@@ -22,7 +22,9 @@
 | 11. Retours et tests | Base en place | Retours et indicateurs (`/feedback`, `/admin/metrics`). Essais avec mécaniciens et magasins d'Oran : à organiser |
 | 12. Mise en ligne | Pas commencé | Seulement sur décision de l'équipe |
 
-**Git : aucun commit pour l'instant.** Le premier commit (preuve datée, section 14) attend l'accord de l'équipe.
+**Emplacement du projet : `C:\Users\Adel\Desktop\DALIL`** (hors OneDrive depuis le 15/11/2026 ; l'ancien dossier `OneDrive\Desktop\DALIL` est vide).
+
+**Git : premier commit `ff8c735` le 15/11/2026** (étapes 1 à 7, preuve datée de la section 14), branche `master`, pas de dépôt distant.
 
 ## 2. Résultats à retenir (étape 7)
 
@@ -41,20 +43,19 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-1. **Décider du premier commit** (en attente de réponse).
-2. **Valider le plan de l'étape 8** (`docs/plan-etape-8.md`). Deux décisions attendues :
+1. **Valider le plan de l'étape 8** (`docs/plan-etape-8.md`). Deux décisions attendues :
    - reporter la recherche hybride (vecteurs) après l'étape 9 ?
    - modèle de langage trop lent : raccourcir le message envoyé, ou garder A pour la démonstration et D pour le mémoire ?
-3. **Réaliser l'étape 8** après validation :
+2. **Réaliser l'étape 8** après validation :
    - repli automatique si le modèle de langage tarde ;
    - cache des réponses ;
    - indicateur de progression ;
    - tests avec un faux fournisseur.
-4. **Web scraping et collecte de données** : discussion reportée par l'utilisateur, à reprendre après l'étape 8. Deux pistes déjà proposées :
+3. **Web scraping et collecte de données** : discussion reportée par l'utilisateur, à reprendre après l'étape 8. Deux pistes déjà proposées :
    - lancer le script OpenStreetMap (magasins d'Oran) ;
    - rédiger des demandes d'autorisation aux forums francophones. Pas de collecte sans licence notée dans `data/SOURCES.md`.
-5. **Jeu de test d'Oran** : faire annoter de vrais cas par des mécaniciens (modèle : `data/test/modele_annotation_oran.csv`), puis relancer `ml/evaluate.py` sur ce jeu.
-6. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
+4. **Jeu de test d'Oran** : faire annoter de vrais cas par des mécaniciens (modèle : `data/test/modele_annotation_oran.csv`), puis relancer `ml/evaluate.py` sur ce jeu.
+5. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
 
 ## 4. Pour reprendre le travail
 
@@ -86,4 +87,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | --- | --- |
 | 14/11/2026 | Étapes 1 à 6. Début de l'étape 7 : variantes A et B, traduction des corpus sur Kaggle |
 | 14-15/11/2026 (nuit) | Affinage LoRA sur Kaggle : 4 échecs corrigés (bfloat16, deux GPU, torchao, disque plein) ; adaptateur entraîné en 3 h 20 |
-| 15/11/2026 | Carnet `04_fusion_gguf`, modèles GGUF rapatriés, llama.cpp installé, mesure de C et D sur le portable, graphe mis à jour. **Étape 7 terminée.** Plan de l'étape 8 rédigé |
+| 15/11/2026 | Carnet `04_fusion_gguf`, modèles GGUF rapatriés, llama.cpp installé, mesure de C et D sur le portable, graphe mis à jour. **Étape 7 terminée.** Plan de l'étape 8 rédigé. Fichier de suivi créé. Projet déplacé hors OneDrive ; premier commit `ff8c735` |
