@@ -1,0 +1,173 @@
+{
+  "rows": [
+    {
+      "date": "20261114-1718",
+      "variante": "A / classifieur seul",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.88,
+      "top3": 0.92,
+      "abstention": 0.06,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 634.2,
+      "ms_p95": 211.0
+    },
+    {
+      "date": "20261114-1718",
+      "variante": "A / classifieur seul",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.824,
+      "top3": 0.882,
+      "abstention": 0.118,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 176.7,
+      "ms_p95": 202.6
+    },
+    {
+      "date": "20261114-1718",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.88,
+      "top3": 0.96,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 183.2,
+      "ms_p95": 215.0
+    },
+    {
+      "date": "20261114-1718",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.765,
+      "top3": 0.882,
+      "abstention": 0.118,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 176.5,
+      "ms_p95": 210.5
+    }
+  ],
+  "erreurs": {
+    "A / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / classifieur seul | demo_cases": [
+      {
+        "id": "demo_cases013",
+        "text": "le volant est dur comme de la pierre quand je manoeuvre",
+        "attendu": [
+          "pompe-direction",
+          "cremaillere"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "bougies-allumage",
+          "support-moteur"
+        ]
+      }
+    ],
+    "A / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases013",
+        "text": "le volant est dur comme de la pierre quand je manoeuvre",
+        "attendu": [
+          "pompe-direction",
+          "cremaillere"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "target": "fault",
+  "cv": "non calcul\u00e9e (corpus) : mesurer avec ml/evaluate.py",
+  "version": "tfidf-lr-fault-corpus-20261114",
+  "corpus": {
+    "cvffad": 17,
+    "mot_uk": 0,
+    "nhtsa_complaints": 1210,
+    "nhtsa_recalls": 0,
+    "rappelconso": 0,
+    "stackexchange_mechanics": 1590
+  }
+}

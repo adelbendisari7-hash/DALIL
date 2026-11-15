@@ -1,0 +1,62 @@
+{
+  "nhtsa_complaints": {
+    "records": 8999,
+    "with_category": 3012,
+    "with_family": 6878,
+    "with_fault": 1210,
+    "translated_fr": 8999,
+    "kinds": {
+      "complaint": 8999
+    }
+  },
+  "nhtsa_recalls": {
+    "records": 65,
+    "with_category": 31,
+    "with_family": 43,
+    "with_fault": 0,
+    "translated_fr": 65,
+    "kinds": {
+      "recall": 65
+    }
+  },
+  "rappelconso": {
+    "records": 1827,
+    "with_category": 612,
+    "with_family": 1113,
+    "with_fault": 0,
+    "translated_fr": 1827,
+    "kinds": {
+      "recall": 1827
+    }
+  },
+  "mot_uk": {
+    "records": 18,
+    "with_category": 18,
+    "with_family": 18,
+    "with_fault": 0,
+    "translated_fr": 18,
+    "kinds": {
+      "stat": 18
+    }
+  },
+  "stackexchange_mechanics": {
+    "records": 8102,
+    "with_category": 5604,
+    "with_family": 5604,
+    "with_fault": 1590,
+    "translated_fr": 8102,
+    "kinds": {
+      "qa": 8102
+    }
+  },
+  "cvffad": {
+    "records": 32,
+    "with_category": 28,
+    "with_family": 32,
+    "with_fault": 17,
+    "translated_fr": 32,
+    "kinds": {
+      "fault_type": 32
+    }
+  }
+}

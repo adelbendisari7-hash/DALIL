@@ -1,0 +1,183 @@
+{
+  "rows": [
+    {
+      "date": "20261114-1234",
+      "variante": "A-panne / classifieur seul",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.86,
+      "top3": 0.9,
+      "abstention": 0.08,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 61.4,
+      "ms_p95": 51.5
+    },
+    {
+      "date": "20261114-1234",
+      "variante": "A-panne / classifieur seul",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 0.941,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 42.3,
+      "ms_p95": 46.4
+    },
+    {
+      "date": "20261114-1234",
+      "variante": "A-panne / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.86,
+      "top3": 0.92,
+      "abstention": 0.04,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 42.2,
+      "ms_p95": 46.4
+    },
+    {
+      "date": "20261114-1234",
+      "variante": "A-panne / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.824,
+      "top3": 0.941,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 41.8,
+      "ms_p95": 46.9
+    }
+  ],
+  "erreurs": {
+    "A-panne / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev002",
+        "text": "en freinant depuis 100 km/h tout le volant se met à trembler",
+        "attendu": [
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-panne / classifieur seul | demo_cases": [
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-panne / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev002",
+        "text": "en freinant depuis 100 km/h tout le volant se met à trembler",
+        "attendu": [
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "support-moteur",
+          "bougies-allumage"
+        ]
+      }
+    ],
+    "A-panne / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ]
+  }
+}

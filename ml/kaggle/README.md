@@ -1,0 +1,73 @@
+# Étape 7 sur Kaggle : traduction et entraînement
+
+Le portable n'a pas de carte graphique : les calculs lourds tournent sur le GPU gratuit de Kaggle
+(quota hebdomadaire affiché dans le compte, souvent autour de 30 heures). Trois carnets, à lancer dans l'ordre.
+Ils sont générés par `python ml/kaggle/make_notebooks.py` : modifier ce script, pas les `.ipynb`.
+
+| Carnet | Rôle | Durée indicative (T4) | Sortie à rapatrier |
+| --- | --- | --- | --- |
+| `01_traduction.ipynb` | Traduit en français les corpus de l'étape 6 et prépare l'échantillon de relecture | 1 à 2 h | `dalil_processed.zip` → `data/processed/` |
+| `02_encodeur_fr.ipynb et 02_encodeur_enfr.ipynb` | Variante B : mmBERT (ou XLM-R, DziriBERT) affiné, exporté en ONNX | 20 à 60 min par configuration | `<modèle>_<config>_onnx.zip` → `ml/artifacts/<modèle>_<config>/` |
+| `03_lora_llm.ipynb` | Variante D : Qwen3-4B (ou Gemma 3 4B) affiné par LoRA, exporté en GGUF | 3 h 30 au plus (budget de temps) | `dalil-…-q4_k_m.gguf` → `ml/artifacts/` |
+| `04_fusion_gguf.ipynb` | Reprise sans réentraîner : évaluation, fusion et GGUF à partir de l'adaptateur (`kaggle_run.py adapter`) | 25 min (+ 40 min si `RUN_EVAL`) | `dalil-…-q4_k_m.gguf` et `-q8_0.gguf` → `ml/artifacts/` |
+
+## Préparer le jeu de données Kaggle « dalil-pipeline »
+
+Sur le portable :
+
+```bash
+python data/pipeline/run.py collect     # si data/processed/ n'est pas à jour
+python ml/build_llm_dataset.py          # à relancer après la traduction (le jeu passe de ~170 à ~3 000 exemples)
+```
+
+Puis créer sur kaggle.com un jeu de données **privé** nommé `dalil-pipeline`, contenant `backend/`, `data/pipeline/`,
+`data/seed/`, `data/test/` et `data/processed/` (sans `data/raw/`, `.venv/`, `node_modules/`, `frontend/`).
+À chaque mise à jour des données : « New version » du jeu de données.
+
+## Ordre conseillé
+
+1. `01_traduction` → rapatrier `data/processed/` → `python data/pipeline/run.py load` → **relire**
+   `data/processed/translations/relecture.csv` (200 traductions ; corriger `POSTEDIT` si un nom de pièce est faux).
+2. Sur le portable : `python ml/train_baseline.py --target part --corpus` (variante A avec le corpus traduit),
+   puis `python ml/build_llm_dataset.py` ; nouvelle version du jeu Kaggle.
+3. `02_encodeur_classifieur` deux fois : `CONFIG = "fr"` puis `CONFIG = "en+fr"` (traduire ou transférer, section 6.3).
+4. `03_lora_llm`. Si l'entraînement réussit mais que la suite échoue, récupérer l'adaptateur (`kaggle kernels output`, dossier `adapter/`) dans `ml/artifacts/lora_adapter/`, puis `kaggle_run.py adapter` et `kaggle_run.py push 04_fusion_gguf`.
+5. Mesurer toutes les variantes sur le portable avec `ml/evaluate.py` (ci-dessous).
+
+## Faire tourner les modèles sur le portable
+
+Deux installations, à faire par vous (elles touchent au système ou exécutent un programme téléchargé) :
+
+1. **Microsoft Visual C++ Redistributable** (x64), installeur officiel :
+   https://aka.ms/vs/17/release/vc_redist.x64.exe. Sans lui, `onnxruntime` et `torch` ne se chargent pas sous Windows.
+   Ensuite : `backend/.venv/Scripts/pip install onnxruntime tokenizers`.
+2. **llama.cpp** pour servir le modèle de langage affiné : archive `llama-<version>-bin-win-cpu-x64.zip` de
+   https://github.com/ggml-org/llama.cpp/releases, à décompresser dans `tools/llama.cpp/` (dossier ignoré par git). Puis :
+
+```bash
+tools/llama.cpp/llama-server.exe -m ml/artifacts/dalil-qwen3-4b-instruct-2507-q4_k_m.gguf --port 8080 -c 4096
+```
+
+et dans `.env` : `DALIL_LLM_PROVIDER=openai_compat`, `DALIL_LLM_BASE_URL=http://localhost:8080/v1`.
+
+`q4_k_m` (~2,5 Go) est le plus rapide sur processeur ; `q8_0` (~4,3 Go) est un peu plus fidèle et plus lent. Le message envoyé au modèle fait environ 1 500 jetons : mesurer le temps de réponse avant la démonstration (exigence : diagnostic en moins de 10 s).
+
+## Mesurer (portable)
+
+```bash
+python ml/evaluate.py --model A=ml/artifacts/baseline_tfidf_lr.joblib \
+                      --model B-fr=ml/artifacts/mmBERT-base_fr --model B-enfr=ml/artifacts/mmBERT-base_en-fr \
+                      --modes classifier,retrieval,full --tag comparaison
+```
+
+Le modèle de langage utilisé par les variantes C et D est celui de la configuration (`DALIL_LLM_PROVIDER`) :
+lancer la même commande avec `openai_compat` (modèle affiné), puis une seule fois avec `anthropic` (modèle payant,
+point de comparaison seulement, section 6.8). Les résultats s'accumulent dans `ml/results/historique.csv`.
+
+**Le jour où le jeu de test d'Oran existe**, ajouter `--test data/test/oran_test.jsonl` : c'est le seul chiffre
+à présenter comme résultat dans le mémoire.
+
+## Mettre un modèle en service
+
+Régler `DALIL_CLASSIFIER_PATH` (fichier `.joblib` ou dossier ONNX) et `DALIL_MODEL_VERSION` dans `.env`.
+Chaque diagnostic enregistre la version du modèle (`diagnosis_sessions.model_version`).

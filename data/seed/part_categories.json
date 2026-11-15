@@ -1,0 +1,100 @@
+{
+  "_note": "Taxonomie à deux niveaux (F5). 'pilot' = familles du pilote de référence exacte (section 6.7). Synonymes : formes courantes, fautes fréquentes ; darija à ajouter en V2.",
+  "families": [
+    {"slug": "freinage", "name_fr": "Freinage", "name_ar": "الفرامل", "synonyms": ["frein", "freins", "frenage"], "children": [
+      {"slug": "plaquettes-avant", "name_fr": "Plaquettes de frein avant", "pilot": true, "synonyms": ["plaquettes", "plaquette", "plaquettes avant", "garnitures", "plakette", "plaquete"]},
+      {"slug": "plaquettes-arriere", "name_fr": "Plaquettes de frein arrière", "pilot": true, "synonyms": ["plaquettes arriere", "plaquettes", "plaquette arriere"]},
+      {"slug": "disques-frein", "name_fr": "Disques de frein", "pilot": true, "synonyms": ["disque", "disques", "disque de frein", "disques voilés"]},
+      {"slug": "machoires-frein", "name_fr": "Mâchoires et tambours de frein", "synonyms": ["machoires", "tambour", "tambours", "segments de frein"]},
+      {"slug": "etrier-frein", "name_fr": "Étrier de frein", "synonyms": ["etrier", "étrier", "piston de frein"]},
+      {"slug": "flexible-frein", "name_fr": "Flexible de frein", "synonyms": ["flexible", "durite de frein"]},
+      {"slug": "maitre-cylindre", "name_fr": "Maître-cylindre de frein", "synonyms": ["maitre cylindre", "maître cylindre"]},
+      {"slug": "liquide-frein", "name_fr": "Liquide de frein", "synonyms": ["liquide frein", "dot4", "dot 4"]}
+    ]},
+    {"slug": "filtration", "name_fr": "Filtration", "name_ar": "المصافي", "synonyms": ["filtre", "filtres"], "children": [
+      {"slug": "filtre-huile", "name_fr": "Filtre à huile", "pilot": true, "synonyms": ["filtre huile", "filtre a huile"]},
+      {"slug": "filtre-air", "name_fr": "Filtre à air", "pilot": true, "synonyms": ["filtre air", "filtre a air"]},
+      {"slug": "filtre-carburant", "name_fr": "Filtre à carburant", "pilot": true, "synonyms": ["filtre gasoil", "filtre essence", "filtre a gasoil", "filtre carburant", "filtre a carburant"]},
+      {"slug": "filtre-habitacle", "name_fr": "Filtre d'habitacle", "pilot": true, "synonyms": ["filtre pollen", "filtre clim", "filtre habitacle"]}
+    ]},
+    {"slug": "allumage", "name_fr": "Allumage et préchauffage", "name_ar": "الإشعال", "synonyms": ["allumage"], "children": [
+      {"slug": "bougies-allumage", "name_fr": "Bougies d'allumage", "pilot": true, "synonyms": ["bougie", "bougies", "bougie allumage"]},
+      {"slug": "bobine-allumage", "name_fr": "Bobine d'allumage", "pilot": true, "synonyms": ["bobine", "bobines", "crayon bobine"]},
+      {"slug": "bougies-prechauffage", "name_fr": "Bougies de préchauffage", "synonyms": ["bougies prechauffage", "préchauffage", "prechauffage", "bougie de préchauffage"]}
+    ]},
+    {"slug": "distribution", "name_fr": "Distribution et courroies", "name_ar": "التوزيع", "synonyms": ["courroie", "courroies"], "children": [
+      {"slug": "kit-distribution", "name_fr": "Kit de distribution", "pilot": true, "synonyms": ["courroie de distribution", "distribution", "kit distribution", "chaine de distribution"]},
+      {"slug": "courroie-accessoires", "name_fr": "Courroie d'accessoires", "pilot": true, "synonyms": ["courroie alternateur", "courroie accessoire", "courroie poly v", "courroie d'alternateur"]},
+      {"slug": "galet-tendeur", "name_fr": "Galet tendeur", "synonyms": ["galet", "tendeur", "galet enrouleur"]}
+    ]},
+    {"slug": "refroidissement", "name_fr": "Refroidissement", "name_ar": "التبريد", "synonyms": ["refroidissement", "radiateur"], "children": [
+      {"slug": "pompe-eau", "name_fr": "Pompe à eau", "pilot": true, "synonyms": ["pompe a eau", "pompe eau"]},
+      {"slug": "thermostat", "name_fr": "Thermostat", "pilot": true, "synonyms": ["calorstat", "thermostat d'eau"]},
+      {"slug": "radiateur", "name_fr": "Radiateur", "synonyms": ["radiateur moteur", "radiateur d'eau"]},
+      {"slug": "durite-refroidissement", "name_fr": "Durite de refroidissement", "synonyms": ["durite", "durites", "tuyau d'eau"]},
+      {"slug": "ventilateur-radiateur", "name_fr": "Motoventilateur", "synonyms": ["ventilateur", "ventilo", "moto ventilateur"]},
+      {"slug": "sonde-temperature", "name_fr": "Sonde de température d'eau", "synonyms": ["sonde temperature", "capteur temperature", "thermocontact"]},
+      {"slug": "vase-expansion", "name_fr": "Vase d'expansion", "synonyms": ["bocal", "vase d'expansion", "bouchon de radiateur"]}
+    ]},
+    {"slug": "suspension", "name_fr": "Suspension", "name_ar": "التعليق", "synonyms": ["suspension"], "children": [
+      {"slug": "amortisseurs", "name_fr": "Amortisseurs", "pilot": true, "synonyms": ["amortisseur", "amorto", "amortos"]},
+      {"slug": "ressorts", "name_fr": "Ressorts de suspension", "synonyms": ["ressort"]},
+      {"slug": "coupelles", "name_fr": "Coupelles d'amortisseur", "synonyms": ["coupelle", "butée d'amortisseur"]},
+      {"slug": "silentblocs", "name_fr": "Silentblocs", "synonyms": ["silent bloc", "silentbloc", "silent-bloc"]}
+    ]},
+    {"slug": "train-roulant", "name_fr": "Train roulant et transmission aux roues", "synonyms": ["train avant", "train arriere"], "children": [
+      {"slug": "roulements-roue", "name_fr": "Roulements de roue", "pilot": true, "synonyms": ["roulement", "roulements", "roulement de roue", "moyeu"]},
+      {"slug": "cardans", "name_fr": "Cardans et soufflets", "synonyms": ["cardan", "soufflet", "soufflet de cardan", "transmission"]},
+      {"slug": "triangles", "name_fr": "Triangles de suspension", "synonyms": ["triangle", "bras de suspension"]},
+      {"slug": "biellette-stabilisatrice", "name_fr": "Biellettes de barre stabilisatrice", "synonyms": ["biellette de barre stabilisatrice", "biellette stab", "barre stabilisatrice"]}
+    ]},
+    {"slug": "direction", "name_fr": "Direction", "name_ar": "التوجيه", "synonyms": ["direction"], "children": [
+      {"slug": "rotules-direction", "name_fr": "Rotules", "pilot": true, "synonyms": ["rotule", "rotules", "rotule de direction", "rotule de suspension"]},
+      {"slug": "biellettes-direction", "name_fr": "Biellettes de direction", "pilot": true, "synonyms": ["biellette", "biellettes", "biellette de direction"]},
+      {"slug": "cremaillere", "name_fr": "Crémaillère de direction", "synonyms": ["cremaillere", "crémaillère", "boitier de direction"]},
+      {"slug": "pompe-direction", "name_fr": "Pompe de direction assistée", "synonyms": ["pompe direction", "pompe de direction", "direction assistée"]}
+    ]},
+    {"slug": "transmission", "name_fr": "Embrayage et boîte", "name_ar": "ناقل الحركة", "synonyms": ["embrayage", "boite"], "children": [
+      {"slug": "kit-embrayage", "name_fr": "Kit d'embrayage", "pilot": true, "synonyms": ["embrayage", "kit embrayage", "disque d'embrayage", "butée d'embrayage", "mécanisme d'embrayage"]},
+      {"slug": "cable-embrayage", "name_fr": "Câble ou commande d'embrayage", "synonyms": ["cable embrayage", "câble d'embrayage", "emetteur embrayage", "recepteur embrayage"]},
+      {"slug": "volant-moteur", "name_fr": "Volant moteur", "synonyms": ["volant bimasse", "bimasse"]},
+      {"slug": "boite-vitesses", "name_fr": "Boîte de vitesses", "synonyms": ["boite de vitesse", "boîte", "bv", "boite auto"]}
+    ]},
+    {"slug": "electricite", "name_fr": "Électricité et charge", "name_ar": "الكهرباء", "synonyms": ["électricité", "electricite", "électrique"], "children": [
+      {"slug": "batterie", "name_fr": "Batterie", "pilot": true, "synonyms": ["batterie", "baterie", "accu"]},
+      {"slug": "alternateur", "name_fr": "Alternateur", "pilot": true, "synonyms": ["alternateur", "alterno", "régulateur alternateur"]},
+      {"slug": "demarreur", "name_fr": "Démarreur", "pilot": true, "synonyms": ["demarreur", "démarreur", "solenoide"]},
+      {"slug": "ampoules", "name_fr": "Ampoules et éclairage", "synonyms": ["ampoule", "phare", "feux"]}
+    ]},
+    {"slug": "gestion-moteur", "name_fr": "Gestion moteur et capteurs", "synonyms": ["capteur", "capteurs", "sonde"], "children": [
+      {"slug": "sonde-lambda", "name_fr": "Sonde lambda", "synonyms": ["sonde lambda", "sonde à oxygène", "sonde o2", "capteur oxygène"]},
+      {"slug": "debitmetre", "name_fr": "Débitmètre d'air", "synonyms": ["debitmetre", "débitmètre", "maf"]},
+      {"slug": "capteur-pression-admission", "name_fr": "Capteur de pression d'admission", "synonyms": ["capteur map", "capteur pression admission"]},
+      {"slug": "capteur-vilebrequin", "name_fr": "Capteur de vilebrequin (PMH)", "synonyms": ["capteur pmh", "capteur vilebrequin", "capteur régime"]},
+      {"slug": "capteur-arbre-came", "name_fr": "Capteur d'arbre à cames", "synonyms": ["capteur arbre a came", "capteur de phase"]},
+      {"slug": "capteur-cliquetis", "name_fr": "Capteur de cliquetis", "synonyms": ["capteur cliquetis"]},
+      {"slug": "vanne-egr", "name_fr": "Vanne EGR", "synonyms": ["egr", "vanne egr"]},
+      {"slug": "papillon-motorise", "name_fr": "Boîtier papillon", "synonyms": ["papillon", "boitier papillon", "corps papillon", "moteur pas à pas"]}
+    ]},
+    {"slug": "alimentation", "name_fr": "Alimentation carburant et air", "synonyms": ["injection", "carburant"], "children": [
+      {"slug": "injecteurs", "name_fr": "Injecteurs", "synonyms": ["injecteur", "injecteurs"]},
+      {"slug": "pompe-carburant", "name_fr": "Pompe à carburant", "synonyms": ["pompe a essence", "pompe à gasoil", "pompe de gavage", "pompe haute pression", "pompe carburant"]},
+      {"slug": "regulateur-pression", "name_fr": "Régulateur de pression carburant", "synonyms": ["régulateur de pression", "regulateur pression"]},
+      {"slug": "turbocompresseur", "name_fr": "Turbocompresseur", "synonyms": ["turbo"]}
+    ]},
+    {"slug": "moteur", "name_fr": "Moteur (joints, supports, huile)", "name_ar": "المحرك", "synonyms": ["moteur"], "children": [
+      {"slug": "joint-culasse", "name_fr": "Joint de culasse", "synonyms": ["joint de culasse", "culasse"]},
+      {"slug": "joint-cache-culbuteurs", "name_fr": "Joint de cache-culbuteurs", "synonyms": ["joint cache culbuteur", "joint de couvre culasse", "cache culbuteur"]},
+      {"slug": "support-moteur", "name_fr": "Supports moteur", "synonyms": ["support moteur", "silentbloc moteur", "tampon moteur"]},
+      {"slug": "huile-moteur", "name_fr": "Huile moteur", "synonyms": ["huile", "vidange", "lubrifiant"]}
+    ]},
+    {"slug": "echappement", "name_fr": "Échappement", "name_ar": "العادم", "synonyms": ["echappement", "pot"], "children": [
+      {"slug": "catalyseur", "name_fr": "Catalyseur et filtre à particules", "synonyms": ["catalyseur", "pot catalytique", "fap", "filtre à particules"]},
+      {"slug": "silencieux", "name_fr": "Silencieux et ligne d'échappement", "synonyms": ["silencieux", "pot d'échappement", "pot", "ligne d'échappement"]}
+    ]},
+    {"slug": "climatisation", "name_fr": "Climatisation", "name_ar": "التكييف", "synonyms": ["clim", "climatisation"], "children": [
+      {"slug": "compresseur-clim", "name_fr": "Compresseur de climatisation", "synonyms": ["compresseur", "compresseur clim"]},
+      {"slug": "condenseur", "name_fr": "Condenseur de climatisation", "synonyms": ["condenseur", "radiateur de clim"]}
+    ]}
+  ]
+}

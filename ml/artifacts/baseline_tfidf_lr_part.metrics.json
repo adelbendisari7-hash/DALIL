@@ -1,0 +1,11 @@
+{
+  "target": "part",
+  "C": 20.0,
+  "n": 173,
+  "top1": 0.601,
+  "top3": 0.798,
+  "part_top1": 0.601,
+  "median_top_prob": 0.295,
+  "version": "tfidf-lr-part-20261114",
+  "corpus": {}
+}

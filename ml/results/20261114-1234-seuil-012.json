@@ -1,0 +1,158 @@
+{
+  "rows": [
+    {
+      "date": "20261114-1234",
+      "variante": "A-panne / classifieur seul",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.88,
+      "top3": 0.92,
+      "abstention": 0.06,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 61.5,
+      "ms_p95": 51.7
+    },
+    {
+      "date": "20261114-1234",
+      "variante": "A-panne / classifieur seul",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 42.1,
+      "ms_p95": 46.1
+    },
+    {
+      "date": "20261114-1234",
+      "variante": "A-panne / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.88,
+      "top3": 0.94,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 0.8,
+      "ms_moyen": 42.7,
+      "ms_p95": 48.8
+    },
+    {
+      "date": "20261114-1234",
+      "variante": "A-panne / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 41.9,
+      "ms_p95": 45.8
+    }
+  ],
+  "erreurs": {
+    "A-panne / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-panne / classifieur seul | demo_cases": [],
+    "A-panne / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "support-moteur",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "capteur-vilebrequin",
+          "roulements-roue"
+        ]
+      }
+    ],
+    "A-panne / D (chaîne complète) | demo_cases": []
+  }
+}

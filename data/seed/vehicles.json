@@ -1,0 +1,132 @@
+{
+  "_note": "Référentiel initial (section 5) : marques et modèles prioritaires, motorisations courantes. Liste à confirmer par les 20 magasins enquêtés ; années et moteurs approximatifs, à vérifier.",
+  "brands": [
+    {"name": "Dacia", "country": "Roumanie", "priority": 10, "models": [
+      {"name": "Logan", "pilot": true, "variants": [
+        {"year_from": 2005, "year_to": 2012, "engine": "1.4 MPI", "fuel": "essence"},
+        {"year_from": 2005, "year_to": 2012, "engine": "1.6 MPI", "fuel": "essence"},
+        {"year_from": 2005, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.2 16V", "fuel": "essence"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
+      ]},
+      {"name": "Sandero", "variants": [
+        {"year_from": 2008, "year_to": 2012, "engine": "1.4 MPI", "fuel": "essence"},
+        {"year_from": 2008, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.2 16V", "fuel": "essence"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
+      ]},
+      {"name": "Duster", "variants": [
+        {"year_from": 2010, "year_to": 2017, "engine": "1.6 16V", "fuel": "essence"},
+        {"year_from": 2010, "year_to": 2017, "engine": "1.5 dCi", "fuel": "diesel"},
+        {"year_from": 2018, "year_to": null, "engine": "1.6 SCe", "fuel": "essence"},
+        {"year_from": 2018, "year_to": null, "engine": "1.5 dCi", "fuel": "diesel"}
+      ]}
+    ]},
+    {"name": "Renault", "country": "France", "priority": 10, "models": [
+      {"name": "Symbol", "pilot": true, "variants": [
+        {"year_from": 2008, "year_to": 2012, "engine": "1.4", "fuel": "essence"},
+        {"year_from": 2008, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.2 16V", "fuel": "essence"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.6 MPI", "fuel": "essence"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
+      ]},
+      {"name": "Clio", "variants": [
+        {"year_from": 2005, "year_to": 2012, "engine": "1.2 16V", "fuel": "essence"},
+        {"year_from": 2005, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel"},
+        {"year_from": 2013, "year_to": 2019, "engine": "1.2 16V", "fuel": "essence"},
+        {"year_from": 2013, "year_to": 2019, "engine": "1.5 dCi", "fuel": "diesel"}
+      ]},
+      {"name": "Kangoo", "variants": [
+        {"year_from": 2008, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
+      ]}
+    ]},
+    {"name": "Hyundai", "country": "Corée du Sud", "priority": 9, "models": [
+      {"name": "Accent", "pilot": true, "variants": [
+        {"year_from": 2006, "year_to": 2011, "engine": "1.4", "fuel": "essence"},
+        {"year_from": 2006, "year_to": 2011, "engine": "1.5 CRDi", "fuel": "diesel"},
+        {"year_from": 2011, "year_to": 2017, "engine": "1.4", "fuel": "essence"},
+        {"year_from": 2011, "year_to": 2017, "engine": "1.6", "fuel": "essence"},
+        {"year_from": 2011, "year_to": 2017, "engine": "1.6 CRDi", "fuel": "diesel"}
+      ]},
+      {"name": "i10", "variants": [
+        {"year_from": 2008, "year_to": 2013, "engine": "1.1", "fuel": "essence"},
+        {"year_from": 2008, "year_to": 2013, "engine": "1.2", "fuel": "essence"},
+        {"year_from": 2014, "year_to": 2019, "engine": "1.0", "fuel": "essence"},
+        {"year_from": 2014, "year_to": 2019, "engine": "1.2", "fuel": "essence"}
+      ]}
+    ]},
+    {"name": "Peugeot", "country": "France", "priority": 9, "models": [
+      {"name": "301", "pilot": true, "variants": [
+        {"year_from": 2012, "year_to": 2020, "engine": "1.2 VTi", "fuel": "essence"},
+        {"year_from": 2012, "year_to": 2020, "engine": "1.6 VTi", "fuel": "essence"},
+        {"year_from": 2012, "year_to": 2020, "engine": "1.6 HDi", "fuel": "diesel"}
+      ]},
+      {"name": "206", "variants": [
+        {"year_from": 1998, "year_to": 2012, "engine": "1.4", "fuel": "essence"},
+        {"year_from": 1998, "year_to": 2012, "engine": "1.4 HDi", "fuel": "diesel"}
+      ]},
+      {"name": "208", "variants": [
+        {"year_from": 2012, "year_to": 2019, "engine": "1.2 PureTech", "fuel": "essence"},
+        {"year_from": 2012, "year_to": 2019, "engine": "1.6 HDi", "fuel": "diesel"}
+      ]}
+    ]},
+    {"name": "Kia", "country": "Corée du Sud", "priority": 8, "models": [
+      {"name": "Picanto", "pilot": true, "variants": [
+        {"year_from": 2004, "year_to": 2011, "engine": "1.0", "fuel": "essence"},
+        {"year_from": 2004, "year_to": 2011, "engine": "1.1", "fuel": "essence"},
+        {"year_from": 2011, "year_to": 2017, "engine": "1.0", "fuel": "essence"},
+        {"year_from": 2011, "year_to": 2017, "engine": "1.2", "fuel": "essence"}
+      ]},
+      {"name": "Rio", "variants": [
+        {"year_from": 2011, "year_to": 2017, "engine": "1.4", "fuel": "essence"}
+      ]}
+    ]},
+    {"name": "Toyota", "country": "Japon", "priority": 7, "models": [
+      {"name": "Hilux", "variants": [
+        {"year_from": 2005, "year_to": 2015, "engine": "2.5 D-4D", "fuel": "diesel"},
+        {"year_from": 2016, "year_to": null, "engine": "2.4 D-4D", "fuel": "diesel"}
+      ]}
+    ]},
+    {"name": "Fiat", "country": "Italie", "priority": 8, "models": [
+      {"name": "Tipo", "variants": [
+        {"year_from": 2016, "year_to": null, "engine": "1.6", "fuel": "essence"},
+        {"year_from": 2016, "year_to": null, "engine": "1.6 Multijet", "fuel": "diesel"}
+      ]},
+      {"name": "500", "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "1.0 hybride", "fuel": "hybride"}
+      ]},
+      {"name": "Doblo", "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "1.5 BlueHDi", "fuel": "diesel"}
+      ]}
+    ]},
+    {"name": "Geely", "country": "Chine", "priority": 7, "models": [
+      {"name": "Coolray", "variants": [{"year_from": 2020, "year_to": null, "engine": "1.5 T", "fuel": "essence"}]}
+    ]},
+    {"name": "Chery", "country": "Chine", "priority": 7, "models": [
+      {"name": "Tiggo 4", "variants": [{"year_from": 2020, "year_to": null, "engine": "1.5", "fuel": "essence"}]}
+    ]},
+    {"name": "MG", "country": "Chine", "priority": 6, "models": [
+      {"name": "MG5", "variants": [{"year_from": 2021, "year_to": null, "engine": "1.5", "fuel": "essence"}]}
+    ]},
+    {"name": "Jetour", "country": "Chine", "priority": 5, "models": [
+      {"name": "X70", "variants": [{"year_from": 2022, "year_to": null, "engine": "1.5 T", "fuel": "essence"}]}
+    ]},
+    {"name": "Opel", "country": "Allemagne", "priority": 6, "models": [
+      {"name": "Corsa", "variants": [{"year_from": 2019, "year_to": null, "engine": "1.2", "fuel": "essence"}]}
+    ]},
+    {"name": "DFSK", "country": "Chine", "priority": 5, "models": [
+      {"name": "Glory 580", "variants": [{"year_from": 2020, "year_to": null, "engine": "1.5 T", "fuel": "essence"}]}
+    ]},
+    {"name": "Volkswagen", "country": "Allemagne", "priority": 5, "models": [
+      {"name": "Golf", "variants": [
+        {"year_from": 2008, "year_to": 2012, "engine": "1.6 TDI", "fuel": "diesel"},
+        {"year_from": 2013, "year_to": 2019, "engine": "1.4 TSI", "fuel": "essence"}
+      ]},
+      {"name": "Polo", "variants": [{"year_from": 2009, "year_to": 2017, "engine": "1.6 TDI", "fuel": "diesel"}]},
+      {"name": "T-Roc", "variants": [{"year_from": 2018, "year_to": null, "engine": "1.5 TSI", "fuel": "essence"}]}
+    ]},
+    {"name": "Skoda", "country": "Tchéquie", "priority": 4, "models": [
+      {"name": "Octavia", "variants": [{"year_from": 2013, "year_to": 2019, "engine": "1.6 TDI", "fuel": "diesel"}]}
+    ]}
+  ]
+}

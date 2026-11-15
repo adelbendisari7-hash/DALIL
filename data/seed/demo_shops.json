@@ -1,0 +1,68 @@
+{
+  "_note": "DONNÉES FICTIVES de démonstration (is_demo = true). Aucun de ces magasins n'existe. Les numéros sont factices ; l'interface bloque l'appel et WhatsApp pour les fiches de démo. À supprimer avant la mise en ligne : python -m app.seed --purge-demo",
+  "shops": [
+    {"name": "[DÉMO] Pièces Auto El Hamri", "commune": "3101", "lat": 35.6905, "lng": -0.6420, "hours": "Sam-Jeu 8h-18h",
+     "brands": ["Renault", "Dacia"], "categories": ["freinage", "filtration", "electricite", "allumage"], "parts_origin": ["origine", "adaptable"], "sale_mode": "detail",
+     "products": [
+       {"title": "Plaquettes avant Logan II 1.5 dCi", "category": "plaquettes-avant", "oem_ref": "FICTIF-PL-001", "part_brand": "Marque démo", "condition": "adaptable", "price": 3200, "fits": [["Dacia", "Logan", "1.5 dCi", 2013], ["Renault", "Symbol", "1.5 dCi", 2013]]},
+       {"title": "Filtre à huile Logan / Symbol dCi", "category": "filtre-huile", "condition": "adaptable", "price": 900, "fits": [["Dacia", "Logan", "1.5 dCi", 2013], ["Renault", "Symbol", "1.5 dCi", 2013]]},
+       {"title": "Batterie 60 Ah", "category": "batterie", "condition": "neuf", "price": 14500, "fits": [["Dacia", "Logan", "1.5 dCi", 2013], ["Renault", "Symbol", "1.2 16V", 2013], ["Renault", "Clio", "1.5 dCi", 2013]]}
+     ]},
+    {"name": "[DÉMO] Auto Pièces Coréennes Es Senia", "commune": "3103", "lat": 35.6450, "lng": -0.6150, "hours": "Sam-Jeu 8h30-17h30",
+     "brands": ["Hyundai", "Kia"], "categories": ["freinage", "suspension", "train-roulant", "direction", "filtration"], "parts_origin": ["origine", "adaptable"], "sale_mode": "les_deux",
+     "products": [
+       {"title": "Amortisseurs avant Accent RB (paire)", "category": "amortisseurs", "condition": "adaptable", "price": 16000, "fits": [["Hyundai", "Accent", "1.4", 2011], ["Hyundai", "Accent", "1.6", 2011]]},
+       {"title": "Plaquettes avant Picanto", "category": "plaquettes-avant", "condition": "adaptable", "price": 2800, "fits": [["Kia", "Picanto", "1.2", 2011], ["Kia", "Picanto", "1.0", 2011]]},
+       {"title": "Roulement de roue avant Accent", "category": "roulements-roue", "condition": "neuf", "price": 4500, "fits": [["Hyundai", "Accent", "1.4", 2011]]}
+     ]},
+    {"name": "[DÉMO] Peugeot Pièces Bir El Djir", "commune": "3102", "lat": 35.7230, "lng": -0.5550, "hours": "Sam-Jeu 9h-18h",
+     "brands": ["Peugeot"], "categories": ["freinage", "distribution", "refroidissement", "allumage", "gestion-moteur"], "parts_origin": ["origine"], "sale_mode": "detail",
+     "products": [
+       {"title": "Kit distribution 301 1.6 HDi", "category": "kit-distribution", "condition": "neuf", "price": 21000, "fits": [["Peugeot", "301", "1.6 HDi", 2012]]},
+       {"title": "Thermostat 301 / 208 1.6 HDi", "category": "thermostat", "condition": "neuf", "price": 5200, "fits": [["Peugeot", "301", "1.6 HDi", 2012], ["Peugeot", "208", "1.6 HDi", 2012]]}
+     ]},
+    {"name": "[DÉMO] Électricité Auto Hai Sabah", "commune": "3102", "lat": 35.7300, "lng": -0.5900, "hours": "Sam-Jeu 8h-17h",
+     "brands": ["Renault", "Dacia", "Peugeot", "Hyundai", "Kia"], "categories": ["electricite", "allumage"], "parts_origin": ["origine", "adaptable", "occasion"], "sale_mode": "detail",
+     "products": [
+       {"title": "Alternateur reconditionné Logan 1.5 dCi", "category": "alternateur", "condition": "occasion", "price": 18000, "fits": [["Dacia", "Logan", "1.5 dCi", 2013]]},
+       {"title": "Démarreur Symbol 1.2 16V", "category": "demarreur", "condition": "adaptable", "price": 15000, "fits": [["Renault", "Symbol", "1.2 16V", 2013]]}
+     ]},
+    {"name": "[DÉMO] Freinage Express Gambetta", "commune": "3101", "lat": 35.7010, "lng": -0.6150, "hours": "Sam-Jeu 8h-18h",
+     "brands": ["Renault", "Dacia", "Peugeot", "Hyundai", "Kia", "Volkswagen"], "categories": ["freinage"], "parts_origin": ["adaptable"], "sale_mode": "les_deux",
+     "products": [
+       {"title": "Disques avant Accent (paire)", "category": "disques-frein", "condition": "adaptable", "price": 7500, "fits": [["Hyundai", "Accent", "1.4", 2011], ["Hyundai", "Accent", "1.6", 2011]]},
+       {"title": "Plaquettes avant 301", "category": "plaquettes-avant", "condition": "adaptable", "price": 3000, "fits": [["Peugeot", "301", "1.6 HDi", 2012], ["Peugeot", "301", "1.6 VTi", 2012]]}
+     ]},
+    {"name": "[DÉMO] Casse Auto Hassi Bounif", "commune": "3105", "lat": 35.6860, "lng": -0.4950, "shop_type": "casse", "hours": "Tous les jours 7h-19h",
+     "brands": ["Renault", "Dacia", "Peugeot", "Toyota"], "categories": ["moteur", "transmission", "electricite", "train-roulant"], "parts_origin": ["occasion"], "sale_mode": "detail",
+     "products": [
+       {"title": "Boîte de vitesses Clio III 1.5 dCi (occasion)", "category": "boite-vitesses", "condition": "occasion", "price": 45000, "fits": [["Renault", "Clio", "1.5 dCi", 2005]]}
+     ]},
+    {"name": "[DÉMO] Chinois Pièces Sidi Chami", "commune": "3104", "lat": 35.6680, "lng": -0.5380, "hours": "Sam-Jeu 9h-18h",
+     "brands": ["Geely", "Chery", "MG", "Jetour", "DFSK"], "categories": ["filtration", "freinage", "allumage", "electricite"], "parts_origin": ["origine", "adaptable"], "sale_mode": "detail",
+     "products": [
+       {"title": "Filtre à air Tiggo 4", "category": "filtre-air", "condition": "adaptable", "price": 1500, "fits": [["Chery", "Tiggo 4", "1.5", 2020]]},
+       {"title": "Plaquettes avant Coolray", "category": "plaquettes-avant", "condition": "origine", "price": 6500, "fits": [["Geely", "Coolray", "1.5 T", 2020]]}
+     ]},
+    {"name": "[DÉMO] Fiat Service Pièces Es Senia", "commune": "3103", "lat": 35.6380, "lng": -0.6050, "hours": "Sam-Jeu 8h-17h",
+     "brands": ["Fiat", "Opel"], "categories": ["filtration", "freinage", "suspension", "refroidissement"], "parts_origin": ["origine"], "sale_mode": "detail",
+     "products": []},
+    {"name": "[DÉMO] Suspension et Direction Ain El Turk", "commune": "3110", "lat": 35.7420, "lng": -0.7650, "hours": "Sam-Jeu 9h-17h",
+     "brands": ["Renault", "Dacia", "Hyundai"], "categories": ["suspension", "direction", "train-roulant"], "parts_origin": ["adaptable"], "sale_mode": "detail",
+     "products": [
+       {"title": "Rotule de direction Logan / Symbol", "category": "rotules-direction", "condition": "adaptable", "price": 2200, "fits": [["Dacia", "Logan", "1.5 dCi", 2013], ["Dacia", "Logan", "1.2 16V", 2013], ["Renault", "Symbol", "1.2 16V", 2013]]}
+     ]},
+    {"name": "[DÉMO] Refroidissement Plus Oran Est", "commune": "3101", "lat": 35.7080, "lng": -0.5950, "hours": "Sam-Jeu 8h-18h",
+     "brands": ["Renault", "Dacia", "Peugeot", "Hyundai"], "categories": ["refroidissement", "climatisation"], "parts_origin": ["adaptable", "origine"], "sale_mode": "les_deux",
+     "products": [
+       {"title": "Pompe à eau Logan 1.5 dCi", "category": "pompe-eau", "condition": "adaptable", "price": 6000, "fits": [["Dacia", "Logan", "1.5 dCi", 2013], ["Renault", "Symbol", "1.5 dCi", 2013]]},
+       {"title": "Radiateur Accent RB", "category": "radiateur", "condition": "adaptable", "price": 12000, "fits": [["Hyundai", "Accent", "1.4", 2011]]}
+     ]},
+    {"name": "[DÉMO] Toyota 4x4 Pièces Arzew", "commune": "3107", "lat": 35.8510, "lng": -0.3150, "hours": "Sam-Jeu 8h-16h",
+     "brands": ["Toyota"], "categories": ["filtration", "freinage", "suspension", "transmission"], "parts_origin": ["origine", "adaptable"], "sale_mode": "detail",
+     "products": []},
+    {"name": "[DÉMO] Allemandes Auto Misserghin", "commune": "3114", "lat": 35.6180, "lng": -0.7280, "hours": "Sam-Jeu 9h-17h",
+     "brands": ["Volkswagen", "Skoda", "Opel"], "categories": ["filtration", "allumage", "gestion-moteur", "alimentation"], "parts_origin": ["origine", "adaptable"], "sale_mode": "detail",
+     "products": []}
+  ]
+}

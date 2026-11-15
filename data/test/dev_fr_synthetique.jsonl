@@ -1,0 +1,55 @@
+{"id": "dev001", "text": "quand j'appuie sur la pédale de frein j'entends un frottement métallique à l'avant", "expect": ["plaquettes-avant", "disques-frein"]}
+{"id": "dev002", "text": "en freinant depuis 100 km/h tout le volant se met à trembler", "expect": ["disques-frein"]}
+{"id": "dev003", "text": "ma pédale de frein devient spongieuse et il faut l'enfoncer presque jusqu'en bas", "expect": ["flexible-frein", "liquide-frein", "maitre-cylindre"]}
+{"id": "dev004", "text": "après un trajet la jante avant droite est très chaude et la voiture freine d'un seul côté", "expect": ["etrier-frein"]}
+{"id": "dev005", "text": "le matin il faut plusieurs essais pour démarrer, le démarreur tourne au ralenti", "expect": ["batterie"]}
+{"id": "dev006", "text": "le témoin de charge rouge reste allumé quand je roule et la radio s'est éteinte", "expect": ["alternateur", "courroie-accessoires"]}
+{"id": "dev007", "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent", "expect": ["demarreur", "batterie"]}
+{"id": "dev008", "text": "la voiture broute à bas régime et la consommation d'essence a augmenté", "expect": ["bougies-allumage", "bobine-allumage", "injecteurs"]}
+{"id": "dev009", "text": "le voyant moteur clignote et le moteur vibre fort, on dirait qu'il manque un cylindre", "expect": ["bobine-allumage", "bougies-allumage"]}
+{"id": "dev010", "text": "mon moteur gasoil peine à démarrer quand il fait froid, ça part après plusieurs tentatives", "expect": ["bougies-prechauffage"], "variant": ["Renault", "Symbol", "1.5 dCi", 2016]}
+{"id": "dev011", "text": "il y a un sifflement aigu sous le capot quand je tourne le volant à l'arrêt", "expect": ["courroie-accessoires", "galet-tendeur", "pompe-direction"]}
+{"id": "dev012", "text": "j'ai acheté une occasion avec 130 000 km, je ne sais pas si la courroie de distribution a été changée", "expect": ["kit-distribution"]}
+{"id": "dev013", "text": "du liquide de refroidissement goutte sous le moteur côté courroie et l'aiguille de température monte", "expect": ["pompe-eau", "radiateur", "durite-refroidissement"]}
+{"id": "dev014", "text": "sur l'autoroute la température grimpe vite alors que le ventilateur tourne", "expect": ["thermostat", "pompe-eau", "radiateur"]}
+{"id": "dev015", "text": "le moteur ne monte jamais en température et le chauffage souffle de l'air froid en hiver", "expect": ["thermostat"]}
+{"id": "dev016", "text": "en ville dans les embouteillages ça chauffe, le ventilateur ne se déclenche jamais", "expect": ["ventilateur-radiateur", "sonde-temperature"]}
+{"id": "dev017", "text": "fumée blanche continue à l'échappement et le bocal de liquide se vide sans fuite visible", "expect": ["joint-culasse"]}
+{"id": "dev018", "text": "la voiture se balance longtemps après un ralentisseur et elle penche dans les virages", "expect": ["amortisseurs", "coupelles", "ressorts"]}
+{"id": "dev019", "text": "jeu dans le volant et claquements dans la direction sur les routes dégradées", "expect": ["rotules-direction", "biellettes-direction"]}
+{"id": "dev020", "text": "un bourdonnement qui s'amplifie avec la vitesse, il change de ton quand je prends un virage", "expect": ["roulements-roue"]}
+{"id": "dev021", "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche", "expect": ["cardans"]}
+{"id": "dev022", "text": "toc toc à l'avant quand je passe sur les pavés doucement", "expect": ["biellette-stabilisatrice", "silentblocs", "amortisseurs", "rotules-direction"]}
+{"id": "dev023", "text": "en montée le moteur s'emballe mais la voiture n'accélère presque pas", "expect": ["kit-embrayage"]}
+{"id": "dev024", "text": "la pédale d'embrayage est restée enfoncée et je ne peux plus enclencher de rapport", "expect": ["cable-embrayage", "kit-embrayage"]}
+{"id": "dev025", "text": "la troisième craque et refuse parfois de rentrer", "expect": ["boite-vitesses", "kit-embrayage"]}
+{"id": "dev026", "text": "voyant moteur orange fixe et odeur d'oeuf pourri derrière la voiture", "expect": ["sonde-lambda", "catalyseur"]}
+{"id": "dev027", "text": "la voiture n'a plus de reprise et on dirait que l'échappement est bouché", "expect": ["catalyseur"]}
+{"id": "dev028", "text": "fumée noire au démarrage sur mon diesel et passage en mode dégradé", "expect": ["vanne-egr", "debitmetre", "injecteurs", "turbocompresseur"]}
+{"id": "dev029", "text": "le moteur cliquette fort au ralenti et sent le gasoil", "expect": ["injecteurs"]}
+{"id": "dev030", "text": "le démarreur tourne mais le moteur ne prend pas, la jauge indique un demi-réservoir", "expect": ["pompe-carburant", "filtre-carburant", "capteur-vilebrequin"]}
+{"id": "dev031", "text": "bruit de sirène quand j'accélère et fumée bleuâtre", "expect": ["turbocompresseur"]}
+{"id": "dev032", "text": "la ventilation souffle très faiblement et il y a une odeur de moisi", "expect": ["filtre-habitacle"]}
+{"id": "dev033", "text": "je dois faire la vidange, elle a 12 000 km de retard", "expect": ["filtre-huile", "huile-moteur"]}
+{"id": "dev034", "text": "le moteur est gras sur le dessus et ça sent l'huile brûlée", "expect": ["joint-cache-culbuteurs"]}
+{"id": "dev035", "text": "une fois chaud le moteur coupe net et ne repart qu'après une demi-heure", "expect": ["capteur-vilebrequin"]}
+{"id": "dev036", "text": "le bruit d'échappement est devenu très fort, comme un tracteur", "expect": ["silencieux"]}
+{"id": "dev037", "text": "la climatisation ne fait plus de froid, juste de l'air tiède", "expect": ["compresseur-clim", "condenseur"]}
+{"id": "dev038", "text": "grosses vibrations dans la caisse au ralenti et choc quand je passe la marche arrière", "expect": ["support-moteur"]}
+{"id": "dev039", "text": "le volant est devenu lourd et il gémit quand je manoeuvre", "expect": ["pompe-direction", "cremaillere"]}
+{"id": "dev040", "text": "la voiture a des trous à l'accélération et cale parfois au feu", "expect": ["debitmetre", "papillon-motorise", "bougies-allumage", "filtre-air"]}
+{"id": "dev041", "text": "grincement aigu à l'arrière à chaque arrêt", "expect": ["plaquettes-arriere", "plaquettes-avant", "machoires-frein"]}
+{"id": "dev042", "text": "les phares baissent d'intensité la nuit et la batterie est neuve", "expect": ["alternateur"]}
+{"id": "dev043", "text": "ça patine et ça sent le brûlé quand je démarre en côte", "expect": ["kit-embrayage"]}
+{"id": "dev044", "text": "il y a une flaque d'huile noire sous le moteur chaque matin", "expect": ["joint-cache-culbuteurs", "huile-moteur"]}
+{"id": "dev045", "text": "un cylindre ne fonctionne pas, la valise indique un raté sur le cylindre 2", "expect": ["bougies-allumage", "bobine-allumage", "injecteurs"]}
+{"id": "dev046", "text": "", "dtc": ["P0128"], "expect": ["thermostat", "sonde-temperature"]}
+{"id": "dev047", "text": "", "dtc": ["P0335"], "expect": ["capteur-vilebrequin"]}
+{"id": "dev048", "text": "perte de puissance", "dtc": ["P0299"], "expect": ["turbocompresseur", "vanne-egr"]}
+{"id": "dev049", "text": "", "dtc": ["P0171"], "expect": ["debitmetre", "injecteurs", "filtre-carburant", "pompe-carburant"]}
+{"id": "dev050", "text": "voyant batterie", "dtc": ["P0562"], "expect": ["alternateur", "batterie"]}
+{"id": "dev051", "text": "le prix du carburant a encore augmenté cette semaine", "expect_status": "unknown"}
+{"id": "dev052", "text": "quelle est la meilleure plage d'Oran pour cet été", "expect_status": "unknown"}
+{"id": "dev053", "text": "je voudrais vendre ma voiture, combien elle vaut", "expect_status": "unknown"}
+{"id": "dev054", "text": "bonjour, vous êtes ouverts le vendredi ?", "expect_status": "unknown"}
+{"id": "dev055", "text": "comment changer le mot de passe de mon compte", "expect_status": "unknown"}

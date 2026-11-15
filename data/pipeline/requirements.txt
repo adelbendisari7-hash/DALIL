@@ -1,0 +1,8 @@
+# Pipeline de données (étape 6), en plus de backend/requirements.txt
+pandas>=2.2
+numpy>=1.26
+py7zr>=0.21          # archive Stack Exchange ; installe aussi inflate64 (Deflate64 des fichiers MOT)
+inflate64>=1.0
+
+# Traduction (sur GPU Kaggle de préférence ; sous Windows, torch demande le Microsoft Visual C++ Redistributable)
+# pip install -r data/pipeline/requirements-translate.txt

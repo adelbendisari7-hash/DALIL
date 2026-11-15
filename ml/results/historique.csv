@@ -1,0 +1,81 @@
+date,variante,modele,cible,mode,llm,jeu,n,n_hors_sujet,top1,top3,abstention,hors_sujet_refuse,ms_moyen,ms_p95
+20261114-1233,A-panne / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.86,0.9,0.08,1.0,42.2,27.8
+20261114-1233,A-panne / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,22.6,26.2
+20261114-1233,A-panne / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.86,0.92,0.04,0.8,22.6,27.0
+20261114-1233,A-panne / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.882,1.0,0.0,1.0,22.5,24.8
+20261114-1233,A-piece / classifieur seul,tfidf-lr-part-20261114,part,classifier,none,dev_fr_synthetique,50,5,0.84,0.88,0.1,1.0,27.6,31.4
+20261114-1233,A-piece / classifieur seul,tfidf-lr-part-20261114,part,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,27.3,30.0
+20261114-1233,A-piece / D (chaîne complète),tfidf-lr-part-20261114,part,full,none,dev_fr_synthetique,50,5,0.86,0.92,0.04,0.8,27.0,29.9
+20261114-1233,A-piece / D (chaîne complète),tfidf-lr-part-20261114,part,full,none,demo_cases,17,3,0.882,1.0,0.0,1.0,27.3,30.7
+20261114-1234,A-panne / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.86,0.9,0.08,1.0,61.4,51.5
+20261114-1234,A-panne / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,demo_cases,17,3,0.882,0.941,0.059,1.0,42.3,46.4
+20261114-1234,A-panne / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.86,0.92,0.04,1.0,42.2,46.4
+20261114-1234,A-panne / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.824,0.941,0.059,1.0,41.8,46.9
+20261114-1234,A-panne / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.88,0.92,0.06,1.0,61.5,51.7
+20261114-1234,A-panne / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,42.1,46.1
+20261114-1234,A-panne / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.88,0.94,0.02,0.8,42.7,48.8
+20261114-1234,A-panne / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.882,1.0,0.0,1.0,41.9,45.8
+20261114-1235,A-panne / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.88,0.92,0.06,1.0,62.2,49.7
+20261114-1235,A-panne / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,41.8,48.1
+20261114-1235,C (recherche + LM),tfidf-lr-fault-20261114,fault,retrieval,none,dev_fr_synthetique,50,5,0.78,0.88,0.04,0.8,41.4,50.3
+20261114-1235,C (recherche + LM),tfidf-lr-fault-20261114,fault,retrieval,none,demo_cases,17,3,0.882,0.941,0.0,1.0,40.0,44.0
+20261114-1235,A-piece / classifieur seul,tfidf-lr-part-20261114,part,classifier,none,dev_fr_synthetique,50,5,0.86,0.9,0.08,1.0,46.8,52.2
+20261114-1235,A-piece / classifieur seul,tfidf-lr-part-20261114,part,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,48.2,54.3
+20261114-1235,A-piece / D (chaîne complète),tfidf-lr-part-20261114,part,full,none,dev_fr_synthetique,50,5,0.88,0.94,0.02,1.0,47.5,53.2
+20261114-1235,A-piece / D (chaîne complète),tfidf-lr-part-20261114,part,full,none,demo_cases,17,3,0.941,1.0,0.0,1.0,47.2,52.0
+20261114-1235,A-panne / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.88,0.92,0.06,1.0,61.3,48.9
+20261114-1235,A-panne / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,42.4,47.7
+20261114-1235,C (recherche + LM),tfidf-lr-fault-20261114,fault,retrieval,none,dev_fr_synthetique,50,5,0.78,0.88,0.04,0.8,40.7,45.6
+20261114-1235,C (recherche + LM),tfidf-lr-fault-20261114,fault,retrieval,none,demo_cases,17,3,0.882,0.941,0.0,1.0,40.6,45.5
+20261114-1235,A-panne / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.88,0.94,0.02,1.0,42.2,46.7
+20261114-1235,A-panne / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.941,1.0,0.0,1.0,42.6,46.3
+20261114-1235,A-piece / classifieur seul,tfidf-lr-part-20261114,part,classifier,none,dev_fr_synthetique,50,5,0.86,0.9,0.08,1.0,46.8,51.1
+20261114-1235,A-piece / classifieur seul,tfidf-lr-part-20261114,part,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,47.4,51.9
+20261114-1235,A-piece / D (chaîne complète),tfidf-lr-part-20261114,part,full,none,dev_fr_synthetique,50,5,0.88,0.94,0.02,1.0,46.8,51.8
+20261114-1235,A-piece / D (chaîne complète),tfidf-lr-part-20261114,part,full,none,demo_cases,17,3,0.941,1.0,0.0,1.0,46.6,49.9
+20261114-1401,A / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.88,0.92,0.06,1.0,143.0,130.9
+20261114-1401,A / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,103.6,117.8
+20261114-1401,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.88,0.94,0.02,1.0,96.9,118.4
+20261114-1401,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.941,1.0,0.0,1.0,123.3,157.0
+20261114-1401,B-enfr / classifieur seul,mmBERT-base_en-fr-20261114,part,classifier,none,dev_fr_synthetique,50,5,0.56,0.76,0.0,0.6,225.9,296.0
+20261114-1401,B-enfr / classifieur seul,mmBERT-base_en-fr-20261114,part,classifier,none,demo_cases,17,3,0.412,0.647,0.0,1.0,223.9,258.4
+20261114-1401,B-enfr / D (chaîne complète),mmBERT-base_en-fr-20261114,part,full,none,dev_fr_synthetique,50,5,0.6,0.84,0.06,0.6,221.6,301.1
+20261114-1401,B-enfr / D (chaîne complète),mmBERT-base_en-fr-20261114,part,full,none,demo_cases,17,3,0.529,0.824,0.059,1.0,178.5,218.5
+20261114-1718,A / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.88,0.92,0.06,1.0,634.2,211.0
+20261114-1718,A / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,demo_cases,17,3,0.824,0.882,0.118,1.0,176.7,202.6
+20261114-1718,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.88,0.96,0.02,1.0,183.2,215.0
+20261114-1718,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.765,0.882,0.118,1.0,176.5,210.5
+20261114-1719,A / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.88,0.92,0.06,1.0,556.4,141.9
+20261114-1719,A / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,87.7,105.9
+20261114-1719,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.88,0.96,0.02,0.8,87.1,105.4
+20261114-1719,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.882,1.0,0.0,1.0,100.5,145.4
+20261114-1722,A / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.88,0.92,0.06,1.0,572.2,118.8
+20261114-1722,A / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,80.7,96.2
+20261114-1722,C (recherche + LM),tfidf-lr-fault-20261114,fault,retrieval,none,dev_fr_synthetique,50,5,0.74,0.78,0.1,0.6,84.3,105.3
+20261114-1722,C (recherche + LM),tfidf-lr-fault-20261114,fault,retrieval,none,demo_cases,17,3,0.588,0.765,0.059,1.0,82.2,102.7
+20261114-1722,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.86,0.94,0.06,1.0,86.1,107.9
+20261114-1722,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.941,1.0,0.0,1.0,87.7,108.7
+20261114-1831,A-amorcage / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.88,0.92,0.06,1.0,563.9,123.3
+20261114-1831,A-amorcage / classifieur seul,tfidf-lr-fault-20261114,fault,classifier,none,demo_cases,17,3,0.941,1.0,0.0,1.0,90.1,109.3
+20261114-1831,A-amorcage / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.86,0.94,0.06,1.0,93.1,121.2
+20261114-1831,A-amorcage / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.941,1.0,0.0,1.0,94.7,114.1
+20261114-1831,A-corpus-panne / classifieur seul,tfidf-lr-fault-corpus-20261114,fault,classifier,none,dev_fr_synthetique,50,5,0.8,0.96,0.02,0.6,90.0,111.0
+20261114-1831,A-corpus-panne / classifieur seul,tfidf-lr-fault-corpus-20261114,fault,classifier,none,demo_cases,17,3,0.824,0.941,0.059,1.0,88.9,103.4
+20261114-1831,A-corpus-panne / D (chaîne complète),tfidf-lr-fault-corpus-20261114,fault,full,none,dev_fr_synthetique,50,5,0.82,0.96,0.02,0.8,92.3,119.0
+20261114-1831,A-corpus-panne / D (chaîne complète),tfidf-lr-fault-corpus-20261114,fault,full,none,demo_cases,17,3,0.882,0.941,0.059,1.0,83.3,94.5
+20261114-1831,A-corpus-piece / classifieur seul,tfidf-lr-part-corpus-20261114,part,classifier,none,dev_fr_synthetique,50,5,0.74,0.82,0.12,0.8,94.5,110.7
+20261114-1831,A-corpus-piece / classifieur seul,tfidf-lr-part-corpus-20261114,part,classifier,none,demo_cases,17,3,0.824,0.824,0.118,1.0,102.1,122.8
+20261114-1831,A-corpus-piece / D (chaîne complète),tfidf-lr-part-corpus-20261114,part,full,none,dev_fr_synthetique,50,5,0.76,0.84,0.12,0.8,98.2,126.7
+20261114-1831,A-corpus-piece / D (chaîne complète),tfidf-lr-part-corpus-20261114,part,full,none,demo_cases,17,3,0.824,0.882,0.059,1.0,88.6,110.2
+20261114-1831,B-fr / classifieur seul,mmBERT-base_fr-20261114,part,classifier,none,dev_fr_synthetique,50,5,0.58,0.78,0.06,0.6,197.6,240.0
+20261114-1831,B-fr / classifieur seul,mmBERT-base_fr-20261114,part,classifier,none,demo_cases,17,3,0.588,0.647,0.059,1.0,185.3,231.7
+20261114-1831,B-fr / D (chaîne complète),mmBERT-base_fr-20261114,part,full,none,dev_fr_synthetique,50,5,0.62,0.84,0.04,0.6,180.0,224.7
+20261114-1831,B-fr / D (chaîne complète),mmBERT-base_fr-20261114,part,full,none,demo_cases,17,3,0.588,0.765,0.118,1.0,181.7,215.7
+20261114-1831,B-enfr / classifieur seul,mmBERT-base_en-fr-20261114,part,classifier,none,dev_fr_synthetique,50,5,0.56,0.76,0.02,0.4,201.9,264.5
+20261114-1831,B-enfr / classifieur seul,mmBERT-base_en-fr-20261114,part,classifier,none,demo_cases,17,3,0.412,0.647,0.0,1.0,185.4,225.5
+20261114-1831,B-enfr / D (chaîne complète),mmBERT-base_en-fr-20261114,part,full,none,dev_fr_synthetique,50,5,0.6,0.86,0.04,0.4,185.8,232.4
+20261114-1831,B-enfr / D (chaîne complète),mmBERT-base_en-fr-20261114,part,full,none,demo_cases,17,3,0.529,0.647,0.059,1.0,181.1,220.8
+20261115-1924,C (recherche + LM),tfidf-lr-fault-20261114,fault,retrieval,openai_compat,dev_fr_synthetique,50,5,0.76,0.78,0.1,0.6,23793.6,46075.4
+20261115-1924,C (recherche + LM),tfidf-lr-fault-20261114,fault,retrieval,openai_compat,demo_cases,17,3,0.824,0.882,0.059,1.0,20273.6,36227.5
+20261115-1924,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,openai_compat,dev_fr_synthetique,50,5,0.86,0.94,0.06,1.0,21277.2,35344.3
+20261115-1924,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,openai_compat,demo_cases,17,3,0.882,1.0,0.0,1.0,19789.3,27422.0

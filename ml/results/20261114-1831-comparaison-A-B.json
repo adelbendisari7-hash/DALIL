@@ -1,0 +1,1561 @@
+{
+  "rows": [
+    {
+      "date": "20261114-1831",
+      "variante": "A-amorcage / classifieur seul",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.88,
+      "top3": 0.92,
+      "abstention": 0.06,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 563.9,
+      "ms_p95": 123.3
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-amorcage / classifieur seul",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 90.1,
+      "ms_p95": 109.3
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-amorcage / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.86,
+      "top3": 0.94,
+      "abstention": 0.06,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 93.1,
+      "ms_p95": 121.2
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-amorcage / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 94.7,
+      "ms_p95": 114.1
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-corpus-panne / classifieur seul",
+      "modele": "tfidf-lr-fault-corpus-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.8,
+      "top3": 0.96,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 0.6,
+      "ms_moyen": 90.0,
+      "ms_p95": 111.0
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-corpus-panne / classifieur seul",
+      "modele": "tfidf-lr-fault-corpus-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.824,
+      "top3": 0.941,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 88.9,
+      "ms_p95": 103.4
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-corpus-panne / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-corpus-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.82,
+      "top3": 0.96,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 0.8,
+      "ms_moyen": 92.3,
+      "ms_p95": 119.0
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-corpus-panne / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-corpus-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 0.941,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 83.3,
+      "ms_p95": 94.5
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-corpus-piece / classifieur seul",
+      "modele": "tfidf-lr-part-corpus-20261114",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.74,
+      "top3": 0.82,
+      "abstention": 0.12,
+      "hors_sujet_refuse": 0.8,
+      "ms_moyen": 94.5,
+      "ms_p95": 110.7
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-corpus-piece / classifieur seul",
+      "modele": "tfidf-lr-part-corpus-20261114",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.824,
+      "top3": 0.824,
+      "abstention": 0.118,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 102.1,
+      "ms_p95": 122.8
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-corpus-piece / D (chaîne complète)",
+      "modele": "tfidf-lr-part-corpus-20261114",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.76,
+      "top3": 0.84,
+      "abstention": 0.12,
+      "hors_sujet_refuse": 0.8,
+      "ms_moyen": 98.2,
+      "ms_p95": 126.7
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "A-corpus-piece / D (chaîne complète)",
+      "modele": "tfidf-lr-part-corpus-20261114",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.824,
+      "top3": 0.882,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 88.6,
+      "ms_p95": 110.2
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "B-fr / classifieur seul",
+      "modele": "mmBERT-base_fr-20261114",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.58,
+      "top3": 0.78,
+      "abstention": 0.06,
+      "hors_sujet_refuse": 0.6,
+      "ms_moyen": 197.6,
+      "ms_p95": 240.0
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "B-fr / classifieur seul",
+      "modele": "mmBERT-base_fr-20261114",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.588,
+      "top3": 0.647,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 185.3,
+      "ms_p95": 231.7
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "B-fr / D (chaîne complète)",
+      "modele": "mmBERT-base_fr-20261114",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.62,
+      "top3": 0.84,
+      "abstention": 0.04,
+      "hors_sujet_refuse": 0.6,
+      "ms_moyen": 180.0,
+      "ms_p95": 224.7
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "B-fr / D (chaîne complète)",
+      "modele": "mmBERT-base_fr-20261114",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.588,
+      "top3": 0.765,
+      "abstention": 0.118,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 181.7,
+      "ms_p95": 215.7
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "B-enfr / classifieur seul",
+      "modele": "mmBERT-base_en-fr-20261114",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.56,
+      "top3": 0.76,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 0.4,
+      "ms_moyen": 201.9,
+      "ms_p95": 264.5
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "B-enfr / classifieur seul",
+      "modele": "mmBERT-base_en-fr-20261114",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.412,
+      "top3": 0.647,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 185.4,
+      "ms_p95": 225.5
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "B-enfr / D (chaîne complète)",
+      "modele": "mmBERT-base_en-fr-20261114",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.6,
+      "top3": 0.86,
+      "abstention": 0.04,
+      "hors_sujet_refuse": 0.4,
+      "ms_moyen": 185.8,
+      "ms_p95": 232.4
+    },
+    {
+      "date": "20261114-1831",
+      "variante": "B-enfr / D (chaîne complète)",
+      "modele": "mmBERT-base_en-fr-20261114",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.529,
+      "top3": 0.647,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 181.1,
+      "ms_p95": 220.8
+    }
+  ],
+  "erreurs": {
+    "A-amorcage / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-amorcage / classifieur seul | demo_cases": [],
+    "A-amorcage / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-amorcage / D (chaîne complète) | demo_cases": [],
+    "A-corpus-panne / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": [
+          "boite-vitesses",
+          "catalyseur",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev051",
+        "text": "le prix du carburant a encore augmenté cette semaine",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "dev053",
+        "text": "je voudrais vendre ma voiture, combien elle vaut",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "boite-vitesses",
+          "demarreur",
+          "amortisseurs"
+        ]
+      }
+    ],
+    "A-corpus-panne / classifieur seul | demo_cases": [
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-corpus-panne / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": [
+          "boite-vitesses",
+          "catalyseur"
+        ]
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev051",
+        "text": "le prix du carburant a encore augmenté cette semaine",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs"
+        ]
+      }
+    ],
+    "A-corpus-panne / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-corpus-piece / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev014",
+        "text": "sur l'autoroute la température grimpe vite alors que le ventilateur tourne",
+        "attendu": [
+          "thermostat",
+          "pompe-eau",
+          "radiateur"
+        ],
+        "obtenu": [
+          "ventilateur-radiateur"
+        ]
+      },
+      {
+        "id": "dev018",
+        "text": "la voiture se balance longtemps après un ralentisseur et elle penche dans les virages",
+        "attendu": [
+          "amortisseurs",
+          "coupelles",
+          "ressorts"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev023",
+        "text": "en montée le moteur s'emballe mais la voiture n'accélère presque pas",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev027",
+        "text": "la voiture n'a plus de reprise et on dirait que l'échappement est bouché",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "silencieux"
+        ]
+      },
+      {
+        "id": "dev030",
+        "text": "le démarreur tourne mais le moteur ne prend pas, la jauge indique un demi-réservoir",
+        "attendu": [
+          "pompe-carburant",
+          "filtre-carburant",
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "demarreur",
+          "batterie"
+        ]
+      },
+      {
+        "id": "dev035",
+        "text": "une fois chaud le moteur coupe net et ne repart qu'après une demi-heure",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev043",
+        "text": "ça patine et ça sent le brûlé quand je démarre en côte",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev051",
+        "text": "le prix du carburant a encore augmenté cette semaine",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs",
+          "turbocompresseur"
+        ]
+      }
+    ],
+    "A-corpus-piece / classifieur seul | demo_cases": [
+      {
+        "id": "demo_cases002",
+        "text": "au feu rouge l'aiguille de température grimpe, sur la route ça va",
+        "attendu": [
+          "ventilateur-radiateur",
+          "sonde-temperature"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases003",
+        "text": "ce matin tac tac tac en démarrant et le moteur ne voulait pas tourner",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": [
+          "joint-culasse",
+          "joint-cache-culbuteurs",
+          "support-moteur"
+        ]
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-corpus-piece / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev014",
+        "text": "sur l'autoroute la température grimpe vite alors que le ventilateur tourne",
+        "attendu": [
+          "thermostat",
+          "pompe-eau",
+          "radiateur"
+        ],
+        "obtenu": [
+          "ventilateur-radiateur"
+        ]
+      },
+      {
+        "id": "dev018",
+        "text": "la voiture se balance longtemps après un ralentisseur et elle penche dans les virages",
+        "attendu": [
+          "amortisseurs",
+          "coupelles",
+          "ressorts"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev023",
+        "text": "en montée le moteur s'emballe mais la voiture n'accélère presque pas",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev027",
+        "text": "la voiture n'a plus de reprise et on dirait que l'échappement est bouché",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "silencieux"
+        ]
+      },
+      {
+        "id": "dev035",
+        "text": "une fois chaud le moteur coupe net et ne repart qu'après une demi-heure",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev043",
+        "text": "ça patine et ça sent le brûlé quand je démarre en côte",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev051",
+        "text": "le prix du carburant a encore augmenté cette semaine",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs",
+          "turbocompresseur"
+        ]
+      }
+    ],
+    "A-corpus-piece / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases003",
+        "text": "ce matin tac tac tac en démarrant et le moteur ne voulait pas tourner",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": [
+          "joint-culasse",
+          "joint-cache-culbuteurs",
+          "support-moteur"
+        ]
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "B-fr / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "joint-culasse",
+          "support-moteur",
+          "joint-cache-culbuteurs"
+        ]
+      },
+      {
+        "id": "dev018",
+        "text": "la voiture se balance longtemps après un ralentisseur et elle penche dans les virages",
+        "attendu": [
+          "amortisseurs",
+          "coupelles",
+          "ressorts"
+        ],
+        "obtenu": [
+          "biellette-stabilisatrice",
+          "courroie-accessoires",
+          "support-moteur"
+        ]
+      },
+      {
+        "id": "dev020",
+        "text": "un bourdonnement qui s'amplifie avec la vitesse, il change de ton quand je prends un virage",
+        "attendu": [
+          "roulements-roue"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "boite-vitesses",
+          "cable-embrayage"
+        ]
+      },
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "amortisseurs",
+          "etrier-frein"
+        ]
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev026",
+        "text": "voyant moteur orange fixe et odeur d'oeuf pourri derrière la voiture",
+        "attendu": [
+          "sonde-lambda",
+          "catalyseur"
+        ],
+        "obtenu": [
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "dev027",
+        "text": "la voiture n'a plus de reprise et on dirait que l'échappement est bouché",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "silencieux"
+        ]
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev038",
+        "text": "grosses vibrations dans la caisse au ralenti et choc quand je passe la marche arrière",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": [
+          "disques-frein",
+          "plaquettes-avant"
+        ]
+      },
+      {
+        "id": "dev043",
+        "text": "ça patine et ça sent le brûlé quand je démarre en côte",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": [
+          "courroie-accessoires",
+          "demarreur",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "dev045",
+        "text": "un cylindre ne fonctionne pas, la valise indique un raté sur le cylindre 2",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev051",
+        "text": "le prix du carburant a encore augmenté cette semaine",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "turbocompresseur"
+        ]
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "alternateur",
+          "demarreur",
+          "etrier-frein"
+        ]
+      }
+    ],
+    "B-fr / classifieur seul | demo_cases": [
+      {
+        "id": "demo_cases002",
+        "text": "au feu rouge l'aiguille de température grimpe, sur la route ça va",
+        "attendu": [
+          "ventilateur-radiateur",
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "thermostat",
+          "radiateur"
+        ]
+      },
+      {
+        "id": "demo_cases008",
+        "text": "mon diesel a du mal à partir les matins d'hiver, il fume blanc",
+        "attendu": [
+          "bougies-prechauffage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "debitmetre",
+          "courroie-accessoires"
+        ]
+      },
+      {
+        "id": "demo_cases009",
+        "text": "en braquant complètement pour me garer j'entends clac clac",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "plaquettes-avant",
+          "etrier-frein",
+          "flexible-frein"
+        ]
+      },
+      {
+        "id": "demo_cases011",
+        "text": "un liquide rose coule sous le moteur et le niveau du bocal baisse",
+        "attendu": [
+          "radiateur",
+          "pompe-eau",
+          "durite-refroidissement"
+        ],
+        "obtenu": [
+          "thermostat",
+          "injecteurs",
+          "joint-culasse"
+        ]
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases017",
+        "text": "pas d'air qui sort des aérateurs et ça sent le moisi",
+        "attendu": [
+          "filtre-habitacle"
+        ],
+        "obtenu": [
+          "courroie-accessoires",
+          "alternateur",
+          "filtre-air"
+        ]
+      }
+    ],
+    "B-fr / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev018",
+        "text": "la voiture se balance longtemps après un ralentisseur et elle penche dans les virages",
+        "attendu": [
+          "amortisseurs",
+          "coupelles",
+          "ressorts"
+        ],
+        "obtenu": [
+          "biellette-stabilisatrice",
+          "courroie-accessoires",
+          "support-moteur"
+        ]
+      },
+      {
+        "id": "dev020",
+        "text": "un bourdonnement qui s'amplifie avec la vitesse, il change de ton quand je prends un virage",
+        "attendu": [
+          "roulements-roue"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "boite-vitesses",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "biellette-stabilisatrice",
+          "amortisseurs"
+        ]
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev027",
+        "text": "la voiture n'a plus de reprise et on dirait que l'échappement est bouché",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "silencieux"
+        ]
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "joint-culasse",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "dev043",
+        "text": "ça patine et ça sent le brûlé quand je démarre en côte",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": [
+          "courroie-accessoires",
+          "demarreur",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "dev045",
+        "text": "un cylindre ne fonctionne pas, la valise indique un raté sur le cylindre 2",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev051",
+        "text": "le prix du carburant a encore augmenté cette semaine",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "turbocompresseur"
+        ]
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "alternateur",
+          "demarreur",
+          "etrier-frein"
+        ]
+      }
+    ],
+    "B-fr / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases002",
+        "text": "au feu rouge l'aiguille de température grimpe, sur la route ça va",
+        "attendu": [
+          "ventilateur-radiateur",
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "thermostat",
+          "radiateur"
+        ]
+      },
+      {
+        "id": "demo_cases008",
+        "text": "mon diesel a du mal à partir les matins d'hiver, il fume blanc",
+        "attendu": [
+          "bougies-prechauffage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "debitmetre",
+          "courroie-accessoires"
+        ]
+      },
+      {
+        "id": "demo_cases009",
+        "text": "en braquant complètement pour me garer j'entends clac clac",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "B-enfr / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev005",
+        "text": "le matin il faut plusieurs essais pour démarrer, le démarreur tourne au ralenti",
+        "attendu": [
+          "batterie"
+        ],
+        "obtenu": [
+          "demarreur",
+          "bougies-prechauffage"
+        ]
+      },
+      {
+        "id": "dev013",
+        "text": "du liquide de refroidissement goutte sous le moteur côté courroie et l'aiguille de température monte",
+        "attendu": [
+          "pompe-eau",
+          "radiateur",
+          "durite-refroidissement"
+        ],
+        "obtenu": [
+          "thermostat",
+          "kit-distribution"
+        ]
+      },
+      {
+        "id": "dev016",
+        "text": "en ville dans les embouteillages ça chauffe, le ventilateur ne se déclenche jamais",
+        "attendu": [
+          "ventilateur-radiateur",
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "thermostat",
+          "radiateur"
+        ]
+      },
+      {
+        "id": "dev018",
+        "text": "la voiture se balance longtemps après un ralentisseur et elle penche dans les virages",
+        "attendu": [
+          "amortisseurs",
+          "coupelles",
+          "ressorts"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "debitmetre",
+          "support-moteur"
+        ]
+      },
+      {
+        "id": "dev020",
+        "text": "un bourdonnement qui s'amplifie avec la vitesse, il change de ton quand je prends un virage",
+        "attendu": [
+          "roulements-roue"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "rotules-direction",
+          "amortisseurs"
+        ]
+      },
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "roulements-roue",
+          "amortisseurs"
+        ]
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev026",
+        "text": "voyant moteur orange fixe et odeur d'oeuf pourri derrière la voiture",
+        "attendu": [
+          "sonde-lambda",
+          "catalyseur"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "turbocompresseur",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "dev027",
+        "text": "la voiture n'a plus de reprise et on dirait que l'échappement est bouché",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "silencieux"
+        ]
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "debitmetre",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "dev041",
+        "text": "grincement aigu à l'arrière à chaque arrêt",
+        "attendu": [
+          "plaquettes-arriere",
+          "plaquettes-avant",
+          "machoires-frein"
+        ],
+        "obtenu": [
+          "roulements-roue",
+          "amortisseurs",
+          "flexible-frein"
+        ]
+      },
+      {
+        "id": "dev043",
+        "text": "ça patine et ça sent le brûlé quand je démarre en côte",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": [
+          "courroie-accessoires",
+          "amortisseurs",
+          "etrier-frein"
+        ]
+      },
+      {
+        "id": "dev051",
+        "text": "le prix du carburant a encore augmenté cette semaine",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs",
+          "turbocompresseur"
+        ]
+      },
+      {
+        "id": "dev053",
+        "text": "je voudrais vendre ma voiture, combien elle vaut",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "support-moteur",
+          "kit-distribution",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "alternateur",
+          "batterie",
+          "etrier-frein"
+        ]
+      }
+    ],
+    "B-enfr / classifieur seul | demo_cases": [
+      {
+        "id": "demo_cases002",
+        "text": "au feu rouge l'aiguille de température grimpe, sur la route ça va",
+        "attendu": [
+          "ventilateur-radiateur",
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "thermostat",
+          "radiateur"
+        ]
+      },
+      {
+        "id": "demo_cases003",
+        "text": "ce matin tac tac tac en démarrant et le moteur ne voulait pas tourner",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "courroie-accessoires"
+        ]
+      },
+      {
+        "id": "demo_cases008",
+        "text": "mon diesel a du mal à partir les matins d'hiver, il fume blanc",
+        "attendu": [
+          "bougies-prechauffage"
+        ],
+        "obtenu": [
+          "debitmetre",
+          "filtre-air",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "demo_cases009",
+        "text": "en braquant complètement pour me garer j'entends clac clac",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "flexible-frein",
+          "bobine-allumage",
+          "plaquettes-avant"
+        ]
+      },
+      {
+        "id": "demo_cases011",
+        "text": "un liquide rose coule sous le moteur et le niveau du bocal baisse",
+        "attendu": [
+          "radiateur",
+          "pompe-eau",
+          "durite-refroidissement"
+        ],
+        "obtenu": [
+          "thermostat",
+          "injecteurs",
+          "rotules-direction"
+        ]
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "thermostat",
+          "support-moteur",
+          "joint-culasse"
+        ]
+      }
+    ],
+    "B-enfr / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev018",
+        "text": "la voiture se balance longtemps après un ralentisseur et elle penche dans les virages",
+        "attendu": [
+          "amortisseurs",
+          "coupelles",
+          "ressorts"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "debitmetre",
+          "support-moteur"
+        ]
+      },
+      {
+        "id": "dev020",
+        "text": "un bourdonnement qui s'amplifie avec la vitesse, il change de ton quand je prends un virage",
+        "attendu": [
+          "roulements-roue"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev026",
+        "text": "voyant moteur orange fixe et odeur d'oeuf pourri derrière la voiture",
+        "attendu": [
+          "sonde-lambda",
+          "catalyseur"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "turbocompresseur",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "dev027",
+        "text": "la voiture n'a plus de reprise et on dirait que l'échappement est bouché",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "silencieux"
+        ]
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "pompe-carburant",
+          "debitmetre"
+        ]
+      },
+      {
+        "id": "dev041",
+        "text": "grincement aigu à l'arrière à chaque arrêt",
+        "attendu": [
+          "plaquettes-arriere",
+          "plaquettes-avant",
+          "machoires-frein"
+        ],
+        "obtenu": [
+          "roulements-roue",
+          "amortisseurs"
+        ]
+      },
+      {
+        "id": "dev051",
+        "text": "le prix du carburant a encore augmenté cette semaine",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs",
+          "turbocompresseur"
+        ]
+      },
+      {
+        "id": "dev053",
+        "text": "je voudrais vendre ma voiture, combien elle vaut",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "support-moteur",
+          "kit-distribution",
+          "disques-frein"
+        ]
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "alternateur",
+          "batterie",
+          "etrier-frein"
+        ]
+      }
+    ],
+    "B-enfr / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases002",
+        "text": "au feu rouge l'aiguille de température grimpe, sur la route ça va",
+        "attendu": [
+          "ventilateur-radiateur",
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "thermostat"
+        ]
+      },
+      {
+        "id": "demo_cases003",
+        "text": "ce matin tac tac tac en démarrant et le moteur ne voulait pas tourner",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "courroie-accessoires"
+        ]
+      },
+      {
+        "id": "demo_cases008",
+        "text": "mon diesel a du mal à partir les matins d'hiver, il fume blanc",
+        "attendu": [
+          "bougies-prechauffage"
+        ],
+        "obtenu": [
+          "debitmetre",
+          "pompe-carburant",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "demo_cases009",
+        "text": "en braquant complètement pour me garer j'entends clac clac",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases011",
+        "text": "un liquide rose coule sous le moteur et le niveau du bocal baisse",
+        "attendu": [
+          "radiateur",
+          "pompe-eau",
+          "durite-refroidissement"
+        ],
+        "obtenu": [
+          "thermostat",
+          "injecteurs",
+          "rotules-direction"
+        ]
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "thermostat",
+          "support-moteur",
+          "joint-culasse"
+        ]
+      }
+    ]
+  }
+}

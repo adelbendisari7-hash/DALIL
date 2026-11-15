@@ -1,0 +1,41 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+backend/*.db
+backend/e2e.db
+.pytest_cache/
+# Node
+node_modules/
+.next/
+frontend/test-results/
+frontend/playwright-report/
+frontend/tsconfig.tsbuildinfo
+# Secrets et données brutes
+.env
+.env.*
+!.env.example
+data/raw/
+# Sorties du pipeline : régénérables par `python data/pipeline/run.py all`.
+# On garde le rapport et les taux MOT (petits) ; le cache de traduction se sauvegarde à part (coûteux à refaire).
+data/processed/*
+!data/processed/report.md
+!data/processed/report.json
+!data/processed/priors/
+# Graphe : garder graph.json et GRAPH_REPORT.md
+graphify-out/graph.html
+
+# Modèles lourds (Kaggle) et outils téléchargés : hors dépôt
+ml/artifacts/*.gguf
+ml/artifacts/*/
+tools/
+ml/kaggle/_staging/
+ml/kaggle/_kernels/
+ml/kaggle/_outputs/
+
+# Modèles entraînés sur le corpus (lourds, régénérés par ml/train_baseline.py --corpus)
+ml/artifacts/*_corpus.joblib
+# Fichiers temporaires des tests
+backend/.pytest_llm/
+# Cache local de graphify (le graphe lui-même est commité)
+graphify-out/cache/

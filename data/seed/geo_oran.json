@@ -1,0 +1,34 @@
+{
+  "_note": "Wilaya d'Oran (31) et ses 26 communes. Coordonnées = centres approximatifs (à affiner), codes communes séquentiels internes à DALIL (pas les codes officiels ONS).",
+  "wilayas": [
+    {"code": "31", "nom_fr": "Oran", "nom_ar": "وهران", "active": true}
+  ],
+  "communes": [
+    {"code": "3101", "nom_fr": "Oran", "nom_ar": "وهران", "lat": 35.6971, "lng": -0.6308},
+    {"code": "3102", "nom_fr": "Bir El Djir", "nom_ar": "بئر الجير", "lat": 35.7200, "lng": -0.5500},
+    {"code": "3103", "nom_fr": "Es Senia", "nom_ar": "السانية", "lat": 35.6480, "lng": -0.6230},
+    {"code": "3104", "nom_fr": "Sidi Chami", "nom_ar": "سيدي الشحمي", "lat": 35.6700, "lng": -0.5400},
+    {"code": "3105", "nom_fr": "Hassi Bounif", "nom_ar": "حاسي بونيف", "lat": 35.6830, "lng": -0.5000},
+    {"code": "3106", "nom_fr": "Gdyel", "nom_ar": "قديل", "lat": 35.7800, "lng": -0.4300},
+    {"code": "3107", "nom_fr": "Arzew", "nom_ar": "أرزيو", "lat": 35.8500, "lng": -0.3200},
+    {"code": "3108", "nom_fr": "Bethioua", "nom_ar": "بطيوة", "lat": 35.8000, "lng": -0.2600},
+    {"code": "3109", "nom_fr": "Marsat El Hadjadj", "nom_ar": "مرسى الحجاج", "lat": 35.8000, "lng": -0.1600},
+    {"code": "3110", "nom_fr": "Ain El Turk", "nom_ar": "عين الترك", "lat": 35.7430, "lng": -0.7710},
+    {"code": "3111", "nom_fr": "El Ançor", "nom_ar": "العنصر", "lat": 35.6870, "lng": -0.8660},
+    {"code": "3112", "nom_fr": "Mers El Kebir", "nom_ar": "المرسى الكبير", "lat": 35.7270, "lng": -0.7100},
+    {"code": "3113", "nom_fr": "Bousfer", "nom_ar": "بوسفر", "lat": 35.7130, "lng": -0.8000},
+    {"code": "3114", "nom_fr": "Misserghin", "nom_ar": "مسرغين", "lat": 35.6170, "lng": -0.7300},
+    {"code": "3115", "nom_fr": "Boutlelis", "nom_ar": "بوتليليس", "lat": 35.5720, "lng": -0.8990},
+    {"code": "3116", "nom_fr": "Ain El Kerma", "nom_ar": "عين الكرمة", "lat": 35.5700, "lng": -0.9700},
+    {"code": "3117", "nom_fr": "Oued Tlelat", "nom_ar": "وادي تليلات", "lat": 35.5500, "lng": -0.4500},
+    {"code": "3118", "nom_fr": "Tafraoui", "nom_ar": "طفراوي", "lat": 35.4900, "lng": -0.5300},
+    {"code": "3119", "nom_fr": "El Kerma", "nom_ar": "الكرمة", "lat": 35.6000, "lng": -0.5800},
+    {"code": "3120", "nom_fr": "Boufatis", "nom_ar": "بوفاطيس", "lat": 35.6800, "lng": -0.4100},
+    {"code": "3121", "nom_fr": "El Braya", "nom_ar": "البرية", "lat": 35.6300, "lng": -0.4800},
+    {"code": "3122", "nom_fr": "Sidi Ben Yebka", "nom_ar": "سيدي بن يبقى", "lat": 35.7100, "lng": -0.3700},
+    {"code": "3123", "nom_fr": "Hassi Ben Okba", "nom_ar": "حاسي بن عقبة", "lat": 35.7300, "lng": -0.4500},
+    {"code": "3124", "nom_fr": "Ben Freha", "nom_ar": "بن فريحة", "lat": 35.6940, "lng": -0.4130},
+    {"code": "3125", "nom_fr": "Hassi Mefsoukh", "nom_ar": "حاسي مفسوخ", "lat": 35.7900, "lng": -0.3900},
+    {"code": "3126", "nom_fr": "Ain El Biya", "nom_ar": "عين البية", "lat": 35.8000, "lng": -0.3000}
+  ]
+}

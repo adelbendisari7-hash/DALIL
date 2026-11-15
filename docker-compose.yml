@@ -1,0 +1,44 @@
+# docker compose up --build  ->  API sur http://localhost:8000/docs, site sur http://localhost:3000
+services:
+  db:
+    # PostGIS + pgvector (extensions activées par la migration 0001)
+    build: ./db
+    environment:
+      POSTGRES_DB: dalil
+      POSTGRES_USER: dalil
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dalil-dev}
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dalil -d dalil"]
+      interval: 5s
+      retries: 20
+
+  api:
+    build: ./backend
+    environment:
+      DALIL_DATABASE_URL: postgresql+psycopg2://dalil:${POSTGRES_PASSWORD:-dalil-dev}@db:5432/dalil
+      DALIL_JWT_SECRET: ${DALIL_JWT_SECRET:-dev-only-secret-change-me-in-production-0123456789}
+      DALIL_ADMIN_PHONES: ${DALIL_ADMIN_PHONES:-}
+      DALIL_CORS_ORIGINS: http://localhost:3000
+      DALIL_DATA_DIR: /app/data
+      DALIL_CLASSIFIER_PATH: /app/ml/artifacts/baseline_tfidf_lr.joblib
+      DALIL_LLM_PROVIDER: ${DALIL_LLM_PROVIDER:-none}
+      DALIL_LLM_API_KEY: ${DALIL_LLM_API_KEY:-}
+      DALIL_LLM_BASE_URL: ${DALIL_LLM_BASE_URL:-}
+    volumes:
+      - ./data:/app/data:ro
+      - ./ml/artifacts:/app/ml/artifacts:ro
+    depends_on:
+      db: { condition: service_healthy }
+    ports: ["8000:8000"]
+
+  web:
+    build:
+      context: ./frontend
+      args: { NEXT_PUBLIC_API_URL: http://localhost:8000/api/v1 }
+    depends_on: [api]
+    ports: ["3000:3000"]
+
+volumes:
+  pgdata:

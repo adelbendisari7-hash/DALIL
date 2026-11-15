@@ -1,0 +1,1891 @@
+year,dalil_brand,dalil_model,band,tests,category,family,rate
+2023,Dacia,Sandero,moins de 100 000 km,75265,amortisseurs,suspension,0.00201
+2023,Dacia,Sandero,moins de 100 000 km,75265,ampoules,electricite,0.09804
+2023,Dacia,Sandero,moins de 100 000 km,75265,batterie,electricite,0.00017
+2023,Dacia,Sandero,moins de 100 000 km,75265,biellettes-direction,direction,0.0
+2023,Dacia,Sandero,moins de 100 000 km,75265,boite-vitesses,transmission,1e-05
+2023,Dacia,Sandero,moins de 100 000 km,75265,cardans,train-roulant,0.03258
+2023,Dacia,Sandero,moins de 100 000 km,75265,catalyseur,echappement,0.0
+2023,Dacia,Sandero,moins de 100 000 km,75265,coupelles,suspension,0.0
+2023,Dacia,Sandero,moins de 100 000 km,75265,courroie-accessoires,distribution,0.0
+2023,Dacia,Sandero,moins de 100 000 km,75265,cremaillere,direction,0.0002
+2023,Dacia,Sandero,moins de 100 000 km,75265,direction,direction,0.00013
+2023,Dacia,Sandero,moins de 100 000 km,75265,disques-frein,freinage,0.00894
+2023,Dacia,Sandero,moins de 100 000 km,75265,echappement,echappement,0.00355
+2023,Dacia,Sandero,moins de 100 000 km,75265,electricite,electricite,0.0
+2023,Dacia,Sandero,moins de 100 000 km,75265,etrier-frein,freinage,5e-05
+2023,Dacia,Sandero,moins de 100 000 km,75265,flexible-frein,freinage,0.00032
+2023,Dacia,Sandero,moins de 100 000 km,75265,freinage,freinage,0.01663
+2023,Dacia,Sandero,moins de 100 000 km,75265,galet-tendeur,distribution,1e-05
+2023,Dacia,Sandero,moins de 100 000 km,75265,huile-moteur,moteur,0.00036
+2023,Dacia,Sandero,moins de 100 000 km,75265,liquide-frein,freinage,0.00045
+2023,Dacia,Sandero,moins de 100 000 km,75265,machoires-frein,freinage,0.01917
+2023,Dacia,Sandero,moins de 100 000 km,75265,maitre-cylindre,freinage,4e-05
+2023,Dacia,Sandero,moins de 100 000 km,75265,plaquettes-avant,freinage,0.0
+2023,Dacia,Sandero,moins de 100 000 km,75265,pompe-direction,direction,0.00035
+2023,Dacia,Sandero,moins de 100 000 km,75265,ressorts,suspension,0.01772
+2023,Dacia,Sandero,moins de 100 000 km,75265,rotules-direction,direction,0.00276
+2023,Dacia,Sandero,moins de 100 000 km,75265,roulements-roue,train-roulant,0.00044
+2023,Dacia,Sandero,moins de 100 000 km,75265,silencieux,echappement,0.00186
+2023,Dacia,Sandero,moins de 100 000 km,75265,silentblocs,suspension,0.00684
+2023,Dacia,Sandero,moins de 100 000 km,75265,sonde-lambda,gestion-moteur,0.00351
+2023,Dacia,Sandero,moins de 100 000 km,75265,support-moteur,moteur,3e-05
+2023,Dacia,Sandero,moins de 100 000 km,75265,suspension,suspension,0.00672
+2023,Dacia,Sandero,moins de 100 000 km,75265,train-roulant,train-roulant,0.00146
+2023,Dacia,Sandero,moins de 100 000 km,75265,triangles,train-roulant,0.01117
+2023,Dacia,Sandero,moins de 100 000 km,75265,turbocompresseur,alimentation,0.0
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,amortisseurs,suspension,0.00643
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,ampoules,electricite,0.20173
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,batterie,electricite,0.00068
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,biellettes-direction,direction,0.0
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,boite-vitesses,transmission,0.0
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,cardans,train-roulant,0.07981
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,catalyseur,echappement,0.0001
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,coupelles,suspension,0.0
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,courroie-accessoires,distribution,0.0
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,cremaillere,direction,0.00083
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,direction,direction,0.00024
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,disques-frein,freinage,0.02157
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,echappement,echappement,0.00687
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,electricite,electricite,0.0
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,etrier-frein,freinage,0.00015
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,flexible-frein,freinage,0.00029
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,freinage,freinage,0.06885
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,galet-tendeur,distribution,0.0
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,huile-moteur,moteur,0.00107
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,liquide-frein,freinage,0.00131
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,machoires-frein,freinage,0.02425
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,maitre-cylindre,freinage,5e-05
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,plaquettes-avant,freinage,0.0
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,pompe-direction,direction,0.0017
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,ressorts,suspension,0.06388
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,rotules-direction,direction,0.02449
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,roulements-roue,train-roulant,0.00209
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,silencieux,echappement,0.00502
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,silentblocs,suspension,0.02532
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,sonde-lambda,gestion-moteur,0.00511
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,support-moteur,moteur,0.00049
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,suspension,suspension,0.03048
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,train-roulant,train-roulant,0.00385
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,triangles,train-roulant,0.056
+2023,Dacia,Sandero,100 000 à 160 000 km,20537,turbocompresseur,alimentation,5e-05
+2023,Dacia,Sandero,plus de 160 000 km,3814,amortisseurs,suspension,0.00891
+2023,Dacia,Sandero,plus de 160 000 km,3814,ampoules,electricite,0.25249
+2023,Dacia,Sandero,plus de 160 000 km,3814,batterie,electricite,0.00105
+2023,Dacia,Sandero,plus de 160 000 km,3814,biellettes-direction,direction,0.0
+2023,Dacia,Sandero,plus de 160 000 km,3814,boite-vitesses,transmission,0.0
+2023,Dacia,Sandero,plus de 160 000 km,3814,cardans,train-roulant,0.06738
+2023,Dacia,Sandero,plus de 160 000 km,3814,catalyseur,echappement,0.00052
+2023,Dacia,Sandero,plus de 160 000 km,3814,coupelles,suspension,0.0
+2023,Dacia,Sandero,plus de 160 000 km,3814,courroie-accessoires,distribution,0.0
+2023,Dacia,Sandero,plus de 160 000 km,3814,cremaillere,direction,0.00079
+2023,Dacia,Sandero,plus de 160 000 km,3814,direction,direction,0.00026
+2023,Dacia,Sandero,plus de 160 000 km,3814,disques-frein,freinage,0.02229
+2023,Dacia,Sandero,plus de 160 000 km,3814,echappement,echappement,0.01075
+2023,Dacia,Sandero,plus de 160 000 km,3814,electricite,electricite,0.0
+2023,Dacia,Sandero,plus de 160 000 km,3814,etrier-frein,freinage,0.0
+2023,Dacia,Sandero,plus de 160 000 km,3814,flexible-frein,freinage,0.00131
+2023,Dacia,Sandero,plus de 160 000 km,3814,freinage,freinage,0.10357
+2023,Dacia,Sandero,plus de 160 000 km,3814,galet-tendeur,distribution,0.0
+2023,Dacia,Sandero,plus de 160 000 km,3814,huile-moteur,moteur,0.00105
+2023,Dacia,Sandero,plus de 160 000 km,3814,liquide-frein,freinage,0.0021
+2023,Dacia,Sandero,plus de 160 000 km,3814,machoires-frein,freinage,0.02412
+2023,Dacia,Sandero,plus de 160 000 km,3814,maitre-cylindre,freinage,0.0
+2023,Dacia,Sandero,plus de 160 000 km,3814,plaquettes-avant,freinage,0.0
+2023,Dacia,Sandero,plus de 160 000 km,3814,pompe-direction,direction,0.00315
+2023,Dacia,Sandero,plus de 160 000 km,3814,ressorts,suspension,0.06974
+2023,Dacia,Sandero,plus de 160 000 km,3814,rotules-direction,direction,0.05401
+2023,Dacia,Sandero,plus de 160 000 km,3814,roulements-roue,train-roulant,0.00498
+2023,Dacia,Sandero,plus de 160 000 km,3814,silencieux,echappement,0.00891
+2023,Dacia,Sandero,plus de 160 000 km,3814,silentblocs,suspension,0.03173
+2023,Dacia,Sandero,plus de 160 000 km,3814,sonde-lambda,gestion-moteur,0.00603
+2023,Dacia,Sandero,plus de 160 000 km,3814,support-moteur,moteur,0.00026
+2023,Dacia,Sandero,plus de 160 000 km,3814,suspension,suspension,0.03408
+2023,Dacia,Sandero,plus de 160 000 km,3814,train-roulant,train-roulant,0.00577
+2023,Dacia,Sandero,plus de 160 000 km,3814,triangles,train-roulant,0.08049
+2023,Dacia,Sandero,plus de 160 000 km,3814,turbocompresseur,alimentation,0.00052
+2023,Dacia,Duster,moins de 100 000 km,46679,amortisseurs,suspension,0.00148
+2023,Dacia,Duster,moins de 100 000 km,46679,ampoules,electricite,0.10591
+2023,Dacia,Duster,moins de 100 000 km,46679,batterie,electricite,0.00024
+2023,Dacia,Duster,moins de 100 000 km,46679,biellettes-direction,direction,0.0
+2023,Dacia,Duster,moins de 100 000 km,46679,boite-vitesses,transmission,0.00124
+2023,Dacia,Duster,moins de 100 000 km,46679,cardans,train-roulant,0.00484
+2023,Dacia,Duster,moins de 100 000 km,46679,catalyseur,echappement,6e-05
+2023,Dacia,Duster,moins de 100 000 km,46679,coupelles,suspension,0.0
+2023,Dacia,Duster,moins de 100 000 km,46679,courroie-accessoires,distribution,0.0
+2023,Dacia,Duster,moins de 100 000 km,46679,cremaillere,direction,0.00015
+2023,Dacia,Duster,moins de 100 000 km,46679,direction,direction,2e-05
+2023,Dacia,Duster,moins de 100 000 km,46679,disques-frein,freinage,0.00578
+2023,Dacia,Duster,moins de 100 000 km,46679,echappement,echappement,0.00163
+2023,Dacia,Duster,moins de 100 000 km,46679,electricite,electricite,0.0
+2023,Dacia,Duster,moins de 100 000 km,46679,etrier-frein,freinage,4e-05
+2023,Dacia,Duster,moins de 100 000 km,46679,flexible-frein,freinage,0.00398
+2023,Dacia,Duster,moins de 100 000 km,46679,freinage,freinage,0.01082
+2023,Dacia,Duster,moins de 100 000 km,46679,galet-tendeur,distribution,2e-05
+2023,Dacia,Duster,moins de 100 000 km,46679,huile-moteur,moteur,0.00013
+2023,Dacia,Duster,moins de 100 000 km,46679,liquide-frein,freinage,0.00026
+2023,Dacia,Duster,moins de 100 000 km,46679,machoires-frein,freinage,0.00679
+2023,Dacia,Duster,moins de 100 000 km,46679,maitre-cylindre,freinage,4e-05
+2023,Dacia,Duster,moins de 100 000 km,46679,plaquettes-avant,freinage,0.0
+2023,Dacia,Duster,moins de 100 000 km,46679,pompe-direction,direction,0.00236
+2023,Dacia,Duster,moins de 100 000 km,46679,ressorts,suspension,0.00797
+2023,Dacia,Duster,moins de 100 000 km,46679,rotules-direction,direction,0.00709
+2023,Dacia,Duster,moins de 100 000 km,46679,roulements-roue,train-roulant,0.00026
+2023,Dacia,Duster,moins de 100 000 km,46679,silencieux,echappement,0.00259
+2023,Dacia,Duster,moins de 100 000 km,46679,silentblocs,suspension,9e-05
+2023,Dacia,Duster,moins de 100 000 km,46679,sonde-lambda,gestion-moteur,0.00152
+2023,Dacia,Duster,moins de 100 000 km,46679,support-moteur,moteur,6e-05
+2023,Dacia,Duster,moins de 100 000 km,46679,suspension,suspension,0.00011
+2023,Dacia,Duster,moins de 100 000 km,46679,train-roulant,train-roulant,0.00116
+2023,Dacia,Duster,moins de 100 000 km,46679,triangles,train-roulant,0.00251
+2023,Dacia,Duster,moins de 100 000 km,46679,turbocompresseur,alimentation,0.0
+2023,Dacia,Duster,100 000 à 160 000 km,13946,amortisseurs,suspension,0.01893
+2023,Dacia,Duster,100 000 à 160 000 km,13946,ampoules,electricite,0.20285
+2023,Dacia,Duster,100 000 à 160 000 km,13946,batterie,electricite,0.00057
+2023,Dacia,Duster,100 000 à 160 000 km,13946,biellettes-direction,direction,0.0
+2023,Dacia,Duster,100 000 à 160 000 km,13946,boite-vitesses,transmission,0.00452
+2023,Dacia,Duster,100 000 à 160 000 km,13946,cardans,train-roulant,0.02854
+2023,Dacia,Duster,100 000 à 160 000 km,13946,catalyseur,echappement,0.00014
+2023,Dacia,Duster,100 000 à 160 000 km,13946,coupelles,suspension,0.0
+2023,Dacia,Duster,100 000 à 160 000 km,13946,courroie-accessoires,distribution,0.0
+2023,Dacia,Duster,100 000 à 160 000 km,13946,cremaillere,direction,0.00115
+2023,Dacia,Duster,100 000 à 160 000 km,13946,direction,direction,0.00022
+2023,Dacia,Duster,100 000 à 160 000 km,13946,disques-frein,freinage,0.01893
+2023,Dacia,Duster,100 000 à 160 000 km,13946,echappement,echappement,0.00566
+2023,Dacia,Duster,100 000 à 160 000 km,13946,electricite,electricite,0.0
+2023,Dacia,Duster,100 000 à 160 000 km,13946,etrier-frein,freinage,0.00029
+2023,Dacia,Duster,100 000 à 160 000 km,13946,flexible-frein,freinage,0.03191
+2023,Dacia,Duster,100 000 à 160 000 km,13946,freinage,freinage,0.0469
+2023,Dacia,Duster,100 000 à 160 000 km,13946,galet-tendeur,distribution,7e-05
+2023,Dacia,Duster,100 000 à 160 000 km,13946,huile-moteur,moteur,0.00022
+2023,Dacia,Duster,100 000 à 160 000 km,13946,liquide-frein,freinage,0.0005
+2023,Dacia,Duster,100 000 à 160 000 km,13946,machoires-frein,freinage,0.01513
+2023,Dacia,Duster,100 000 à 160 000 km,13946,maitre-cylindre,freinage,0.0
+2023,Dacia,Duster,100 000 à 160 000 km,13946,plaquettes-avant,freinage,0.0
+2023,Dacia,Duster,100 000 à 160 000 km,13946,pompe-direction,direction,0.00272
+2023,Dacia,Duster,100 000 à 160 000 km,13946,ressorts,suspension,0.02632
+2023,Dacia,Duster,100 000 à 160 000 km,13946,rotules-direction,direction,0.04331
+2023,Dacia,Duster,100 000 à 160 000 km,13946,roulements-roue,train-roulant,0.00172
+2023,Dacia,Duster,100 000 à 160 000 km,13946,silencieux,echappement,0.01312
+2023,Dacia,Duster,100 000 à 160 000 km,13946,silentblocs,suspension,0.00201
+2023,Dacia,Duster,100 000 à 160 000 km,13946,sonde-lambda,gestion-moteur,0.00316
+2023,Dacia,Duster,100 000 à 160 000 km,13946,support-moteur,moteur,0.00022
+2023,Dacia,Duster,100 000 à 160 000 km,13946,suspension,suspension,0.00108
+2023,Dacia,Duster,100 000 à 160 000 km,13946,train-roulant,train-roulant,0.00294
+2023,Dacia,Duster,100 000 à 160 000 km,13946,triangles,train-roulant,0.02223
+2023,Dacia,Duster,100 000 à 160 000 km,13946,turbocompresseur,alimentation,0.0
+2023,Dacia,Duster,plus de 160 000 km,3755,amortisseurs,suspension,0.03728
+2023,Dacia,Duster,plus de 160 000 km,3755,ampoules,electricite,0.28602
+2023,Dacia,Duster,plus de 160 000 km,3755,batterie,electricite,0.00107
+2023,Dacia,Duster,plus de 160 000 km,3755,biellettes-direction,direction,0.0
+2023,Dacia,Duster,plus de 160 000 km,3755,boite-vitesses,transmission,0.01012
+2023,Dacia,Duster,plus de 160 000 km,3755,cardans,train-roulant,0.04128
+2023,Dacia,Duster,plus de 160 000 km,3755,catalyseur,echappement,0.0008
+2023,Dacia,Duster,plus de 160 000 km,3755,coupelles,suspension,0.0
+2023,Dacia,Duster,plus de 160 000 km,3755,courroie-accessoires,distribution,0.0
+2023,Dacia,Duster,plus de 160 000 km,3755,cremaillere,direction,0.00266
+2023,Dacia,Duster,plus de 160 000 km,3755,direction,direction,0.00027
+2023,Dacia,Duster,plus de 160 000 km,3755,disques-frein,freinage,0.01944
+2023,Dacia,Duster,plus de 160 000 km,3755,echappement,echappement,0.00905
+2023,Dacia,Duster,plus de 160 000 km,3755,electricite,electricite,0.0
+2023,Dacia,Duster,plus de 160 000 km,3755,etrier-frein,freinage,0.00027
+2023,Dacia,Duster,plus de 160 000 km,3755,flexible-frein,freinage,0.05566
+2023,Dacia,Duster,plus de 160 000 km,3755,freinage,freinage,0.07909
+2023,Dacia,Duster,plus de 160 000 km,3755,galet-tendeur,distribution,0.0
+2023,Dacia,Duster,plus de 160 000 km,3755,huile-moteur,moteur,0.0016
+2023,Dacia,Duster,plus de 160 000 km,3755,liquide-frein,freinage,0.00053
+2023,Dacia,Duster,plus de 160 000 km,3755,machoires-frein,freinage,0.01278
+2023,Dacia,Duster,plus de 160 000 km,3755,maitre-cylindre,freinage,0.00027
+2023,Dacia,Duster,plus de 160 000 km,3755,plaquettes-avant,freinage,0.0
+2023,Dacia,Duster,plus de 160 000 km,3755,pompe-direction,direction,0.00479
+2023,Dacia,Duster,plus de 160 000 km,3755,ressorts,suspension,0.02796
+2023,Dacia,Duster,plus de 160 000 km,3755,rotules-direction,direction,0.08842
+2023,Dacia,Duster,plus de 160 000 km,3755,roulements-roue,train-roulant,0.00533
+2023,Dacia,Duster,plus de 160 000 km,3755,silencieux,echappement,0.01838
+2023,Dacia,Duster,plus de 160 000 km,3755,silentblocs,suspension,0.00985
+2023,Dacia,Duster,plus de 160 000 km,3755,sonde-lambda,gestion-moteur,0.0024
+2023,Dacia,Duster,plus de 160 000 km,3755,support-moteur,moteur,0.0008
+2023,Dacia,Duster,plus de 160 000 km,3755,suspension,suspension,0.00453
+2023,Dacia,Duster,plus de 160 000 km,3755,train-roulant,train-roulant,0.00586
+2023,Dacia,Duster,plus de 160 000 km,3755,triangles,train-roulant,0.0522
+2023,Dacia,Duster,plus de 160 000 km,3755,turbocompresseur,alimentation,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,amortisseurs,suspension,0.00144
+2023,Dacia,Logan,moins de 100 000 km,9050,ampoules,electricite,0.10044
+2023,Dacia,Logan,moins de 100 000 km,9050,batterie,electricite,0.00033
+2023,Dacia,Logan,moins de 100 000 km,9050,biellettes-direction,direction,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,boite-vitesses,transmission,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,cardans,train-roulant,0.00376
+2023,Dacia,Logan,moins de 100 000 km,9050,catalyseur,echappement,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,coupelles,suspension,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,courroie-accessoires,distribution,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,cremaillere,direction,0.00044
+2023,Dacia,Logan,moins de 100 000 km,9050,direction,direction,0.00011
+2023,Dacia,Logan,moins de 100 000 km,9050,disques-frein,freinage,0.0074
+2023,Dacia,Logan,moins de 100 000 km,9050,echappement,echappement,0.00232
+2023,Dacia,Logan,moins de 100 000 km,9050,electricite,electricite,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,etrier-frein,freinage,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,flexible-frein,freinage,0.00044
+2023,Dacia,Logan,moins de 100 000 km,9050,freinage,freinage,0.01182
+2023,Dacia,Logan,moins de 100 000 km,9050,galet-tendeur,distribution,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,huile-moteur,moteur,0.00022
+2023,Dacia,Logan,moins de 100 000 km,9050,liquide-frein,freinage,0.00033
+2023,Dacia,Logan,moins de 100 000 km,9050,machoires-frein,freinage,0.01768
+2023,Dacia,Logan,moins de 100 000 km,9050,maitre-cylindre,freinage,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,plaquettes-avant,freinage,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,pompe-direction,direction,0.00066
+2023,Dacia,Logan,moins de 100 000 km,9050,ressorts,suspension,0.00343
+2023,Dacia,Logan,moins de 100 000 km,9050,rotules-direction,direction,0.00122
+2023,Dacia,Logan,moins de 100 000 km,9050,roulements-roue,train-roulant,0.00088
+2023,Dacia,Logan,moins de 100 000 km,9050,silencieux,echappement,0.00099
+2023,Dacia,Logan,moins de 100 000 km,9050,silentblocs,suspension,0.00519
+2023,Dacia,Logan,moins de 100 000 km,9050,sonde-lambda,gestion-moteur,0.00199
+2023,Dacia,Logan,moins de 100 000 km,9050,support-moteur,moteur,0.0
+2023,Dacia,Logan,moins de 100 000 km,9050,suspension,suspension,0.00409
+2023,Dacia,Logan,moins de 100 000 km,9050,train-roulant,train-roulant,0.00155
+2023,Dacia,Logan,moins de 100 000 km,9050,triangles,train-roulant,0.00718
+2023,Dacia,Logan,moins de 100 000 km,9050,turbocompresseur,alimentation,0.0
+2023,Dacia,Logan,100 000 à 160 000 km,4320,amortisseurs,suspension,0.00278
+2023,Dacia,Logan,100 000 à 160 000 km,4320,ampoules,electricite,0.1838
+2023,Dacia,Logan,100 000 à 160 000 km,4320,batterie,electricite,0.00023
+2023,Dacia,Logan,100 000 à 160 000 km,4320,biellettes-direction,direction,0.0
+2023,Dacia,Logan,100 000 à 160 000 km,4320,boite-vitesses,transmission,0.0
+2023,Dacia,Logan,100 000 à 160 000 km,4320,cardans,train-roulant,0.00301
+2023,Dacia,Logan,100 000 à 160 000 km,4320,catalyseur,echappement,0.00023
+2023,Dacia,Logan,100 000 à 160 000 km,4320,coupelles,suspension,0.0
+2023,Dacia,Logan,100 000 à 160 000 km,4320,courroie-accessoires,distribution,0.0
+2023,Dacia,Logan,100 000 à 160 000 km,4320,cremaillere,direction,0.00093
+2023,Dacia,Logan,100 000 à 160 000 km,4320,direction,direction,0.00046
+2023,Dacia,Logan,100 000 à 160 000 km,4320,disques-frein,freinage,0.01111
+2023,Dacia,Logan,100 000 à 160 000 km,4320,echappement,echappement,0.00671
+2023,Dacia,Logan,100 000 à 160 000 km,4320,electricite,electricite,0.0
+2023,Dacia,Logan,100 000 à 160 000 km,4320,etrier-frein,freinage,0.00023
+2023,Dacia,Logan,100 000 à 160 000 km,4320,flexible-frein,freinage,0.00023
+2023,Dacia,Logan,100 000 à 160 000 km,4320,freinage,freinage,0.03588
+2023,Dacia,Logan,100 000 à 160 000 km,4320,galet-tendeur,distribution,0.00023
+2023,Dacia,Logan,100 000 à 160 000 km,4320,huile-moteur,moteur,0.00093
+2023,Dacia,Logan,100 000 à 160 000 km,4320,liquide-frein,freinage,0.00255
+2023,Dacia,Logan,100 000 à 160 000 km,4320,machoires-frein,freinage,0.02106
+2023,Dacia,Logan,100 000 à 160 000 km,4320,maitre-cylindre,freinage,0.0
+2023,Dacia,Logan,100 000 à 160 000 km,4320,plaquettes-avant,freinage,0.0
+2023,Dacia,Logan,100 000 à 160 000 km,4320,pompe-direction,direction,0.00093
+2023,Dacia,Logan,100 000 à 160 000 km,4320,ressorts,suspension,0.00787
+2023,Dacia,Logan,100 000 à 160 000 km,4320,rotules-direction,direction,0.00995
+2023,Dacia,Logan,100 000 à 160 000 km,4320,roulements-roue,train-roulant,0.00139
+2023,Dacia,Logan,100 000 à 160 000 km,4320,silencieux,echappement,0.00417
+2023,Dacia,Logan,100 000 à 160 000 km,4320,silentblocs,suspension,0.01667
+2023,Dacia,Logan,100 000 à 160 000 km,4320,sonde-lambda,gestion-moteur,0.00301
+2023,Dacia,Logan,100 000 à 160 000 km,4320,support-moteur,moteur,0.00069
+2023,Dacia,Logan,100 000 à 160 000 km,4320,suspension,suspension,0.03634
+2023,Dacia,Logan,100 000 à 160 000 km,4320,train-roulant,train-roulant,0.00347
+2023,Dacia,Logan,100 000 à 160 000 km,4320,triangles,train-roulant,0.03218
+2023,Dacia,Logan,100 000 à 160 000 km,4320,turbocompresseur,alimentation,0.0
+2023,Dacia,Logan,plus de 160 000 km,2570,amortisseurs,suspension,0.00623
+2023,Dacia,Logan,plus de 160 000 km,2570,ampoules,electricite,0.20895
+2023,Dacia,Logan,plus de 160 000 km,2570,batterie,electricite,0.00233
+2023,Dacia,Logan,plus de 160 000 km,2570,biellettes-direction,direction,0.0
+2023,Dacia,Logan,plus de 160 000 km,2570,boite-vitesses,transmission,0.0
+2023,Dacia,Logan,plus de 160 000 km,2570,cardans,train-roulant,0.00739
+2023,Dacia,Logan,plus de 160 000 km,2570,catalyseur,echappement,0.00078
+2023,Dacia,Logan,plus de 160 000 km,2570,coupelles,suspension,0.0
+2023,Dacia,Logan,plus de 160 000 km,2570,courroie-accessoires,distribution,0.0
+2023,Dacia,Logan,plus de 160 000 km,2570,cremaillere,direction,0.00233
+2023,Dacia,Logan,plus de 160 000 km,2570,direction,direction,0.0
+2023,Dacia,Logan,plus de 160 000 km,2570,disques-frein,freinage,0.01051
+2023,Dacia,Logan,plus de 160 000 km,2570,echappement,echappement,0.00584
+2023,Dacia,Logan,plus de 160 000 km,2570,electricite,electricite,0.0
+2023,Dacia,Logan,plus de 160 000 km,2570,etrier-frein,freinage,0.00039
+2023,Dacia,Logan,plus de 160 000 km,2570,flexible-frein,freinage,0.00272
+2023,Dacia,Logan,plus de 160 000 km,2570,freinage,freinage,0.05992
+2023,Dacia,Logan,plus de 160 000 km,2570,galet-tendeur,distribution,0.0
+2023,Dacia,Logan,plus de 160 000 km,2570,huile-moteur,moteur,0.00078
+2023,Dacia,Logan,plus de 160 000 km,2570,liquide-frein,freinage,0.00428
+2023,Dacia,Logan,plus de 160 000 km,2570,machoires-frein,freinage,0.01907
+2023,Dacia,Logan,plus de 160 000 km,2570,maitre-cylindre,freinage,0.0
+2023,Dacia,Logan,plus de 160 000 km,2570,plaquettes-avant,freinage,0.0
+2023,Dacia,Logan,plus de 160 000 km,2570,pompe-direction,direction,0.00195
+2023,Dacia,Logan,plus de 160 000 km,2570,ressorts,suspension,0.01556
+2023,Dacia,Logan,plus de 160 000 km,2570,rotules-direction,direction,0.04514
+2023,Dacia,Logan,plus de 160 000 km,2570,roulements-roue,train-roulant,0.00973
+2023,Dacia,Logan,plus de 160 000 km,2570,silencieux,echappement,0.00584
+2023,Dacia,Logan,plus de 160 000 km,2570,silentblocs,suspension,0.02412
+2023,Dacia,Logan,plus de 160 000 km,2570,sonde-lambda,gestion-moteur,0.00428
+2023,Dacia,Logan,plus de 160 000 km,2570,support-moteur,moteur,0.00156
+2023,Dacia,Logan,plus de 160 000 km,2570,suspension,suspension,0.04591
+2023,Dacia,Logan,plus de 160 000 km,2570,train-roulant,train-roulant,0.00545
+2023,Dacia,Logan,plus de 160 000 km,2570,triangles,train-roulant,0.04864
+2023,Dacia,Logan,plus de 160 000 km,2570,turbocompresseur,alimentation,0.00039
+2023,Renault,Clio,moins de 100 000 km,154843,amortisseurs,suspension,0.00563
+2023,Renault,Clio,moins de 100 000 km,154843,ampoules,electricite,0.0954
+2023,Renault,Clio,moins de 100 000 km,154843,batterie,electricite,0.00034
+2023,Renault,Clio,moins de 100 000 km,154843,biellettes-direction,direction,0.0
+2023,Renault,Clio,moins de 100 000 km,154843,boite-vitesses,transmission,4e-05
+2023,Renault,Clio,moins de 100 000 km,154843,cardans,train-roulant,0.01482
+2023,Renault,Clio,moins de 100 000 km,154843,catalyseur,echappement,3e-05
+2023,Renault,Clio,moins de 100 000 km,154843,coupelles,suspension,0.0
+2023,Renault,Clio,moins de 100 000 km,154843,courroie-accessoires,distribution,0.0
+2023,Renault,Clio,moins de 100 000 km,154843,cremaillere,direction,0.00487
+2023,Renault,Clio,moins de 100 000 km,154843,direction,direction,0.00017
+2023,Renault,Clio,moins de 100 000 km,154843,disques-frein,freinage,0.01243
+2023,Renault,Clio,moins de 100 000 km,154843,echappement,echappement,0.00372
+2023,Renault,Clio,moins de 100 000 km,154843,electricite,electricite,0.0
+2023,Renault,Clio,moins de 100 000 km,154843,etrier-frein,freinage,0.00015
+2023,Renault,Clio,moins de 100 000 km,154843,flexible-frein,freinage,0.01175
+2023,Renault,Clio,moins de 100 000 km,154843,freinage,freinage,0.0352
+2023,Renault,Clio,moins de 100 000 km,154843,galet-tendeur,distribution,1e-05
+2023,Renault,Clio,moins de 100 000 km,154843,huile-moteur,moteur,0.00065
+2023,Renault,Clio,moins de 100 000 km,154843,liquide-frein,freinage,0.00089
+2023,Renault,Clio,moins de 100 000 km,154843,machoires-frein,freinage,0.01898
+2023,Renault,Clio,moins de 100 000 km,154843,maitre-cylindre,freinage,1e-05
+2023,Renault,Clio,moins de 100 000 km,154843,plaquettes-avant,freinage,0.0
+2023,Renault,Clio,moins de 100 000 km,154843,pompe-direction,direction,6e-05
+2023,Renault,Clio,moins de 100 000 km,154843,ressorts,suspension,0.06428
+2023,Renault,Clio,moins de 100 000 km,154843,rotules-direction,direction,0.0253
+2023,Renault,Clio,moins de 100 000 km,154843,roulements-roue,train-roulant,0.00313
+2023,Renault,Clio,moins de 100 000 km,154843,silencieux,echappement,0.00492
+2023,Renault,Clio,moins de 100 000 km,154843,silentblocs,suspension,0.00263
+2023,Renault,Clio,moins de 100 000 km,154843,sonde-lambda,gestion-moteur,0.00323
+2023,Renault,Clio,moins de 100 000 km,154843,support-moteur,moteur,7e-05
+2023,Renault,Clio,moins de 100 000 km,154843,suspension,suspension,0.00396
+2023,Renault,Clio,moins de 100 000 km,154843,train-roulant,train-roulant,0.00373
+2023,Renault,Clio,moins de 100 000 km,154843,triangles,train-roulant,0.05498
+2023,Renault,Clio,moins de 100 000 km,154843,turbocompresseur,alimentation,0.00017
+2023,Renault,Clio,100 000 à 160 000 km,125003,amortisseurs,suspension,0.01536
+2023,Renault,Clio,100 000 à 160 000 km,125003,ampoules,electricite,0.27007
+2023,Renault,Clio,100 000 à 160 000 km,125003,batterie,electricite,0.00148
+2023,Renault,Clio,100 000 à 160 000 km,125003,biellettes-direction,direction,0.0
+2023,Renault,Clio,100 000 à 160 000 km,125003,boite-vitesses,transmission,0.00018
+2023,Renault,Clio,100 000 à 160 000 km,125003,cardans,train-roulant,0.03894
+2023,Renault,Clio,100 000 à 160 000 km,125003,catalyseur,echappement,0.00036
+2023,Renault,Clio,100 000 à 160 000 km,125003,coupelles,suspension,0.0
+2023,Renault,Clio,100 000 à 160 000 km,125003,courroie-accessoires,distribution,0.0
+2023,Renault,Clio,100 000 à 160 000 km,125003,cremaillere,direction,0.01517
+2023,Renault,Clio,100 000 à 160 000 km,125003,direction,direction,0.00071
+2023,Renault,Clio,100 000 à 160 000 km,125003,disques-frein,freinage,0.02136
+2023,Renault,Clio,100 000 à 160 000 km,125003,echappement,echappement,0.01458
+2023,Renault,Clio,100 000 à 160 000 km,125003,electricite,electricite,0.0
+2023,Renault,Clio,100 000 à 160 000 km,125003,etrier-frein,freinage,0.00056
+2023,Renault,Clio,100 000 à 160 000 km,125003,flexible-frein,freinage,0.02298
+2023,Renault,Clio,100 000 à 160 000 km,125003,freinage,freinage,0.08092
+2023,Renault,Clio,100 000 à 160 000 km,125003,galet-tendeur,distribution,4e-05
+2023,Renault,Clio,100 000 à 160 000 km,125003,huile-moteur,moteur,0.00329
+2023,Renault,Clio,100 000 à 160 000 km,125003,liquide-frein,freinage,0.0025
+2023,Renault,Clio,100 000 à 160 000 km,125003,machoires-frein,freinage,0.01897
+2023,Renault,Clio,100 000 à 160 000 km,125003,maitre-cylindre,freinage,6e-05
+2023,Renault,Clio,100 000 à 160 000 km,125003,plaquettes-avant,freinage,0.0
+2023,Renault,Clio,100 000 à 160 000 km,125003,pompe-direction,direction,0.00039
+2023,Renault,Clio,100 000 à 160 000 km,125003,ressorts,suspension,0.11176
+2023,Renault,Clio,100 000 à 160 000 km,125003,rotules-direction,direction,0.098
+2023,Renault,Clio,100 000 à 160 000 km,125003,roulements-roue,train-roulant,0.01405
+2023,Renault,Clio,100 000 à 160 000 km,125003,silencieux,echappement,0.01678
+2023,Renault,Clio,100 000 à 160 000 km,125003,silentblocs,suspension,0.00831
+2023,Renault,Clio,100 000 à 160 000 km,125003,sonde-lambda,gestion-moteur,0.00923
+2023,Renault,Clio,100 000 à 160 000 km,125003,support-moteur,moteur,0.00066
+2023,Renault,Clio,100 000 à 160 000 km,125003,suspension,suspension,0.01273
+2023,Renault,Clio,100 000 à 160 000 km,125003,train-roulant,train-roulant,0.00833
+2023,Renault,Clio,100 000 à 160 000 km,125003,triangles,train-roulant,0.09405
+2023,Renault,Clio,100 000 à 160 000 km,125003,turbocompresseur,alimentation,0.00106
+2023,Renault,Clio,plus de 160 000 km,59567,amortisseurs,suspension,0.02394
+2023,Renault,Clio,plus de 160 000 km,59567,ampoules,electricite,0.3468
+2023,Renault,Clio,plus de 160 000 km,59567,batterie,electricite,0.0024
+2023,Renault,Clio,plus de 160 000 km,59567,biellettes-direction,direction,2e-05
+2023,Renault,Clio,plus de 160 000 km,59567,boite-vitesses,transmission,0.00032
+2023,Renault,Clio,plus de 160 000 km,59567,cardans,train-roulant,0.04068
+2023,Renault,Clio,plus de 160 000 km,59567,catalyseur,echappement,0.00112
+2023,Renault,Clio,plus de 160 000 km,59567,coupelles,suspension,0.0
+2023,Renault,Clio,plus de 160 000 km,59567,courroie-accessoires,distribution,0.0
+2023,Renault,Clio,plus de 160 000 km,59567,cremaillere,direction,0.02439
+2023,Renault,Clio,plus de 160 000 km,59567,direction,direction,0.00153
+2023,Renault,Clio,plus de 160 000 km,59567,disques-frein,freinage,0.0231
+2023,Renault,Clio,plus de 160 000 km,59567,echappement,echappement,0.03042
+2023,Renault,Clio,plus de 160 000 km,59567,electricite,electricite,0.0
+2023,Renault,Clio,plus de 160 000 km,59567,etrier-frein,freinage,0.00112
+2023,Renault,Clio,plus de 160 000 km,59567,flexible-frein,freinage,0.02538
+2023,Renault,Clio,plus de 160 000 km,59567,freinage,freinage,0.10299
+2023,Renault,Clio,plus de 160 000 km,59567,galet-tendeur,distribution,2e-05
+2023,Renault,Clio,plus de 160 000 km,59567,huile-moteur,moteur,0.00623
+2023,Renault,Clio,plus de 160 000 km,59567,liquide-frein,freinage,0.00269
+2023,Renault,Clio,plus de 160 000 km,59567,machoires-frein,freinage,0.02055
+2023,Renault,Clio,plus de 160 000 km,59567,maitre-cylindre,freinage,0.00012
+2023,Renault,Clio,plus de 160 000 km,59567,plaquettes-avant,freinage,0.0
+2023,Renault,Clio,plus de 160 000 km,59567,pompe-direction,direction,0.00065
+2023,Renault,Clio,plus de 160 000 km,59567,ressorts,suspension,0.11204
+2023,Renault,Clio,plus de 160 000 km,59567,rotules-direction,direction,0.14127
+2023,Renault,Clio,plus de 160 000 km,59567,roulements-roue,train-roulant,0.02278
+2023,Renault,Clio,plus de 160 000 km,59567,silencieux,echappement,0.02419
+2023,Renault,Clio,plus de 160 000 km,59567,silentblocs,suspension,0.01452
+2023,Renault,Clio,plus de 160 000 km,59567,sonde-lambda,gestion-moteur,0.01236
+2023,Renault,Clio,plus de 160 000 km,59567,support-moteur,moteur,0.00156
+2023,Renault,Clio,plus de 160 000 km,59567,suspension,suspension,0.01691
+2023,Renault,Clio,plus de 160 000 km,59567,train-roulant,train-roulant,0.01185
+2023,Renault,Clio,plus de 160 000 km,59567,triangles,train-roulant,0.10897
+2023,Renault,Clio,plus de 160 000 km,59567,turbocompresseur,alimentation,0.00478
+2023,Renault,Kangoo,moins de 100 000 km,16056,amortisseurs,suspension,0.00455
+2023,Renault,Kangoo,moins de 100 000 km,16056,ampoules,electricite,0.1392
+2023,Renault,Kangoo,moins de 100 000 km,16056,batterie,electricite,0.00143
+2023,Renault,Kangoo,moins de 100 000 km,16056,biellettes-direction,direction,0.0
+2023,Renault,Kangoo,moins de 100 000 km,16056,boite-vitesses,transmission,0.0
+2023,Renault,Kangoo,moins de 100 000 km,16056,cardans,train-roulant,0.04609
+2023,Renault,Kangoo,moins de 100 000 km,16056,catalyseur,echappement,0.00012
+2023,Renault,Kangoo,moins de 100 000 km,16056,coupelles,suspension,0.0
+2023,Renault,Kangoo,moins de 100 000 km,16056,courroie-accessoires,distribution,0.0
+2023,Renault,Kangoo,moins de 100 000 km,16056,cremaillere,direction,0.01389
+2023,Renault,Kangoo,moins de 100 000 km,16056,direction,direction,0.00019
+2023,Renault,Kangoo,moins de 100 000 km,16056,disques-frein,freinage,0.01003
+2023,Renault,Kangoo,moins de 100 000 km,16056,echappement,echappement,0.00536
+2023,Renault,Kangoo,moins de 100 000 km,16056,electricite,electricite,0.0
+2023,Renault,Kangoo,moins de 100 000 km,16056,etrier-frein,freinage,0.00012
+2023,Renault,Kangoo,moins de 100 000 km,16056,flexible-frein,freinage,0.01713
+2023,Renault,Kangoo,moins de 100 000 km,16056,freinage,freinage,0.03824
+2023,Renault,Kangoo,moins de 100 000 km,16056,galet-tendeur,distribution,0.0
+2023,Renault,Kangoo,moins de 100 000 km,16056,huile-moteur,moteur,0.00062
+2023,Renault,Kangoo,moins de 100 000 km,16056,liquide-frein,freinage,0.00056
+2023,Renault,Kangoo,moins de 100 000 km,16056,machoires-frein,freinage,0.01644
+2023,Renault,Kangoo,moins de 100 000 km,16056,maitre-cylindre,freinage,0.00019
+2023,Renault,Kangoo,moins de 100 000 km,16056,plaquettes-avant,freinage,0.0
+2023,Renault,Kangoo,moins de 100 000 km,16056,pompe-direction,direction,0.00262
+2023,Renault,Kangoo,moins de 100 000 km,16056,ressorts,suspension,0.02884
+2023,Renault,Kangoo,moins de 100 000 km,16056,rotules-direction,direction,0.03033
+2023,Renault,Kangoo,moins de 100 000 km,16056,roulements-roue,train-roulant,0.00392
+2023,Renault,Kangoo,moins de 100 000 km,16056,silencieux,echappement,0.01495
+2023,Renault,Kangoo,moins de 100 000 km,16056,silentblocs,suspension,0.00635
+2023,Renault,Kangoo,moins de 100 000 km,16056,sonde-lambda,gestion-moteur,0.00448
+2023,Renault,Kangoo,moins de 100 000 km,16056,support-moteur,moteur,0.00031
+2023,Renault,Kangoo,moins de 100 000 km,16056,suspension,suspension,0.00617
+2023,Renault,Kangoo,moins de 100 000 km,16056,train-roulant,train-roulant,0.00249
+2023,Renault,Kangoo,moins de 100 000 km,16056,triangles,train-roulant,0.01601
+2023,Renault,Kangoo,moins de 100 000 km,16056,turbocompresseur,alimentation,0.00125
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,amortisseurs,suspension,0.01562
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,ampoules,electricite,0.2379
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,batterie,electricite,0.00181
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,biellettes-direction,direction,0.0
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,boite-vitesses,transmission,0.00074
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,cardans,train-roulant,0.07787
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,catalyseur,echappement,0.0004
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,coupelles,suspension,0.0
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,courroie-accessoires,distribution,0.0
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,cremaillere,direction,0.02597
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,direction,direction,0.00062
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,disques-frein,freinage,0.02009
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,echappement,echappement,0.01166
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,electricite,electricite,0.0
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,etrier-frein,freinage,0.00091
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,flexible-frein,freinage,0.03933
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,freinage,freinage,0.06253
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,galet-tendeur,distribution,0.0
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,huile-moteur,moteur,0.00068
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,liquide-frein,freinage,0.00153
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,machoires-frein,freinage,0.0253
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,maitre-cylindre,freinage,0.00017
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,plaquettes-avant,freinage,0.0
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,pompe-direction,direction,0.00334
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,ressorts,suspension,0.06627
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,rotules-direction,direction,0.07357
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,roulements-roue,train-roulant,0.01188
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,silencieux,echappement,0.01517
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,silentblocs,suspension,0.01115
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,sonde-lambda,gestion-moteur,0.00328
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,support-moteur,moteur,0.00113
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,suspension,suspension,0.01188
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,train-roulant,train-roulant,0.00351
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,triangles,train-roulant,0.04256
+2023,Renault,Kangoo,100 000 à 160 000 km,17671,turbocompresseur,alimentation,0.00311
+2023,Renault,Kangoo,plus de 160 000 km,25381,amortisseurs,suspension,0.02935
+2023,Renault,Kangoo,plus de 160 000 km,25381,ampoules,electricite,0.3018
+2023,Renault,Kangoo,plus de 160 000 km,25381,batterie,electricite,0.00378
+2023,Renault,Kangoo,plus de 160 000 km,25381,biellettes-direction,direction,0.0
+2023,Renault,Kangoo,plus de 160 000 km,25381,boite-vitesses,transmission,0.00075
+2023,Renault,Kangoo,plus de 160 000 km,25381,cardans,train-roulant,0.09141
+2023,Renault,Kangoo,plus de 160 000 km,25381,catalyseur,echappement,0.00098
+2023,Renault,Kangoo,plus de 160 000 km,25381,coupelles,suspension,0.0
+2023,Renault,Kangoo,plus de 160 000 km,25381,courroie-accessoires,distribution,0.0
+2023,Renault,Kangoo,plus de 160 000 km,25381,cremaillere,direction,0.02726
+2023,Renault,Kangoo,plus de 160 000 km,25381,direction,direction,0.00126
+2023,Renault,Kangoo,plus de 160 000 km,25381,disques-frein,freinage,0.02486
+2023,Renault,Kangoo,plus de 160 000 km,25381,echappement,echappement,0.01816
+2023,Renault,Kangoo,plus de 160 000 km,25381,electricite,electricite,0.0
+2023,Renault,Kangoo,plus de 160 000 km,25381,etrier-frein,freinage,0.00075
+2023,Renault,Kangoo,plus de 160 000 km,25381,flexible-frein,freinage,0.06529
+2023,Renault,Kangoo,plus de 160 000 km,25381,freinage,freinage,0.10157
+2023,Renault,Kangoo,plus de 160 000 km,25381,galet-tendeur,distribution,0.0
+2023,Renault,Kangoo,plus de 160 000 km,25381,huile-moteur,moteur,0.00209
+2023,Renault,Kangoo,plus de 160 000 km,25381,liquide-frein,freinage,0.00154
+2023,Renault,Kangoo,plus de 160 000 km,25381,machoires-frein,freinage,0.0344
+2023,Renault,Kangoo,plus de 160 000 km,25381,maitre-cylindre,freinage,0.00012
+2023,Renault,Kangoo,plus de 160 000 km,25381,plaquettes-avant,freinage,0.0
+2023,Renault,Kangoo,plus de 160 000 km,25381,pompe-direction,direction,0.00307
+2023,Renault,Kangoo,plus de 160 000 km,25381,ressorts,suspension,0.08743
+2023,Renault,Kangoo,plus de 160 000 km,25381,rotules-direction,direction,0.11052
+2023,Renault,Kangoo,plus de 160 000 km,25381,roulements-roue,train-roulant,0.0195
+2023,Renault,Kangoo,plus de 160 000 km,25381,silencieux,echappement,0.01344
+2023,Renault,Kangoo,plus de 160 000 km,25381,silentblocs,suspension,0.01548
+2023,Renault,Kangoo,plus de 160 000 km,25381,sonde-lambda,gestion-moteur,0.00158
+2023,Renault,Kangoo,plus de 160 000 km,25381,support-moteur,moteur,0.00118
+2023,Renault,Kangoo,plus de 160 000 km,25381,suspension,suspension,0.0104
+2023,Renault,Kangoo,plus de 160 000 km,25381,train-roulant,train-roulant,0.008
+2023,Renault,Kangoo,plus de 160 000 km,25381,triangles,train-roulant,0.08128
+2023,Renault,Kangoo,plus de 160 000 km,25381,turbocompresseur,alimentation,0.00788
+2023,Hyundai,i10,moins de 100 000 km,182010,amortisseurs,suspension,0.0043
+2023,Hyundai,i10,moins de 100 000 km,182010,ampoules,electricite,0.07896
+2023,Hyundai,i10,moins de 100 000 km,182010,batterie,electricite,0.00087
+2023,Hyundai,i10,moins de 100 000 km,182010,biellettes-direction,direction,0.0
+2023,Hyundai,i10,moins de 100 000 km,182010,boite-vitesses,transmission,0.00013
+2023,Hyundai,i10,moins de 100 000 km,182010,cardans,train-roulant,0.00109
+2023,Hyundai,i10,moins de 100 000 km,182010,catalyseur,echappement,0.0
+2023,Hyundai,i10,moins de 100 000 km,182010,coupelles,suspension,0.0
+2023,Hyundai,i10,moins de 100 000 km,182010,courroie-accessoires,distribution,0.0
+2023,Hyundai,i10,moins de 100 000 km,182010,cremaillere,direction,0.00553
+2023,Hyundai,i10,moins de 100 000 km,182010,direction,direction,0.00013
+2023,Hyundai,i10,moins de 100 000 km,182010,disques-frein,freinage,0.01154
+2023,Hyundai,i10,moins de 100 000 km,182010,echappement,echappement,0.00156
+2023,Hyundai,i10,moins de 100 000 km,182010,electricite,electricite,0.0
+2023,Hyundai,i10,moins de 100 000 km,182010,etrier-frein,freinage,0.00021
+2023,Hyundai,i10,moins de 100 000 km,182010,flexible-frein,freinage,0.00843
+2023,Hyundai,i10,moins de 100 000 km,182010,freinage,freinage,0.02754
+2023,Hyundai,i10,moins de 100 000 km,182010,galet-tendeur,distribution,4e-05
+2023,Hyundai,i10,moins de 100 000 km,182010,huile-moteur,moteur,0.00047
+2023,Hyundai,i10,moins de 100 000 km,182010,liquide-frein,freinage,0.00023
+2023,Hyundai,i10,moins de 100 000 km,182010,machoires-frein,freinage,0.01773
+2023,Hyundai,i10,moins de 100 000 km,182010,maitre-cylindre,freinage,7e-05
+2023,Hyundai,i10,moins de 100 000 km,182010,plaquettes-avant,freinage,0.0
+2023,Hyundai,i10,moins de 100 000 km,182010,pompe-direction,direction,9e-05
+2023,Hyundai,i10,moins de 100 000 km,182010,ressorts,suspension,0.00042
+2023,Hyundai,i10,moins de 100 000 km,182010,rotules-direction,direction,0.00766
+2023,Hyundai,i10,moins de 100 000 km,182010,roulements-roue,train-roulant,0.0013
+2023,Hyundai,i10,moins de 100 000 km,182010,silencieux,echappement,0.00119
+2023,Hyundai,i10,moins de 100 000 km,182010,silentblocs,suspension,0.00046
+2023,Hyundai,i10,moins de 100 000 km,182010,sonde-lambda,gestion-moteur,0.00117
+2023,Hyundai,i10,moins de 100 000 km,182010,support-moteur,moteur,4e-05
+2023,Hyundai,i10,moins de 100 000 km,182010,suspension,suspension,0.00132
+2023,Hyundai,i10,moins de 100 000 km,182010,train-roulant,train-roulant,0.00149
+2023,Hyundai,i10,moins de 100 000 km,182010,triangles,train-roulant,0.01484
+2023,Hyundai,i10,moins de 100 000 km,182010,turbocompresseur,alimentation,2e-05
+2023,Hyundai,i10,100 000 à 160 000 km,50510,amortisseurs,suspension,0.01257
+2023,Hyundai,i10,100 000 à 160 000 km,50510,ampoules,electricite,0.20568
+2023,Hyundai,i10,100 000 à 160 000 km,50510,batterie,electricite,0.00273
+2023,Hyundai,i10,100 000 à 160 000 km,50510,biellettes-direction,direction,0.0
+2023,Hyundai,i10,100 000 à 160 000 km,50510,boite-vitesses,transmission,0.00036
+2023,Hyundai,i10,100 000 à 160 000 km,50510,cardans,train-roulant,0.00469
+2023,Hyundai,i10,100 000 à 160 000 km,50510,catalyseur,echappement,0.0
+2023,Hyundai,i10,100 000 à 160 000 km,50510,coupelles,suspension,0.0
+2023,Hyundai,i10,100 000 à 160 000 km,50510,courroie-accessoires,distribution,0.0
+2023,Hyundai,i10,100 000 à 160 000 km,50510,cremaillere,direction,0.00432
+2023,Hyundai,i10,100 000 à 160 000 km,50510,direction,direction,0.00042
+2023,Hyundai,i10,100 000 à 160 000 km,50510,disques-frein,freinage,0.01657
+2023,Hyundai,i10,100 000 à 160 000 km,50510,echappement,echappement,0.00859
+2023,Hyundai,i10,100 000 à 160 000 km,50510,electricite,electricite,0.0
+2023,Hyundai,i10,100 000 à 160 000 km,50510,etrier-frein,freinage,0.00059
+2023,Hyundai,i10,100 000 à 160 000 km,50510,flexible-frein,freinage,0.02599
+2023,Hyundai,i10,100 000 à 160 000 km,50510,freinage,freinage,0.07302
+2023,Hyundai,i10,100 000 à 160 000 km,50510,galet-tendeur,distribution,4e-05
+2023,Hyundai,i10,100 000 à 160 000 km,50510,huile-moteur,moteur,0.00253
+2023,Hyundai,i10,100 000 à 160 000 km,50510,liquide-frein,freinage,0.00095
+2023,Hyundai,i10,100 000 à 160 000 km,50510,machoires-frein,freinage,0.02417
+2023,Hyundai,i10,100 000 à 160 000 km,50510,maitre-cylindre,freinage,0.00012
+2023,Hyundai,i10,100 000 à 160 000 km,50510,plaquettes-avant,freinage,0.0
+2023,Hyundai,i10,100 000 à 160 000 km,50510,pompe-direction,direction,0.00018
+2023,Hyundai,i10,100 000 à 160 000 km,50510,ressorts,suspension,0.00141
+2023,Hyundai,i10,100 000 à 160 000 km,50510,rotules-direction,direction,0.03219
+2023,Hyundai,i10,100 000 à 160 000 km,50510,roulements-roue,train-roulant,0.00447
+2023,Hyundai,i10,100 000 à 160 000 km,50510,silencieux,echappement,0.00626
+2023,Hyundai,i10,100 000 à 160 000 km,50510,silentblocs,suspension,0.00299
+2023,Hyundai,i10,100 000 à 160 000 km,50510,sonde-lambda,gestion-moteur,0.00489
+2023,Hyundai,i10,100 000 à 160 000 km,50510,support-moteur,moteur,0.0002
+2023,Hyundai,i10,100 000 à 160 000 km,50510,suspension,suspension,0.0057
+2023,Hyundai,i10,100 000 à 160 000 km,50510,train-roulant,train-roulant,0.00396
+2023,Hyundai,i10,100 000 à 160 000 km,50510,triangles,train-roulant,0.04742
+2023,Hyundai,i10,100 000 à 160 000 km,50510,turbocompresseur,alimentation,2e-05
+2023,Hyundai,i10,plus de 160 000 km,9424,amortisseurs,suspension,0.02006
+2023,Hyundai,i10,plus de 160 000 km,9424,ampoules,electricite,0.27801
+2023,Hyundai,i10,plus de 160 000 km,9424,batterie,electricite,0.00531
+2023,Hyundai,i10,plus de 160 000 km,9424,biellettes-direction,direction,0.0
+2023,Hyundai,i10,plus de 160 000 km,9424,boite-vitesses,transmission,0.00042
+2023,Hyundai,i10,plus de 160 000 km,9424,cardans,train-roulant,0.00775
+2023,Hyundai,i10,plus de 160 000 km,9424,catalyseur,echappement,0.0
+2023,Hyundai,i10,plus de 160 000 km,9424,coupelles,suspension,0.0
+2023,Hyundai,i10,plus de 160 000 km,9424,courroie-accessoires,distribution,0.0
+2023,Hyundai,i10,plus de 160 000 km,9424,cremaillere,direction,0.00435
+2023,Hyundai,i10,plus de 160 000 km,9424,direction,direction,0.00149
+2023,Hyundai,i10,plus de 160 000 km,9424,disques-frein,freinage,0.01899
+2023,Hyundai,i10,plus de 160 000 km,9424,echappement,echappement,0.01889
+2023,Hyundai,i10,plus de 160 000 km,9424,electricite,electricite,0.0
+2023,Hyundai,i10,plus de 160 000 km,9424,etrier-frein,freinage,0.00011
+2023,Hyundai,i10,plus de 160 000 km,9424,flexible-frein,freinage,0.0313
+2023,Hyundai,i10,plus de 160 000 km,9424,freinage,freinage,0.1128
+2023,Hyundai,i10,plus de 160 000 km,9424,galet-tendeur,distribution,0.0
+2023,Hyundai,i10,plus de 160 000 km,9424,huile-moteur,moteur,0.00403
+2023,Hyundai,i10,plus de 160 000 km,9424,liquide-frein,freinage,0.00106
+2023,Hyundai,i10,plus de 160 000 km,9424,machoires-frein,freinage,0.02738
+2023,Hyundai,i10,plus de 160 000 km,9424,maitre-cylindre,freinage,0.00011
+2023,Hyundai,i10,plus de 160 000 km,9424,plaquettes-avant,freinage,0.0
+2023,Hyundai,i10,plus de 160 000 km,9424,pompe-direction,direction,0.00032
+2023,Hyundai,i10,plus de 160 000 km,9424,ressorts,suspension,0.00202
+2023,Hyundai,i10,plus de 160 000 km,9424,rotules-direction,direction,0.06314
+2023,Hyundai,i10,plus de 160 000 km,9424,roulements-roue,train-roulant,0.00711
+2023,Hyundai,i10,plus de 160 000 km,9424,silencieux,echappement,0.01157
+2023,Hyundai,i10,plus de 160 000 km,9424,silentblocs,suspension,0.00456
+2023,Hyundai,i10,plus de 160 000 km,9424,sonde-lambda,gestion-moteur,0.00955
+2023,Hyundai,i10,plus de 160 000 km,9424,support-moteur,moteur,0.00053
+2023,Hyundai,i10,plus de 160 000 km,9424,suspension,suspension,0.01114
+2023,Hyundai,i10,plus de 160 000 km,9424,train-roulant,train-roulant,0.00488
+2023,Hyundai,i10,plus de 160 000 km,9424,triangles,train-roulant,0.06685
+2023,Hyundai,i10,plus de 160 000 km,9424,turbocompresseur,alimentation,0.0
+2023,Kia,Picanto,moins de 100 000 km,130218,amortisseurs,suspension,0.00269
+2023,Kia,Picanto,moins de 100 000 km,130218,ampoules,electricite,0.06084
+2023,Kia,Picanto,moins de 100 000 km,130218,batterie,electricite,0.00134
+2023,Kia,Picanto,moins de 100 000 km,130218,biellettes-direction,direction,0.0
+2023,Kia,Picanto,moins de 100 000 km,130218,boite-vitesses,transmission,5e-05
+2023,Kia,Picanto,moins de 100 000 km,130218,cardans,train-roulant,0.0062
+2023,Kia,Picanto,moins de 100 000 km,130218,catalyseur,echappement,0.0
+2023,Kia,Picanto,moins de 100 000 km,130218,coupelles,suspension,0.0
+2023,Kia,Picanto,moins de 100 000 km,130218,courroie-accessoires,distribution,0.0
+2023,Kia,Picanto,moins de 100 000 km,130218,cremaillere,direction,0.00125
+2023,Kia,Picanto,moins de 100 000 km,130218,direction,direction,0.00012
+2023,Kia,Picanto,moins de 100 000 km,130218,disques-frein,freinage,0.00522
+2023,Kia,Picanto,moins de 100 000 km,130218,echappement,echappement,0.00366
+2023,Kia,Picanto,moins de 100 000 km,130218,electricite,electricite,0.0
+2023,Kia,Picanto,moins de 100 000 km,130218,etrier-frein,freinage,0.00013
+2023,Kia,Picanto,moins de 100 000 km,130218,flexible-frein,freinage,0.01262
+2023,Kia,Picanto,moins de 100 000 km,130218,freinage,freinage,0.04472
+2023,Kia,Picanto,moins de 100 000 km,130218,galet-tendeur,distribution,2e-05
+2023,Kia,Picanto,moins de 100 000 km,130218,huile-moteur,moteur,0.00082
+2023,Kia,Picanto,moins de 100 000 km,130218,liquide-frein,freinage,0.00028
+2023,Kia,Picanto,moins de 100 000 km,130218,machoires-frein,freinage,0.0105
+2023,Kia,Picanto,moins de 100 000 km,130218,maitre-cylindre,freinage,5e-05
+2023,Kia,Picanto,moins de 100 000 km,130218,plaquettes-avant,freinage,0.0
+2023,Kia,Picanto,moins de 100 000 km,130218,pompe-direction,direction,8e-05
+2023,Kia,Picanto,moins de 100 000 km,130218,ressorts,suspension,0.01298
+2023,Kia,Picanto,moins de 100 000 km,130218,rotules-direction,direction,0.01069
+2023,Kia,Picanto,moins de 100 000 km,130218,roulements-roue,train-roulant,0.00117
+2023,Kia,Picanto,moins de 100 000 km,130218,silencieux,echappement,0.00654
+2023,Kia,Picanto,moins de 100 000 km,130218,silentblocs,suspension,0.00065
+2023,Kia,Picanto,moins de 100 000 km,130218,sonde-lambda,gestion-moteur,0.00342
+2023,Kia,Picanto,moins de 100 000 km,130218,support-moteur,moteur,6e-05
+2023,Kia,Picanto,moins de 100 000 km,130218,suspension,suspension,0.00171
+2023,Kia,Picanto,moins de 100 000 km,130218,train-roulant,train-roulant,0.00158
+2023,Kia,Picanto,moins de 100 000 km,130218,triangles,train-roulant,0.01653
+2023,Kia,Picanto,moins de 100 000 km,130218,turbocompresseur,alimentation,1e-05
+2023,Kia,Picanto,100 000 à 160 000 km,40316,amortisseurs,suspension,0.01076
+2023,Kia,Picanto,100 000 à 160 000 km,40316,ampoules,electricite,0.19037
+2023,Kia,Picanto,100 000 à 160 000 km,40316,batterie,electricite,0.00387
+2023,Kia,Picanto,100 000 à 160 000 km,40316,biellettes-direction,direction,0.0
+2023,Kia,Picanto,100 000 à 160 000 km,40316,boite-vitesses,transmission,0.00015
+2023,Kia,Picanto,100 000 à 160 000 km,40316,cardans,train-roulant,0.02929
+2023,Kia,Picanto,100 000 à 160 000 km,40316,catalyseur,echappement,0.0
+2023,Kia,Picanto,100 000 à 160 000 km,40316,coupelles,suspension,0.0
+2023,Kia,Picanto,100 000 à 160 000 km,40316,courroie-accessoires,distribution,0.0
+2023,Kia,Picanto,100 000 à 160 000 km,40316,cremaillere,direction,0.0033
+2023,Kia,Picanto,100 000 à 160 000 km,40316,direction,direction,0.00067
+2023,Kia,Picanto,100 000 à 160 000 km,40316,disques-frein,freinage,0.01573
+2023,Kia,Picanto,100 000 à 160 000 km,40316,echappement,echappement,0.0288
+2023,Kia,Picanto,100 000 à 160 000 km,40316,electricite,electricite,0.0
+2023,Kia,Picanto,100 000 à 160 000 km,40316,etrier-frein,freinage,0.00052
+2023,Kia,Picanto,100 000 à 160 000 km,40316,flexible-frein,freinage,0.03473
+2023,Kia,Picanto,100 000 à 160 000 km,40316,freinage,freinage,0.13848
+2023,Kia,Picanto,100 000 à 160 000 km,40316,galet-tendeur,distribution,0.0
+2023,Kia,Picanto,100 000 à 160 000 km,40316,huile-moteur,moteur,0.00456
+2023,Kia,Picanto,100 000 à 160 000 km,40316,liquide-frein,freinage,0.00127
+2023,Kia,Picanto,100 000 à 160 000 km,40316,machoires-frein,freinage,0.02111
+2023,Kia,Picanto,100 000 à 160 000 km,40316,maitre-cylindre,freinage,0.0001
+2023,Kia,Picanto,100 000 à 160 000 km,40316,plaquettes-avant,freinage,0.0
+2023,Kia,Picanto,100 000 à 160 000 km,40316,pompe-direction,direction,0.00089
+2023,Kia,Picanto,100 000 à 160 000 km,40316,ressorts,suspension,0.02892
+2023,Kia,Picanto,100 000 à 160 000 km,40316,rotules-direction,direction,0.05854
+2023,Kia,Picanto,100 000 à 160 000 km,40316,roulements-roue,train-roulant,0.00585
+2023,Kia,Picanto,100 000 à 160 000 km,40316,silencieux,echappement,0.03926
+2023,Kia,Picanto,100 000 à 160 000 km,40316,silentblocs,suspension,0.00332
+2023,Kia,Picanto,100 000 à 160 000 km,40316,sonde-lambda,gestion-moteur,0.02624
+2023,Kia,Picanto,100 000 à 160 000 km,40316,support-moteur,moteur,0.00032
+2023,Kia,Picanto,100 000 à 160 000 km,40316,suspension,suspension,0.01466
+2023,Kia,Picanto,100 000 à 160 000 km,40316,train-roulant,train-roulant,0.00494
+2023,Kia,Picanto,100 000 à 160 000 km,40316,triangles,train-roulant,0.06
+2023,Kia,Picanto,100 000 à 160 000 km,40316,turbocompresseur,alimentation,0.0002
+2023,Kia,Picanto,plus de 160 000 km,8531,amortisseurs,suspension,0.02368
+2023,Kia,Picanto,plus de 160 000 km,8531,ampoules,electricite,0.25472
+2023,Kia,Picanto,plus de 160 000 km,8531,batterie,electricite,0.00692
+2023,Kia,Picanto,plus de 160 000 km,8531,biellettes-direction,direction,0.0
+2023,Kia,Picanto,plus de 160 000 km,8531,boite-vitesses,transmission,0.00035
+2023,Kia,Picanto,plus de 160 000 km,8531,cardans,train-roulant,0.03833
+2023,Kia,Picanto,plus de 160 000 km,8531,catalyseur,echappement,0.0
+2023,Kia,Picanto,plus de 160 000 km,8531,coupelles,suspension,0.0
+2023,Kia,Picanto,plus de 160 000 km,8531,courroie-accessoires,distribution,0.0
+2023,Kia,Picanto,plus de 160 000 km,8531,cremaillere,direction,0.00375
+2023,Kia,Picanto,plus de 160 000 km,8531,direction,direction,0.00199
+2023,Kia,Picanto,plus de 160 000 km,8531,disques-frein,freinage,0.01782
+2023,Kia,Picanto,plus de 160 000 km,8531,echappement,echappement,0.05638
+2023,Kia,Picanto,plus de 160 000 km,8531,electricite,electricite,0.0
+2023,Kia,Picanto,plus de 160 000 km,8531,etrier-frein,freinage,0.00047
+2023,Kia,Picanto,plus de 160 000 km,8531,flexible-frein,freinage,0.04361
+2023,Kia,Picanto,plus de 160 000 km,8531,freinage,freinage,0.19646
+2023,Kia,Picanto,plus de 160 000 km,8531,galet-tendeur,distribution,0.0
+2023,Kia,Picanto,plus de 160 000 km,8531,huile-moteur,moteur,0.01078
+2023,Kia,Picanto,plus de 160 000 km,8531,liquide-frein,freinage,0.00164
+2023,Kia,Picanto,plus de 160 000 km,8531,machoires-frein,freinage,0.02298
+2023,Kia,Picanto,plus de 160 000 km,8531,maitre-cylindre,freinage,0.00035
+2023,Kia,Picanto,plus de 160 000 km,8531,plaquettes-avant,freinage,0.0
+2023,Kia,Picanto,plus de 160 000 km,8531,pompe-direction,direction,0.00094
+2023,Kia,Picanto,plus de 160 000 km,8531,ressorts,suspension,0.03013
+2023,Kia,Picanto,plus de 160 000 km,8531,rotules-direction,direction,0.09436
+2023,Kia,Picanto,plus de 160 000 km,8531,roulements-roue,train-roulant,0.00856
+2023,Kia,Picanto,plus de 160 000 km,8531,silencieux,echappement,0.06693
+2023,Kia,Picanto,plus de 160 000 km,8531,silentblocs,suspension,0.00621
+2023,Kia,Picanto,plus de 160 000 km,8531,sonde-lambda,gestion-moteur,0.04642
+2023,Kia,Picanto,plus de 160 000 km,8531,support-moteur,moteur,0.00047
+2023,Kia,Picanto,plus de 160 000 km,8531,suspension,suspension,0.03212
+2023,Kia,Picanto,plus de 160 000 km,8531,train-roulant,train-roulant,0.00621
+2023,Kia,Picanto,plus de 160 000 km,8531,triangles,train-roulant,0.08112
+2023,Kia,Picanto,plus de 160 000 km,8531,turbocompresseur,alimentation,0.00035
+2023,Kia,Rio,moins de 100 000 km,54231,amortisseurs,suspension,0.0021
+2023,Kia,Rio,moins de 100 000 km,54231,ampoules,electricite,0.05777
+2023,Kia,Rio,moins de 100 000 km,54231,batterie,electricite,0.00068
+2023,Kia,Rio,moins de 100 000 km,54231,biellettes-direction,direction,0.0
+2023,Kia,Rio,moins de 100 000 km,54231,boite-vitesses,transmission,7e-05
+2023,Kia,Rio,moins de 100 000 km,54231,cardans,train-roulant,0.00197
+2023,Kia,Rio,moins de 100 000 km,54231,catalyseur,echappement,0.00013
+2023,Kia,Rio,moins de 100 000 km,54231,coupelles,suspension,0.0
+2023,Kia,Rio,moins de 100 000 km,54231,courroie-accessoires,distribution,0.0
+2023,Kia,Rio,moins de 100 000 km,54231,cremaillere,direction,0.0012
+2023,Kia,Rio,moins de 100 000 km,54231,direction,direction,0.00033
+2023,Kia,Rio,moins de 100 000 km,54231,disques-frein,freinage,0.00824
+2023,Kia,Rio,moins de 100 000 km,54231,echappement,echappement,0.00304
+2023,Kia,Rio,moins de 100 000 km,54231,electricite,electricite,0.0
+2023,Kia,Rio,moins de 100 000 km,54231,etrier-frein,freinage,4e-05
+2023,Kia,Rio,moins de 100 000 km,54231,flexible-frein,freinage,0.00561
+2023,Kia,Rio,moins de 100 000 km,54231,freinage,freinage,0.01873
+2023,Kia,Rio,moins de 100 000 km,54231,galet-tendeur,distribution,0.0
+2023,Kia,Rio,moins de 100 000 km,54231,huile-moteur,moteur,0.00042
+2023,Kia,Rio,moins de 100 000 km,54231,liquide-frein,freinage,0.0003
+2023,Kia,Rio,moins de 100 000 km,54231,machoires-frein,freinage,0.0206
+2023,Kia,Rio,moins de 100 000 km,54231,maitre-cylindre,freinage,4e-05
+2023,Kia,Rio,moins de 100 000 km,54231,plaquettes-avant,freinage,0.0
+2023,Kia,Rio,moins de 100 000 km,54231,pompe-direction,direction,0.00044
+2023,Kia,Rio,moins de 100 000 km,54231,ressorts,suspension,0.00304
+2023,Kia,Rio,moins de 100 000 km,54231,rotules-direction,direction,0.02097
+2023,Kia,Rio,moins de 100 000 km,54231,roulements-roue,train-roulant,0.0021
+2023,Kia,Rio,moins de 100 000 km,54231,silencieux,echappement,0.00282
+2023,Kia,Rio,moins de 100 000 km,54231,silentblocs,suspension,0.00028
+2023,Kia,Rio,moins de 100 000 km,54231,sonde-lambda,gestion-moteur,0.00074
+2023,Kia,Rio,moins de 100 000 km,54231,support-moteur,moteur,2e-05
+2023,Kia,Rio,moins de 100 000 km,54231,suspension,suspension,0.00159
+2023,Kia,Rio,moins de 100 000 km,54231,train-roulant,train-roulant,0.00173
+2023,Kia,Rio,moins de 100 000 km,54231,triangles,train-roulant,0.02253
+2023,Kia,Rio,moins de 100 000 km,54231,turbocompresseur,alimentation,0.00017
+2023,Kia,Rio,100 000 à 160 000 km,32354,amortisseurs,suspension,0.00445
+2023,Kia,Rio,100 000 à 160 000 km,32354,ampoules,electricite,0.17429
+2023,Kia,Rio,100 000 à 160 000 km,32354,batterie,electricite,0.00306
+2023,Kia,Rio,100 000 à 160 000 km,32354,biellettes-direction,direction,0.0
+2023,Kia,Rio,100 000 à 160 000 km,32354,boite-vitesses,transmission,0.00028
+2023,Kia,Rio,100 000 à 160 000 km,32354,cardans,train-roulant,0.01011
+2023,Kia,Rio,100 000 à 160 000 km,32354,catalyseur,echappement,0.00022
+2023,Kia,Rio,100 000 à 160 000 km,32354,coupelles,suspension,0.0
+2023,Kia,Rio,100 000 à 160 000 km,32354,courroie-accessoires,distribution,0.0
+2023,Kia,Rio,100 000 à 160 000 km,32354,cremaillere,direction,0.00204
+2023,Kia,Rio,100 000 à 160 000 km,32354,direction,direction,0.0009
+2023,Kia,Rio,100 000 à 160 000 km,32354,disques-frein,freinage,0.02043
+2023,Kia,Rio,100 000 à 160 000 km,32354,echappement,echappement,0.01255
+2023,Kia,Rio,100 000 à 160 000 km,32354,electricite,electricite,0.0
+2023,Kia,Rio,100 000 à 160 000 km,32354,etrier-frein,freinage,0.00015
+2023,Kia,Rio,100 000 à 160 000 km,32354,flexible-frein,freinage,0.01873
+2023,Kia,Rio,100 000 à 160 000 km,32354,freinage,freinage,0.06039
+2023,Kia,Rio,100 000 à 160 000 km,32354,galet-tendeur,distribution,0.0
+2023,Kia,Rio,100 000 à 160 000 km,32354,huile-moteur,moteur,0.00192
+2023,Kia,Rio,100 000 à 160 000 km,32354,liquide-frein,freinage,0.00062
+2023,Kia,Rio,100 000 à 160 000 km,32354,machoires-frein,freinage,0.02735
+2023,Kia,Rio,100 000 à 160 000 km,32354,maitre-cylindre,freinage,0.0
+2023,Kia,Rio,100 000 à 160 000 km,32354,plaquettes-avant,freinage,0.0
+2023,Kia,Rio,100 000 à 160 000 km,32354,pompe-direction,direction,0.00173
+2023,Kia,Rio,100 000 à 160 000 km,32354,ressorts,suspension,0.00535
+2023,Kia,Rio,100 000 à 160 000 km,32354,rotules-direction,direction,0.08169
+2023,Kia,Rio,100 000 à 160 000 km,32354,roulements-roue,train-roulant,0.00689
+2023,Kia,Rio,100 000 à 160 000 km,32354,silencieux,echappement,0.0115
+2023,Kia,Rio,100 000 à 160 000 km,32354,silentblocs,suspension,0.00114
+2023,Kia,Rio,100 000 à 160 000 km,32354,sonde-lambda,gestion-moteur,0.00244
+2023,Kia,Rio,100 000 à 160 000 km,32354,support-moteur,moteur,0.00019
+2023,Kia,Rio,100 000 à 160 000 km,32354,suspension,suspension,0.00909
+2023,Kia,Rio,100 000 à 160 000 km,32354,train-roulant,train-roulant,0.00402
+2023,Kia,Rio,100 000 à 160 000 km,32354,triangles,train-roulant,0.07384
+2023,Kia,Rio,100 000 à 160 000 km,32354,turbocompresseur,alimentation,0.00062
+2023,Kia,Rio,plus de 160 000 km,11932,amortisseurs,suspension,0.01458
+2023,Kia,Rio,plus de 160 000 km,11932,ampoules,electricite,0.24925
+2023,Kia,Rio,plus de 160 000 km,11932,batterie,electricite,0.00545
+2023,Kia,Rio,plus de 160 000 km,11932,biellettes-direction,direction,0.0
+2023,Kia,Rio,plus de 160 000 km,11932,boite-vitesses,transmission,0.00025
+2023,Kia,Rio,plus de 160 000 km,11932,cardans,train-roulant,0.02028
+2023,Kia,Rio,plus de 160 000 km,11932,catalyseur,echappement,0.00067
+2023,Kia,Rio,plus de 160 000 km,11932,coupelles,suspension,0.0
+2023,Kia,Rio,plus de 160 000 km,11932,courroie-accessoires,distribution,0.0
+2023,Kia,Rio,plus de 160 000 km,11932,cremaillere,direction,0.00352
+2023,Kia,Rio,plus de 160 000 km,11932,direction,direction,0.00285
+2023,Kia,Rio,plus de 160 000 km,11932,disques-frein,freinage,0.0238
+2023,Kia,Rio,plus de 160 000 km,11932,echappement,echappement,0.0269
+2023,Kia,Rio,plus de 160 000 km,11932,electricite,electricite,0.0
+2023,Kia,Rio,plus de 160 000 km,11932,etrier-frein,freinage,0.0005
+2023,Kia,Rio,plus de 160 000 km,11932,flexible-frein,freinage,0.02841
+2023,Kia,Rio,plus de 160 000 km,11932,freinage,freinage,0.09328
+2023,Kia,Rio,plus de 160 000 km,11932,galet-tendeur,distribution,0.0
+2023,Kia,Rio,plus de 160 000 km,11932,huile-moteur,moteur,0.00352
+2023,Kia,Rio,plus de 160 000 km,11932,liquide-frein,freinage,0.00117
+2023,Kia,Rio,plus de 160 000 km,11932,machoires-frein,freinage,0.03076
+2023,Kia,Rio,plus de 160 000 km,11932,maitre-cylindre,freinage,0.00017
+2023,Kia,Rio,plus de 160 000 km,11932,plaquettes-avant,freinage,0.0
+2023,Kia,Rio,plus de 160 000 km,11932,pompe-direction,direction,0.00293
+2023,Kia,Rio,plus de 160 000 km,11932,ressorts,suspension,0.00721
+2023,Kia,Rio,plus de 160 000 km,11932,rotules-direction,direction,0.13418
+2023,Kia,Rio,plus de 160 000 km,11932,roulements-roue,train-roulant,0.01198
+2023,Kia,Rio,plus de 160 000 km,11932,silencieux,echappement,0.01685
+2023,Kia,Rio,plus de 160 000 km,11932,silentblocs,suspension,0.00201
+2023,Kia,Rio,plus de 160 000 km,11932,sonde-lambda,gestion-moteur,0.00411
+2023,Kia,Rio,plus de 160 000 km,11932,support-moteur,moteur,0.00059
+2023,Kia,Rio,plus de 160 000 km,11932,suspension,suspension,0.01835
+2023,Kia,Rio,plus de 160 000 km,11932,train-roulant,train-roulant,0.00696
+2023,Kia,Rio,plus de 160 000 km,11932,triangles,train-roulant,0.10736
+2023,Kia,Rio,plus de 160 000 km,11932,turbocompresseur,alimentation,0.00184
+2023,Peugeot,206,moins de 100 000 km,14634,amortisseurs,suspension,0.00567
+2023,Peugeot,206,moins de 100 000 km,14634,ampoules,electricite,0.17979
+2023,Peugeot,206,moins de 100 000 km,14634,batterie,electricite,0.0041
+2023,Peugeot,206,moins de 100 000 km,14634,biellettes-direction,direction,7e-05
+2023,Peugeot,206,moins de 100 000 km,14634,boite-vitesses,transmission,7e-05
+2023,Peugeot,206,moins de 100 000 km,14634,cardans,train-roulant,0.02501
+2023,Peugeot,206,moins de 100 000 km,14634,catalyseur,echappement,0.00014
+2023,Peugeot,206,moins de 100 000 km,14634,coupelles,suspension,0.0
+2023,Peugeot,206,moins de 100 000 km,14634,courroie-accessoires,distribution,0.0
+2023,Peugeot,206,moins de 100 000 km,14634,cremaillere,direction,0.00793
+2023,Peugeot,206,moins de 100 000 km,14634,direction,direction,0.00021
+2023,Peugeot,206,moins de 100 000 km,14634,disques-frein,freinage,0.01169
+2023,Peugeot,206,moins de 100 000 km,14634,echappement,echappement,0.0246
+2023,Peugeot,206,moins de 100 000 km,14634,electricite,electricite,0.0
+2023,Peugeot,206,moins de 100 000 km,14634,etrier-frein,freinage,0.0028
+2023,Peugeot,206,moins de 100 000 km,14634,flexible-frein,freinage,0.01886
+2023,Peugeot,206,moins de 100 000 km,14634,freinage,freinage,0.05679
+2023,Peugeot,206,moins de 100 000 km,14634,galet-tendeur,distribution,0.0
+2023,Peugeot,206,moins de 100 000 km,14634,huile-moteur,moteur,0.00219
+2023,Peugeot,206,moins de 100 000 km,14634,liquide-frein,freinage,0.00034
+2023,Peugeot,206,moins de 100 000 km,14634,machoires-frein,freinage,0.01305
+2023,Peugeot,206,moins de 100 000 km,14634,maitre-cylindre,freinage,0.00055
+2023,Peugeot,206,moins de 100 000 km,14634,plaquettes-avant,freinage,0.0
+2023,Peugeot,206,moins de 100 000 km,14634,pompe-direction,direction,0.00383
+2023,Peugeot,206,moins de 100 000 km,14634,ressorts,suspension,0.01087
+2023,Peugeot,206,moins de 100 000 km,14634,rotules-direction,direction,0.06902
+2023,Peugeot,206,moins de 100 000 km,14634,roulements-roue,train-roulant,0.0067
+2023,Peugeot,206,moins de 100 000 km,14634,silencieux,echappement,0.049
+2023,Peugeot,206,moins de 100 000 km,14634,silentblocs,suspension,0.00116
+2023,Peugeot,206,moins de 100 000 km,14634,sonde-lambda,gestion-moteur,0.02392
+2023,Peugeot,206,moins de 100 000 km,14634,support-moteur,moteur,0.00096
+2023,Peugeot,206,moins de 100 000 km,14634,suspension,suspension,0.00656
+2023,Peugeot,206,moins de 100 000 km,14634,train-roulant,train-roulant,0.00417
+2023,Peugeot,206,moins de 100 000 km,14634,triangles,train-roulant,0.03266
+2023,Peugeot,206,moins de 100 000 km,14634,turbocompresseur,alimentation,0.00116
+2023,Peugeot,206,100 000 à 160 000 km,26302,amortisseurs,suspension,0.01281
+2023,Peugeot,206,100 000 à 160 000 km,26302,ampoules,electricite,0.28557
+2023,Peugeot,206,100 000 à 160 000 km,26302,batterie,electricite,0.00593
+2023,Peugeot,206,100 000 à 160 000 km,26302,biellettes-direction,direction,0.0
+2023,Peugeot,206,100 000 à 160 000 km,26302,boite-vitesses,transmission,0.00046
+2023,Peugeot,206,100 000 à 160 000 km,26302,cardans,train-roulant,0.03239
+2023,Peugeot,206,100 000 à 160 000 km,26302,catalyseur,echappement,0.00042
+2023,Peugeot,206,100 000 à 160 000 km,26302,coupelles,suspension,0.0
+2023,Peugeot,206,100 000 à 160 000 km,26302,courroie-accessoires,distribution,0.0
+2023,Peugeot,206,100 000 à 160 000 km,26302,cremaillere,direction,0.01479
+2023,Peugeot,206,100 000 à 160 000 km,26302,direction,direction,0.0003
+2023,Peugeot,206,100 000 à 160 000 km,26302,disques-frein,freinage,0.01585
+2023,Peugeot,206,100 000 à 160 000 km,26302,echappement,echappement,0.04163
+2023,Peugeot,206,100 000 à 160 000 km,26302,electricite,electricite,0.0
+2023,Peugeot,206,100 000 à 160 000 km,26302,etrier-frein,freinage,0.00456
+2023,Peugeot,206,100 000 à 160 000 km,26302,flexible-frein,freinage,0.02794
+2023,Peugeot,206,100 000 à 160 000 km,26302,freinage,freinage,0.08862
+2023,Peugeot,206,100 000 à 160 000 km,26302,galet-tendeur,distribution,0.0
+2023,Peugeot,206,100 000 à 160 000 km,26302,huile-moteur,moteur,0.00547
+2023,Peugeot,206,100 000 à 160 000 km,26302,liquide-frein,freinage,0.00129
+2023,Peugeot,206,100 000 à 160 000 km,26302,machoires-frein,freinage,0.01787
+2023,Peugeot,206,100 000 à 160 000 km,26302,maitre-cylindre,freinage,0.00087
+2023,Peugeot,206,100 000 à 160 000 km,26302,plaquettes-avant,freinage,0.0
+2023,Peugeot,206,100 000 à 160 000 km,26302,pompe-direction,direction,0.00547
+2023,Peugeot,206,100 000 à 160 000 km,26302,ressorts,suspension,0.01517
+2023,Peugeot,206,100 000 à 160 000 km,26302,rotules-direction,direction,0.10581
+2023,Peugeot,206,100 000 à 160 000 km,26302,roulements-roue,train-roulant,0.01582
+2023,Peugeot,206,100 000 à 160 000 km,26302,silencieux,echappement,0.07224
+2023,Peugeot,206,100 000 à 160 000 km,26302,silentblocs,suspension,0.00574
+2023,Peugeot,206,100 000 à 160 000 km,26302,sonde-lambda,gestion-moteur,0.03372
+2023,Peugeot,206,100 000 à 160 000 km,26302,support-moteur,moteur,0.00068
+2023,Peugeot,206,100 000 à 160 000 km,26302,suspension,suspension,0.01871
+2023,Peugeot,206,100 000 à 160 000 km,26302,train-roulant,train-roulant,0.00791
+2023,Peugeot,206,100 000 à 160 000 km,26302,triangles,train-roulant,0.0746
+2023,Peugeot,206,100 000 à 160 000 km,26302,turbocompresseur,alimentation,0.00373
+2023,Peugeot,206,plus de 160 000 km,16793,amortisseurs,suspension,0.02007
+2023,Peugeot,206,plus de 160 000 km,16793,ampoules,electricite,0.3321
+2023,Peugeot,206,plus de 160 000 km,16793,batterie,electricite,0.0056
+2023,Peugeot,206,plus de 160 000 km,16793,biellettes-direction,direction,0.0
+2023,Peugeot,206,plus de 160 000 km,16793,boite-vitesses,transmission,0.00042
+2023,Peugeot,206,plus de 160 000 km,16793,cardans,train-roulant,0.03662
+2023,Peugeot,206,plus de 160 000 km,16793,catalyseur,echappement,0.00042
+2023,Peugeot,206,plus de 160 000 km,16793,coupelles,suspension,0.0
+2023,Peugeot,206,plus de 160 000 km,16793,courroie-accessoires,distribution,0.0
+2023,Peugeot,206,plus de 160 000 km,16793,cremaillere,direction,0.02471
+2023,Peugeot,206,plus de 160 000 km,16793,direction,direction,0.0006
+2023,Peugeot,206,plus de 160 000 km,16793,disques-frein,freinage,0.01548
+2023,Peugeot,206,plus de 160 000 km,16793,echappement,echappement,0.04823
+2023,Peugeot,206,plus de 160 000 km,16793,electricite,electricite,0.0
+2023,Peugeot,206,plus de 160 000 km,16793,etrier-frein,freinage,0.00637
+2023,Peugeot,206,plus de 160 000 km,16793,flexible-frein,freinage,0.03317
+2023,Peugeot,206,plus de 160 000 km,16793,freinage,freinage,0.10689
+2023,Peugeot,206,plus de 160 000 km,16793,galet-tendeur,distribution,6e-05
+2023,Peugeot,206,plus de 160 000 km,16793,huile-moteur,moteur,0.00923
+2023,Peugeot,206,plus de 160 000 km,16793,liquide-frein,freinage,0.00113
+2023,Peugeot,206,plus de 160 000 km,16793,machoires-frein,freinage,0.02072
+2023,Peugeot,206,plus de 160 000 km,16793,maitre-cylindre,freinage,0.00155
+2023,Peugeot,206,plus de 160 000 km,16793,plaquettes-avant,freinage,0.0
+2023,Peugeot,206,plus de 160 000 km,16793,pompe-direction,direction,0.00595
+2023,Peugeot,206,plus de 160 000 km,16793,ressorts,suspension,0.02078
+2023,Peugeot,206,plus de 160 000 km,16793,rotules-direction,direction,0.11296
+2023,Peugeot,206,plus de 160 000 km,16793,roulements-roue,train-roulant,0.02596
+2023,Peugeot,206,plus de 160 000 km,16793,silencieux,echappement,0.07604
+2023,Peugeot,206,plus de 160 000 km,16793,silentblocs,suspension,0.01262
+2023,Peugeot,206,plus de 160 000 km,16793,sonde-lambda,gestion-moteur,0.03525
+2023,Peugeot,206,plus de 160 000 km,16793,support-moteur,moteur,0.00119
+2023,Peugeot,206,plus de 160 000 km,16793,suspension,suspension,0.04341
+2023,Peugeot,206,plus de 160 000 km,16793,train-roulant,train-roulant,0.00863
+2023,Peugeot,206,plus de 160 000 km,16793,triangles,train-roulant,0.10076
+2023,Peugeot,206,plus de 160 000 km,16793,turbocompresseur,alimentation,0.01203
+2023,Peugeot,208,moins de 100 000 km,130865,amortisseurs,suspension,0.0016
+2023,Peugeot,208,moins de 100 000 km,130865,ampoules,electricite,0.08171
+2023,Peugeot,208,moins de 100 000 km,130865,batterie,electricite,0.00092
+2023,Peugeot,208,moins de 100 000 km,130865,biellettes-direction,direction,0.0
+2023,Peugeot,208,moins de 100 000 km,130865,boite-vitesses,transmission,0.00017
+2023,Peugeot,208,moins de 100 000 km,130865,cardans,train-roulant,0.02798
+2023,Peugeot,208,moins de 100 000 km,130865,catalyseur,echappement,0.00011
+2023,Peugeot,208,moins de 100 000 km,130865,coupelles,suspension,0.0
+2023,Peugeot,208,moins de 100 000 km,130865,courroie-accessoires,distribution,0.0
+2023,Peugeot,208,moins de 100 000 km,130865,cremaillere,direction,0.00031
+2023,Peugeot,208,moins de 100 000 km,130865,direction,direction,0.0001
+2023,Peugeot,208,moins de 100 000 km,130865,disques-frein,freinage,0.01103
+2023,Peugeot,208,moins de 100 000 km,130865,echappement,echappement,0.00905
+2023,Peugeot,208,moins de 100 000 km,130865,electricite,electricite,0.0
+2023,Peugeot,208,moins de 100 000 km,130865,etrier-frein,freinage,5e-05
+2023,Peugeot,208,moins de 100 000 km,130865,flexible-frein,freinage,0.00048
+2023,Peugeot,208,moins de 100 000 km,130865,freinage,freinage,0.01114
+2023,Peugeot,208,moins de 100 000 km,130865,galet-tendeur,distribution,1e-05
+2023,Peugeot,208,moins de 100 000 km,130865,huile-moteur,moteur,0.0004
+2023,Peugeot,208,moins de 100 000 km,130865,liquide-frein,freinage,0.00013
+2023,Peugeot,208,moins de 100 000 km,130865,machoires-frein,freinage,0.01033
+2023,Peugeot,208,moins de 100 000 km,130865,maitre-cylindre,freinage,2e-05
+2023,Peugeot,208,moins de 100 000 km,130865,plaquettes-avant,freinage,0.0
+2023,Peugeot,208,moins de 100 000 km,130865,pompe-direction,direction,8e-05
+2023,Peugeot,208,moins de 100 000 km,130865,ressorts,suspension,0.00195
+2023,Peugeot,208,moins de 100 000 km,130865,rotules-direction,direction,0.00472
+2023,Peugeot,208,moins de 100 000 km,130865,roulements-roue,train-roulant,0.00248
+2023,Peugeot,208,moins de 100 000 km,130865,silencieux,echappement,0.02288
+2023,Peugeot,208,moins de 100 000 km,130865,silentblocs,suspension,0.00041
+2023,Peugeot,208,moins de 100 000 km,130865,sonde-lambda,gestion-moteur,0.00902
+2023,Peugeot,208,moins de 100 000 km,130865,support-moteur,moteur,0.00019
+2023,Peugeot,208,moins de 100 000 km,130865,suspension,suspension,0.00063
+2023,Peugeot,208,moins de 100 000 km,130865,train-roulant,train-roulant,0.00192
+2023,Peugeot,208,moins de 100 000 km,130865,triangles,train-roulant,0.01022
+2023,Peugeot,208,moins de 100 000 km,130865,turbocompresseur,alimentation,8e-05
+2023,Peugeot,208,100 000 à 160 000 km,54364,amortisseurs,suspension,0.00502
+2023,Peugeot,208,100 000 à 160 000 km,54364,ampoules,electricite,0.18514
+2023,Peugeot,208,100 000 à 160 000 km,54364,batterie,electricite,0.00292
+2023,Peugeot,208,100 000 à 160 000 km,54364,biellettes-direction,direction,2e-05
+2023,Peugeot,208,100 000 à 160 000 km,54364,boite-vitesses,transmission,0.00033
+2023,Peugeot,208,100 000 à 160 000 km,54364,cardans,train-roulant,0.06609
+2023,Peugeot,208,100 000 à 160 000 km,54364,catalyseur,echappement,0.00026
+2023,Peugeot,208,100 000 à 160 000 km,54364,coupelles,suspension,0.0
+2023,Peugeot,208,100 000 à 160 000 km,54364,courroie-accessoires,distribution,0.0
+2023,Peugeot,208,100 000 à 160 000 km,54364,cremaillere,direction,0.0012
+2023,Peugeot,208,100 000 à 160 000 km,54364,direction,direction,0.00022
+2023,Peugeot,208,100 000 à 160 000 km,54364,disques-frein,freinage,0.01896
+2023,Peugeot,208,100 000 à 160 000 km,54364,echappement,echappement,0.05353
+2023,Peugeot,208,100 000 à 160 000 km,54364,electricite,electricite,0.0
+2023,Peugeot,208,100 000 à 160 000 km,54364,etrier-frein,freinage,7e-05
+2023,Peugeot,208,100 000 à 160 000 km,54364,flexible-frein,freinage,0.00097
+2023,Peugeot,208,100 000 à 160 000 km,54364,freinage,freinage,0.03605
+2023,Peugeot,208,100 000 à 160 000 km,54364,galet-tendeur,distribution,2e-05
+2023,Peugeot,208,100 000 à 160 000 km,54364,huile-moteur,moteur,0.00162
+2023,Peugeot,208,100 000 à 160 000 km,54364,liquide-frein,freinage,0.00028
+2023,Peugeot,208,100 000 à 160 000 km,54364,machoires-frein,freinage,0.01416
+2023,Peugeot,208,100 000 à 160 000 km,54364,maitre-cylindre,freinage,6e-05
+2023,Peugeot,208,100 000 à 160 000 km,54364,plaquettes-avant,freinage,0.0
+2023,Peugeot,208,100 000 à 160 000 km,54364,pompe-direction,direction,0.00024
+2023,Peugeot,208,100 000 à 160 000 km,54364,ressorts,suspension,0.00657
+2023,Peugeot,208,100 000 à 160 000 km,54364,rotules-direction,direction,0.02386
+2023,Peugeot,208,100 000 à 160 000 km,54364,roulements-roue,train-roulant,0.01058
+2023,Peugeot,208,100 000 à 160 000 km,54364,silencieux,echappement,0.05763
+2023,Peugeot,208,100 000 à 160 000 km,54364,silentblocs,suspension,0.00138
+2023,Peugeot,208,100 000 à 160 000 km,54364,sonde-lambda,gestion-moteur,0.03931
+2023,Peugeot,208,100 000 à 160 000 km,54364,support-moteur,moteur,0.00057
+2023,Peugeot,208,100 000 à 160 000 km,54364,suspension,suspension,0.00223
+2023,Peugeot,208,100 000 à 160 000 km,54364,train-roulant,train-roulant,0.0051
+2023,Peugeot,208,100 000 à 160 000 km,54364,triangles,train-roulant,0.0412
+2023,Peugeot,208,100 000 à 160 000 km,54364,turbocompresseur,alimentation,0.00033
+2023,Peugeot,208,plus de 160 000 km,10327,amortisseurs,suspension,0.00852
+2023,Peugeot,208,plus de 160 000 km,10327,ampoules,electricite,0.24664
+2023,Peugeot,208,plus de 160 000 km,10327,batterie,electricite,0.00523
+2023,Peugeot,208,plus de 160 000 km,10327,biellettes-direction,direction,0.0
+2023,Peugeot,208,plus de 160 000 km,10327,boite-vitesses,transmission,0.00068
+2023,Peugeot,208,plus de 160 000 km,10327,cardans,train-roulant,0.07446
+2023,Peugeot,208,plus de 160 000 km,10327,catalyseur,echappement,0.00126
+2023,Peugeot,208,plus de 160 000 km,10327,coupelles,suspension,0.0
+2023,Peugeot,208,plus de 160 000 km,10327,courroie-accessoires,distribution,0.0
+2023,Peugeot,208,plus de 160 000 km,10327,cremaillere,direction,0.00174
+2023,Peugeot,208,plus de 160 000 km,10327,direction,direction,0.00048
+2023,Peugeot,208,plus de 160 000 km,10327,disques-frein,freinage,0.02179
+2023,Peugeot,208,plus de 160 000 km,10327,echappement,echappement,0.05006
+2023,Peugeot,208,plus de 160 000 km,10327,electricite,electricite,0.0
+2023,Peugeot,208,plus de 160 000 km,10327,etrier-frein,freinage,0.00029
+2023,Peugeot,208,plus de 160 000 km,10327,flexible-frein,freinage,0.00145
+2023,Peugeot,208,plus de 160 000 km,10327,freinage,freinage,0.06439
+2023,Peugeot,208,plus de 160 000 km,10327,galet-tendeur,distribution,0.0001
+2023,Peugeot,208,plus de 160 000 km,10327,huile-moteur,moteur,0.00271
+2023,Peugeot,208,plus de 160 000 km,10327,liquide-frein,freinage,0.00048
+2023,Peugeot,208,plus de 160 000 km,10327,machoires-frein,freinage,0.01908
+2023,Peugeot,208,plus de 160 000 km,10327,maitre-cylindre,freinage,0.0001
+2023,Peugeot,208,plus de 160 000 km,10327,plaquettes-avant,freinage,0.0
+2023,Peugeot,208,plus de 160 000 km,10327,pompe-direction,direction,0.00019
+2023,Peugeot,208,plus de 160 000 km,10327,ressorts,suspension,0.01055
+2023,Peugeot,208,plus de 160 000 km,10327,rotules-direction,direction,0.05994
+2023,Peugeot,208,plus de 160 000 km,10327,roulements-roue,train-roulant,0.01985
+2023,Peugeot,208,plus de 160 000 km,10327,silencieux,echappement,0.05723
+2023,Peugeot,208,plus de 160 000 km,10327,silentblocs,suspension,0.00271
+2023,Peugeot,208,plus de 160 000 km,10327,sonde-lambda,gestion-moteur,0.02828
+2023,Peugeot,208,plus de 160 000 km,10327,support-moteur,moteur,0.00087
+2023,Peugeot,208,plus de 160 000 km,10327,suspension,suspension,0.00445
+2023,Peugeot,208,plus de 160 000 km,10327,train-roulant,train-roulant,0.00988
+2023,Peugeot,208,plus de 160 000 km,10327,triangles,train-roulant,0.07524
+2023,Peugeot,208,plus de 160 000 km,10327,turbocompresseur,alimentation,0.00029
+2023,Fiat,500,moins de 100 000 km,220580,amortisseurs,suspension,0.04078
+2023,Fiat,500,moins de 100 000 km,220580,ampoules,electricite,0.06505
+2023,Fiat,500,moins de 100 000 km,220580,batterie,electricite,0.00032
+2023,Fiat,500,moins de 100 000 km,220580,biellettes-direction,direction,0.0
+2023,Fiat,500,moins de 100 000 km,220580,boite-vitesses,transmission,5e-05
+2023,Fiat,500,moins de 100 000 km,220580,cardans,train-roulant,0.00113
+2023,Fiat,500,moins de 100 000 km,220580,catalyseur,echappement,2e-05
+2023,Fiat,500,moins de 100 000 km,220580,coupelles,suspension,0.0
+2023,Fiat,500,moins de 100 000 km,220580,courroie-accessoires,distribution,0.0
+2023,Fiat,500,moins de 100 000 km,220580,cremaillere,direction,0.00062
+2023,Fiat,500,moins de 100 000 km,220580,direction,direction,0.0001
+2023,Fiat,500,moins de 100 000 km,220580,disques-frein,freinage,0.01082
+2023,Fiat,500,moins de 100 000 km,220580,echappement,echappement,0.00377
+2023,Fiat,500,moins de 100 000 km,220580,electricite,electricite,0.0
+2023,Fiat,500,moins de 100 000 km,220580,etrier-frein,freinage,0.00029
+2023,Fiat,500,moins de 100 000 km,220580,flexible-frein,freinage,0.00117
+2023,Fiat,500,moins de 100 000 km,220580,freinage,freinage,0.02221
+2023,Fiat,500,moins de 100 000 km,220580,galet-tendeur,distribution,0.0
+2023,Fiat,500,moins de 100 000 km,220580,huile-moteur,moteur,0.00125
+2023,Fiat,500,moins de 100 000 km,220580,liquide-frein,freinage,0.00013
+2023,Fiat,500,moins de 100 000 km,220580,machoires-frein,freinage,0.01404
+2023,Fiat,500,moins de 100 000 km,220580,maitre-cylindre,freinage,4e-05
+2023,Fiat,500,moins de 100 000 km,220580,plaquettes-avant,freinage,0.0
+2023,Fiat,500,moins de 100 000 km,220580,pompe-direction,direction,9e-05
+2023,Fiat,500,moins de 100 000 km,220580,ressorts,suspension,0.01308
+2023,Fiat,500,moins de 100 000 km,220580,rotules-direction,direction,0.00528
+2023,Fiat,500,moins de 100 000 km,220580,roulements-roue,train-roulant,0.00074
+2023,Fiat,500,moins de 100 000 km,220580,silencieux,echappement,0.01042
+2023,Fiat,500,moins de 100 000 km,220580,silentblocs,suspension,0.00221
+2023,Fiat,500,moins de 100 000 km,220580,sonde-lambda,gestion-moteur,0.00637
+2023,Fiat,500,moins de 100 000 km,220580,support-moteur,moteur,0.00015
+2023,Fiat,500,moins de 100 000 km,220580,suspension,suspension,0.00196
+2023,Fiat,500,moins de 100 000 km,220580,train-roulant,train-roulant,0.00141
+2023,Fiat,500,moins de 100 000 km,220580,triangles,train-roulant,0.05449
+2023,Fiat,500,moins de 100 000 km,220580,turbocompresseur,alimentation,4e-05
+2023,Fiat,500,100 000 à 160 000 km,90196,amortisseurs,suspension,0.09106
+2023,Fiat,500,100 000 à 160 000 km,90196,ampoules,electricite,0.17175
+2023,Fiat,500,100 000 à 160 000 km,90196,batterie,electricite,0.00135
+2023,Fiat,500,100 000 à 160 000 km,90196,biellettes-direction,direction,0.0
+2023,Fiat,500,100 000 à 160 000 km,90196,boite-vitesses,transmission,0.00024
+2023,Fiat,500,100 000 à 160 000 km,90196,cardans,train-roulant,0.00503
+2023,Fiat,500,100 000 à 160 000 km,90196,catalyseur,echappement,0.0001
+2023,Fiat,500,100 000 à 160 000 km,90196,coupelles,suspension,0.0
+2023,Fiat,500,100 000 à 160 000 km,90196,courroie-accessoires,distribution,0.0
+2023,Fiat,500,100 000 à 160 000 km,90196,cremaillere,direction,0.00198
+2023,Fiat,500,100 000 à 160 000 km,90196,direction,direction,0.0002
+2023,Fiat,500,100 000 à 160 000 km,90196,disques-frein,freinage,0.01323
+2023,Fiat,500,100 000 à 160 000 km,90196,echappement,echappement,0.01577
+2023,Fiat,500,100 000 à 160 000 km,90196,electricite,electricite,0.0
+2023,Fiat,500,100 000 à 160 000 km,90196,etrier-frein,freinage,0.00161
+2023,Fiat,500,100 000 à 160 000 km,90196,flexible-frein,freinage,0.00368
+2023,Fiat,500,100 000 à 160 000 km,90196,freinage,freinage,0.07175
+2023,Fiat,500,100 000 à 160 000 km,90196,galet-tendeur,distribution,3e-05
+2023,Fiat,500,100 000 à 160 000 km,90196,huile-moteur,moteur,0.00325
+2023,Fiat,500,100 000 à 160 000 km,90196,liquide-frein,freinage,0.00042
+2023,Fiat,500,100 000 à 160 000 km,90196,machoires-frein,freinage,0.02699
+2023,Fiat,500,100 000 à 160 000 km,90196,maitre-cylindre,freinage,0.0001
+2023,Fiat,500,100 000 à 160 000 km,90196,plaquettes-avant,freinage,0.0
+2023,Fiat,500,100 000 à 160 000 km,90196,pompe-direction,direction,0.00031
+2023,Fiat,500,100 000 à 160 000 km,90196,ressorts,suspension,0.01363
+2023,Fiat,500,100 000 à 160 000 km,90196,rotules-direction,direction,0.0237
+2023,Fiat,500,100 000 à 160 000 km,90196,roulements-roue,train-roulant,0.0043
+2023,Fiat,500,100 000 à 160 000 km,90196,silencieux,echappement,0.03819
+2023,Fiat,500,100 000 à 160 000 km,90196,silentblocs,suspension,0.00522
+2023,Fiat,500,100 000 à 160 000 km,90196,sonde-lambda,gestion-moteur,0.01806
+2023,Fiat,500,100 000 à 160 000 km,90196,support-moteur,moteur,0.00099
+2023,Fiat,500,100 000 à 160 000 km,90196,suspension,suspension,0.00936
+2023,Fiat,500,100 000 à 160 000 km,90196,train-roulant,train-roulant,0.00283
+2023,Fiat,500,100 000 à 160 000 km,90196,triangles,train-roulant,0.0979
+2023,Fiat,500,100 000 à 160 000 km,90196,turbocompresseur,alimentation,0.00011
+2023,Fiat,500,plus de 160 000 km,16305,amortisseurs,suspension,0.0896
+2023,Fiat,500,plus de 160 000 km,16305,ampoules,electricite,0.24029
+2023,Fiat,500,plus de 160 000 km,16305,batterie,electricite,0.00239
+2023,Fiat,500,plus de 160 000 km,16305,biellettes-direction,direction,0.0
+2023,Fiat,500,plus de 160 000 km,16305,boite-vitesses,transmission,0.00061
+2023,Fiat,500,plus de 160 000 km,16305,cardans,train-roulant,0.00859
+2023,Fiat,500,plus de 160 000 km,16305,catalyseur,echappement,0.00043
+2023,Fiat,500,plus de 160 000 km,16305,coupelles,suspension,0.0
+2023,Fiat,500,plus de 160 000 km,16305,courroie-accessoires,distribution,0.0
+2023,Fiat,500,plus de 160 000 km,16305,cremaillere,direction,0.00319
+2023,Fiat,500,plus de 160 000 km,16305,direction,direction,0.00025
+2023,Fiat,500,plus de 160 000 km,16305,disques-frein,freinage,0.013
+2023,Fiat,500,plus de 160 000 km,16305,echappement,echappement,0.03073
+2023,Fiat,500,plus de 160 000 km,16305,electricite,electricite,0.0
+2023,Fiat,500,plus de 160 000 km,16305,etrier-frein,freinage,0.00251
+2023,Fiat,500,plus de 160 000 km,16305,flexible-frein,freinage,0.00828
+2023,Fiat,500,plus de 160 000 km,16305,freinage,freinage,0.12653
+2023,Fiat,500,plus de 160 000 km,16305,galet-tendeur,distribution,0.0
+2023,Fiat,500,plus de 160 000 km,16305,huile-moteur,moteur,0.00497
+2023,Fiat,500,plus de 160 000 km,16305,liquide-frein,freinage,0.00092
+2023,Fiat,500,plus de 160 000 km,16305,machoires-frein,freinage,0.03103
+2023,Fiat,500,plus de 160 000 km,16305,maitre-cylindre,freinage,6e-05
+2023,Fiat,500,plus de 160 000 km,16305,plaquettes-avant,freinage,0.0
+2023,Fiat,500,plus de 160 000 km,16305,pompe-direction,direction,0.00184
+2023,Fiat,500,plus de 160 000 km,16305,ressorts,suspension,0.01503
+2023,Fiat,500,plus de 160 000 km,16305,rotules-direction,direction,0.04882
+2023,Fiat,500,plus de 160 000 km,16305,roulements-roue,train-roulant,0.0081
+2023,Fiat,500,plus de 160 000 km,16305,silencieux,echappement,0.05501
+2023,Fiat,500,plus de 160 000 km,16305,silentblocs,suspension,0.00767
+2023,Fiat,500,plus de 160 000 km,16305,sonde-lambda,gestion-moteur,0.02564
+2023,Fiat,500,plus de 160 000 km,16305,support-moteur,moteur,0.0019
+2023,Fiat,500,plus de 160 000 km,16305,suspension,suspension,0.01748
+2023,Fiat,500,plus de 160 000 km,16305,train-roulant,train-roulant,0.00491
+2023,Fiat,500,plus de 160 000 km,16305,triangles,train-roulant,0.09335
+2023,Fiat,500,plus de 160 000 km,16305,turbocompresseur,alimentation,0.00061
+2023,Fiat,Tipo,moins de 100 000 km,9247,amortisseurs,suspension,0.02855
+2023,Fiat,Tipo,moins de 100 000 km,9247,ampoules,electricite,0.05429
+2023,Fiat,Tipo,moins de 100 000 km,9247,batterie,electricite,0.00011
+2023,Fiat,Tipo,moins de 100 000 km,9247,biellettes-direction,direction,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,boite-vitesses,transmission,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,cardans,train-roulant,0.00032
+2023,Fiat,Tipo,moins de 100 000 km,9247,catalyseur,echappement,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,coupelles,suspension,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,courroie-accessoires,distribution,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,cremaillere,direction,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,direction,direction,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,disques-frein,freinage,0.00757
+2023,Fiat,Tipo,moins de 100 000 km,9247,echappement,echappement,0.0013
+2023,Fiat,Tipo,moins de 100 000 km,9247,electricite,electricite,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,etrier-frein,freinage,0.00011
+2023,Fiat,Tipo,moins de 100 000 km,9247,flexible-frein,freinage,0.00065
+2023,Fiat,Tipo,moins de 100 000 km,9247,freinage,freinage,0.01417
+2023,Fiat,Tipo,moins de 100 000 km,9247,galet-tendeur,distribution,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,huile-moteur,moteur,0.00011
+2023,Fiat,Tipo,moins de 100 000 km,9247,liquide-frein,freinage,0.00011
+2023,Fiat,Tipo,moins de 100 000 km,9247,machoires-frein,freinage,0.03223
+2023,Fiat,Tipo,moins de 100 000 km,9247,maitre-cylindre,freinage,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,plaquettes-avant,freinage,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,pompe-direction,direction,0.0
+2023,Fiat,Tipo,moins de 100 000 km,9247,ressorts,suspension,0.02909
+2023,Fiat,Tipo,moins de 100 000 km,9247,rotules-direction,direction,0.01936
+2023,Fiat,Tipo,moins de 100 000 km,9247,roulements-roue,train-roulant,0.00357
+2023,Fiat,Tipo,moins de 100 000 km,9247,silencieux,echappement,0.00011
+2023,Fiat,Tipo,moins de 100 000 km,9247,silentblocs,suspension,0.00054
+2023,Fiat,Tipo,moins de 100 000 km,9247,sonde-lambda,gestion-moteur,0.00022
+2023,Fiat,Tipo,moins de 100 000 km,9247,support-moteur,moteur,0.00011
+2023,Fiat,Tipo,moins de 100 000 km,9247,suspension,suspension,0.00076
+2023,Fiat,Tipo,moins de 100 000 km,9247,train-roulant,train-roulant,0.00314
+2023,Fiat,Tipo,moins de 100 000 km,9247,triangles,train-roulant,0.00043
+2023,Fiat,Tipo,moins de 100 000 km,9247,turbocompresseur,alimentation,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,amortisseurs,suspension,0.03839
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,ampoules,electricite,0.11074
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,batterie,electricite,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,biellettes-direction,direction,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,boite-vitesses,transmission,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,cardans,train-roulant,0.00258
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,catalyseur,echappement,0.00074
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,coupelles,suspension,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,courroie-accessoires,distribution,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,cremaillere,direction,0.00111
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,direction,direction,0.00037
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,disques-frein,freinage,0.0144
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,echappement,echappement,0.00443
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,electricite,electricite,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,etrier-frein,freinage,0.00037
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,flexible-frein,freinage,0.00037
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,freinage,freinage,0.0251
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,galet-tendeur,distribution,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,huile-moteur,moteur,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,liquide-frein,freinage,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,machoires-frein,freinage,0.03544
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,maitre-cylindre,freinage,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,plaquettes-avant,freinage,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,pompe-direction,direction,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,ressorts,suspension,0.0443
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,rotules-direction,direction,0.0454
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,roulements-roue,train-roulant,0.01034
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,silencieux,echappement,0.00037
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,silentblocs,suspension,0.00037
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,sonde-lambda,gestion-moteur,0.00111
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,support-moteur,moteur,0.0
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,suspension,suspension,0.00221
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,train-roulant,train-roulant,0.00443
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,triangles,train-roulant,0.00295
+2023,Fiat,Tipo,100 000 à 160 000 km,2709,turbocompresseur,alimentation,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,amortisseurs,suspension,0.01852
+2023,Fiat,Tipo,plus de 160 000 km,216,ampoules,electricite,0.16667
+2023,Fiat,Tipo,plus de 160 000 km,216,batterie,electricite,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,biellettes-direction,direction,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,boite-vitesses,transmission,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,cardans,train-roulant,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,catalyseur,echappement,0.00463
+2023,Fiat,Tipo,plus de 160 000 km,216,coupelles,suspension,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,courroie-accessoires,distribution,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,cremaillere,direction,0.00463
+2023,Fiat,Tipo,plus de 160 000 km,216,direction,direction,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,disques-frein,freinage,0.02315
+2023,Fiat,Tipo,plus de 160 000 km,216,echappement,echappement,0.01389
+2023,Fiat,Tipo,plus de 160 000 km,216,electricite,electricite,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,etrier-frein,freinage,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,flexible-frein,freinage,0.00926
+2023,Fiat,Tipo,plus de 160 000 km,216,freinage,freinage,0.04167
+2023,Fiat,Tipo,plus de 160 000 km,216,galet-tendeur,distribution,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,huile-moteur,moteur,0.00463
+2023,Fiat,Tipo,plus de 160 000 km,216,liquide-frein,freinage,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,machoires-frein,freinage,0.03704
+2023,Fiat,Tipo,plus de 160 000 km,216,maitre-cylindre,freinage,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,plaquettes-avant,freinage,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,pompe-direction,direction,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,ressorts,suspension,0.03241
+2023,Fiat,Tipo,plus de 160 000 km,216,rotules-direction,direction,0.02315
+2023,Fiat,Tipo,plus de 160 000 km,216,roulements-roue,train-roulant,0.01389
+2023,Fiat,Tipo,plus de 160 000 km,216,silencieux,echappement,0.00926
+2023,Fiat,Tipo,plus de 160 000 km,216,silentblocs,suspension,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,sonde-lambda,gestion-moteur,0.00463
+2023,Fiat,Tipo,plus de 160 000 km,216,support-moteur,moteur,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,suspension,suspension,0.00926
+2023,Fiat,Tipo,plus de 160 000 km,216,train-roulant,train-roulant,0.0
+2023,Fiat,Tipo,plus de 160 000 km,216,triangles,train-roulant,0.00463
+2023,Fiat,Tipo,plus de 160 000 km,216,turbocompresseur,alimentation,0.0
+2023,Fiat,Doblo,moins de 100 000 km,16236,amortisseurs,suspension,0.01731
+2023,Fiat,Doblo,moins de 100 000 km,16236,ampoules,electricite,0.08457
+2023,Fiat,Doblo,moins de 100 000 km,16236,batterie,electricite,0.00068
+2023,Fiat,Doblo,moins de 100 000 km,16236,biellettes-direction,direction,0.0
+2023,Fiat,Doblo,moins de 100 000 km,16236,boite-vitesses,transmission,6e-05
+2023,Fiat,Doblo,moins de 100 000 km,16236,cardans,train-roulant,0.00345
+2023,Fiat,Doblo,moins de 100 000 km,16236,catalyseur,echappement,0.00129
+2023,Fiat,Doblo,moins de 100 000 km,16236,coupelles,suspension,0.0
+2023,Fiat,Doblo,moins de 100 000 km,16236,courroie-accessoires,distribution,0.0
+2023,Fiat,Doblo,moins de 100 000 km,16236,cremaillere,direction,0.00136
+2023,Fiat,Doblo,moins de 100 000 km,16236,direction,direction,0.0
+2023,Fiat,Doblo,moins de 100 000 km,16236,disques-frein,freinage,0.0077
+2023,Fiat,Doblo,moins de 100 000 km,16236,echappement,echappement,0.01232
+2023,Fiat,Doblo,moins de 100 000 km,16236,electricite,electricite,0.0
+2023,Fiat,Doblo,moins de 100 000 km,16236,etrier-frein,freinage,0.00012
+2023,Fiat,Doblo,moins de 100 000 km,16236,flexible-frein,freinage,0.00123
+2023,Fiat,Doblo,moins de 100 000 km,16236,freinage,freinage,0.02131
+2023,Fiat,Doblo,moins de 100 000 km,16236,galet-tendeur,distribution,0.0
+2023,Fiat,Doblo,moins de 100 000 km,16236,huile-moteur,moteur,0.00092
+2023,Fiat,Doblo,moins de 100 000 km,16236,liquide-frein,freinage,0.00025
+2023,Fiat,Doblo,moins de 100 000 km,16236,machoires-frein,freinage,0.00573
+2023,Fiat,Doblo,moins de 100 000 km,16236,maitre-cylindre,freinage,0.0
+2023,Fiat,Doblo,moins de 100 000 km,16236,plaquettes-avant,freinage,0.0
+2023,Fiat,Doblo,moins de 100 000 km,16236,pompe-direction,direction,0.00172
+2023,Fiat,Doblo,moins de 100 000 km,16236,ressorts,suspension,0.05192
+2023,Fiat,Doblo,moins de 100 000 km,16236,rotules-direction,direction,0.01842
+2023,Fiat,Doblo,moins de 100 000 km,16236,roulements-roue,train-roulant,0.00111
+2023,Fiat,Doblo,moins de 100 000 km,16236,silencieux,echappement,0.01373
+2023,Fiat,Doblo,moins de 100 000 km,16236,silentblocs,suspension,0.0032
+2023,Fiat,Doblo,moins de 100 000 km,16236,sonde-lambda,gestion-moteur,0.00228
+2023,Fiat,Doblo,moins de 100 000 km,16236,support-moteur,moteur,0.00166
+2023,Fiat,Doblo,moins de 100 000 km,16236,suspension,suspension,0.00443
+2023,Fiat,Doblo,moins de 100 000 km,16236,train-roulant,train-roulant,0.0032
+2023,Fiat,Doblo,moins de 100 000 km,16236,triangles,train-roulant,0.01386
+2023,Fiat,Doblo,moins de 100 000 km,16236,turbocompresseur,alimentation,0.00203
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,amortisseurs,suspension,0.02994
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,ampoules,electricite,0.17295
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,batterie,electricite,0.00152
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,biellettes-direction,direction,0.0
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,boite-vitesses,transmission,6e-05
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,cardans,train-roulant,0.00957
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,catalyseur,echappement,0.00356
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,coupelles,suspension,0.0
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,courroie-accessoires,distribution,0.0
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,cremaillere,direction,0.00181
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,direction,direction,0.00012
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,disques-frein,freinage,0.01138
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,echappement,echappement,0.02662
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,electricite,electricite,0.0
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,etrier-frein,freinage,0.00029
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,flexible-frein,freinage,0.00257
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,freinage,freinage,0.05084
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,galet-tendeur,distribution,6e-05
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,huile-moteur,moteur,0.00193
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,liquide-frein,freinage,0.00053
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,machoires-frein,freinage,0.00911
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,maitre-cylindre,freinage,0.00018
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,plaquettes-avant,freinage,0.0
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,pompe-direction,direction,0.00187
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,ressorts,suspension,0.07705
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,rotules-direction,direction,0.04173
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,roulements-roue,train-roulant,0.00368
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,silencieux,echappement,0.02469
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,silentblocs,suspension,0.00718
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,sonde-lambda,gestion-moteur,0.00339
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,support-moteur,moteur,0.00385
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,suspension,suspension,0.01471
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,train-roulant,train-roulant,0.00601
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,triangles,train-roulant,0.03438
+2023,Fiat,Doblo,100 000 à 160 000 km,17132,turbocompresseur,alimentation,0.00584
+2023,Fiat,Doblo,plus de 160 000 km,15427,amortisseurs,suspension,0.04855
+2023,Fiat,Doblo,plus de 160 000 km,15427,ampoules,electricite,0.25209
+2023,Fiat,Doblo,plus de 160 000 km,15427,batterie,electricite,0.00253
+2023,Fiat,Doblo,plus de 160 000 km,15427,biellettes-direction,direction,0.0
+2023,Fiat,Doblo,plus de 160 000 km,15427,boite-vitesses,transmission,0.00026
+2023,Fiat,Doblo,plus de 160 000 km,15427,cardans,train-roulant,0.01705
+2023,Fiat,Doblo,plus de 160 000 km,15427,catalyseur,echappement,0.00415
+2023,Fiat,Doblo,plus de 160 000 km,15427,coupelles,suspension,0.0
+2023,Fiat,Doblo,plus de 160 000 km,15427,courroie-accessoires,distribution,0.0
+2023,Fiat,Doblo,plus de 160 000 km,15427,cremaillere,direction,0.00331
+2023,Fiat,Doblo,plus de 160 000 km,15427,direction,direction,0.00026
+2023,Fiat,Doblo,plus de 160 000 km,15427,disques-frein,freinage,0.01452
+2023,Fiat,Doblo,plus de 160 000 km,15427,echappement,echappement,0.03397
+2023,Fiat,Doblo,plus de 160 000 km,15427,electricite,electricite,0.0
+2023,Fiat,Doblo,plus de 160 000 km,15427,etrier-frein,freinage,0.00039
+2023,Fiat,Doblo,plus de 160 000 km,15427,flexible-frein,freinage,0.0072
+2023,Fiat,Doblo,plus de 160 000 km,15427,freinage,freinage,0.08291
+2023,Fiat,Doblo,plus de 160 000 km,15427,galet-tendeur,distribution,0.0
+2023,Fiat,Doblo,plus de 160 000 km,15427,huile-moteur,moteur,0.00395
+2023,Fiat,Doblo,plus de 160 000 km,15427,liquide-frein,freinage,0.00084
+2023,Fiat,Doblo,plus de 160 000 km,15427,machoires-frein,freinage,0.01134
+2023,Fiat,Doblo,plus de 160 000 km,15427,maitre-cylindre,freinage,0.00026
+2023,Fiat,Doblo,plus de 160 000 km,15427,plaquettes-avant,freinage,0.0
+2023,Fiat,Doblo,plus de 160 000 km,15427,pompe-direction,direction,0.00428
+2023,Fiat,Doblo,plus de 160 000 km,15427,ressorts,suspension,0.07059
+2023,Fiat,Doblo,plus de 160 000 km,15427,rotules-direction,direction,0.05536
+2023,Fiat,Doblo,plus de 160 000 km,15427,roulements-roue,train-roulant,0.00674
+2023,Fiat,Doblo,plus de 160 000 km,15427,silencieux,echappement,0.04025
+2023,Fiat,Doblo,plus de 160 000 km,15427,silentblocs,suspension,0.01154
+2023,Fiat,Doblo,plus de 160 000 km,15427,sonde-lambda,gestion-moteur,0.00207
+2023,Fiat,Doblo,plus de 160 000 km,15427,support-moteur,moteur,0.00784
+2023,Fiat,Doblo,plus de 160 000 km,15427,suspension,suspension,0.04233
+2023,Fiat,Doblo,plus de 160 000 km,15427,train-roulant,train-roulant,0.00927
+2023,Fiat,Doblo,plus de 160 000 km,15427,triangles,train-roulant,0.05289
+2023,Fiat,Doblo,plus de 160 000 km,15427,turbocompresseur,alimentation,0.01659
+2023,Volkswagen,Golf,moins de 100 000 km,328340,amortisseurs,suspension,0.00545
+2023,Volkswagen,Golf,moins de 100 000 km,328340,ampoules,electricite,0.03135
+2023,Volkswagen,Golf,moins de 100 000 km,328340,batterie,electricite,0.00016
+2023,Volkswagen,Golf,moins de 100 000 km,328340,biellettes-direction,direction,0.0
+2023,Volkswagen,Golf,moins de 100 000 km,328340,boite-vitesses,transmission,2e-05
+2023,Volkswagen,Golf,moins de 100 000 km,328340,cardans,train-roulant,0.00192
+2023,Volkswagen,Golf,moins de 100 000 km,328340,catalyseur,echappement,0.00014
+2023,Volkswagen,Golf,moins de 100 000 km,328340,coupelles,suspension,0.0
+2023,Volkswagen,Golf,moins de 100 000 km,328340,courroie-accessoires,distribution,0.0
+2023,Volkswagen,Golf,moins de 100 000 km,328340,cremaillere,direction,0.00036
+2023,Volkswagen,Golf,moins de 100 000 km,328340,direction,direction,4e-05
+2023,Volkswagen,Golf,moins de 100 000 km,328340,disques-frein,freinage,0.0029
+2023,Volkswagen,Golf,moins de 100 000 km,328340,echappement,echappement,0.00256
+2023,Volkswagen,Golf,moins de 100 000 km,328340,electricite,electricite,0.0
+2023,Volkswagen,Golf,moins de 100 000 km,328340,etrier-frein,freinage,2e-05
+2023,Volkswagen,Golf,moins de 100 000 km,328340,flexible-frein,freinage,0.00069
+2023,Volkswagen,Golf,moins de 100 000 km,328340,freinage,freinage,0.00602
+2023,Volkswagen,Golf,moins de 100 000 km,328340,galet-tendeur,distribution,1e-05
+2023,Volkswagen,Golf,moins de 100 000 km,328340,huile-moteur,moteur,0.00012
+2023,Volkswagen,Golf,moins de 100 000 km,328340,liquide-frein,freinage,0.00011
+2023,Volkswagen,Golf,moins de 100 000 km,328340,machoires-frein,freinage,0.01056
+2023,Volkswagen,Golf,moins de 100 000 km,328340,maitre-cylindre,freinage,2e-05
+2023,Volkswagen,Golf,moins de 100 000 km,328340,plaquettes-avant,freinage,0.0
+2023,Volkswagen,Golf,moins de 100 000 km,328340,pompe-direction,direction,0.00016
+2023,Volkswagen,Golf,moins de 100 000 km,328340,ressorts,suspension,0.00789
+2023,Volkswagen,Golf,moins de 100 000 km,328340,rotules-direction,direction,0.00429
+2023,Volkswagen,Golf,moins de 100 000 km,328340,roulements-roue,train-roulant,0.00053
+2023,Volkswagen,Golf,moins de 100 000 km,328340,silencieux,echappement,0.00095
+2023,Volkswagen,Golf,moins de 100 000 km,328340,silentblocs,suspension,0.00014
+2023,Volkswagen,Golf,moins de 100 000 km,328340,sonde-lambda,gestion-moteur,0.00162
+2023,Volkswagen,Golf,moins de 100 000 km,328340,support-moteur,moteur,1e-05
+2023,Volkswagen,Golf,moins de 100 000 km,328340,suspension,suspension,0.00041
+2023,Volkswagen,Golf,moins de 100 000 km,328340,train-roulant,train-roulant,0.00229
+2023,Volkswagen,Golf,moins de 100 000 km,328340,triangles,train-roulant,0.00217
+2023,Volkswagen,Golf,moins de 100 000 km,328340,turbocompresseur,alimentation,0.00023
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,amortisseurs,suspension,0.02068
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,ampoules,electricite,0.09729
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,batterie,electricite,0.00055
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,biellettes-direction,direction,0.0
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,boite-vitesses,transmission,9e-05
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,cardans,train-roulant,0.01489
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,catalyseur,echappement,0.0004
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,coupelles,suspension,0.0
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,courroie-accessoires,distribution,0.0
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,cremaillere,direction,0.0016
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,direction,direction,0.00014
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,disques-frein,freinage,0.00885
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,echappement,echappement,0.00904
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,electricite,electricite,0.0
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,etrier-frein,freinage,4e-05
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,flexible-frein,freinage,0.00311
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,freinage,freinage,0.02982
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,galet-tendeur,distribution,1e-05
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,huile-moteur,moteur,0.00069
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,liquide-frein,freinage,0.00032
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,machoires-frein,freinage,0.02247
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,maitre-cylindre,freinage,4e-05
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,plaquettes-avant,freinage,0.0
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,pompe-direction,direction,0.00062
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,ressorts,suspension,0.03208
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,rotules-direction,direction,0.0304
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,roulements-roue,train-roulant,0.00254
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,silencieux,echappement,0.00673
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,silentblocs,suspension,0.00112
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,sonde-lambda,gestion-moteur,0.0044
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,support-moteur,moteur,9e-05
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,suspension,suspension,0.00355
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,train-roulant,train-roulant,0.00428
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,triangles,train-roulant,0.01409
+2023,Volkswagen,Golf,100 000 à 160 000 km,269867,turbocompresseur,alimentation,0.00192
+2023,Volkswagen,Golf,plus de 160 000 km,320525,amortisseurs,suspension,0.02675
+2023,Volkswagen,Golf,plus de 160 000 km,320525,ampoules,electricite,0.19635
+2023,Volkswagen,Golf,plus de 160 000 km,320525,batterie,electricite,0.00171
+2023,Volkswagen,Golf,plus de 160 000 km,320525,biellettes-direction,direction,0.0
+2023,Volkswagen,Golf,plus de 160 000 km,320525,boite-vitesses,transmission,0.00013
+2023,Volkswagen,Golf,plus de 160 000 km,320525,cardans,train-roulant,0.04227
+2023,Volkswagen,Golf,plus de 160 000 km,320525,catalyseur,echappement,0.00144
+2023,Volkswagen,Golf,plus de 160 000 km,320525,coupelles,suspension,0.0
+2023,Volkswagen,Golf,plus de 160 000 km,320525,courroie-accessoires,distribution,0.0
+2023,Volkswagen,Golf,plus de 160 000 km,320525,cremaillere,direction,0.00614
+2023,Volkswagen,Golf,plus de 160 000 km,320525,direction,direction,0.00045
+2023,Volkswagen,Golf,plus de 160 000 km,320525,disques-frein,freinage,0.01224
+2023,Volkswagen,Golf,plus de 160 000 km,320525,echappement,echappement,0.02132
+2023,Volkswagen,Golf,plus de 160 000 km,320525,electricite,electricite,0.0
+2023,Volkswagen,Golf,plus de 160 000 km,320525,etrier-frein,freinage,0.00021
+2023,Volkswagen,Golf,plus de 160 000 km,320525,flexible-frein,freinage,0.0126
+2023,Volkswagen,Golf,plus de 160 000 km,320525,freinage,freinage,0.07156
+2023,Volkswagen,Golf,plus de 160 000 km,320525,galet-tendeur,distribution,2e-05
+2023,Volkswagen,Golf,plus de 160 000 km,320525,huile-moteur,moteur,0.00186
+2023,Volkswagen,Golf,plus de 160 000 km,320525,liquide-frein,freinage,0.00062
+2023,Volkswagen,Golf,plus de 160 000 km,320525,machoires-frein,freinage,0.02892
+2023,Volkswagen,Golf,plus de 160 000 km,320525,maitre-cylindre,freinage,8e-05
+2023,Volkswagen,Golf,plus de 160 000 km,320525,plaquettes-avant,freinage,0.0
+2023,Volkswagen,Golf,plus de 160 000 km,320525,pompe-direction,direction,0.00243
+2023,Volkswagen,Golf,plus de 160 000 km,320525,ressorts,suspension,0.05358
+2023,Volkswagen,Golf,plus de 160 000 km,320525,rotules-direction,direction,0.07445
+2023,Volkswagen,Golf,plus de 160 000 km,320525,roulements-roue,train-roulant,0.00832
+2023,Volkswagen,Golf,plus de 160 000 km,320525,silencieux,echappement,0.02113
+2023,Volkswagen,Golf,plus de 160 000 km,320525,silentblocs,suspension,0.00497
+2023,Volkswagen,Golf,plus de 160 000 km,320525,sonde-lambda,gestion-moteur,0.00858
+2023,Volkswagen,Golf,plus de 160 000 km,320525,support-moteur,moteur,0.00044
+2023,Volkswagen,Golf,plus de 160 000 km,320525,suspension,suspension,0.01776
+2023,Volkswagen,Golf,plus de 160 000 km,320525,train-roulant,train-roulant,0.0075
+2023,Volkswagen,Golf,plus de 160 000 km,320525,triangles,train-roulant,0.04339
+2023,Volkswagen,Golf,plus de 160 000 km,320525,turbocompresseur,alimentation,0.00929
+2023,Volkswagen,Polo,moins de 100 000 km,322355,amortisseurs,suspension,0.00633
+2023,Volkswagen,Polo,moins de 100 000 km,322355,ampoules,electricite,0.06736
+2023,Volkswagen,Polo,moins de 100 000 km,322355,batterie,electricite,0.00036
+2023,Volkswagen,Polo,moins de 100 000 km,322355,biellettes-direction,direction,0.0
+2023,Volkswagen,Polo,moins de 100 000 km,322355,boite-vitesses,transmission,4e-05
+2023,Volkswagen,Polo,moins de 100 000 km,322355,cardans,train-roulant,0.0045
+2023,Volkswagen,Polo,moins de 100 000 km,322355,catalyseur,echappement,4e-05
+2023,Volkswagen,Polo,moins de 100 000 km,322355,coupelles,suspension,0.0
+2023,Volkswagen,Polo,moins de 100 000 km,322355,courroie-accessoires,distribution,0.0
+2023,Volkswagen,Polo,moins de 100 000 km,322355,cremaillere,direction,0.00065
+2023,Volkswagen,Polo,moins de 100 000 km,322355,direction,direction,9e-05
+2023,Volkswagen,Polo,moins de 100 000 km,322355,disques-frein,freinage,0.00605
+2023,Volkswagen,Polo,moins de 100 000 km,322355,echappement,echappement,0.00633
+2023,Volkswagen,Polo,moins de 100 000 km,322355,electricite,electricite,0.0
+2023,Volkswagen,Polo,moins de 100 000 km,322355,etrier-frein,freinage,0.00065
+2023,Volkswagen,Polo,moins de 100 000 km,322355,flexible-frein,freinage,0.00103
+2023,Volkswagen,Polo,moins de 100 000 km,322355,freinage,freinage,0.0242
+2023,Volkswagen,Polo,moins de 100 000 km,322355,galet-tendeur,distribution,1e-05
+2023,Volkswagen,Polo,moins de 100 000 km,322355,huile-moteur,moteur,0.0002
+2023,Volkswagen,Polo,moins de 100 000 km,322355,liquide-frein,freinage,0.00033
+2023,Volkswagen,Polo,moins de 100 000 km,322355,machoires-frein,freinage,0.01161
+2023,Volkswagen,Polo,moins de 100 000 km,322355,maitre-cylindre,freinage,4e-05
+2023,Volkswagen,Polo,moins de 100 000 km,322355,plaquettes-avant,freinage,0.0
+2023,Volkswagen,Polo,moins de 100 000 km,322355,pompe-direction,direction,0.00038
+2023,Volkswagen,Polo,moins de 100 000 km,322355,ressorts,suspension,0.01117
+2023,Volkswagen,Polo,moins de 100 000 km,322355,rotules-direction,direction,0.02518
+2023,Volkswagen,Polo,moins de 100 000 km,322355,roulements-roue,train-roulant,0.00208
+2023,Volkswagen,Polo,moins de 100 000 km,322355,silencieux,echappement,0.00573
+2023,Volkswagen,Polo,moins de 100 000 km,322355,silentblocs,suspension,0.00054
+2023,Volkswagen,Polo,moins de 100 000 km,322355,sonde-lambda,gestion-moteur,0.00423
+2023,Volkswagen,Polo,moins de 100 000 km,322355,support-moteur,moteur,7e-05
+2023,Volkswagen,Polo,moins de 100 000 km,322355,suspension,suspension,0.00116
+2023,Volkswagen,Polo,moins de 100 000 km,322355,train-roulant,train-roulant,0.0026
+2023,Volkswagen,Polo,moins de 100 000 km,322355,triangles,train-roulant,0.02084
+2023,Volkswagen,Polo,moins de 100 000 km,322355,turbocompresseur,alimentation,8e-05
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,amortisseurs,suspension,0.0303
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,ampoules,electricite,0.201
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,batterie,electricite,0.00121
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,biellettes-direction,direction,1e-05
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,boite-vitesses,transmission,8e-05
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,cardans,train-roulant,0.02876
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,catalyseur,echappement,0.00022
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,coupelles,suspension,0.0
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,courroie-accessoires,distribution,0.0
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,cremaillere,direction,0.00251
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,direction,direction,0.00033
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,disques-frein,freinage,0.01009
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,echappement,echappement,0.02506
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,electricite,electricite,0.0
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,etrier-frein,freinage,0.00362
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,flexible-frein,freinage,0.00516
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,freinage,freinage,0.08909
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,galet-tendeur,distribution,1e-05
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,huile-moteur,moteur,0.00095
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,liquide-frein,freinage,0.00118
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,machoires-frein,freinage,0.01468
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,maitre-cylindre,freinage,0.00017
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,plaquettes-avant,freinage,0.0
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,pompe-direction,direction,0.00181
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,ressorts,suspension,0.02984
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,rotules-direction,direction,0.05912
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,roulements-roue,train-roulant,0.00725
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,silencieux,echappement,0.03377
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,silentblocs,suspension,0.00297
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,sonde-lambda,gestion-moteur,0.01811
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,support-moteur,moteur,0.00025
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,suspension,suspension,0.00699
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,train-roulant,train-roulant,0.00601
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,triangles,train-roulant,0.04309
+2023,Volkswagen,Polo,100 000 à 160 000 km,201402,turbocompresseur,alimentation,0.00044
+2023,Volkswagen,Polo,plus de 160 000 km,100920,amortisseurs,suspension,0.04447
+2023,Volkswagen,Polo,plus de 160 000 km,100920,ampoules,electricite,0.3076
+2023,Volkswagen,Polo,plus de 160 000 km,100920,batterie,electricite,0.00185
+2023,Volkswagen,Polo,plus de 160 000 km,100920,biellettes-direction,direction,2e-05
+2023,Volkswagen,Polo,plus de 160 000 km,100920,boite-vitesses,transmission,0.00019
+2023,Volkswagen,Polo,plus de 160 000 km,100920,cardans,train-roulant,0.0654
+2023,Volkswagen,Polo,plus de 160 000 km,100920,catalyseur,echappement,0.00061
+2023,Volkswagen,Polo,plus de 160 000 km,100920,coupelles,suspension,0.0
+2023,Volkswagen,Polo,plus de 160 000 km,100920,courroie-accessoires,distribution,0.0
+2023,Volkswagen,Polo,plus de 160 000 km,100920,cremaillere,direction,0.00711
+2023,Volkswagen,Polo,plus de 160 000 km,100920,direction,direction,0.00072
+2023,Volkswagen,Polo,plus de 160 000 km,100920,disques-frein,freinage,0.01022
+2023,Volkswagen,Polo,plus de 160 000 km,100920,echappement,echappement,0.05804
+2023,Volkswagen,Polo,plus de 160 000 km,100920,electricite,electricite,0.0
+2023,Volkswagen,Polo,plus de 160 000 km,100920,etrier-frein,freinage,0.00526
+2023,Volkswagen,Polo,plus de 160 000 km,100920,flexible-frein,freinage,0.01562
+2023,Volkswagen,Polo,plus de 160 000 km,100920,freinage,freinage,0.13062
+2023,Volkswagen,Polo,plus de 160 000 km,100920,galet-tendeur,distribution,6e-05
+2023,Volkswagen,Polo,plus de 160 000 km,100920,huile-moteur,moteur,0.0024
+2023,Volkswagen,Polo,plus de 160 000 km,100920,liquide-frein,freinage,0.00216
+2023,Volkswagen,Polo,plus de 160 000 km,100920,machoires-frein,freinage,0.01596
+2023,Volkswagen,Polo,plus de 160 000 km,100920,maitre-cylindre,freinage,0.00021
+2023,Volkswagen,Polo,plus de 160 000 km,100920,plaquettes-avant,freinage,0.0
+2023,Volkswagen,Polo,plus de 160 000 km,100920,pompe-direction,direction,0.00469
+2023,Volkswagen,Polo,plus de 160 000 km,100920,ressorts,suspension,0.04299
+2023,Volkswagen,Polo,plus de 160 000 km,100920,rotules-direction,direction,0.10815
+2023,Volkswagen,Polo,plus de 160 000 km,100920,roulements-roue,train-roulant,0.01263
+2023,Volkswagen,Polo,plus de 160 000 km,100920,silencieux,echappement,0.05507
+2023,Volkswagen,Polo,plus de 160 000 km,100920,silentblocs,suspension,0.00767
+2023,Volkswagen,Polo,plus de 160 000 km,100920,sonde-lambda,gestion-moteur,0.03328
+2023,Volkswagen,Polo,plus de 160 000 km,100920,support-moteur,moteur,0.00032
+2023,Volkswagen,Polo,plus de 160 000 km,100920,suspension,suspension,0.0195
+2023,Volkswagen,Polo,plus de 160 000 km,100920,train-roulant,train-roulant,0.00913
+2023,Volkswagen,Polo,plus de 160 000 km,100920,triangles,train-roulant,0.05456
+2023,Volkswagen,Polo,plus de 160 000 km,100920,turbocompresseur,alimentation,0.00238
+2023,Skoda,Octavia,moins de 100 000 km,67995,amortisseurs,suspension,0.00766
+2023,Skoda,Octavia,moins de 100 000 km,67995,ampoules,electricite,0.03022
+2023,Skoda,Octavia,moins de 100 000 km,67995,batterie,electricite,6e-05
+2023,Skoda,Octavia,moins de 100 000 km,67995,biellettes-direction,direction,0.0
+2023,Skoda,Octavia,moins de 100 000 km,67995,boite-vitesses,transmission,3e-05
+2023,Skoda,Octavia,moins de 100 000 km,67995,cardans,train-roulant,0.00119
+2023,Skoda,Octavia,moins de 100 000 km,67995,catalyseur,echappement,0.0001
+2023,Skoda,Octavia,moins de 100 000 km,67995,coupelles,suspension,0.0
+2023,Skoda,Octavia,moins de 100 000 km,67995,courroie-accessoires,distribution,0.0
+2023,Skoda,Octavia,moins de 100 000 km,67995,cremaillere,direction,0.00022
+2023,Skoda,Octavia,moins de 100 000 km,67995,direction,direction,3e-05
+2023,Skoda,Octavia,moins de 100 000 km,67995,disques-frein,freinage,0.00216
+2023,Skoda,Octavia,moins de 100 000 km,67995,echappement,echappement,0.00262
+2023,Skoda,Octavia,moins de 100 000 km,67995,electricite,electricite,0.0
+2023,Skoda,Octavia,moins de 100 000 km,67995,etrier-frein,freinage,4e-05
+2023,Skoda,Octavia,moins de 100 000 km,67995,flexible-frein,freinage,0.00032
+2023,Skoda,Octavia,moins de 100 000 km,67995,freinage,freinage,0.0064
+2023,Skoda,Octavia,moins de 100 000 km,67995,galet-tendeur,distribution,0.0
+2023,Skoda,Octavia,moins de 100 000 km,67995,huile-moteur,moteur,0.00018
+2023,Skoda,Octavia,moins de 100 000 km,67995,liquide-frein,freinage,7e-05
+2023,Skoda,Octavia,moins de 100 000 km,67995,machoires-frein,freinage,0.00924
+2023,Skoda,Octavia,moins de 100 000 km,67995,maitre-cylindre,freinage,0.0
+2023,Skoda,Octavia,moins de 100 000 km,67995,plaquettes-avant,freinage,0.0
+2023,Skoda,Octavia,moins de 100 000 km,67995,pompe-direction,direction,7e-05
+2023,Skoda,Octavia,moins de 100 000 km,67995,ressorts,suspension,0.00847
+2023,Skoda,Octavia,moins de 100 000 km,67995,rotules-direction,direction,0.00393
+2023,Skoda,Octavia,moins de 100 000 km,67995,roulements-roue,train-roulant,0.00057
+2023,Skoda,Octavia,moins de 100 000 km,67995,silencieux,echappement,0.00037
+2023,Skoda,Octavia,moins de 100 000 km,67995,silentblocs,suspension,6e-05
+2023,Skoda,Octavia,moins de 100 000 km,67995,sonde-lambda,gestion-moteur,0.00153
+2023,Skoda,Octavia,moins de 100 000 km,67995,support-moteur,moteur,4e-05
+2023,Skoda,Octavia,moins de 100 000 km,67995,suspension,suspension,0.00018
+2023,Skoda,Octavia,moins de 100 000 km,67995,train-roulant,train-roulant,0.00184
+2023,Skoda,Octavia,moins de 100 000 km,67995,triangles,train-roulant,0.0029
+2023,Skoda,Octavia,moins de 100 000 km,67995,turbocompresseur,alimentation,0.00025
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,amortisseurs,suspension,0.01431
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,ampoules,electricite,0.08343
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,batterie,electricite,0.00024
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,biellettes-direction,direction,0.0
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,boite-vitesses,transmission,7e-05
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,cardans,train-roulant,0.00712
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,catalyseur,echappement,0.00017
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,coupelles,suspension,0.0
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,courroie-accessoires,distribution,0.0
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,cremaillere,direction,0.00055
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,direction,direction,5e-05
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,disques-frein,freinage,0.00836
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,echappement,echappement,0.00618
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,electricite,electricite,0.0
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,etrier-frein,freinage,0.00014
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,flexible-frein,freinage,0.00156
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,freinage,freinage,0.02255
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,galet-tendeur,distribution,0.0
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,huile-moteur,moteur,0.00039
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,liquide-frein,freinage,0.00031
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,machoires-frein,freinage,0.02533
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,maitre-cylindre,freinage,0.0001
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,plaquettes-avant,freinage,0.0
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,pompe-direction,direction,0.00026
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,ressorts,suspension,0.02787
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,rotules-direction,direction,0.02183
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,roulements-roue,train-roulant,0.00239
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,silencieux,echappement,0.00209
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,silentblocs,suspension,0.00051
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,sonde-lambda,gestion-moteur,0.00235
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,support-moteur,moteur,3e-05
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,suspension,suspension,0.00094
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,train-roulant,train-roulant,0.00304
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,triangles,train-roulant,0.01033
+2023,Skoda,Octavia,100 000 à 160 000 km,58263,turbocompresseur,alimentation,0.00184
+2023,Skoda,Octavia,plus de 160 000 km,81106,amortisseurs,suspension,0.02573
+2023,Skoda,Octavia,plus de 160 000 km,81106,ampoules,electricite,0.1828
+2023,Skoda,Octavia,plus de 160 000 km,81106,batterie,electricite,0.00122
+2023,Skoda,Octavia,plus de 160 000 km,81106,biellettes-direction,direction,0.0
+2023,Skoda,Octavia,plus de 160 000 km,81106,boite-vitesses,transmission,0.00014
+2023,Skoda,Octavia,plus de 160 000 km,81106,cardans,train-roulant,0.02782
+2023,Skoda,Octavia,plus de 160 000 km,81106,catalyseur,echappement,0.0012
+2023,Skoda,Octavia,plus de 160 000 km,81106,coupelles,suspension,0.0
+2023,Skoda,Octavia,plus de 160 000 km,81106,courroie-accessoires,distribution,0.0
+2023,Skoda,Octavia,plus de 160 000 km,81106,cremaillere,direction,0.00287
+2023,Skoda,Octavia,plus de 160 000 km,81106,direction,direction,0.00016
+2023,Skoda,Octavia,plus de 160 000 km,81106,disques-frein,freinage,0.01176
+2023,Skoda,Octavia,plus de 160 000 km,81106,echappement,echappement,0.0128
+2023,Skoda,Octavia,plus de 160 000 km,81106,electricite,electricite,0.0
+2023,Skoda,Octavia,plus de 160 000 km,81106,etrier-frein,freinage,0.00042
+2023,Skoda,Octavia,plus de 160 000 km,81106,flexible-frein,freinage,0.00734
+2023,Skoda,Octavia,plus de 160 000 km,81106,freinage,freinage,0.05027
+2023,Skoda,Octavia,plus de 160 000 km,81106,galet-tendeur,distribution,5e-05
+2023,Skoda,Octavia,plus de 160 000 km,81106,huile-moteur,moteur,0.00231
+2023,Skoda,Octavia,plus de 160 000 km,81106,liquide-frein,freinage,0.0007
+2023,Skoda,Octavia,plus de 160 000 km,81106,machoires-frein,freinage,0.02598
+2023,Skoda,Octavia,plus de 160 000 km,81106,maitre-cylindre,freinage,0.0001
+2023,Skoda,Octavia,plus de 160 000 km,81106,plaquettes-avant,freinage,0.0
+2023,Skoda,Octavia,plus de 160 000 km,81106,pompe-direction,direction,0.00112
+2023,Skoda,Octavia,plus de 160 000 km,81106,ressorts,suspension,0.04795
+2023,Skoda,Octavia,plus de 160 000 km,81106,rotules-direction,direction,0.06436
+2023,Skoda,Octavia,plus de 160 000 km,81106,roulements-roue,train-roulant,0.00715
+2023,Skoda,Octavia,plus de 160 000 km,81106,silencieux,echappement,0.00937
+2023,Skoda,Octavia,plus de 160 000 km,81106,silentblocs,suspension,0.00274
+2023,Skoda,Octavia,plus de 160 000 km,81106,sonde-lambda,gestion-moteur,0.00249
+2023,Skoda,Octavia,plus de 160 000 km,81106,support-moteur,moteur,0.00033
+2023,Skoda,Octavia,plus de 160 000 km,81106,suspension,suspension,0.00683
+2023,Skoda,Octavia,plus de 160 000 km,81106,train-roulant,train-roulant,0.00692
+2023,Skoda,Octavia,plus de 160 000 km,81106,triangles,train-roulant,0.03855
+2023,Skoda,Octavia,plus de 160 000 km,81106,turbocompresseur,alimentation,0.00756
+2023,Toyota,Hilux,moins de 100 000 km,19967,amortisseurs,suspension,0.00436
+2023,Toyota,Hilux,moins de 100 000 km,19967,ampoules,electricite,0.07968
+2023,Toyota,Hilux,moins de 100 000 km,19967,batterie,electricite,0.0002
+2023,Toyota,Hilux,moins de 100 000 km,19967,biellettes-direction,direction,0.0
+2023,Toyota,Hilux,moins de 100 000 km,19967,boite-vitesses,transmission,0.00115
+2023,Toyota,Hilux,moins de 100 000 km,19967,cardans,train-roulant,0.00396
+2023,Toyota,Hilux,moins de 100 000 km,19967,catalyseur,echappement,0.0
+2023,Toyota,Hilux,moins de 100 000 km,19967,coupelles,suspension,0.0
+2023,Toyota,Hilux,moins de 100 000 km,19967,courroie-accessoires,distribution,0.0
+2023,Toyota,Hilux,moins de 100 000 km,19967,cremaillere,direction,0.00115
+2023,Toyota,Hilux,moins de 100 000 km,19967,direction,direction,0.00025
+2023,Toyota,Hilux,moins de 100 000 km,19967,disques-frein,freinage,0.00255
+2023,Toyota,Hilux,moins de 100 000 km,19967,echappement,echappement,0.00336
+2023,Toyota,Hilux,moins de 100 000 km,19967,electricite,electricite,0.0
+2023,Toyota,Hilux,moins de 100 000 km,19967,etrier-frein,freinage,0.00015
+2023,Toyota,Hilux,moins de 100 000 km,19967,flexible-frein,freinage,0.00566
+2023,Toyota,Hilux,moins de 100 000 km,19967,freinage,freinage,0.04142
+2023,Toyota,Hilux,moins de 100 000 km,19967,galet-tendeur,distribution,5e-05
+2023,Toyota,Hilux,moins de 100 000 km,19967,huile-moteur,moteur,0.00035
+2023,Toyota,Hilux,moins de 100 000 km,19967,liquide-frein,freinage,0.00015
+2023,Toyota,Hilux,moins de 100 000 km,19967,machoires-frein,freinage,0.01457
+2023,Toyota,Hilux,moins de 100 000 km,19967,maitre-cylindre,freinage,0.0001
+2023,Toyota,Hilux,moins de 100 000 km,19967,plaquettes-avant,freinage,0.0
+2023,Toyota,Hilux,moins de 100 000 km,19967,pompe-direction,direction,0.00095
+2023,Toyota,Hilux,moins de 100 000 km,19967,ressorts,suspension,0.02524
+2023,Toyota,Hilux,moins de 100 000 km,19967,rotules-direction,direction,0.00381
+2023,Toyota,Hilux,moins de 100 000 km,19967,roulements-roue,train-roulant,0.001
+2023,Toyota,Hilux,moins de 100 000 km,19967,silencieux,echappement,0.00391
+2023,Toyota,Hilux,moins de 100 000 km,19967,silentblocs,suspension,0.00035
+2023,Toyota,Hilux,moins de 100 000 km,19967,sonde-lambda,gestion-moteur,5e-05
+2023,Toyota,Hilux,moins de 100 000 km,19967,support-moteur,moteur,0.0
+2023,Toyota,Hilux,moins de 100 000 km,19967,suspension,suspension,0.00321
+2023,Toyota,Hilux,moins de 100 000 km,19967,train-roulant,train-roulant,0.0019
+2023,Toyota,Hilux,moins de 100 000 km,19967,triangles,train-roulant,0.00306
+2023,Toyota,Hilux,moins de 100 000 km,19967,turbocompresseur,alimentation,0.00045
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,amortisseurs,suspension,0.00972
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,ampoules,electricite,0.14584
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,batterie,electricite,0.00115
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,biellettes-direction,direction,0.0
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,boite-vitesses,transmission,0.00623
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,cardans,train-roulant,0.00693
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,catalyseur,echappement,0.00035
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,coupelles,suspension,0.0
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,courroie-accessoires,distribution,0.0
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,cremaillere,direction,0.00304
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,direction,direction,0.0008
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,disques-frein,freinage,0.00463
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,echappement,echappement,0.00737
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,electricite,electricite,0.0
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,etrier-frein,freinage,0.00115
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,flexible-frein,freinage,0.02551
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,freinage,freinage,0.08127
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,galet-tendeur,distribution,0.0
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,huile-moteur,moteur,0.0004
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,liquide-frein,freinage,0.0006
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,machoires-frein,freinage,0.02367
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,maitre-cylindre,freinage,0.00015
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,plaquettes-avant,freinage,0.0
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,pompe-direction,direction,0.00194
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,ressorts,suspension,0.05356
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,rotules-direction,direction,0.0141
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,roulements-roue,train-roulant,0.00568
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,silencieux,echappement,0.01475
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,silentblocs,suspension,0.00184
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,sonde-lambda,gestion-moteur,0.0001
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,support-moteur,moteur,0.0
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,suspension,suspension,0.01589
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,train-roulant,train-roulant,0.00399
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,triangles,train-roulant,0.01126
+2023,Toyota,Hilux,100 000 à 160 000 km,20070,turbocompresseur,alimentation,0.00204
+2023,Toyota,Hilux,plus de 160 000 km,28306,amortisseurs,suspension,0.0194
+2023,Toyota,Hilux,plus de 160 000 km,28306,ampoules,electricite,0.23394
+2023,Toyota,Hilux,plus de 160 000 km,28306,batterie,electricite,0.00392
+2023,Toyota,Hilux,plus de 160 000 km,28306,biellettes-direction,direction,0.0
+2023,Toyota,Hilux,plus de 160 000 km,28306,boite-vitesses,transmission,0.01699
+2023,Toyota,Hilux,plus de 160 000 km,28306,cardans,train-roulant,0.01922
+2023,Toyota,Hilux,plus de 160 000 km,28306,catalyseur,echappement,0.00042
+2023,Toyota,Hilux,plus de 160 000 km,28306,coupelles,suspension,0.0
+2023,Toyota,Hilux,plus de 160 000 km,28306,courroie-accessoires,distribution,0.0
+2023,Toyota,Hilux,plus de 160 000 km,28306,cremaillere,direction,0.00488
+2023,Toyota,Hilux,plus de 160 000 km,28306,direction,direction,0.00314
+2023,Toyota,Hilux,plus de 160 000 km,28306,disques-frein,freinage,0.00576
+2023,Toyota,Hilux,plus de 160 000 km,28306,echappement,echappement,0.01434
+2023,Toyota,Hilux,plus de 160 000 km,28306,electricite,electricite,0.0
+2023,Toyota,Hilux,plus de 160 000 km,28306,etrier-frein,freinage,0.00166
+2023,Toyota,Hilux,plus de 160 000 km,28306,flexible-frein,freinage,0.04529
+2023,Toyota,Hilux,plus de 160 000 km,28306,freinage,freinage,0.13128
+2023,Toyota,Hilux,plus de 160 000 km,28306,galet-tendeur,distribution,0.0
+2023,Toyota,Hilux,plus de 160 000 km,28306,huile-moteur,moteur,0.00216
+2023,Toyota,Hilux,plus de 160 000 km,28306,liquide-frein,freinage,0.00131
+2023,Toyota,Hilux,plus de 160 000 km,28306,machoires-frein,freinage,0.02303
+2023,Toyota,Hilux,plus de 160 000 km,28306,maitre-cylindre,freinage,0.00074
+2023,Toyota,Hilux,plus de 160 000 km,28306,plaquettes-avant,freinage,0.0
+2023,Toyota,Hilux,plus de 160 000 km,28306,pompe-direction,direction,0.00293
+2023,Toyota,Hilux,plus de 160 000 km,28306,ressorts,suspension,0.05872
+2023,Toyota,Hilux,plus de 160 000 km,28306,rotules-direction,direction,0.0478
+2023,Toyota,Hilux,plus de 160 000 km,28306,roulements-roue,train-roulant,0.01191
+2023,Toyota,Hilux,plus de 160 000 km,28306,silencieux,echappement,0.02999
+2023,Toyota,Hilux,plus de 160 000 km,28306,silentblocs,suspension,0.00813
+2023,Toyota,Hilux,plus de 160 000 km,28306,sonde-lambda,gestion-moteur,0.00018
+2023,Toyota,Hilux,plus de 160 000 km,28306,support-moteur,moteur,7e-05
+2023,Toyota,Hilux,plus de 160 000 km,28306,suspension,suspension,0.03964
+2023,Toyota,Hilux,plus de 160 000 km,28306,train-roulant,train-roulant,0.00692
+2023,Toyota,Hilux,plus de 160 000 km,28306,triangles,train-roulant,0.03748
+2023,Toyota,Hilux,plus de 160 000 km,28306,turbocompresseur,alimentation,0.00996
+2023,Opel,Corsa,moins de 100 000 km,478335,amortisseurs,suspension,0.01447
+2023,Opel,Corsa,moins de 100 000 km,478335,ampoules,electricite,0.08617
+2023,Opel,Corsa,moins de 100 000 km,478335,batterie,electricite,0.00078
+2023,Opel,Corsa,moins de 100 000 km,478335,biellettes-direction,direction,0.0
+2023,Opel,Corsa,moins de 100 000 km,478335,boite-vitesses,transmission,3e-05
+2023,Opel,Corsa,moins de 100 000 km,478335,cardans,train-roulant,0.00811
+2023,Opel,Corsa,moins de 100 000 km,478335,catalyseur,echappement,4e-05
+2023,Opel,Corsa,moins de 100 000 km,478335,coupelles,suspension,0.0
+2023,Opel,Corsa,moins de 100 000 km,478335,courroie-accessoires,distribution,0.0
+2023,Opel,Corsa,moins de 100 000 km,478335,cremaillere,direction,0.00086
+2023,Opel,Corsa,moins de 100 000 km,478335,direction,direction,0.00034
+2023,Opel,Corsa,moins de 100 000 km,478335,disques-frein,freinage,0.008
+2023,Opel,Corsa,moins de 100 000 km,478335,echappement,echappement,0.00365
+2023,Opel,Corsa,moins de 100 000 km,478335,electricite,electricite,0.0
+2023,Opel,Corsa,moins de 100 000 km,478335,etrier-frein,freinage,0.00013
+2023,Opel,Corsa,moins de 100 000 km,478335,flexible-frein,freinage,0.002
+2023,Opel,Corsa,moins de 100 000 km,478335,freinage,freinage,0.02721
+2023,Opel,Corsa,moins de 100 000 km,478335,galet-tendeur,distribution,2e-05
+2023,Opel,Corsa,moins de 100 000 km,478335,huile-moteur,moteur,0.00116
+2023,Opel,Corsa,moins de 100 000 km,478335,liquide-frein,freinage,0.00035
+2023,Opel,Corsa,moins de 100 000 km,478335,machoires-frein,freinage,0.014
+2023,Opel,Corsa,moins de 100 000 km,478335,maitre-cylindre,freinage,5e-05
+2023,Opel,Corsa,moins de 100 000 km,478335,plaquettes-avant,freinage,0.0
+2023,Opel,Corsa,moins de 100 000 km,478335,pompe-direction,direction,9e-05
+2023,Opel,Corsa,moins de 100 000 km,478335,ressorts,suspension,0.05073
+2023,Opel,Corsa,moins de 100 000 km,478335,rotules-direction,direction,0.03311
+2023,Opel,Corsa,moins de 100 000 km,478335,roulements-roue,train-roulant,0.00138
+2023,Opel,Corsa,moins de 100 000 km,478335,silencieux,echappement,0.00569
+2023,Opel,Corsa,moins de 100 000 km,478335,silentblocs,suspension,0.00232
+2023,Opel,Corsa,moins de 100 000 km,478335,sonde-lambda,gestion-moteur,0.00307
+2023,Opel,Corsa,moins de 100 000 km,478335,support-moteur,moteur,4e-05
+2023,Opel,Corsa,moins de 100 000 km,478335,suspension,suspension,0.00418
+2023,Opel,Corsa,moins de 100 000 km,478335,train-roulant,train-roulant,0.00238
+2023,Opel,Corsa,moins de 100 000 km,478335,triangles,train-roulant,0.00563
+2023,Opel,Corsa,moins de 100 000 km,478335,turbocompresseur,alimentation,5e-05
+2023,Opel,Corsa,100 000 à 160 000 km,336262,amortisseurs,suspension,0.04404
+2023,Opel,Corsa,100 000 à 160 000 km,336262,ampoules,electricite,0.2259
+2023,Opel,Corsa,100 000 à 160 000 km,336262,batterie,electricite,0.0026
+2023,Opel,Corsa,100 000 à 160 000 km,336262,biellettes-direction,direction,0.0
+2023,Opel,Corsa,100 000 à 160 000 km,336262,boite-vitesses,transmission,0.00012
+2023,Opel,Corsa,100 000 à 160 000 km,336262,cardans,train-roulant,0.02079
+2023,Opel,Corsa,100 000 à 160 000 km,336262,catalyseur,echappement,0.00026
+2023,Opel,Corsa,100 000 à 160 000 km,336262,coupelles,suspension,0.0
+2023,Opel,Corsa,100 000 à 160 000 km,336262,courroie-accessoires,distribution,0.0
+2023,Opel,Corsa,100 000 à 160 000 km,336262,cremaillere,direction,0.00304
+2023,Opel,Corsa,100 000 à 160 000 km,336262,direction,direction,0.00086
+2023,Opel,Corsa,100 000 à 160 000 km,336262,disques-frein,freinage,0.01226
+2023,Opel,Corsa,100 000 à 160 000 km,336262,echappement,echappement,0.01789
+2023,Opel,Corsa,100 000 à 160 000 km,336262,electricite,electricite,0.0
+2023,Opel,Corsa,100 000 à 160 000 km,336262,etrier-frein,freinage,0.00052
+2023,Opel,Corsa,100 000 à 160 000 km,336262,flexible-frein,freinage,0.00674
+2023,Opel,Corsa,100 000 à 160 000 km,336262,freinage,freinage,0.05692
+2023,Opel,Corsa,100 000 à 160 000 km,336262,galet-tendeur,distribution,4e-05
+2023,Opel,Corsa,100 000 à 160 000 km,336262,huile-moteur,moteur,0.00553
+2023,Opel,Corsa,100 000 à 160 000 km,336262,liquide-frein,freinage,0.00098
+2023,Opel,Corsa,100 000 à 160 000 km,336262,machoires-frein,freinage,0.01877
+2023,Opel,Corsa,100 000 à 160 000 km,336262,maitre-cylindre,freinage,7e-05
+2023,Opel,Corsa,100 000 à 160 000 km,336262,plaquettes-avant,freinage,0.0
+2023,Opel,Corsa,100 000 à 160 000 km,336262,pompe-direction,direction,0.0003
+2023,Opel,Corsa,100 000 à 160 000 km,336262,ressorts,suspension,0.08803
+2023,Opel,Corsa,100 000 à 160 000 km,336262,rotules-direction,direction,0.05831
+2023,Opel,Corsa,100 000 à 160 000 km,336262,roulements-roue,train-roulant,0.00413
+2023,Opel,Corsa,100 000 à 160 000 km,336262,silencieux,echappement,0.02831
+2023,Opel,Corsa,100 000 à 160 000 km,336262,silentblocs,suspension,0.00569
+2023,Opel,Corsa,100 000 à 160 000 km,336262,sonde-lambda,gestion-moteur,0.01301
+2023,Opel,Corsa,100 000 à 160 000 km,336262,support-moteur,moteur,0.00035
+2023,Opel,Corsa,100 000 à 160 000 km,336262,suspension,suspension,0.0164
+2023,Opel,Corsa,100 000 à 160 000 km,336262,train-roulant,train-roulant,0.00767
+2023,Opel,Corsa,100 000 à 160 000 km,336262,triangles,train-roulant,0.02292
+2023,Opel,Corsa,100 000 à 160 000 km,336262,turbocompresseur,alimentation,0.00032
+2023,Opel,Corsa,plus de 160 000 km,127682,amortisseurs,suspension,0.05941
+2023,Opel,Corsa,plus de 160 000 km,127682,ampoules,electricite,0.29307
+2023,Opel,Corsa,plus de 160 000 km,127682,batterie,electricite,0.00456
+2023,Opel,Corsa,plus de 160 000 km,127682,biellettes-direction,direction,2e-05
+2023,Opel,Corsa,plus de 160 000 km,127682,boite-vitesses,transmission,0.00021
+2023,Opel,Corsa,plus de 160 000 km,127682,cardans,train-roulant,0.0292
+2023,Opel,Corsa,plus de 160 000 km,127682,catalyseur,echappement,0.00067
+2023,Opel,Corsa,plus de 160 000 km,127682,coupelles,suspension,0.0
+2023,Opel,Corsa,plus de 160 000 km,127682,courroie-accessoires,distribution,0.0
+2023,Opel,Corsa,plus de 160 000 km,127682,cremaillere,direction,0.00544
+2023,Opel,Corsa,plus de 160 000 km,127682,direction,direction,0.00166
+2023,Opel,Corsa,plus de 160 000 km,127682,disques-frein,freinage,0.01244
+2023,Opel,Corsa,plus de 160 000 km,127682,echappement,echappement,0.03093
+2023,Opel,Corsa,plus de 160 000 km,127682,electricite,electricite,0.0
+2023,Opel,Corsa,plus de 160 000 km,127682,etrier-frein,freinage,0.00075
+2023,Opel,Corsa,plus de 160 000 km,127682,flexible-frein,freinage,0.01147
+2023,Opel,Corsa,plus de 160 000 km,127682,freinage,freinage,0.07404
+2023,Opel,Corsa,plus de 160 000 km,127682,galet-tendeur,distribution,8e-05
+2023,Opel,Corsa,plus de 160 000 km,127682,huile-moteur,moteur,0.00968
+2023,Opel,Corsa,plus de 160 000 km,127682,liquide-frein,freinage,0.0016
+2023,Opel,Corsa,plus de 160 000 km,127682,machoires-frein,freinage,0.02156
+2023,Opel,Corsa,plus de 160 000 km,127682,maitre-cylindre,freinage,8e-05
+2023,Opel,Corsa,plus de 160 000 km,127682,plaquettes-avant,freinage,0.0
+2023,Opel,Corsa,plus de 160 000 km,127682,pompe-direction,direction,0.00056
+2023,Opel,Corsa,plus de 160 000 km,127682,ressorts,suspension,0.10368
+2023,Opel,Corsa,plus de 160 000 km,127682,rotules-direction,direction,0.06539
+2023,Opel,Corsa,plus de 160 000 km,127682,roulements-roue,train-roulant,0.00737
+2023,Opel,Corsa,plus de 160 000 km,127682,silencieux,echappement,0.04282
+2023,Opel,Corsa,plus de 160 000 km,127682,silentblocs,suspension,0.00797
+2023,Opel,Corsa,plus de 160 000 km,127682,sonde-lambda,gestion-moteur,0.01804
+2023,Opel,Corsa,plus de 160 000 km,127682,support-moteur,moteur,0.00092
+2023,Opel,Corsa,plus de 160 000 km,127682,suspension,suspension,0.02511
+2023,Opel,Corsa,plus de 160 000 km,127682,train-roulant,train-roulant,0.01285
+2023,Opel,Corsa,plus de 160 000 km,127682,triangles,train-roulant,0.03918
+2023,Opel,Corsa,plus de 160 000 km,127682,turbocompresseur,alimentation,0.00151

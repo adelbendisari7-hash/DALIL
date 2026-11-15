@@ -1,0 +1,256 @@
+{
+  "rows": [
+    {
+      "date": "20261115-1924",
+      "variante": "C (recherche + LM)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "retrieval",
+      "llm": "openai_compat",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.76,
+      "top3": 0.78,
+      "abstention": 0.1,
+      "hors_sujet_refuse": 0.6,
+      "ms_moyen": 23793.6,
+      "ms_p95": 46075.4
+    },
+    {
+      "date": "20261115-1924",
+      "variante": "C (recherche + LM)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "retrieval",
+      "llm": "openai_compat",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.824,
+      "top3": 0.882,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 20273.6,
+      "ms_p95": 36227.5
+    },
+    {
+      "date": "20261115-1924",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "openai_compat",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.86,
+      "top3": 0.94,
+      "abstention": 0.06,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 21277.2,
+      "ms_p95": 35344.3
+    },
+    {
+      "date": "20261115-1924",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "openai_compat",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 19789.3,
+      "ms_p95": 27422.0
+    }
+  ],
+  "erreurs": {
+    "C (recherche + LM) | dev_fr_synthetique": [
+      {
+        "id": "dev006",
+        "text": "le témoin de charge rouge reste allumé quand je roule et la radio s'est éteinte",
+        "attendu": [
+          "alternateur",
+          "courroie-accessoires"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": [
+          "boite-vitesses"
+        ]
+      },
+      {
+        "id": "dev014",
+        "text": "sur l'autoroute la température grimpe vite alors que le ventilateur tourne",
+        "attendu": [
+          "thermostat",
+          "pompe-eau",
+          "radiateur"
+        ],
+        "obtenu": [
+          "ventilateur-radiateur"
+        ]
+      },
+      {
+        "id": "dev018",
+        "text": "la voiture se balance longtemps après un ralentisseur et elle penche dans les virages",
+        "attendu": [
+          "amortisseurs",
+          "coupelles",
+          "ressorts"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev023",
+        "text": "en montée le moteur s'emballe mais la voiture n'accélère presque pas",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev027",
+        "text": "la voiture n'a plus de reprise et on dirait que l'échappement est bouché",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "silencieux"
+        ]
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev035",
+        "text": "une fois chaud le moteur coupe net et ne repart qu'après une demi-heure",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "demarreur"
+        ]
+      },
+      {
+        "id": "dev044",
+        "text": "il y a une flaque d'huile noire sous le moteur chaque matin",
+        "attendu": [
+          "joint-cache-culbuteurs",
+          "huile-moteur"
+        ],
+        "obtenu": [
+          "filtre-huile",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "dev045",
+        "text": "un cylindre ne fonctionne pas, la valise indique un raté sur le cylindre 2",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev053",
+        "text": "je voudrais vendre ma voiture, combien elle vaut",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "disques-frein",
+          "cable-embrayage"
+        ]
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "kit-embrayage"
+        ]
+      }
+    ],
+    "C (recherche + LM) | demo_cases": [
+      {
+        "id": "demo_cases002",
+        "text": "au feu rouge l'aiguille de température grimpe, sur la route ça va",
+        "attendu": [
+          "ventilateur-radiateur",
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "thermostat"
+        ]
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | demo_cases": []
+  }
+}

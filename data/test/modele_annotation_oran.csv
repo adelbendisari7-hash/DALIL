@@ -1,0 +1,2 @@
+id;date;mecanicien;marque;modele;motorisation;annee;symptome_mots_du_client;codes_obd;cause_trouvee;pieces_changees;commentaire
+oran001;2027-02-10;M1;Dacia;Logan;1.5 dCi;2015;"exemple : ça grince quand je freine le matin";;plaquettes avant usées jusqu'au métal;plaquettes-avant;ligne d'exemple, à supprimer

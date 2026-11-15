@@ -1,0 +1,173 @@
+{"text": "ça grince fort quand je freine, un bruit de métal", "fault": "plaquettes-usees"}
+{"text": "bruit de ferraille au freinage depuis une semaine", "fault": "plaquettes-usees"}
+{"text": "le voyant d'usure des plaquettes s'est allumé", "fault": "plaquettes-usees"}
+{"text": "je dois appuyer plus fort pour freiner et ça couine", "fault": "plaquettes-usees"}
+{"text": "sifflement aigu à chaque coup de frein", "fault": "plaquettes-usees"}
+{"text": "grincement des freins avant quand je m'arrête au feu", "fault": "plaquettes-usees"}
+{"text": "le volant tremble quand je freine sur l'autoroute", "fault": "disques-voiles"}
+{"text": "vibrations dans la pédale de frein en ralentissant", "fault": "disques-voiles"}
+{"text": "ça vibre au freinage à grande vitesse", "fault": "disques-voiles"}
+{"text": "les disques sont rayés et le freinage fait des à-coups", "fault": "disques-voiles"}
+{"text": "toute la voiture tremble quand je freine fort en descente", "fault": "disques-voiles"}
+{"text": "la pédale de frein est molle et descend jusqu'au plancher", "fault": "fuite-liquide-frein"}
+{"text": "voyant de frein rouge allumé et niveau de liquide bas", "fault": "fuite-liquide-frein"}
+{"text": "il y a du liquide qui coule près de la roue arrière", "fault": "fuite-liquide-frein"}
+{"text": "je pompe sur la pédale pour freiner, elle s'enfonce", "fault": "fuite-liquide-frein"}
+{"text": "le bocal de liquide de frein se vide tout seul", "fault": "fuite-liquide-frein"}
+{"text": "la voiture tire à droite quand je freine", "fault": "etrier-grippe"}
+{"text": "une roue avant est brûlante après avoir roulé, ça sent le brûlé", "fault": "etrier-grippe"}
+{"text": "le frein reste serré sur une roue, la voiture freine toute seule", "fault": "etrier-grippe"}
+{"text": "odeur de brûlé près d'une roue et la jante est noire de poussière", "fault": "etrier-grippe"}
+{"text": "le matin la voiture a du mal à démarrer, le démarreur tourne lentement", "fault": "batterie-faible"}
+{"text": "quand je tourne la clé j'entends tac tac tac et rien", "fault": "batterie-faible"}
+{"text": "la voiture ne démarre plus après deux jours sans rouler", "fault": "batterie-faible"}
+{"text": "il faut la pousser ou mettre des câbles pour démarrer", "fault": "batterie-faible"}
+{"text": "la batterie a quatre ans et le moteur tourne mou au démarrage", "fault": "batterie-faible"}
+{"text": "le tableau de bord s'éteint quand je démarre", "fault": "batterie-faible"}
+{"text": "le voyant batterie reste allumé en roulant", "fault": "alternateur-defaillant"}
+{"text": "les phares baissent la nuit et la batterie se vide en roulant", "fault": "alternateur-defaillant"}
+{"text": "la voiture s'est arrêtée en route, tout s'est éteint, voyant batterie avant", "fault": "alternateur-defaillant"}
+{"text": "batterie neuve mais elle se décharge quand même, la charge ne se fait pas", "fault": "alternateur-defaillant"}
+{"text": "bruit de roulement côté alternateur et voyant de charge", "fault": "alternateur-defaillant"}
+{"text": "je tourne la clé, un seul clac et le moteur ne tourne pas", "fault": "demarreur-hs"}
+{"text": "le démarreur ne fait plus rien alors que les lumières marchent bien", "fault": "demarreur-hs"}
+{"text": "parfois il faut taper sur le démarreur pour que ça démarre", "fault": "demarreur-hs"}
+{"text": "bruit de crécelle au démarrage, le démarreur patine", "fault": "demarreur-hs"}
+{"text": "la batterie est bonne mais rien ne se passe en tournant la clé", "fault": "demarreur-hs"}
+{"text": "le moteur tremble au ralenti et manque de puissance", "fault": "bougies-usees"}
+{"text": "la voiture consomme beaucoup plus d'essence et a des ratés", "fault": "bougies-usees"}
+{"text": "à-coups en accélérant, ça fait des trous", "fault": "bougies-usees"}
+{"text": "je n'ai jamais changé les bougies et le moteur broute", "fault": "bougies-usees"}
+{"text": "moteur essence qui démarre mal et qui hésite en reprise", "fault": "bougies-usees"}
+{"text": "le moteur tourne sur trois cylindres et le voyant moteur clignote", "fault": "bobine-hs"}
+{"text": "grosse perte de puissance d'un coup, voyant orange qui clignote", "fault": "bobine-hs"}
+{"text": "le moteur cogne et tremble énormément, un cylindre ne marche plus", "fault": "bobine-hs"}
+{"text": "ratés quand il pleut ou quand il fait humide", "fault": "bobine-hs"}
+{"text": "le diesel démarre très mal le matin quand il fait froid", "fault": "prechauffage-hs"}
+{"text": "le voyant de préchauffage clignote et la voiture fume blanc au démarrage", "fault": "prechauffage-hs"}
+{"text": "en hiver il faut plusieurs coups de démarreur pour lancer le moteur diesel", "fault": "prechauffage-hs"}
+{"text": "le gasoil démarre bien à chaud mais pas à froid", "fault": "prechauffage-hs"}
+{"text": "ça siffle fort au démarrage le matin", "fault": "courroie-accessoires-usee"}
+{"text": "sifflement quand j'allume la climatisation", "fault": "courroie-accessoires-usee"}
+{"text": "couinement quand je tourne le volant à fond à l'arrêt", "fault": "courroie-accessoires-usee"}
+{"text": "la courroie est craquelée et fait du bruit", "fault": "courroie-accessoires-usee"}
+{"text": "bruit aigu sous le capot qui disparaît quand le moteur chauffe", "fault": "courroie-accessoires-usee"}
+{"text": "j'ai 120000 km et je n'ai jamais fait la distribution", "fault": "distribution-a-faire"}
+{"text": "on m'a dit de changer la courroie de distribution, elle est en retard", "fault": "distribution-a-faire"}
+{"text": "bruit de claquement côté courroie de distribution", "fault": "distribution-a-faire"}
+{"text": "achat d'une voiture d'occasion, je ne sais pas quand la distribution a été faite", "fault": "distribution-a-faire"}
+{"text": "il y a de l'eau qui coule sous le moteur côté droit et ça chauffe", "fault": "pompe-eau-hs"}
+{"text": "fuite de liquide de refroidissement près de la courroie", "fault": "pompe-eau-hs"}
+{"text": "bruit de roulement côté distribution et le liquide baisse", "fault": "pompe-eau-hs"}
+{"text": "la température monte et la pompe à eau suinte", "fault": "pompe-eau-hs"}
+{"text": "l'aiguille de température monte vite sur route", "fault": "thermostat-bloque"}
+{"text": "le moteur ne chauffe jamais et le chauffage reste froid", "fault": "thermostat-bloque"}
+{"text": "la température monte puis redescend toute seule en roulant", "fault": "thermostat-bloque"}
+{"text": "durite du radiateur froide alors que le moteur est chaud", "fault": "thermostat-bloque"}
+{"text": "le niveau du vase d'expansion baisse tout le temps", "fault": "fuite-refroidissement"}
+{"text": "flaque verte sous l'avant de la voiture", "fault": "fuite-refroidissement"}
+{"text": "le radiateur fuit, il y a des traces blanches", "fault": "fuite-refroidissement"}
+{"text": "odeur sucrée et vapeur sous le capot", "fault": "fuite-refroidissement"}
+{"text": "une durite d'eau est fissurée et goutte", "fault": "fuite-refroidissement"}
+{"text": "ça chauffe dans les embouteillages mais pas sur la route", "fault": "ventilateur-hs"}
+{"text": "le ventilateur du radiateur ne tourne jamais", "fault": "ventilateur-hs"}
+{"text": "la température monte quand je suis à l'arrêt au feu rouge", "fault": "ventilateur-hs"}
+{"text": "surchauffe en ville l'été, le ventilo ne se met pas en route", "fault": "ventilateur-hs"}
+{"text": "grosse fumée blanche à l'échappement et je perds du liquide de refroidissement", "fault": "joint-culasse-hs"}
+{"text": "il y a de la mayonnaise sous le bouchon d'huile", "fault": "joint-culasse-hs"}
+{"text": "le moteur a chauffé fort et maintenant il fume blanc et l'eau bouillonne dans le vase", "fault": "joint-culasse-hs"}
+{"text": "huile mélangée avec de l'eau, couleur café au lait", "fault": "joint-culasse-hs"}
+{"text": "la voiture rebondit beaucoup après les dos d'âne", "fault": "amortisseurs-uses"}
+{"text": "en virage la voiture penche trop et tangue", "fault": "amortisseurs-uses"}
+{"text": "un amortisseur avant est plein d'huile", "fault": "amortisseurs-uses"}
+{"text": "ça cogne fort dans les trous et la voiture flotte sur l'autoroute", "fault": "amortisseurs-uses"}
+{"text": "suspension très molle, l'arrière tape", "fault": "amortisseurs-uses"}
+{"text": "la direction est floue et le volant a du jeu", "fault": "jeu-direction"}
+{"text": "claquement dans le train avant sur les routes abîmées et le volant est de travers", "fault": "jeu-direction"}
+{"text": "les pneus avant s'usent sur le bord intérieur", "fault": "jeu-direction"}
+{"text": "la voiture ne tient pas sa ligne droite, il faut corriger tout le temps", "fault": "jeu-direction"}
+{"text": "bruit de rotule quand je braque", "fault": "jeu-direction"}
+{"text": "grondement qui augmente avec la vitesse, comme un avion", "fault": "roulement-use"}
+{"text": "ronflement à partir de 60 km/h qui change quand je tourne", "fault": "roulement-use"}
+{"text": "bruit sourd d'une roue qui augmente en accélérant, même sans freiner", "fault": "roulement-use"}
+{"text": "ça ronfle à droite en virage à gauche", "fault": "roulement-use"}
+{"text": "clac clac clac quand je tourne à fond en accélérant", "fault": "cardan-hs"}
+{"text": "claquements en braquant pour sortir d'un parking", "fault": "cardan-hs"}
+{"text": "le soufflet est déchiré et il y a de la graisse sur la jante", "fault": "cardan-hs"}
+{"text": "bruit de cliquetis dans les ronds-points", "fault": "cardan-hs"}
+{"text": "petits claquements à l'avant sur les pavés à basse vitesse", "fault": "biellette-stab-hs"}
+{"text": "bruit sourd sur les ralentisseurs côté avant gauche", "fault": "biellette-stab-hs"}
+{"text": "toc toc dans la suspension quand la route est mauvaise", "fault": "biellette-stab-hs"}
+{"text": "cognement à l'avant en passant les dos d'âne doucement", "fault": "biellette-stab-hs"}
+{"text": "le moteur monte dans les tours mais la voiture n'avance pas", "fault": "embrayage-use"}
+{"text": "l'embrayage patine en côte et ça sent le brûlé", "fault": "embrayage-use"}
+{"text": "la pédale d'embrayage accroche tout en haut", "fault": "embrayage-use"}
+{"text": "en cinquième quand j'accélère le régime monte sans prendre de vitesse", "fault": "embrayage-use"}
+{"text": "la pédale d'embrayage est devenue très dure", "fault": "commande-embrayage-hs"}
+{"text": "la pédale d'embrayage reste au plancher et je ne peux plus passer les vitesses", "fault": "commande-embrayage-hs"}
+{"text": "le câble d'embrayage a cassé", "fault": "commande-embrayage-hs"}
+{"text": "pédale d'embrayage sans résistance, les vitesses craquent", "fault": "commande-embrayage-hs"}
+{"text": "la deuxième craque quand je la passe", "fault": "boite-vitesses-hs"}
+{"text": "la vitesse saute toute seule en roulant", "fault": "boite-vitesses-hs"}
+{"text": "sifflement de la boîte de vitesses qui augmente avec la vitesse", "fault": "boite-vitesses-hs"}
+{"text": "la boîte automatique passe les vitesses brutalement", "fault": "boite-vitesses-hs"}
+{"text": "voyant moteur allumé et la voiture consomme plus", "fault": "sonde-lambda-hs"}
+{"text": "j'ai raté le contrôle de pollution, CO trop élevé", "fault": "sonde-lambda-hs"}
+{"text": "odeur d'œuf pourri à l'échappement et voyant moteur", "fault": "sonde-lambda-hs"}
+{"text": "le garagiste dit que c'est la sonde à oxygène", "fault": "sonde-lambda-hs"}
+{"text": "perte de puissance qui s'aggrave, on dirait que le pot est bouché", "fault": "catalyseur-hs"}
+{"text": "bruit de cailloux dans le pot d'échappement", "fault": "catalyseur-hs"}
+{"text": "le filtre à particules est plein, voyant FAP allumé", "fault": "catalyseur-hs"}
+{"text": "odeur de soufre et la voiture n'avance plus en côte", "fault": "catalyseur-hs"}
+{"text": "trous à l'accélération et le moteur cale parfois", "fault": "debitmetre-hs"}
+{"text": "fumée noire quand j'accélère sur mon diesel et manque de puissance", "fault": "debitmetre-hs"}
+{"text": "le moteur hésite en reprise comme s'il manquait d'air", "fault": "debitmetre-hs"}
+{"text": "le débitmètre est encrassé selon la valise", "fault": "debitmetre-hs"}
+{"text": "le moteur passe en mode dégradé et n'a plus de puissance", "fault": "egr-encrassee"}
+{"text": "ralenti instable sur mon diesel qui fait beaucoup de ville", "fault": "egr-encrassee"}
+{"text": "voyant moteur et perte de puissance en ville, fumée noire au démarrage", "fault": "egr-encrassee"}
+{"text": "la vanne egr est bloquée", "fault": "egr-encrassee"}
+{"text": "claquement fort du moteur diesel comme un cognement", "fault": "injecteurs-hs"}
+{"text": "le moteur démarre mal à chaud et fume", "fault": "injecteurs-hs"}
+{"text": "odeur de gasoil dans le moteur et ratés", "fault": "injecteurs-hs"}
+{"text": "moteur qui claque et consomme beaucoup", "fault": "injecteurs-hs"}
+{"text": "le moteur tourne au démarreur mais ne démarre pas", "fault": "pompe-carburant-hs"}
+{"text": "la voiture cale en roulant et ne redémarre pas, il y a de l'essence", "fault": "pompe-carburant-hs"}
+{"text": "je n'entends plus le bruit de la pompe quand je mets le contact", "fault": "pompe-carburant-hs"}
+{"text": "à-coups à haute vitesse puis le moteur s'arrête, comme s'il manquait d'essence", "fault": "pompe-carburant-hs"}
+{"text": "sifflement de sirène quand j'accélère et pas de puissance", "fault": "turbo-hs"}
+{"text": "fumée bleue et le moteur consomme de l'huile", "fault": "turbo-hs"}
+{"text": "le turbo ne pousse plus au-dessus de 2000 tours", "fault": "turbo-hs"}
+{"text": "bruit de turbine aigu et de l'huile dans la durite d'air", "fault": "turbo-hs"}
+{"text": "le filtre à air est tout noir et la voiture manque un peu de puissance", "fault": "filtre-air-colmate"}
+{"text": "je roule souvent sur des pistes poussiéreuses, légère surconsommation", "fault": "filtre-air-colmate"}
+{"text": "entretien : je veux changer le filtre à air", "fault": "filtre-air-colmate"}
+{"text": "presque pas d'air qui sort de la ventilation", "fault": "filtre-habitacle-encrasse"}
+{"text": "mauvaise odeur dans la voiture quand je mets la ventilation", "fault": "filtre-habitacle-encrasse"}
+{"text": "la buée ne part pas sur le pare-brise", "fault": "filtre-habitacle-encrasse"}
+{"text": "le voyant de vidange s'est allumé", "fault": "vidange-a-faire"}
+{"text": "j'ai dépassé 10000 km sans faire la vidange", "fault": "vidange-a-faire"}
+{"text": "l'huile est noire et épaisse sur la jauge", "fault": "vidange-a-faire"}
+{"text": "je veux faire la vidange avec le filtre à huile", "fault": "vidange-a-faire"}
+{"text": "le dessus du moteur est plein d'huile", "fault": "fuite-huile-cache-culbuteurs"}
+{"text": "odeur d'huile brûlée quand le moteur est chaud", "fault": "fuite-huile-cache-culbuteurs"}
+{"text": "taches d'huile sous la voiture le matin", "fault": "fuite-huile-cache-culbuteurs"}
+{"text": "fuite d'huile autour du couvercle du moteur", "fault": "fuite-huile-cache-culbuteurs"}
+{"text": "le moteur cale quand il est chaud et ne redémarre qu'après avoir refroidi", "fault": "capteur-vilebrequin-hs"}
+{"text": "le compte-tours tombe à zéro et le moteur s'arrête", "fault": "capteur-vilebrequin-hs"}
+{"text": "la voiture s'arrête net en roulant puis redémarre une demi-heure après", "fault": "capteur-vilebrequin-hs"}
+{"text": "le capteur pmh est hors service d'après la valise", "fault": "capteur-vilebrequin-hs"}
+{"text": "le bruit du moteur est devenu très fort, comme une moto", "fault": "echappement-perce"}
+{"text": "ronflement sous la voiture et odeur de gaz d'échappement dans l'habitacle", "fault": "echappement-perce"}
+{"text": "le pot d'échappement est troué", "fault": "echappement-perce"}
+{"text": "la clim souffle chaud", "fault": "clim-ne-refroidit-plus"}
+{"text": "la climatisation ne refroidit plus du tout en été", "fault": "clim-ne-refroidit-plus"}
+{"text": "le compresseur de clim fait du bruit et ne s'enclenche pas", "fault": "clim-ne-refroidit-plus"}
+{"text": "air tiède même en mettant la clim au maximum", "fault": "clim-ne-refroidit-plus"}
+{"text": "grosses vibrations dans l'habitacle au ralenti", "fault": "supports-moteur-uses"}
+{"text": "le moteur bouge beaucoup et cogne quand je passe la première", "fault": "supports-moteur-uses"}
+{"text": "à-coup et choc quand je lâche l'embrayage ou en marche arrière", "fault": "supports-moteur-uses"}
+{"text": "le volant est devenu très dur à tourner", "fault": "direction-assistee-hs"}
+{"text": "gémissement quand je tourne le volant", "fault": "direction-assistee-hs"}
+{"text": "fuite de liquide de direction assistée et direction dure", "fault": "direction-assistee-hs"}
+{"text": "la direction assistée ne marche plus par moments", "fault": "direction-assistee-hs"}

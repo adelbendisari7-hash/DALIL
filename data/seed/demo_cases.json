@@ -1,0 +1,25 @@
+{
+  "_note": "20 cas de démonstration (critère de l'étape 8), formulations absentes des exemples d'entraînement. Réussite = la pièce attendue figure parmi les pièces des 3 causes proposées (ou status attendu). Ce n'est PAS le jeu de test figé d'Oran (200 cas réels annotés par des mécaniciens, data/test/).",
+  "cases": [
+    {"text": "quand j'appuie sur le frein ça crisse comme du métal contre du métal", "expect_parts": ["plaquettes-avant", "disques-frein"]},
+    {"text": "au feu rouge l'aiguille de température grimpe, sur la route ça va", "expect_parts": ["ventilateur-radiateur", "sonde-temperature"]},
+    {"text": "ce matin tac tac tac en démarrant et le moteur ne voulait pas tourner", "expect_parts": ["batterie", "demarreur"]},
+    {"text": "j'ai un ronronnement de plus en plus fort qui suit la vitesse de la voiture", "expect_parts": ["roulements-roue"]},
+    {"text": "la pédale de l'embrayage colle en haut et le moteur s'emballe en montée", "expect_parts": ["kit-embrayage"]},
+    {"text": "on entend un sifflement strident au démarrage qui part après quelques minutes", "expect_parts": ["courroie-accessoires", "galet-tendeur"]},
+    {"text": "la batterie ne tient plus la charge en roulant et le voyant de batterie est allumé", "expect_parts": ["alternateur", "batterie"]},
+    {"text": "mon diesel a du mal à partir les matins d'hiver, il fume blanc", "variant": ["Dacia", "Logan", "1.5 dCi", 2015], "expect_parts": ["bougies-prechauffage"]},
+    {"text": "en braquant complètement pour me garer j'entends clac clac", "expect_parts": ["cardans"]},
+    {"text": "la voiture saute beaucoup sur les dos-d'âne et rebondit plusieurs fois", "expect_parts": ["amortisseurs", "biellette-stabilisatrice"]},
+    {"text": "un liquide rose coule sous le moteur et le niveau du bocal baisse", "expect_parts": ["radiateur", "pompe-eau", "durite-refroidissement"]},
+    {"text": "la climatisation envoie de l'air chaud", "expect_parts": ["compresseur-clim", "condenseur"]},
+    {"text": "le volant est dur comme de la pierre quand je manoeuvre", "expect_parts": ["pompe-direction", "cremaillere"]},
+    {"text": "", "dtc": ["P0420"], "expect_parts": ["catalyseur", "sonde-lambda"]},
+    {"text": "voyant moteur", "dtc": ["P0301"], "expect_parts": ["bougies-allumage", "bobine-allumage"]},
+    {"text": "elle s'arrête quand elle est bien chaude puis repart une fois froide", "expect_parts": ["capteur-vilebrequin"]},
+    {"text": "pas d'air qui sort des aérateurs et ça sent le moisi", "expect_parts": ["filtre-habitacle"]},
+    {"text": "quelle heure est-il à Alger ?", "expect_status": "unknown"},
+    {"text": "je cherche une recette de chorba", "expect_status": "unknown"},
+    {"text": "le match de foot de ce soir", "expect_status": "unknown"}
+  ]
+}

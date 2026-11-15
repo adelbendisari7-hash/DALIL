@@ -1,0 +1,41 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Base PostgreSQL + PostGIS + pgvector
+        run: |
+          docker build -t dalil-db db
+          docker run -d --name db -p 5432:5432 -e POSTGRES_DB=dalil -e POSTGRES_USER=dalil -e POSTGRES_PASSWORD=dalil dalil-db
+          for i in $(seq 1 30); do docker exec db pg_isready -U dalil -d dalil && break; sleep 2; done
+      - run: pip install -r backend/requirements.txt
+      - name: Migrations rejouables sur PostgreSQL (montée, descente, remontée)
+        working-directory: backend
+        env: { DALIL_DATABASE_URL: "postgresql+psycopg2://dalil:dalil@localhost:5432/dalil" }
+        run: alembic upgrade head && alembic downgrade base && alembic upgrade head && python -m app.seed
+      - name: Tests
+        working-directory: backend
+        run: pytest -q
+      - name: Tests du pipeline de données (sans réseau)
+        working-directory: backend
+        run: pip install -r ../data/pipeline/requirements.txt && pytest -q ../data/pipeline/tests
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm, cache-dependency-path: frontend/package-lock.json }
+      - run: pip install -r backend/requirements.txt
+      - working-directory: frontend
+        run: npm ci && npx tsc --noEmit && npx next build
+      - name: Parcours de bout en bout (Playwright)
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium && npx playwright test

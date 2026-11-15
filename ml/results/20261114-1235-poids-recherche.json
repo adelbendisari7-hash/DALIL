@@ -1,0 +1,355 @@
+{
+  "rows": [
+    {
+      "date": "20261114-1235",
+      "variante": "A-panne / classifieur seul",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.88,
+      "top3": 0.92,
+      "abstention": 0.06,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 62.2,
+      "ms_p95": 49.7
+    },
+    {
+      "date": "20261114-1235",
+      "variante": "A-panne / classifieur seul",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 41.8,
+      "ms_p95": 48.1
+    },
+    {
+      "date": "20261114-1235",
+      "variante": "C (recherche + LM)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "retrieval",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.78,
+      "top3": 0.88,
+      "abstention": 0.04,
+      "hors_sujet_refuse": 0.8,
+      "ms_moyen": 41.4,
+      "ms_p95": 50.3
+    },
+    {
+      "date": "20261114-1235",
+      "variante": "C (recherche + LM)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "retrieval",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 0.941,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 40.0,
+      "ms_p95": 44.0
+    },
+    {
+      "date": "20261114-1235",
+      "variante": "A-piece / classifieur seul",
+      "modele": "tfidf-lr-part-20261114",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.86,
+      "top3": 0.9,
+      "abstention": 0.08,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 46.8,
+      "ms_p95": 52.2
+    },
+    {
+      "date": "20261114-1235",
+      "variante": "A-piece / classifieur seul",
+      "modele": "tfidf-lr-part-20261114",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 48.2,
+      "ms_p95": 54.3
+    },
+    {
+      "date": "20261114-1235",
+      "variante": "A-piece / D (chaîne complète)",
+      "modele": "tfidf-lr-part-20261114",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.88,
+      "top3": 0.94,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 47.5,
+      "ms_p95": 53.2
+    },
+    {
+      "date": "20261114-1235",
+      "variante": "A-piece / D (chaîne complète)",
+      "modele": "tfidf-lr-part-20261114",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 47.2,
+      "ms_p95": 52.0
+    }
+  ],
+  "erreurs": {
+    "A-panne / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-panne / classifieur seul | demo_cases": [],
+    "C (recherche + LM) | dev_fr_synthetique": [
+      {
+        "id": "dev001",
+        "text": "quand j'appuie sur la pédale de frein j'entends un frottement métallique à l'avant",
+        "attendu": [
+          "plaquettes-avant",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": [
+          "filtre-air",
+          "kit-embrayage",
+          "turbocompresseur"
+        ]
+      },
+      {
+        "id": "dev027",
+        "text": "la voiture n'a plus de reprise et on dirait que l'échappement est bouché",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "silencieux"
+        ]
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "support-moteur"
+        ]
+      },
+      {
+        "id": "dev045",
+        "text": "un cylindre ne fonctionne pas, la valise indique un raté sur le cylindre 2",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "capteur-vilebrequin",
+          "roulements-roue"
+        ]
+      }
+    ],
+    "C (recherche + LM) | demo_cases": [
+      {
+        "id": "demo_cases002",
+        "text": "au feu rouge l'aiguille de température grimpe, sur la route ça va",
+        "attendu": [
+          "ventilateur-radiateur",
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "thermostat"
+        ]
+      }
+    ],
+    "A-piece / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-piece / classifieur seul | demo_cases": [],
+    "A-piece / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev007",
+        "text": "j'entends juste un clic quand je mets le contact mais le moteur ne se lance pas, les feux marchent",
+        "attendu": [
+          "demarreur",
+          "batterie"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "support-moteur",
+          "vanne-egr",
+          "bougies-allumage"
+        ]
+      }
+    ],
+    "A-piece / D (chaîne complète) | demo_cases": []
+  }
+}

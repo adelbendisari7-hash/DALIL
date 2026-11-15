@@ -1,0 +1,11 @@
+{
+  "_note": "Véhicules vendus aux États-Unis et proches du parc algérien (section 5). Seule la Hyundai Accent est un modèle du pilote ; les autres partagent plateforme ou moteur avec des modèles courants à Oran. À revoir avec les 20 magasins enquêtés.",
+  "vehicles": [
+    {"make": "HYUNDAI", "model": "ACCENT", "years": [2006, 2017], "dalil_brand": "Hyundai", "dalil_model": "Accent", "why": "modèle du pilote"},
+    {"make": "KIA", "model": "RIO", "years": [2012, 2017], "dalil_brand": "Kia", "dalil_model": "Rio", "why": "même plateforme que l'Accent RB"},
+    {"make": "HYUNDAI", "model": "ELANTRA", "years": [2011, 2016], "dalil_brand": "Hyundai", "dalil_model": null, "why": "moteur Gamma 1.6 partagé avec l'Accent"},
+    {"make": "FIAT", "model": "500", "years": [2012, 2019], "dalil_brand": "Fiat", "dalil_model": "500", "why": "Fiat, première marque en 2025"},
+    {"make": "VOLKSWAGEN", "model": "GOLF", "years": [2010, 2019], "dalil_brand": "Volkswagen", "dalil_model": "Golf", "why": "cité par l'équipe"},
+    {"make": "VOLKSWAGEN", "model": "JETTA", "years": [2011, 2018], "dalil_brand": "Volkswagen", "dalil_model": null, "why": "plateforme et moteurs de la Golf"}
+  ]
+}
