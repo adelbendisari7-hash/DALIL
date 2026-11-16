@@ -1,0 +1,76 @@
+{
+  "rows": [
+    {
+      "date": "20261116-0054",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "openai_compat",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.88,
+      "top3": 0.96,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 62585.0,
+      "ms_p95": 83685.1
+    },
+    {
+      "date": "20261116-0054",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "openai_compat",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.765,
+      "top3": 0.941,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 56295.8,
+      "ms_p95": 75475.5
+    }
+  ],
+  "erreurs": {
+    "A / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev023",
+        "text": "en montée le moteur s'emballe mais la voiture n'accélère presque pas",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": [
+          "filtre-air",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases006",
+        "text": "on entend un sifflement strident au démarrage qui part après quelques minutes",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur"
+        ],
+        "obtenu": [
+          "pompe-direction",
+          "pompe-carburant"
+        ]
+      }
+    ]
+  }
+}

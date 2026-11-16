@@ -54,6 +54,7 @@
   "result.feedback.no": "Non",
   "result.feedback.thanks": "Merci, votre réponse améliore DALIL.",
   "result.newSearch": "Nouveau diagnostic",
+  "result.refining": "Analyse approfondie en cours : ce résultat est provisoire et peut changer dans quelques secondes. Vous pouvez déjà le consulter.",
   "parts.title": "Chercher une pièce",
   "parts.lead": "Pour les mécaniciens et ceux qui connaissent déjà la pièce : trouvez le magasin en deux gestes.",
   "parts.search": "Nom de la pièce",

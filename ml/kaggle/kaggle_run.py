@@ -26,7 +26,9 @@ HERE = Path(__file__).parent
 STAGING = Path(os.environ.get("LOCALAPPDATA", tempfile.gettempdir())) / "dalil-kaggle" / "staging"
 KERNELS = HERE / "_kernels"
 OUTPUTS = HERE / "_outputs"
-KAGGLE = str(HERE / ".venv" / "Scripts" / "kaggle")
+# « python -m kaggle » plutôt que le lanceur kaggle.exe : celui-ci garde le chemin absolu du dossier au moment
+# de l'installation et ne répond plus (sans message) si le projet est déplacé.
+KAGGLE = [sys.executable, "-m", "kaggle"]
 DATASET_SLUG = "dalil-pipeline"
 ADAPTER_SLUG = "dalil-lora-adapter"
 ADAPTER_DIR = ROOT / "ml" / "artifacts" / "lora_adapter"
@@ -37,6 +39,7 @@ NOTEBOOKS = {
     "03_lora_llm": {"slug": "dalil-03-lora-llm", "outputs": ["*.gguf", "*-evaluation.json"]},
     "04_fusion_gguf": {"slug": "dalil-04-fusion-gguf", "outputs": ["*.gguf", "*-evaluation.json"],
                        "datasets": [ADAPTER_SLUG]},
+    "05_vecteurs": {"slug": "dalil-05-vecteurs", "outputs": ["chunk_vectors.npy", "chunk_ids.json", "check_queries.json", "*.zip"]},
 }
 # Ce qui part sur Kaggle : le code et les données traitées, jamais les données brutes ni les environnements.
 INCLUDE = ["backend", "data/pipeline", "data/seed", "data/test", "data/processed"]
@@ -44,7 +47,7 @@ IGNORE = shutil.ignore_patterns(".venv", "__pycache__", "*.db", "*.db-journal", 
 
 
 def kaggle(*args: str, check: bool = True) -> str:
-    res = subprocess.run([KAGGLE, *args], capture_output=True, text=True, encoding="utf-8", errors="replace")
+    res = subprocess.run([*KAGGLE, *args], capture_output=True, text=True, encoding="utf-8", errors="replace")
     out = (res.stdout or "") + (res.stderr or "")
     if check and res.returncode != 0:
         raise SystemExit(f"kaggle {' '.join(args)} a échoué :\n{out}")

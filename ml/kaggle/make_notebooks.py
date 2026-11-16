@@ -383,6 +383,92 @@ if RUN_EVAL:
     ("code", GGUF_CELL),
 ]
 
+NB_VECTEURS = [
+    ("md", "# DALIL : vecteurs de recherche et modèle de reclassement (étape 8, section 6.1)\n\n"
+           "Paramètres Kaggle : **GPU T4**, **Internet activé**. Entrée : `data/processed/kb/chunks.jsonl` "
+           "(`python ml/export_kb_chunks.py`). Calcule un vecteur Qwen3-Embedding-0.6B par passage de la base de "
+           "connaissances, vérifie la recherche sur quelques requêtes, puis exporte les deux modèles "
+           "(Qwen3-Embedding-0.6B et bge-reranker-v2-m3) pour les charger sur le portable.\n\n"
+           "Sorties : `chunk_vectors.npy` (float16, normalisés), `chunk_ids.json`, `check_queries.json` (contrôle du "
+           "portage), `qwen3-embedding-0.6b.zip`, `bge-reranker-v2-m3.zip`."),
+    ("code", SETUP),
+    ("code", '!pip install -q -U "transformers>=4.51"'),
+    ("code", '''os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+import numpy as np
+import torch
+import torch.nn.functional as F
+from transformers import AutoModel, AutoModelForSequenceClassification, AutoTokenizer
+
+EMB_ID, RERANK_ID = "Qwen/Qwen3-Embedding-0.6B", "BAAI/bge-reranker-v2-m3"
+MAX_LEN, BATCH = 384, 32
+# Instruction devant chaque requête (les passages n'en portent pas). Même chaîne côté portable :
+# backend/app/services/diagnosis/embeddings.py
+TASK = "Given a description of a car problem, retrieve passages describing the same fault"
+rows = [json.loads(l) for l in open("data/processed/kb/chunks.jsonl", encoding="utf-8")]
+print(len(rows), "passages")
+
+tok = AutoTokenizer.from_pretrained(EMB_ID, padding_side="left")
+model = AutoModel.from_pretrained(EMB_ID, dtype=torch.float16).cuda().eval()
+
+
+def encode(texts, bs=BATCH, max_len=MAX_LEN):
+    """Vecteur du dernier jeton (remplissage à gauche), normalisé : méthode de Qwen3-Embedding."""
+    order = sorted(range(len(texts)), key=lambda i: -len(texts[i]))   # lots de longueurs voisines : plus rapide
+    out = np.zeros((len(texts), model.config.hidden_size), dtype=np.float16)
+    t0 = time.time()
+    for s in range(0, len(order), bs):
+        idx = order[s:s + bs]
+        enc = tok([texts[i] for i in idx], padding=True, truncation=True, max_length=max_len, return_tensors="pt").to("cuda")
+        with torch.no_grad():
+            h = model(**enc).last_hidden_state[:, -1]
+        out[idx] = F.normalize(h.float(), dim=-1).cpu().numpy().astype(np.float16)
+        if (s // bs) % 50 == 0:
+            print(f"{s}/{len(texts)} ({time.time() - t0:.0f} s)", flush=True)
+    return out
+
+
+def query_text(q):
+    return f"Instruct: {TASK}\\nQuery:{q}"'''),
+    ("code", '''vectors = encode([r["text"] for r in rows])
+np.save("/kaggle/working/chunk_vectors.npy", vectors)
+json.dump([r["id"] for r in rows], open("/kaggle/working/chunk_ids.json", "w"))
+print(vectors.shape, vectors.dtype, "norme moyenne", float(np.linalg.norm(vectors.astype(np.float32), axis=1).mean()))'''),
+    ("code", '''# Contrôle : quelques requêtes du jeu dev, passages les plus proches. Les vecteurs des requêtes sont aussi
+# exportés : le portable doit retrouver les mêmes (cosinus ~ 1), sinon son portage de la méthode est faux.
+dev = [json.loads(l) for l in open("data/test/dev_fr_synthetique.jsonl", encoding="utf-8")]
+queries = [d["text"] for d in dev[:12]]
+qv = encode([query_text(q) for q in queries])
+sims = qv.astype(np.float32) @ vectors.astype(np.float32).T
+for q, s in list(zip(queries, sims))[:4]:
+    print("REQUÊTE :", q[:110])
+    for j in np.argsort(-s)[:3]:
+        print(f"   {s[j]:.3f} [{rows[j]['source']}] {rows[j]['text'][:110]}")
+json.dump({"task": TASK, "texts": queries, "vectors": qv.astype(np.float32).tolist()},
+          open("/kaggle/working/check_queries.json", "w"), ensure_ascii=False)'''),
+    ("code", '''# Reclassement : bge-reranker-v2-m3 sur les 20 passages les plus proches de chaque requête de contrôle
+del model; torch.cuda.empty_cache()
+rtok = AutoTokenizer.from_pretrained(RERANK_ID)
+rmodel = AutoModelForSequenceClassification.from_pretrained(RERANK_ID, dtype=torch.float16).cuda().eval()
+for q, s in list(zip(queries, sims))[:3]:
+    cand = list(np.argsort(-s)[:20])
+    enc = rtok([q] * len(cand), [rows[j]["text"] for j in cand], padding=True, truncation=True, max_length=512,
+               return_tensors="pt").to("cuda")
+    with torch.no_grad():
+        sc = torch.sigmoid(rmodel(**enc).logits.view(-1).float()).cpu().numpy()
+    print("REQUÊTE :", q[:110])
+    for k in np.argsort(-sc)[:3]:
+        print(f"   rerank {sc[k]:.3f} (vecteur {s[cand[k]]:.3f}) [{rows[cand[k]]['source']}] {rows[cand[k]]['text'][:100]}")'''),
+    ("code", '''# Export des deux modèles (float16) pour le portable
+rmodel.save_pretrained("/kaggle/working/bge-reranker-v2-m3"); rtok.save_pretrained("/kaggle/working/bge-reranker-v2-m3")
+emb = AutoModel.from_pretrained(EMB_ID, dtype=torch.float16)
+emb.save_pretrained("/kaggle/working/qwen3-embedding-0.6b")
+AutoTokenizer.from_pretrained(EMB_ID).save_pretrained("/kaggle/working/qwen3-embedding-0.6b")
+for name in ("qwen3-embedding-0.6b", "bge-reranker-v2-m3"):
+    shutil.make_archive(f"/kaggle/working/{name}", "zip", f"/kaggle/working/{name}")
+    shutil.rmtree(f"/kaggle/working/{name}")
+!rm -rf /kaggle/working/dalil && ls -lh /kaggle/working'''),
+]
+
 
 def encoder(config: str) -> list[tuple[str, str]]:
     return [(k, src.replace("__CONFIG__", config)) for k, src in NB_ENCODER]
@@ -394,6 +480,7 @@ NOTEBOOKS = {
     "02_encodeur_enfr": encoder("en+fr"),     # variante B par transfert multilingue (sans traduction)
     "03_lora_llm": NB_LLM,
     "04_fusion_gguf": NB_FUSION,   # reprise après le 03 : évaluation, fusion, GGUF
+    "05_vecteurs": NB_VECTEURS,    # étape 8 : vecteurs de recherche + modèle de reclassement
 }
 
 

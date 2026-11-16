@@ -24,7 +24,7 @@ sys.path.insert(0, str(ROOT / "backend"))
 from app.db import SessionLocal  # noqa: E402
 from app.services.diagnosis.classifier import get_classifier, load_examples  # noqa: E402
 from app.services.diagnosis.llm import SYSTEM_PROMPT, build_user_message  # noqa: E402
-from app.services.diagnosis.retrieval import index  # noqa: E402
+from app.services.diagnosis.retrieval import index  # noqa: E402  (mots-clés : le jeu d affinage est fixe)
 
 OUT = ROOT / "data" / "processed" / "llm"
 N_CANDIDATES = 6

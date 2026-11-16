@@ -19,16 +19,23 @@ from sqlalchemy.orm import Session
 from ...config import get_settings
 from ...models import DtcCode, DtcPart, Fault, PartCategory, PartReference, Product, ProductFitment, VehicleVariant
 from .classifier import get_classifier
-from .llm import rerank_with_llm
+from .llm import get_llm, rerank_with_llm
 from .normalize import detect_lang, extract_dtc, normalize
-from .retrieval import DOMAIN_SOURCES, domain_index, index
+from .retrieval import DOMAIN_SOURCES, dense_index, domain_index, get_index
 from .safety import DISCLAIMER, DO_NOT_DRIVE, UNKNOWN, text_is_dangerous
 
 MIX = {"clf": 0.6, "ret": 0.2, "dtc": 0.5}
 MIN_SHOWN = 0.05
 MIN_RETRIEVAL_SIM = 0.15  # réglé sur data/test/dev_fr_synthetique.jsonl, index des fiches de référence seulement
+# Seuil du garde-fou par vecteurs (recherche hybride). Réglé sur data/test/dev_fr_synthetique.jsonl + 20 cas de démo :
+# pannes >= 0,492, hors-sujet <= 0,482 ; le seuil est au milieu, marge de 0,005 de chaque côté. À revoir avec des
+# textes réels, sans toucher au jeu de test d'Oran. Un refus à tort donne « je ne sais pas » : l'erreur sûre.
+MIN_DOMAIN_DENSE = 0.487
 MAX_QUESTIONS = 3
-RET_FULL_SIM = 0.35  # similarité à partir de laquelle la recherche pèse de tout son poids
+# Poids de la recherche : plein poids quand le meilleur passage étiqueté atteint ce score. Les scores des deux
+# modes n'ont pas la même échelle (cosinus de fragments de caractères / probabilité du reclassement) :
+# un seuil par mode.
+RET_FULL_SIM = {"keyword": 0.35, "hybrid": 0.35}
 RET_FULL_COVERAGE = 0.5  # part des passages retrouvés qui doit appuyer une panne pour un plein poids
 
 
@@ -119,7 +126,9 @@ def _pick_questions(top: list[tuple[str, float]], answered: dict[str, int]) -> l
     return [{"id": q["id"], "text": q["text"], "options": [o["label"] for o in q["options"]]} for _, _, q in scored[:n]]
 
 
-def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full") -> tuple[dict, list[int]]:
+def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full", use_llm: bool = True) -> tuple[dict, list[int]]:
+    """`use_llm=False` rend tout de suite le classement du classifieur et marque `llm: "pending"` quand un
+    modèle de langage est configuré : le serveur affinera ensuite en arrière-plan (voir routers/public.py)."""
     s = get_settings()
     text = (inp.text or "").strip()
     lang = detect_lang(text)
@@ -137,6 +146,7 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full") -> tuple
         "status": "ok", "lang": lang, "vehicle": vehicle_label, "causes": [], "questions": [], "dtc": [],
         "dtc_parts": [], "safety": {"do_not_drive": False, "message": None}, "disclaimer": DISCLAIMER,
         "message": None, "model_version": s.model_version, "mode": mode,
+        "llm": "off",  # off | pending | used | cached | fallback (modèle absent, trop lent, ou réponse rejetée)
     }
 
     # --- Codes OBD : explication en français et pièces candidates (F3)
@@ -158,7 +168,9 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full") -> tuple
         return result, []
 
     # --- Recherche
-    hits = index.search(db, text, k=8) if text else []
+    search_index = get_index()
+    # En mode classifieur seul, la recherche hybride (vecteurs et reclassement) serait du temps perdu.
+    hits = search_index.search(db, text, k=8) if text and not (mode == "classifier" and search_index.name == "hybrid") else []
     retrieved_ids = [h.chunk_id for h in hits]
     # Appui de la recherche pour chaque panne : somme des similarités des passages étiquetés avec elle.
     # La part de cet appui dans tout ce qui a été retrouvé (couverture) dit si les passages trouvés
@@ -175,6 +187,8 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full") -> tuple
     # les sources externes (rappels…) contiennent trop de vocabulaire général pour servir de garde-fou.
     domain_hits = domain_index.search(db, text, k=1) if text else []
     max_sim = max((h.score for h in domain_hits), default=0.0)
+    # Avec la recherche hybride, un second garde-fou : ressemblance des vecteurs avec les fiches de référence.
+    dense_domain = dense_index.domain_similarity(db, text, DOMAIN_SOURCES) if search_index.name == "hybrid" else None
 
     # --- Classifieur
     clf: dict[str, float] = {}
@@ -200,7 +214,7 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full") -> tuple
     # similarité du meilleur passage étiqueté (plein poids à RET_FULL_SIM) et la couverture (à RET_FULL_COVERAGE).
     weights = dict(MIX)
     if ret:
-        weights["ret"] *= min(1.0, ret_best / RET_FULL_SIM) * min(1.0, ret_coverage / RET_FULL_COVERAGE)
+        weights["ret"] *= min(1.0, ret_best / RET_FULL_SIM[search_index.name]) * min(1.0, ret_coverage / RET_FULL_COVERAGE)
     total_w = sum(weights[k] for k, d in components.items() if d)
     mix: dict[str, float] = {}
     for k, d in components.items():
@@ -209,7 +223,7 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full") -> tuple
                 mix[slug] = mix.get(slug, 0) + weights[k] / total_w * p
 
     # Hors sujet : pas de code OBD et texte sans rapport avec la base
-    off_topic = not dtc_scores and max_sim < MIN_RETRIEVAL_SIM
+    off_topic = not dtc_scores and (max_sim < MIN_RETRIEVAL_SIM or (dense_domain is not None and dense_domain < MIN_DOMAIN_DENSE))
 
     # --- Contraintes véhicule et réponses
     if variant:
@@ -239,7 +253,11 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full") -> tuple
     explanations: dict[str, str] = {}
     if mode in ("full", "retrieval"):  # variantes D et C (section 6.2)
         candidates = {slug: faults[slug].name_fr for slug, _ in ranked[:6]}
-        llm_rank = rerank_with_llm(text, vehicle_label, [h.text for h in hits], candidates)
+        if use_llm:
+            llm_rank, result["llm"] = rerank_with_llm(text, vehicle_label, [h.text for h in hits], candidates)
+        else:
+            llm_rank = None
+            result["llm"] = "pending" if get_llm().name != "none" else "off"
         if llm_rank:
             order = [r["fault"] for r in llm_rank]
             explanations = {r["fault"]: r["explanation"] for r in llm_rank}

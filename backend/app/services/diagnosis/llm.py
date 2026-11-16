@@ -14,6 +14,9 @@ from __future__ import annotations
 import json
 import logging
 import re
+import threading
+import time
+from collections import OrderedDict
 from datetime import datetime, timezone
 
 import httpx
@@ -120,19 +123,66 @@ def build_user_message(text: str, vehicle: str, passages: list[str], candidates:
     }, ensure_ascii=False)
 
 
-def rerank_with_llm(text: str, vehicle: str, passages: list[str], candidates: dict[str, str]) -> list[dict] | None:
-    """Renvoie un classement validé, ou None (pas de fournisseur, budget épuisé, réponse invalide)."""
+class _ResponseCache:
+    """Cache en mémoire des classements validés (section 10, coût : codes OBD et questions fréquentes).
+
+    Clé : fournisseur, modèle et message complet (texte, véhicule, passages, candidats). Une même question
+    posée deux fois ne coûte qu'un appel ; changer de modèle ou de passages change la clé. Vidé au
+    redémarrage du serveur (pas de table : le gain d'un cache persistant ne justifie pas une migration)."""
+
+    def __init__(self, size: int = 512):
+        self.size = size
+        self.data: OrderedDict[str, tuple[float, list[dict]]] = OrderedDict()
+        self.lock = threading.Lock()
+
+    def get(self, key: str) -> list[dict] | None:
+        with self.lock:
+            hit = self.data.get(key)
+            if hit is None:
+                return None
+            if time.monotonic() - hit[0] > get_settings().llm_cache_ttl:
+                del self.data[key]
+                return None
+            self.data.move_to_end(key)
+            return hit[1]
+
+    def put(self, key: str, value: list[dict]) -> None:
+        with self.lock:
+            self.data[key] = (time.monotonic(), value)
+            self.data.move_to_end(key)
+            while len(self.data) > self.size:
+                self.data.popitem(last=False)
+
+
+cache = _ResponseCache()
+
+# États rendus avec le classement, recopiés dans le résultat du diagnostic (champ « llm ») :
+#   off      pas de modèle de langage configuré, ou rien à classer
+#   used     le modèle a répondu et sa réponse a été retenue
+#   cached   même question déjà posée : réponse du cache
+#   fallback le modèle n'a pas répondu à temps, a échoué, ou sa réponse a été rejetée : classement du classifieur
+
+
+def rerank_with_llm(text: str, vehicle: str, passages: list[str], candidates: dict[str, str]) -> tuple[list[dict] | None, str]:
+    """Renvoie (classement validé ou None, état). Dans tous les cas d'échec la chaîne garde le classement
+    du classifieur : l'utilisateur reçoit un diagnostic, jamais une erreur."""
     llm = get_llm()
-    if llm.name == "none" or not candidates or not budget.allow():
-        return None
+    if llm.name == "none" or not candidates:
+        return None, "off"
     user = build_user_message(text, vehicle, passages, candidates)
+    key = f"{llm.name}|{get_settings().llm_model}|{user}"
+    cached = cache.get(key)
+    if cached is not None:
+        return cached, "cached"
+    if not budget.allow():
+        return None, "fallback"
     try:
         data = llm.complete_json(SYSTEM_PROMPT, user)
-    except Exception as e:  # réseau, quota : la chaîne continue sans modèle de langage
+    except Exception as e:  # réseau, délai dépassé, quota : la chaîne continue sans modèle de langage
         log.warning("Appel au modèle de langage en échec : %s", e)
-        return None
+        return None, "fallback"
     if not isinstance(data, dict) or not isinstance(data.get("ranking"), list):
-        return None
+        return None, "fallback"
     out = []
     for item in data["ranking"][:3]:
         if isinstance(item, dict) and item.get("fault") in candidates:
@@ -141,4 +191,7 @@ def rerank_with_llm(text: str, vehicle: str, passages: list[str], candidates: di
             except (TypeError, ValueError):
                 conf = 0.0
             out.append({"fault": item["fault"], "confidence": conf, "explanation": str(item.get("explanation", ""))[:300]})
-    return out or None
+    if not out:  # réponse valide mais aucune panne parmi les candidats : rejetée
+        return None, "fallback"
+    cache.put(key, out)
+    return out, "used"

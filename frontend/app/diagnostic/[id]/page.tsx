@@ -17,6 +17,8 @@ type Result = {
   causes: Cause[]; questions: Question[]; message: string | null; urgency?: string;
   dtc: { code: string; known: boolean; title_fr: string }[]; dtc_parts: (Part & { weight: number })[];
   safety: { do_not_drive: boolean; message: string | null }; disclaimer: string;
+  // pending : résultat provisoire du classifieur, le modèle de langage affine en arrière-plan
+  llm?: "off" | "pending" | "used" | "cached" | "fallback";
 };
 
 function shopsHref(r: Result, p: Part) {
@@ -57,11 +59,21 @@ export default function DiagnosticResult() {
     api<Result>(`/diagnosis/${id}`).then(setR).catch(() => setError(t("common.error")));
   }, [id]);
 
+  // Tant que le modèle de langage travaille (20 à 45 s sur le portable), on garde le résultat provisoire à l'écran
+  // et on relit le résultat toutes les 2,5 s ; il remplace le provisoire dès que `llm` n'est plus « pending ».
+  useEffect(() => {
+    if (r?.llm !== "pending") return;
+    const timer = setInterval(() => {
+      api<Result>(`/diagnosis/${id}`).then((next) => { if (next.llm !== "pending") setR(next); }).catch(() => undefined);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [r?.llm, id]);
+
   async function answer(qid: string, idx: number) {
     if (!r) return;
     setBusy(true);
     try {
-      const next = await api<Result>(`/diagnosis/${r.session_id}/answers`, { method: "POST", json: { answers: { [qid]: idx } } });
+      const next = await api<Result>(`/diagnosis/${r.session_id}/answers`, { method: "POST", json: { answers: { [qid]: idx }, defer_llm: true } });
       setR({ ...next, variant_id: r.variant_id });
     } catch (e) {
       setError(e instanceof ApiError && e.message ? e.message : t("common.error"));
@@ -80,6 +92,7 @@ export default function DiagnosticResult() {
   return (
     <article>
       <p className="meta">{t("result.for")} {r.vehicle}</p>
+      {r.llm === "pending" && <p className="notice" role="status">{t("result.refining")}</p>}
       {r.safety.do_not_drive && <div className="danger" role="alert">{r.safety.message}</div>}
 
       {r.dtc.length > 0 && (

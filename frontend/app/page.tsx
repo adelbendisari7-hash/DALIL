@@ -25,7 +25,7 @@ export default function Home() {
     try {
       const r = await api<{ session_id: number }>("/diagnosis", {
         method: "POST",
-        json: { text, dtc_codes: codes, variant_id: vehicle?.variantId ?? null },
+        json: { text, dtc_codes: codes, variant_id: vehicle?.variantId ?? null, defer_llm: true },
       });
       router.push(`/diagnostic/${r.session_id}`);
     } catch (err) {

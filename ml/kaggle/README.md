@@ -10,6 +10,7 @@ Ils sont générés par `python ml/kaggle/make_notebooks.py` : modifier ce scrip
 | `02_encodeur_fr.ipynb et 02_encodeur_enfr.ipynb` | Variante B : mmBERT (ou XLM-R, DziriBERT) affiné, exporté en ONNX | 20 à 60 min par configuration | `<modèle>_<config>_onnx.zip` → `ml/artifacts/<modèle>_<config>/` |
 | `03_lora_llm.ipynb` | Variante D : Qwen3-4B (ou Gemma 3 4B) affiné par LoRA, exporté en GGUF | 3 h 30 au plus (budget de temps) | `dalil-…-q4_k_m.gguf` → `ml/artifacts/` |
 | `04_fusion_gguf.ipynb` | Reprise sans réentraîner : évaluation, fusion et GGUF à partir de l'adaptateur (`kaggle_run.py adapter`) | 25 min (+ 40 min si `RUN_EVAL`) | `dalil-…-q4_k_m.gguf` et `-q8_0.gguf` → `ml/artifacts/` |
+| `05_vecteurs.ipynb` | Étape 8 : vecteurs Qwen3-Embedding-0.6B des passages de la base de connaissances et modèles de recherche (Qwen3-Embedding, bge-reranker-v2-m3). Entrée : `python ml/export_kb_chunks.py` puis `kaggle_run.py dataset` | 15 min | `chunk_vectors.npy`, `chunk_ids.json`, deux zip → `python ml/load_vectors.py` les installe dans `ml/artifacts/` |
 
 ## Préparer le jeu de données Kaggle « dalil-pipeline »
 
@@ -32,7 +33,8 @@ Puis créer sur kaggle.com un jeu de données **privé** nommé `dalil-pipeline`
    puis `python ml/build_llm_dataset.py` ; nouvelle version du jeu Kaggle.
 3. `02_encodeur_classifieur` deux fois : `CONFIG = "fr"` puis `CONFIG = "en+fr"` (traduire ou transférer, section 6.3).
 4. `03_lora_llm`. Si l'entraînement réussit mais que la suite échoue, récupérer l'adaptateur (`kaggle kernels output`, dossier `adapter/`) dans `ml/artifacts/lora_adapter/`, puis `kaggle_run.py adapter` et `kaggle_run.py push 04_fusion_gguf`.
-5. Mesurer toutes les variantes sur le portable avec `ml/evaluate.py` (ci-dessous).
+5. `05_vecteurs` (après `export_kb_chunks.py` et une nouvelle version du jeu de données), puis `python ml/kaggle/kaggle_run.py output 05_vecteurs` et `python ml/load_vectors.py`. À refaire si la base de connaissances est rechargée (les identifiants des passages changent).
+6. Mesurer toutes les variantes sur le portable avec `ml/evaluate.py` (ci-dessous). Recherche hybride : `DALIL_RETRIEVAL_MODE=hybrid`. Avec le modèle de langage affiné : `bash ml/eval_with_llm.sh <fichier.gguf> <étiquette> full`.
 
 ## Faire tourner les modèles sur le portable
 

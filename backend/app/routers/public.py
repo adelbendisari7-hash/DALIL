@@ -1,16 +1,17 @@
 """Points d'entrée publics : véhicules, pièces, codes OBD, diagnostic."""
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ..config import get_settings
-from ..db import get_db
+from ..db import SessionLocal, get_db
 from ..models import Brand, Commune, DiagnosisSession, DtcCode, DtcPart, Model, PartCategory, PartReference, Product, User, VehicleVariant
 from ..schemas import AnswersRequest, DiagnosisRequest
 from ..security import current_user_optional, diagnosis_limiter
 from ..services.catalog import search_categories
+from ..services.diagnosis.llm import get_llm
 from ..services.diagnosis.pipeline import DiagnosisInput, run_diagnosis
 
 router = APIRouter()
@@ -120,30 +121,65 @@ def _save(db: Session, sess: DiagnosisSession, result: dict, chunks: list[int]) 
     return {"session_id": sess.id, **result}
 
 
+def _refine(session_id: int) -> None:
+    """Tâche d'arrière-plan : refait le diagnostic avec le modèle de langage et remplace le résultat provisoire.
+    Ouvre sa propre session de base (celle de la requête est déjà fermée). Quoi qu'il arrive, `llm` quitte
+    « pending » : sinon l'écran attendrait indéfiniment."""
+    with SessionLocal() as db:
+        sess = db.get(DiagnosisSession, session_id)
+        if sess is None:
+            return
+        prev = sess.result_json or {}
+        try:
+            inp = DiagnosisInput(text=sess.input_text, variant_id=sess.variant_id, dtc_codes=sess.dtc_codes or [],
+                                 answers=sess.answers or {})
+            result, chunks = run_diagnosis(db, inp, mode=prev.get("mode", "full"))
+            sess.result_json, sess.retrieved_chunk_ids = result, chunks
+        except Exception:
+            sess.result_json = {**prev, "llm": "fallback"}
+        db.add(sess)
+        db.commit()
+
+
+def _defer(body_defer: bool, mode: str) -> bool:
+    """On ne diffère que s'il y a un modèle de langage à attendre."""
+    return body_defer and mode in ("full", "retrieval") and get_llm().name != "none"
+
+
 @router.post("/diagnosis", dependencies=[Depends(diagnosis_limiter)])
-def diagnosis(body: DiagnosisRequest, db: Session = Depends(get_db), user: User | None = Depends(current_user_optional)):
+def diagnosis(body: DiagnosisRequest, background: BackgroundTasks, db: Session = Depends(get_db),
+              user: User | None = Depends(current_user_optional)):
     if not body.text.strip() and not body.dtc_codes:
         raise HTTPException(422, "Décrivez le problème ou saisissez un code OBD-II")
     if body.variant_id and not db.get(VehicleVariant, body.variant_id):
         raise HTTPException(422, "Véhicule inconnu")
     inp = DiagnosisInput(text=body.text, variant_id=body.variant_id, dtc_codes=body.dtc_codes)
-    result, chunks = run_diagnosis(db, inp, mode=body.mode)
+    defer = _defer(body.defer_llm, body.mode)
+    result, chunks = run_diagnosis(db, inp, mode=body.mode, use_llm=not defer)
     sess = DiagnosisSession(user_id=user.id if user else None, variant_id=body.variant_id, input_text=body.text,
                             lang=result["lang"], dtc_codes=body.dtc_codes, answers={},
                             model_version=get_settings().model_version)
-    return _save(db, sess, result, chunks)
+    saved = _save(db, sess, result, chunks)
+    if defer and result["llm"] == "pending":
+        background.add_task(_refine, sess.id)
+    return saved
 
 
 @router.post("/diagnosis/{session_id}/answers", dependencies=[Depends(diagnosis_limiter)])
-def diagnosis_answers(session_id: int, body: AnswersRequest, db: Session = Depends(get_db)):
+def diagnosis_answers(session_id: int, body: AnswersRequest, background: BackgroundTasks, db: Session = Depends(get_db)):
     sess = db.get(DiagnosisSession, session_id)
     if not sess:
         raise HTTPException(404, "Session inconnue")
     answers = {**(sess.answers or {}), **body.answers}
     inp = DiagnosisInput(text=sess.input_text, variant_id=sess.variant_id, dtc_codes=sess.dtc_codes or [], answers=answers)
-    result, chunks = run_diagnosis(db, inp, mode=(sess.result_json or {}).get("mode", "full"))
+    mode = (sess.result_json or {}).get("mode", "full")
+    defer = _defer(body.defer_llm, mode)
+    result, chunks = run_diagnosis(db, inp, mode=mode, use_llm=not defer)
     sess.answers = answers
-    return _save(db, sess, result, chunks)
+    saved = _save(db, sess, result, chunks)
+    if defer and result["llm"] == "pending":
+        background.add_task(_refine, sess.id)
+    return saved
 
 
 @router.get("/diagnosis/{session_id}")

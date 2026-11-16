@@ -82,6 +82,33 @@ Lecture :
 Stack Exchange traduits), pas d'un mécanicien. Le chiffre à présenter reste celui du jeu de test d'Oran, chaîne
 complète, mesuré par `evaluate.py` une fois le GGUF servi par llama.cpp sur le portable.
 
+## Étape 8 : recherche hybride et chaîne complète (16/11/2026)
+
+Recherche hybride = mots-clés + vecteurs Qwen3-Embedding-0.6B, fusionnés par rangs réciproques, puis 20 passages
+reclassés par bge-reranker-v2-m3. Garde-fou « est-ce une panne ? » sur la ressemblance vectorielle avec les fiches
+(seuil 0,487 ; pannes >= 0,492, hors-sujet <= 0,482 : marge mince, réglée sur des jeux écrits par l'équipe).
+Détails : `results/20261116-0000-hybride-garde-vecteurs.md`, `results/20261116-0054-lora-q8-hybride.md`.
+
+| Chaîne complète (D) | Jeu | Top-1 | Top-3 | Hors sujet refusé | Temps moyen |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Mots-clés, sans modèle de langage | dev | 86 % | 94 % | 100 % | 0,09 s |
+| Hybride, sans modèle de langage | dev | **92 %** | **98 %** | 100 % | 18 ms |
+| Hybride + modèle affiné q8_0 | dev | 88 % | 96 % | 100 % | 63 s |
+| Mots-clés, sans modèle de langage | démo (17) | 94 % | 100 % | 100 % | 0,09 s |
+| Hybride, sans modèle de langage | démo | 88 % | 100 % | 100 % | 16 ms |
+| Hybride + modèle affiné q8_0 | démo | 77 % | 94 % | 100 % | 56 s |
+
+Lecture honnête :
+- La recherche hybride améliore le jeu dev (+6 points de top-1) et garde 100 % de refus des hors-sujets.
+- **Le modèle affiné q8_0 *dégrade* la chaîne sur ces jeux** (92 -> 88 % dev, 88 -> 77 % démo) et coûte ~1 minute
+  par diagnostic sur le portable (processeur seul). Le classifieur y est déjà très bon ; le modèle de langage
+  réordonne parfois à tort. Écart faible (1 à 2 cas) mais constant dans le même sens.
+- Le modèle a été entraîné avec des passages issus de la recherche par mots-clés ; la recherche hybride lui en donne
+  d'autres (décalage de distribution). Piste : régénérer le jeu d'entraînement avec la recherche hybride.
+- Décision de l'équipe : précision d'abord, modèle de langage gardé, affinement affiché en arrière-plan après le
+  résultat provisoire du classifieur. L'exigence « moins de 10 s » n'est pas tenue avec le modèle de langage :
+  compromis assumé, à signaler dans le mémoire. Le chiffre à présenter reste celui du jeu de test d'Oran.
+
 ## Ce que le banc a déjà appris (matière pour le mémoire)
 
 - **Ajouter des sources affaiblit la détection du hors-sujet.** Après le chargement des 1 800 rappels RappelConso,

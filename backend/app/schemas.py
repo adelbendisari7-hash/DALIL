@@ -14,6 +14,9 @@ class DiagnosisRequest(BaseModel):
     variant_id: int | None = None
     dtc_codes: list[str] = Field(default_factory=list, max_length=10)
     mode: str = Field("full", pattern="^(full|classifier|retrieval)$")
+    # True : répondre tout de suite avec le classifieur (`llm: "pending"`) ; le modèle de langage affine en
+    # arrière-plan et le résultat se relit par GET /diagnosis/{id} jusqu'à `llm` != "pending".
+    defer_llm: bool = False
 
     @field_validator("dtc_codes")
     @classmethod
@@ -32,6 +35,7 @@ class DiagnosisRequest(BaseModel):
 
 class AnswersRequest(BaseModel):
     answers: dict[str, int]
+    defer_llm: bool = False
 
 
 class ShopIn(BaseModel):

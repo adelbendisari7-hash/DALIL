@@ -1,0 +1,236 @@
+{
+  "rows": [
+    {
+      "date": "20261116-0000",
+      "variante": "C (recherche + LM)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "retrieval",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.68,
+      "top3": 0.78,
+      "abstention": 0.08,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 48758.0,
+      "ms_p95": 69439.2
+    },
+    {
+      "date": "20261116-0000",
+      "variante": "C (recherche + LM)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "retrieval",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.647,
+      "top3": 0.882,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 27711.2,
+      "ms_p95": 39777.3
+    },
+    {
+      "date": "20261116-0000",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.92,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 18.2,
+      "ms_p95": 36.0
+    },
+    {
+      "date": "20261116-0000",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 16.3,
+      "ms_p95": 26.2
+    }
+  ],
+  "erreurs": {
+    "C (recherche + LM) | dev_fr_synthetique": [
+      {
+        "id": "dev006",
+        "text": "le témoin de charge rouge reste allumé quand je roule et la radio s'est éteinte",
+        "attendu": [
+          "alternateur",
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "batterie"
+        ]
+      },
+      {
+        "id": "dev008",
+        "text": "la voiture broute à bas régime et la consommation d'essence a augmenté",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": [
+          "boite-vitesses"
+        ]
+      },
+      {
+        "id": "dev011",
+        "text": "il y a un sifflement aigu sous le capot quand je tourne le volant à l'arrêt",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur",
+          "pompe-direction"
+        ],
+        "obtenu": [
+          "roulements-roue",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "dev018",
+        "text": "la voiture se balance longtemps après un ralentisseur et elle penche dans les virages",
+        "attendu": [
+          "amortisseurs",
+          "coupelles",
+          "ressorts"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev022",
+        "text": "toc toc à l'avant quand je passe sur les pavés doucement",
+        "attendu": [
+          "biellette-stabilisatrice",
+          "silentblocs",
+          "amortisseurs",
+          "rotules-direction"
+        ],
+        "obtenu": [
+          "cardans",
+          "boite-vitesses",
+          "disques-frein"
+        ]
+      },
+      {
+        "id": "dev023",
+        "text": "en montée le moteur s'emballe mais la voiture n'accélère presque pas",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev035",
+        "text": "une fois chaud le moteur coupe net et ne repart qu'après une demi-heure",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev039",
+        "text": "le volant est devenu lourd et il gémit quand je manoeuvre",
+        "attendu": [
+          "pompe-direction",
+          "cremaillere"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev041",
+        "text": "grincement aigu à l'arrière à chaque arrêt",
+        "attendu": [
+          "plaquettes-arriere",
+          "plaquettes-avant",
+          "machoires-frein"
+        ],
+        "obtenu": [
+          "disques-frein",
+          "boite-vitesses",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "dev045",
+        "text": "un cylindre ne fonctionne pas, la valise indique un raté sur le cylindre 2",
+        "attendu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "injecteurs"
+        ],
+        "obtenu": [
+          "kit-distribution",
+          "sonde-lambda"
+        ]
+      }
+    ],
+    "C (recherche + LM) | demo_cases": [
+      {
+        "id": "demo_cases006",
+        "text": "on entend un sifflement strident au démarrage qui part après quelques minutes",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur"
+        ],
+        "obtenu": [
+          "pompe-direction",
+          "pompe-carburant",
+          "sonde-lambda"
+        ]
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | demo_cases": []
+  }
+}

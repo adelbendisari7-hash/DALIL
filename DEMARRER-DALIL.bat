@@ -9,6 +9,9 @@ rem  Lance tout DALIL en un double-clic : API (port 8000) + site (port 3000).
 rem  Votre numero de mobile ci-dessous devient administrateur a la 1re connexion.
 rem ---------------------------------------------------------------------------
 set "ADMIN_PHONE=0550000000"
+rem  Modele de langage affine (serveur llama.cpp, ~5 Go de memoire en q8_0). Pour economiser la memoire,
+rem  remplacez q8_0 par q4_k_m (2,5 Go, un peu moins precis). Sans le fichier, le diagnostic marche sans modele de langage.
+set "LLM_GGUF=ml\artifacts\dalil-qwen3-4b-instruct-2507-q8_0.gguf"
 
 echo.
 echo  ===== DALIL : demarrage =====
@@ -58,6 +61,18 @@ if not exist "frontend\node_modules" (
 rem --- 5. Lancement dans deux fenetres (fermez-les pour tout arreter)
 echo [5/5] Lancement de l'API et du site...
 set "DALIL_ADMIN_PHONES=%ADMIN_PHONE%"
+rem Recherche par vecteurs + reclassement (retombe sur les mots-cles si les modeles de ml\artifacts sont absents)
+set "DALIL_RETRIEVAL_MODE=hybrid"
+if exist "tools\llama.cpp\llama-server.exe" if exist "%LLM_GGUF%" (
+  echo      Modele de langage affine : demarrage du serveur ^(port 8080^)
+  start "DALIL - Modele de langage" /D "%~dp0" cmd /k tools\llama.cpp\llama-server.exe -m "%LLM_GGUF%" --port 8080 -c 4096 --alias dalil-lora --host 127.0.0.1
+  set "DALIL_LLM_PROVIDER=openai_compat"
+  set "DALIL_LLM_BASE_URL=http://127.0.0.1:8080/v1"
+  set "DALIL_LLM_MODEL=dalil-lora"
+  set "DALIL_LLM_TIMEOUT=300"
+) else (
+  echo      Modele de langage affine absent : diagnostic sans modele de langage
+)
 start "DALIL - API (codes SMS affiches ici)" /D "%~dp0backend" cmd /k .venv\Scripts\python -m uvicorn app.main:app --port 8000
 start "DALIL - Site" /D "%~dp0frontend" cmd /k npm run dev
 
@@ -79,6 +94,6 @@ echo   Site           : http://localhost:3000
 echo   API (doc)      : http://localhost:8000/docs
 echo   Administrateur : connectez-vous avec le %ADMIN_PHONE%
 echo   Le code SMS s'affiche dans la fenetre "DALIL - API".
-echo   Pour tout arreter : fermez les deux fenetres DALIL.
+echo   Pour tout arreter : fermez les fenetres DALIL (API, site, modele de langage).
 echo.
 pause

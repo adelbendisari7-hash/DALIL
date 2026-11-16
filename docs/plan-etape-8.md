@@ -29,7 +29,7 @@ Le critère de fin est donc **déjà vérifié avec le modèle A** (TF-IDF, sans
 2. **Repli automatique.** Si le serveur du modèle de langage ne répond pas dans le délai, la chaîne rend le résultat du classifieur au lieu d'échouer. Le délai sera configurable (`DALIL_LLM_TIMEOUT`). Un test simulera une panne du serveur.
 3. **Cache des réponses** pour les codes OBD et les questions fréquentes (section 10, « Coût ») : même texte normalisé, même véhicule, même version de modèle, donc même réponse. Cache en table, avec durée de vie.
 4. **Indicateur de progression** côté application (section 10 : diagnostic en moins de 10 s *avec indicateur de progression*). Côté API, renvoyer les étapes franchies ; l'affichage relève de l'étape 9.
-5. **Recherche hybride** (vecteurs multilingues dans pgvector et reclassement). Elle est prévue en section 6.1 mais pas indispensable au critère de fin. *Proposition* : la reporter après l'étape 9 et la présenter dans le mémoire comme une variante mesurée, pas comme un prérequis.
+5. **Recherche hybride** (vecteurs multilingues dans pgvector et reclassement) : **dans l'étape 8, décision de l'équipe du 15/11/2026**. Qwen3-Embedding-0.6B pour les vecteurs, bge-reranker-v2-m3 pour le reclassement (section 6.6). Les vecteurs des 19 131 passages et les deux modèles sont préparés sur Kaggle (carnet `05_vecteurs`), puis chargés en local. Mesure avant/après sur le jeu dev et les cas de démo : on ne garde la recherche hybride que si elle ne dégrade pas le top-1 ni le refus du hors-sujet.
 
 ## 3. Hors périmètre de l'étape 8
 
@@ -45,5 +45,8 @@ Le critère de fin est donc **déjà vérifié avec le modèle A** (TF-IDF, sans
 
 ## 5. Décisions demandées à l'équipe
 
-1. Accepter le report de la recherche hybride (point 5) ?
-2. Si D dépasse 10 s sur le portable : garder A en démonstration et D dans le mémoire, ou réduire le contexte de D ?
+**Décisions prises le 15/11/2026 :**
+1. Recherche hybride : **non au report**, elle est faite dans l'étape 8 (point 5).
+2. Lenteur du modèle de langage : **la précision passe avant la vitesse.** Le modèle affiné reste dans la chaîne de démonstration, sans amputer son message pour gagner du temps. On mesure aussi la version q8_0 (plus fidèle que q4_k_m). Le point 1 devient : rendre l'attente supportable (indicateur de progression, résultat du classifieur affiché en attendant), pas la supprimer. L'exigence « moins de 10 s » de la section 10 est écartée pour la variante avec modèle de langage et sera signalée dans le mémoire comme un compromis assumé.
+
+**Statut : fait le 16/11/2026.** Résultats dans ml/README.md (section Étape 8).

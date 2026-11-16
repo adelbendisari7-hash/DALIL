@@ -90,7 +90,7 @@ def test_jeu_d_affinage(db, monkeypatch):
     assert not test_texts & train_texts
 
 
-@pytest.mark.parametrize("name", ["01_traduction", "02_encodeur_fr", "02_encodeur_enfr", "03_lora_llm", "04_fusion_gguf"])
+@pytest.mark.parametrize("name", ["01_traduction", "02_encodeur_fr", "02_encodeur_enfr", "03_lora_llm", "04_fusion_gguf", "05_vecteurs"])
 def test_carnets_kaggle_a_jour_et_valides(name):
     import importlib.util
 

@@ -1,11 +1,11 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 15/11/2026, fin de l'étape 7.
+> Dernière mise à jour : 16/11/2026, fin de l'étape 8.
 
 ## 1. Où on en est
 
-**Étape en cours : 8 (chaîne de diagnostic). Elle n'est pas commencée : le plan attend la validation de l'équipe.**
+**Étape 8 (chaîne de diagnostic) terminée le 16/11/2026. Prochaine : étape 9 (vérification sur téléphone) et jeu de test d'Oran.**
 
 | Étape (section 11 du cahier) | État | Notes |
 | --- | --- | --- |
@@ -16,7 +16,7 @@
 | 5. Recommandation | Fait | `score_shop`, 10 scénarios testés |
 | 6. Données de diagnostic | Fait | 6 sources sous licence (`data/SOURCES.md`), traduction sur Kaggle, rapport `data/processed/report.md` |
 | 7. Modèles | **Fait (15/11/2026)** | Variantes A, B, C, D mesurées ; résultats dans `ml/README.md` |
-| 8. Chaîne de diagnostic | À faire | Plan : `docs/plan-etape-8.md`. Le critère de fin passe déjà sans modèle de langage |
+| 8. Chaîne de diagnostic | **Fait (16/11/2026)** | Recherche hybride, modèle affiné derrière une interface, cache, repli, affinage en arrière-plan avec sondage. 104 tests. Résultats : `ml/README.md` (section Étape 8) |
 | 9. Application | Base en place | Pages `diagnostic`, `magasins`, `pieces`, `connexion`, PWA, test e2e `frontend/e2e/parcours.spec.ts`. Critère non vérifié sur téléphone |
 | 10. Espace magasin | Base en place | Inscription, revendication, catalogue, import (`routers/shops.py`). Critère « 20 produits publiés » non vérifié |
 | 11. Retours et tests | Base en place | Retours et indicateurs (`/feedback`, `/admin/metrics`). Essais avec mécaniciens et magasins d'Oran : à organiser |
@@ -43,14 +43,8 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-1. **Valider le plan de l'étape 8** (`docs/plan-etape-8.md`). Deux décisions attendues :
-   - reporter la recherche hybride (vecteurs) après l'étape 9 ?
-   - modèle de langage trop lent : raccourcir le message envoyé, ou garder A pour la démonstration et D pour le mémoire ?
-2. **Réaliser l'étape 8** après validation :
-   - repli automatique si le modèle de langage tarde ;
-   - cache des réponses ;
-   - indicateur de progression ;
-   - tests avec un faux fournisseur.
+1. **Réglages restants de l'étape 8** : le modèle affiné q8_0 dégrade légèrement la précision (dev 92 -> 88 %, démo 88 -> 77 %) et prend ~1 min par diagnostic sur le portable. À trancher : le garder (décision « précision d'abord » prise avant cette mesure) ou le désactiver par défaut (`DALIL_LLM_PROVIDER=none`) ; ou régénérer le jeu d'entraînement avec la recherche hybride (`ml/build_llm_dataset.py`) et ré-affiner. Valeur par défaut du code : recherche `keyword` ; le lanceur `DEMARRER-DALIL.bat` active `hybrid`.
+2. **Étape 9** : vérifier le parcours sur téléphone (frontend, `npm run dev`, e2e Playwright).
 3. **Web scraping et collecte de données** : discussion reportée par l'utilisateur, à reprendre après l'étape 8. Deux pistes déjà proposées :
    - lancer le script OpenStreetMap (magasins d'Oran) ;
    - rédiger des demandes d'autorisation aux forums francophones. Pas de collecte sans licence notée dans `data/SOURCES.md`.
@@ -88,3 +82,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 14/11/2026 | Étapes 1 à 6. Début de l'étape 7 : variantes A et B, traduction des corpus sur Kaggle |
 | 14-15/11/2026 (nuit) | Affinage LoRA sur Kaggle : 4 échecs corrigés (bfloat16, deux GPU, torchao, disque plein) ; adaptateur entraîné en 3 h 20 |
 | 15/11/2026 | Carnet `04_fusion_gguf`, modèles GGUF rapatriés, llama.cpp installé, mesure de C et D sur le portable, graphe mis à jour. **Étape 7 terminée.** Plan de l'étape 8 rédigé. Fichier de suivi créé. Projet déplacé hors OneDrive ; premier commit `ff8c735` |
+| 16/11/2026 (nuit) | Étape 8 : recherche hybride (vecteurs Kaggle 05 + reclassement), garde-fou vectoriel, cache, repli, affinage en arrière-plan. Mesure finale q8_0 + hybride : le modèle de langage dégrade légèrement (voir `ml/README.md`). 104 tests. Commit de l'étape 8 |
