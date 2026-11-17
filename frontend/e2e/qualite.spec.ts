@@ -6,6 +6,8 @@ test("la liste des années se limite à celles du modèle choisi", async ({ page
   await page.goto("/");
   await page.getByLabel("Marque").selectOption({ label: "Chery" });
   await page.getByLabel("Modèle").selectOption({ label: "Tiggo 4" });
+  // Les années arrivent avec les motorisations du modèle (requête) : attendre que la liste soit remplie.
+  await expect.poll(() => page.getByLabel("Année").locator("option").count()).toBeGreaterThan(1);
   const years = (await page.getByLabel("Année").locator("option").allTextContents()).map(Number).filter(Boolean);
   expect(years.length).toBeGreaterThan(0);
   expect(Math.min(...years)).toBeGreaterThanOrEqual(2020); // Tiggo 4 : à partir de 2020, pas de « Tiggo 4 de 2010 »
