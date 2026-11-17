@@ -39,15 +39,19 @@ export default function ShopContact({ shop, ctx }: { shop: ContactShop; ctx: Ctx
   const vehicle = vehicleStore.get()?.label || t("shops.whatsapp.noVehicle");
   const msg = t("shops.whatsapp.msg", { part: (ctx.partName || "").toLowerCase(), vehicle });
   const wa = shop.whatsapp ? `https://wa.me/${shop.whatsapp.replace("+", "")}?text=${encodeURIComponent(msg)}` : null;
+  // Magasin fictif : aucun numéro dans le lien (un appui long sur le téléphone pourrait sinon le composer, et un
+  // numéro de démonstration au format algérien peut appartenir à quelqu'un).
+  const callHref = shop.is_demo ? "#" : `tel:${shop.phone}`;
+  const waHref = shop.is_demo ? "#" : wa;
 
   return (
     <div>
       <div className="actions">
         {shop.phone && (
-          <a className="btn" href={`tel:${shop.phone}`} onClick={(e) => open("call", e)}>{t("shops.call")}</a>
+          <a className="btn" href={callHref} onClick={(e) => open("call", e)}>{t("shops.call")}</a>
         )}
         {wa && (
-          <a className="btn btn-wa" href={wa} target="_blank" rel="noopener noreferrer" onClick={(e) => open("whatsapp", e)}>
+          <a className="btn btn-wa" href={waHref ?? undefined} target="_blank" rel="noopener noreferrer" onClick={(e) => open("whatsapp", e)}>
             {t("shops.whatsapp")}
           </a>
         )}

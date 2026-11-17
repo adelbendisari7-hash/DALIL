@@ -27,7 +27,8 @@ class DiagnosisRequest(BaseModel):
         for c in v:
             c = c.strip().upper().replace(" ", "")
             if c and not re.match(DTC_PATTERN, c):
-                raise ValueError(f"Code OBD-II invalide : {c} (format attendu : P0420)")
+                raise ValueError(f"Code OBD-II invalide : {c}. Un code commence par P, C, B ou U, puis 4 caractères "
+                                 f"dont le premier va de 0 à 3 (exemple : P0420). Vérifiez la lecture de la valise.")
             if c:
                 out.append(c)
         return out

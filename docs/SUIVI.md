@@ -43,13 +43,14 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-1. **Étape 11 (retours et tests)** : test « un retour “pièce trouvée” modifie le score » ; essais avec des mécaniciens et des magasins d'Oran, puis compte rendu.
-2. **Web scraping et collecte de données** : discussion reportée par l'utilisateur, à reprendre après l'étape 8. Deux pistes déjà proposées :
+1. **Décision à prendre : diagnostic trop sûr sur une description très courte.** « frein » seul donne « Étrier de frein grippé » à 78 % de confiance, sans question de précision. Proposition : sous 3 mots utiles et sans code OBD, poser d'office les questions de précision (statut `clarify`) ; à remesurer ensuite avec `ml/evaluate.py` (les jeux dev et démo ont des phrases complètes).
+2. **Étape 11 (retours et tests)** : test « un retour “pièce trouvée” modifie le score » ; essais avec des mécaniciens et des magasins d'Oran, puis compte rendu.
+3. **Web scraping et collecte de données** : discussion reportée par l'utilisateur, à reprendre après l'étape 8. Deux pistes déjà proposées :
    - lancer le script OpenStreetMap (magasins d'Oran) ;
    - rédiger des demandes d'autorisation aux forums francophones. Pas de collecte sans licence notée dans `data/SOURCES.md`.
-3. **Jeu de test d'Oran** : faire annoter de vrais cas par des mécaniciens (modèle : `data/test/modele_annotation_oran.csv`), puis relancer `ml/evaluate.py` sur ce jeu.
-4. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
-5. **Étape 12 (mise en ligne)** : seulement sur décision de l'équipe (hébergement, https, sauvegardes, surveillance, guide des magasins, déclaration à l'ANPDP).
+4. **Jeu de test d'Oran** : faire annoter de vrais cas par des mécaniciens (modèle : `data/test/modele_annotation_oran.csv`), puis relancer `ml/evaluate.py` sur ce jeu.
+5. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
+6. **Étape 12 (mise en ligne)** : seulement sur décision de l'équipe (hébergement, https, sauvegardes, surveillance, guide des magasins, déclaration à l'ANPDP).
 
 ## Décisions prises
 
@@ -62,7 +63,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 ## 4. Pour reprendre le travail
 
 - **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (112 tests).
-- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (8 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
+- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (13 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
 - **Ouvrir le site sur un téléphone** : `DEMARRER-DALIL.bat` affiche l'adresse Wi-Fi du PC (fiche : `docs/test-telephone.md`).
 - **Tests du pipeline de données** : `cd backend && .venv/Scripts/python -m pytest -q ../data/pipeline/tests`.
 - **Servir le modèle affiné** :
@@ -98,3 +99,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 17/11/2026 | Premier essai réel du site sur le PC : « Le serveur ne répond pas ». Trois défauts corrigés : (1) reclassement trop lent (15-24 s, faussement mesuré à 18 ms le 16/11) -> int8 et 10 passages, 3,5-5 s ; (2) le seed renumérotait les 88 fiches à chaque démarrage, leurs vecteurs étaient perdus et le garde-fou hors sujet muet -> seed en place + recalcul automatique des vecteurs manquants ; (3) diagnostics simultanés au démarrage -> préchargement des modèles et verrou. 108 tests backend, 31 tests pipeline |
 | 17/11/2026 | Essai réel validé par l'utilisateur. Tests e2e lançables à côté de l'application (ports et dossier `.next-e2e` à part). **Étape 9 terminée**, graphe mis à jour, commit |
 | 17/11/2026 | Étape 10 : modèle Excel du catalogue, catalogue des fiches non validées caché au public, code SMS fixe réservé aux tests (`DALIL_OTP_TEST_CODE`, refusé hors SMS « console »), test de bout en bout « un magasin publie 20 produits ». 112 tests backend, 8 e2e. **Étape 10 terminée** |
+| 17/11/2026 | Exploration de l'application dans un vrai navigateur (agent-browser, format téléphone). Corrigés : années limitées au modèle choisi (et remise à zéro au changement de modèle), message clair pour un code OBD-II impossible (sans « Value error, »), « diagnostic / magasin introuvable » au lieu de « le serveur ne répond pas », page 404 en français, aucun numéro dans les liens des magasins fictifs. 5 tests e2e ajoutés (13 au total), 112 tests backend. Reste une décision : diagnostic trop sûr sur un seul mot |

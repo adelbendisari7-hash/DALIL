@@ -7,7 +7,14 @@ type Brand = { id: number; name: string };
 type Model = { id: number; name: string };
 type Variant = { id: number; engine: string; fuel: string; year_from: number; year_to: number | null; label: string };
 
-const YEARS = Array.from({ length: 2026 - 1998 + 1 }, (_, i) => 2026 - i);
+const THIS_YEAR = new Date().getFullYear();
+
+/** Années où le modèle existe (réunion des périodes de ses motorisations), de la plus récente à la plus ancienne. */
+function modelYears(vs: Variant[]): number[] {
+  const years = new Set<number>();
+  for (const v of vs) for (let y = v.year_from; y <= (v.year_to ?? THIS_YEAR); y++) years.add(y);
+  return Array.from(years).sort((a, b) => b - a);
+}
 
 /** Sélection du véhicule (F1) : marque, modèle, année, motorisation. Mémorisé sur l'appareil. */
 export default function VehiclePicker({ onChange }: { onChange: (v: Vehicle | null) => void }) {
@@ -16,6 +23,7 @@ export default function VehiclePicker({ onChange }: { onChange: (v: Vehicle | nu
   const [brands, setBrands] = useState<Brand[]>([]);
   const [models, setModels] = useState<Model[]>([]);
   const [variants, setVariants] = useState<Variant[]>([]);
+  const [modelVariants, setModelVariants] = useState<Variant[]>([]);
   const [brand, setBrand] = useState<Brand | null>(null);
   const [model, setModel] = useState<Model | null>(null);
   const [year, setYear] = useState<number | "">("");
@@ -34,6 +42,13 @@ export default function VehiclePicker({ onChange }: { onChange: (v: Vehicle | nu
     setModel(null);
     if (brand) api<Model[]>(`/vehicles/models?brand_id=${brand.id}`).then(setModels).catch(() => undefined);
   }, [brand]);
+
+  // Toutes les motorisations du modèle : elles bornent la liste des années (pas de « Tiggo 4 de 2010 »).
+  useEffect(() => {
+    setModelVariants([]);
+    setYear("");
+    if (model) api<Variant[]>(`/vehicles/variants?model_id=${model.id}`).then(setModelVariants).catch(() => undefined);
+  }, [model]);
 
   useEffect(() => {
     setVariants([]);
@@ -105,7 +120,7 @@ export default function VehiclePicker({ onChange }: { onChange: (v: Vehicle | nu
           <label htmlFor="v-year">{t("vehicle.year")}</label>
           <select id="v-year" disabled={!model} value={year} onChange={(e) => setYear(e.target.value ? +e.target.value : "")}>
             <option value="">{t("vehicle.choose")}</option>
-            {YEARS.map((y) => (
+            {modelYears(modelVariants).map((y) => (
               <option key={y} value={y}>{y}</option>
             ))}
           </select>

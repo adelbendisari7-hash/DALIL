@@ -64,7 +64,9 @@ export async function api<T = unknown>(path: string, init: RequestInit & { json?
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
     const d = (data as { detail?: unknown }).detail;
-    const msg = typeof d === "string" ? d : Array.isArray(d) ? d.map((x: { msg?: string }) => x.msg).join(" ; ") : "";
+    // Erreurs de validation (FastAPI/pydantic) : on garde le message en français, sans le préfixe technique « Value error, ».
+    const msg = typeof d === "string" ? d : Array.isArray(d)
+      ? d.map((x: { msg?: string }) => (x.msg ?? "").replace(/^Value error,\s*/i, "")).join(" ; ") : "";
     throw new ApiError(res.status, msg);
   }
   return data as T;

@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ShopContact from "@/components/ShopContact";
-import { api } from "@/lib/api";
+import { api, ApiError } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
 const ShopMap = dynamic(() => import("@/components/ShopMap"), { ssr: false });
@@ -26,7 +26,8 @@ export default function ShopPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    api<Shop>(`/shops/${id}`).then(setShop).catch(() => setError(t("common.error")));
+    api<Shop>(`/shops/${id}`).then(setShop)
+      .catch((e) => setError(e instanceof ApiError && e.status === 404 ? t("shop.notFound") : t("common.error")));
     api<Product[]>(`/shops/${id}/products`).then(setProducts).catch(() => undefined);
     api<Named[]>("/vehicles/brands").then(setBrands).catch(() => undefined);
     api<Family[]>("/parts/categories").then((f) => setCats(f.flatMap((x) => [x, ...x.children]))).catch(() => undefined);

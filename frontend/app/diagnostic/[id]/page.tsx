@@ -56,7 +56,8 @@ export default function DiagnosticResult() {
   const [feedback, setFeedback] = useState(false);
 
   useEffect(() => {
-    api<Result>(`/diagnosis/${id}`).then(setR).catch(() => setError(t("common.error")));
+    api<Result>(`/diagnosis/${id}`).then(setR)
+      .catch((e) => setError(e instanceof ApiError && e.status === 404 ? t("diagnosis.notFound") : t("common.error")));
   }, [id]);
 
   // Tant que le modèle de langage travaille (20 à 45 s sur le portable), on garde le résultat provisoire à l'écran
