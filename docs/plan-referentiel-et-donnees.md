@@ -6,6 +6,22 @@ Rédigé le 17/11/2026, à exécuter dans une prochaine session. Il s'appuie sur
 
 > Lis `docs/SUIVI.md` puis `docs/plan-referentiel-et-donnees.md`, et réalise les phases A à D dans l'ordre. Pour chaque phase, écris les tests, vérifie le critère de fin, mets à jour le suivi et commite. Arrête-toi et demande-moi avant tout ce que le plan marque « décision ».
 
+## Décisions déjà prises par l'utilisateur (17/11/2026)
+
+La prochaine session les applique sans les redemander.
+
+1. **Suzuki et Lada : oui**, à ajouter au référentiel (Maruti 800, Alto, Swift, Celerio, Jimny ; Lada Niva), marqués `a_verifier`.
+2. **Traduction : la meilleure qualité, même si c'est long.** Tout traduire, sans échantillon. Méthode :
+   - avant de lancer, comparer sur l'échantillon de relecture de 200 textes (`data/processed/translations/relecture.csv`) le traducteur actuel (MarianMT opus-mt, rapide) et un traducteur plus fort sous licence libre, par exemple MADLAD-400-3B (Apache 2.0) ;
+   - critère : moins de termes de pièces mal traduits (`glossary_misses`), relecture d'un échantillon ;
+   - garder le meilleur, puis traduire tout le corpus sur Kaggle, sur plusieurs nuits s'il le faut (carnet 01, reprise automatique par le cache) ;
+   - écarter NLLB-200, réservé à un usage non commercial (CC BY-NC).
+3. **Base européenne des rappels (Safety Gate)** : pas de décision à prendre. Règle : lire ses conditions de réutilisation ; l'ajouter si elles l'autorisent, l'écarter sinon (avec la raison dans `data/SOURCES.md`). Apport modeste : des avis de rappel, pas des descriptions de pannes.
+4. **Modèle de langage : viser l'efficacité.** Ré-affiner (C5) sur le jeu régénéré avec la recherche hybride et le corpus élargi, puis mesurer la chaîne avec et sans lui, sur les jeux dev et démo.
+   - **Ne le réactiver par défaut que s'il améliore le top-1 sans dégrader le top-3 ni le refus des hors-sujet, et en restant sous 10 s.**
+   - S'il est trop lent sur processeur, essayer d'abord : un message plus court (2 passages au lieu de 5), une réponse limitée au classement, la quantification Q4_K_M.
+   - Sinon, le garder pour le mémoire uniquement.
+
 ## 0. Objectifs et critères de fin
 
 | Objectif | Critère de fin vérifiable |
@@ -51,7 +67,7 @@ Priorité d'après le parc ONS 2020 (tableau 7). Le **gras** marque ce qui manqu
 | Opel (0,18 %) | (Corsa) **Astra, Vectra, Combo** |
 | Skoda | (Octavia) **Fabia, Superb** |
 | **Isuzu** | **D-Max, NKR, NPR (camions)** |
-| **Suzuki, Lada** (dans « Autres », 25,5 %) | **Maruti 800, Alto, Swift, Celerio, Jimny ; Lada Niva**. **Décision** : à confirmer en magasin, l'ONS ne les détaille pas |
+| **Suzuki, Lada** (dans « Autres », 25,5 %) | **Maruti 800, Alto, Swift, Celerio, Jimny ; Lada Niva** (ajout validé le 17/11/2026, `a_verifier`) |
 | Marques chinoises (forte hausse 2023-2026) | (Geely Coolray, Chery Tiggo 4, MG5, Jetour X70, DFSK Glory 580) **Chery QQ, Tiggo 2, 3, 7, 8, Arrizo 5 ; Geely Emgrand, GX3 Pro ; JAC J7, S3, T6 ; Great Wall Wingle (pick-up) ; Haval H6 ; BAIC ; GAC GS3, GS4 ; Changan ; MG ZS, HS ; BYD ; DFSK K01 ; Jetour Dashing** |
 
 Les utilitaires et les camions comptent : 18 % du parc sont des camionnettes. Il faut un champ `genre` (tourisme, utilitaire, camion) pour filtrer l'affichage.
@@ -107,12 +123,12 @@ Pour chaque source :
 | Priorité | Source | Licence | Ce qu'elle apporte | Travail |
 | --- | --- | --- | --- | --- |
 | 1 | **DVSA MOT, Royaume-Uni** (déjà branchée, 18 modèles) | Open Government Licence v3.0 | Taux d'échec au contrôle technique par modèle, année et famille de pièce. Le Royaume-Uni a la plupart des modèles européens et asiatiques d'Algérie : Peugeot, Renault, Citroën, Dacia, VW, Toyota, Hyundai, Kia, Chevrolet Aveo / Spark / Captiva, Mitsubishi L200, Nissan, Mazda, Fiat, Seat, Skoda, MG, Suzuki | Étendre `TARGETS` de `pipeline/sources/mot.py` à tous les modèles A1 vendus au Royaume-Uni (correspondances Opel = Vauxhall). Lire aussi les fichiers « failure item », qui donnent le détail des défauts, et les tables de libellés. Traduire les quelque 2 000 libellés standard de défauts une fois (`translate.py`). **Sortie** : `priors/mot_*.csv`, soit P(famille de pièce \| modèle, âge) |
-| 2 | **NHTSA, plaintes, États-Unis** (déjà branchée, 6 modèles) | Domaine public | Récits de pannes en texte libre, étiquetés par composant. Modèles en commun avec l'Algérie : Toyota Corolla, Yaris, RAV4, Tacoma (proche du Hilux) ; Hyundai Accent, Elantra, Tucson, Santa Fe ; Kia Rio, Forte (Cerato), Sportage, Sorento ; Chevrolet Aveo, Spark, Cruze ; Mitsubishi Lancer, Outlander, Mirage ; Mazda 3, 6 ; VW Golf, Jetta, Passat, Tiguan ; Nissan Sentra (Sunny), Versa, Frontier (Navara) ; Fiat 500 ; Honda Civic, Accord ; Ford Focus, Fiesta, Ranger | Compléter `pipeline/sources/nhtsa_vehicles.json`. Viser **40 000 à 60 000 plaintes** (aujourd'hui 8 999). **Décision** : traduction sur Kaggle, environ 1 h par tranche de 10 000 textes (carnet 01) |
+| 2 | **NHTSA, plaintes, États-Unis** (déjà branchée, 6 modèles) | Domaine public | Récits de pannes en texte libre, étiquetés par composant. Modèles en commun avec l'Algérie : Toyota Corolla, Yaris, RAV4, Tacoma (proche du Hilux) ; Hyundai Accent, Elantra, Tucson, Santa Fe ; Kia Rio, Forte (Cerato), Sportage, Sorento ; Chevrolet Aveo, Spark, Cruze ; Mitsubishi Lancer, Outlander, Mirage ; Mazda 3, 6 ; VW Golf, Jetta, Passat, Tiguan ; Nissan Sentra (Sunny), Versa, Frontier (Navara) ; Fiat 500 ; Honda Civic, Accord ; Ford Focus, Fiesta, Ranger | Compléter `pipeline/sources/nhtsa_vehicles.json`. Viser **40 000 à 60 000 plaintes** (aujourd'hui 8 999). Traduction complète, avec le meilleur traducteur mesuré (décision 2) |
 | 3 | **NHTSA vPIC** | Domaine public | Motorisations et années des modèles vendus aux États-Unis | Contrôle croisé des motorisations A3 pour les modèles communs |
 | 4 | **Wikidata** | CC0 1.0 | Modèles, générations, années de production | Phase A2 |
 | 5 | **RappelConso, France** (déjà branchée) | Licence Ouverte 2.0 | Rappels Peugeot, Renault, Citroën et Dacia en français | Vérifier que toutes les marques A1 sont prises (pas de filtre de modèle) |
 | 6 | **Transport Canada, rappels** | Licence du gouvernement ouvert, Canada (attribution « Contains information licensed under the Open Government Licence – Canada ») | Rappels en anglais et en français (Canada bilingue) | Nouveau module `transport_canada`. Vérifier sur open.canada.ca la licence et la présence d'un texte français. Les plaintes canadiennes ne sont **pas** publiques |
-| 7 | **EU Safety Gate**, catégorie véhicules à moteur | Documents de la Commission en CC BY 4.0 ; **conditions de la base à vérifier** | Rappels européens, dont modèles français et chinois | **Décision** : ne brancher qu'après lecture des conditions du portail |
+| 7 | **EU Safety Gate**, catégorie véhicules à moteur | Documents de la Commission en CC BY 4.0 ; **conditions de la base à vérifier** | Rappels européens, dont modèles français et chinois | Règle de la décision 3 |
 | 8 | **Zenodo, Automotive Faults Dataset** (2025) | CC BY 4.0 | Pannes, symptômes, procédures (61 ko, petit) | Lire le contenu ; si ce sont de vrais cas, l'ajouter aux fiches de référence |
 | 9 | **Forums auto francophones** (forum Caradisiac, Auto-Évasion, forum-auto, fiches-auto) | Droit d'auteur des membres : **autorisation écrite nécessaire** | Le meilleur texte français symptôme → panne, sur Peugeot et Renault | Rédiger les demandes (projet universitaire, usage non commercial, anonymisation, citation). **Décision** : l'utilisateur envoie les demandes |
 | 10 | **Données propres à DALIL** | Consentement de l'utilisateur, déjà recueilli | Diagnostics réels d'Oran avec la réponse « diagnostic juste ? » ; saisies « véhicule absent » | Script d'export anonymisé : texte, véhicule, réponse, sans téléphone. Ne garder pour l'entraînement que les cas confirmés. **Jamais** les cas du jeu de test d'Oran |
@@ -137,7 +153,7 @@ Pour chaque source :
    - Tests sur un a priori factice.
 3. **Réentraîner le classifieur** : `python ml/train_baseline.py --target part --corpus`, avec le corpus élargi. Comparer A seul et A avec a priori véhicule.
 4. **Vecteurs de recherche** : recalculer sur Kaggle (carnet 05) pour les nouveaux passages ; la réparation automatique de `DenseIndex` ne couvre que les fiches DALIL.
-5. **Modèle de langage (facultatif). Décision** : régénérer `ml/build_llm_dataset.py` avec la recherche hybride et le corpus élargi, puis ré-affiner (carnets 03 et 04, environ 4 h sur Kaggle). Seulement si l'on veut réactiver `USE_LLM` ; sinon, ignorer.
+5. **Modèle de langage** (décision 4) : régénérer `ml/build_llm_dataset.py` avec la recherche hybride et le corpus élargi, ré-affiner (carnets 03 et 04, environ 4 h sur Kaggle), mesurer, et ne réactiver que si la règle de la décision 4 est remplie.
 6. **Mesurer** : `ml/evaluate.py` en mode mots-clés et hybride, sur les jeux dev et démo, puis sur le jeu d'Oran quand il existera. Critère D de la section 0. Résultats dans `ml/README.md`.
 
 ## 4. Phase D : documentation et clôture
