@@ -10,6 +10,9 @@ os.environ["DALIL_OTP_RATE_PER_MINUTE"] = "1000"
 # Les tests tournent sur une base à eux : ni les vecteurs ni les modèles de ml/artifacts ne leur correspondent.
 os.environ["DALIL_RETRIEVAL_MODE"] = "keyword"
 os.environ["DALIL_LLM_PROVIDER"] = "none"
+# La recherche réécrit ses fichiers de vecteurs quand des fiches en manquent : jamais ceux de ml/artifacts.
+os.environ["DALIL_VECTORS_PATH"] = str(_tmp.parent / "vecteurs")
+os.environ["DALIL_WARMUP"] = "false"
 
 import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402

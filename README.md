@@ -40,7 +40,7 @@ docker compose up --build    # PostgreSQL + PostGIS + pgvector, API, site
 
 ```bash
 cd backend && .venv/Scripts/python -m pytest -q                 # 54 tests : API, imports, score, 20 cas de démo
-cd frontend && PYTHON=../backend/.venv/Scripts/python npx playwright test   # parcours dans un navigateur mobile
+cd frontend && npx playwright test   # parcours dans un navigateur mobile (trouve seul backend/.venv)
 ```
 
 ## État par étape (section 11)

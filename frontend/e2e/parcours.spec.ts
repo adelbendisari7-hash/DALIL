@@ -56,9 +56,77 @@ test("entrée hors sujet : je ne sais pas", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Panne non identifiée" })).toBeVisible();
 });
 
+test("saisie vocale : la dictée remplit la zone de texte, puis diagnostic", async ({ page }) => {
+  // Reconnaissance vocale factice (pas de micro en test) : elle « entend » une phrase au démarrage.
+  await page.addInitScript(() => {
+    class FakeRecognition {
+      lang = "";
+      interimResults = false;
+      continuous = false;
+      onresult: (e: unknown) => void = () => {};
+      onend: () => void = () => {};
+      onerror: () => void = () => {};
+      start() {
+        setTimeout(() => {
+          this.onresult({ results: [[{ transcript: "ça grince fort quand je freine" }]] });
+          this.onend();
+        }, 50);
+      }
+      stop() {
+        this.onend();
+      }
+    }
+    // Chromium récent expose SpeechRecognition (prioritaire dans l'application) : remplacer les deux noms.
+    const w = window as unknown as Record<string, unknown>;
+    w.SpeechRecognition = FakeRecognition;
+    w.webkitSpeechRecognition = FakeRecognition;
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Dicter" }).click();
+  await expect(page.getByLabel("Décrivez le problème")).toHaveValue("ça grince fort quand je freine");
+  await expect(page.getByText("Relisez et corrigez le texte")).toBeVisible();
+  await page.getByRole("button", { name: "Trouver la panne" }).click();
+  await expect(page.getByRole("heading", { name: "Causes probables" })).toBeVisible();
+});
+
+test("saisie vocale absente du navigateur : message clair", async ({ page }) => {
+  await page.addInitScript(() => {
+    const w = window as unknown as Record<string, unknown>;
+    delete w.SpeechRecognition;
+    delete w.webkitSpeechRecognition;
+  });
+  await page.goto("/");
+  await expect(page.getByText("La dictée n'est pas disponible sur ce navigateur")).toBeVisible();
+});
+
 test("le site est installable", async ({ page, request }) => {
   const res = await request.get("/manifest.webmanifest");
   expect((await res.json()).display).toBe("standalone");
   await page.goto("/");
   await expect(page.locator('link[rel="manifest"]')).toHaveCount(1);
+});
+
+test("écran de 360 px : aucune page ne déborde en largeur (section 10)", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  const noOverflow = async (what: string) => {
+    await page.waitForLoadState("networkidle");
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    expect(overflow, `débordement horizontal : ${what}`).toBeLessThanOrEqual(0);
+  };
+  for (const path of ["/", "/pieces", "/connexion", "/espace-magasin"]) {
+    await page.goto(path);
+    await noOverflow(path);
+  }
+  // Pages à contenu : résultat de diagnostic, liste de magasins, fiche magasin
+  await page.goto("/");
+  await page.getByLabel("Décrivez le problème").fill("ça grince fort quand je freine, bruit de métal");
+  await page.getByRole("button", { name: "Trouver la panne" }).click();
+  await expect(page.getByRole("heading", { name: "Causes probables" })).toBeVisible();
+  await noOverflow("résultat du diagnostic");
+  await page.locator(".part-label").first().getByRole("link", { name: "Voir les magasins" }).click();
+  await expect(page.locator(".shop").first()).toBeVisible();
+  await noOverflow("liste des magasins");
+  await page.locator(".shop").first().getByRole("link").first().click();
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  await noOverflow("fiche magasin");
 });

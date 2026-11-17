@@ -27,6 +27,9 @@ class FakeEmbedder:
     def encode_query(self, q: str) -> np.ndarray:
         return _vec(q)
 
+    def encode(self, texts: list[str]) -> np.ndarray:
+        return np.stack([_vec(t) for t in texts]) if texts else np.zeros((0, DIM), dtype=np.float32)
+
 
 class FakeReranker:
     """Score = part des mots de la requête présents dans le passage."""
@@ -79,7 +82,7 @@ def test_recherche_hybride_fusionne_et_reclasse(db, hybrid):
     assert [h.score for h in hits] == sorted((h.score for h in hits), reverse=True)  # trié par reclassement
     assert all({"rrf", "rerank"} <= set(h.detail) for h in hits)
     assert hybrid.calls == 1
-    assert len(retrieval.hybrid_index.candidates(db, "frein")) <= retrieval.RERANK_POOL
+    assert len(retrieval.hybrid_index.candidates(db, "frein")) <= get_settings().rerank_pool
 
 
 def test_recherche_hybride_mise_en_cache(db, hybrid):
@@ -123,3 +126,37 @@ def test_garde_fou_vectoriel_absent_en_mode_mots_cles(db, monkeypatch):
     assert retrieval.get_index() is retrieval.index  # le garde-fou vectoriel n'est consulté qu'en mode hybride
     r = _diag(db, "plaquettes de frein usées, frottement métallique à l'avant")
     assert r["status"] in ("ok", "clarify")
+
+
+def test_rechargement_des_referentiels_garde_les_identifiants(db):
+    """Les vecteurs sont rangés par identifiant de passage : `python -m app.seed` (relancé à chaque démarrage
+    par le lanceur) ne doit pas renuméroter les fiches (incident du 17/11/2026)."""
+    from app.seed import seed_knowledge
+
+    def ids():
+        return sorted(db.scalars(select(KnowledgeChunk.id).where(KnowledgeChunk.source.in_(retrieval.DOMAIN_SOURCES))))
+
+    avant = ids()
+    seed_knowledge(db)
+    db.commit()
+    assert ids() == avant
+
+
+def test_vecteurs_des_fiches_manquants_recalcules(db, hybrid, tmp_path):
+    """Fiches de référence sans vecteur (identifiants changés) : la recherche les recalcule, retire les vecteurs
+    de passages disparus, enregistre le résultat, et le garde-fou du domaine refonctionne."""
+    fiches = set(db.scalars(select(KnowledgeChunk.id).where(KnowledgeChunk.source.in_(retrieval.DOMAIN_SOURCES))))
+    ids = json.loads((tmp_path / "chunk_ids.json").read_text(encoding="utf-8"))
+    vec = np.load(tmp_path / "chunk_vectors.npy")
+    keep = [i for i, cid in enumerate(ids) if cid not in fiches]
+    np.save(tmp_path / "chunk_vectors.npy", np.concatenate([vec[keep], vec[:3]]))  # 3 vecteurs orphelins
+    (tmp_path / "chunk_ids.json").write_text(json.dumps([ids[i] for i in keep] + [10**9, 10**9 + 1, 10**9 + 2]),
+                                              encoding="utf-8")
+    retrieval.dense_index.signature = None
+    retrieval.dense_index.domain_rows = None
+    fiche = db.scalars(select(KnowledgeChunk).where(KnowledgeChunk.source == "dalil-fiches")).first()
+
+    assert retrieval.dense_index.domain_similarity(db, fiche.text, {"dalil-fiches"}) == pytest.approx(1.0, abs=1e-3)
+    saved = json.loads((tmp_path / "chunk_ids.json").read_text(encoding="utf-8"))
+    assert fiches <= set(saved) and 10**9 not in saved
+    assert retrieval.dense_index.ensure_reference(db) == 0  # rien à refaire ensuite

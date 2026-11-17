@@ -8,6 +8,7 @@ backend/e2e.db
 # Node
 node_modules/
 .next/
+.next-e2e/
 frontend/test-results/
 frontend/playwright-report/
 frontend/tsconfig.tsbuildinfo
@@ -39,3 +40,4 @@ ml/artifacts/*_corpus.joblib
 backend/.pytest_llm/
 # Cache local de graphify (le graphe lui-même est commité)
 graphify-out/cache/
+frontend/next-env.d.ts

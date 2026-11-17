@@ -91,3 +91,7 @@ date,variante,modele,cible,mode,llm,jeu,n,n_hors_sujet,top1,top3,abstention,hors
 20261116-0000,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.882,1.0,0.0,1.0,16.3,26.2
 20261116-0054,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,openai_compat,dev_fr_synthetique,50,5,0.88,0.96,0.02,1.0,62585.0,83685.1
 20261116-0054,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,openai_compat,demo_cases,17,3,0.765,0.941,0.0,1.0,56295.8,75475.5
+20261117-1533,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.9,0.96,0.04,0.8,4839.0,4277.3
+20261117-1533,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.882,1.0,0.0,1.0,2795.4,3303.9
+20261117-1542,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,dev_fr_synthetique,50,5,0.9,0.96,0.04,1.0,4933.0,6718.8
+20261117-1542,A / D (chaîne complète),tfidf-lr-fault-20261114,fault,full,none,demo_cases,17,3,0.882,1.0,0.0,1.0,3545.7,4665.7

@@ -84,18 +84,20 @@ complète, mesuré par `evaluate.py` une fois le GGUF servi par llama.cpp sur le
 
 ## Étape 8 : recherche hybride et chaîne complète (16/11/2026)
 
-Recherche hybride = mots-clés + vecteurs Qwen3-Embedding-0.6B, fusionnés par rangs réciproques, puis 20 passages
-reclassés par bge-reranker-v2-m3. Garde-fou « est-ce une panne ? » sur la ressemblance vectorielle avec les fiches
+Recherche hybride = mots-clés + vecteurs Qwen3-Embedding-0.6B, fusionnés par rangs réciproques, puis passages
+reclassés par bge-reranker-v2-m3 (20 le 16/11 ; 10 en int8 depuis le 17/11). Garde-fou « est-ce une panne ? » sur la ressemblance vectorielle avec les fiches
 (seuil 0,487 ; pannes >= 0,492, hors-sujet <= 0,482 : marge mince, réglée sur des jeux écrits par l'équipe).
 Détails : `results/20261116-0000-hybride-garde-vecteurs.md`, `results/20261116-0054-lora-q8-hybride.md`.
 
 | Chaîne complète (D) | Jeu | Top-1 | Top-3 | Hors sujet refusé | Temps moyen |
 | --- | --- | ---: | ---: | ---: | ---: |
 | Mots-clés, sans modèle de langage | dev | 86 % | 94 % | 100 % | 0,09 s |
-| Hybride, sans modèle de langage | dev | **92 %** | **98 %** | 100 % | 18 ms |
+| Hybride, sans modèle de langage (20 passages, float32) | dev | **92 %** | **98 %** | 100 % | ~20 s (voir correction) |
+| **Hybride, reclassement int8, 10 passages x 256 jetons (réglage retenu le 17/11)** | dev | 90 % | 96 % | 100 % | **4,9 s (p95 6,7 s)** |
 | Hybride + modèle affiné q8_0 | dev | 88 % | 96 % | 100 % | 63 s |
 | Mots-clés, sans modèle de langage | démo (17) | 94 % | 100 % | 100 % | 0,09 s |
-| Hybride, sans modèle de langage | démo | 88 % | 100 % | 100 % | 16 ms |
+| Hybride, sans modèle de langage (20 passages, float32) | démo | 88 % | 100 % | 100 % | ~20 s (voir correction) |
+| **Hybride, reclassement int8, 10 x 256 (réglage retenu)** | démo | 88 % | 100 % | 100 % | **3,5 s (p95 4,7 s)** |
 | Hybride + modèle affiné q8_0 | démo | 77 % | 94 % | 100 % | 56 s |
 
 Lecture honnête :
@@ -105,9 +107,24 @@ Lecture honnête :
   réordonne parfois à tort. Écart faible (1 à 2 cas) mais constant dans le même sens.
 - Le modèle a été entraîné avec des passages issus de la recherche par mots-clés ; la recherche hybride lui en donne
   d'autres (décalage de distribution). Piste : régénérer le jeu d'entraînement avec la recherche hybride.
-- Décision de l'équipe : précision d'abord, modèle de langage gardé, affinement affiché en arrière-plan après le
-  résultat provisoire du classifieur. L'exigence « moins de 10 s » n'est pas tenue avec le modèle de langage :
-  compromis assumé, à signaler dans le mémoire. Le chiffre à présenter reste celui du jeu de test d'Oran.
+- Décision du 17/11/2026 : **modèle de langage désactivé par défaut** (`USE_LLM=1` dans `DEMARRER-DALIL.bat` pour le
+  réactiver le temps d'une mesure) : il ne gagne pas en précision et ne tient pas les 10 s. Le chiffre à présenter
+  reste celui du jeu de test d'Oran.
+
+**Correction du 17/11/2026 (deux défauts trouvés en essayant le site sur le portable).**
+- *Temps de réponse.* Les « 16-18 ms » du 16/11 étaient faux : mesurés sur des questions déjà en cache. Le
+  reclassement de 20 passages x 512 jetons en float32 prend en réalité 15 à 24 s par question nouvelle sur le
+  processeur du portable. Réglage retenu (`rerank_pool=10`, `rerank_max_len=256`, `rerank_int8=True` dans
+  `backend/app/config.py`) : 2,9 s pour le reclassement, 3,5 à 4,9 s par diagnostic, pour 2 points de moins sur le
+  jeu dev (`results/20261117-1542-hybride-int8-10x256-vecteurs-repares.md`).
+- *Vecteurs des fiches perdus.* `python -m app.seed`, relancé à chaque démarrage par le lanceur, supprimait et recréait
+  les 88 fiches de l'équipe : nouveaux identifiants, et leurs vecteurs (rangés par identifiant) ne les retrouvaient
+  plus. Effet : le garde-fou vectoriel ne répondait plus, et « le prix du carburant a encore augmenté » passait pour
+  une panne. Corrigé de deux façons : le seed met à jour les fiches en place (identifiants stables), et la recherche
+  recalcule elle-même les vecteurs des fiches qui en manquent (`DenseIndex.ensure_reference`, ~20 s une seule fois).
+- *Démarrage.* Les modèles sont chargés dès le démarrage de l'API (`app.main.warmup`, ~1 min en arrière-plan), et la
+  partie recherche et classifieur est protégée par un verrou : sans lui, deux diagnostics simultanés pendant la
+  construction des index échouaient (`NotFittedError`, 12 fois sur 15 dans `tests/test_concurrence.py`).
 
 ## Ce que le banc a déjà appris (matière pour le mémoire)
 

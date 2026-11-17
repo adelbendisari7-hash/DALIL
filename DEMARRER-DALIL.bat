@@ -9,8 +9,10 @@ rem  Lance tout DALIL en un double-clic : API (port 8000) + site (port 3000).
 rem  Votre numero de mobile ci-dessous devient administrateur a la 1re connexion.
 rem ---------------------------------------------------------------------------
 set "ADMIN_PHONE=0550000000"
-rem  Modele de langage affine (serveur llama.cpp, ~5 Go de memoire en q8_0). Pour economiser la memoire,
-rem  remplacez q8_0 par q4_k_m (2,5 Go, un peu moins precis). Sans le fichier, le diagnostic marche sans modele de langage.
+rem  Modele de langage affine : DESACTIVE par defaut (decision du 17/11/2026). Sur ce portable il prend ~1 min
+rem  par diagnostic (exigence : moins de 10 s) et ne gagne pas en precision (demo 88 -> 77 %, voir ml/README.md).
+rem  Pour les mesures du memoire, mettre USE_LLM=1 (serveur llama.cpp, ~5 Go de memoire en q8_0).
+set "USE_LLM=0"
 set "LLM_GGUF=ml\artifacts\dalil-qwen3-4b-instruct-2507-q8_0.gguf"
 
 echo.
@@ -63,7 +65,9 @@ echo [5/5] Lancement de l'API et du site...
 set "DALIL_ADMIN_PHONES=%ADMIN_PHONE%"
 rem Recherche par vecteurs + reclassement (retombe sur les mots-cles si les modeles de ml\artifacts sont absents)
 set "DALIL_RETRIEVAL_MODE=hybrid"
-if exist "tools\llama.cpp\llama-server.exe" if exist "%LLM_GGUF%" (
+if not "%USE_LLM%"=="1" (
+  echo      Diagnostic sans modele de langage ^(rapide ; USE_LLM=1 en haut de ce fichier pour l'activer^)
+) else if exist "tools\llama.cpp\llama-server.exe" if exist "%LLM_GGUF%" (
   echo      Modele de langage affine : demarrage du serveur ^(port 8080^)
   start "DALIL - Modele de langage" /D "%~dp0" cmd /k tools\llama.cpp\llama-server.exe -m "%LLM_GGUF%" --port 8080 -c 4096 --alias dalil-lora --host 127.0.0.1
   set "DALIL_LLM_PROVIDER=openai_compat"
@@ -95,5 +99,13 @@ echo   API (doc)      : http://localhost:8000/docs
 echo   Administrateur : connectez-vous avec le %ADMIN_PHONE%
 echo   Le code SMS s'affiche dans la fenetre "DALIL - API".
 echo   Pour tout arreter : fermez les fenetres DALIL (API, site, modele de langage).
+rem Adresse du PC sur le Wi-Fi, pour ouvrir le site depuis un telephone (meme reseau)
+set "LAN_IP="
+for /f "usebackq delims=" %%i in (`powershell -NoProfile -Command "(Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.PrefixOrigin -eq 'Dhcp' } | Select-Object -First 1).IPAddress"`) do set "LAN_IP=%%i"
+if defined LAN_IP (
+  echo.
+  echo   Sur un telephone connecte au meme Wi-Fi : http://%LAN_IP%:3000
+  echo   ^(si Windows demande d'autoriser Node.js sur le reseau prive, acceptez^)
+)
 echo.
 pause

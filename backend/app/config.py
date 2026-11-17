@@ -45,9 +45,17 @@ class Settings(BaseSettings):
     embedding_model_path: str = str(REPO_ROOT / "ml" / "artifacts" / "qwen3-embedding-0.6b")
     reranker_model_path: str = str(REPO_ROOT / "ml" / "artifacts" / "bge-reranker-v2-m3")
     vectors_path: str = str(REPO_ROOT / "ml" / "artifacts" / "vectors")
+    # Reclassement sur processeur (mesuré le 17/11/2026 sur le portable, 4 requêtes) : 20 passages x 512 jetons en
+    # float32 = 23,5 s par diagnostic ; 10 x 256 en int8 = 2,9 s. Précision vérifiée avec ml/evaluate.py (ml/README.md).
+    rerank_pool: int = 10
+    rerank_max_len: int = 256
+    rerank_int8: bool = True
 
     diagnosis_rate_per_minute: int = 20
     otp_rate_per_minute: int = 5
+    # Charge les modèles de diagnostic au démarrage (en arrière-plan) : le premier diagnostic ne paie pas
+    # ~1 min de chargement de la recherche hybride.
+    warmup: bool = True
     cors_origins: str = "http://localhost:3000"
 
     data_dir: str = str(REPO_ROOT / "data")

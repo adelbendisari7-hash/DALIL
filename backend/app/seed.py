@@ -124,19 +124,27 @@ def seed_dtc(db: Session, cats: dict[str, int]) -> None:
 
 
 def seed_knowledge(db: Session) -> None:
-    """Base de connaissances amorcée avec les fiches DALIL (pannes, codes)."""
-    db.execute(delete(KnowledgeChunk).where(KnowledgeChunk.source.in_(["dalil-fiches", "dalil-dtc"])))
+    """Base de connaissances amorcée avec les fiches DALIL (pannes, codes).
+
+    Mise à jour en place (clé : source + panne ou code) : les identifiants des passages ne changent pas d'un
+    chargement à l'autre, et les vecteurs de la recherche hybride, rangés par identifiant, restent valables."""
+    wanted: dict[tuple[str, str], tuple[str, dict]] = {}
     for f in _load("faults.json")["faults"]:
-        db.add(KnowledgeChunk(
-            source="dalil-fiches", lang="fr", license="propriétaire DALIL",
-            text=f"{f['name_fr']}. {f['description']}", meta={"fault": f["slug"]},
-        ))
+        wanted[("dalil-fiches", f["slug"])] = (f"{f['name_fr']}. {f['description']}", {"fault": f["slug"]})
     for d in _load("dtc_fr.json")["codes"]:
-        db.add(KnowledgeChunk(
-            source="dalil-dtc", lang="fr", license="propriétaire DALIL",
-            text=f"Code {d['code']} : {d['title_fr']}. Causes : {'; '.join(d['causes'])}. Symptômes : {'; '.join(d['symptoms'])}.",
-            meta={"dtc": d["code"]},
-        ))
+        text = f"Code {d['code']} : {d['title_fr']}. Causes : {'; '.join(d['causes'])}. Symptômes : {'; '.join(d['symptoms'])}."
+        wanted[("dalil-dtc", d["code"])] = (text, {"dtc": d["code"]})
+    for row in db.scalars(select(KnowledgeChunk).where(KnowledgeChunk.source.in_(["dalil-fiches", "dalil-dtc"]))):
+        key = (row.source, (row.meta or {}).get("fault") or (row.meta or {}).get("dtc"))
+        if key in wanted:
+            text, meta = wanted.pop(key)
+            if row.text != text:
+                row.text, row.embedding = text, None
+            row.meta = meta
+        else:
+            db.delete(row)  # fiche retirée du référentiel (ou doublon)
+    for (source, _), (text, meta) in wanted.items():
+        db.add(KnowledgeChunk(source=source, lang="fr", license="propriétaire DALIL", text=text, meta=meta))
 
 
 def _variant(db: Session, brand: str, model: str, engine: str, year: int) -> VehicleVariant | None:

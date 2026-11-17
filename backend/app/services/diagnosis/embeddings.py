@@ -57,9 +57,12 @@ class Reranker:
         self.torch = torch
         self.tok = AutoTokenizer.from_pretrained(str(folder))
         self.model = AutoModelForSequenceClassification.from_pretrained(str(folder), dtype=torch.float32).eval()
+        if get_settings().rerank_int8:  # couches linéaires en int8 : ~2 à 3 fois plus rapide sur processeur
+            self.model = torch.quantization.quantize_dynamic(self.model, {torch.nn.Linear}, dtype=torch.qint8)
 
-    def score(self, query: str, passages: list[str], max_len: int = 512, batch: int = 8) -> list[float]:
+    def score(self, query: str, passages: list[str], max_len: int | None = None, batch: int = 8) -> list[float]:
         torch = self.torch
+        max_len = max_len or get_settings().rerank_max_len
         out: list[float] = []
         for s in range(0, len(passages), batch):
             part = passages[s:s + batch]

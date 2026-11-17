@@ -1,4 +1,5 @@
-export const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+// Par défaut, même adresse que le site (relais vers l'API dans next.config) ; NEXT_PUBLIC_API_URL pour une API ailleurs.
+export const API = process.env.NEXT_PUBLIC_API_URL || "/api/v1";
 
 export type User = { id: number; phone: string; role: string; name: string | null; consent: boolean };
 

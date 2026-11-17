@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
+import threading
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -115,6 +116,7 @@ class DenseIndex:
         (data/test/dev_fr_synthetique.jsonl : pannes >= 0,492, hors-sujet <= 0,482)."""
         if not query.strip() or not self.available():
             return None
+        self.ensure_reference(db)
         key = (self.signature, frozenset(sources))
         if self.domain_rows is None or self.domain_rows[0] != key:
             wanted = set(db.scalars(select(KnowledgeChunk.id).where(KnowledgeChunk.source.in_(sources))))
@@ -142,9 +144,43 @@ class DenseIndex:
         self._load()
         return self.matrix is not None and get_embedder() is not None
 
+    def ensure_reference(self, db: Session) -> int:
+        """Calcule ici les vecteurs des fiches de l'équipe (DOMAIN_SOURCES) qui n'en ont pas, et retire ceux des
+        passages disparus. Ces fiches sont rechargées par `python -m app.seed` : quand leurs identifiants
+        changeaient, leurs vecteurs (carnet 05) ne les retrouvaient plus et le garde-fou « est-ce une panne ? »
+        se taisait (incident du 17/11/2026). 88 textes courts : quelques secondes sur processeur, une seule fois
+        (le résultat est enregistré avec les autres vecteurs). Même méthode que le carnet 05 (Embedder.encode).
+        Rend le nombre de vecteurs ajoutés."""
+        if self.matrix is None or getattr(self, "_checked", None) == self.signature:
+            return 0
+        existing = set(db.scalars(select(KnowledgeChunk.id)))
+        keep = [i for i, cid in enumerate(self.ids) if cid in existing]
+        have = {self.ids[i] for i in keep}
+        missing = list(db.scalars(select(KnowledgeChunk).where(KnowledgeChunk.source.in_(DOMAIN_SOURCES))
+                                  .order_by(KnowledgeChunk.id)))
+        missing = [r for r in missing if r.id not in have]
+        if not missing and len(keep) == len(self.ids):
+            self._checked = self.signature
+            return 0
+        removed = len(self.ids) - len(keep)
+        new = get_embedder().encode([r.text for r in missing]) if missing else np.zeros((0, self.matrix.shape[1]))
+        self.matrix = np.concatenate([self.matrix[keep], new.astype(np.float32)])
+        self.ids = [self.ids[i] for i in keep] + [r.id for r in missing]
+        folder = Path(get_settings().vectors_path)
+        np.save(folder / "chunk_vectors.npy", self.matrix.astype(np.float16))  # même format que le carnet 05
+        (folder / "chunk_ids.json").write_text(json.dumps(self.ids), encoding="utf-8")
+        vec, ids = folder / "chunk_vectors.npy", folder / "chunk_ids.json"
+        self.signature = (vec.stat().st_mtime_ns, ids.stat().st_mtime_ns)
+        self._checked = self.signature
+        self.domain_rows = None
+        log.warning("Vecteurs mis à jour : %s fiches de référence ajoutées, %s passages disparus retirés",
+                    len(missing), removed)
+        return len(missing)
+
     def search(self, db: Session, query: str, k: int = 30) -> list[Hit]:
         if not query.strip() or not self.available():
             return []
+        self.ensure_reference(db)
         sims = self.matrix @ self.query_vector(query)
         top = np.argsort(-sims)[:k]
         rows = {r.id: r for r in db.scalars(select(KnowledgeChunk).where(KnowledgeChunk.id.in_([self.ids[i] for i in top])))}
@@ -157,7 +193,6 @@ class DenseIndex:
 RRF_K = 60          # constante de la fusion par rangs réciproques (valeur usuelle)
 KEYWORD_POOL = 30   # passages gardés de chaque recherche avant fusion
 DENSE_POOL = 30
-RERANK_POOL = 20    # passages passés au modèle de reclassement (le coût du reclassement suit ce nombre)
 
 
 class HybridIndex:
@@ -190,7 +225,8 @@ class HybridIndex:
             else:
                 h.detail["dense"] = h.score
                 hits[h.chunk_id] = h
-        order = sorted(fused, key=lambda i: -fused[i])[:RERANK_POOL]
+        # Passages passés au modèle de reclassement : son coût suit ce nombre (réglage rerank_pool).
+        order = sorted(fused, key=lambda i: -fused[i])[:get_settings().rerank_pool]
         for i in order:
             hits[i].detail["rrf"] = fused[i]
         return [hits[i] for i in order]
@@ -215,6 +251,9 @@ class HybridIndex:
             self.cache.popitem(last=False)
         return out
 
+
+# Verrou des index et des modèles partagés (voir pipeline.run_diagnosis et warmup).
+MODELS_LOCK = threading.RLock()
 
 index = KeywordIndex()
 # Garde-fou « est-ce une panne automobile ? » : index des seules fiches de référence de l'équipe,

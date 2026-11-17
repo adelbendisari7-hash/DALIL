@@ -23,7 +23,7 @@ Cahier des charges complet : `docs/cahier-des-charges.md` (le relire pour toute 
 - Modèle de référence : `python ml/train_baseline.py [--target part] [--corpus]` (exporte dans `ml/artifacts/`).
 - Évaluation des variantes : `python ml/evaluate.py --model NOM=chemin --modes classifier,retrieval,full [--test data/test/oran_test.jsonl]` (résultats dans `ml/results/`). Le jeu de test d'Oran ne sert jamais à entraîner ni à régler un seuil ; les réglages se font sur `data/test/dev_fr_synthetique.jsonl`.
 - Étape 7 sur Kaggle : `ml/kaggle/README.md` ; carnets générés par `python ml/kaggle/make_notebooks.py` (modifier ce script, pas les .ipynb) ; jeu d'affinage du modèle de langage : `python ml/build_llm_dataset.py`.
-- Frontend : `cd frontend && npm run dev` ; e2e : `PYTHON=../backend/.venv/Scripts/python npx playwright test`.
+- Frontend : `cd frontend && npm run dev` ; e2e : `cd frontend && npx playwright test` (téléphone simulé ; trouve seul `backend/.venv`).
 - Pipeline de données (étape 6) : `python data/pipeline/run.py all` (collecte, chargement, rapport ; `--sources`, `--limit`, `--refresh`) ; traduction : `run.py translate` sur Kaggle (`ml/kaggle/README.md`) ; tests : `cd backend && .venv/Scripts/python -m pytest -q ../data/pipeline/tests`.
 - Ajouter une source de données : skill de projet `ajouter-source-donnees` (`.claude/skills/`).
 - Tout : `docker compose up --build`.

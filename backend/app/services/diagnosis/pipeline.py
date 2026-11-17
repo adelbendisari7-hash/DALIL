@@ -21,7 +21,7 @@ from ...models import DtcCode, DtcPart, Fault, PartCategory, PartReference, Prod
 from .classifier import get_classifier
 from .llm import get_llm, rerank_with_llm
 from .normalize import detect_lang, extract_dtc, normalize
-from .retrieval import DOMAIN_SOURCES, dense_index, domain_index, get_index
+from .retrieval import DOMAIN_SOURCES, MODELS_LOCK, dense_index, domain_index, get_index
 from .safety import DISCLAIMER, DO_NOT_DRIVE, UNKNOWN, text_is_dangerous
 
 MIX = {"clf": 0.6, "ret": 0.2, "dtc": 0.5}
@@ -167,38 +167,41 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full", use_llm:
         result.update(status="unknown", message="La première version ne comprend que le français. L'arabe et la darija arrivent ensuite.")
         return result, []
 
-    # --- Recherche
-    search_index = get_index()
-    # En mode classifieur seul, la recherche hybride (vecteurs et reclassement) serait du temps perdu.
-    hits = search_index.search(db, text, k=8) if text and not (mode == "classifier" and search_index.name == "hybrid") else []
-    retrieved_ids = [h.chunk_id for h in hits]
-    # Appui de la recherche pour chaque panne : somme des similarités des passages étiquetés avec elle.
-    # La part de cet appui dans tout ce qui a été retrouvé (couverture) dit si les passages trouvés
-    # parlent vraiment de la même panne ou si un seul passage étiqueté se perd parmi d'autres.
-    ret: dict[str, float] = {}
-    ret_best = 0.0
-    for h in hits:
-        f = h.meta.get("fault")
-        if f in faults:
-            ret[f] = ret.get(f, 0.0) + h.score
-            ret_best = max(ret_best, h.score)
-    ret_coverage = sum(ret.values()) / max(sum(h.score for h in hits), 1e-9)
-    # Le domaine (« est-ce une panne automobile ? ») se juge sur les fiches de référence seulement :
-    # les sources externes (rappels…) contiennent trop de vocabulaire général pour servir de garde-fou.
-    domain_hits = domain_index.search(db, text, k=1) if text else []
-    max_sim = max((h.score for h in domain_hits), default=0.0)
-    # Avec la recherche hybride, un second garde-fou : ressemblance des vecteurs avec les fiches de référence.
-    dense_domain = dense_index.domain_similarity(db, text, DOMAIN_SOURCES) if search_index.name == "hybrid" else None
+    # Index et modèles partagés entre les requêtes (reconstruits ou chargés à la demande) : un diagnostic à la
+    # fois dans cette partie. Une fois les modèles chargés elle prend ~0,03 s ; le modèle de langage, lent, reste hors du verrou.
+    with MODELS_LOCK:
+        # --- Recherche
+        search_index = get_index()
+        # En mode classifieur seul, la recherche hybride (vecteurs et reclassement) serait du temps perdu.
+        hits = search_index.search(db, text, k=8) if text and not (mode == "classifier" and search_index.name == "hybrid") else []
+        retrieved_ids = [h.chunk_id for h in hits]
+        # Appui de la recherche pour chaque panne : somme des similarités des passages étiquetés avec elle.
+        # La part de cet appui dans tout ce qui a été retrouvé (couverture) dit si les passages trouvés
+        # parlent vraiment de la même panne ou si un seul passage étiqueté se perd parmi d'autres.
+        ret: dict[str, float] = {}
+        ret_best = 0.0
+        for h in hits:
+            f = h.meta.get("fault")
+            if f in faults:
+                ret[f] = ret.get(f, 0.0) + h.score
+                ret_best = max(ret_best, h.score)
+        ret_coverage = sum(ret.values()) / max(sum(h.score for h in hits), 1e-9)
+        # Le domaine (« est-ce une panne automobile ? ») se juge sur les fiches de référence seulement :
+        # les sources externes (rappels…) contiennent trop de vocabulaire général pour servir de garde-fou.
+        domain_hits = domain_index.search(db, text, k=1) if text else []
+        max_sim = max((h.score for h in domain_hits), default=0.0)
+        # Avec la recherche hybride, un second garde-fou : ressemblance des vecteurs avec les fiches de référence.
+        dense_domain = dense_index.domain_similarity(db, text, DOMAIN_SOURCES) if search_index.name == "hybrid" else None
 
-    # --- Classifieur
-    clf: dict[str, float] = {}
-    if len(normalize(text).split()) >= 2 and mode in ("full", "classifier"):
-        model = get_classifier()
-        probs = model.predict_proba(text)
-        if getattr(model, "target", "fault") == "part":
-            clf = parts_to_faults(probs, faults, cats)
-        else:
-            clf = {k: v for k, v in probs.items() if k in faults}
+        # --- Classifieur
+        clf: dict[str, float] = {}
+        if len(normalize(text).split()) >= 2 and mode in ("full", "classifier"):
+            model = get_classifier()
+            probs = model.predict_proba(text)
+            if getattr(model, "target", "fault") == "part":
+                clf = parts_to_faults(probs, faults, cats)
+            else:
+                clf = {k: v for k, v in probs.items() if k in faults}
 
     # --- Codes OBD -> pannes
     dtc_scores: dict[str, float] = {}
