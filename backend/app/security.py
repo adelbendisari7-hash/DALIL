@@ -41,6 +41,13 @@ def hash_code(phone: str, code: str) -> str:
 
 
 def new_otp() -> str:
+    """Code à 6 chiffres. `otp_test_code` (tests de bout en bout dans un navigateur, qui ne lit pas la console)
+    n'est honoré qu'avec le fournisseur SMS « console » : jamais avec un vrai envoi de SMS."""
+    s = get_settings()
+    if s.otp_test_code:
+        if s.sms_provider == "console":
+            return s.otp_test_code
+        log.error("DALIL_OTP_TEST_CODE ignoré : réservé au fournisseur SMS « console »")
     return f"{secrets.randbelow(10**6):06d}"
 
 

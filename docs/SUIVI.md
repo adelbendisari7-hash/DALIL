@@ -1,11 +1,11 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 17/11/2026, fin de l'étape 9.
+> Dernière mise à jour : 17/11/2026, fin de l'étape 10.
 
 ## 1. Où on en est
 
-**Étape 9 (application) terminée le 17/11/2026. Prochaine : étape 10 (espace magasin).**
+**Étape 10 (espace magasin) terminée le 17/11/2026. Prochaine : étape 11 (retours et tests), puis les essais à Oran.**
 
 | Étape (section 11 du cahier) | État | Notes |
 | --- | --- | --- |
@@ -18,7 +18,7 @@
 | 7. Modèles | **Fait (15/11/2026)** | Variantes A, B, C, D mesurées ; résultats dans `ml/README.md` |
 | 8. Chaîne de diagnostic | **Fait (16/11/2026)** | Recherche hybride, modèle affiné derrière une interface, cache, repli, affinage en arrière-plan avec sondage. 104 tests. Résultats : `ml/README.md` (section Étape 8) |
 | 9. Application | **Fait (17/11/2026)** | 7 tests e2e sur téléphone simulé (`cd frontend && npx playwright test`) : parcours automobiliste, mécanicien, hors sujet, dictée, installable, 360 px. Essai réel sur le PC validé par l'utilisateur. Site ouvrable depuis un téléphone du même Wi-Fi ; fiche d'essai sur vrai téléphone : `docs/test-telephone.md` (recommandée avant les essais d'Oran) |
-| 10. Espace magasin | Base en place | Inscription, revendication, catalogue, import (`routers/shops.py`). Critère « 20 produits publiés » non vérifié |
+| 10. Espace magasin | **Fait (17/11/2026)** | Critère vérifié de bout en bout (`frontend/e2e/magasin.spec.ts`) : connexion SMS, inscription avec position, modèle Excel téléchargeable (`GET /catalog/template.xlsx`), import de 20 produits, validation, fiche publique avec ses 20 produits. Catalogue d'une fiche non validée caché au public |
 | 11. Retours et tests | Base en place | Retours et indicateurs (`/feedback`, `/admin/metrics`). Essais avec mécaniciens et magasins d'Oran : à organiser |
 | 12. Mise en ligne | Pas commencé | Seulement sur décision de l'équipe |
 
@@ -43,14 +43,13 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-1. **Étape 10 (espace magasin)** : vérifier le critère « un magasin test publie 20 produits » (inscription, revendication, catalogue, import Excel), et ajouter le test qui manque.
+1. **Étape 11 (retours et tests)** : test « un retour “pièce trouvée” modifie le score » ; essais avec des mécaniciens et des magasins d'Oran, puis compte rendu.
 2. **Web scraping et collecte de données** : discussion reportée par l'utilisateur, à reprendre après l'étape 8. Deux pistes déjà proposées :
    - lancer le script OpenStreetMap (magasins d'Oran) ;
    - rédiger des demandes d'autorisation aux forums francophones. Pas de collecte sans licence notée dans `data/SOURCES.md`.
 3. **Jeu de test d'Oran** : faire annoter de vrais cas par des mécaniciens (modèle : `data/test/modele_annotation_oran.csv`), puis relancer `ml/evaluate.py` sur ce jeu.
 4. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
-5. **Étape 11 (retours et tests)** : test « un retour “pièce trouvée” modifie le score » ; essais avec des mécaniciens et des magasins d'Oran, puis compte rendu.
-6. **Étape 12 (mise en ligne)** : seulement sur décision de l'équipe (hébergement, https, sauvegardes, surveillance, guide des magasins, déclaration à l'ANPDP).
+5. **Étape 12 (mise en ligne)** : seulement sur décision de l'équipe (hébergement, https, sauvegardes, surveillance, guide des magasins, déclaration à l'ANPDP).
 
 ## Décisions prises
 
@@ -62,8 +61,8 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 4. Pour reprendre le travail
 
-- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (108 tests).
-- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (7 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
+- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (112 tests).
+- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (8 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
 - **Ouvrir le site sur un téléphone** : `DEMARRER-DALIL.bat` affiche l'adresse Wi-Fi du PC (fiche : `docs/test-telephone.md`).
 - **Tests du pipeline de données** : `cd backend && .venv/Scripts/python -m pytest -q ../data/pipeline/tests`.
 - **Servir le modèle affiné** :
@@ -98,3 +97,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 17/11/2026 | Décision : modèle de langage désactivé par défaut dans le lanceur (option `USE_LLM=1`) |
 | 17/11/2026 | Premier essai réel du site sur le PC : « Le serveur ne répond pas ». Trois défauts corrigés : (1) reclassement trop lent (15-24 s, faussement mesuré à 18 ms le 16/11) -> int8 et 10 passages, 3,5-5 s ; (2) le seed renumérotait les 88 fiches à chaque démarrage, leurs vecteurs étaient perdus et le garde-fou hors sujet muet -> seed en place + recalcul automatique des vecteurs manquants ; (3) diagnostics simultanés au démarrage -> préchargement des modèles et verrou. 108 tests backend, 31 tests pipeline |
 | 17/11/2026 | Essai réel validé par l'utilisateur. Tests e2e lançables à côté de l'application (ports et dossier `.next-e2e` à part). **Étape 9 terminée**, graphe mis à jour, commit |
+| 17/11/2026 | Étape 10 : modèle Excel du catalogue, catalogue des fiches non validées caché au public, code SMS fixe réservé aux tests (`DALIL_OTP_TEST_CODE`, refusé hors SMS « console »), test de bout en bout « un magasin publie 20 produits ». 112 tests backend, 8 e2e. **Étape 10 terminée** |

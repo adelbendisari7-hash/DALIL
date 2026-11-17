@@ -7,11 +7,12 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 
 from fastapi import HTTPException
-from openpyxl import load_workbook
+from openpyxl import Workbook, load_workbook
+from openpyxl.styles import Font
 from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 
-from ..models import Brand, Commune, Product, ProductFitment, Shop, ShopBrand, ShopCategory
+from ..models import Brand, Commune, PartCategory, Product, ProductFitment, Shop, ShopBrand, ShopCategory
 from ..security import normalize_phone
 from .catalog import resolve_category, resolve_variants
 from .diagnosis.normalize import normalize
@@ -181,3 +182,39 @@ def import_products(db: Session, shop: Shop, rows: list[dict]) -> ImportReport:
         rep.updated += existing is not None
     db.flush()
     return rep
+
+
+TEMPLATE_HEADERS = ["Titre", "Famille", "Reference", "Marque_piece", "Etat", "Prix", "En_stock", "Compatibilite"]
+TEMPLATE_EXAMPLES = [
+    ["Plaquettes de frein avant Logan", "plaquettes avant", "", "Bosch", "adaptable", 4500, "oui", "Dacia Logan 1.5 dCi 2015"],
+    ["Filtre à huile", "filtre à huile", "", "Mann", "neuf", 900, "oui", "Renault Symbol 2016; Dacia Logan 1.5 dCi 2015"],
+]
+
+
+def product_template(db: Session) -> bytes:
+    """Modèle Excel du catalogue (F12). L'import lit la première feuille seulement : les exemples et la liste des
+    familles sont sur des feuilles à part, pour ne jamais être importés par erreur."""
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Catalogue"
+    ws.append(TEMPLATE_HEADERS)
+    for c in ws[1]:
+        c.font = Font(bold=True)
+    ex = wb.create_sheet("Exemples")
+    ex.append(TEMPLATE_HEADERS)
+    for row in TEMPLATE_EXAMPLES:
+        ex.append(row)
+    ex.append([])
+    ex.append(["Etat : neuf, origine, adaptable ou occasion. En_stock : oui ou non. Prix en dinars, sans espace."])
+    ex.append(["Compatibilite : « Marque Modèle Motorisation Année », plusieurs véhicules séparés par ; (facultatif)."])
+    fam = wb.create_sheet("Familles")
+    fam.append(["Famille (à recopier dans la colonne Famille)", "Groupe"])
+    parents = {c.id: c.name_fr for c in db.scalars(select(PartCategory).where(PartCategory.parent_id.is_(None)))}
+    for c in db.scalars(select(PartCategory).where(PartCategory.parent_id.is_not(None)).order_by(PartCategory.parent_id, PartCategory.name_fr)):
+        fam.append([c.name_fr, parents.get(c.parent_id, "")])
+    for sheet in (ws, ex, fam):
+        for col in sheet.columns:
+            sheet.column_dimensions[col[0].column_letter].width = max(12, min(45, max(len(str(c.value or "")) for c in col) + 2))
+    buf = io.BytesIO()
+    wb.save(buf)
+    return buf.getvalue()

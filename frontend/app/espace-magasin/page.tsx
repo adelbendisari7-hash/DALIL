@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import ShopForm, { cleanShop, type ShopFormValue } from "@/components/ShopForm";
-import { api, ApiError, session, type User } from "@/lib/api";
+import { API, api, ApiError, session, type User } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
 type Shop = ShopFormValue & { id: number; status: string; brands: { brand_id: number }[]; categories: { category_id: number }[] };
@@ -235,6 +235,7 @@ function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
 
           <h3 className="section">{t("shop.import.title")}</h3>
           <p className="help">{t("shop.import.help")}</p>
+          <p><a className="btn btn-ghost" href={`${API}/catalog/template.xlsx`} download>{t("shop.import.template")}</a></p>
           <input type="file" accept=".xlsx,.csv" onChange={importFile} aria-label={t("shop.import.title")} />
           {importMsg && <p className="help" role="status">{importMsg}</p>}
 

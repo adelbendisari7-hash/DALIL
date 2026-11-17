@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
+from fastapi import APIRouter, Depends, File, HTTPException, Query, Response, UploadFile
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -34,7 +34,7 @@ from ..schemas import (
     shop_out,
 )
 from ..security import current_user, current_user_optional, normalize_phone, require_role
-from ..services.imports import import_products, read_table
+from ..services.imports import import_products, product_template, read_table
 from ..services.recommendation import RECOMMENDABLE_STATUSES, category_lineage, recommend
 
 router = APIRouter()
@@ -133,8 +133,21 @@ def shop_detail(shop_id: int, db: Session = Depends(get_db), user: User | None =
     return shop_out(shop)
 
 
+@router.get("/catalog/template.xlsx")
+def catalog_template(db: Session = Depends(get_db)):
+    """Modèle Excel du catalogue : feuille « Catalogue » à remplir, plus « Exemples » et « Familles » (aide)."""
+    return Response(product_template(db), media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    headers={"Content-Disposition": 'attachment; filename="dalil-modele-catalogue.xlsx"'})
+
+
 @router.get("/shops/{shop_id}/products")
-def shop_products(shop_id: int, db: Session = Depends(get_db)):
+def shop_products(shop_id: int, db: Session = Depends(get_db), user: User | None = Depends(current_user_optional)):
+    """Catalogue public d'un magasin visible (même règle que la fiche) ; le gérant et l'administrateur voient
+    aussi celui d'une fiche en attente de validation."""
+    shop = db.get(Shop, shop_id)
+    if not shop or (shop.status not in RECOMMENDABLE_STATUSES
+                    and not (user and (user.role == "admin" or user.id == shop.owner_user_id))):
+        raise HTTPException(404, "Magasin inconnu")
     rows = db.scalars(select(Product).where(Product.shop_id == shop_id).order_by(Product.updated_at.desc()))
     return [
         {"id": p.id, "title": p.title, "category_id": p.category_id, "oem_ref": p.oem_ref, "part_brand": p.part_brand,

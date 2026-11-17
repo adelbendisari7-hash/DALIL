@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     admin_phones: str = ""
     # Fournisseur SMS : "console" écrit le code dans le journal (développement).
     sms_provider: str = "console"
+    # Code fixe pour les tests de bout en bout (Playwright). Ignoré sauf avec sms_provider = "console".
+    otp_test_code: str = ""
 
     # Modèle de langage derrière une interface unique : none | anthropic | openai_compat
     llm_provider: str = "none"
