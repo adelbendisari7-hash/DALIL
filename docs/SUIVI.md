@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 17/11/2026, étape 11 (partie logicielle terminée, essais à mener).
+> Dernière mise à jour : 17/11/2026, plan du référentiel et des données prêt à lancer.
 
 ## 1. Où on en est
 
@@ -43,8 +43,8 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-1. **Étape 11, essais à Oran (équipe, sur le terrain)** : suivre `docs/essais-oran.md` : fiches des mécaniciens (jeu de test, objectif 200 cas), inscription chronométrée de 5 à 10 magasins, parcours de 10 à 20 automobilistes, questionnaire ; puis rédiger `docs/compte-rendu-essais.md`.
-2. **Étendre le référentiel véhicules** selon `docs/etude-marche-algerie.md` (section 4) : Peugeot et Renault anciennes et utilitaires, puis Chevrolet, Citroën, Mazda et Mitsubishi (absentes), puis modèles chinois récents ; années jusqu'aux années 1980 ; champ « mon véhicule n'est pas dans la liste ». À décider avec l'utilisateur.
+1. **PROCHAINE SESSION : référentiel complet et nouveaux jeux de données** : exécuter `docs/plan-referentiel-et-donnees.md` (prompt prêt en tête du fichier). Phase A : ~250 modèles manquants (Peugeot et Renault anciennes et utilitaires, Chevrolet, Citroën, Mazda, Mitsubishi, Ford, Mercedes, Seat, Nissan, marques chinoises…), années depuis 1980, « véhicule absent ». Phase B : MOT et NHTSA étendus à ces modèles, Wikidata (CC0), vPIC, rappels Canada. Phase C : a priori par modèle dans le diagnostic, réentraînement.
+2. **Étape 11, essais à Oran (équipe, sur le terrain)** : suivre `docs/essais-oran.md` : fiches des mécaniciens (jeu de test, objectif 200 cas), inscription chronométrée de 5 à 10 magasins, parcours de 10 à 20 automobilistes, questionnaire ; puis rédiger `docs/compte-rendu-essais.md`.
 3. **Données des magasins** : importer les 62 lieux OpenStreetMap (`data/raw/osm_oran.csv`) en brouillons, liste de visite (mention « © contributeurs OpenStreetMap ») ; Ouedkniss exclu (CGU, article 9), demande d'autorisation possible.
 4. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
 5. **Étape 12 (mise en ligne)** : seulement sur décision de l'équipe (hébergement, https, sauvegardes, surveillance, guide des magasins, déclaration à l'ANPDP).
@@ -103,3 +103,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 17/11/2026 | Description d'un seul mot : questions de précision ou demande de préciser au lieu d'un résultat sûr. 115 tests backend, 13 e2e, mesures inchangées |
 | 17/11/2026 | Étape 11, partie logicielle : anti-abus du « pièce trouvée » (migration 0002), page « Mon compte » avec suppression du compte (promise mais absente du site), convertisseur des fiches d'Oran (script annoncé mais absent), `evaluate.py` robuste à un véhicule inconnu, protocole des essais `docs/essais-oran.md`. 123 tests backend, 14 e2e |
 | 17/11/2026 | Collecte : OpenStreetMap interrogé (62 lieux dans la wilaya d'Oran, dont 23 magasins de pièces ; miroirs Overpass ajoutés au script). Étude de marché `docs/etude-marche-algerie.md` à partir de l'ONS (parc fin 2020 : 48 % des voitures ont 20 ans ou plus, Peugeot et Renault 34 %, 70 % de diesel dans les reventes ; Oran 3e wilaya) : le référentiel ne couvre ni le parc ancien ni Chevrolet, Citroën, Mazda, Mitsubishi |
+| 17/11/2026 | Recherche de jeux de données pour les modèles d'Algérie (Wikidata CC0, MOT étendu, NHTSA étendu, vPIC, Transport Canada, Safety Gate, Zenodo ; écartés : UTAC, ADAC, CJJones HF, Ouedkniss). Plan d'exécution `docs/plan-referentiel-et-donnees.md` |
