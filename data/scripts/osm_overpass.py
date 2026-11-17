@@ -35,10 +35,21 @@ out center tags;
 TYPE_MAP = {"car_parts": "pieces", "car_repair": "garage", "tyres": "pneus"}
 
 
+# Serveurs publics de l'API Overpass (mêmes données OpenStreetMap) : le principal est souvent surchargé (502, 504).
+MIRRORS = [OVERPASS, "https://overpass.kumi.systems/api/interpreter", "https://overpass.private.coffee/api/interpreter"]
+
+
 def fetch(query: str) -> list[dict]:
-    r = httpx.post(OVERPASS, data={"data": query}, timeout=120, headers={"User-Agent": "dalil-prototype/0.1"})
-    r.raise_for_status()
-    return r.json().get("elements", [])
+    last: Exception | None = None
+    for url in MIRRORS:
+        try:
+            r = httpx.post(url, data={"data": query}, timeout=120, headers={"User-Agent": "dalil-prototype/0.1"})
+            r.raise_for_status()
+            return r.json().get("elements", [])
+        except (httpx.HTTPError, ValueError) as e:  # serveur surchargé ou réponse illisible : miroir suivant
+            print(f"{url} indisponible ({e.__class__.__name__}), essai du serveur suivant")
+            last = e
+    raise SystemExit(f"Aucun serveur Overpass n'a répondu ({last}) ; réessayer plus tard.")
 
 
 def main() -> None:
