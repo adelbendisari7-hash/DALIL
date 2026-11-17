@@ -1,0 +1,60 @@
+{
+  "rows": [
+    {
+      "date": "20261117-1627",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.9,
+      "top3": 0.96,
+      "abstention": 0.04,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 4046.2,
+      "ms_p95": 4342.1
+    },
+    {
+      "date": "20261117-1627",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 3724.1,
+      "ms_p95": 4675.4
+    }
+  ],
+  "erreurs": {
+    "A / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | demo_cases": []
+  }
+}

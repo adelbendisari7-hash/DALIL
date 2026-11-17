@@ -20,9 +20,9 @@ from ...config import get_settings
 from ...models import DtcCode, DtcPart, Fault, PartCategory, PartReference, Product, ProductFitment, VehicleVariant
 from .classifier import get_classifier
 from .llm import get_llm, rerank_with_llm
-from .normalize import detect_lang, extract_dtc, normalize
+from .normalize import detect_lang, extract_dtc, normalize, strip_accents
 from .retrieval import DOMAIN_SOURCES, MODELS_LOCK, dense_index, domain_index, get_index
-from .safety import DISCLAIMER, DO_NOT_DRIVE, UNKNOWN, text_is_dangerous
+from .safety import DISCLAIMER, DO_NOT_DRIVE, TOO_SHORT, UNKNOWN, text_is_dangerous
 
 MIX = {"clf": 0.6, "ret": 0.2, "dtc": 0.5}
 MIN_SHOWN = 0.05
@@ -32,6 +32,23 @@ MIN_RETRIEVAL_SIM = 0.15  # réglé sur data/test/dev_fr_synthetique.jsonl, inde
 # textes réels, sans toucher au jeu de test d'Oran. Un refus à tort donne « je ne sais pas » : l'erreur sûre.
 MIN_DOMAIN_DENSE = 0.487
 MAX_QUESTIONS = 3
+# Description trop courte pour trancher (« frein ») : sans code OBD et sous ce nombre de mots utiles, on pose
+# d'office les questions de précision au lieu d'afficher un résultat sûr (78 % pour « frein » le 17/11/2026).
+MIN_INFORMATIVE_WORDS = 2  # « frein » (1 mot) : questions ; « moteur chauffe », « ça grince quand je freine » (2) : non
+# Mots qui ne disent rien de la panne : mots grammaticaux et termes trop généraux.
+UNINFORMATIVE = set("""
+le la les l un une des de du d a au aux et ou en sur sous dans par pour avec sans je j me m ma mon mes ta ton tes
+tu il elle on nous vous ils elles ca c ce cet cette ces est sont ai as avait fait font quand qui que qu y ne n pas
+plus tres trop bien mal tout toute tous encore aussi deja voiture auto automobile vehicule bagnole probleme
+problemes panne pannes souci soucis truc chose marche ya il_y_a bonjour salut svp merci aide
+""".split())
+
+
+def informative_words(text: str) -> int:
+    """Mots utiles du texte d'origine (sans accents), avant l'ajout de synonymes par la normalisation."""
+    import re
+
+    return sum(1 for w in re.findall(r"[a-z0-9]+", strip_accents(text.lower())) if len(w) > 1 and w not in UNINFORMATIVE)
 # Poids de la recherche : plein poids quand le meilleur passage étiqueté atteint ce score. Les scores des deux
 # modes n'ont pas la même échelle (cosinus de fragments de caractères / probabilité du reclassement) :
 # un seuil par mode.
@@ -282,10 +299,18 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full", use_llm:
         })
 
     top_conf = result["causes"][0]["confidence"]
-    if len(ranked) > 1 and top_conf - ranked[1][1] < s.clarify_margin:
+    too_short = not codes and not inp.answers and informative_words(text) < MIN_INFORMATIVE_WORDS
+    if len(ranked) > 1 and (too_short or top_conf - ranked[1][1] < s.clarify_margin):
         qs = _pick_questions(ranked, inp.answers or {})
         if qs:
             result.update(status="clarify", questions=qs)
+    if too_short and result["status"] != "clarify":
+        # Une seule panne ressort (confiance de 100 % par construction) ou aucune question ne départage : un mot seul
+        # (« bruit ») ne suffit pas, on demande une description plus précise plutôt que d'afficher un résultat sûr.
+        result.update(status="unknown", message=TOO_SHORT, causes=[])
+        if text_is_dangerous(text):
+            result["safety"] = {"do_not_drive": True, "message": DO_NOT_DRIVE}
+        return result, retrieved_ids
 
     danger = text_is_dangerous(text) or any(c["do_not_drive"] and c["confidence"] >= 0.2 for c in result["causes"])
     if danger:

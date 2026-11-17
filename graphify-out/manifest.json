@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/pipeline.py": {
-    "mtime": 1794928807.3050678,
-    "seen": 1794931051.2328465,
-    "ast_hash": "08a787b20453c822674a4e8c9d279f92",
+    "mtime": 1794932614.1283555,
+    "seen": 1794933248.5847898,
+    "ast_hash": "324d9ddbe3c807621d3152d2d579c9c8",
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/retrieval.py": {
@@ -144,9 +144,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/safety.py": {
-    "mtime": 1794618217.6264486,
-    "seen": 1794659040.1764622,
-    "ast_hash": "ee10802070e829705f24feec77244b7b",
+    "mtime": 1794932614.125774,
+    "seen": 1794933248.5847898,
+    "ast_hash": "38cd39ed4e834a818f498a452ac2c3c0",
     "semantic_hash": ""
   },
   "backend/app/services/imports.py": {
@@ -180,9 +180,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_demo_cases.py": {
-    "mtime": 1794618767.9292326,
-    "seen": 1794659040.1764622,
-    "ast_hash": "13a0b2b236ab232eaf5bdc4ca74bd052",
+    "mtime": 1794932801.6950355,
+    "seen": 1794933248.5847898,
+    "ast_hash": "c6532caee9d2b389604a761975329388",
     "semantic_hash": ""
   },
   "backend/tests/test_recommendation.py": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1794932205.3645296,
-    "seen": 1794932212.3062465,
-    "ast_hash": "67d6dcad1103bf7378efed59c0c0d96c",
+    "mtime": 1794933244.8158145,
+    "seen": 1794933248.5847898,
+    "ast_hash": "20dbdb2d083cc65b75b5897f86bb5f87",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -981,6 +981,30 @@
     "mtime": 1794932007.7415812,
     "seen": 1794932212.3062465,
     "ast_hash": "be68225652ed9c3404f7a7d8e08c458b",
+    "semantic_hash": ""
+  },
+  "ml/results/20261117-1627-mot-seul-hybride.json": {
+    "mtime": 1794933170.8963487,
+    "seen": 1794933248.5847898,
+    "ast_hash": "0094171c53f4d04e551468e5cdcd0364",
+    "semantic_hash": ""
+  },
+  "ml/results/20261117-1627-mot-seul-mots-cles.json": {
+    "mtime": 1794932870.6881185,
+    "seen": 1794933248.5847898,
+    "ast_hash": "bb06231ef2568fa8b3f6327d69a3436b",
+    "semantic_hash": ""
+  },
+  "ml/results/20261117-1627-mot-seul-hybride.md": {
+    "mtime": 1794933170.8947914,
+    "seen": 1794933248.5847898,
+    "ast_hash": "b9d6c81a9f84802c95248203c7d2545c",
+    "semantic_hash": ""
+  },
+  "ml/results/20261117-1627-mot-seul-mots-cles.md": {
+    "mtime": 1794932870.660994,
+    "seen": 1794933248.5847898,
+    "ast_hash": "b9e2d04455a902accd5b7d5124391dd8",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {

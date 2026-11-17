@@ -1,0 +1,18 @@
+# Résultats 20261117-1627 mot-seul-mots-cles
+
+Modèle de langage : `none`. Jeux : dev_fr_synthetique, demo_cases.
+
+| Variante | Modèle | Jeu | n | Top-1 | Top-3 | Abstention | Hors sujet refusé | ms (moy. / p95) |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| A / D (chaîne complète) | tfidf-lr-fault-20261114 | dev_fr_synthetique | 50 | 86% | 94% | 6% | 100% | 853.2 / 93.7 |
+| A / D (chaîne complète) | tfidf-lr-fault-20261114 | demo_cases | 17 | 94% | 100% | 0% | 100% | 70.8 / 80.2 |
+
+## Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
+
+### A / D (chaîne complète) | dev_fr_synthetique (3)
+- `dev008` "la voiture broute à bas régime et la consommation d'essence a augmenté" : attendu ['bougies-allumage', 'bobine-allumage', 'injecteurs'], obtenu unknown
+- `dev025` 'la troisième craque et refuse parfois de rentrer' : attendu ['boite-vitesses', 'kit-embrayage'], obtenu unknown
+- `dev029` 'le moteur cliquette fort au ralenti et sent le gasoil' : attendu ['injecteurs'], obtenu unknown
+
+### A / D (chaîne complète) | demo_cases (0)
+- aucune
