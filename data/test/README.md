@@ -11,7 +11,8 @@
 1. Remplir `modele_annotation_oran.csv` avec les mécaniciens partenaires : un cas par ligne, **le symptôme
    dans les mots du client** (pas reformulé), le véhicule, les codes OBD lus, la cause trouvée et la ou les
    pièces changées. Viser 200 cas, sur plusieurs mécaniciens et plusieurs semaines.
-2. Convertir : `python ml/oran_csv_to_jsonl.py data/test/modele_annotation_oran.csv` produit `oran_test.jsonl`.
+2. Contrôler puis convertir : `python ml/oran_csv_to_jsonl.py fiches.csv --check` liste les lignes refusées (pièce inconnue, symptôme vide, doublon) et les avertissements à relire (pièce écrite de façon approchée, véhicule absent du référentiel) ; sans `--check`, le script écrit `oran_test.jsonl` et affiche son empreinte.
+   Protocole complet des essais : `docs/essais-oran.md`.
 3. **Le figer avant tout entraînement** : le commiter, ne plus le modifier, noter son empreinte dans le mémoire.
 
 Format JSONL (une ligne par cas) :

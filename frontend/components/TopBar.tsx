@@ -47,7 +47,7 @@ export default function TopBar() {
           {link("/espace-magasin", t("nav.shop"))}
           {user?.role === "admin" && link("/admin", t("nav.admin"))}
           {user ? (
-            <button onClick={() => session.clear()}>{t("nav.logout")}</button>
+            link("/compte", t("nav.account"))
           ) : (
             link("/connexion", t("nav.login"))
           )}

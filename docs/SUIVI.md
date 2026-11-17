@@ -1,11 +1,11 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 17/11/2026, fin de l'étape 10.
+> Dernière mise à jour : 17/11/2026, étape 11 (partie logicielle terminée, essais à mener).
 
 ## 1. Où on en est
 
-**Étape 10 (espace magasin) terminée le 17/11/2026. Prochaine : étape 11 (retours et tests), puis les essais à Oran.**
+**Étape 11 : partie logicielle terminée le 17/11/2026. Reste le terrain : essais à Oran et leur compte rendu (protocole : `docs/essais-oran.md`), qui donneront aussi le jeu de test d'Oran.**
 
 | Étape (section 11 du cahier) | État | Notes |
 | --- | --- | --- |
@@ -19,7 +19,7 @@
 | 8. Chaîne de diagnostic | **Fait (16/11/2026)** | Recherche hybride, modèle affiné derrière une interface, cache, repli, affinage en arrière-plan avec sondage. 104 tests. Résultats : `ml/README.md` (section Étape 8) |
 | 9. Application | **Fait (17/11/2026)** | 7 tests e2e sur téléphone simulé (`cd frontend && npx playwright test`) : parcours automobiliste, mécanicien, hors sujet, dictée, installable, 360 px. Essai réel sur le PC validé par l'utilisateur. Site ouvrable depuis un téléphone du même Wi-Fi ; fiche d'essai sur vrai téléphone : `docs/test-telephone.md` (recommandée avant les essais d'Oran) |
 | 10. Espace magasin | **Fait (17/11/2026)** | Critère vérifié de bout en bout (`frontend/e2e/magasin.spec.ts`) : connexion SMS, inscription avec position, modèle Excel téléchargeable (`GET /catalog/template.xlsx`), import de 20 produits, validation, fiche publique avec ses 20 produits. Catalogue d'une fiche non validée caché au public |
-| 11. Retours et tests | Base en place | Retours et indicateurs (`/feedback`, `/admin/metrics`). Essais avec mécaniciens et magasins d'Oran : à organiser |
+| 11. Retours et tests | **Logiciel fait (17/11/2026) ; essais à mener** | « Pièce trouvée » modifie le score (`tests/test_retours.py`), compté une fois par client et par jour (empreinte d'IP, jamais l'adresse ; migration `0002`), retours et contacts limités en débit. Page d'indicateurs : admin > Indicateurs. Page « Mon compte » avec suppression du compte. Convertisseur `ml/oran_csv_to_jsonl.py`. **Reste : essais à Oran + compte rendu** (`docs/essais-oran.md` -> `docs/compte-rendu-essais.md`) |
 | 12. Mise en ligne | Pas commencé | Seulement sur décision de l'équipe |
 
 **Emplacement du projet : `C:\Users\Adel\Desktop\DALIL`** (hors OneDrive depuis le 15/11/2026 ; l'ancien dossier `OneDrive\Desktop\DALIL` est vide).
@@ -43,27 +43,27 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-1. **Étape 11 (retours et tests)** : test « un retour “pièce trouvée” modifie le score » ; essais avec des mécaniciens et des magasins d'Oran, puis compte rendu.
+1. **Étape 11, essais à Oran (équipe, sur le terrain)** : suivre `docs/essais-oran.md` : fiches des mécaniciens (jeu de test, objectif 200 cas), inscription chronométrée de 5 à 10 magasins, parcours de 10 à 20 automobilistes, questionnaire ; puis rédiger `docs/compte-rendu-essais.md`.
 2. **Web scraping et collecte de données** : discussion reportée par l'utilisateur, à reprendre après l'étape 8. Deux pistes déjà proposées :
    - lancer le script OpenStreetMap (magasins d'Oran) ;
    - rédiger des demandes d'autorisation aux forums francophones. Pas de collecte sans licence notée dans `data/SOURCES.md`.
-3. **Jeu de test d'Oran** : faire annoter de vrais cas par des mécaniciens (modèle : `data/test/modele_annotation_oran.csv`), puis relancer `ml/evaluate.py` sur ce jeu.
-4. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
-5. **Étape 12 (mise en ligne)** : seulement sur décision de l'équipe (hébergement, https, sauvegardes, surveillance, guide des magasins, déclaration à l'ANPDP).
+3. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
+4. **Étape 12 (mise en ligne)** : seulement sur décision de l'équipe (hébergement, https, sauvegardes, surveillance, guide des magasins, déclaration à l'ANPDP).
 
 ## Décisions prises
 
 | Date | Décision | Raison |
 | --- | --- | --- |
 | 17/11/2026 | **Modèle de langage affiné désactivé par défaut** (`USE_LLM=0` dans `DEMARRER-DALIL.bat`, `DALIL_LLM_PROVIDER=none` dans le code). Gardé en option pour les mesures du mémoire (`USE_LLM=1`) | Il ne gagne pas en précision (démo 88 -> 77 %, dev 92 -> 88 %) et prend ~1 min par diagnostic, alors que le cahier exige moins de 10 s. Pour le réactiver un jour : ré-affiner avec un jeu construit par la recherche hybride (`ml/build_llm_dataset.py`), puis remesurer |
+| 17/11/2026 | « Pièce trouvée » compté une fois par client (empreinte HMAC de l'adresse IP) et par jour ; retours et contacts limités à 30 par minute | Sans cela, un magasin pouvait gonfler son score en répétant le retour. Limite connue : derrière une même adresse IP d'opérateur (CGNAT), deux vrais clients le même jour comptent pour un : on sous-compte plutôt que de laisser tricher |
 | 17/11/2026 | **Description d'un seul mot utile, sans code OBD : jamais de résultat sûr.** Questions de précision (« frein », « batterie »), ou demande de préciser quand une seule panne ressort (« bruit », « fumée ») (`MIN_INFORMATIVE_WORDS = 2` dans `pipeline.py`) | « frein » donnait 78 %, « bruit » 100 % sans question. Seuil 2 et non 3 : « ça grince quand je freine » (2 mots utiles) est une vraie description. Jeux dev et démo inchangés |
 | 17/11/2026 | Reclassement accéléré : int8, 10 passages x 256 jetons (`backend/app/config.py`) | 20 passages en float32 prenaient 15 à 24 s par diagnostic sur le portable ; maintenant 3,5 à 5 s, pour 2 points de moins sur le jeu dev (92 -> 90 %), démo inchangée (88 %), hors sujet toujours 100 % refusé |
 | 16/11/2026 | Recherche hybride (vecteurs + reclassement) activée par le lanceur | Voir `ml/README.md`, section Étape 8 |
 
 ## 4. Pour reprendre le travail
 
-- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (115 tests).
-- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (13 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
+- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (123 tests).
+- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (14 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
 - **Ouvrir le site sur un téléphone** : `DEMARRER-DALIL.bat` affiche l'adresse Wi-Fi du PC (fiche : `docs/test-telephone.md`).
 - **Tests du pipeline de données** : `cd backend && .venv/Scripts/python -m pytest -q ../data/pipeline/tests`.
 - **Servir le modèle affiné** :
@@ -101,3 +101,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 17/11/2026 | Étape 10 : modèle Excel du catalogue, catalogue des fiches non validées caché au public, code SMS fixe réservé aux tests (`DALIL_OTP_TEST_CODE`, refusé hors SMS « console »), test de bout en bout « un magasin publie 20 produits ». 112 tests backend, 8 e2e. **Étape 10 terminée** |
 | 17/11/2026 | Exploration de l'application dans un vrai navigateur (agent-browser, format téléphone). Corrigés : années limitées au modèle choisi (et remise à zéro au changement de modèle), message clair pour un code OBD-II impossible (sans « Value error, »), « diagnostic / magasin introuvable » au lieu de « le serveur ne répond pas », page 404 en français, aucun numéro dans les liens des magasins fictifs. 5 tests e2e ajoutés (13 au total), 112 tests backend. Reste une décision : diagnostic trop sûr sur un seul mot |
 | 17/11/2026 | Description d'un seul mot : questions de précision ou demande de préciser au lieu d'un résultat sûr. 115 tests backend, 13 e2e, mesures inchangées |
+| 17/11/2026 | Étape 11, partie logicielle : anti-abus du « pièce trouvée » (migration 0002), page « Mon compte » avec suppression du compte (promise mais absente du site), convertisseur des fiches d'Oran (script annoncé mais absent), `evaluate.py` robuste à un véhicule inconnu, protocole des essais `docs/essais-oran.md`. 123 tests backend, 14 e2e |

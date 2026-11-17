@@ -133,4 +133,12 @@ class RateLimiter:
 
 
 diagnosis_limiter = RateLimiter(get_settings().diagnosis_rate_per_minute)
+feedback_limiter = RateLimiter(get_settings().feedback_rate_per_minute)
+
+
+def client_hash(request: Request) -> str:
+    """Empreinte courte et non réversible du client (HMAC de l'adresse IP avec la clé du serveur) : sert à compter
+    les retours par client sans conserver d'adresse IP (collecte minimale, section 10)."""
+    ip = request.client.host if request.client else "anon"
+    return hmac.new(get_settings().jwt_secret.encode(), f"client:{ip}".encode(), hashlib.sha256).hexdigest()[:16]
 otp_limiter = RateLimiter(get_settings().otp_rate_per_minute)

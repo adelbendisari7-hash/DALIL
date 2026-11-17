@@ -11,7 +11,7 @@ import math
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 
-from sqlalchemy import func, select
+from sqlalchemy import String, cast, func, select
 from sqlalchemy.orm import Session
 
 from ..models import (
@@ -196,9 +196,12 @@ def recommend(
             )
         }
 
+    # « Pièce trouvée » : un retour par client et par jour (empreinte + date), pour qu'on ne puisse pas gonfler le
+    # score d'un magasin en répétant le même retour. Retours anciens sans empreinte : comptés un par un.
+    voter = func.coalesce(Feedback.client_hash, "id:" + cast(Feedback.id, String)) + "|" + func.date(Feedback.created_at)
     fb = {
         (sid, found): n for sid, found, n in db.execute(
-            select(Feedback.shop_id, Feedback.part_found, func.count())
+            select(Feedback.shop_id, Feedback.part_found, func.count(func.distinct(voter)))
             .where(Feedback.shop_id.in_(ids), Feedback.part_found.is_not(None))
             .group_by(Feedback.shop_id, Feedback.part_found)
         )

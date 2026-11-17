@@ -69,7 +69,8 @@ def run(db, cases: list[dict], mode: str) -> dict:
     top1 = top3 = abstain = neg_ok = 0
     times, errors = [], []
     for c in cases:
-        vid = _variant(db, *c["variant"]).id if c.get("variant") else None
+        v = _variant(db, *c["variant"]) if c.get("variant") else None
+        vid = v.id if v else None  # véhicule inconnu du référentiel : diagnostic sans véhicule
         t0 = time.perf_counter()
         r, _ = P.run_diagnosis(db, P.DiagnosisInput(text=c["text"], variant_id=vid, dtc_codes=c["dtc"]), mode=mode)
         times.append((time.perf_counter() - t0) * 1000)

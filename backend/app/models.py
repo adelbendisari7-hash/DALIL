@@ -341,4 +341,7 @@ class Feedback(Base):
     part_found: Mapped[bool | None] = mapped_column(Boolean)
     diagnosis_correct: Mapped[bool | None] = mapped_column(Boolean)
     comment: Mapped[str | None] = mapped_column(Text)
+    # Empreinte du client (HMAC de l'adresse IP, jamais l'adresse) : un « pièce trouvée » compte une fois par client
+    # et par jour dans le score (section 6.4), pour qu'un magasin ne puisse pas gonfler le sien.
+    client_hash: Mapped[str | None] = mapped_column(String(16), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)

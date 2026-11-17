@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends, File, HTTPException, Query, Response, UploadFile
+from fastapi import APIRouter, Depends, File, HTTPException, Query, Request, Response, UploadFile
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -33,7 +33,7 @@ from ..schemas import (
     ShopPatch,
     shop_out,
 )
-from ..security import current_user, current_user_optional, normalize_phone, require_role
+from ..security import client_hash, current_user, current_user_optional, feedback_limiter, normalize_phone, require_role
 from ..services.imports import import_products, product_template, read_table
 from ..services.recommendation import RECOMMENDABLE_STATUSES, category_lineage, recommend
 
@@ -156,7 +156,7 @@ def shop_products(shop_id: int, db: Session = Depends(get_db), user: User | None
     ]
 
 
-@router.post("/contact-events", status_code=201)
+@router.post("/contact-events", status_code=201, dependencies=[Depends(feedback_limiter)])
 def contact_event(body: ContactEventIn, db: Session = Depends(get_db)):
     if not db.get(Shop, body.shop_id):
         raise HTTPException(404, "Magasin inconnu")
@@ -166,11 +166,11 @@ def contact_event(body: ContactEventIn, db: Session = Depends(get_db)):
     return {"id": ev.id}
 
 
-@router.post("/feedback", status_code=201)
-def feedback(body: FeedbackIn, db: Session = Depends(get_db)):
+@router.post("/feedback", status_code=201, dependencies=[Depends(feedback_limiter)])
+def feedback(body: FeedbackIn, request: Request, db: Session = Depends(get_db)):
     if body.shop_id and not db.get(Shop, body.shop_id):
         raise HTTPException(404, "Magasin inconnu")
-    fb = Feedback(**body.model_dump())
+    fb = Feedback(**body.model_dump(), client_hash=client_hash(request))
     db.add(fb)
     if body.part_found and body.shop_id:
         variant_id = None
