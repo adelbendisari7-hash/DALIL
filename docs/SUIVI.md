@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 18/11/2026, qualité des réponses (darija, fiches, exemples).
+> Dernière mise à jour : 18/11/2026, collecte Ouedkniss anonymisée.
 
 ## 1. Où on en est
 
@@ -54,6 +54,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | Date | Décision | Raison |
 | --- | --- | --- |
 | 17/11/2026 | **Modèle de langage affiné désactivé par défaut** (`USE_LLM=0` dans `DEMARRER-DALIL.bat`, `DALIL_LLM_PROVIDER=none` dans le code). Gardé en option pour les mesures du mémoire (`USE_LLM=1`) | Il ne gagne pas en précision (démo 88 -> 77 %, dev 92 -> 88 %) et prend ~1 min par diagnostic, alors que le cahier exige moins de 10 s. Pour le réactiver un jour : ré-affiner avec un jeu construit par la recherche hybride (`ml/build_llm_dataset.py`), puis remesurer |
+| 18/11/2026 | **Ouedkniss utilisé sur déclaration d'autorisation de l'utilisateur** (accord oral) ; données anonymisées, statistiques agrégées seulement | L'utilisateur déclare l'accord d'Ouedkniss ; les CGU exigent un écrit : confirmation écrite à obtenir et archiver. L'Argus : collecte en cours, à ne pas toucher ; autorisation à confirmer avant tout usage |
 | 18/11/2026 | **Darija prise en charge** (lettres latines et arabes) par un lexique, avant toute la chaîne ; 2 fiches de pannes et 255 exemples ajoutés ; règle hors sujet (prix, achat, vente) | Audit d'écriture réaliste : top-3 56 % -> 89 % ; contrôle jamais vu 38 % -> 100 % ; dev et démo stables ou meilleurs ; hors sujet 100 %. Lexique à faire relire par des locuteurs |
 | 17/11/2026 | **Ouedkniss exclu de la collecte** ; étude de marché sur sources publiques (ONS, presse) | Leurs CGU (article 9) interdisent « toute réutilisation, extraction de l'une ou partie du contenu » sans autorisation écrite, même agrégée. L'ONS publie le parc par marque (pas par modèle) ; le détail par modèle viendra des magasins enquêtés et des recherches faites dans DALIL |
 | 17/11/2026 | « Pièce trouvée » compté une fois par client (empreinte HMAC de l'adresse IP) et par jour ; retours et contacts limités à 30 par minute | Sans cela, un magasin pouvait gonfler son score en répétant le retour. Limite connue : derrière une même adresse IP d'opérateur (CGNAT), deux vrais clients le même jour comptent pour un : on sous-compte plutôt que de laisser tricher |
@@ -107,3 +108,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 17/11/2026 | Recherche de jeux de données pour les modèles d'Algérie (Wikidata CC0, MOT étendu, NHTSA étendu, vPIC, Transport Canada, Safety Gate, Zenodo ; écartés : UTAC, ADAC, CJJones HF, Ouedkniss). Plan d'exécution `docs/plan-referentiel-et-donnees.md` |
 | 17/11/2026 | Décisions pour le plan du référentiel et des données : Suzuki et Lada ajoutés ; traduction complète avec le meilleur traducteur mesuré (comparer opus-mt et MADLAD-400) ; Safety Gate selon ses conditions ; modèle de langage ré-affiné et réactivé seulement s'il améliore la chaîne sous 10 s. Détail en tête de `docs/plan-referentiel-et-donnees.md` |
 | 18/11/2026 | Qualité des réponses : audit de 48 descriptions écrites comme à Oran (SMS, darija, arabe) et contrôle de 20 ; lexique darija (`diagnosis/darija.py`), « Nous avons compris » sur la page de résultat, fiches « ampoule grillée » et « ralenti instable », 428 exemples d'entraînement, règle hors sujet. 140 tests backend, 16 e2e |
+| 18/11/2026 | Collecte Ouedkniss de l'utilisateur (246 617 annonces) anonymisée par `data/scripts/anonymiser_ouedkniss.py` (champs vendeur retirés, identifiants hachés, 394 numéros masqués dont des formes déguisées : émojis, lettres arabes, « x », « _ », « H »). Premiers agrégats : Geely Coolray, Livan X3 Pro, Symbol, Ibiza, Clio 4 en tête ; Oran 3e région |
