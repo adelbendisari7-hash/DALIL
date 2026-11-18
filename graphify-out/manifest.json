@@ -210,15 +210,15 @@
     "semantic_hash": ""
   },
   "data/pipeline/run.py": {
-    "mtime": 1794669947.0242114,
-    "seen": 1794774089.5846496,
-    "ast_hash": "177f504f062839621f562d3db5aa462d",
+    "mtime": 1795036370.2202823,
+    "seen": 1795036540.4535232,
+    "ast_hash": "0a6b5677ef0f913143b6a5f1cba64565",
     "semantic_hash": ""
   },
   "data/pipeline/sources/__init__.py": {
-    "mtime": 1794657721.3125153,
-    "seen": 1794659040.1764622,
-    "ast_hash": "d3fd952e2c71cf09094f6524217d2fd6",
+    "mtime": 1795036433.4165792,
+    "seen": 1795036540.4535232,
+    "ast_hash": "7cb650713d204515a30b362fdebdc894",
     "semantic_hash": ""
   },
   "data/pipeline/sources/cvffad.py": {
@@ -546,9 +546,9 @@
     "semantic_hash": ""
   },
   "data/SOURCES.md": {
-    "mtime": 1795035856.8706377,
-    "seen": 1795035864.419936,
-    "ast_hash": "16092d11855be3ecdfa01ac8f8faaa1b",
+    "mtime": 1795036391.9658823,
+    "seen": 1795036540.4701474,
+    "ast_hash": "f2381f7256f769ad22e8559a686794d4",
     "semantic_hash": ""
   },
   "data/pipeline/requirements-translate.txt": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795035856.8706377,
-    "seen": 1795035864.4220774,
-    "ast_hash": "9ca5bc573b2390f8d701266aca8493be",
+    "mtime": 1795036446.0167615,
+    "seen": 1795036540.4830947,
+    "ast_hash": "163d35c4bb5d980a72451d1272a38a04",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -1239,6 +1239,24 @@
     "mtime": 1795035833.871562,
     "seen": 1795035864.4280934,
     "ast_hash": "7efed86ea9eaf26089d8229943b7fbb0",
+    "semantic_hash": ""
+  },
+  "data/pipeline/sources/largus.py": {
+    "mtime": 1795036370.2202823,
+    "seen": 1795036540.4543045,
+    "ast_hash": "d55766f137ef2ae9c0fb1f32beacda76",
+    "semantic_hash": ""
+  },
+  "data/pipeline/tests/test_largus.py": {
+    "mtime": 1795036419.9675422,
+    "seen": 1795036540.4543045,
+    "ast_hash": "d99b56f54d1b680d1043159f0ecc4acc",
+    "semantic_hash": ""
+  },
+  "data/sources/largus_forum.md": {
+    "mtime": 1795036390.8707697,
+    "seen": 1795036540.4815626,
+    "ast_hash": "7779999af36bac58de4df2b19d3e4214",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {
