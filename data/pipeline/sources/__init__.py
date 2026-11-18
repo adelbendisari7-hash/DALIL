@@ -60,4 +60,10 @@ SOURCES: dict[str, SourceSpec] = {s.id: s for s in [
         "zh", "cvffad", synthetic=True,
         notes="Textes générés à partir de gabarits (champ source = generated), flottes de camions et de cars anonymisées.",
     ),
+    SourceSpec(
+        "largus_forum", "Forum L'Argus – Panne auto, mécanique et entretien (collecte de l'équipe)",
+        "Accord de L'Argus (DALIL_LARGUS_AUTORISATION)", "https://www.largus.fr/forum-auto/panne-auto-mecanique-et-entretien/",
+        "Forum auto L'Argus (largus.fr), messages des membres anonymisés ; lien vers chaque discussion", "fr", "largus",
+        notes="Utilisable seulement avec l'accord de L'Argus, à archiver. Voir data/sources/largus_forum.md.",
+    ),
 ]}

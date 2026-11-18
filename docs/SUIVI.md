@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 18/11/2026, référentiel véhicules complété (phase A).
+> Dernière mise à jour : 18/11/2026, module L'Argus prêt (collecte en cours).
 
 ## 1. Où on en est
 
@@ -43,7 +43,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-1. **En attendant la fin de la collecte L'Argus (~30 h à partir du 18/11 soir)** : écrire le module de lecture de L'Argus (anonymisation des auteurs, panne -> pièce, discussions résolues), testé sur une base fictive de même structure, sans toucher à la collecte en cours. Puis entraînement sur L'Argus + données existantes, comparaison du classifieur actuel et d'un modèle français affiné (CamemBERT), mesure sur dev, démo, audit, contrôle. Traduction des sources anglaises en attente : décidée après mesure. Phase A du plan référentiel : **faite**.
+1. **À la fin de la collecte L'Argus (~20/11/2026)** : (a) obtenir l'accord écrit de L'Argus ; (b) lancer `DALIL_LARGUS_AUTORISATION="écrite, date" python data/pipeline/run.py collect --sources largus_forum --largus-db <chemin>/largus_pannes.db` puis `run.py load --sources largus_forum` ; (c) relire 100 étiquettes au hasard ; (d) entraîner (L'Argus + données existantes), comparer classifieur actuel et modèle français affiné, mesurer (dev, démo, audit, contrôle). Module, fiche et tests : prêts. Préparation de l'entraînement : à faire en attendant.
 2. **Étape 11, essais à Oran (équipe, sur le terrain)** : suivre `docs/essais-oran.md` : fiches des mécaniciens (jeu de test, objectif 200 cas), inscription chronométrée de 5 à 10 magasins, parcours de 10 à 20 automobilistes, questionnaire ; puis rédiger `docs/compte-rendu-essais.md`.
 3. **Données des magasins** : importer les 62 lieux OpenStreetMap (`data/raw/osm_oran.csv`) en brouillons, liste de visite (mention « © contributeurs OpenStreetMap ») ; Ouedkniss exclu (CGU, article 9), demande d'autorisation possible.
 4. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
@@ -110,3 +110,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 18/11/2026 | Qualité des réponses : audit de 48 descriptions écrites comme à Oran (SMS, darija, arabe) et contrôle de 20 ; lexique darija (`diagnosis/darija.py`), « Nous avons compris » sur la page de résultat, fiches « ampoule grillée » et « ralenti instable », 428 exemples d'entraînement, règle hors sujet. 140 tests backend, 16 e2e |
 | 18/11/2026 | Collecte Ouedkniss de l'utilisateur (246 617 annonces) anonymisée par `data/scripts/anonymiser_ouedkniss.py` (champs vendeur retirés, identifiants hachés, 394 numéros masqués dont des formes déguisées : émojis, lettres arabes, « x », « _ », « H »). Premiers agrégats : Geely Coolray, Livan X3 Pro, Symbol, Ibiza, Clio 4 en tête ; Oran 3e région |
 | 18/11/2026 | Phase A du référentiel : statistiques Ouedkniss par modèle (`data/market/ouedkniss_modeles.json`), référentiel porté à 44 marques, 260 modèles, 467 motorisations (Clio 1 à 5, 205, 405, R19, Coolray, Livan X3 Pro, Aveo, Ibiza, utilitaires…), recherche par saisie, « véhicule absent », modèles triés par fréquence, indicateurs. Migration 0003. Carburant « inconnu » sans pénalité dans le diagnostic. 149 tests backend, 18 e2e, mesures inchangées |
+| 18/11/2026 | Module de lecture de L'Argus (`data/pipeline/sources/largus.py`) : verrou tant que l'accord n'est pas renseigné, lecture seule, auteurs anonymisés, texte = question seule, étiquette par solution / réponses / question. Fiche `data/sources/largus_forum.md`, 5 tests sur une base fictive de même structure (36 tests pipeline) |
