@@ -24,7 +24,7 @@
 
 **Emplacement du projet : `C:\Users\Adel\Desktop\DALIL`** (hors OneDrive depuis le 15/11/2026 ; l'ancien dossier `OneDrive\Desktop\DALIL` est vide).
 
-**Git : premier commit `ff8c735` le 15/11/2026** (étapes 1 à 7, preuve datée de la section 14), branche `master`, pas de dépôt distant.
+**Git : premier commit `ff8c735` le 15/11/2026** (étapes 1 à 7, preuve datée de la section 14), branche `master`, envoyée sur GitHub depuis le 19/11/2026 : `adelbendisari7-hash/DALIL`, branche `main` (`git push` après chaque modification).
 
 ## 2. Résultats à retenir (étape 7)
 
