@@ -126,6 +126,35 @@ Lecture honnête :
   partie recherche et classifieur est protégée par un verrou : sans lui, deux diagnostics simultanés pendant la
   construction des index échouaient (`NotFittedError`, 12 fois sur 15 dans `tests/test_concurrence.py`).
 
+## Qualité des réponses sur des textes écrits comme à Oran (18/11/2026)
+
+Les jeux dev et démo sont en français propre ; les automobilistes d'Oran écrivent avec des fautes, en style SMS, en
+darija (lettres latines ou arabes). Deux jeux synthétiques mesurent cet écart (`data/test/README.md`) : l'audit (48 cas,
+a servi à régler) et le contrôle (20 cas écrits avant les corrections, jamais utilisés pour les écrire).
+
+| Bonne pièce dans les 3 premières (top-3), mode hybride | Avant | Lexique darija | + 2 fiches, 255 exemples, règle hors sujet |
+| --- | ---: | ---: | ---: |
+| Audit (réglage) | 56 % | 78 % | **89 %** |
+| Contrôle (jamais vu) | 38 % | 94 % | **100 %** |
+| Dev (français propre) | 96 % | 96 % | **98 %** |
+| Démo | 100 % | 100 % | **100 %** |
+| « Je ne sais pas » à tort (audit) | 42 % | 20 % | **7 %** |
+| Hors sujet refusé (tous les jeux) | 67 à 100 % | 75 à 100 % | **100 %** |
+
+Ce qui a été changé :
+1. **Lexique darija → français** (`diagnosis/darija.py`, section 6.1 du cahier, étape 1). Tournures négatives (« ma tdemarich »),
+   verbes de symptômes (« ysakhen », « ysoni », « tfargh »), arabe avec article et préfixes (« الموتور يسخن »). Toute la chaîne
+   reçoit du français ; la page de résultat affiche « Nous avons compris : … ».
+2. **Deux fiches de pannes manquantes** : ampoule ou feu grillé, ralenti instable ou calage au ralenti.
+3. **255 nouveaux exemples d'entraînement** (173 -> 428, au moins 9 par panne) ; validation croisée du classifieur :
+   top-1 59 % -> 72 %.
+4. **Règle hors sujet** : prix, achat, vente, permis, salutations, sans symptôme ni pièce citée -> « je ne sais pas »
+   (« combien coûte le gasoil » passait pour une panne).
+
+Prudence : audit, contrôle et lexique ont le même auteur ; le chiffre du mémoire reste celui du jeu de test d'Oran.
+Restent mal traités : « fumée noire et ça consomme », « ça s'éteint tout seul en route », « tak tak en tournant le volant »
+(rotules au lieu de cardans), et l'arabe au-delà du vocabulaire courant.
+
 ## Ce que le banc a déjà appris (matière pour le mémoire)
 
 - **Ajouter des sources affaiblit la détection du hors-sujet.** Après le chargement des 1 800 rappels RappelConso,

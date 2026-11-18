@@ -1,11 +1,11 @@
 {
   "target": "fault",
   "C": 20.0,
-  "n": 173,
-  "top1": 0.601,
-  "top3": 0.798,
-  "part_top1": 0.601,
-  "median_top_prob": 0.295,
-  "version": "tfidf-lr-fault-20261114",
+  "n": 428,
+  "top1": 0.717,
+  "top3": 0.879,
+  "part_top1": 0.717,
+  "median_top_prob": 0.471,
+  "version": "tfidf-lr-fault-20261118",
   "corpus": {}
 }

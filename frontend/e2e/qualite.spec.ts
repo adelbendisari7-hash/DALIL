@@ -51,3 +51,19 @@ test("magasin fictif : aucun numéro dans les liens d'appel et de WhatsApp", asy
     expect(href).not.toMatch(/\d{6,}/);
   }
 });
+
+test("description en darija : DALIL dit ce qu'il a compris et propose des causes", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Décrivez le problème").fill("el moteur ysakhen bezaf f la route");
+  await page.getByRole("button", { name: "Trouver la panne" }).click();
+  await expect(page.getByText("Nous avons compris :")).toBeVisible();
+  await expect(page.getByText(/chauffe/).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Causes probables" })).toBeVisible();
+});
+
+test("question sans panne en darija : je ne sais pas", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Décrivez le problème").fill("chhal soum el gasoil lyoum");
+  await page.getByRole("button", { name: "Trouver la panne" }).click();
+  await expect(page.getByRole("heading", { name: "Panne non identifiée" })).toBeVisible();
+});

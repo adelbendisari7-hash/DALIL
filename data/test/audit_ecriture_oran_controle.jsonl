@@ -1,0 +1,20 @@
+{"id": "ctl01", "groupe": "darija-latin", "text": "loto ma theza9ch ki ndir contact, ghir tak tak", "expect": ["batterie", "demarreur"]}
+{"id": "ctl02", "groupe": "darija-latin", "text": "les freins ysafro bezaf f sbah", "expect": ["plaquettes-avant", "plaquettes-arriere", "disques-frein"]}
+{"id": "ctl03", "groupe": "darija-latin", "text": "el aiguille ta3 la temperature tla3 l rouge", "expect": ["thermostat", "radiateur", "pompe-eau", "ventilateur-radiateur", "durite-refroidissement", "vase-expansion"]}
+{"id": "ctl04", "groupe": "darija-latin", "text": "siyara t3ayi f la monté w ma tetla3ch", "expect": ["kit-embrayage", "turbocompresseur", "filtre-carburant", "injecteurs", "filtre-air"]}
+{"id": "ctl05", "groupe": "darija-latin", "text": "kayen tak tak f la roue ki ndour", "expect": ["cardans", "rotules-direction", "roulements-roue"]}
+{"id": "ctl06", "groupe": "darija-latin", "text": "ri7a ta3 l7ri9 men el frein", "expect": ["etrier-frein", "plaquettes-avant", "disques-frein"]}
+{"id": "ctl07", "groupe": "darija-latin", "text": "el moteur yakel zit bezaf", "expect": ["joint-culasse", "turbocompresseur", "huile-moteur", "joint-cache-culbuteurs"]}
+{"id": "ctl08", "groupe": "darija-latin", "text": "el voyant ta3 batterie yche3el ki nemchi", "expect": ["alternateur", "batterie", "courroie-accessoires"]}
+{"id": "ctl09", "groupe": "darija-latin", "text": "dokhan byed yokhrej men l'echappement w el ma yan9es", "expect": ["joint-culasse"]}
+{"id": "ctl10", "groupe": "darija-latin", "text": "el volant yertajef ki nfreini", "expect": ["disques-frein", "plaquettes-avant"]}
+{"id": "ctl11", "groupe": "arabe", "text": "السيارة تسخن في الطريق", "expect": ["thermostat", "radiateur", "pompe-eau", "ventilateur-radiateur", "durite-refroidissement", "vase-expansion"]}
+{"id": "ctl12", "groupe": "arabe", "text": "الفران يصفر بزاف", "expect": ["plaquettes-avant", "plaquettes-arriere", "disques-frein"]}
+{"id": "ctl13", "groupe": "arabe", "text": "الباطري ماتشارجيش", "expect": ["batterie", "alternateur"]}
+{"id": "ctl14", "groupe": "arabe", "text": "دخان كحل من الشكمان", "expect": ["injecteurs", "turbocompresseur", "filtre-air", "debitmetre", "vanne-egr"]}
+{"id": "ctl15", "groupe": "arabe", "text": "الكليماتيزور ما يبردش", "expect": ["compresseur-clim", "condenseur"]}
+{"id": "ctl16", "groupe": "arabe", "text": "ريحة ليسانس في الطوموبيل", "expect": ["injecteurs", "pompe-carburant", "filtre-carburant"]}
+{"id": "ctl17", "groupe": "hors-sujet", "text": "win nelga mécanicien mlih f wahran", "expect_status": "unknown"}
+{"id": "ctl18", "groupe": "hors-sujet", "text": "chhal ydir el permis", "expect_status": "unknown"}
+{"id": "ctl19", "groupe": "hors-sujet", "text": "صباح الخير كيراك", "expect_status": "unknown"}
+{"id": "ctl20", "groupe": "hors-sujet", "text": "nheb nechri tomobil jdida", "expect_status": "unknown"}

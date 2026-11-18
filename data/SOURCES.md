@@ -6,7 +6,8 @@ avec sa licence. `knowledge_chunks.license` est obligatoire en base.
 | Source | Fichier / script | Licence | Statut | Remarques |
 | --- | --- | --- | --- | --- |
 | Fiches de pannes DALIL | `seed/faults.json` | Propriétaire DALIL | En base | Rédigées par l'équipe ; à relire par un mécanicien partenaire |
-| Exemples d'amorçage du classifieur | `seed/diagnosis_examples_fr.jsonl` | Propriétaire DALIL | En base / entraînement | **Synthétiques**, rédigés pour valider le code. Ne servent pas à l'évaluation du mémoire |
+| Exemples d'amorçage du classifieur | `seed/diagnosis_examples_fr.jsonl` | Propriétaire DALIL | En base / entraînement | **Synthétiques**, rédigés pour valider le code (428 depuis le 18/11/2026, au moins 9 par panne, registres variés). Ne servent pas à l'évaluation du mémoire |
+| Lexique darija → français | `backend/app/services/diagnosis/darija.py` | Propriétaire DALIL | En production | Rédigé par l'équipe le 18/11/2026 (lettres latines et arabes). **À faire relire et enrichir par des locuteurs d'Oran** |
 | Cas de démonstration | `seed/demo_cases.json` | Propriétaire DALIL | Tests | Critère de l'étape 8 ; ne remplacent pas le jeu de test figé d'Oran |
 | Codes OBD-II (amorce) | `seed/dtc_fr.json` | Propriétaire DALIL (définitions génériques SAE J2012 reformulées) | En base | 47 codes courants |
 | Taxonomie des pièces | `seed/part_categories.json` | Propriétaire DALIL | En base | Synonymes à enrichir (darija en V2) |

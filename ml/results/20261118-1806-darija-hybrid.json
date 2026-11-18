@@ -1,0 +1,220 @@
+{
+  "rows": [
+    {
+      "date": "20261118-1806",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.689,
+      "top3": 0.778,
+      "abstention": 0.2,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 3856.9,
+      "ms_p95": 3445.3
+    },
+    {
+      "date": "20261118-1806",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.938,
+      "top3": 0.938,
+      "abstention": 0.062,
+      "hors_sujet_refuse": 0.75,
+      "ms_moyen": 2750.1,
+      "ms_p95": 3288.5
+    },
+    {
+      "date": "20261118-1806",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.9,
+      "top3": 0.96,
+      "abstention": 0.04,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 2944.6,
+      "ms_p95": 3489.8
+    },
+    {
+      "date": "20261118-1806",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 4461.9,
+      "ms_p95": 6466.1
+    }
+  ],
+  "erreurs": {
+    "A / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud09",
+        "text": "les vitesse rentre mal surtout la 2",
+        "attendu": [
+          "kit-embrayage",
+          "boite-vitesses",
+          "cable-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud17",
+        "text": "phare avant grillé",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud19",
+        "text": "ca cale au ralenti au feu rouge",
+        "attendu": [
+          "papillon-motorise",
+          "vanne-egr",
+          "capteur-vilebrequin",
+          "debitmetre",
+          "bougies-allumage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "courroie-accessoires",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud33",
+        "text": "el phare ma ycha3elch",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud34",
+        "text": "el vitesse ma tedkhelch",
+        "attendu": [
+          "kit-embrayage",
+          "boite-vitesses",
+          "cable-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud45",
+        "text": "كاين صوت في الروضة القدامية",
+        "attendu": [
+          "roulements-roue",
+          "cardans",
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | audit_ecriture_oran_controle": [
+      {
+        "id": "ctl16",
+        "text": "ريحة ليسانس في الطوموبيل",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl20",
+        "text": "nheb nechri tomobil jdida",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "bougies-allumage",
+          "pompe-carburant",
+          "amortisseurs"
+        ]
+      }
+    ],
+    "A / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | demo_cases": []
+  }
+}

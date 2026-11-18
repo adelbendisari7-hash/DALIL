@@ -1,0 +1,223 @@
+{
+  "rows": [
+    {
+      "date": "20261118-1756",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.489,
+      "top3": 0.6,
+      "abstention": 0.356,
+      "hors_sujet_refuse": 0.667,
+      "ms_moyen": 564.9,
+      "ms_p95": 92.9
+    }
+  ],
+  "erreurs": {
+    "A / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud09",
+        "text": "les vitesse rentre mal surtout la 2",
+        "attendu": [
+          "kit-embrayage",
+          "boite-vitesses",
+          "cable-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud17",
+        "text": "phare avant grillé",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud19",
+        "text": "ca cale au ralenti au feu rouge",
+        "attendu": [
+          "papillon-motorise",
+          "vanne-egr",
+          "capteur-vilebrequin",
+          "debitmetre",
+          "bougies-allumage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud22",
+        "text": "tomobil ma tdemarich",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud23",
+        "text": "el moteur ysakhen bezaf",
+        "attendu": [
+          "thermostat",
+          "radiateur",
+          "pompe-eau",
+          "ventilateur-radiateur",
+          "durite-refroidissement",
+          "vase-expansion"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud24",
+        "text": "kayen bruit f la roue avant",
+        "attendu": [
+          "roulements-roue",
+          "cardans",
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud25",
+        "text": "la batrie tfargh kol sbah",
+        "attendu": [
+          "batterie",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud27",
+        "text": "ki nfreini tsoni",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "pompe-direction",
+          "rotules-direction"
+        ]
+      },
+      {
+        "id": "aud33",
+        "text": "el phare ma ycha3elch",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": [
+          "ventilateur-radiateur",
+          "rotules-direction",
+          "biellette-stabilisatrice"
+        ]
+      },
+      {
+        "id": "aud41",
+        "text": "الفرامل تصفر كي نفريني",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud43",
+        "text": "الموتور يسخن بزاف",
+        "attendu": [
+          "thermostat",
+          "radiateur",
+          "pompe-eau",
+          "ventilateur-radiateur",
+          "durite-refroidissement",
+          "vase-expansion"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud44",
+        "text": "البطارية تفرغ كل صباح",
+        "attendu": [
+          "batterie",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud45",
+        "text": "كاين صوت في الروضة القدامية",
+        "attendu": [
+          "roulements-roue",
+          "cardans",
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud47",
+        "text": "chhal soum el gasoil lyoum",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "bougies-prechauffage",
+          "pompe-carburant",
+          "debitmetre"
+        ]
+      }
+    ]
+  }
+}

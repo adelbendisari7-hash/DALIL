@@ -1,0 +1,124 @@
+{
+  "rows": [
+    {
+      "date": "20261118-1801",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261114",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.25,
+      "top3": 0.438,
+      "abstention": 0.438,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 1205.5,
+      "ms_p95": 84.9
+    }
+  ],
+  "erreurs": {
+    "A / D (chaîne complète) | audit_ecriture_oran_controle": [
+      {
+        "id": "ctl01",
+        "text": "loto ma theza9ch ki ndir contact, ghir tak tak",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "ctl05",
+        "text": "kayen tak tak f la roue ki ndour",
+        "attendu": [
+          "cardans",
+          "rotules-direction",
+          "roulements-roue"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl07",
+        "text": "el moteur yakel zit bezaf",
+        "attendu": [
+          "joint-culasse",
+          "turbocompresseur",
+          "huile-moteur",
+          "joint-cache-culbuteurs"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "bobine-allumage",
+          "debitmetre"
+        ]
+      },
+      {
+        "id": "ctl11",
+        "text": "السيارة تسخن في الطريق",
+        "attendu": [
+          "thermostat",
+          "radiateur",
+          "pompe-eau",
+          "ventilateur-radiateur",
+          "durite-refroidissement",
+          "vase-expansion"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl12",
+        "text": "الفران يصفر بزاف",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl13",
+        "text": "الباطري ماتشارجيش",
+        "attendu": [
+          "batterie",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl14",
+        "text": "دخان كحل من الشكمان",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl15",
+        "text": "الكليماتيزور ما يبردش",
+        "attendu": [
+          "compresseur-clim",
+          "condenseur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl16",
+        "text": "ريحة ليسانس في الطوموبيل",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      }
+    ]
+  }
+}

@@ -19,6 +19,8 @@ type Result = {
   safety: { do_not_drive: boolean; message: string | null }; disclaimer: string;
   // pending : résultat provisoire du classifieur, le modèle de langage affine en arrière-plan
   llm?: "off" | "pending" | "used" | "cached" | "fallback";
+  // Texte en darija ou en arabe : ce que DALIL en a compris, en français, pour que l'utilisateur vérifie
+  understood?: string | null;
 };
 
 function shopsHref(r: Result, p: Part) {
@@ -93,6 +95,7 @@ export default function DiagnosticResult() {
   return (
     <article>
       <p className="meta">{t("result.for")} {r.vehicle}</p>
+      {r.understood && <p className="help" role="status">{t("result.understood")} « {r.understood} »</p>}
       {r.llm === "pending" && <p className="notice" role="status">{t("result.refining")}</p>}
       {r.safety.do_not_drive && <div className="danger" role="alert">{r.safety.message}</div>}
 

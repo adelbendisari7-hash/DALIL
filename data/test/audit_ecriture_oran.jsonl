@@ -1,0 +1,48 @@
+{"id": "aud01", "groupe": "sms", "text": "sa grinse kan je frein", "expect": ["plaquettes-avant", "plaquettes-arriere", "disques-frein"]}
+{"id": "aud02", "groupe": "sms", "text": "ma voitur demare pa le matin ca fait tac tac", "expect": ["batterie", "demarreur"]}
+{"id": "aud03", "groupe": "sms", "text": "le moteur chaufe bcp leguille monte au rouge", "expect": ["thermostat", "radiateur", "pompe-eau", "ventilateur-radiateur", "durite-refroidissement", "vase-expansion"]}
+{"id": "aud04", "groupe": "sms", "text": "la direction tir a gauche quand je roule", "expect": ["rotules-direction", "biellettes-direction", "triangles"]}
+{"id": "aud05", "groupe": "sms", "text": "voyant batrie alumé en roulant", "expect": ["alternateur", "batterie", "courroie-accessoires"]}
+{"id": "aud06", "groupe": "sms", "text": "bruit clak clak quand je tourne le volan a fond", "expect": ["cardans"]}
+{"id": "aud07", "groupe": "sms", "text": "fumé noir a lechapement et ca consome bcp", "expect": ["injecteurs", "filtre-air", "turbocompresseur", "debitmetre", "vanne-egr"]}
+{"id": "aud08", "groupe": "sms", "text": "lembrayage patine en montee", "expect": ["kit-embrayage"]}
+{"id": "aud09", "groupe": "sms", "text": "les vitesse rentre mal surtout la 2", "expect": ["kit-embrayage", "boite-vitesses", "cable-embrayage"]}
+{"id": "aud10", "groupe": "sms", "text": "la clim souffle chaud", "expect": ["compresseur-clim", "condenseur"]}
+{"id": "aud11", "groupe": "sms", "text": "voyant moteur orange et perte de puissance", "expect": ["vanne-egr", "turbocompresseur", "debitmetre", "sonde-lambda", "capteur-pression-admission", "injecteurs"]}
+{"id": "aud12", "groupe": "sms", "text": "fuite dhuile sous le moteur", "expect": ["joint-cache-culbuteurs", "joint-culasse", "huile-moteur"]}
+{"id": "aud13", "groupe": "sms", "text": "fumee blanche et le liquide de refroidissement baisse", "expect": ["joint-culasse"]}
+{"id": "aud14", "groupe": "sms", "text": "bruit de roulement qui augmente avec la vitesse", "expect": ["roulements-roue"]}
+{"id": "aud15", "groupe": "sms", "text": "la voiture tape sur les dos dane", "expect": ["amortisseurs", "silentblocs", "biellette-stabilisatrice", "coupelles"]}
+{"id": "aud16", "groupe": "sms", "text": "pedale de frein molle", "expect": ["liquide-frein", "maitre-cylindre", "flexible-frein"]}
+{"id": "aud17", "groupe": "sms", "text": "phare avant grillé", "expect": ["ampoules"]}
+{"id": "aud18", "groupe": "sms", "text": "sifflement au demarrage a froid", "expect": ["courroie-accessoires", "galet-tendeur"]}
+{"id": "aud19", "groupe": "sms", "text": "ca cale au ralenti au feu rouge", "expect": ["papillon-motorise", "vanne-egr", "capteur-vilebrequin", "debitmetre", "bougies-allumage"]}
+{"id": "aud20", "groupe": "sms", "text": "le diesel demare mal a froid", "expect": ["bougies-prechauffage", "injecteurs", "filtre-carburant", "batterie"]}
+{"id": "aud21", "groupe": "darija-latin", "text": "el frein ysoni", "expect": ["plaquettes-avant", "plaquettes-arriere", "disques-frein"]}
+{"id": "aud22", "groupe": "darija-latin", "text": "tomobil ma tdemarich", "expect": ["batterie", "demarreur"]}
+{"id": "aud23", "groupe": "darija-latin", "text": "el moteur ysakhen bezaf", "expect": ["thermostat", "radiateur", "pompe-eau", "ventilateur-radiateur", "durite-refroidissement", "vase-expansion"]}
+{"id": "aud24", "groupe": "darija-latin", "text": "kayen bruit f la roue avant", "expect": ["roulements-roue", "cardans", "triangles"]}
+{"id": "aud25", "groupe": "darija-latin", "text": "la batrie tfargh kol sbah", "expect": ["batterie", "alternateur"]}
+{"id": "aud26", "groupe": "darija-latin", "text": "el clim ma tberredch", "expect": ["compresseur-clim", "condenseur"]}
+{"id": "aud27", "groupe": "darija-latin", "text": "ki nfreini tsoni", "expect": ["plaquettes-avant", "plaquettes-arriere", "disques-frein"]}
+{"id": "aud28", "groupe": "darija-latin", "text": "el voyant ta3 moteur cha3el", "expect": ["sonde-lambda", "vanne-egr", "debitmetre", "capteur-pression-admission", "bobine-allumage", "catalyseur"]}
+{"id": "aud29", "groupe": "darija-latin", "text": "kayen dkhan k7al men l'echappement", "expect": ["injecteurs", "turbocompresseur", "filtre-air", "debitmetre", "vanne-egr"]}
+{"id": "aud30", "groupe": "darija-latin", "text": "el ma ta3 radiateur yan9as", "expect": ["joint-culasse", "durite-refroidissement", "radiateur", "pompe-eau", "vase-expansion"]}
+{"id": "aud31", "groupe": "darija-latin", "text": "kayen ri7a ta3 l'essence", "expect": ["injecteurs", "pompe-carburant", "filtre-carburant"]}
+{"id": "aud32", "groupe": "darija-latin", "text": "ki ndour el volant tsoni tak tak", "expect": ["cardans"]}
+{"id": "aud33", "groupe": "darija-latin", "text": "el phare ma ycha3elch", "expect": ["ampoules"]}
+{"id": "aud34", "groupe": "darija-latin", "text": "el vitesse ma tedkhelch", "expect": ["kit-embrayage", "boite-vitesses", "cable-embrayage"]}
+{"id": "aud35", "groupe": "darija-latin", "text": "el courroie tsaffar ki nchaal", "expect": ["courroie-accessoires", "galet-tendeur"]}
+{"id": "aud36", "groupe": "darija-latin", "text": "tomobil tetfa wahedha f la route", "expect": ["capteur-vilebrequin", "pompe-carburant", "filtre-carburant", "alternateur"]}
+{"id": "aud37", "groupe": "darija-latin", "text": "el frein ma yechedch mlih", "expect": ["plaquettes-avant", "disques-frein", "liquide-frein", "maitre-cylindre"]}
+{"id": "aud38", "groupe": "darija-latin", "text": "el chauffage ma ysakhanch", "expect": ["thermostat"]}
+{"id": "aud39", "groupe": "darija-latin", "text": "el boite tsoni ki nbeddel", "expect": ["boite-vitesses", "kit-embrayage"]}
+{"id": "aud40", "groupe": "darija-latin", "text": "el amortisseur rah fini, tomobil tdegdeg", "expect": ["amortisseurs", "coupelles", "silentblocs"]}
+{"id": "aud41", "groupe": "arabe", "text": "الفرامل تصفر كي نفريني", "expect": ["plaquettes-avant", "plaquettes-arriere", "disques-frein"]}
+{"id": "aud42", "groupe": "arabe", "text": "الطوموبيل ما تديماريش في الصباح", "expect": ["batterie", "demarreur"]}
+{"id": "aud43", "groupe": "arabe", "text": "الموتور يسخن بزاف", "expect": ["thermostat", "radiateur", "pompe-eau", "ventilateur-radiateur", "durite-refroidissement", "vase-expansion"]}
+{"id": "aud44", "groupe": "arabe", "text": "البطارية تفرغ كل صباح", "expect": ["batterie", "alternateur"]}
+{"id": "aud45", "groupe": "arabe", "text": "كاين صوت في الروضة القدامية", "expect": ["roulements-roue", "cardans", "triangles"]}
+{"id": "aud46", "groupe": "hors-sujet", "text": "wach rak khouya labas", "expect_status": "unknown"}
+{"id": "aud47", "groupe": "hors-sujet", "text": "chhal soum el gasoil lyoum", "expect_status": "unknown"}
+{"id": "aud48", "groupe": "hors-sujet", "text": "نحب نبيع طوموبيلتي", "expect_status": "unknown"}

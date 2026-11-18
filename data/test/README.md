@@ -5,6 +5,8 @@
 | `oran_test.jsonl` | **Jeu de test figé** : 200 cas réels d'Oran annotés par des mécaniciens partenaires (à constituer) | Seule mesure valable pour le mémoire. Jamais utilisé pour entraîner ni pour régler un seuil |
 | `dev_fr_synthetique.jsonl` | 55 cas rédigés par l'équipe (50 pannes, 5 hors sujet), formulations absentes des exemples d'entraînement | Réglage des seuils et comparaison rapide des variantes pendant le développement. **Synthétique** : jamais présenté comme un résultat |
 | `../seed/demo_cases.json` | 20 cas de démonstration | Critère de l'étape 8, test automatique |
+| `audit_ecriture_oran.jsonl` | 48 cas écrits comme à Oran : français fautif ou SMS (20), darija en lettres latines (20), arabe (5), hors sujet (3) | **Synthétique**, rédigé le 18/11/2026. A servi à écrire le lexique de darija (`backend/app/services/diagnosis/darija.py`) : mesure de réglage, pas un résultat |
+| `audit_ecriture_oran_controle.jsonl` | 20 cas du même genre, écrits **avant** le lexique et jamais utilisés pour l'écrire | **Synthétique**. Contrôle : dit si le gain tient sur des phrases nouvelles. Même auteur que le lexique : biais possible, seul le jeu d'Oran tranchera |
 
 ## Constituer le jeu de test d'Oran (section 5, couche 3)
 

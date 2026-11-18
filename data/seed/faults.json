@@ -123,7 +123,13 @@
      "parts": {"support-moteur": 1.0}},
     {"slug": "direction-assistee-hs", "name_fr": "Direction assistée dure ou bruyante", "system": "direction", "severity": "haute", "do_not_drive": true,
      "description": "Volant très dur, gémissement en braquant, fuite de liquide de direction.",
-     "parts": {"pompe-direction": 1.0, "cremaillere": 0.6}}
+     "parts": {"pompe-direction": 1.0, "cremaillere": 0.6}},
+    {"slug": "ampoule-grillee", "name_fr": "Ampoule ou feu grillé", "system": "electricite", "severity": "moyenne",
+     "description": "Un phare, un feu stop, un feu arrière ou un clignotant ne s'allume plus ; clignotant qui clignote deux fois plus vite ; voyant d'ampoule au tableau de bord. Rouler sans feux est dangereux la nuit et sanctionné.",
+     "parts": {"ampoules": 1.0}},
+    {"slug": "ralenti-instable", "name_fr": "Ralenti instable ou calage au ralenti", "system": "gestion-moteur", "severity": "moyenne",
+     "description": "Le moteur cale à l'arrêt, au feu rouge ou en lâchant l'accélérateur ; régime qui monte et descend tout seul au ralenti ; papillon ou vanne EGR encrassés, prise d'air.",
+     "parts": {"papillon-motorise": 1.0, "vanne-egr": 0.5, "debitmetre": 0.4, "bougies-allumage": 0.3}}
   ],
   "questions": [
     {"id": "q_au_freinage", "text": "Le symptôme apparaît-il surtout quand vous freinez ?",

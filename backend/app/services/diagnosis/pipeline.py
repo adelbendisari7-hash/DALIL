@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
@@ -20,7 +21,8 @@ from ...config import get_settings
 from ...models import DtcCode, DtcPart, Fault, PartCategory, PartReference, Product, ProductFitment, VehicleVariant
 from .classifier import get_classifier
 from .llm import get_llm, rerank_with_llm
-from .normalize import detect_lang, extract_dtc, normalize, strip_accents
+from .darija import to_french
+from .normalize import extract_dtc, normalize, strip_accents
 from .retrieval import DOMAIN_SOURCES, MODELS_LOCK, dense_index, domain_index, get_index
 from .safety import DISCLAIMER, DO_NOT_DRIVE, TOO_SHORT, UNKNOWN, text_is_dangerous
 
@@ -35,13 +37,46 @@ MAX_QUESTIONS = 3
 # Description trop courte pour trancher (« frein ») : sans code OBD et sous ce nombre de mots utiles, on pose
 # d'office les questions de précision au lieu d'afficher un résultat sûr (78 % pour « frein » le 17/11/2026).
 MIN_INFORMATIVE_WORDS = 2  # « frein » (1 mot) : questions ; « moteur chauffe », « ça grince quand je freine » (2) : non
+AR_NOT_UNDERSTOOD = (
+    "Je n'ai pas reconnu assez de mots. Décrivez le problème en français, ou en darija en lettres latines "
+    "(par exemple « el moteur ysakhen bezaf »). L'arabe n'est encore compris qu'en partie."
+)
 # Mots qui ne disent rien de la panne : mots grammaticaux et termes trop généraux.
 UNINFORMATIVE = set("""
 le la les l un une des de du d a au aux et ou en sur sous dans par pour avec sans je j me m ma mon mes ta ton tes
 tu il elle on nous vous ils elles ca c ce cet cette ces est sont ai as avait fait font quand qui que qu y ne n pas
 plus tres trop bien mal tout toute tous encore aussi deja voiture auto automobile vehicule bagnole probleme
-problemes panne pannes souci soucis truc chose marche ya il_y_a bonjour salut svp merci aide
+problemes panne pannes souci soucis truc chose marche ya il_y_a bonjour salut svp merci aide du fait dans quand beaucoup seulement chaque matin
 """.split())
+
+
+# Questions sans panne (prix, achat, vente, papiers) : « combien coûte le gasoil », « je veux vendre ma voiture ».
+# Le vocabulaire automobile y trompe la recherche ; sans symptôme ni pièce citée, ce n'est pas un diagnostic.
+_WB, _WE = r"(?<![a-z0-9])", r"(?![a-z0-9])"  # limites de mot (texte normalisé : minuscules, sans accents)
+NON_FAULT_INTENT = re.compile(_WB + r"(prix|combien|coute|coutent|tarif|acheter|achat|vendre|vente|louer|location|"
+                              r"assurance|permis|credit|bonjour|ca va)" + _WE)
+SYMPTOM = re.compile(_WB + r"(bruit|grince|grincement|siffle|sifflement|claque|claquement|cogne|tape|vibre|vibration|"
+                     r"tremble|chauffe|surchauffe|fuit|fuite|fume|fumee|odeur|sent|cale|demarre|patine|voyant|allume|"
+                     r"eteint|panne|marche plus|tire|dur|molle|use|casse|baisse|perte|consomme|rates?|a-coups|broute|"
+                     r"craque|saute|ne passe|ne rentre|ne charge|ne refroidit|ne chauffe|decharge|crisse|couine|"
+                     r"ronfle|gronde|toussote|hoquette)" + _WE)
+
+
+@lru_cache
+def _part_words() -> frozenset[str]:
+    """Mots des noms et synonymes de pièces (taxonomie) : une question qui cite une pièce reste un diagnostic."""
+    data = json.loads((Path(get_settings().data_dir) / "seed" / "part_categories.json").read_text(encoding="utf-8"))
+    words: set[str] = set()
+    for fam in data["families"]:
+        for c in [fam] + fam.get("children", []):
+            for name in [c["name_fr"]] + c.get("synonyms", []):
+                words |= {w for w in normalize(name).split() if len(w) > 3}
+    return frozenset(words - {"moteur", "avant", "arriere", "voiture", "gasoil", "essence", "carburant", "diesel"})
+
+
+def non_fault_question(text: str) -> bool:
+    t = normalize(text)
+    return bool(NON_FAULT_INTENT.search(t)) and not SYMPTOM.search(t) and not (set(t.split()) & _part_words())
 
 
 def informative_words(text: str) -> int:
@@ -147,9 +182,10 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full", use_llm:
     """`use_llm=False` rend tout de suite le classement du classifieur et marque `llm: "pending"` quand un
     modèle de langage est configuré : le serveur affinera ensuite en arrière-plan (voir routers/public.py)."""
     s = get_settings()
-    text = (inp.text or "").strip()
-    lang = detect_lang(text)
-    codes = sorted(set(c.upper() for c in inp.dtc_codes) | set(extract_dtc(text)))
+    raw_text = (inp.text or "").strip()
+    # Darija (lettres latines ou arabes) -> français : toute la suite de la chaîne travaille en français.
+    text, lang = to_french(raw_text)
+    codes = sorted(set(c.upper() for c in inp.dtc_codes) | set(extract_dtc(raw_text)))
     variant = db.get(VehicleVariant, inp.variant_id) if inp.variant_id else None
     vehicle_label = (
         f"{variant.model.brand.name} {variant.model.name} {variant.engine} ({variant.year_from}-{variant.year_to or ''})"
@@ -164,6 +200,8 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full", use_llm:
         "dtc_parts": [], "safety": {"do_not_drive": False, "message": None}, "disclaimer": DISCLAIMER,
         "message": None, "model_version": s.model_version, "mode": mode,
         "llm": "off",  # off | pending | used | cached | fallback (modèle absent, trop lent, ou réponse rejetée)
+        # Ce que DALIL a compris d'un texte en darija ou en arabe, montré à l'utilisateur pour qu'il le vérifie.
+        "understood": text if lang != "fr" and text != raw_text else None,
     }
 
     # --- Codes OBD : explication en français et pièces candidates (F3)
@@ -180,8 +218,8 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full", use_llm:
         {**_part_view(cats[cid]), "weight": w} for cid, w in sorted(dtc_cat_weight.items(), key=lambda x: -x[1])
     ]
 
-    if lang != "fr":
-        result.update(status="unknown", message="La première version ne comprend que le français. L'arabe et la darija arrivent ensuite.")
+    if lang == "ar" and not codes and informative_words(text) < MIN_INFORMATIVE_WORDS:
+        result.update(status="unknown", message=AR_NOT_UNDERSTOOD)
         return result, []
 
     # Index et modèles partagés entre les requêtes (reconstruits ou chargés à la demande) : un diagnostic à la
@@ -243,7 +281,8 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full", use_llm:
                 mix[slug] = mix.get(slug, 0) + weights[k] / total_w * p
 
     # Hors sujet : pas de code OBD et texte sans rapport avec la base
-    off_topic = not dtc_scores and (max_sim < MIN_RETRIEVAL_SIM or (dense_domain is not None and dense_domain < MIN_DOMAIN_DENSE))
+    off_topic = not dtc_scores and (max_sim < MIN_RETRIEVAL_SIM or (dense_domain is not None and dense_domain < MIN_DOMAIN_DENSE)
+                                    or non_fault_question(text))
 
     # --- Contraintes véhicule et réponses
     if variant:

@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/pipeline.py": {
-    "mtime": 1794932614.1283555,
-    "seen": 1794933248.5847898,
-    "ast_hash": "324d9ddbe3c807621d3152d2d579c9c8",
+    "mtime": 1795026621.921967,
+    "seen": 1795027518.9094217,
+    "ast_hash": "daa474526e19e7ee5516fea4fe32ce4f",
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/retrieval.py": {
@@ -294,9 +294,9 @@
     "semantic_hash": ""
   },
   "data/scripts/osm_overpass.py": {
-    "mtime": 1794618891.0032294,
-    "seen": 1794659040.1764622,
-    "ast_hash": "9dee435f52d8971bb16fd67a7aa47fbe",
+    "mtime": 1794934439.4416275,
+    "seen": 1795027518.9094217,
+    "ast_hash": "aff908741235fbba197000db6eeef0e2",
     "semantic_hash": ""
   },
   "data/seed/demo_cases.json": {
@@ -318,9 +318,9 @@
     "semantic_hash": ""
   },
   "data/seed/faults.json": {
-    "mtime": 1794617969.8039954,
-    "seen": 1794659040.1764622,
-    "ast_hash": "0932cf9d09f4e784e6c330ed5c057792",
+    "mtime": 1795025736.8660326,
+    "seen": 1795027518.9094217,
+    "ast_hash": "4f76e8be3a613b33145d48ede9a49b2f",
     "semantic_hash": ""
   },
   "data/seed/geo_oran.json": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "frontend/app/diagnostic/[id]/page.tsx": {
-    "mtime": 1794931931.7059748,
-    "seen": 1794932212.3062465,
-    "ast_hash": "1fe07d6bd935e281ebbe80ae7d500734",
+    "mtime": 1795026745.738583,
+    "seen": 1795027518.9094217,
+    "ast_hash": "4a2fd6959bf752ed9afa4cf1b5917818",
     "semantic_hash": ""
   },
   "frontend/app/espace-magasin/page.tsx": {
@@ -468,9 +468,9 @@
     "semantic_hash": ""
   },
   "frontend/messages/fr.json": {
-    "mtime": 1794933987.3078372,
-    "seen": 1794934270.8126845,
-    "ast_hash": "b9edc45a2fb21a4e07b222cdb73dbd8e",
+    "mtime": 1795026766.445722,
+    "seen": 1795027518.9094217,
+    "ast_hash": "954acdf4bedea0824800fe632d22428f",
     "semantic_hash": ""
   },
   "frontend/next.config.mjs": {
@@ -504,9 +504,9 @@
     "semantic_hash": ""
   },
   "ml/artifacts/baseline_tfidf_lr.metrics.json": {
-    "mtime": 1794659609.7989154,
-    "seen": 1794660166.6776087,
-    "ast_hash": "1a6322f82539a2ae9f90bb22c6e72d21",
+    "mtime": 1795025861.3032146,
+    "seen": 1795027518.9094217,
+    "ast_hash": "35148fc6c18ecc9edcf182841855e782",
     "semantic_hash": ""
   },
   "ml/train_baseline.py": {
@@ -546,9 +546,9 @@
     "semantic_hash": ""
   },
   "data/SOURCES.md": {
-    "mtime": 1794658877.4076722,
-    "seen": 1794659040.1764622,
-    "ast_hash": "f4c8cc1b0f9b5163f3d1b65f63c13a6d",
+    "mtime": 1795027502.7073276,
+    "seen": 1795027518.9094217,
+    "ast_hash": "c5e27df08756df79d00b4fc6611838fe",
     "semantic_hash": ""
   },
   "data/pipeline/requirements-translate.txt": {
@@ -612,9 +612,9 @@
     "semantic_hash": ""
   },
   "ml/README.md": {
-    "mtime": 1794930510.6168716,
-    "seen": 1794931051.2328465,
-    "ast_hash": "923d49eb9b563b42617e6a51d6574f16",
+    "mtime": 1795027502.7073276,
+    "seen": 1795027518.9094217,
+    "ast_hash": "7154e2b9107903e186864c4c0e0908a7",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.pdf": {
@@ -690,9 +690,9 @@
     "semantic_hash": ""
   },
   "data/test/README.md": {
-    "mtime": 1794934260.1568398,
-    "seen": 1794934270.8126845,
-    "ast_hash": "ed6ce95514bcd1638683582f8d5047ed",
+    "mtime": 1795027502.7030175,
+    "seen": 1795027518.9094217,
+    "ast_hash": "8963b83d725eb24a9b35aae1ed025eaf",
     "semantic_hash": ""
   },
   "ml/kaggle/README.md": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1794934260.159029,
-    "seen": 1794934270.8126845,
-    "ast_hash": "036401db78153dd14e53d51d07a7202f",
+    "mtime": 1795027502.7073276,
+    "seen": 1795027518.9094217,
+    "ast_hash": "daefc71088ad455b8cd389ae4c05bd42",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -978,9 +978,9 @@
     "semantic_hash": ""
   },
   "frontend/e2e/qualite.spec.ts": {
-    "mtime": 1794933313.5700274,
-    "seen": 1794934270.8126845,
-    "ast_hash": "dd2f087709036b69b603eb1ac8fb5956",
+    "mtime": 1795026766.447729,
+    "seen": 1795027518.9094217,
+    "ast_hash": "ca2ad984acbe3e9cf8e8805e3318d423",
     "semantic_hash": ""
   },
   "ml/results/20261117-1627-mot-seul-hybride.json": {
@@ -1047,6 +1047,156 @@
     "mtime": 1794933954.7626598,
     "seen": 1794934270.8126845,
     "ast_hash": "8405ed92903a53799db607165b859c4b",
+    "semantic_hash": ""
+  },
+  "backend/app/services/diagnosis/darija.py": {
+    "mtime": 1795025110.9565606,
+    "seen": 1795027518.9094217,
+    "ast_hash": "d0ee29ddbdaf8561b9e6926730394712",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_darija.py": {
+    "mtime": 1795026487.8607142,
+    "seen": 1795027518.9094217,
+    "ast_hash": "f98c0824967fece461f3815cca374a81",
+    "semantic_hash": ""
+  },
+  "data/market/ons_parc_2020.json": {
+    "mtime": 1794934942.371758,
+    "seen": 1795027518.9094217,
+    "ast_hash": "770fcea4eb3598e766303c868a359a28",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1756-audit-keyword.json": {
+    "mtime": 1795024629.3277261,
+    "seen": 1795027518.9094217,
+    "ast_hash": "edb1b5c097bae1959f1275d41314508e",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1757-audit-hybrid.json": {
+    "mtime": 1795024826.9136553,
+    "seen": 1795027518.9094217,
+    "ast_hash": "10d0497ee718377fbc3b24858d1d6651",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1801-controle-avant-keyword.json": {
+    "mtime": 1795024917.949284,
+    "seen": 1795027518.9094217,
+    "ast_hash": "1f3eca0e56865b206b773bcb70647be7",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1802-controle-avant-hybrid.json": {
+    "mtime": 1795025002.0354838,
+    "seen": 1795027518.9094217,
+    "ast_hash": "7b412d7370c6e7619d1b2fa4590c3325",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1805-darija-keyword.json": {
+    "mtime": 1795025186.154285,
+    "seen": 1795027518.9094217,
+    "ast_hash": "2a6dad53f164cdab5ed2800fbb80569f",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1806-darija-hybrid.json": {
+    "mtime": 1795025681.3507597,
+    "seen": 1795027518.9094217,
+    "ast_hash": "531a137680b7eacda3f5a2f3a2443407",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1817-darija-exemples-keyword.json": {
+    "mtime": 1795025911.9998233,
+    "seen": 1795027518.9094217,
+    "ast_hash": "5f0d4712228450b63e50871feda82366",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1818-darija-exemples-hybrid.json": {
+    "mtime": 1795026659.7740989,
+    "seen": 1795027518.9094217,
+    "ast_hash": "6deb3a1da8bc2665567e476a2b9a7205",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1832-qualite-finale-hybrid.json": {
+    "mtime": 1795027465.8339722,
+    "seen": 1795027518.9094217,
+    "ast_hash": "f01385126f1239633ed1cae1b09a7a5b",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1832-qualite-finale-keyword.json": {
+    "mtime": 1795026774.6817899,
+    "seen": 1795027518.9094217,
+    "ast_hash": "28f8f481b6771cc65effc70d92a2cb52",
+    "semantic_hash": ""
+  },
+  "docs/etude-marche-algerie.md": {
+    "mtime": 1794935001.2189252,
+    "seen": 1795027518.9094217,
+    "ast_hash": "befdd804eb9041b30fed9875af78348a",
+    "semantic_hash": ""
+  },
+  "docs/plan-referentiel-et-donnees.md": {
+    "mtime": 1794935856.2302456,
+    "seen": 1795027518.9094217,
+    "ast_hash": "e0219a93381e144769213b8674191847",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1756-audit-keyword.md": {
+    "mtime": 1795024629.3277261,
+    "seen": 1795027518.9094217,
+    "ast_hash": "7a355d2a9199220cf63f59a30ad6c1f3",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1757-audit-hybrid.md": {
+    "mtime": 1795024826.9116464,
+    "seen": 1795027518.9094217,
+    "ast_hash": "ccaa6f255711926f253c741055d9de8f",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1801-controle-avant-keyword.md": {
+    "mtime": 1795024917.949284,
+    "seen": 1795027518.9094217,
+    "ast_hash": "bd7746267900d91ebf44a017ae124c3a",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1802-controle-avant-hybrid.md": {
+    "mtime": 1795025002.0334806,
+    "seen": 1795027518.9094217,
+    "ast_hash": "5f70704febb8e691406ccaf12cf200fc",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1805-darija-keyword.md": {
+    "mtime": 1795025186.154285,
+    "seen": 1795027518.9094217,
+    "ast_hash": "2f4ca5b5859b822f071fe4d8e16af500",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1806-darija-hybrid.md": {
+    "mtime": 1795025681.3496165,
+    "seen": 1795027518.9094217,
+    "ast_hash": "41d707d102530029f4c1c976639ead25",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1817-darija-exemples-keyword.md": {
+    "mtime": 1795025911.9862912,
+    "seen": 1795027518.9094217,
+    "ast_hash": "5e75a07ccc98e1e59af823d1cd52d835",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1818-darija-exemples-hybrid.md": {
+    "mtime": 1795026659.7720919,
+    "seen": 1795027518.9094217,
+    "ast_hash": "6c366859516727c4aed305263c59c492",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1832-qualite-finale-hybrid.md": {
+    "mtime": 1795027465.8329668,
+    "seen": 1795027518.9094217,
+    "ast_hash": "4a29270901be5453d0da258dbfbe5b8b",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-1832-qualite-finale-keyword.md": {
+    "mtime": 1795026774.6817899,
+    "seen": 1795027518.9094217,
+    "ast_hash": "32e3ffeb51ff660e8e006e62bd9fa052",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {

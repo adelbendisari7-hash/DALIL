@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 17/11/2026, plan du référentiel et des données prêt à lancer.
+> Dernière mise à jour : 18/11/2026, qualité des réponses (darija, fiches, exemples).
 
 ## 1. Où on en est
 
@@ -54,6 +54,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | Date | Décision | Raison |
 | --- | --- | --- |
 | 17/11/2026 | **Modèle de langage affiné désactivé par défaut** (`USE_LLM=0` dans `DEMARRER-DALIL.bat`, `DALIL_LLM_PROVIDER=none` dans le code). Gardé en option pour les mesures du mémoire (`USE_LLM=1`) | Il ne gagne pas en précision (démo 88 -> 77 %, dev 92 -> 88 %) et prend ~1 min par diagnostic, alors que le cahier exige moins de 10 s. Pour le réactiver un jour : ré-affiner avec un jeu construit par la recherche hybride (`ml/build_llm_dataset.py`), puis remesurer |
+| 18/11/2026 | **Darija prise en charge** (lettres latines et arabes) par un lexique, avant toute la chaîne ; 2 fiches de pannes et 255 exemples ajoutés ; règle hors sujet (prix, achat, vente) | Audit d'écriture réaliste : top-3 56 % -> 89 % ; contrôle jamais vu 38 % -> 100 % ; dev et démo stables ou meilleurs ; hors sujet 100 %. Lexique à faire relire par des locuteurs |
 | 17/11/2026 | **Ouedkniss exclu de la collecte** ; étude de marché sur sources publiques (ONS, presse) | Leurs CGU (article 9) interdisent « toute réutilisation, extraction de l'une ou partie du contenu » sans autorisation écrite, même agrégée. L'ONS publie le parc par marque (pas par modèle) ; le détail par modèle viendra des magasins enquêtés et des recherches faites dans DALIL |
 | 17/11/2026 | « Pièce trouvée » compté une fois par client (empreinte HMAC de l'adresse IP) et par jour ; retours et contacts limités à 30 par minute | Sans cela, un magasin pouvait gonfler son score en répétant le retour. Limite connue : derrière une même adresse IP d'opérateur (CGNAT), deux vrais clients le même jour comptent pour un : on sous-compte plutôt que de laisser tricher |
 | 17/11/2026 | **Description d'un seul mot utile, sans code OBD : jamais de résultat sûr.** Questions de précision (« frein », « batterie »), ou demande de préciser quand une seule panne ressort (« bruit », « fumée ») (`MIN_INFORMATIVE_WORDS = 2` dans `pipeline.py`) | « frein » donnait 78 %, « bruit » 100 % sans question. Seuil 2 et non 3 : « ça grince quand je freine » (2 mots utiles) est une vraie description. Jeux dev et démo inchangés |
@@ -62,8 +63,8 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 4. Pour reprendre le travail
 
-- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (123 tests).
-- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (14 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
+- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (140 tests).
+- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (16 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
 - **Ouvrir le site sur un téléphone** : `DEMARRER-DALIL.bat` affiche l'adresse Wi-Fi du PC (fiche : `docs/test-telephone.md`).
 - **Tests du pipeline de données** : `cd backend && .venv/Scripts/python -m pytest -q ../data/pipeline/tests`.
 - **Servir le modèle affiné** :
@@ -105,3 +106,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 17/11/2026 | Collecte : OpenStreetMap interrogé (62 lieux dans la wilaya d'Oran, dont 23 magasins de pièces ; miroirs Overpass ajoutés au script). Étude de marché `docs/etude-marche-algerie.md` à partir de l'ONS (parc fin 2020 : 48 % des voitures ont 20 ans ou plus, Peugeot et Renault 34 %, 70 % de diesel dans les reventes ; Oran 3e wilaya) : le référentiel ne couvre ni le parc ancien ni Chevrolet, Citroën, Mazda, Mitsubishi |
 | 17/11/2026 | Recherche de jeux de données pour les modèles d'Algérie (Wikidata CC0, MOT étendu, NHTSA étendu, vPIC, Transport Canada, Safety Gate, Zenodo ; écartés : UTAC, ADAC, CJJones HF, Ouedkniss). Plan d'exécution `docs/plan-referentiel-et-donnees.md` |
 | 17/11/2026 | Décisions pour le plan du référentiel et des données : Suzuki et Lada ajoutés ; traduction complète avec le meilleur traducteur mesuré (comparer opus-mt et MADLAD-400) ; Safety Gate selon ses conditions ; modèle de langage ré-affiné et réactivé seulement s'il améliore la chaîne sous 10 s. Détail en tête de `docs/plan-referentiel-et-donnees.md` |
+| 18/11/2026 | Qualité des réponses : audit de 48 descriptions écrites comme à Oran (SMS, darija, arabe) et contrôle de 20 ; lexique darija (`diagnosis/darija.py`), « Nous avons compris » sur la page de résultat, fiches « ampoule grillée » et « ralenti instable », 428 exemples d'entraînement, règle hors sujet. 140 tests backend, 16 e2e |
