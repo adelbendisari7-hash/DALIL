@@ -39,6 +39,8 @@ Règles du projet qui s'appliquent :
 
 ## 1. Phase A : référentiel des véhicules
 
+**Réalisée le 18/11/2026** (au lieu de Wikidata, les années et motorisations viennent des 246 617 annonces Ouedkniss, plus fiables pour l'Algérie) : `data/scripts/ouedkniss_stats.py` (agrégats) puis `data/scripts/build_vehicles.py` (44 marques, 260 modèles, 467 motorisations ; modèles d'au moins 100 annonces, plus utilitaires et modèles anciens de l'ONS). Interface : recherche par saisie, « Mon véhicule n'est pas dans la liste » (table `vehicle_requests`, migration 0003), modèles triés par fréquence, indicateurs « véhicules les plus diagnostiqués » et « véhicules demandés absents ». Restent à confirmer en magasin : les entrées `a_verifier`.
+
 ### A1. Modèles à ajouter
 
 Priorité d'après le parc ONS 2020 (tableau 7). Le **gras** marque ce qui manque aujourd'hui ; les modèles déjà présents sont entre parenthèses.

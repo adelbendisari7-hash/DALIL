@@ -10,6 +10,10 @@ from sqlalchemy.orm import Session
 from ..db import get_db
 from ..models import (
     AdminAction,
+    Brand,
+    Model,
+    VehicleRequest,
+    VehicleVariant,
     ContactEvent,
     DiagnosisSession,
     Feedback,
@@ -197,6 +201,14 @@ def admin_metrics(db: Session = Depends(get_db)):
                      "diagnosis_correct_rate": round(diag_ok / diag_all, 3) if diag_all else None, "diagnosis_n": diag_all},
         "part_requests": count(PartRequest),
         "top_contacted_parts": [{"part": p, "count": n} for p, n in top_parts],
+        # Référentiel : véhicules les plus diagnostiqués, et véhicules saisis car absents de la liste (à ajouter)
+        "top_diagnosed_vehicles": [{"vehicle": f"{b} {m}", "count": n} for b, m, n in db.execute(
+            select(Brand.name, Model.name, func.count()).select_from(DiagnosisSession)
+            .join(VehicleVariant, VehicleVariant.id == DiagnosisSession.variant_id).join(Model).join(Brand)
+            .group_by(Brand.name, Model.name).order_by(func.count().desc()).limit(10))],
+        "requested_missing_vehicles": [{"vehicle": f"{b} {m}", "count": n} for b, m, n in db.execute(
+            select(VehicleRequest.brand, VehicleRequest.model, func.count()).group_by(VehicleRequest.brand, VehicleRequest.model)
+            .order_by(func.count().desc()).limit(10))],
     }
 
 

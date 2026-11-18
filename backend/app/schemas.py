@@ -148,3 +148,10 @@ def shop_out(shop: Shop, full: bool = True) -> dict:
 
 def _iso(d: datetime | None) -> str | None:
     return d.isoformat() if d else None
+
+
+class VehicleRequestIn(BaseModel):
+    brand: str = Field(min_length=1, max_length=60)
+    model: str = Field(min_length=1, max_length=80)
+    year: int | None = Field(None, ge=1950, le=2030)
+    engine: str | None = Field(None, max_length=60)

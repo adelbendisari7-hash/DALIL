@@ -1,0 +1,156 @@
+{
+  "rows": [
+    {
+      "date": "20261118-2103",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.822,
+      "top3": 0.867,
+      "abstention": 0.089,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 598.5,
+      "ms_p95": 86.8
+    },
+    {
+      "date": "20261118-2103",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.875,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 75.3,
+      "ms_p95": 85.8
+    },
+    {
+      "date": "20261118-2103",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.9,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 83.8,
+      "ms_p95": 94.7
+    },
+    {
+      "date": "20261118-2103",
+      "variante": "A / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 81.2,
+      "ms_p95": 90.7
+    }
+  ],
+  "erreurs": {
+    "A / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud21",
+        "text": "el frein ysoni",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": [
+          "amortisseurs",
+          "papillon-motorise",
+          "rotules-direction"
+        ]
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | audit_ecriture_oran_controle": [],
+    "A / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A / D (chaîne complète) | demo_cases": []
+  }
+}

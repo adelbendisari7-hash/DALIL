@@ -13,6 +13,8 @@ type Metrics = {
   feedback: { part_found_rate: number | null; part_found_n: number; diagnosis_correct_rate: number | null; diagnosis_n: number };
   part_requests: number;
   top_contacted_parts: { part: string; count: number }[];
+  top_diagnosed_vehicles: { vehicle: string; count: number }[];
+  requested_missing_vehicles: { vehicle: string; count: number }[];
 };
 type Tab = "pending" | "verified" | "metrics" | "import";
 
@@ -122,6 +124,15 @@ export default function Admin() {
           <h3 className="section">Pièces les plus demandées</h3>
           <ul className="list">
             {metrics.top_contacted_parts.map((p) => <li key={p.part}><span>{p.part}</span><span>{p.count}</span></li>)}
+          </ul>
+          <h3 className="section">{t("admin.metrics.topVehicles")}</h3>
+          <ul className="list">
+            {metrics.top_diagnosed_vehicles.map((v) => <li key={v.vehicle}><span>{v.vehicle}</span><span>{v.count}</span></li>)}
+          </ul>
+          <h3 className="section">{t("admin.metrics.missingVehicles")}</h3>
+          <p className="help">{t("admin.metrics.missingVehicles.help")}</p>
+          <ul className="list">
+            {metrics.requested_missing_vehicles.map((v) => <li key={v.vehicle}><span>{v.vehicle}</span><span>{v.count}</span></li>)}
           </ul>
         </>
       )}

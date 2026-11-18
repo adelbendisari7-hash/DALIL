@@ -56,6 +56,9 @@ def seed_geo(db: Session) -> None:
         db.add(obj)
 
 
+VARIANT_FIELDS = ("year_from", "year_to", "engine", "fuel")
+
+
 def seed_vehicles(db: Session) -> None:
     for b in _load("vehicles.json")["brands"]:
         brand = db.scalar(select(Brand).where(Brand.name == b["name"])) or Brand(name=b["name"])
@@ -67,6 +70,7 @@ def seed_vehicles(db: Session) -> None:
             if model is None:
                 model = Model(brand_id=brand.id, name=m["name"])
             model.pilot = m.get("pilot", False)
+            model.priority = m.get("priority", 0)
             db.add(model)
             db.flush()
             for v in m["variants"]:
@@ -76,7 +80,8 @@ def seed_vehicles(db: Session) -> None:
                     VehicleVariant.year_from == v["year_from"],
                 ))
                 if exists is None:
-                    db.add(VehicleVariant(model_id=model.id, **v))
+                    # « source » et « a_verifier » servent à la traçabilité dans vehicles.json, pas en base
+                    db.add(VehicleVariant(model_id=model.id, **{k: v[k] for k in VARIANT_FIELDS}))
                 else:
                     exists.year_to, exists.fuel = v["year_to"], v["fuel"]
 

@@ -1,132 +1,1080 @@
 {
-  "_note": "Référentiel initial (section 5) : marques et modèles prioritaires, motorisations courantes. Liste à confirmer par les 20 magasins enquêtés ; années et moteurs approximatifs, à vérifier.",
+  "_note": "Référentiel : modèles initiaux de l'équipe, complétés le 18/11/2026 par les modèles d'au moins 100 annonces Ouedkniss (data/market/ouedkniss_modeles.json) et des utilitaires et modèles anciens de l'ONS. Les entrées « a_verifier » sont à confirmer par les magasins enquêtés.",
   "brands": [
-    {"name": "Dacia", "country": "Roumanie", "priority": 10, "models": [
-      {"name": "Logan", "pilot": true, "variants": [
-        {"year_from": 2005, "year_to": 2012, "engine": "1.4 MPI", "fuel": "essence"},
-        {"year_from": 2005, "year_to": 2012, "engine": "1.6 MPI", "fuel": "essence"},
-        {"year_from": 2005, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel"},
-        {"year_from": 2013, "year_to": 2020, "engine": "1.2 16V", "fuel": "essence"},
-        {"year_from": 2013, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
-      ]},
-      {"name": "Sandero", "variants": [
-        {"year_from": 2008, "year_to": 2012, "engine": "1.4 MPI", "fuel": "essence"},
-        {"year_from": 2008, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel"},
-        {"year_from": 2013, "year_to": 2020, "engine": "1.2 16V", "fuel": "essence"},
-        {"year_from": 2013, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
-      ]},
-      {"name": "Duster", "variants": [
-        {"year_from": 2010, "year_to": 2017, "engine": "1.6 16V", "fuel": "essence"},
-        {"year_from": 2010, "year_to": 2017, "engine": "1.5 dCi", "fuel": "diesel"},
-        {"year_from": 2018, "year_to": null, "engine": "1.6 SCe", "fuel": "essence"},
-        {"year_from": 2018, "year_to": null, "engine": "1.5 dCi", "fuel": "diesel"}
-      ]}
-    ]},
-    {"name": "Renault", "country": "France", "priority": 10, "models": [
-      {"name": "Symbol", "pilot": true, "variants": [
+    {"name": "Renault", "country": "France", "priority": 36, "models": [
+      {"name": "Symbol", "pilot": true, "priority": 6053, "variants": [
         {"year_from": 2008, "year_to": 2012, "engine": "1.4", "fuel": "essence"},
         {"year_from": 2008, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel"},
         {"year_from": 2013, "year_to": 2020, "engine": "1.2 16V", "fuel": "essence"},
         {"year_from": 2013, "year_to": 2020, "engine": "1.6 MPI", "fuel": "essence"},
         {"year_from": 2013, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
       ]},
-      {"name": "Clio", "variants": [
+      {"name": "Clio 4", "source": "ouedkniss:6050 annonces (425 à Oran)", "priority": 6050, "variants": [
+        {"year_from": 2013, "year_to": 2019, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:6050 annonces", "a_verifier": true},
+        {"year_from": 2013, "year_to": 2016, "engine": "1.2 16V", "fuel": "essence", "source": "ouedkniss:6050 annonces", "a_verifier": true},
+        {"year_from": 2014, "year_to": 2019, "engine": "0.9 TCe", "fuel": "essence", "source": "ouedkniss:6050 annonces", "a_verifier": true},
+        {"year_from": 2013, "year_to": 2021, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:6050 annonces", "a_verifier": true}
+      ]},
+      {"name": "Clio 5", "source": "ouedkniss:4515 annonces (617 à Oran)", "priority": 4515, "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:4515 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": 2024, "engine": "1.0 TCe", "fuel": "essence", "source": "ouedkniss:4515 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:4515 annonces", "a_verifier": true}
+      ]},
+      {"name": "Kangoo", "priority": 2583, "variants": [
+        {"year_from": 2008, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
+      ]},
+      {"name": "Clio Campus", "source": "ouedkniss:1844 annonces (147 à Oran)", "priority": 1844, "variants": [
+        {"year_from": 2007, "year_to": 2014, "engine": "1.2 16V", "fuel": "essence", "source": "ouedkniss:1844 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2015, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1844 annonces", "a_verifier": true}
+      ]},
+      {"name": "Clio 2", "source": "ouedkniss:1493 annonces (95 à Oran)", "priority": 1493, "variants": [
+        {"year_from": 2001, "year_to": 2005, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:1493 annonces", "a_verifier": true},
+        {"year_from": 2001, "year_to": 2006, "engine": "1.2 16V", "fuel": "essence", "source": "ouedkniss:1493 annonces", "a_verifier": true},
+        {"year_from": 1998, "year_to": 2006, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1493 annonces", "a_verifier": true}
+      ]},
+      {"name": "Clio 3", "source": "ouedkniss:1450 annonces (119 à Oran)", "priority": 1450, "variants": [
+        {"year_from": 2007, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:1450 annonces", "a_verifier": true},
+        {"year_from": 2008, "year_to": 2012, "engine": "1.2 16V", "fuel": "essence", "source": "ouedkniss:1450 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2010, "engine": "1.4 16V", "fuel": "essence", "source": "ouedkniss:1450 annonces", "a_verifier": true},
+        {"year_from": 2006, "year_to": 2012, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1450 annonces", "a_verifier": true}
+      ]},
+      {"name": "Megane 3", "source": "ouedkniss:1184 annonces (76 à Oran)", "priority": 1184, "variants": [
+        {"year_from": 2009, "year_to": 2015, "engine": "1.9 dCi", "fuel": "diesel", "source": "ouedkniss:1184 annonces", "a_verifier": true},
+        {"year_from": 2010, "year_to": 2014, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:1184 annonces", "a_verifier": true},
+        {"year_from": 2009, "year_to": 2017, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1184 annonces", "a_verifier": true}
+      ]},
+      {"name": "Captur", "source": "ouedkniss:1056 annonces (87 à Oran)", "priority": 1056, "variants": [
+        {"year_from": 2021, "year_to": 2024, "engine": "1.0 TCe", "fuel": "essence", "source": "ouedkniss:1056 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "1.3 TCe", "fuel": "essence", "source": "ouedkniss:1056 annonces", "a_verifier": true},
+        {"year_from": 2014, "year_to": 2022, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:1056 annonces", "a_verifier": true},
+        {"year_from": 2014, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1056 annonces", "a_verifier": true}
+      ]},
+      {"name": "Megane 1", "source": "ouedkniss:969 annonces (53 à Oran)", "priority": 969, "variants": [
+        {"year_from": 1999, "year_to": 2002, "engine": "1.9 dCi", "fuel": "diesel", "source": "ouedkniss:969 annonces", "a_verifier": true},
+        {"year_from": 1996, "year_to": 2002, "engine": "1.4 16V", "fuel": "essence", "source": "ouedkniss:969 annonces", "a_verifier": true},
+        {"year_from": 1998, "year_to": 2002, "engine": "1.6 16V", "fuel": "essence", "source": "ouedkniss:969 annonces", "a_verifier": true},
+        {"year_from": 1996, "year_to": 2002, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:969 annonces", "a_verifier": true}
+      ]},
+      {"name": "Scenic", "source": "ouedkniss:818 annonces (60 à Oran)", "priority": 818, "variants": [
+        {"year_from": 2000, "year_to": 2012, "engine": "1.9 dCi", "fuel": "diesel", "source": "ouedkniss:818 annonces", "a_verifier": true},
+        {"year_from": 2005, "year_to": 2009, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:818 annonces", "a_verifier": true},
+        {"year_from": 1999, "year_to": 2003, "engine": "1.6 16V", "fuel": "essence", "source": "ouedkniss:818 annonces", "a_verifier": true},
+        {"year_from": 1998, "year_to": 2015, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:818 annonces", "a_verifier": true}
+      ]},
+      {"name": "Megane 2", "source": "ouedkniss:742 annonces (30 à Oran)", "priority": 742, "variants": [
+        {"year_from": 2003, "year_to": 2009, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:742 annonces", "a_verifier": true},
+        {"year_from": 2003, "year_to": 2007, "engine": "1.9 dCi", "fuel": "diesel", "source": "ouedkniss:742 annonces", "a_verifier": true},
+        {"year_from": 2003, "year_to": 2005, "engine": "1.4 16V", "fuel": "essence", "source": "ouedkniss:742 annonces", "a_verifier": true},
+        {"year_from": 2003, "year_to": 2008, "engine": "1.6 16V", "fuel": "essence", "source": "ouedkniss:742 annonces", "a_verifier": true},
+        {"year_from": 2003, "year_to": 2009, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:742 annonces", "a_verifier": true}
+      ]},
+      {"name": "Clio 1", "source": "ouedkniss:702 annonces (28 à Oran)", "priority": 702, "variants": [
+        {"year_from": 1992, "year_to": 2001, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:702 annonces", "a_verifier": true}
+      ]},
+      {"name": "Laguna 1", "source": "ouedkniss:488 annonces (25 à Oran)", "priority": 488, "variants": [
+        {"year_from": 1996, "year_to": 2000, "engine": "1.6 16V", "fuel": "essence", "source": "ouedkniss:488 annonces", "a_verifier": true},
+        {"year_from": 1998, "year_to": 2000, "engine": "1.9 dCi", "fuel": "diesel", "source": "ouedkniss:488 annonces", "a_verifier": true},
+        {"year_from": 1994, "year_to": 2001, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:488 annonces", "a_verifier": true}
+      ]},
+      {"name": "Laguna 2", "source": "ouedkniss:424 annonces (9 à Oran)", "priority": 424, "variants": [
+        {"year_from": 2001, "year_to": 2004, "engine": "1.9 dCi", "fuel": "diesel", "source": "ouedkniss:424 annonces", "a_verifier": true},
+        {"year_from": 2001, "year_to": 2006, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:424 annonces", "a_verifier": true}
+      ]},
+      {"name": "Clio Classique", "source": "ouedkniss:371 annonces (12 à Oran)", "priority": 371, "variants": [
+        {"year_from": 2001, "year_to": 2008, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:371 annonces", "a_verifier": true}
+      ]},
+      {"name": "Arkana", "source": "ouedkniss:363 annonces (19 à Oran)", "priority": 363, "variants": [
+        {"year_from": 2022, "year_to": 2024, "engine": "1.3 TCe", "fuel": "essence", "source": "ouedkniss:363 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:363 annonces", "a_verifier": true}
+      ]},
+      {"name": "Express", "source": "ouedkniss:307 annonces (14 à Oran)", "priority": 307, "variants": [
+        {"year_from": 1987, "year_to": 2000, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:307 annonces", "a_verifier": true}
+      ]},
+      {"name": "R4", "source": "ouedkniss:290 annonces (5 à Oran)", "priority": 290, "variants": [
+        {"year_from": 1968, "year_to": 1990, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:290 annonces", "a_verifier": true}
+      ]},
+      {"name": "R19", "source": "ouedkniss:253 annonces (8 à Oran)", "priority": 253, "variants": [
+        {"year_from": 1989, "year_to": 1996, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:253 annonces", "a_verifier": true}
+      ]},
+      {"name": "Megane 4", "source": "ouedkniss:221 annonces (9 à Oran)", "priority": 221, "variants": [
+        {"year_from": 2021, "year_to": 2024, "engine": "1.3 TCe", "fuel": "essence", "source": "ouedkniss:221 annonces", "a_verifier": true},
+        {"year_from": 2017, "year_to": 2019, "engine": "1.6 dCi", "fuel": "diesel", "source": "ouedkniss:221 annonces", "a_verifier": true},
+        {"year_from": 2017, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:221 annonces", "a_verifier": true}
+      ]},
+      {"name": "Megane 2 Classique", "source": "ouedkniss:218 annonces (10 à Oran)", "priority": 218, "variants": [
+        {"year_from": 2004, "year_to": 2009, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:218 annonces", "a_verifier": true},
+        {"year_from": 2008, "year_to": 2008, "engine": "1.9 dCi", "fuel": "diesel", "source": "ouedkniss:218 annonces", "a_verifier": true},
+        {"year_from": 2004, "year_to": 2009, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:218 annonces", "a_verifier": true}
+      ]},
+      {"name": "Taliant", "source": "ouedkniss:215 annonces (20 à Oran)", "priority": 215, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "1.0 TCe", "fuel": "essence", "source": "ouedkniss:215 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:215 annonces", "a_verifier": true}
+      ]},
+      {"name": "Twingo", "source": "ouedkniss:171 annonces (17 à Oran)", "priority": 171, "variants": [
+        {"year_from": 1994, "year_to": 2023, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:171 annonces", "a_verifier": true}
+      ]},
+      {"name": "Fluence", "source": "ouedkniss:167 annonces (5 à Oran)", "priority": 167, "variants": [
+        {"year_from": 2012, "year_to": 2014, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:167 annonces", "a_verifier": true},
+        {"year_from": 2010, "year_to": 2016, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:167 annonces", "a_verifier": true}
+      ]},
+      {"name": "Duster", "source": "ouedkniss:155 annonces (12 à Oran)", "priority": 155, "variants": [
+        {"year_from": 2014, "year_to": null, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:155 annonces", "a_verifier": true}
+      ]},
+      {"name": "R21", "source": "ouedkniss:147 annonces (5 à Oran)", "priority": 147, "variants": [
+        {"year_from": 1986, "year_to": 1994, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:147 annonces", "a_verifier": true}
+      ]},
+      {"name": "Kwid", "source": "ouedkniss:141 annonces (25 à Oran)", "priority": 141, "variants": [
+        {"year_from": 2023, "year_to": 2024, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:141 annonces", "a_verifier": true}
+      ]},
+      {"name": "Megane 2 Coupé", "source": "ouedkniss:111 annonces (4 à Oran)", "priority": 111, "variants": [
+        {"year_from": 2003, "year_to": 2006, "engine": "1.9 dCi", "fuel": "diesel", "source": "ouedkniss:111 annonces", "a_verifier": true},
+        {"year_from": 2003, "year_to": 2009, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:111 annonces", "a_verifier": true}
+      ]},
+      {"name": "Master", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 64, "variants": [
+        {"year_from": 1996, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:64 annonces", "a_verifier": true}
+      ]},
+      {"name": "Clio", "priority": 42, "variants": [
         {"year_from": 2005, "year_to": 2012, "engine": "1.2 16V", "fuel": "essence"},
         {"year_from": 2005, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel"},
         {"year_from": 2013, "year_to": 2019, "engine": "1.2 16V", "fuel": "essence"},
         {"year_from": 2013, "year_to": 2019, "engine": "1.5 dCi", "fuel": "diesel"}
       ]},
-      {"name": "Kangoo", "variants": [
-        {"year_from": 2008, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
+      {"name": "Trafic", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 42, "variants": [
+        {"year_from": 1987, "year_to": 2020, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:42 annonces", "a_verifier": true}
       ]}
     ]},
-    {"name": "Hyundai", "country": "Corée du Sud", "priority": 9, "models": [
-      {"name": "Accent", "pilot": true, "variants": [
+    {"name": "Volkswagen", "country": "Allemagne", "priority": 31, "models": [
+      {"name": "T-Roc", "priority": 4276, "variants": [
+        {"year_from": 2018, "year_to": null, "engine": "1.5 TSI", "fuel": "essence"}
+      ]},
+      {"name": "Polo", "priority": 3779, "variants": [
+        {"year_from": 2009, "year_to": 2017, "engine": "1.6 TDI", "fuel": "diesel"}
+      ]},
+      {"name": "Golf 7", "source": "ouedkniss:3523 annonces (200 à Oran)", "priority": 3523, "variants": [
+        {"year_from": 2013, "year_to": 2019, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:3523 annonces", "a_verifier": true},
+        {"year_from": 2013, "year_to": 2019, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:3523 annonces", "a_verifier": true}
+      ]},
+      {"name": "Golf 8", "source": "ouedkniss:3241 annonces (311 à Oran)", "priority": 3241, "variants": [
+        {"year_from": 2021, "year_to": null, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:3241 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:3241 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": 2023, "engine": "1.0 TSI", "fuel": "essence", "source": "ouedkniss:3241 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "1.4 TSI", "fuel": "essence", "source": "ouedkniss:3241 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:3241 annonces", "a_verifier": true}
+      ]},
+      {"name": "Tiguan", "source": "ouedkniss:3116 annonces (151 à Oran)", "priority": 3116, "variants": [
+        {"year_from": 2011, "year_to": null, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:3116 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:3116 annonces", "a_verifier": true},
+        {"year_from": 2010, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:3116 annonces", "a_verifier": true}
+      ]},
+      {"name": "Caddy", "source": "ouedkniss:1569 annonces (105 à Oran)", "priority": 1569, "variants": [
+        {"year_from": 2013, "year_to": 2018, "engine": "1.6 TDI", "fuel": "diesel", "source": "ouedkniss:1569 annonces", "a_verifier": true},
+        {"year_from": 2014, "year_to": 2019, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:1569 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2011, "engine": "1.9 TDI", "fuel": "diesel", "source": "ouedkniss:1569 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2021, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1569 annonces", "a_verifier": true}
+      ]},
+      {"name": "Golf 6", "source": "ouedkniss:1300 annonces (45 à Oran)", "priority": 1300, "variants": [
+        {"year_from": 2010, "year_to": 2013, "engine": "1.6 TDI", "fuel": "diesel", "source": "ouedkniss:1300 annonces", "a_verifier": true},
+        {"year_from": 2009, "year_to": 2012, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:1300 annonces", "a_verifier": true},
+        {"year_from": 2009, "year_to": 2013, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1300 annonces", "a_verifier": true}
+      ]},
+      {"name": "Passat", "source": "ouedkniss:1256 annonces (51 à Oran)", "priority": 1256, "variants": [
+        {"year_from": 1999, "year_to": 2006, "engine": "1.9 TDI", "fuel": "diesel", "source": "ouedkniss:1256 annonces", "a_verifier": true},
+        {"year_from": 2023, "year_to": null, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:1256 annonces", "a_verifier": true},
+        {"year_from": 2006, "year_to": 2015, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:1256 annonces", "a_verifier": true},
+        {"year_from": 1997, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1256 annonces", "a_verifier": true}
+      ]},
+      {"name": "Tharu", "source": "ouedkniss:1169 annonces (75 à Oran)", "priority": 1169, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:1169 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "1.5 MPI", "fuel": "essence", "source": "ouedkniss:1169 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1169 annonces", "a_verifier": true}
+      ]},
+      {"name": "Tharu XR", "source": "ouedkniss:954 annonces (47 à Oran)", "priority": 954, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:954 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "1.5 MPI", "fuel": "essence", "source": "ouedkniss:954 annonces", "a_verifier": true},
+        {"year_from": 2026, "year_to": null, "engine": "1.5 Turbo", "fuel": "electrique", "source": "ouedkniss:954 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:954 annonces", "a_verifier": true}
+      ]},
+      {"name": "T-Cross", "source": "ouedkniss:597 annonces (33 à Oran)", "priority": 597, "variants": [
+        {"year_from": 2022, "year_to": null, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:597 annonces", "a_verifier": true},
+        {"year_from": 2022, "year_to": null, "engine": "1.0 TSI", "fuel": "essence", "source": "ouedkniss:597 annonces", "a_verifier": true},
+        {"year_from": 2023, "year_to": null, "engine": "1.5 MPI", "fuel": "essence", "source": "ouedkniss:597 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:597 annonces", "a_verifier": true}
+      ]},
+      {"name": "Golf 4", "source": "ouedkniss:576 annonces (18 à Oran)", "priority": 576, "variants": [
+        {"year_from": 1998, "year_to": 2003, "engine": "1.9 TDI", "fuel": "diesel", "source": "ouedkniss:576 annonces", "a_verifier": true},
+        {"year_from": 1998, "year_to": 2005, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:576 annonces", "a_verifier": true}
+      ]},
+      {"name": "Jetta", "source": "ouedkniss:535 annonces (36 à Oran)", "priority": 535, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "1.4 TSI", "fuel": "essence", "source": "ouedkniss:535 annonces", "a_verifier": true},
+        {"year_from": 2008, "year_to": 2010, "engine": "1.9 TDI", "fuel": "diesel", "source": "ouedkniss:535 annonces", "a_verifier": true},
+        {"year_from": 2024, "year_to": null, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:535 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2013, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:535 annonces", "a_verifier": true},
+        {"year_from": 1986, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:535 annonces", "a_verifier": true}
+      ]},
+      {"name": "Golf 5", "source": "ouedkniss:466 annonces (18 à Oran)", "priority": 466, "variants": [
+        {"year_from": 2004, "year_to": 2009, "engine": "1.9 TDI", "fuel": "diesel", "source": "ouedkniss:466 annonces", "a_verifier": true},
+        {"year_from": 2005, "year_to": 2008, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:466 annonces", "a_verifier": true},
+        {"year_from": 2004, "year_to": 2009, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:466 annonces", "a_verifier": true}
+      ]},
+      {"name": "Taigo", "source": "ouedkniss:448 annonces (30 à Oran)", "priority": 448, "variants": [
+        {"year_from": 2022, "year_to": null, "engine": "1.0 TSI", "fuel": "essence", "source": "ouedkniss:448 annonces", "a_verifier": true},
+        {"year_from": 2023, "year_to": 2024, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:448 annonces", "a_verifier": true},
+        {"year_from": 2022, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:448 annonces", "a_verifier": true}
+      ]},
+      {"name": "Taos", "source": "ouedkniss:420 annonces (20 à Oran)", "priority": 420, "variants": [
+        {"year_from": 2022, "year_to": null, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:420 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "1.5 Turbo", "fuel": "electrique", "source": "ouedkniss:420 annonces", "a_verifier": true},
+        {"year_from": 2022, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:420 annonces", "a_verifier": true}
+      ]},
+      {"name": "Golf 3", "source": "ouedkniss:319 annonces (7 à Oran)", "priority": 319, "variants": [
+        {"year_from": 1992, "year_to": 1998, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:319 annonces", "a_verifier": true}
+      ]},
+      {"name": "Golf 2", "source": "ouedkniss:273 annonces (13 à Oran)", "priority": 273, "variants": [
+        {"year_from": 1985, "year_to": 1992, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:273 annonces", "a_verifier": true}
+      ]},
+      {"name": "Passat CC", "source": "ouedkniss:167 annonces (12 à Oran)", "priority": 167, "variants": [
+        {"year_from": 2009, "year_to": 2014, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:167 annonces", "a_verifier": true},
+        {"year_from": 2009, "year_to": 2015, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:167 annonces", "a_verifier": true}
+      ]},
+      {"name": "Lavida", "source": "ouedkniss:160 annonces (6 à Oran)", "priority": 160, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "1.5 MPI", "fuel": "essence", "source": "ouedkniss:160 annonces", "a_verifier": true},
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:160 annonces", "a_verifier": true}
+      ]},
+      {"name": "Touran", "source": "ouedkniss:157 annonces (8 à Oran)", "priority": 157, "variants": [
+        {"year_from": 2005, "year_to": 2023, "engine": "Autre motorisation", "fuel": "electrique", "source": "ouedkniss:157 annonces", "a_verifier": true}
+      ]},
+      {"name": "Bora", "source": "ouedkniss:141 annonces (6 à Oran)", "priority": 141, "variants": [
+        {"year_from": 2022, "year_to": 2024, "engine": "1.5 MPI", "fuel": "essence", "source": "ouedkniss:141 annonces", "a_verifier": true},
+        {"year_from": 2000, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:141 annonces", "a_verifier": true}
+      ]},
+      {"name": "Golf 8.5", "source": "ouedkniss:120 annonces (12 à Oran)", "priority": 120, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "electrique", "source": "ouedkniss:120 annonces", "a_verifier": true}
+      ]},
+      {"name": "Amarok", "source": "ouedkniss:117 annonces (5 à Oran)", "priority": 117, "variants": [
+        {"year_from": 2010, "year_to": 2019, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:117 annonces", "a_verifier": true}
+      ]},
+      {"name": "Gol", "source": "ouedkniss:113 annonces (6 à Oran)", "priority": 113, "variants": [
+        {"year_from": 2004, "year_to": 2007, "engine": "Autre motorisation", "fuel": "gpl", "source": "ouedkniss:113 annonces", "a_verifier": true}
+      ]},
+      {"name": "Golf", "priority": 21, "variants": [
+        {"year_from": 2008, "year_to": 2012, "engine": "1.6 TDI", "fuel": "diesel"},
+        {"year_from": 2013, "year_to": 2019, "engine": "1.4 TSI", "fuel": "essence"}
+      ]}
+    ]},
+    {"name": "Peugeot", "country": "France", "priority": 23, "models": [
+      {"name": "208", "priority": 5482, "variants": [
+        {"year_from": 2012, "year_to": 2019, "engine": "1.2 PureTech", "fuel": "essence"},
+        {"year_from": 2012, "year_to": 2019, "engine": "1.6 HDi", "fuel": "diesel"}
+      ]},
+      {"name": "207", "source": "ouedkniss:3865 annonces (182 à Oran)", "priority": 3865, "variants": [
+        {"year_from": 2007, "year_to": 2012, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:3865 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2012, "engine": "1.4 HDi", "fuel": "diesel", "source": "ouedkniss:3865 annonces", "a_verifier": true},
+        {"year_from": 2011, "year_to": 2012, "engine": "1.4 VTi", "fuel": "essence", "source": "ouedkniss:3865 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2010, "engine": "1.4 16V", "fuel": "essence", "source": "ouedkniss:3865 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2013, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:3865 annonces", "a_verifier": true}
+      ]},
+      {"name": "308", "source": "ouedkniss:2831 annonces (122 à Oran)", "priority": 2831, "variants": [
+        {"year_from": 2009, "year_to": 2016, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:2831 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": 2023, "engine": "1.2 PureTech", "fuel": "essence", "source": "ouedkniss:2831 annonces", "a_verifier": true},
+        {"year_from": 2011, "year_to": 2013, "engine": "1.6 VTi", "fuel": "essence", "source": "ouedkniss:2831 annonces", "a_verifier": true},
+        {"year_from": 2008, "year_to": 2023, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:2831 annonces", "a_verifier": true}
+      ]},
+      {"name": "301", "pilot": true, "priority": 1840, "variants": [
+        {"year_from": 2012, "year_to": 2020, "engine": "1.2 VTi", "fuel": "essence"},
+        {"year_from": 2012, "year_to": 2020, "engine": "1.6 VTi", "fuel": "essence"},
+        {"year_from": 2012, "year_to": 2020, "engine": "1.6 HDi", "fuel": "diesel"}
+      ]},
+      {"name": "Partner", "source": "ouedkniss:1470 annonces (45 à Oran)", "priority": 1470, "variants": [
+        {"year_from": 2010, "year_to": 2018, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:1470 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2014, "engine": "2.0 HDi", "fuel": "diesel", "source": "ouedkniss:1470 annonces", "a_verifier": true},
+        {"year_from": 2000, "year_to": 2022, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1470 annonces", "a_verifier": true}
+      ]},
+      {"name": "206", "priority": 1251, "variants": [
+        {"year_from": 1998, "year_to": 2012, "engine": "1.4", "fuel": "essence"},
+        {"year_from": 1998, "year_to": 2012, "engine": "1.4 HDi", "fuel": "diesel"}
+      ]},
+      {"name": "3008", "source": "ouedkniss:902 annonces (54 à Oran)", "priority": 902, "variants": [
+        {"year_from": 2020, "year_to": 2022, "engine": "2.0 HDi", "fuel": "diesel", "source": "ouedkniss:902 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": 2023, "engine": "1.2 PureTech", "fuel": "essence", "source": "ouedkniss:902 annonces", "a_verifier": true},
+        {"year_from": 2010, "year_to": 2017, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:902 annonces", "a_verifier": true},
+        {"year_from": 2018, "year_to": 2024, "engine": "1.6 THP", "fuel": "essence", "source": "ouedkniss:902 annonces", "a_verifier": true},
+        {"year_from": 2010, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:902 annonces", "a_verifier": true}
+      ]},
+      {"name": "406", "source": "ouedkniss:654 annonces (20 à Oran)", "priority": 654, "variants": [
+        {"year_from": 1999, "year_to": 2002, "engine": "2.0 HDi", "fuel": "diesel", "source": "ouedkniss:654 annonces", "a_verifier": true},
+        {"year_from": 1996, "year_to": 2004, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:654 annonces", "a_verifier": true}
+      ]},
+      {"name": "206 Plus", "source": "ouedkniss:587 annonces (34 à Oran)", "priority": 587, "variants": [
+        {"year_from": 2009, "year_to": 2013, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:587 annonces", "a_verifier": true}
+      ]},
+      {"name": "307", "source": "ouedkniss:523 annonces (19 à Oran)", "priority": 523, "variants": [
+        {"year_from": 2006, "year_to": 2007, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:523 annonces", "a_verifier": true},
+        {"year_from": 2003, "year_to": 2007, "engine": "2.0 HDi", "fuel": "diesel", "source": "ouedkniss:523 annonces", "a_verifier": true},
+        {"year_from": 2001, "year_to": 2007, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:523 annonces", "a_verifier": true}
+      ]},
+      {"name": "Rifter", "source": "ouedkniss:474 annonces (38 à Oran)", "priority": 474, "variants": [
+        {"year_from": 2020, "year_to": null, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:474 annonces", "a_verifier": true},
+        {"year_from": 2019, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:474 annonces", "a_verifier": true}
+      ]},
+      {"name": "306", "source": "ouedkniss:281 annonces (9 à Oran)", "priority": 281, "variants": [
+        {"year_from": 1994, "year_to": 2002, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:281 annonces", "a_verifier": true}
+      ]},
+      {"name": "407", "source": "ouedkniss:265 annonces (8 à Oran)", "priority": 265, "variants": [
+        {"year_from": 2006, "year_to": 2010, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:265 annonces", "a_verifier": true},
+        {"year_from": 2004, "year_to": 2006, "engine": "2.0 HDi", "fuel": "diesel", "source": "ouedkniss:265 annonces", "a_verifier": true},
+        {"year_from": 2004, "year_to": 2010, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:265 annonces", "a_verifier": true}
+      ]},
+      {"name": "405", "source": "ouedkniss:256 annonces (12 à Oran)", "priority": 256, "variants": [
+        {"year_from": 1987, "year_to": 2007, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:256 annonces", "a_verifier": true}
+      ]},
+      {"name": "Expert", "source": "ouedkniss:247 annonces (18 à Oran)", "priority": 247, "variants": [
+        {"year_from": 2001, "year_to": null, "engine": "2.0 HDi", "fuel": "diesel", "source": "ouedkniss:247 annonces", "a_verifier": true},
+        {"year_from": 1999, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:247 annonces", "a_verifier": true}
+      ]},
+      {"name": "508", "source": "ouedkniss:230 annonces (10 à Oran)", "priority": 230, "variants": [
+        {"year_from": 2011, "year_to": 2015, "engine": "2.0 HDi", "fuel": "diesel", "source": "ouedkniss:230 annonces", "a_verifier": true},
+        {"year_from": 2011, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:230 annonces", "a_verifier": true}
+      ]},
+      {"name": "205", "source": "ouedkniss:177 annonces (6 à Oran)", "priority": 177, "variants": [
+        {"year_from": 1984, "year_to": 1999, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:177 annonces", "a_verifier": true}
+      ]},
+      {"name": "207 plus", "source": "ouedkniss:168 annonces (12 à Oran)", "priority": 168, "variants": [
+        {"year_from": 2012, "year_to": 2013, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:168 annonces", "a_verifier": true}
+      ]},
+      {"name": "305", "source": "ouedkniss:163 annonces (1 à Oran)", "priority": 163, "variants": [
+        {"year_from": 1980, "year_to": 1988, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:163 annonces", "a_verifier": true}
+      ]},
+      {"name": "505", "source": "ouedkniss:152 annonces (2 à Oran)", "priority": 152, "variants": [
+        {"year_from": 1982, "year_to": 1992, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:152 annonces", "a_verifier": true}
+      ]},
+      {"name": "106", "source": "ouedkniss:135 annonces (1 à Oran)", "priority": 135, "variants": [
+        {"year_from": 1994, "year_to": 2002, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:135 annonces", "a_verifier": true}
+      ]},
+      {"name": "Bipper", "source": "ouedkniss:109 annonces (6 à Oran)", "priority": 109, "variants": [
+        {"year_from": 2009, "year_to": 2014, "engine": "1.4 HDi", "fuel": "diesel", "source": "ouedkniss:109 annonces", "a_verifier": true},
+        {"year_from": 2009, "year_to": 2015, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:109 annonces", "a_verifier": true}
+      ]},
+      {"name": "107", "source": "ouedkniss:107 annonces (20 à Oran)", "priority": 107, "variants": [
+        {"year_from": 2008, "year_to": 2014, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:107 annonces", "a_verifier": true}
+      ]},
+      {"name": "404", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 90, "variants": [
+        {"year_from": 1963, "year_to": 1987, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:90 annonces", "a_verifier": true}
+      ]},
+      {"name": "504", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 46, "variants": [
+        {"year_from": 1974, "year_to": 1993, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:46 annonces", "a_verifier": true}
+      ]},
+      {"name": "Boxer", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 41, "variants": [
+        {"year_from": 1994, "year_to": 2022, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:41 annonces", "a_verifier": true}
+      ]},
+      {"name": "J5", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 13, "variants": [
+        {"year_from": 1983, "year_to": 1996, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:13 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Geely", "country": "Chine", "priority": 19, "models": [
+      {"name": "Coolray", "priority": 14787, "variants": [
+        {"year_from": 2020, "year_to": null, "engine": "1.5 T", "fuel": "essence"}
+      ]},
+      {"name": "GX3 Pro", "source": "ouedkniss:2159 annonces (118 à Oran)", "priority": 2159, "variants": [
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:2159 annonces", "a_verifier": true}
+      ]},
+      {"name": "Emgrand", "source": "ouedkniss:261 annonces (2 à Oran)", "priority": 261, "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "Autre motorisation", "fuel": "electrique", "source": "ouedkniss:261 annonces", "a_verifier": true}
+      ]},
+      {"name": "Starray", "source": "ouedkniss:250 annonces (15 à Oran)", "priority": 250, "variants": [
+        {"year_from": 2026, "year_to": null, "engine": "1.5 Turbo", "fuel": "essence", "source": "ouedkniss:250 annonces", "a_verifier": true},
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:250 annonces", "a_verifier": true}
+      ]},
+      {"name": "Cowboy", "source": "ouedkniss:247 annonces (1 à Oran)", "priority": 247, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:247 annonces", "a_verifier": true}
+      ]},
+      {"name": "Cityray", "source": "ouedkniss:147 annonces (8 à Oran)", "priority": 147, "variants": [
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:147 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Kia", "country": "Corée du Sud", "priority": 14, "models": [
+      {"name": "Picanto", "pilot": true, "priority": 5630, "variants": [
+        {"year_from": 2004, "year_to": 2011, "engine": "1.0", "fuel": "essence"},
+        {"year_from": 2004, "year_to": 2011, "engine": "1.1", "fuel": "essence"},
+        {"year_from": 2011, "year_to": 2017, "engine": "1.0", "fuel": "essence"},
+        {"year_from": 2011, "year_to": 2017, "engine": "1.2", "fuel": "essence"}
+      ]},
+      {"name": "KX1", "source": "ouedkniss:2296 annonces (116 à Oran)", "priority": 2296, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:2296 annonces", "a_verifier": true}
+      ]},
+      {"name": "Sportage", "source": "ouedkniss:1875 annonces (83 à Oran)", "priority": 1875, "variants": [
+        {"year_from": 2012, "year_to": 2020, "engine": "2.0 CRDi", "fuel": "diesel", "source": "ouedkniss:1875 annonces", "a_verifier": true},
+        {"year_from": 2019, "year_to": null, "engine": "1.6 CRDi", "fuel": "diesel", "source": "ouedkniss:1875 annonces", "a_verifier": true},
+        {"year_from": 2017, "year_to": 2018, "engine": "1.7 CRDi", "fuel": "diesel", "source": "ouedkniss:1875 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "1.5 Turbo", "fuel": "electrique", "source": "ouedkniss:1875 annonces", "a_verifier": true},
+        {"year_from": 2008, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1875 annonces", "a_verifier": true}
+      ]},
+      {"name": "Seltos", "source": "ouedkniss:879 annonces (42 à Oran)", "priority": 879, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "1.5 MPI", "fuel": "essence", "source": "ouedkniss:879 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:879 annonces", "a_verifier": true}
+      ]},
+      {"name": "Rio", "priority": 676, "variants": [
+        {"year_from": 2011, "year_to": 2017, "engine": "1.4", "fuel": "essence"}
+      ]},
+      {"name": "Sorento", "source": "ouedkniss:446 annonces (17 à Oran)", "priority": 446, "variants": [
+        {"year_from": 2010, "year_to": 2015, "engine": "2.2 CRDi", "fuel": "diesel", "source": "ouedkniss:446 annonces", "a_verifier": true},
+        {"year_from": 2006, "year_to": 2020, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:446 annonces", "a_verifier": true}
+      ]},
+      {"name": "Sonet", "source": "ouedkniss:318 annonces (14 à Oran)", "priority": 318, "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:318 annonces", "a_verifier": true}
+      ]},
+      {"name": "Cerato", "source": "ouedkniss:312 annonces (7 à Oran)", "priority": 312, "variants": [
+        {"year_from": 2006, "year_to": 2021, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:312 annonces", "a_verifier": true}
+      ]},
+      {"name": "Carens", "source": "ouedkniss:290 annonces (16 à Oran)", "priority": 290, "variants": [
+        {"year_from": 2014, "year_to": 2015, "engine": "1.7 CRDi", "fuel": "diesel", "source": "ouedkniss:290 annonces", "a_verifier": true},
+        {"year_from": 2005, "year_to": 2016, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:290 annonces", "a_verifier": true}
+      ]},
+      {"name": "K3", "source": "ouedkniss:256 annonces (10 à Oran)", "priority": 256, "variants": [
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "electrique", "source": "ouedkniss:256 annonces", "a_verifier": true}
+      ]},
+      {"name": "Morning", "source": "ouedkniss:142 annonces (6 à Oran)", "priority": 142, "variants": [
+        {"year_from": 2022, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:142 annonces", "a_verifier": true}
+      ]},
+      {"name": "K2700", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 7, "variants": [
+        {"year_from": 2008, "year_to": 2019, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:7 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Hyundai", "country": "Corée du Sud", "priority": 13, "models": [
+      {"name": "Accent", "pilot": true, "priority": 2108, "variants": [
         {"year_from": 2006, "year_to": 2011, "engine": "1.4", "fuel": "essence"},
         {"year_from": 2006, "year_to": 2011, "engine": "1.5 CRDi", "fuel": "diesel"},
         {"year_from": 2011, "year_to": 2017, "engine": "1.4", "fuel": "essence"},
         {"year_from": 2011, "year_to": 2017, "engine": "1.6", "fuel": "essence"},
         {"year_from": 2011, "year_to": 2017, "engine": "1.6 CRDi", "fuel": "diesel"}
       ]},
-      {"name": "i10", "variants": [
+      {"name": "Grand i10", "source": "ouedkniss:1981 annonces (112 à Oran)", "priority": 1981, "variants": [
+        {"year_from": 2017, "year_to": 2020, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1981 annonces", "a_verifier": true}
+      ]},
+      {"name": "i10", "priority": 1526, "variants": [
         {"year_from": 2008, "year_to": 2013, "engine": "1.1", "fuel": "essence"},
         {"year_from": 2008, "year_to": 2013, "engine": "1.2", "fuel": "essence"},
         {"year_from": 2014, "year_to": 2019, "engine": "1.0", "fuel": "essence"},
         {"year_from": 2014, "year_to": 2019, "engine": "1.2", "fuel": "essence"}
-      ]}
-    ]},
-    {"name": "Peugeot", "country": "France", "priority": 9, "models": [
-      {"name": "301", "pilot": true, "variants": [
-        {"year_from": 2012, "year_to": 2020, "engine": "1.2 VTi", "fuel": "essence"},
-        {"year_from": 2012, "year_to": 2020, "engine": "1.6 VTi", "fuel": "essence"},
-        {"year_from": 2012, "year_to": 2020, "engine": "1.6 HDi", "fuel": "diesel"}
       ]},
-      {"name": "206", "variants": [
-        {"year_from": 1998, "year_to": 2012, "engine": "1.4", "fuel": "essence"},
-        {"year_from": 1998, "year_to": 2012, "engine": "1.4 HDi", "fuel": "diesel"}
+      {"name": "Tucson", "source": "ouedkniss:1379 annonces (63 à Oran)", "priority": 1379, "variants": [
+        {"year_from": 2011, "year_to": 2018, "engine": "2.0 CRDi", "fuel": "diesel", "source": "ouedkniss:1379 annonces", "a_verifier": true},
+        {"year_from": 2019, "year_to": 2024, "engine": "1.6 CRDi", "fuel": "diesel", "source": "ouedkniss:1379 annonces", "a_verifier": true},
+        {"year_from": 2008, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1379 annonces", "a_verifier": true}
       ]},
-      {"name": "208", "variants": [
-        {"year_from": 2012, "year_to": 2019, "engine": "1.2 PureTech", "fuel": "essence"},
-        {"year_from": 2012, "year_to": 2019, "engine": "1.6 HDi", "fuel": "diesel"}
-      ]}
-    ]},
-    {"name": "Kia", "country": "Corée du Sud", "priority": 8, "models": [
-      {"name": "Picanto", "pilot": true, "variants": [
-        {"year_from": 2004, "year_to": 2011, "engine": "1.0", "fuel": "essence"},
-        {"year_from": 2004, "year_to": 2011, "engine": "1.1", "fuel": "essence"},
-        {"year_from": 2011, "year_to": 2017, "engine": "1.0", "fuel": "essence"},
-        {"year_from": 2011, "year_to": 2017, "engine": "1.2", "fuel": "essence"}
+      {"name": "Creta", "source": "ouedkniss:1149 annonces (36 à Oran)", "priority": 1149, "variants": [
+        {"year_from": 2017, "year_to": 2019, "engine": "1.6 CRDi", "fuel": "diesel", "source": "ouedkniss:1149 annonces", "a_verifier": true},
+        {"year_from": 2017, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1149 annonces", "a_verifier": true}
       ]},
-      {"name": "Rio", "variants": [
-        {"year_from": 2011, "year_to": 2017, "engine": "1.4", "fuel": "essence"}
+      {"name": "Accent RB", "source": "ouedkniss:1060 annonces (59 à Oran)", "priority": 1060, "variants": [
+        {"year_from": 2014, "year_to": 2019, "engine": "1.6 CRDi", "fuel": "diesel", "source": "ouedkniss:1060 annonces", "a_verifier": true},
+        {"year_from": 2012, "year_to": 2019, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1060 annonces", "a_verifier": true}
+      ]},
+      {"name": "Atos", "source": "ouedkniss:1042 annonces (54 à Oran)", "priority": 1042, "variants": [
+        {"year_from": 1999, "year_to": 2012, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1042 annonces", "a_verifier": true}
+      ]},
+      {"name": "i20", "source": "ouedkniss:799 annonces (41 à Oran)", "priority": 799, "variants": [
+        {"year_from": 2018, "year_to": 2020, "engine": "1.4 CRDi", "fuel": "diesel", "source": "ouedkniss:799 annonces", "a_verifier": true},
+        {"year_from": 2022, "year_to": 2024, "engine": "1.0 T-GDi", "fuel": "essence", "source": "ouedkniss:799 annonces", "a_verifier": true},
+        {"year_from": 2014, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:799 annonces", "a_verifier": true}
+      ]},
+      {"name": "Elantra", "source": "ouedkniss:434 annonces (17 à Oran)", "priority": 434, "variants": [
+        {"year_from": 2011, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:434 annonces", "a_verifier": true}
+      ]},
+      {"name": "Santa Fe", "source": "ouedkniss:405 annonces (23 à Oran)", "priority": 405, "variants": [
+        {"year_from": 2009, "year_to": 2018, "engine": "2.2 CRDi", "fuel": "diesel", "source": "ouedkniss:405 annonces", "a_verifier": true},
+        {"year_from": 2006, "year_to": 2019, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:405 annonces", "a_verifier": true}
+      ]},
+      {"name": "EON", "source": "ouedkniss:300 annonces (23 à Oran)", "priority": 300, "variants": [
+        {"year_from": 2012, "year_to": 2014, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:300 annonces", "a_verifier": true}
+      ]},
+      {"name": "i30", "source": "ouedkniss:166 annonces (7 à Oran)", "priority": 166, "variants": [
+        {"year_from": 2009, "year_to": 2023, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:166 annonces", "a_verifier": true}
+      ]},
+      {"name": "H-1", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 60, "variants": [
+        {"year_from": 2003, "year_to": 2020, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:60 annonces", "a_verifier": true}
+      ]},
+      {"name": "H-100", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 23, "variants": [
+        {"year_from": 2002, "year_to": 2020, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:23 annonces", "a_verifier": true}
       ]}
     ]},
-    {"name": "Toyota", "country": "Japon", "priority": 7, "models": [
-      {"name": "Hilux", "variants": [
-        {"year_from": 2005, "year_to": 2015, "engine": "2.5 D-4D", "fuel": "diesel"},
-        {"year_from": 2016, "year_to": null, "engine": "2.4 D-4D", "fuel": "diesel"}
+    {"name": "Dacia", "country": "Roumanie", "priority": 11, "models": [
+      {"name": "Sandero", "priority": 5267, "variants": [
+        {"year_from": 2008, "year_to": 2012, "engine": "1.4 MPI", "fuel": "essence"},
+        {"year_from": 2008, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.2 16V", "fuel": "essence"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
+      ]},
+      {"name": "Duster", "priority": 2522, "variants": [
+        {"year_from": 2010, "year_to": 2017, "engine": "1.6 16V", "fuel": "essence"},
+        {"year_from": 2010, "year_to": 2017, "engine": "1.5 dCi", "fuel": "diesel"},
+        {"year_from": 2018, "year_to": null, "engine": "1.6 SCe", "fuel": "essence"},
+        {"year_from": 2018, "year_to": null, "engine": "1.5 dCi", "fuel": "diesel"}
+      ]},
+      {"name": "Logan", "pilot": true, "priority": 2458, "variants": [
+        {"year_from": 2005, "year_to": 2012, "engine": "1.4 MPI", "fuel": "essence"},
+        {"year_from": 2005, "year_to": 2012, "engine": "1.6 MPI", "fuel": "essence"},
+        {"year_from": 2005, "year_to": 2012, "engine": "1.5 dCi", "fuel": "diesel"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.2 16V", "fuel": "essence"},
+        {"year_from": 2013, "year_to": 2020, "engine": "1.5 dCi", "fuel": "diesel"}
+      ]},
+      {"name": "Stepway", "source": "ouedkniss:223 annonces (9 à Oran)", "priority": 223, "variants": [
+        {"year_from": 2017, "year_to": 2019, "engine": "1.5 dCi", "fuel": "diesel", "source": "ouedkniss:223 annonces", "a_verifier": true},
+        {"year_from": 2015, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:223 annonces", "a_verifier": true}
+      ]},
+      {"name": "Logan MCV", "source": "ouedkniss:111 annonces (3 à Oran)", "priority": 111, "variants": [
+        {"year_from": 2007, "year_to": 2015, "engine": "Autre motorisation", "fuel": "gpl", "source": "ouedkniss:111 annonces", "a_verifier": true}
+      ]},
+      {"name": "Solenza", "source": "ouedkniss:104 annonces (4 à Oran)", "priority": 104, "variants": [
+        {"year_from": 2004, "year_to": 2005, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:104 annonces", "a_verifier": true}
       ]}
     ]},
-    {"name": "Fiat", "country": "Italie", "priority": 8, "models": [
-      {"name": "Tipo", "variants": [
+    {"name": "Seat", "country": "Espagne", "priority": 11, "source": "ouedkniss+ons", "models": [
+      {"name": "Ibiza", "source": "ouedkniss:5845 annonces (475 à Oran)", "priority": 5845, "variants": [
+        {"year_from": 2016, "year_to": 2019, "engine": "1.6 MPI", "fuel": "essence", "source": "ouedkniss:5845 annonces", "a_verifier": true},
+        {"year_from": 2012, "year_to": 2015, "engine": "1.6 TDI", "fuel": "diesel", "source": "ouedkniss:5845 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "1.0 TSI", "fuel": "essence", "source": "ouedkniss:5845 annonces", "a_verifier": true},
+        {"year_from": 2020, "year_to": 2024, "engine": "1.0 MPI", "fuel": "essence", "source": "ouedkniss:5845 annonces", "a_verifier": true},
+        {"year_from": 2011, "year_to": 2023, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:5845 annonces", "a_verifier": true}
+      ]},
+      {"name": "Leon", "source": "ouedkniss:3854 annonces (232 à Oran)", "priority": 3854, "variants": [
+        {"year_from": 2011, "year_to": 2021, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:3854 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": 2022, "engine": "1.0 TSI", "fuel": "essence", "source": "ouedkniss:3854 annonces", "a_verifier": true},
+        {"year_from": 2016, "year_to": 2016, "engine": "1.6 MPI", "fuel": "essence", "source": "ouedkniss:3854 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": 2022, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:3854 annonces", "a_verifier": true},
+        {"year_from": 2010, "year_to": 2011, "engine": "1.9 TDI", "fuel": "diesel", "source": "ouedkniss:3854 annonces", "a_verifier": true},
+        {"year_from": 2010, "year_to": 2022, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:3854 annonces", "a_verifier": true}
+      ]},
+      {"name": "Arona", "source": "ouedkniss:781 annonces (53 à Oran)", "priority": 781, "variants": [
+        {"year_from": 2021, "year_to": 2024, "engine": "1.0 TSI", "fuel": "essence", "source": "ouedkniss:781 annonces", "a_verifier": true},
+        {"year_from": 2018, "year_to": 2019, "engine": "1.6 MPI", "fuel": "essence", "source": "ouedkniss:781 annonces", "a_verifier": true},
+        {"year_from": 2018, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:781 annonces", "a_verifier": true}
+      ]},
+      {"name": "Ateca", "source": "ouedkniss:265 annonces (12 à Oran)", "priority": 265, "variants": [
+        {"year_from": 2021, "year_to": 2023, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:265 annonces", "a_verifier": true},
+        {"year_from": 2017, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:265 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Fiat", "country": "Italie", "priority": 10, "models": [
+      {"name": "500", "priority": 2864, "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "1.0 hybride", "fuel": "hybride"}
+      ]},
+      {"name": "Tipo", "priority": 2796, "variants": [
         {"year_from": 2016, "year_to": null, "engine": "1.6", "fuel": "essence"},
         {"year_from": 2016, "year_to": null, "engine": "1.6 Multijet", "fuel": "diesel"}
       ]},
-      {"name": "500", "variants": [
-        {"year_from": 2023, "year_to": null, "engine": "1.0 hybride", "fuel": "hybride"}
+      {"name": "500x", "source": "ouedkniss:2558 annonces (247 à Oran)", "priority": 2558, "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "1.4 Turbo", "fuel": "essence", "source": "ouedkniss:2558 annonces", "a_verifier": true},
+        {"year_from": 2023, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:2558 annonces", "a_verifier": true}
       ]},
-      {"name": "Doblo", "variants": [
+      {"name": "Doblo", "priority": 800, "variants": [
         {"year_from": 2023, "year_to": null, "engine": "1.5 BlueHDi", "fuel": "diesel"}
+      ]},
+      {"name": "Punto", "source": "ouedkniss:232 annonces (2 à Oran)", "priority": 232, "variants": [
+        {"year_from": 1995, "year_to": 2014, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:232 annonces", "a_verifier": true}
+      ]},
+      {"name": "Palio", "source": "ouedkniss:167 annonces (6 à Oran)", "priority": 167, "variants": [
+        {"year_from": 2002, "year_to": 2008, "engine": "Autre motorisation", "fuel": "gpl", "source": "ouedkniss:167 annonces", "a_verifier": true}
+      ]},
+      {"name": "Uno", "source": "ouedkniss:110 annonces (4 à Oran)", "priority": 110, "variants": [
+        {"year_from": 1985, "year_to": 2006, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:110 annonces", "a_verifier": true}
+      ]},
+      {"name": "Ducato", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 33, "variants": [
+        {"year_from": 2016, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:33 annonces", "a_verifier": true}
+      ]},
+      {"name": "Doblo Cargo", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 0, "variants": [
+        {"year_from": 2001, "year_to": null, "engine": "Autre motorisation", "fuel": "diesel", "source": "equipe (ONS 2020 : marque)", "a_verifier": true}
       ]}
     ]},
-    {"name": "Geely", "country": "Chine", "priority": 7, "models": [
-      {"name": "Coolray", "variants": [{"year_from": 2020, "year_to": null, "engine": "1.5 T", "fuel": "essence"}]}
+    {"name": "Livan", "country": "Chine", "priority": 8, "source": "ouedkniss+ons", "models": [
+      {"name": "X3 Pro", "source": "ouedkniss:8344 annonces (352 à Oran)", "priority": 8344, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:8344 annonces", "a_verifier": true}
+      ]}
     ]},
     {"name": "Chery", "country": "Chine", "priority": 7, "models": [
-      {"name": "Tiggo 4", "variants": [{"year_from": 2020, "year_to": null, "engine": "1.5", "fuel": "essence"}]}
+      {"name": "QQ", "source": "ouedkniss:1434 annonces (51 à Oran)", "priority": 1434, "variants": [
+        {"year_from": 2009, "year_to": 2019, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1434 annonces", "a_verifier": true}
+      ]},
+      {"name": "Tiggo 4 pro", "source": "ouedkniss:738 annonces (25 à Oran)", "priority": 738, "variants": [
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:738 annonces", "a_verifier": true}
+      ]},
+      {"name": "Arrizo 5", "source": "ouedkniss:588 annonces (21 à Oran)", "priority": 588, "variants": [
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:588 annonces", "a_verifier": true}
+      ]},
+      {"name": "Tiggo 2 pro", "source": "ouedkniss:540 annonces (28 à Oran)", "priority": 540, "variants": [
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:540 annonces", "a_verifier": true}
+      ]},
+      {"name": "Tiggo 7 Pro", "source": "ouedkniss:404 annonces (15 à Oran)", "priority": 404, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "1.5 Turbo", "fuel": "electrique", "source": "ouedkniss:404 annonces", "a_verifier": true},
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:404 annonces", "a_verifier": true}
+      ]},
+      {"name": "Tiggo 4", "priority": 0, "variants": [
+        {"year_from": 2020, "year_to": null, "engine": "1.5", "fuel": "essence"}
+      ]}
+    ]},
+    {"name": "Toyota", "country": "Japon", "priority": 7, "models": [
+      {"name": "Yaris", "source": "ouedkniss:1413 annonces (46 à Oran)", "priority": 1413, "variants": [
+        {"year_from": 2004, "year_to": 2022, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1413 annonces", "a_verifier": true}
+      ]},
+      {"name": "Corolla", "source": "ouedkniss:779 annonces (19 à Oran)", "priority": 779, "variants": [
+        {"year_from": 2002, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:779 annonces", "a_verifier": true}
+      ]},
+      {"name": "Hilux", "priority": 431, "variants": [
+        {"year_from": 2005, "year_to": 2015, "engine": "2.5 D-4D", "fuel": "diesel"},
+        {"year_from": 2016, "year_to": null, "engine": "2.4 D-4D", "fuel": "diesel"}
+      ]},
+      {"name": "RAV4", "source": "ouedkniss:305 annonces (19 à Oran)", "priority": 305, "variants": [
+        {"year_from": 2002, "year_to": 2018, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:305 annonces", "a_verifier": true}
+      ]},
+      {"name": "Land Cruiser", "source": "ouedkniss:152 annonces (4 à Oran)", "priority": 152, "variants": [
+        {"year_from": 1975, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:152 annonces", "a_verifier": true}
+      ]},
+      {"name": "Corolla Verso", "source": "ouedkniss:135 annonces (2 à Oran)", "priority": 135, "variants": [
+        {"year_from": 2003, "year_to": 2009, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:135 annonces", "a_verifier": true}
+      ]},
+      {"name": "Auris", "source": "ouedkniss:124 annonces (6 à Oran)", "priority": 124, "variants": [
+        {"year_from": 2008, "year_to": 2016, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:124 annonces", "a_verifier": true}
+      ]},
+      {"name": "Revo", "source": "ouedkniss:111 annonces (2 à Oran)", "priority": 111, "variants": [
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:111 annonces", "a_verifier": true}
+      ]},
+      {"name": "Hiace", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 3, "variants": [
+        {"year_from": 1999, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:3 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Citroën", "country": "France", "priority": 6, "source": "ouedkniss+ons", "models": [
+      {"name": "C3", "source": "ouedkniss:2037 annonces (150 à Oran)", "priority": 2037, "variants": [
+        {"year_from": 2021, "year_to": 2024, "engine": "1.2 PureTech", "fuel": "essence", "source": "ouedkniss:2037 annonces", "a_verifier": true},
+        {"year_from": 2003, "year_to": 2008, "engine": "1.4 HDi", "fuel": "diesel", "source": "ouedkniss:2037 annonces", "a_verifier": true},
+        {"year_from": 2011, "year_to": 2022, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:2037 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": 2023, "engine": "1.2 VTi", "fuel": "essence", "source": "ouedkniss:2037 annonces", "a_verifier": true},
+        {"year_from": 2003, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:2037 annonces", "a_verifier": true}
+      ]},
+      {"name": "Berlingo", "source": "ouedkniss:1432 annonces (89 à Oran)", "priority": 1432, "variants": [
+        {"year_from": 2011, "year_to": null, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:1432 annonces", "a_verifier": true},
+        {"year_from": 2002, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1432 annonces", "a_verifier": true}
+      ]},
+      {"name": "C Elysée", "source": "ouedkniss:469 annonces (24 à Oran)", "priority": 469, "variants": [
+        {"year_from": 2013, "year_to": 2015, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:469 annonces", "a_verifier": true},
+        {"year_from": 2013, "year_to": 2022, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:469 annonces", "a_verifier": true}
+      ]},
+      {"name": "C4", "source": "ouedkniss:468 annonces (26 à Oran)", "priority": 468, "variants": [
+        {"year_from": 2022, "year_to": null, "engine": "1.2 PureTech", "fuel": "essence", "source": "ouedkniss:468 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2015, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:468 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:468 annonces", "a_verifier": true}
+      ]},
+      {"name": "Xsara", "source": "ouedkniss:325 annonces (5 à Oran)", "priority": 325, "variants": [
+        {"year_from": 1998, "year_to": 2004, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:325 annonces", "a_verifier": true}
+      ]},
+      {"name": "C5", "source": "ouedkniss:167 annonces (4 à Oran)", "priority": 167, "variants": [
+        {"year_from": 2001, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:167 annonces", "a_verifier": true}
+      ]},
+      {"name": "Saxo", "source": "ouedkniss:160 annonces (2 à Oran)", "priority": 160, "variants": [
+        {"year_from": 1997, "year_to": 2003, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:160 annonces", "a_verifier": true}
+      ]},
+      {"name": "Jumpy", "source": "ouedkniss:125 annonces (7 à Oran)", "priority": 125, "variants": [
+        {"year_from": 2004, "year_to": null, "engine": "Autre motorisation", "fuel": "diesel", "source": "ouedkniss:125 annonces", "a_verifier": true}
+      ]},
+      {"name": "Jumper", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 20, "variants": [
+        {"year_from": 1998, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:20 annonces", "a_verifier": true}
+      ]}
     ]},
     {"name": "MG", "country": "Chine", "priority": 6, "models": [
-      {"name": "MG5", "variants": [{"year_from": 2021, "year_to": null, "engine": "1.5", "fuel": "essence"}]}
-    ]},
-    {"name": "Jetour", "country": "Chine", "priority": 5, "models": [
-      {"name": "X70", "variants": [{"year_from": 2022, "year_to": null, "engine": "1.5 T", "fuel": "essence"}]}
+      {"name": "MG5", "priority": 3136, "variants": [
+        {"year_from": 2021, "year_to": null, "engine": "1.5", "fuel": "essence"}
+      ]},
+      {"name": "5", "source": "ouedkniss:499 annonces (13 à Oran)", "priority": 499, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:499 annonces", "a_verifier": true}
+      ]}
     ]},
     {"name": "Opel", "country": "Allemagne", "priority": 6, "models": [
-      {"name": "Corsa", "variants": [{"year_from": 2019, "year_to": null, "engine": "1.2", "fuel": "essence"}]}
+      {"name": "Astra", "source": "ouedkniss:916 annonces (96 à Oran)", "priority": 916, "variants": [
+        {"year_from": 2024, "year_to": null, "engine": "1.2 PureTech", "fuel": "essence", "source": "ouedkniss:916 annonces", "a_verifier": true},
+        {"year_from": 1999, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:916 annonces", "a_verifier": true}
+      ]},
+      {"name": "Corsa", "priority": 537, "variants": [
+        {"year_from": 2019, "year_to": null, "engine": "1.2", "fuel": "essence"}
+      ]},
+      {"name": "Mokka", "source": "ouedkniss:304 annonces (31 à Oran)", "priority": 304, "variants": [
+        {"year_from": 2022, "year_to": 2024, "engine": "1.2 PureTech", "fuel": "essence", "source": "ouedkniss:304 annonces", "a_verifier": true},
+        {"year_from": 2022, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:304 annonces", "a_verifier": true}
+      ]},
+      {"name": "GrandLand", "source": "ouedkniss:244 annonces (31 à Oran)", "priority": 244, "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:244 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Audi", "country": "Allemagne", "priority": 5, "source": "ouedkniss+ons", "models": [
+      {"name": "A3", "source": "ouedkniss:1063 annonces (105 à Oran)", "priority": 1063, "variants": [
+        {"year_from": 2010, "year_to": 2021, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:1063 annonces", "a_verifier": true},
+        {"year_from": 2013, "year_to": 2016, "engine": "1.8 TFSI", "fuel": "essence", "source": "ouedkniss:1063 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:1063 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "1.5 TFSI", "fuel": "essence", "source": "ouedkniss:1063 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1063 annonces", "a_verifier": true}
+      ]},
+      {"name": "Q3", "source": "ouedkniss:900 annonces (82 à Oran)", "priority": 900, "variants": [
+        {"year_from": 2016, "year_to": null, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:900 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "1.5 TFSI", "fuel": "essence", "source": "ouedkniss:900 annonces", "a_verifier": true},
+        {"year_from": 2013, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:900 annonces", "a_verifier": true}
+      ]},
+      {"name": "Q5", "source": "ouedkniss:851 annonces (73 à Oran)", "priority": 851, "variants": [
+        {"year_from": 2011, "year_to": 2023, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:851 annonces", "a_verifier": true},
+        {"year_from": 2010, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:851 annonces", "a_verifier": true}
+      ]},
+      {"name": "A3 Sportback", "source": "ouedkniss:263 annonces (30 à Oran)", "priority": 263, "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:263 annonces", "a_verifier": true},
+        {"year_from": 2019, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:263 annonces", "a_verifier": true}
+      ]},
+      {"name": "A6", "source": "ouedkniss:228 annonces (23 à Oran)", "priority": 228, "variants": [
+        {"year_from": 2001, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:228 annonces", "a_verifier": true}
+      ]},
+      {"name": "A1", "source": "ouedkniss:215 annonces (26 à Oran)", "priority": 215, "variants": [
+        {"year_from": 2012, "year_to": 2023, "engine": "Autre motorisation", "fuel": "electrique", "source": "ouedkniss:215 annonces", "a_verifier": true}
+      ]},
+      {"name": "S3", "source": "ouedkniss:192 annonces (5 à Oran)", "priority": 192, "variants": [
+        {"year_from": 2009, "year_to": 2019, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:192 annonces", "a_verifier": true}
+      ]},
+      {"name": "A4", "source": "ouedkniss:177 annonces (10 à Oran)", "priority": 177, "variants": [
+        {"year_from": 2007, "year_to": 2018, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:177 annonces", "a_verifier": true},
+        {"year_from": 2000, "year_to": 2021, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:177 annonces", "a_verifier": true}
+      ]},
+      {"name": "Q2", "source": "ouedkniss:160 annonces (15 à Oran)", "priority": 160, "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "1.5 TFSI", "fuel": "essence", "source": "ouedkniss:160 annonces", "a_verifier": true},
+        {"year_from": 2017, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:160 annonces", "a_verifier": true}
+      ]},
+      {"name": "A3 Limousine", "source": "ouedkniss:120 annonces (6 à Oran)", "priority": 120, "variants": [
+        {"year_from": 2014, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:120 annonces", "a_verifier": true}
+      ]},
+      {"name": "A3 Ssportback", "source": "ouedkniss:105 annonces (14 à Oran)", "priority": 105, "variants": [
+        {"year_from": 2013, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:105 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Chevrolet", "country": "États-Unis", "priority": 5, "source": "ouedkniss+ons", "models": [
+      {"name": "Aveo", "source": "ouedkniss:1562 annonces (54 à Oran)", "priority": 1562, "variants": [
+        {"year_from": 2009, "year_to": 2014, "engine": "1.2 16V", "fuel": "essence", "source": "ouedkniss:1562 annonces", "a_verifier": true},
+        {"year_from": 2004, "year_to": 2014, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1562 annonces", "a_verifier": true}
+      ]},
+      {"name": "Spark", "source": "ouedkniss:1053 annonces (36 à Oran)", "priority": 1053, "variants": [
+        {"year_from": 2005, "year_to": 2017, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1053 annonces", "a_verifier": true}
+      ]},
+      {"name": "Sail", "source": "ouedkniss:864 annonces (32 à Oran)", "priority": 864, "variants": [
+        {"year_from": 2011, "year_to": 2014, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:864 annonces", "a_verifier": true}
+      ]},
+      {"name": "Optra", "source": "ouedkniss:545 annonces (16 à Oran)", "priority": 545, "variants": [
+        {"year_from": 2004, "year_to": 2015, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:545 annonces", "a_verifier": true}
+      ]},
+      {"name": "Captiva", "source": "ouedkniss:501 annonces (27 à Oran)", "priority": 501, "variants": [
+        {"year_from": 2008, "year_to": 2022, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:501 annonces", "a_verifier": true}
+      ]},
+      {"name": "Cruze", "source": "ouedkniss:500 annonces (26 à Oran)", "priority": 500, "variants": [
+        {"year_from": 2010, "year_to": 2017, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:500 annonces", "a_verifier": true}
+      ]},
+      {"name": "Sonic", "source": "ouedkniss:166 annonces (8 à Oran)", "priority": 166, "variants": [
+        {"year_from": 2012, "year_to": 2017, "engine": "Autre motorisation", "fuel": "gpl", "source": "ouedkniss:166 annonces", "a_verifier": true}
+      ]},
+      {"name": "Trax", "source": "ouedkniss:113 annonces (11 à Oran)", "priority": 113, "variants": [
+        {"year_from": 2014, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:113 annonces", "a_verifier": true}
+      ]}
     ]},
     {"name": "DFSK", "country": "Chine", "priority": 5, "models": [
-      {"name": "Glory 580", "variants": [{"year_from": 2020, "year_to": null, "engine": "1.5 T", "fuel": "essence"}]}
+      {"name": "Glory 580", "priority": 1, "variants": [
+        {"year_from": 2020, "year_to": null, "engine": "1.5 T", "fuel": "essence"}
+      ]}
     ]},
-    {"name": "Volkswagen", "country": "Allemagne", "priority": 5, "models": [
-      {"name": "Golf", "variants": [
-        {"year_from": 2008, "year_to": 2012, "engine": "1.6 TDI", "fuel": "diesel"},
-        {"year_from": 2013, "year_to": 2019, "engine": "1.4 TSI", "fuel": "essence"}
+    {"name": "Jetour", "country": "Chine", "priority": 5, "models": [
+      {"name": "X70 Plus", "source": "ouedkniss:653 annonces (23 à Oran)", "priority": 653, "variants": [
+        {"year_from": 2023, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:653 annonces", "a_verifier": true}
       ]},
-      {"name": "Polo", "variants": [{"year_from": 2009, "year_to": 2017, "engine": "1.6 TDI", "fuel": "diesel"}]},
-      {"name": "T-Roc", "variants": [{"year_from": 2018, "year_to": null, "engine": "1.5 TSI", "fuel": "essence"}]}
+      {"name": "Dashing", "source": "ouedkniss:637 annonces (28 à Oran)", "priority": 637, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "1.5 Turbo", "fuel": "electrique", "source": "ouedkniss:637 annonces", "a_verifier": true},
+        {"year_from": 2023, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:637 annonces", "a_verifier": true}
+      ]},
+      {"name": "T2", "source": "ouedkniss:451 annonces (26 à Oran)", "priority": 451, "variants": [
+        {"year_from": 2024, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:451 annonces", "a_verifier": true}
+      ]},
+      {"name": "X70 L", "source": "ouedkniss:135 annonces (5 à Oran)", "priority": 135, "variants": [
+        {"year_from": 2026, "year_to": null, "engine": "1.5 Turbo", "fuel": "essence", "source": "ouedkniss:135 annonces", "a_verifier": true},
+        {"year_from": 2026, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:135 annonces", "a_verifier": true}
+      ]},
+      {"name": "X70", "priority": 77, "variants": [
+        {"year_from": 2022, "year_to": null, "engine": "1.5 T", "fuel": "essence"}
+      ]}
     ]},
-    {"name": "Skoda", "country": "Tchéquie", "priority": 4, "models": [
-      {"name": "Octavia", "variants": [{"year_from": 2013, "year_to": 2019, "engine": "1.6 TDI", "fuel": "diesel"}]}
+    {"name": "Skoda", "country": "Tchéquie", "priority": 5, "models": [
+      {"name": "Fabia", "source": "ouedkniss:1823 annonces (76 à Oran)", "priority": 1823, "variants": [
+        {"year_from": 2021, "year_to": 2024, "engine": "1.0 TSI", "fuel": "essence", "source": "ouedkniss:1823 annonces", "a_verifier": true},
+        {"year_from": 2015, "year_to": 2019, "engine": "1.6 MPI", "fuel": "essence", "source": "ouedkniss:1823 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": 2024, "engine": "1.0 MPI", "fuel": "essence", "source": "ouedkniss:1823 annonces", "a_verifier": true},
+        {"year_from": 2017, "year_to": 2019, "engine": "1.4 TDI", "fuel": "diesel", "source": "ouedkniss:1823 annonces", "a_verifier": true},
+        {"year_from": 2010, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1823 annonces", "a_verifier": true}
+      ]},
+      {"name": "Octavia", "priority": 1260, "variants": [
+        {"year_from": 2013, "year_to": 2019, "engine": "1.6 TDI", "fuel": "diesel"}
+      ]},
+      {"name": "Kamiq", "source": "ouedkniss:753 annonces (40 à Oran)", "priority": 753, "variants": [
+        {"year_from": 2021, "year_to": 2024, "engine": "1.0 TSI", "fuel": "essence", "source": "ouedkniss:753 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "1.5 MPI", "fuel": "essence", "source": "ouedkniss:753 annonces", "a_verifier": true},
+        {"year_from": 2023, "year_to": 2024, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:753 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:753 annonces", "a_verifier": true}
+      ]},
+      {"name": "Rapid", "source": "ouedkniss:495 annonces (17 à Oran)", "priority": 495, "variants": [
+        {"year_from": 2014, "year_to": 2019, "engine": "1.6 MPI", "fuel": "essence", "source": "ouedkniss:495 annonces", "a_verifier": true},
+        {"year_from": 2013, "year_to": 2015, "engine": "1.6 TDI", "fuel": "diesel", "source": "ouedkniss:495 annonces", "a_verifier": true},
+        {"year_from": 2013, "year_to": 2019, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:495 annonces", "a_verifier": true}
+      ]},
+      {"name": "Yeti", "source": "ouedkniss:270 annonces (1 à Oran)", "priority": 270, "variants": [
+        {"year_from": 2012, "year_to": 2016, "engine": "2.0 TDI", "fuel": "diesel", "source": "ouedkniss:270 annonces", "a_verifier": true},
+        {"year_from": 2011, "year_to": 2017, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:270 annonces", "a_verifier": true}
+      ]},
+      {"name": "Karoq", "source": "ouedkniss:158 annonces (12 à Oran)", "priority": 158, "variants": [
+        {"year_from": 2021, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:158 annonces", "a_verifier": true}
+      ]},
+      {"name": "Kamiq GT", "source": "ouedkniss:151 annonces (4 à Oran)", "priority": 151, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "1.5 MPI", "fuel": "essence", "source": "ouedkniss:151 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:151 annonces", "a_verifier": true}
+      ]},
+      {"name": "Superb", "source": "ouedkniss:115 annonces (4 à Oran)", "priority": 115, "variants": [
+        {"year_from": 2011, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:115 annonces", "a_verifier": true}
+      ]},
+      {"name": "Scala", "source": "ouedkniss:101 annonces (7 à Oran)", "priority": 101, "variants": [
+        {"year_from": 2022, "year_to": 2024, "engine": "1.0 TSI", "fuel": "essence", "source": "ouedkniss:101 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:101 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Suzuki", "country": "Japon", "priority": 5, "source": "ouedkniss+ons", "models": [
+      {"name": "Swift", "source": "ouedkniss:1605 annonces (77 à Oran)", "priority": 1605, "variants": [
+        {"year_from": 2008, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1605 annonces", "a_verifier": true}
+      ]},
+      {"name": "Maruti 800", "source": "ouedkniss:1375 annonces (82 à Oran)", "priority": 1375, "variants": [
+        {"year_from": 2003, "year_to": 2013, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1375 annonces", "a_verifier": true}
+      ]},
+      {"name": "Alto", "source": "ouedkniss:772 annonces (35 à Oran)", "priority": 772, "variants": [
+        {"year_from": 2006, "year_to": 2016, "engine": "Autre motorisation", "fuel": "electrique", "source": "ouedkniss:772 annonces", "a_verifier": true}
+      ]},
+      {"name": "Swift Dzire", "source": "ouedkniss:274 annonces (9 à Oran)", "priority": 274, "variants": [
+        {"year_from": 2012, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:274 annonces", "a_verifier": true}
+      ]},
+      {"name": "Celerio", "source": "ouedkniss:252 annonces (16 à Oran)", "priority": 252, "variants": [
+        {"year_from": 2010, "year_to": 2024, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:252 annonces", "a_verifier": true}
+      ]},
+      {"name": "Alto K10", "source": "ouedkniss:175 annonces (5 à Oran)", "priority": 175, "variants": [
+        {"year_from": 2011, "year_to": 2016, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:175 annonces", "a_verifier": true}
+      ]},
+      {"name": "Maruti Zen", "source": "ouedkniss:130 annonces (3 à Oran)", "priority": 130, "variants": [
+        {"year_from": 2002, "year_to": 2006, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:130 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Mercedes", "country": "Allemagne", "priority": 4, "source": "ouedkniss+ons", "models": [
+      {"name": "Classe C", "source": "ouedkniss:1159 annonces (109 à Oran)", "priority": 1159, "variants": [
+        {"year_from": 1996, "year_to": 2023, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1159 annonces", "a_verifier": true}
+      ]},
+      {"name": "Classe E", "source": "ouedkniss:574 annonces (55 à Oran)", "priority": 574, "variants": [
+        {"year_from": 1986, "year_to": 2021, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:574 annonces", "a_verifier": true}
+      ]},
+      {"name": "Classe A", "source": "ouedkniss:366 annonces (45 à Oran)", "priority": 366, "variants": [
+        {"year_from": 2001, "year_to": 2023, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:366 annonces", "a_verifier": true}
+      ]},
+      {"name": "GLC", "source": "ouedkniss:294 annonces (37 à Oran)", "priority": 294, "variants": [
+        {"year_from": 2017, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:294 annonces", "a_verifier": true}
+      ]},
+      {"name": "GLE", "source": "ouedkniss:222 annonces (32 à Oran)", "priority": 222, "variants": [
+        {"year_from": 2016, "year_to": null, "engine": "Autre motorisation", "fuel": "diesel", "source": "ouedkniss:222 annonces", "a_verifier": true}
+      ]},
+      {"name": "ML", "source": "ouedkniss:186 annonces (11 à Oran)", "priority": 186, "variants": [
+        {"year_from": 2003, "year_to": 2015, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:186 annonces", "a_verifier": true}
+      ]},
+      {"name": "CLA", "source": "ouedkniss:149 annonces (18 à Oran)", "priority": 149, "variants": [
+        {"year_from": 2013, "year_to": 2022, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:149 annonces", "a_verifier": true}
+      ]},
+      {"name": "Sprinter", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 19, "variants": [
+        {"year_from": 1997, "year_to": 2021, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:19 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Ford", "country": "États-Unis", "priority": 2, "source": "ouedkniss+ons", "models": [
+      {"name": "Fiesta", "source": "ouedkniss:1137 annonces (63 à Oran)", "priority": 1137, "variants": [
+        {"year_from": 2006, "year_to": 2013, "engine": "1.4 HDi", "fuel": "diesel", "source": "ouedkniss:1137 annonces", "a_verifier": true},
+        {"year_from": 2007, "year_to": 2013, "engine": "1.4 TDCi", "fuel": "diesel", "source": "ouedkniss:1137 annonces", "a_verifier": true},
+        {"year_from": 2013, "year_to": 2016, "engine": "1.6 HDi", "fuel": "diesel", "source": "ouedkniss:1137 annonces", "a_verifier": true},
+        {"year_from": 2014, "year_to": 2015, "engine": "1.5 TDCi", "fuel": "diesel", "source": "ouedkniss:1137 annonces", "a_verifier": true},
+        {"year_from": 1997, "year_to": 2016, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1137 annonces", "a_verifier": true}
+      ]},
+      {"name": "Focus", "source": "ouedkniss:315 annonces (17 à Oran)", "priority": 315, "variants": [
+        {"year_from": 2001, "year_to": 2022, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:315 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "GAC", "country": "Chine", "priority": 2, "source": "ouedkniss+ons", "models": [
+      {"name": "GS3 emzoom", "source": "ouedkniss:1005 annonces (47 à Oran)", "priority": 1005, "variants": [
+        {"year_from": 2026, "year_to": null, "engine": "1.5 Turbo", "fuel": "electrique", "source": "ouedkniss:1005 annonces", "a_verifier": true},
+        {"year_from": 2026, "year_to": null, "engine": "1.5 T", "fuel": "electrique", "source": "ouedkniss:1005 annonces", "a_verifier": true},
+        {"year_from": 2026, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1005 annonces", "a_verifier": true}
+      ]},
+      {"name": "Gs3", "source": "ouedkniss:436 annonces (20 à Oran)", "priority": 436, "variants": [
+        {"year_from": 2026, "year_to": null, "engine": "1.5 Turbo", "fuel": "electrique", "source": "ouedkniss:436 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:436 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Nissan", "country": "Japon", "priority": 2, "source": "ouedkniss+ons", "models": [
+      {"name": "Micra", "source": "ouedkniss:541 annonces (36 à Oran)", "priority": 541, "variants": [
+        {"year_from": 2004, "year_to": 2022, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:541 annonces", "a_verifier": true}
+      ]},
+      {"name": "Sunny", "source": "ouedkniss:466 annonces (15 à Oran)", "priority": 466, "variants": [
+        {"year_from": 2004, "year_to": 2023, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:466 annonces", "a_verifier": true}
+      ]},
+      {"name": "Qashqai", "source": "ouedkniss:298 annonces (20 à Oran)", "priority": 298, "variants": [
+        {"year_from": 2015, "year_to": 2020, "engine": "1.6 dCi", "fuel": "diesel", "source": "ouedkniss:298 annonces", "a_verifier": true},
+        {"year_from": 2010, "year_to": 2015, "engine": "2.0 dCi", "fuel": "diesel", "source": "ouedkniss:298 annonces", "a_verifier": true},
+        {"year_from": 2009, "year_to": 2022, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:298 annonces", "a_verifier": true}
+      ]},
+      {"name": "X-Trail", "source": "ouedkniss:151 annonces (5 à Oran)", "priority": 151, "variants": [
+        {"year_from": 2002, "year_to": 2018, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:151 annonces", "a_verifier": true}
+      ]},
+      {"name": "Patrol", "source": "ouedkniss:148 annonces (1 à Oran)", "priority": 148, "variants": [
+        {"year_from": 1984, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:148 annonces", "a_verifier": true}
+      ]},
+      {"name": "Navara", "source": "ouedkniss:141 annonces (6 à Oran)", "priority": 141, "variants": [
+        {"year_from": 2009, "year_to": 2021, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:141 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "BMW", "country": "Allemagne", "priority": 1, "source": "ouedkniss+ons", "models": [
+      {"name": "Série 3", "source": "ouedkniss:257 annonces (8 à Oran)", "priority": 257, "variants": [
+        {"year_from": 1986, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:257 annonces", "a_verifier": true}
+      ]},
+      {"name": "Série 5", "source": "ouedkniss:211 annonces (23 à Oran)", "priority": 211, "variants": [
+        {"year_from": 1983, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:211 annonces", "a_verifier": true}
+      ]},
+      {"name": "Série 1", "source": "ouedkniss:200 annonces (23 à Oran)", "priority": 200, "variants": [
+        {"year_from": 2006, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:200 annonces", "a_verifier": true}
+      ]},
+      {"name": "X3", "source": "ouedkniss:177 annonces (8 à Oran)", "priority": 177, "variants": [
+        {"year_from": 2007, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:177 annonces", "a_verifier": true}
+      ]},
+      {"name": "X1", "source": "ouedkniss:112 annonces (4 à Oran)", "priority": 112, "variants": [
+        {"year_from": 2010, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:112 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Changan", "country": "Chine", "priority": 1, "source": "ouedkniss+ons", "models": [
+      {"name": "X5 Plus", "source": "ouedkniss:392 annonces (25 à Oran)", "priority": 392, "variants": [
+        {"year_from": 2026, "year_to": null, "engine": "1.5 Turbo", "fuel": "essence", "source": "ouedkniss:392 annonces", "a_verifier": true},
+        {"year_from": 2026, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:392 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Daewoo", "country": "Corée du Sud", "priority": 1, "source": "ouedkniss+ons", "models": [
+      {"name": "Cielo", "source": "ouedkniss:179 annonces (3 à Oran)", "priority": 179, "variants": [
+        {"year_from": 1996, "year_to": 2001, "engine": "Autre motorisation", "fuel": "gpl", "source": "ouedkniss:179 annonces", "a_verifier": true}
+      ]},
+      {"name": "Nubira", "source": "ouedkniss:148 annonces (6 à Oran)", "priority": 148, "variants": [
+        {"year_from": 1998, "year_to": 2001, "engine": "Autre motorisation", "fuel": "gpl", "source": "ouedkniss:148 annonces", "a_verifier": true}
+      ]},
+      {"name": "Matiz", "source": "ouedkniss:110 annonces (3 à Oran)", "priority": 110, "variants": [
+        {"year_from": 1999, "year_to": 2002, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:110 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Great Wall", "country": "Chine", "priority": 1, "source": "ouedkniss+ons", "models": [
+      {"name": "C30", "source": "ouedkniss:299 annonces (15 à Oran)", "priority": 299, "variants": [
+        {"year_from": 2011, "year_to": 2016, "engine": "Autre motorisation", "fuel": "gpl", "source": "ouedkniss:299 annonces", "a_verifier": true}
+      ]},
+      {"name": "Florid", "source": "ouedkniss:197 annonces (14 à Oran)", "priority": 197, "variants": [
+        {"year_from": 2010, "year_to": 2016, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:197 annonces", "a_verifier": true}
+      ]},
+      {"name": "M4", "source": "ouedkniss:118 annonces (3 à Oran)", "priority": 118, "variants": [
+        {"year_from": 2013, "year_to": 2016, "engine": "Autre motorisation", "fuel": "gpl", "source": "ouedkniss:118 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Kaiyi", "country": "Chine", "priority": 1, "source": "ouedkniss+ons", "models": [
+      {"name": "X3 Pro", "source": "ouedkniss:411 annonces (11 à Oran)", "priority": 411, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:411 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Land Rover", "country": "Royaume-Uni", "priority": 1, "source": "ouedkniss+ons", "models": [
+      {"name": "Range Rover Evoque", "source": "ouedkniss:482 annonces (17 à Oran)", "priority": 482, "variants": [
+        {"year_from": 2012, "year_to": 2021, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:482 annonces", "a_verifier": true}
+      ]},
+      {"name": "Freelander 2", "source": "ouedkniss:305 annonces (6 à Oran)", "priority": 305, "variants": [
+        {"year_from": 2009, "year_to": 2015, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:305 annonces", "a_verifier": true}
+      ]},
+      {"name": "Range Sport", "source": "ouedkniss:119 annonces (8 à Oran)", "priority": 119, "variants": [
+        {"year_from": 2010, "year_to": 2020, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:119 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Lifan", "country": "Chine", "priority": 1, "source": "ouedkniss+ons", "models": [
+      {"name": "X3pro", "source": "ouedkniss:135 annonces (2 à Oran)", "priority": 135, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:135 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Cupra", "country": "Espagne", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "Leon", "source": "ouedkniss:146 annonces (26 à Oran)", "priority": 146, "variants": [
+        {"year_from": 2019, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:146 annonces", "a_verifier": true}
+      ]},
+      {"name": "Formentor", "source": "ouedkniss:142 annonces (20 à Oran)", "priority": 142, "variants": [
+        {"year_from": 2022, "year_to": 2023, "engine": "1.5 TSI", "fuel": "essence", "source": "ouedkniss:142 annonces", "a_verifier": true},
+        {"year_from": 2021, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:142 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Daihatsu", "country": "Japon", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "Terios", "source": "ouedkniss:111 annonces (5 à Oran)", "priority": 111, "variants": [
+        {"year_from": 2003, "year_to": 2014, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:111 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Honda", "country": "Japon", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "Civic", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 77, "variants": [
+        {"year_from": 1982, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:77 annonces", "a_verifier": true}
+      ]},
+      {"name": "Accord", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 23, "variants": [
+        {"year_from": 1982, "year_to": 2024, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:23 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Isuzu", "country": "Japon", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "D-Max", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 10, "variants": [
+        {"year_from": 2006, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:10 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Jetta", "country": "Chine", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "VS5", "source": "ouedkniss:388 annonces (31 à Oran)", "priority": 388, "variants": [
+        {"year_from": 2025, "year_to": null, "engine": "1.4 TSI", "fuel": "essence", "source": "ouedkniss:388 annonces", "a_verifier": true},
+        {"year_from": 2025, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:388 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Lada", "country": "Russie", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "Niva", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 29, "variants": [
+        {"year_from": 1987, "year_to": 2013, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:29 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Mazda", "country": "Japon", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "BT-50", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 26, "variants": [
+        {"year_from": 2007, "year_to": 2016, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:26 annonces", "a_verifier": true}
+      ]},
+      {"name": "323", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 10, "variants": [
+        {"year_from": 1982, "year_to": 1996, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:10 annonces", "a_verifier": true}
+      ]},
+      {"name": "B2500", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 1, "variants": [
+        {"year_from": 2007, "year_to": 2007, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Mitsubishi", "country": "Japon", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "L200", "source": "ouedkniss:117 annonces (2 à Oran)", "priority": 117, "variants": [
+        {"year_from": 2003, "year_to": null, "engine": "Autre motorisation", "fuel": "diesel", "source": "ouedkniss:117 annonces", "a_verifier": true}
+      ]},
+      {"name": "Pajero", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 65, "variants": [
+        {"year_from": 1990, "year_to": 2007, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:65 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Porsche", "country": "Allemagne", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "Macan", "source": "ouedkniss:107 annonces (8 à Oran)", "priority": 107, "variants": [
+        {"year_from": 2016, "year_to": null, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:107 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Roewe", "country": "Chine", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "I5", "source": "ouedkniss:232 annonces (9 à Oran)", "priority": 232, "variants": [
+        {"year_from": 2026, "year_to": null, "engine": "Autre motorisation", "fuel": "essence", "source": "ouedkniss:232 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "SsangYong", "country": "Corée du Sud", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "Kyron", "source": "ouedkniss:121 annonces (6 à Oran)", "priority": 121, "variants": [
+        {"year_from": 2007, "year_to": 2013, "engine": "Autre motorisation", "fuel": "diesel", "source": "ouedkniss:121 annonces", "a_verifier": true}
+      ]}
+    ]},
+    {"name": "Zotye", "country": "Chine", "priority": 0, "source": "ouedkniss+ons", "models": [
+      {"name": "Z100", "source": "ouedkniss:111 annonces (8 à Oran)", "priority": 111, "variants": [
+        {"year_from": 2012, "year_to": 2016, "engine": "Autre motorisation", "fuel": "electrique", "source": "ouedkniss:111 annonces", "a_verifier": true}
+      ]}
     ]}
   ]
 }

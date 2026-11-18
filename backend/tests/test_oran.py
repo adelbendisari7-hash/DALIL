@@ -46,6 +46,6 @@ def test_lignes_invalides_refusees_avec_la_raison():
 
 
 def test_vehicule_inconnu_garde_sans_vehicule_et_signale():
-    cases, errors = O.convert(HEAD + "b1;;M1;Renault;Clio 4;1.5 dCi;2017;le moteur chauffe;;;thermostat;\n")
+    cases, errors = O.convert(HEAD + "b1;;M1;Zastava;Yugo;1.1;1988;le moteur chauffe;;;thermostat;\n")
     assert errors == [] and "variant" not in cases[0]
     assert any("véhicule inconnu" in w for w in O.warnings)

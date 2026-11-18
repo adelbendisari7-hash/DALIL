@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 18/11/2026, collecte Ouedkniss anonymisée.
+> Dernière mise à jour : 18/11/2026, référentiel véhicules complété (phase A).
 
 ## 1. Où on en est
 
@@ -43,7 +43,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-1. **PROCHAINE SESSION : référentiel complet et nouveaux jeux de données** : exécuter `docs/plan-referentiel-et-donnees.md` (prompt prêt en tête du fichier). Phase A : ~250 modèles manquants (Peugeot et Renault anciennes et utilitaires, Chevrolet, Citroën, Mazda, Mitsubishi, Ford, Mercedes, Seat, Nissan, marques chinoises…), années depuis 1980, « véhicule absent ». Phase B : MOT et NHTSA étendus à ces modèles, Wikidata (CC0), vPIC, rappels Canada. Phase C : a priori par modèle dans le diagnostic, réentraînement.
+1. **En attendant la fin de la collecte L'Argus (~30 h à partir du 18/11 soir)** : écrire le module de lecture de L'Argus (anonymisation des auteurs, panne -> pièce, discussions résolues), testé sur une base fictive de même structure, sans toucher à la collecte en cours. Puis entraînement sur L'Argus + données existantes, comparaison du classifieur actuel et d'un modèle français affiné (CamemBERT), mesure sur dev, démo, audit, contrôle. Traduction des sources anglaises en attente : décidée après mesure. Phase A du plan référentiel : **faite**.
 2. **Étape 11, essais à Oran (équipe, sur le terrain)** : suivre `docs/essais-oran.md` : fiches des mécaniciens (jeu de test, objectif 200 cas), inscription chronométrée de 5 à 10 magasins, parcours de 10 à 20 automobilistes, questionnaire ; puis rédiger `docs/compte-rendu-essais.md`.
 3. **Données des magasins** : importer les 62 lieux OpenStreetMap (`data/raw/osm_oran.csv`) en brouillons, liste de visite (mention « © contributeurs OpenStreetMap ») ; Ouedkniss exclu (CGU, article 9), demande d'autorisation possible.
 4. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
@@ -64,8 +64,8 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 4. Pour reprendre le travail
 
-- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (140 tests).
-- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (16 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
+- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (149 tests).
+- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (18 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
 - **Ouvrir le site sur un téléphone** : `DEMARRER-DALIL.bat` affiche l'adresse Wi-Fi du PC (fiche : `docs/test-telephone.md`).
 - **Tests du pipeline de données** : `cd backend && .venv/Scripts/python -m pytest -q ../data/pipeline/tests`.
 - **Servir le modèle affiné** :
@@ -109,3 +109,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 17/11/2026 | Décisions pour le plan du référentiel et des données : Suzuki et Lada ajoutés ; traduction complète avec le meilleur traducteur mesuré (comparer opus-mt et MADLAD-400) ; Safety Gate selon ses conditions ; modèle de langage ré-affiné et réactivé seulement s'il améliore la chaîne sous 10 s. Détail en tête de `docs/plan-referentiel-et-donnees.md` |
 | 18/11/2026 | Qualité des réponses : audit de 48 descriptions écrites comme à Oran (SMS, darija, arabe) et contrôle de 20 ; lexique darija (`diagnosis/darija.py`), « Nous avons compris » sur la page de résultat, fiches « ampoule grillée » et « ralenti instable », 428 exemples d'entraînement, règle hors sujet. 140 tests backend, 16 e2e |
 | 18/11/2026 | Collecte Ouedkniss de l'utilisateur (246 617 annonces) anonymisée par `data/scripts/anonymiser_ouedkniss.py` (champs vendeur retirés, identifiants hachés, 394 numéros masqués dont des formes déguisées : émojis, lettres arabes, « x », « _ », « H »). Premiers agrégats : Geely Coolray, Livan X3 Pro, Symbol, Ibiza, Clio 4 en tête ; Oran 3e région |
+| 18/11/2026 | Phase A du référentiel : statistiques Ouedkniss par modèle (`data/market/ouedkniss_modeles.json`), référentiel porté à 44 marques, 260 modèles, 467 motorisations (Clio 1 à 5, 205, 405, R19, Coolray, Livan X3 Pro, Aveo, Ibiza, utilitaires…), recherche par saisie, « véhicule absent », modèles triés par fréquence, indicateurs. Migration 0003. Carburant « inconnu » sans pénalité dans le diagnostic. 149 tests backend, 18 e2e, mesures inchangées |

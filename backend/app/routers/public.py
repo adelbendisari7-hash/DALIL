@@ -1,15 +1,18 @@
 """Points d'entrée publics : véhicules, pièces, codes OBD, diagnostic."""
 from __future__ import annotations
 
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ..config import get_settings
 from ..db import SessionLocal, get_db
-from ..models import Brand, Commune, DiagnosisSession, DtcCode, DtcPart, Model, PartCategory, PartReference, Product, User, VehicleVariant
-from ..schemas import AnswersRequest, DiagnosisRequest
-from ..security import current_user_optional, diagnosis_limiter
+from ..models import (
+    Brand, Commune, DiagnosisSession, DtcCode, DtcPart, Model, PartCategory, PartReference, Product, User, VehicleRequest,
+    VehicleVariant,
+)
+from ..schemas import AnswersRequest, DiagnosisRequest, VehicleRequestIn
+from ..security import client_hash, current_user_optional, diagnosis_limiter, feedback_limiter
 from ..services.catalog import search_categories
 from ..services.diagnosis.llm import get_llm
 from ..services.diagnosis.pipeline import DiagnosisInput, run_diagnosis
@@ -27,8 +30,40 @@ def brands(db: Session = Depends(get_db)):
 
 @router.get("/vehicles/models")
 def models(brand_id: int, db: Session = Depends(get_db)):
-    rows = db.scalars(select(Model).where(Model.brand_id == brand_id).order_by(Model.name))
+    # Les modèles les plus courants d'abord (nombre d'annonces), puis par nom
+    rows = db.scalars(select(Model).where(Model.brand_id == brand_id).order_by(Model.priority.desc(), Model.name))
     return [{"id": m.id, "name": m.name, "pilot": m.pilot} for m in rows]
+
+
+def _flat(s: str) -> str:
+    import unicodedata
+
+    s = "".join(c for c in unicodedata.normalize("NFD", (s or "").lower()) if unicodedata.category(c) != "Mn")
+    return "".join(ch for ch in s if ch.isalnum() or ch == " ")
+
+
+@router.get("/vehicles/search")
+def vehicles_search(q: str = Query(min_length=2, max_length=60), db: Session = Depends(get_db)):
+    """Recherche par saisie (« clio 2 », « 206 hdi ») : marque et modèle, les plus courants d'abord."""
+    tokens = [t for t in _flat(q).split() if t]
+    out = []
+    for m in db.scalars(select(Model).join(Brand).order_by(Model.priority.desc(), Model.name)):
+        hay = _flat(f"{m.brand.name} {m.name}")
+        compact = hay.replace(" ", "")
+        if all(t in hay or t in compact for t in tokens):
+            out.append({"brand_id": m.brand_id, "brand": m.brand.name, "model_id": m.id, "model": m.name})
+            if len(out) >= 8:
+                break
+    return out
+
+
+@router.post("/vehicles/requests", status_code=201, dependencies=[Depends(feedback_limiter)])
+def vehicle_request(body: VehicleRequestIn, request: Request, db: Session = Depends(get_db)):
+    """« Mon véhicule n'est pas dans la liste » : enregistré pour compléter le référentiel (Indicateurs)."""
+    vr = VehicleRequest(**body.model_dump(), client_hash=client_hash(request))
+    db.add(vr)
+    db.commit()
+    return {"id": vr.id}
 
 
 @router.get("/vehicles/variants")
@@ -38,7 +73,7 @@ def variants(model_id: int, year: int | None = None, db: Session = Depends(get_d
         q = q.where(VehicleVariant.year_from <= year).where((VehicleVariant.year_to.is_(None)) | (VehicleVariant.year_to >= year))
     return [
         {"id": v.id, "engine": v.engine, "fuel": v.fuel, "year_from": v.year_from, "year_to": v.year_to,
-         "label": f"{v.engine} ({v.fuel}, {v.year_from}–{v.year_to or 'auj.'})"}
+         "label": f"{v.engine} ({'' if v.fuel == 'inconnu' else v.fuel + ', '}{v.year_from}–{v.year_to or 'auj.'})"}
         for v in db.scalars(q.order_by(VehicleVariant.year_from, VehicleVariant.engine))
     ]
 

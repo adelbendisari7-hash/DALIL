@@ -288,7 +288,9 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full", use_llm:
     if variant:
         for slug in mix:
             fuel = faults[slug].fuel
-            if fuel and fuel != variant.fuel and not (fuel == "essence" and variant.fuel in ("gpl", "hybride")):
+            # Carburant du véhicule inconnu (« Autre motorisation ») : aucune pénalité
+            if (fuel and variant.fuel not in (None, "", "inconnu") and fuel != variant.fuel
+                    and not (fuel == "essence" and variant.fuel in ("gpl", "hybride"))):
                 mix[slug] *= 0.05
     bank = question_bank()
     for qid, idx in (inp.answers or {}).items():

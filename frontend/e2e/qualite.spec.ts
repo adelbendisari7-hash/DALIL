@@ -67,3 +67,23 @@ test("question sans panne en darija : je ne sais pas", async ({ page }) => {
   await page.getByRole("button", { name: "Trouver la panne" }).click();
   await expect(page.getByRole("heading", { name: "Panne non identifiée" })).toBeVisible();
 });
+
+test("recherche du véhicule par saisie : « clio 2 » choisit la marque et le modèle", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Rechercher votre voiture").fill("clio 2");
+  await page.getByRole("option", { name: "Renault Clio 2" }).click();
+  await expect(page.getByLabel("Marque")).toHaveValue(/\d+/);
+  await expect(page.getByLabel("Modèle", { exact: true }).locator("option:checked")).toHaveText("Clio 2");
+  await expect.poll(() => page.getByLabel("Année").locator("option").count()).toBeGreaterThan(1);
+  const years = (await page.getByLabel("Année").locator("option").allTextContents()).map(Number).filter(Boolean);
+  expect(Math.max(...years)).toBeLessThanOrEqual(2008); // Clio 2 : années 1998 à 2006 environ
+});
+
+test("véhicule absent de la liste : la saisie est envoyée", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Mon véhicule n'est pas dans la liste" }).click();
+  await page.getByLabel("Marque", { exact: true }).last().fill("Zastava");
+  await page.getByLabel("Modèle", { exact: true }).last().fill("Yugo");
+  await page.getByRole("button", { name: "Envoyer" }).click();
+  await expect(page.getByText("Merci, votre véhicule sera ajouté.")).toBeVisible();
+});

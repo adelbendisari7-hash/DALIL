@@ -117,6 +117,8 @@ class Model(Base):
     brand_id: Mapped[int] = mapped_column(ForeignKey("brands.id"), index=True)
     name: Mapped[str] = mapped_column(String(80))
     pilot: Mapped[bool] = mapped_column(Boolean, default=False)  # pilote de référence exacte (F14)
+    # Ordre d'affichage : nombre d'annonces Ouedkniss du modèle (data/market/ouedkniss_modeles.json)
+    priority: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     brand: Mapped[Brand] = relationship(back_populates="models")
     variants: Mapped[list[VehicleVariant]] = relationship(back_populates="model")
     __table_args__ = (UniqueConstraint("brand_id", "name"),)
@@ -329,6 +331,18 @@ class ContactEvent(Base):
     category_id: Mapped[int | None] = mapped_column(ForeignKey("part_categories.id"))
     variant_id: Mapped[int | None] = mapped_column(ForeignKey("vehicle_variants.id"))
     channel: Mapped[str] = mapped_column(String(20))  # call|whatsapp
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class VehicleRequest(Base):
+    """« Mon véhicule n'est pas dans la liste » : ce que l'utilisateur a saisi, pour savoir quoi ajouter au référentiel."""
+    __tablename__ = "vehicle_requests"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    brand: Mapped[str] = mapped_column(String(60))
+    model: Mapped[str] = mapped_column(String(80))
+    year: Mapped[int | None] = mapped_column(Integer)
+    engine: Mapped[str | None] = mapped_column(String(60))
+    client_hash: Mapped[str | None] = mapped_column(String(16))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 
