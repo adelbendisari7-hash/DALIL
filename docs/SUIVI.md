@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 19/11/2026, fuite de numéros corrigée avant la publication sur GitHub.
+> Dernière mise à jour : 19/11/2026, premier jet des chapitres techniques du mémoire.
 
 ## 1. Où on en est
 
@@ -115,3 +115,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 18/11/2026 | Magasins OpenStreetMap : extraction relancée (identique, 62 lieux) et importée en brouillons (`backend/app/import_osm.py`, rejouable). Chaque lieu est rattaché à la commune la plus proche (61 sur 61 fiches). Liste de visite Excel, avec lien carte, colonnes à remplir et listes déroulantes ; réimportable telle quelle, car l'import comprend maintenant les en-têtes français. Import corrigé : plusieurs numéros dans un champ -> premier mobile valide ; deux lieux au même téléphone -> fusion sans écraser la position, signalée « à vérifier » ; numéro saisi dans l'adresse sur OSM -> remis en téléphone. Brouillons jamais recommandés (testé). 151 tests backend |
 | 18/11/2026 | Outil de relecture des étiquettes (`ml/relecture_etiquettes.py`) : tirage stratifié par niveau de confiance (graine fixe), Excel à remplir (oui / partiel / non / ?), mesure par niveau avec intervalle de Wilson, justesse globale repondérée, décision et poids conseillés ; fiches dans `data/relecture/` (hors git). Connexion : l'API indique `delivery: console` (jamais le code) et la page affiche « Mode démonstration : le code s'affiche dans la fenêtre DALIL - API » ; vérifié en e2e. 40 tests pipeline |
 | 19/11/2026 | **Fuite corrigée avant publication sur GitHub** : 16 numéros de téléphone de vendeurs, saisis à la place du nom du modèle, figuraient dans `data/market/ouedkniss_modeles.json`. L'anonymiseur nettoie maintenant tous les champs texte, sauf les dates (437 numéros masqués au lieu de 394). Les statistiques ne publient que les modèles cités au moins 3 fois et écartent tout nom contenant un numéro. Fichier régénéré (0 numéro), historique local réécrit pour ce seul fichier avant le premier envoi, test ajouté (41 tests pipeline) |
+| 19/11/2026 | Premier jet des chapitres techniques du mémoire : `docs/memoire/DALIL-chapitres-techniques.docx` (données et licences, anonymisation et incident des numéros, chaîne de diagnostic, expériences A-D, modèle de langage, darija, qualité des étiquettes, recommandation, limites ; 6 tableaux, 2 600 mots). Chiffres repris des mesures datées. 7 emplacements « [À compléter] » surlignés pour Oran, L'Argus et le terrain. Validé contre les schémas Word ; pas d'aperçu visuel possible sur ce PC (ni Word ni LibreOffice). À reprendre dans le modèle de l'université |
