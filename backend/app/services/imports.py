@@ -3,13 +3,14 @@ from __future__ import annotations
 
 import csv
 import io
+import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 
 from fastapi import HTTPException
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font
-from sqlalchemy import or_, select
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ..models import Brand, Commune, PartCategory, Product, ProductFitment, Shop, ShopBrand, ShopCategory
@@ -19,6 +20,10 @@ from .diagnosis.normalize import normalize
 
 SHOP_COLUMNS = ["name", "phone", "whatsapp", "commune", "lat", "lng", "address", "hours", "brands", "categories",
                 "parts_origin", "sale_mode", "shop_type", "surveyor", "source", "osm_id"]
+# En-têtes français acceptés (liste de visite remplie sur le terrain, data/terrain/) -> colonne d'import.
+SHOP_ALIASES = {"nom": "name", "telephone": "phone", "id_osm": "osm_id", "type": "shop_type", "adresse": "address",
+                "horaires": "hours", "marques": "brands", "familles": "categories", "origine_des_pieces": "parts_origin",
+                "mode_de_vente": "sale_mode", "enqueteur": "surveyor"}
 PRODUCT_COLUMNS = ["titre", "famille", "reference", "marque_piece", "etat", "prix", "en_stock", "compatibilite"]
 
 
@@ -27,6 +32,19 @@ class ImportReport:
     created: int = 0
     updated: int = 0
     errors: list[dict] = field(default_factory=list)
+    notes: list[dict] = field(default_factory=list)  # fusions et numéros écartés, à vérifier sur place
+
+
+def _first_phone(raw: str) -> str:
+    """Un champ peut contenir plusieurs numéros (« 041 00 00 00 / 0661 00 00 00 ») : le premier mobile valide."""
+    parts = [x for x in re.split(r"[/;,|]| ou ", str(raw)) if x.strip()]
+    if len(parts) > 1:
+        for x in parts:
+            try:
+                return normalize_phone(x)
+            except HTTPException:
+                continue
+    return normalize_phone(str(raw))
 
 
 def _split(v: str | None) -> list[str]:
@@ -75,11 +93,13 @@ def import_shops(db: Session, rows: list[dict], default_source: str = "terrain")
         communes[c.code] = c.id
         communes[normalize(c.nom_fr)] = c.id
     for line, r in enumerate(rows, start=2):
+        r = {**{SHOP_ALIASES[k]: v for k, v in r.items() if k in SHOP_ALIASES and v not in (None, "")}, **{
+            k: v for k, v in r.items() if v not in (None, "")}}
         try:
             name = str(r.get("name") or r.get("nom") or "").strip()
             if not name:
                 raise ValueError("nom manquant")
-            phone = normalize_phone(str(r["phone"])) if r.get("phone") else None
+            phone = _first_phone(r["phone"]) if r.get("phone") else None
             wa = normalize_phone(str(r["whatsapp"])) if r.get("whatsapp") else phone
             osm_id = str(r.get("osm_id") or "").strip() or None
             commune_id = None
@@ -104,11 +124,17 @@ def import_shops(db: Session, rows: list[dict], default_source: str = "terrain")
             rep.errors.append({"line": line, "error": getattr(e, "detail", None) or str(e)})
             continue
 
-        conds = [Shop.phone == phone] if phone else []
-        if osm_id:
-            conds.append(Shop.osm_id == osm_id)
-        shop = db.scalar(select(Shop).where(or_(*conds))) if conds else None
+        # Même identifiant OSM d'abord, puis même téléphone.
+        shop = db.scalar(select(Shop).where(Shop.osm_id == osm_id)) if osm_id else None
+        if shop is None and phone:
+            shop = db.scalar(select(Shop).where(Shop.phone == phone))
         is_new = shop is None
+        # Deux lieux OSM distincts au même téléphone : on fusionne (même commerce probable) sans écraser
+        # l'identifiant ni la position du premier, et on le signale pour vérification sur place.
+        other_place = not is_new and osm_id and shop.osm_id and shop.osm_id != osm_id
+        if other_place:
+            rep.notes.append({"line": line, "note": f"même téléphone que la fiche {shop.id} ({shop.name}) : "
+                                                   f"{osm_id} fusionné avec {shop.osm_id}, à vérifier sur place"})
         if is_new:
             shop = Shop(name=name, source=str(r.get("source") or default_source), status="draft")
             db.add(shop)
@@ -119,6 +145,9 @@ def import_shops(db: Session, rows: list[dict], default_source: str = "terrain")
             "lat": lat, "lng": lng, "sale_mode": r.get("sale_mode"), "shop_type": r.get("shop_type"),
             "surveyor": r.get("surveyor"),
         }
+        if other_place:
+            for k in ("osm_id", "lat", "lng", "address", "commune_id"):
+                fields.pop(k)
         for k, v in fields.items():
             if v not in (None, ""):
                 setattr(shop, k, v)

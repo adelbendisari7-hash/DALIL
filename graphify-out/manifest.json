@@ -150,9 +150,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/imports.py": {
-    "mtime": 1794931157.6882794,
-    "seen": 1794931441.0283535,
-    "ast_hash": "449a206290e5e30387f46c1e99c283f1",
+    "mtime": 1795038056.4686313,
+    "seen": 1795038242.208205,
+    "ast_hash": "55836c2cf03e01381e22ac812bc48207",
     "semantic_hash": ""
   },
   "backend/app/services/recommendation.py": {
@@ -522,9 +522,9 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1794934260.159029,
-    "seen": 1794934270.8126845,
-    "ast_hash": "706303de22bad444a1d425d8eca30515",
+    "mtime": 1795038237.8879037,
+    "seen": 1795038242.219321,
+    "ast_hash": "70222c6e01be1e7a4de4af9131e63dbd",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.md": {
@@ -546,9 +546,9 @@
     "semantic_hash": ""
   },
   "data/SOURCES.md": {
-    "mtime": 1795036391.9658823,
-    "seen": 1795036540.4701474,
-    "ast_hash": "f2381f7256f769ad22e8559a686794d4",
+    "mtime": 1795038237.8712294,
+    "seen": 1795038242.219321,
+    "ast_hash": "92b16142eb4b1b2b0593c01f3217a5f7",
     "semantic_hash": ""
   },
   "data/pipeline/requirements-translate.txt": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795037386.2865112,
-    "seen": 1795037398.2894669,
-    "ast_hash": "ac25f27c034245ec25a46c3903953eb7",
+    "mtime": 1795038237.8879037,
+    "seen": 1795038242.219321,
+    "ast_hash": "916e9b7c15ca76bc1a9fa3e7dd6d38b9",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -1293,6 +1293,18 @@
     "mtime": 1795037344.715203,
     "seen": 1795037398.2894669,
     "ast_hash": "8eea48964052044e35857ba63e8e5e39",
+    "semantic_hash": ""
+  },
+  "backend/app/import_osm.py": {
+    "mtime": 1795038208.6052175,
+    "seen": 1795038242.20551,
+    "ast_hash": "266fbf57dd90884669552b335510ae5c",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_import_osm.py": {
+    "mtime": 1795038208.6188884,
+    "seen": 1795038242.208205,
+    "ast_hash": "544e23a4effccd4270bec784b7469ba9",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {
