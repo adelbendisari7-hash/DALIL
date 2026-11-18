@@ -39,7 +39,8 @@ def otp_request(body: OtpRequest, db: Session = Depends(get_db)):
                    expires_at=datetime.now(timezone.utc) + timedelta(minutes=get_settings().otp_ttl_minutes)))
     db.commit()
     get_sms_sender().send(phone, f"DALIL : votre code est {code}")
-    return {"sent": True, "phone": phone}
+    # « console » : aucun SMS ne part (prototype) ; la page de connexion dit où lire le code. Jamais le code lui-même.
+    return {"sent": True, "phone": phone, "delivery": "console" if get_settings().sms_provider == "console" else "sms"}
 
 
 @router.post("/otp/verify")

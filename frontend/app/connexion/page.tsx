@@ -10,6 +10,7 @@ function Login() {
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
   const [sent, setSent] = useState(false);
+  const [consoleSms, setConsoleSms] = useState(false);
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -21,7 +22,8 @@ function Login() {
     setBusy(true);
     setError("");
     try {
-      await api("/auth/otp/request", { method: "POST", json: { phone } });
+      const r = await api<{ delivery?: string }>("/auth/otp/request", { method: "POST", json: { phone } });
+      setConsoleSms(r.delivery === "console");
       setSent(true);
     } catch (err) { fail(err); }
     setBusy(false);
@@ -55,6 +57,7 @@ function Login() {
         </form>
       ) : (
         <form onSubmit={verify}>
+          {consoleSms && <p className="notice" role="note">{t("login.consoleHint")}</p>}
           <label htmlFor="code">{t("login.code")}</label>
           <input id="code" inputMode="numeric" autoComplete="one-time-code" maxLength={6} value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))} required />
           <label className="check">

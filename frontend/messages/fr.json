@@ -116,6 +116,7 @@
   "login.phone.placeholder": "0550 12 34 56",
   "login.send": "Recevoir le code",
   "login.code": "Code reçu par SMS",
+  "login.consoleHint": "Mode démonstration : aucun SMS n'est envoyé. Le code s'affiche sur l'ordinateur qui fait tourner DALIL, dans la fenêtre « DALIL - API ».",
   "login.verify": "Me connecter",
   "login.consent": "J'accepte que DALIL conserve mon numéro pour gérer mon compte. Je peux supprimer mon compte à tout moment.",
   "login.done": "Vous êtes connecté.",

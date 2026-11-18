@@ -60,3 +60,12 @@ def test_code_fixe_des_tests_seulement_avec_les_sms_de_console(monkeypatch):
     assert new_otp() == "123456"
     monkeypatch.setattr(s, "sms_provider", "operateur")  # vrai fournisseur : le code fixe est ignoré
     assert all(new_otp() != "123456" for _ in range(20))
+
+
+def test_mode_console_annonce_sans_donner_le_code(client, monkeypatch):
+    s = get_settings()
+    monkeypatch.setattr(s, "sms_provider", "console")
+    r = client.post(f"{API}/auth/otp/request", json={"phone": "0661 55 44 33"}).json()
+    assert r["delivery"] == "console" and "code" not in r
+    monkeypatch.setattr(s, "sms_provider", "operateur")
+    assert client.post(f"{API}/auth/otp/request", json={"phone": "0661 55 44 33"}).json()["delivery"] == "sms"

@@ -41,3 +41,6 @@ backend/.pytest_llm/
 # Cache local de graphify (le graphe lui-même est commité)
 graphify-out/cache/
 frontend/next-env.d.ts
+
+# Fiches de relecture (textes de forums, même anonymisés) : jamais dans git
+data/relecture/

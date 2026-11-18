@@ -17,6 +17,7 @@ test("un magasin test s'inscrit et publie 20 produits par import Excel", async (
   await page.getByRole("link", { name: "Connexion" }).last().click();
   await page.getByLabel("Numéro de mobile").fill("0555123456");
   await page.getByRole("button", { name: "Recevoir le code" }).click();
+  await expect(page.getByRole("note")).toContainText("DALIL - API");   // prototype : où lire le code
   await page.getByLabel("Code reçu par SMS").fill(OTP);
   await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "Me connecter" }).click();
