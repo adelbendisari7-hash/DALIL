@@ -12,6 +12,38 @@ Ils sont générés par `python ml/kaggle/make_notebooks.py` : modifier ce scrip
 | `04_fusion_gguf.ipynb` | Reprise sans réentraîner : évaluation, fusion et GGUF à partir de l'adaptateur (`kaggle_run.py adapter`) | 25 min (+ 40 min si `RUN_EVAL`) | `dalil-…-q4_k_m.gguf` et `-q8_0.gguf` → `ml/artifacts/` |
 | `05_vecteurs.ipynb` | Étape 8 : vecteurs Qwen3-Embedding-0.6B des passages de la base de connaissances et modèles de recherche (Qwen3-Embedding, bge-reranker-v2-m3). Entrée : `python ml/export_kb_chunks.py` puis `kaggle_run.py dataset` | 15 min | `chunk_vectors.npy`, `chunk_ids.json`, deux zip → `python ml/load_vectors.py` les installe dans `ml/artifacts/` |
 
+## Entraîner avec L'Argus (variante A contre CamemBERT)
+
+Les deux variantes lisent le **même** jeu d'entraînement, `data/processed/train_set/`, fabriqué par
+`ml/build_training_set.py`. Ce script :
+- retire tout texte présent dans un jeu de test ;
+- donne à chaque exemple un poids selon la confiance de son étiquette ;
+- garde par défaut les étiquettes sûres seulement, avec les exemples d'amorçage comptés cinq fois (réglage mesuré le 18/11/2026).
+
+1. **Charger L'Argus**, seulement avec l'accord écrit :
+   `DALIL_LARGUS_AUTORISATION="écrite, AAAA-MM-JJ" python data/pipeline/run.py collect --sources largus_forum --largus-db <chemin>`,
+   puis `python data/pipeline/run.py load --sources largus_forum`. Relire 100 étiquettes au hasard dans
+   `data/processed/train/largus_forum.jsonl`.
+2. **Construire le jeu commun** : `python ml/build_training_set.py`. Pour tester d'autres réglages, ajouter
+   `--quality moyen`, `--seed-weight 1` ou `--max-per-label 3000`. Lire `stats.json`.
+3. **Variante A**, sur le portable (environ 2 min) : `python ml/train_baseline.py --set`, ce qui produit `ml/artifacts/baseline_tfidf_lr_set.joblib`.
+4. **Variante B**, CamemBERT sur Kaggle :
+   - publier une nouvelle version du jeu de données, avec `python ml/kaggle/kaggle_run.py dataset` ;
+   - lancer le carnet, avec `python ml/kaggle/kaggle_run.py push 02_encodeur_camembert` ;
+   - au bout de 30 à 90 min selon le volume, récupérer le résultat, avec `python ml/kaggle/kaggle_run.py output 02_encodeur_camembert` ;
+   - dézipper dans `ml/artifacts/camembert-base_set/`.
+
+   Pour essayer CamemBERTa-v2, changer `MODEL_ID` dans `make_notebooks.py`.
+5. **Mesurer** :
+   ```bash
+   python ml/evaluate.py --model A-actuel=ml/artifacts/baseline_tfidf_lr.joblib        --model A-largus=ml/artifacts/baseline_tfidf_lr_set.joblib --model B-camembert=ml/artifacts/camembert-base_set        --modes classifier,full --test data/test/dev_fr_synthetique.jsonl --test data/seed/demo_cases.json        --test data/test/audit_ecriture_oran.jsonl --test data/test/audit_ecriture_oran_controle.jsonl --tag largus
+   ```
+   Les réglages se choisissent sur `dev`, `demo` et `audit` ; `audit_ecriture_oran_controle` n'est regardé qu'à la fin.
+   Un nouveau modèle ne remplace le modèle en service que s'il fait mieux sans rien perdre ailleurs.
+
+Les données de L'Argus, même anonymisées, montent sur Kaggle dans le jeu de données **privé**. L'accord de L'Argus
+doit couvrir cet usage.
+
 ## Préparer le jeu de données Kaggle « dalil-pipeline »
 
 Sur le portable :

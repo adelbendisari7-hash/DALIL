@@ -4,6 +4,7 @@
     python ml/train_baseline.py --target part            # cible = famille de pièce (section 6.1)
     python ml/train_baseline.py --target part --corpus   # + corpus traduit de l'étape 6 (data/processed/train/)
     python ml/train_baseline.py --grid                   # petite recherche d'hyperparamètres
+    python ml/train_baseline.py --set                    # jeu commun aux variantes (ml/build_training_set.py), pondéré
 
 Le modèle est exporté avec sa cible et sa version ; la chaîne de diagnostic sait utiliser les deux cibles.
 La validation croisée porte sur les exemples d'amorçage synthétiques : elle valide le code. Les mesures
@@ -89,6 +90,30 @@ def evaluate(texts, labels, target: str, extra: tuple[list, list], C: float = 20
             "part_top1": round(part1 / n, 3), "median_top_prob": round(float(np.median(top_probs)), 3)}
 
 
+def train_on_set(set_dir: Path, out: Path | None) -> Path:
+    """Variante A sur le jeu commun (cible = pièce), chaque exemple pondéré par la confiance de son étiquette."""
+    rows = [json.loads(line) for line in (set_dir / "train.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    stats = json.loads((set_dir / "stats.json").read_text(encoding="utf-8"))
+    texts = [r["text"][:1000] for r in rows]
+    pipe = build_pipeline(large=True)
+    pipe.fit(texts, [r["label"] for r in rows], clf__sample_weight=np.array([r["weight"] for r in rows]))
+    val = [json.loads(line) for line in (set_dir / "val.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    res: dict = {"target": "part", "set": stats.get("quality"), "train": len(rows), "val": len(val)}
+    if val:
+        proba = pipe.predict_proba([r["text"][:1000] for r in val])
+        order = pipe.classes_[np.argsort(-proba, axis=1)]
+        res.update(val_top1=round(float(np.mean([o[0] == r["label"] for o, r in zip(order, val)])), 3),
+                   val_top3=round(float(np.mean([r["label"] in o[:3] for o, r in zip(order, val)])), 3))
+    version = f"tfidf-lr-set-{stats.get('quality')}-{datetime.now(timezone.utc):%Y%m%d}"
+    out = out or ARTIFACTS / "baseline_tfidf_lr_set.joblib"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    joblib.dump({"pipeline": pipe, "target": "part", "version": version, "trained_on": stats}, out)
+    out.with_suffix(".metrics.json").write_text(json.dumps({**res, "version": version}, indent=2), encoding="utf-8")
+    print(res)
+    print(f"Poids exportés : {out} (version {version})")
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--target", choices=["fault", "part"], default="fault")
@@ -97,7 +122,12 @@ def main() -> None:
     ap.add_argument("--grid", action="store_true")
     ap.add_argument("--cv", action="store_true", help="validation croisée même avec le corpus (lent)")
     ap.add_argument("--out", default=None, help="fichier de sortie (défaut : ml/artifacts/baseline_tfidf_lr[_part].joblib)")
+    ap.add_argument("--set", nargs="?", const=str(ROOT / "data" / "processed" / "train_set"), default=None,
+                    help="entraîner sur le jeu commun (dossier de ml/build_training_set.py)")
     args = ap.parse_args()
+    if args.set:
+        train_on_set(Path(args.set), Path(args.out) if args.out else None)
+        return
 
     seed_texts, seed_faults = load_examples(ROOT / "data" / "seed" / "diagnosis_examples_fr.jsonl")
     seed_labels = relabel(seed_faults, args.target)

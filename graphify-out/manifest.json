@@ -510,9 +510,9 @@
     "semantic_hash": ""
   },
   "ml/train_baseline.py": {
-    "mtime": 1794680908.6408935,
-    "seen": 1794774089.5846496,
-    "ast_hash": "01ac01b40c30abf8e51fa628789a997b",
+    "mtime": 1795036832.213631,
+    "seen": 1795037398.2894669,
+    "ast_hash": "204862d35b672f3153ce95b573b09f00",
     "semantic_hash": ""
   },
   ".claude/skills/ajouter-source-donnees/SKILL.md": {
@@ -654,9 +654,9 @@
     "semantic_hash": ""
   },
   "ml/kaggle/make_notebooks.py": {
-    "mtime": 1794781751.7036386,
-    "seen": 1794795248.276057,
-    "ast_hash": "28667ceffb2e7fef11d10eea639dd7b8",
+    "mtime": 1795036993.56526,
+    "seen": 1795037398.2848127,
+    "ast_hash": "9457ec2ac2cab3e7a42976ffe719fe03",
     "semantic_hash": ""
   },
   "ml/results/20261114-1233-premier-banc.json": {
@@ -696,9 +696,9 @@
     "semantic_hash": ""
   },
   "ml/kaggle/README.md": {
-    "mtime": 1794783042.0360856,
-    "seen": 1794795248.276057,
-    "ast_hash": "8c2b74659bd69ed095c29663298c0235",
+    "mtime": 1795037386.2865112,
+    "seen": 1795037398.2894669,
+    "ast_hash": "896e3a3ab3da637e2f5eee05698acfff",
     "semantic_hash": ""
   },
   "ml/results/20261114-1233-premier-banc.md": {
@@ -744,9 +744,9 @@
     "semantic_hash": ""
   },
   "ml/kaggle/kaggle_run.py": {
-    "mtime": 1794781860.2520857,
-    "seen": 1794795248.276057,
-    "ast_hash": "81cffeba2a353bd33c0d40bbd1b9c24c",
+    "mtime": 1795037019.5663424,
+    "seen": 1795037398.2848127,
+    "ast_hash": "61f3dc525aaa493593e7b14863d8035c",
     "semantic_hash": ""
   },
   "ml/results/20261114-1401-A-vs-B-enfr.json": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795036446.0167615,
-    "seen": 1795036540.4830947,
-    "ast_hash": "163d35c4bb5d980a72451d1272a38a04",
+    "mtime": 1795037386.2865112,
+    "seen": 1795037398.2894669,
+    "ast_hash": "ac25f27c034245ec25a46c3903953eb7",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -1257,6 +1257,42 @@
     "mtime": 1795036390.8707697,
     "seen": 1795036540.4815626,
     "ast_hash": "7779999af36bac58de4df2b19d3e4214",
+    "semantic_hash": ""
+  },
+  "data/pipeline/tests/test_jeu_entrainement.py": {
+    "mtime": 1795037358.3394735,
+    "seen": 1795037398.2735102,
+    "ast_hash": "92dbf64619b8bfd3f0a0b85ba334de74",
+    "semantic_hash": ""
+  },
+  "ml/build_training_set.py": {
+    "mtime": 1795037358.3394735,
+    "seen": 1795037398.2848127,
+    "ast_hash": "5eb6d227e727ed263ce0634b1d97c439",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-2122-point-zero-avant-largus.json": {
+    "mtime": 1795037061.083109,
+    "seen": 1795037398.2894669,
+    "ast_hash": "b598f0dfb2f031833450bb0ee67aeaa2",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-2127-remedes-jeu-commun.json": {
+    "mtime": 1795037344.7182057,
+    "seen": 1795037398.2894669,
+    "ast_hash": "d53ffd64a4fb5a34c4f69f4aa4a8e7c1",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-2122-point-zero-avant-largus.md": {
+    "mtime": 1795037061.083109,
+    "seen": 1795037398.2894669,
+    "ast_hash": "791cfaac64cb99a0e61b7e2987132d64",
+    "semantic_hash": ""
+  },
+  "ml/results/20261118-2127-remedes-jeu-commun.md": {
+    "mtime": 1795037344.715203,
+    "seen": 1795037398.2894669,
+    "ast_hash": "8eea48964052044e35857ba63e8e5e39",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {

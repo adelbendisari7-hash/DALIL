@@ -40,12 +40,14 @@ NB_ENCODER = [
     ("md", "# DALIL : classifieur de famille de pièce par encodeur multilingue affiné (variante B)\n\n"
            "Paramètres Kaggle : **GPU T4**, **Internet activé**. Sortie : dossier ONNX à copier dans `ml/artifacts/` "
            "puis à évaluer avec `python ml/evaluate.py --model B=ml/artifacts/<dossier>`.\n\n"
-           "Deux configurations à comparer (section 6.3) : `fr` (textes traduits en français) et `en+fr` "
-           "(textes anglais d'origine + français : transfert multilingue sans traduction)."),
+           "Configurations (section 6.3) : `fr` (textes traduits en français), `en+fr` "
+           "(textes anglais d'origine + français : transfert multilingue sans traduction) et `set` : le jeu commun "
+           "`data/processed/train_set/` (`python ml/build_training_set.py`), le même que la variante A, avec un poids "
+           "par exemple selon la confiance de l'étiquette (L'Argus, NHTSA…)."),
     ("code", SETUP),
     ("code", '!pip install -q -U "transformers>=4.48" accelerate onnx onnxruntime onnxscript'),
-    ("code", '''MODEL_ID = "jhu-clsp/mmBERT-base"   # à comparer : "FacebookAI/xlm-roberta-base", "alger-ia/dziribert"
-CONFIG = "__CONFIG__"                 # "fr" (textes traduits) ou "en+fr" (transfert depuis l'anglais)
+    ("code", '''MODEL_ID = "__MODEL__"   # à comparer : "jhu-clsp/mmBERT-base", "almanach/camembert-base", "almanach/camembertav2-base"
+CONFIG = "__CONFIG__"    # "set" (jeu commun pondéré), "fr" (textes traduits) ou "en+fr" (transfert depuis l'anglais)
 MAX_LEN, EPOCHS, LR, BATCH, SEED, MIN_PER_CLASS = 256, 3, 3e-5, 32, 13, 5
 NAME = f"{MODEL_ID.split('/')[-1]}_{CONFIG.replace('+', '-')}"
 OUT = f"/kaggle/working/{NAME}"
@@ -55,8 +57,9 @@ os.makedirs(OUT, exist_ok=True)'''),
 
 faults = json.load(open("data/seed/faults.json", encoding="utf-8"))["faults"]
 f2p = {f["slug"]: max(f["parts"].items(), key=lambda x: x[1])[0] for f in faults}
-examples = [{"text": r["text"], "label": f2p[r["fault"]], "src": "seed"} for r in load_jsonl("data/seed/diagnosis_examples_fr.jsonl")]
-for p in sorted(glob.glob("data/processed/train/*.jsonl")):
+examples = [{"text": r["text"], "label": f2p[r["fault"]], "src": "seed", "weight": 1.0}
+            for r in load_jsonl("data/seed/diagnosis_examples_fr.jsonl")]
+for p in ([] if CONFIG == "set" else sorted(glob.glob("data/processed/train/*.jsonl"))):
     for r in load_jsonl(p):
         label = r.get("category") or r.get("family")
         if not label:
@@ -66,14 +69,24 @@ for p in sorted(glob.glob("data/processed/train/*.jsonl")):
         else:
             text = r["text"] if r["lang"] in ("en", "fr") else r.get("text_fr")
         if text:
-            examples.append({"text": text[:2000], "label": label, "src": r["source"]})
-counts = Counter(e["label"] for e in examples)
-examples = [e for e in examples if counts[e["label"]] >= MIN_PER_CLASS]
-labels = sorted({e["label"] for e in examples})
+            examples.append({"text": text[:2000], "label": label, "src": r["source"], "weight": 1.0})
+if CONFIG == "set":   # même découpage et mêmes poids que la variante A (train_baseline.py --set)
+    print(json.load(open("data/processed/train_set/stats.json", encoding="utf-8")))
+    train = [{**r, "src": r["source"]} for r in load_jsonl("data/processed/train_set/train.jsonl")]
+    val = [{**r, "src": r["source"]} for r in load_jsonl("data/processed/train_set/val.jsonl")]
+    counts = Counter(e["label"] for e in train)
+    train = [e for e in train if counts[e["label"]] >= MIN_PER_CLASS]
+    labels = sorted({e["label"] for e in train})
+    val = [e for e in val if e["label"] in labels]
+    examples = train + val
+else:
+    counts = Counter(e["label"] for e in examples)
+    examples = [e for e in examples if counts[e["label"]] >= MIN_PER_CLASS]
+    labels = sorted({e["label"] for e in examples})
+    random.Random(SEED).shuffle(examples)
+    n_val = max(50, len(examples) // 10)
+    val, train = examples[:n_val], examples[n_val:]
 lid = {l: i for i, l in enumerate(labels)}
-random.Random(SEED).shuffle(examples)
-n_val = max(50, len(examples) // 10)
-val, train = examples[:n_val], examples[n_val:]
 dev = [d for d in load_jsonl("data/test/dev_fr_synthetique.jsonl") if d.get("text") and d.get("expect")]
 print(f"{len(train)} entraînement, {len(val)} validation, {len(dev)} dev FR, {len(labels)} classes")
 print(Counter(e["src"] for e in examples))'''),
@@ -89,6 +102,7 @@ model = AutoModelForSequenceClassification.from_pretrained(
 def collate(batch):
     enc = tok([b["text"] for b in batch], truncation=True, max_length=MAX_LEN, padding=True, return_tensors="pt")
     enc["labels"] = torch.tensor([lid[b["label"]] for b in batch])
+    enc["weights"] = torch.tensor([float(b.get("weight", 1.0)) for b in batch])
     return enc
 
 @torch.no_grad()
@@ -125,8 +139,11 @@ for epoch in range(start, EPOCHS):
     t0 = time.time()
     for step, batch in enumerate(dl):
         batch = {k: v.to("cuda") for k, v in batch.items()}
+        y, w = batch.pop("labels"), batch.pop("weights")
         with torch.autocast("cuda", dtype=torch.float16):
-            loss = model(**batch).loss
+            logits = model(**batch).logits
+        # perte pondérée : une étiquette tirée des réponses du forum compte moins qu'une solution confirmée
+        loss = (torch.nn.functional.cross_entropy(logits.float(), y, reduction="none") * w).sum() / w.sum()
         scaler.scale(loss).backward()
         scaler.unscale_(opt)
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
@@ -470,14 +487,15 @@ for name in ("qwen3-embedding-0.6b", "bge-reranker-v2-m3"):
 ]
 
 
-def encoder(config: str) -> list[tuple[str, str]]:
-    return [(k, src.replace("__CONFIG__", config)) for k, src in NB_ENCODER]
+def encoder(config: str, model_id: str = "jhu-clsp/mmBERT-base") -> list[tuple[str, str]]:
+    return [(k, src.replace("__CONFIG__", config).replace("__MODEL__", model_id)) for k, src in NB_ENCODER]
 
 
 NOTEBOOKS = {
     "01_traduction": NB_TRANSLATE,
     "02_encodeur_fr": encoder("fr"),          # variante B sur textes traduits (après le carnet 01)
     "02_encodeur_enfr": encoder("en+fr"),     # variante B par transfert multilingue (sans traduction)
+    "02_encodeur_camembert": encoder("set", "almanach/camembert-base"),  # variante B sur le jeu commun (L'Argus inclus)
     "03_lora_llm": NB_LLM,
     "04_fusion_gguf": NB_FUSION,   # reprise après le 03 : évaluation, fusion, GGUF
     "05_vecteurs": NB_VECTEURS,    # étape 8 : vecteurs de recherche + modèle de reclassement

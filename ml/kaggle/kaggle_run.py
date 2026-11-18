@@ -36,6 +36,7 @@ NOTEBOOKS = {
     "01_traduction": {"slug": "dalil-01-traduction", "outputs": ["dalil_processed.zip"]},
     "02_encodeur_fr": {"slug": "dalil-02-encodeur-fr", "outputs": ["*_onnx.zip"]},
     "02_encodeur_enfr": {"slug": "dalil-02-encodeur-enfr", "outputs": ["*_onnx.zip"]},
+    "02_encodeur_camembert": {"slug": "dalil-02-encodeur-camembert", "outputs": ["*_onnx.zip"]},
     "03_lora_llm": {"slug": "dalil-03-lora-llm", "outputs": ["*.gguf", "*-evaluation.json"]},
     "04_fusion_gguf": {"slug": "dalil-04-fusion-gguf", "outputs": ["*.gguf", "*-evaluation.json"],
                        "datasets": [ADAPTER_SLUG]},
