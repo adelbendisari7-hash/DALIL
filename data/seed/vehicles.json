@@ -775,7 +775,7 @@
       ]}
     ]},
     {"name": "DFSK", "country": "Chine", "priority": 5, "models": [
-      {"name": "Glory 580", "priority": 1, "variants": [
+      {"name": "Glory 580", "priority": 0, "variants": [
         {"year_from": 2020, "year_to": null, "engine": "1.5 T", "fuel": "essence"}
       ]}
     ]},
@@ -1044,7 +1044,7 @@
       {"name": "323", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 10, "variants": [
         {"year_from": 1982, "year_to": 1996, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:10 annonces", "a_verifier": true}
       ]},
-      {"name": "B2500", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 1, "variants": [
+      {"name": "B2500", "source": "equipe (utilitaire ou modèle ancien, ONS 2020)", "priority": 0, "variants": [
         {"year_from": 2007, "year_to": 2007, "engine": "Autre motorisation", "fuel": "inconnu", "source": "ouedkniss:1 annonces", "a_verifier": true}
       ]}
     ]},

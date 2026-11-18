@@ -20,6 +20,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+MIN_ANNONCES = 3  # un modèle cité moins de 3 fois n'est pas publié (agrégat trop fin, souvent une saisie libre)
 
 BRAND_NAMES = {  # orthographe du référentiel DALIL
     "citroen": "Citroën", "mercedes-benz": "Mercedes", "mercedes benz": "Mercedes", "mercedes": "Mercedes", "mg": "MG",
@@ -135,9 +136,21 @@ def main(argv: list[str] | None = None) -> None:
             if fuel:
                 fuels[key][fuel] += 1
 
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).parent))
+    from anonymiser_ouedkniss import scrub  # défense en profondeur : aucun numéro dans un nom de modèle
+
     models = []
+    dropped = Counter()
     for key, sp in spellings.items():
         n = sum(sp.values())
+        if n < MIN_ANNONCES:
+            dropped["moins de 3 annonces"] += 1
+            continue
+        if scrub(key[1], Counter()) != key[1] or scrub(sp.most_common(1)[0][0], Counter()) != sp.most_common(1)[0][0]:
+            dropped["numéro ou adresse dans le nom"] += 1
+            continue
         ys = years[key]
         eng = []
         for (label, fuel), c in engines[key].most_common(12):
@@ -152,7 +165,7 @@ def main(argv: list[str] | None = None) -> None:
     out = {
         "_source": "Collecte Ouedkniss de l'utilisateur, anonymisée (data/scripts/anonymiser_ouedkniss.py) ; agrégats seulement",
         "_licence": "Autorisation déclarée par l'utilisateur, confirmation écrite à obtenir (data/SOURCES.md)",
-        "_annonces": total, "modeles": models,
+        "_annonces": total, "_min_annonces": MIN_ANNONCES, "_ecartes": dict(dropped), "modeles": models,
     }
     args.sortie.parent.mkdir(parents=True, exist_ok=True)
     args.sortie.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")

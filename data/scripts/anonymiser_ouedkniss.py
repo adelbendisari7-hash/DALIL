@@ -25,7 +25,9 @@ from collections import Counter
 from pathlib import Path
 
 DROP_FIELDS = ("seller_id", "seller_username", "url", "image_url")
-TEXT_FIELDS = ("title", "description")
+TEXT_FIELDS = ("title", "description")  # gardé pour compatibilité : tous les champs texte sont maintenant nettoyés
+# Les vendeurs écrivent aussi leur numéro dans « modèle », « version », « ville »… (19/11/2026 : 16 numéros trouvés
+# dans le champ modèle) : tout champ texte passe par le nettoyage, sauf l'empreinte d'identifiant.
 ARABIC_DIGITS = str.maketrans("٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹", "01234567890123456789")
 # Séparateurs entre groupes de chiffres : jusqu'à 5 signes non alphanumériques (« 05//50//12 », « 05 - 50 », « 05''50 »,
 # « 05🔹50 »). Un numéro commence toujours par 0[2-7] ou 213 : les années, kilométrages et prix ne sont pas touchés.
@@ -49,6 +51,9 @@ PATTERNS = [
 ]
 
 
+ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}(?:[T ][\d:.]+Z?)?")
+
+
 def scrub(text: str, counts: Counter) -> str:
     # Émojis chiffres (0️⃣ = chiffre + U+FE0F + U+20E3) -> chiffres ; chiffres arabes -> chiffres latins
     t = (text or "").replace("️", "").replace("⃣", "").translate(ARABIC_DIGITS)
@@ -62,9 +67,9 @@ def anonymize(row: dict, salt: bytes, counts: Counter) -> dict:
     out = {k: v for k, v in row.items() if k not in DROP_FIELDS}
     if row.get("id") is not None:
         out["id"] = hmac.new(salt, str(row["id"]).encode(), hashlib.sha256).hexdigest()[:16]
-    for f in TEXT_FIELDS:
-        if out.get(f):
-            out[f] = scrub(out[f], counts)
+    for f, v in out.items():
+        if f != "id" and isinstance(v, str) and v and not ISO_DATE.fullmatch(v):  # « 09:30:45.000 » n'est pas un numéro
+            out[f] = scrub(v, counts)
     return out
 
 
