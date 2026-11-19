@@ -90,15 +90,23 @@ a { color: var(--blue); }
   color: #fff;
   text-decoration: none;
   letter-spacing: 0.04em;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
-.nav { display: flex; gap: 0.25rem 1rem; flex-wrap: wrap; font-size: var(--step--1); }
+/* Boutons de zoom de la carte : 30 px par défaut, trop petits pour un doigt */
+.leaflet-touch .leaflet-bar a { width: 44px; height: 44px; line-height: 44px; font-size: 22px; }
+.nav { display: flex; gap: 0 1rem; flex-wrap: wrap; font-size: var(--step--1); }
 .nav a, .nav button {
   color: #dbe6f1;
   text-decoration: none;
   background: none;
   border: 0;
   font: inherit;
-  padding: 0.25rem 0;
+  padding: 0 0.15rem;
+  min-height: 44px;            /* cible tactile d'un doigt (vérification sur téléphone du 19/11/2026) */
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
 }
 .nav a[aria-current="page"] { color: #fff; box-shadow: inset 0 -2px 0 var(--yellow); }

@@ -130,3 +130,31 @@ test("écran de 360 px : aucune page ne déborde en largeur (section 10)", async
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await noOverflow("fiche magasin");
 });
+
+test("saisie vocale refusée par le navigateur : message clair, pas de silence", async ({ page }) => {
+  // Sur un téléphone, le micro peut être refusé (réglages, adresse non sécurisée) : l'utilisateur doit le savoir.
+  await page.addInitScript(() => {
+    class DeniedRecognition {
+      lang = "";
+      interimResults = false;
+      continuous = false;
+      onresult: (e: unknown) => void = () => {};
+      onend: () => void = () => {};
+      onerror: (e: { error: string }) => void = () => {};
+      start() {
+        setTimeout(() => {
+          this.onerror({ error: "not-allowed" });
+          this.onend();
+        }, 50);
+      }
+      stop() {}
+    }
+    const w = window as unknown as Record<string, unknown>;
+    w.SpeechRecognition = DeniedRecognition;
+    w.webkitSpeechRecognition = DeniedRecognition;
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Dicter" }).click();
+  await expect(page.getByRole("alert").filter({ hasText: "Le micro n'est pas autorisé" })).toBeVisible();
+  await expect(page.getByText("Relisez et corrigez le texte")).toHaveCount(0);
+});

@@ -12,6 +12,9 @@ const nextConfig = {
   experimental: { proxyTimeout: 120_000 },
   // Mode développement ouvert depuis un téléphone du même Wi-Fi (adresses de réseau local).
   allowedDevOrigins: ["192.168.*.*", "10.*.*.*", "172.*.*.*"],
+  // Le lanceur sert le site en mode développement : sans ceci, le badge « N » de Next.js recouvre des boutons sur
+  // un téléphone de 360 px (vérification du 19/11/2026, docs/test-telephone.md).
+  devIndicators: false,
   async rewrites() {
     return [{ source: "/api/v1/:path*", destination: `${API_INTERNAL}/api/v1/:path*` }];
   },

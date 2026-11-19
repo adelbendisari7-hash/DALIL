@@ -5,6 +5,23 @@ Critère de fin de l'étape 9 (section 11) : parcours de bout en bout sur télé
 - **Test automatisé** : fait, `cd frontend && npx playwright test`, 7 tests sur un téléphone simulé (Pixel 5), dont la largeur de 360 px.
 - **Vérification sur un vrai téléphone** : la fiche ci-dessous, environ 10 minutes.
 
+## Vérification automatique « comme un téléphone » (à refaire avant les essais d'Oran)
+
+`frontend/e2e-telephone/fiche-telephone.spec.ts` déroule cette fiche sur un téléphone simulé :
+- Android d'entrée de gamme, 360 px, tactile, processeur 4 fois plus lent ;
+- réseau 3G ;
+- passage par l'**adresse Wi-Fi du PC**, comme un vrai téléphone.
+
+Le test prend une capture de chaque écran, mesure les temps et relève les cibles trop petites pour un doigt.
+
+```bash
+cd frontend
+TEL_URL=http://192.168.1.20:3000 TEL_SHOTS=captures npx playwright test -c playwright.telephone.config.ts
+```
+
+Il écrit dans la base visée (diagnostics, « pièce trouvée ») : le lancer de préférence contre une copie de la base.
+Rapport : `captures/rapport.json`.
+
 ## Préparer
 
 1. Sur le PC, double-cliquer sur `DEMARRER-DALIL.bat`. À la fin, il affiche une adresse du type `http://192.168.1.20:3000`.
@@ -47,3 +64,4 @@ Noter ici la date, le modèle de téléphone, le navigateur et ce qui n'a pas ma
 | Date | Téléphone | Navigateur | Résultat | Problèmes |
 | --- | --- | --- | --- | --- |
 | | | | | |
+| 19/11/2026 | Simulé : Android 360 px, tactile, processeur ÷4, 3G | Chromium (Playwright), adresse Wi-Fi du PC, mode développement comme le lanceur | 3 parcours sur 3 réussis après corrections. Diagnostic 3,4 s, liste des magasins 2,8 s, connexion 2,3 s. Premier affichage de l'accueil : 17 s pour 2,1 Mo (mode développement) | Corrigé : badge « N » de Next.js qui recouvrait des boutons ; liens du menu, logo et zoom de la carte trop petits pour un doigt (29-38 px, portés à 44 px) ; dictée muette sur l'adresse du PC (message affiché, et message pour chaque erreur du micro). Reste : installation impossible en http (attendu) ; premier chargement lent en mode développement |

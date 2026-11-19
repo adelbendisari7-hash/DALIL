@@ -11,7 +11,7 @@ type Rec = {
   continuous: boolean;
   onresult: (e: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void;
   onend: () => void;
-  onerror: () => void;
+  onerror: (e: { error?: string }) => void;
   start: () => void;
   stop: () => void;
 };
@@ -20,6 +20,8 @@ export default function VoiceInput({ onText }: { onText: (text: string) => void 
   const [supported, setSupported] = useState(true);
   const [listening, setListening] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState("");
+  const [secure, setSecure] = useState(true);
   const rec = useRef<Rec | null>(null);
 
   useEffect(() => {
@@ -27,6 +29,11 @@ export default function VoiceInput({ onText }: { onText: (text: string) => void 
     const Ctor = w.SpeechRecognition || w.webkitSpeechRecognition;
     if (!Ctor) {
       setSupported(false);
+      return;
+    }
+    // Le micro n'est accordé que sur https ou localhost : sur l'adresse du PC (http://192.168…), Chrome le refuse.
+    if (!window.isSecureContext) {
+      setSecure(false);
       return;
     }
     const r = new Ctor();
@@ -38,11 +45,19 @@ export default function VoiceInput({ onText }: { onText: (text: string) => void 
       setListening(false);
       setDone(true);
     };
-    r.onerror = () => setListening(false);
+    r.onerror = (e) => {
+      setListening(false);
+      const code = e?.error || "";
+      setError(code === "not-allowed" || code === "service-not-allowed" ? t("voice.error.denied")
+        : code === "no-speech" ? t("voice.error.nospeech")
+        : code === "network" ? t("voice.error.network")
+        : code === "aborted" ? "" : t("voice.error.other"));
+    };
     rec.current = r;
   }, [onText]);
 
   if (!supported) return <p className="help">{t("voice.unsupported")}</p>;
+  if (!secure) return <p className="help">{t("voice.insecure")}</p>;
   return (
     <div className="voice">
       <button
@@ -53,8 +68,13 @@ export default function VoiceInput({ onText }: { onText: (text: string) => void 
           if (listening) rec.current?.stop();
           else {
             setDone(false);
-            rec.current?.start();
-            setListening(true);
+            setError("");
+            try {
+              rec.current?.start();
+              setListening(true);
+            } catch {
+              setError(t("voice.error.other"));
+            }
           }
         }}
       >
@@ -66,7 +86,8 @@ export default function VoiceInput({ onText }: { onText: (text: string) => void 
           <span className="status" role="status">{t("voice.listening")}</span>
         </>
       )}
-      {done && !listening && <span className="status" role="status">{t("voice.review")}</span>}
+      {done && !listening && !error && <span className="status" role="status">{t("voice.review")}</span>}
+      {error && <span className="status" role="alert">{error}</span>}
     </div>
   );
 }
