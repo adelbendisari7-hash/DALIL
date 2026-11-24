@@ -1,0 +1,194 @@
+{
+  "source": "largus_forum",
+  "fichier": "data\\relecture\\largus_forum_relecture.xlsx",
+  "date": "2026-11-24 09:00",
+  "justesse_globale_repondérée": 0.29,
+  "niveaux": {
+    "auteur": {
+      "n": 18,
+      "oui": 1,
+      "partiel": 1,
+      "non": 16,
+      "ignores": 5,
+      "piece_juste": 0.056,
+      "intervalle_95": [
+        0.01,
+        0.258
+      ],
+      "famille_juste": 0.111,
+      "population": 7493,
+      "poids_conseille": 0.0,
+      "decision": "écarter"
+    },
+    "auteur+component": {
+      "n": 16,
+      "oui": 10,
+      "partiel": 2,
+      "non": 4,
+      "ignores": 7,
+      "piece_juste": 0.625,
+      "intervalle_95": [
+        0.386,
+        0.815
+      ],
+      "famille_juste": 0.75,
+      "population": 2566,
+      "poids_conseille": 0.62,
+      "decision": "garder avec un poids réduit"
+    },
+    "component": {
+      "n": 19,
+      "oui": 0,
+      "partiel": 17,
+      "non": 2,
+      "ignores": 3,
+      "piece_juste": 0.0,
+      "intervalle_95": [
+        0.0,
+        0.168
+      ],
+      "famille_juste": 0.895,
+      "population": 3704,
+      "poids_conseille": 0.0,
+      "decision": "écarter"
+    },
+    "question": {
+      "n": 18,
+      "oui": 2,
+      "partiel": 6,
+      "non": 10,
+      "ignores": 4,
+      "piece_juste": 0.111,
+      "intervalle_95": [
+        0.031,
+        0.328
+      ],
+      "famille_juste": 0.444,
+      "population": 14768,
+      "poids_conseille": 0.0,
+      "decision": "écarter"
+    },
+    "question+component": {
+      "n": 20,
+      "oui": 13,
+      "partiel": 4,
+      "non": 3,
+      "ignores": 2,
+      "piece_juste": 0.65,
+      "intervalle_95": [
+        0.433,
+        0.819
+      ],
+      "famille_juste": 0.85,
+      "population": 8520,
+      "poids_conseille": 0.65,
+      "decision": "garder avec un poids réduit"
+    },
+    "reponses": {
+      "n": 17,
+      "oui": 5,
+      "partiel": 3,
+      "non": 9,
+      "ignores": 5,
+      "piece_juste": 0.294,
+      "intervalle_95": [
+        0.133,
+        0.531
+      ],
+      "famille_juste": 0.471,
+      "population": 25481,
+      "poids_conseille": 0.0,
+      "decision": "écarter"
+    },
+    "reponses+component": {
+      "n": 20,
+      "oui": 9,
+      "partiel": 8,
+      "non": 3,
+      "ignores": 2,
+      "piece_juste": 0.45,
+      "intervalle_95": [
+        0.258,
+        0.658
+      ],
+      "famille_juste": 0.85,
+      "population": 9747,
+      "poids_conseille": 0.0,
+      "decision": "écarter"
+    },
+    "solution": {
+      "n": 18,
+      "oui": 4,
+      "partiel": 8,
+      "non": 6,
+      "ignores": 4,
+      "piece_juste": 0.222,
+      "intervalle_95": [
+        0.09,
+        0.452
+      ],
+      "famille_juste": 0.667,
+      "population": 3317,
+      "poids_conseille": 0.0,
+      "decision": "écarter"
+    },
+    "solution+component": {
+      "n": 18,
+      "oui": 7,
+      "partiel": 7,
+      "non": 4,
+      "ignores": 4,
+      "piece_juste": 0.389,
+      "intervalle_95": [
+        0.203,
+        0.614
+      ],
+      "famille_juste": 0.778,
+      "population": 1006,
+      "poids_conseille": 0.0,
+      "decision": "écarter"
+    }
+  },
+  "corrections_frequentes": [
+    [
+      "Joint de culasse",
+      3
+    ],
+    [
+      "Pompe d'injection",
+      2
+    ],
+    [
+      "Commodo",
+      2
+    ],
+    [
+      "Antidémarrage",
+      2
+    ],
+    [
+      "Calculateur d'injection",
+      2
+    ],
+    [
+      "Batterie ou masse",
+      1
+    ],
+    [
+      "Module de commande du motoventilateur",
+      1
+    ],
+    [
+      "Pompe d'injection (calage)",
+      1
+    ],
+    [
+      "Servofrein (mastervac)",
+      1
+    ],
+    [
+      "Huile de boîte",
+      1
+    ]
+  ]
+}

@@ -77,8 +77,35 @@ _SCRUB = [
 YEAR_RE = re.compile(r"(?<!\d)(19[5-9]\d|20[0-3]\d)(?!\d)")
 
 
-def scrub(text: str) -> str:
+# Mentions ajoutées par le forum (relecture du 24/11/2026) : la fiche du véhicule et la catégorie recopiées en fin de
+# question (elles donneraient la réponse au modèle), les lignes « Dernière modification par <pseudo> (date) » et
+# « Citation de <pseudo> », qui contiennent des pseudonymes.
+_BOILERPLATE = [
+    re.compile(r"\s*Le mod[eè]le de la voiture\b.*$", re.DOTALL),
+    re.compile(r"\s*Cat[eé]gorie de la panne\s*:.*$", re.DOTALL),   # parfois sans la fiche du véhicule devant
+    re.compile(r"\s*Derni[eè]re modification par\s+\S+(\s*\([^)]*\))?", re.IGNORECASE),
+    re.compile(r"\bCitation(\s+de\s+\S+)?", re.IGNORECASE),
+]
+
+
+def strip_boilerplate(text: str) -> str:
     t = text or ""
+    for pat in _BOILERPLATE:
+        t = pat.sub(" ", t)
+    return t
+
+
+def mask_names(text: str, names: set[str]) -> str:
+    """Remplace les pseudonymes des participants de la discussion (« Merci JCDA81 ») par « [membre] »."""
+    for name in sorted((n for n in names if n and len(n) >= 3), key=len, reverse=True):
+        text = re.sub(rf"(?<![\w@]){re.escape(name)}(?!\w)", "[membre]", text, flags=re.IGNORECASE)
+    return text
+
+
+def scrub(text: str, names: set[str] | None = None) -> str:
+    t = strip_boilerplate(text or "")
+    if names:
+        t = mask_names(t, names)
     for pat, label in _SCRUB:
         t = pat.sub(label, t)
     return re.sub(r"[ \t]+", " ", t).strip()
@@ -184,13 +211,18 @@ def collect(ctx: Context) -> Iterator[Record]:
     n = 0
     for row in con.execute("SELECT * FROM topics ORDER BY topic_id"):
         t = dict(row)
-        question = scrub(f"{t.get('title') or ''}. {t.get('problem_description') or ''}").strip(" .")
-        if len(question) < 15:
-            continue
+        # la mention « Catégorie de la panne : … » recopiée par le forum ne doit pas servir à l'étiquette « question »
+        t["problem_description"] = strip_boilerplate(t.get("problem_description") or "")
         posts = [dict(r) for r in con.execute(
             "SELECT post_number, author, content FROM messages WHERE topic_id = ? ORDER BY id", (t["topic_id"],))]
-        replies = [scrub(p["content"] or "") for p in posts if post_number(p) > 1 and p.get("author") != t.get("author")]
-        own = [scrub(p["content"] or "") for p in posts if post_number(p) > 1 and p.get("author") == t.get("author")]
+        names = {t.get("author") or ""} | {p.get("author") or "" for p in posts}   # tous les participants
+        question = scrub(f"{t.get('title') or ''}. {t['problem_description']}", names).strip(" .")
+        if len(question) < 15:
+            continue
+        replies = [scrub(p["content"] or "", names) for p in posts
+                   if post_number(p) > 1 and p.get("author") != t.get("author")]
+        own = [scrub(p["content"] or "", names) for p in posts
+               if post_number(p) > 1 and p.get("author") == t.get("author")]
         resolved = str(t.get("is_resolved")) in ("1", "True", "true")
         author_text, cue = author_solution(own)
         cats, fam, quality = label(t, replies, author_text, author_is_solution=cue or resolved)
@@ -203,7 +235,7 @@ def collect(ctx: Context) -> Iterator[Record]:
             fault=fault_for(cats, "keyword+component") if strong else None, label_quality=quality,
             meta={"diagnostic": category not in NOT_A_FAULT, "resolved": resolved, "symptom_category": category,
                   "replies": len(replies), "views": t.get("views_count"),
-                  "solution": (scrub(t.get("resolution_summary") or "") or (author_text if cue else ""))[:1000] or None},
+                  "solution": (scrub(t.get("resolution_summary") or "", names) or (author_text if cue else ""))[:1000] or None},
         )
         n += 1
         if ctx.limit and n >= ctx.limit:

@@ -60,13 +60,13 @@
     }
   },
   "largus_forum": {
-    "records": 99727,
-    "with_category": 72898,
-    "with_family": 76602,
+    "records": 99720,
+    "with_category": 71368,
+    "with_family": 76510,
     "with_fault": 866,
-    "translated_fr": 99727,
+    "translated_fr": 99720,
     "kinds": {
-      "qa": 99727
+      "qa": 99720
     }
   }
 }

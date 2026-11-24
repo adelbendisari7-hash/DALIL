@@ -1,6 +1,6 @@
 # Rapport du pipeline de données (étape 6)
 
-Généré le 2026-11-24 07:49 UTC par `python data/pipeline/run.py report`.
+Généré le 2026-11-24 08:18 UTC par `python data/pipeline/run.py report`.
 
 | Source | Licence | Enregistrements | Reliés à une famille | À une sous-famille | À une panne type | Traduits / en français |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -10,6 +10,6 @@ Généré le 2026-11-24 07:49 UTC par `python data/pipeline/run.py report`.
 | DVSA – contrôle technique britannique (MOT anonymisé) | Open Government Licence v3.0 | 18 | 18 (100 %) | 18 (100 %) | 0 (0 %) | 18 (100 %) |
 | Stack Exchange – Motor Vehicle Maintenance & Repair (export 2024-12-31) | CC BY-SA 4.0 | 8102 | 5604 (69 %) | 5604 (69 %) | 1590 (19 %) | 8102 (100 %) |
 | Chinese Vehicle Fleet Fault Association Dataset (Mendeley Data, v1) (synthétique) | CC BY 4.0 | 32 | 32 (100 %) | 28 (87 %) | 17 (53 %) | 32 (100 %) |
-| Forum L'Argus – Panne auto, mécanique et entretien (collecte de l'équipe) | Accord de L'Argus (DALIL_LARGUS_AUTORISATION) | 99727 | 76602 (76 %) | 72898 (73 %) | 866 (0 %) | 99727 (100 %) |
+| Forum L'Argus – Panne auto, mécanique et entretien (collecte de l'équipe) | Accord de L'Argus (DALIL_LARGUS_AUTORISATION) | 99720 | 76510 (76 %) | 71368 (71 %) | 866 (0 %) | 99720 (100 %) |
 
 Les étiquettes sont obtenues par mots-clés (voir `data/pipeline/taxonomy_map.py`) : elles servent à l'entraînement, jamais à l'évaluation, qui se fait sur le jeu de test d'Oran annoté par des mécaniciens.

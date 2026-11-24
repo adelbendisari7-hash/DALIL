@@ -49,6 +49,16 @@ QUALITY_WEIGHT = {
     "reponses+component": 0.7, "auteur+component": 0.7, "keyword": 0.6, "component": 0.5, "auteur": 0.4,  # auteur : à régler par la relecture
     "reponses": 0.4, "question+component": 0.4, "question": 0.2,
 }
+# Règles propres à une source, mesurées par relecture (ml/relecture_etiquettes.py) ; elles remplacent QUALITY_WEIGHT.
+# L'Argus, 24/11/2026 (200 étiquettes relues par Claude, sans voir le niveau ; ml/results/*relecture-largus_forum*) :
+# la pièce exacte n'est juste que dans 28 % des cas, mais la famille l'est dans 75 à 89 % des cas pour les niveaux
+# confirmés par la catégorie du forum. On n'en garde que la famille, avec un poids égal à sa justesse mesurée ; les
+# autres niveaux (famille juste dans 11 à 67 % des cas) sont écartés.
+SOURCE_RULES = {
+    "largus_forum": {"label": "family", "weights": {
+        "component": 0.89, "reponses+component": 0.85, "question+component": 0.82,
+        "solution+component": 0.78, "auteur+component": 0.75}},
+}
 LEVELS = {"fort": 0.8, "moyen": 0.5, "tout": 0.0}
 MAX_CHARS = 2000  # le symptôme est au début ; chaque modèle tronque encore à sa façon
 
@@ -109,6 +119,13 @@ def build(quality: str = "fort", max_per_label: int = 0, sources: set[str] | Non
             label = r.get("category") or r.get("family")
             q = r.get("label_quality") or ("manual" if r.get("synthetic") else "keyword")
             w = QUALITY_WEIGHT.get(q, 0.2)
+            rule = SOURCE_RULES.get(r["source"])
+            if rule:
+                label = r.get("family") if rule["label"] == "family" else label
+                w = rule["weights"].get(q, 0.0)
+                if not w:
+                    stats["ecartes"]["niveau écarté par la relecture"] += 1
+                    continue
             if not text or not label:
                 stats["ecartes"]["sans texte français ou étiquette"] += 1
                 continue

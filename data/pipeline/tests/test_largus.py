@@ -34,6 +34,10 @@ TOPICS = [
      "Bruit métallique au freinage depuis hier soir", None),   # catégorie = titre recopié depuis l'adresse
     (8, "Fiat", "Punto", "Punto 2008", "Avis et fiabilité", "Punto fiable ?", 0, "yacine",
      "Je pense acheter une Punto de 2008, est-ce une voiture fiable ?", None),
+    # Mentions ajoutées par le forum (relecture du 24/11/2026)
+    (9, "Renault", "Scenic", "Scenic 2004", "Freinage", "Bruit d'air au freinage", 0, "Jerbii93",
+     "Bruit d'air quand je relâche la pédale de frein. Le modèle de la voiture Renault Scenic 2004 - Diesel "
+     "Catégorie de la panne : Freinage Dernière modification par Jerbii93 (12-03-2011 06:45:10)", None),
 ]
 MESSAGES = [  # numéros au format de la collecte : « #2 », « #3 »… (le message #1 recopie la description)
     (2, 2, "pro_meca", "Regarde tes plaquettes, elles doivent être mortes"),
@@ -48,6 +52,8 @@ MESSAGES = [  # numéros au format de la collecte : « #2 », « #3 »… (le me
     (6, 3, "samir", "Merci, je vais vérifier les plaquettes arrière"),
     (7, 2, "pro_meca", "Tes plaquettes avant sont sûrement mortes"),
     (8, 2, "autre", "Oui, bonne voiture"),
+    (9, 2, "Tiger33", "Regarde le servofrein"),
+    (9, 3, "Jerbii93", "Citation de Tiger33 regarde le servofrein. Merci TIGER33, c'était bien le servofrein"),
 ]
 
 
@@ -131,3 +137,17 @@ def test_base_reelle_dernier_message_auteur_ordre_categories(base, monkeypatch):
     assert recs["largus_forum:2"].meta["diagnostic"] is True and recs["largus_forum:2"].meta["symptom_category"] == "freinage"
     for author in ("nadia", "samir", "lea", "yacine"):
         assert all(author not in f"{r.text} {r.meta}" for r in recs.values())
+
+
+def test_mentions_du_forum_et_pseudonymes_retires(base, monkeypatch):
+    r9 = _collect(base, monkeypatch)["largus_forum:9"]
+    blob = f"{r9.text} {r9.meta}"
+    assert "jerbii93" not in blob.lower() and "tiger33" not in blob.lower()
+    assert "Catégorie de la panne" not in r9.text and "Le modèle de la voiture" not in r9.text
+    assert "Dernière modification" not in r9.text and "[téléphone]" not in r9.text
+    assert "servofrein" in (r9.meta["solution"] or "") and "[membre]" in r9.meta["solution"]
+
+
+def test_categorie_recopiee_seule():
+    assert largus.strip_boilerplate("La clé ne tourne plus Catégorie de la panne : Cle et verrouillage").strip() == "La clé ne tourne plus"
+    assert "excitation de l'alternateur" in largus.scrub("courant d'excitation de l'alternateur")
