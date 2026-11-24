@@ -25,12 +25,29 @@ TOPICS = [
     (3, "Dacia", "Logan", "Logan 2010 - Diesel 1l5 dci", "Embrayage", "Embrayage qui patine", 1, "m_ali",
      "Le moteur monte dans les tours mais la voiture n'avance pas en côte", "Kit embrayage changé, problème réglé"),
     (4, "Citroen", "C3", "C3 2012", "Lève vitre", "Vitre bloquée", 0, "x", "La vitre conducteur ne remonte plus", None),
+    # Base réelle (24/11/2026) : 0,2 % de sujets marqués résolus ; la cause est dans le dernier message de l'auteur
+    (5, "Renault", "Clio 2", "Clio 2 2003 - Essence 1l2", "Démarrage", "Ne démarre plus", 0, "nadia",
+     "La voiture ne démarre plus le matin, rien ne se passe quand je tourne la clé", None),
+    (6, "Peugeot", "307", "307 2006 - Diesel 1l6 hdi", "Freinage", "Pédale molle", 0, "samir",
+     "La pédale de frein est molle et s'enfonce presque jusqu'au plancher", None),
+    (7, "Renault", "Clio 2", "Clio 2", "clio-2-bruit-au-freinage", "Bruit au freinage clio", 0, "lea",
+     "Bruit métallique au freinage depuis hier soir", None),   # catégorie = titre recopié depuis l'adresse
+    (8, "Fiat", "Punto", "Punto 2008", "Avis et fiabilité", "Punto fiable ?", 0, "yacine",
+     "Je pense acheter une Punto de 2008, est-ce une voiture fiable ?", None),
 ]
-MESSAGES = [
+MESSAGES = [  # numéros au format de la collecte : « #2 », « #3 »… (le message #1 recopie la description)
     (2, 2, "pro_meca", "Regarde tes plaquettes, elles doivent être mortes"),
     (2, 3, "autre", "Oui les plaquettes avant, et vérifie les disques @kader31"),
     (1, 2, "pro_meca", "Passe la valise, ça peut être le turbo ou la vanne EGR"),
     (1, 3, "Jean_Dupont", "Merci à tous, c'était bien la vanne EGR"),
+    (5, 2, "pro_meca", "Batterie ou démarreur, mesure la tension"),
+    (5, 3, "nadia", "J'ai changé la batterie mais rien ne change"),
+    *[(5, i, "autre", "Des nouvelles ?") for i in range(4, 11)],
+    (5, 11, "nadia", "Merci, c'était bien le démarreur, il est remplacé et tout marche"),   # « #11 » après « #3 »
+    (6, 2, "pro_meca", "Fais purger le circuit"),
+    (6, 3, "samir", "Merci, je vais vérifier les plaquettes arrière"),
+    (7, 2, "pro_meca", "Tes plaquettes avant sont sûrement mortes"),
+    (8, 2, "autre", "Oui, bonne voiture"),
 ]
 
 
@@ -46,9 +63,12 @@ def base(tmp_path):
         con.execute("INSERT INTO topics VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     (tid, brand, model, brand.lower(), model.lower(), declared, cat, title, res, 100, 3,
                      f"https://www.largus.fr/forum-auto/x/{tid}.html", author, "2020-01-01", desc, sol, "2026-11-18"))
+    for t in TOPICS:   # message #1 = la description, comme dans la collecte
+        con.execute("INSERT INTO messages (topic_id, post_number, author, post_date, content) VALUES (?,?,?,?,?)",
+                    (t[0], "#1", t[7], "2020-01-01", t[8]))
     for m in MESSAGES:
         con.execute("INSERT INTO messages (topic_id, post_number, author, post_date, content) VALUES (?,?,?,?,?)",
-                    (m[0], m[1], m[2], "2020-01-02", m[3]))
+                    (m[0], f"#{m[1]}", m[2], "2020-01-02", m[3]))
     con.commit()
     con.close()
     return db
@@ -96,3 +116,18 @@ def test_lecture_seule_et_licence_du_registre(base, monkeypatch):
     assert base.stat().st_mtime_ns == avant
     rows = chunk_rows([r.__dict__ for r in recs.values()])  # refuserait une licence différente du registre
     assert rows and all(r["license"] == SOURCES["largus_forum"].license for r in rows)
+
+
+def test_base_reelle_dernier_message_auteur_ordre_categories(base, monkeypatch):
+    recs = _collect(base, monkeypatch)
+    r5 = recs["largus_forum:5"]   # non marqué résolu ; « #11 » lu après « #3 » (ordre d'enregistrement, pas du texte)
+    assert r5.categories[0] == "demarreur" and r5.label_quality == "solution" and not r5.meta["resolved"]
+    assert "démarreur" in r5.meta["solution"] and "démarreur" not in r5.text
+    r6 = recs["largus_forum:6"]   # dernier message de l'auteur sans tournure de solution
+    assert r6.categories[0] == "plaquettes-arriere" and r6.label_quality == "auteur+component" and r6.fault is None
+    r7 = recs["largus_forum:7"]   # catégorie illisible : ni « +component », ni catégorie enregistrée
+    assert r7.label_quality == "reponses" and r7.meta["symptom_category"] is None
+    assert recs["largus_forum:8"].meta["diagnostic"] is False      # avis : hors de l'entraînement
+    assert recs["largus_forum:2"].meta["diagnostic"] is True and recs["largus_forum:2"].meta["symptom_category"] == "freinage"
+    for author in ("nadia", "samir", "lea", "yacine"):
+        assert all(author not in f"{r.text} {r.meta}" for r in recs.values())

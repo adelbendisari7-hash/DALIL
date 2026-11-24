@@ -46,7 +46,7 @@ TEST_FILES = [*sorted((ROOT / "data" / "test").glob("*.jsonl")), ROOT / "data" /
 QUALITY_WEIGHT = {
     "manual": 1.0, "solution+component": 1.0, "keyword+component": 1.0,   # deux indices concordants
     "solution": 0.8,                                                       # solution confirmée, catégorie muette
-    "reponses+component": 0.7, "keyword": 0.6, "component": 0.5,
+    "reponses+component": 0.7, "auteur+component": 0.7, "keyword": 0.6, "component": 0.5, "auteur": 0.4,  # auteur : à régler par la relecture
     "reponses": 0.4, "question+component": 0.4, "question": 0.2,
 }
 LEVELS = {"fort": 0.8, "moyen": 0.5, "tout": 0.0}
