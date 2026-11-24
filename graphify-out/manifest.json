@@ -282,9 +282,9 @@
     "semantic_hash": ""
   },
   "data/processed/report.json": {
-    "mtime": 1795506571.3072908,
-    "seen": 1795506775.0617769,
-    "ast_hash": "a0f64bbdcd5890226a866ca459c067b4",
+    "mtime": 1795508282.0740123,
+    "seen": 1795508779.3648093,
+    "ast_hash": "04bfb50e032514232b7f4c55d9b7a5ef",
     "semantic_hash": ""
   },
   "data/scripts/import_obdex.py": {
@@ -564,9 +564,9 @@
     "semantic_hash": ""
   },
   "data/processed/report.md": {
-    "mtime": 1795506571.2915347,
-    "seen": 1795506775.0617769,
-    "ast_hash": "6dadd0d3c84d45bd379a1baa5440b4d2",
+    "mtime": 1795508282.0740123,
+    "seen": 1795508779.3648093,
+    "ast_hash": "05217ffa6c018dfb6a6b0ed036ee791c",
     "semantic_hash": ""
   },
   "data/sources/cvffad.md": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795506246.567417,
-    "seen": 1795506775.0617769,
-    "ast_hash": "0c297408e0a5e6e9aad344d0ea6744ea",
+    "mtime": 1795508774.8443358,
+    "seen": 1795508779.3648093,
+    "ast_hash": "160644275c6c9e99a632a27066b77616",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -1242,15 +1242,15 @@
     "semantic_hash": ""
   },
   "data/pipeline/sources/largus.py": {
-    "mtime": 1795506132.69238,
-    "seen": 1795506775.0617769,
-    "ast_hash": "eb2c55402610435c2bb4fa1e7810a196",
+    "mtime": 1795507835.7127755,
+    "seen": 1795508779.3648093,
+    "ast_hash": "a3b4825c218c98477c7a18eaf349020f",
     "semantic_hash": ""
   },
   "data/pipeline/tests/test_largus.py": {
-    "mtime": 1795506168.3405323,
-    "seen": 1795506775.0617769,
-    "ast_hash": "add4a9175debc9d9a743e9ba73f1375c",
+    "mtime": 1795507836.121109,
+    "seen": 1795508779.3648093,
+    "ast_hash": "60b73cd588dbc2dc475f9110f3479518",
     "semantic_hash": ""
   },
   "data/sources/largus_forum.md": {
@@ -1260,15 +1260,15 @@
     "semantic_hash": ""
   },
   "data/pipeline/tests/test_jeu_entrainement.py": {
-    "mtime": 1795037358.3394735,
-    "seen": 1795037398.2735102,
-    "ast_hash": "92dbf64619b8bfd3f0a0b85ba334de74",
+    "mtime": 1795507891.3245656,
+    "seen": 1795508779.3648093,
+    "ast_hash": "456916c7455fdea69b5b66030dd565e3",
     "semantic_hash": ""
   },
   "ml/build_training_set.py": {
-    "mtime": 1795506642.0968297,
-    "seen": 1795506775.0617769,
-    "ast_hash": "d15bc7a32870f28fcf9e42608a083973",
+    "mtime": 1795507871.2787192,
+    "seen": 1795508779.3648093,
+    "ast_hash": "b226ff1b60626ef533d49bda050dae90",
     "semantic_hash": ""
   },
   "ml/results/20261118-2122-point-zero-avant-largus.json": {
@@ -1341,6 +1341,30 @@
     "mtime": 1795047948.85628,
     "seen": 1795049514.7529655,
     "ast_hash": "f36bc11cf0cdd3e902c8500ba708e9f0",
+    "semantic_hash": ""
+  },
+  "ml/results/20261124-0823-largus-famille.json": {
+    "mtime": 1795508740.5060856,
+    "seen": 1795508779.3648093,
+    "ast_hash": "c5a0b763d305f724b5a3b166ac4740f6",
+    "semantic_hash": ""
+  },
+  "ml/results/20261124-0900-relecture-largus_forum.json": {
+    "mtime": 1795507245.4646597,
+    "seen": 1795508779.3648093,
+    "ast_hash": "825f3b2c19b27daff5ff5acd264d91e0",
+    "semantic_hash": ""
+  },
+  "ml/results/20261124-0823-largus-famille.md": {
+    "mtime": 1795508740.5060856,
+    "seen": 1795508779.3648093,
+    "ast_hash": "fc757a145bcd8ba8846bd2038f520135",
+    "semantic_hash": ""
+  },
+  "ml/results/20261124-0900-relecture-largus_forum.md": {
+    "mtime": 1795507245.4646597,
+    "seen": 1795508779.3648093,
+    "ast_hash": "811fea8c67dd0ea80e2f2fa56b9d29b4",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {

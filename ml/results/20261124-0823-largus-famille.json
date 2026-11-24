@@ -1,0 +1,1540 @@
+{
+  "rows": [
+    {
+      "date": "20261124-0823",
+      "variante": "A-actuel / classifieur seul",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.9,
+      "top3": 0.96,
+      "abstention": 0.04,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 435.0,
+      "ms_p95": 99.5
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-actuel / classifieur seul",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 72.6,
+      "ms_p95": 92.3
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-actuel / classifieur seul",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.778,
+      "top3": 0.822,
+      "abstention": 0.133,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 65.5,
+      "ms_p95": 80.5
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-actuel / classifieur seul",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.875,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 64.9,
+      "ms_p95": 84.1
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-actuel / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.9,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 72.0,
+      "ms_p95": 96.9
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-actuel / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 67.8,
+      "ms_p95": 86.0
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-actuel / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.822,
+      "top3": 0.867,
+      "abstention": 0.089,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 65.6,
+      "ms_p95": 82.0
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-actuel / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.875,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 64.9,
+      "ms_p95": 84.8
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-sans-largus / classifieur seul",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.88,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 77.9,
+      "ms_p95": 102.9
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-sans-largus / classifieur seul",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 0.941,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 77.2,
+      "ms_p95": 99.8
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-sans-largus / classifieur seul",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.889,
+      "top3": 0.889,
+      "abstention": 0.067,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 80.1,
+      "ms_p95": 98.3
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-sans-largus / classifieur seul",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.875,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 76.9,
+      "ms_p95": 94.7
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-sans-largus / D (chaîne complète)",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.9,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 81.9,
+      "ms_p95": 103.8
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-sans-largus / D (chaîne complète)",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 0.941,
+      "abstention": 0.059,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 74.8,
+      "ms_p95": 89.2
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-sans-largus / D (chaîne complète)",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.844,
+      "top3": 0.867,
+      "abstention": 0.089,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 78.4,
+      "ms_p95": 97.5
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-sans-largus / D (chaîne complète)",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.875,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 86.0,
+      "ms_p95": 102.1
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-avec-largus / classifieur seul",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.92,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 84.0,
+      "ms_p95": 107.2
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-avec-largus / classifieur seul",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.765,
+      "top3": 0.824,
+      "abstention": 0.176,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 82.1,
+      "ms_p95": 100.5
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-avec-largus / classifieur seul",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.822,
+      "top3": 0.844,
+      "abstention": 0.089,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 77.6,
+      "ms_p95": 99.2
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-avec-largus / classifieur seul",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.875,
+      "top3": 0.938,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 75.9,
+      "ms_p95": 96.5
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-avec-largus / D (chaîne complète)",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.9,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 0.8,
+      "ms_moyen": 80.7,
+      "ms_p95": 107.5
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-avec-largus / D (chaîne complète)",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.765,
+      "top3": 0.824,
+      "abstention": 0.176,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 80.8,
+      "ms_p95": 106.8
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-avec-largus / D (chaîne complète)",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.822,
+      "top3": 0.844,
+      "abstention": 0.089,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 78.3,
+      "ms_p95": 99.8
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-avec-largus / D (chaîne complète)",
+      "modele": "tfidf-lr-set-fort-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.875,
+      "top3": 0.875,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 77.8,
+      "ms_p95": 100.2
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-largus-moyen / classifieur seul",
+      "modele": "tfidf-lr-set-moyen-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.86,
+      "top3": 0.94,
+      "abstention": 0.04,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 82.8,
+      "ms_p95": 108.1
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-largus-moyen / classifieur seul",
+      "modele": "tfidf-lr-set-moyen-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.824,
+      "top3": 0.882,
+      "abstention": 0.118,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 81.5,
+      "ms_p95": 106.8
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-largus-moyen / classifieur seul",
+      "modele": "tfidf-lr-set-moyen-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.778,
+      "top3": 0.844,
+      "abstention": 0.089,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 81.9,
+      "ms_p95": 103.1
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-largus-moyen / classifieur seul",
+      "modele": "tfidf-lr-set-moyen-20261124",
+      "cible": "part",
+      "mode": "classifier",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.875,
+      "top3": 0.875,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 79.2,
+      "ms_p95": 98.6
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-largus-moyen / D (chaîne complète)",
+      "modele": "tfidf-lr-set-moyen-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.88,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 0.8,
+      "ms_moyen": 84.7,
+      "ms_p95": 110.5
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-largus-moyen / D (chaîne complète)",
+      "modele": "tfidf-lr-set-moyen-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.824,
+      "top3": 0.882,
+      "abstention": 0.118,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 85.0,
+      "ms_p95": 106.0
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-largus-moyen / D (chaîne complète)",
+      "modele": "tfidf-lr-set-moyen-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.756,
+      "top3": 0.844,
+      "abstention": 0.089,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 75.7,
+      "ms_p95": 103.7
+    },
+    {
+      "date": "20261124-0823",
+      "variante": "A-largus-moyen / D (chaîne complète)",
+      "modele": "tfidf-lr-set-moyen-20261124",
+      "cible": "part",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.875,
+      "top3": 0.875,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 72.2,
+      "ms_p95": 92.3
+    }
+  ],
+  "erreurs": {
+    "A-actuel / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-actuel / classifieur seul | demo_cases": [],
+    "A-actuel / classifieur seul | audit_ecriture_oran": [
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud21",
+        "text": "el frein ysoni",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud24",
+        "text": "kayen bruit f la roue avant",
+        "attendu": [
+          "roulements-roue",
+          "cardans",
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": [
+          "amortisseurs",
+          "papillon-motorise",
+          "rotules-direction"
+        ]
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud45",
+        "text": "كاين صوت في الروضة القدامية",
+        "attendu": [
+          "roulements-roue",
+          "cardans",
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-actuel / classifieur seul | audit_ecriture_oran_controle": [],
+    "A-actuel / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-actuel / D (chaîne complète) | demo_cases": [],
+    "A-actuel / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud21",
+        "text": "el frein ysoni",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": [
+          "amortisseurs",
+          "papillon-motorise",
+          "rotules-direction"
+        ]
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-actuel / D (chaîne complète) | audit_ecriture_oran_controle": [],
+    "A-sans-largus / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-sans-largus / classifieur seul | demo_cases": [
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-sans-largus / classifieur seul | audit_ecriture_oran": [
+      {
+        "id": "aud04",
+        "text": "la direction tir a gauche quand je roule",
+        "attendu": [
+          "rotules-direction",
+          "biellettes-direction",
+          "triangles"
+        ],
+        "obtenu": [
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-sans-largus / classifieur seul | audit_ecriture_oran_controle": [],
+    "A-sans-largus / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-sans-largus / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-sans-largus / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud04",
+        "text": "la direction tir a gauche quand je roule",
+        "attendu": [
+          "rotules-direction",
+          "biellettes-direction",
+          "triangles"
+        ],
+        "obtenu": [
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-sans-largus / D (chaîne complète) | audit_ecriture_oran_controle": [],
+    "A-avec-largus / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-avec-largus / classifieur seul | demo_cases": [
+      {
+        "id": "demo_cases003",
+        "text": "ce matin tac tac tac en démarrant et le moteur ne voulait pas tourner",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases006",
+        "text": "on entend un sifflement strident au démarrage qui part après quelques minutes",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-avec-largus / classifieur seul | audit_ecriture_oran": [
+      {
+        "id": "aud02",
+        "text": "ma voitur demare pa le matin ca fait tac tac",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud06",
+        "text": "bruit clak clak quand je tourne le volan a fond",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "catalyseur",
+          "silencieux",
+          "sonde-lambda"
+        ]
+      },
+      {
+        "id": "aud29",
+        "text": "kayen dkhan k7al men l'echappement",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "silencieux",
+          "catalyseur",
+          "sonde-lambda"
+        ]
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-avec-largus / classifieur seul | audit_ecriture_oran_controle": [
+      {
+        "id": "ctl14",
+        "text": "دخان كحل من الشكمان",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "silencieux",
+          "catalyseur",
+          "sonde-lambda"
+        ]
+      }
+    ],
+    "A-avec-largus / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "kit-embrayage",
+          "cable-embrayage",
+          "boite-vitesses"
+        ]
+      }
+    ],
+    "A-avec-largus / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases003",
+        "text": "ce matin tac tac tac en démarrant et le moteur ne voulait pas tourner",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases006",
+        "text": "on entend un sifflement strident au démarrage qui part après quelques minutes",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-avec-largus / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud02",
+        "text": "ma voitur demare pa le matin ca fait tac tac",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud06",
+        "text": "bruit clak clak quand je tourne le volan a fond",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "catalyseur",
+          "silencieux",
+          "sonde-lambda"
+        ]
+      },
+      {
+        "id": "aud29",
+        "text": "kayen dkhan k7al men l'echappement",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "silencieux",
+          "catalyseur",
+          "sonde-lambda"
+        ]
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-avec-largus / D (chaîne complète) | audit_ecriture_oran_controle": [
+      {
+        "id": "ctl04",
+        "text": "siyara t3ayi f la monté w ma tetla3ch",
+        "attendu": [
+          "kit-embrayage",
+          "turbocompresseur",
+          "filtre-carburant",
+          "injecteurs",
+          "filtre-air"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "papillon-motorise",
+          "kit-distribution"
+        ]
+      },
+      {
+        "id": "ctl14",
+        "text": "دخان كحل من الشكمان",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "silencieux",
+          "catalyseur",
+          "sonde-lambda"
+        ]
+      }
+    ],
+    "A-largus-moyen / classifieur seul | dev_fr_synthetique": [
+      {
+        "id": "dev010",
+        "text": "mon moteur gasoil peine à démarrer quand il fait froid, ça part après plusieurs tentatives",
+        "attendu": [
+          "bougies-prechauffage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev033",
+        "text": "je dois faire la vidange, elle a 12 000 km de retard",
+        "attendu": [
+          "filtre-huile",
+          "huile-moteur"
+        ],
+        "obtenu": [
+          "support-moteur",
+          "joint-culasse",
+          "joint-cache-culbuteurs"
+        ]
+      }
+    ],
+    "A-largus-moyen / classifieur seul | demo_cases": [
+      {
+        "id": "demo_cases006",
+        "text": "on entend un sifflement strident au démarrage qui part après quelques minutes",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-largus-moyen / classifieur seul | audit_ecriture_oran": [
+      {
+        "id": "aud03",
+        "text": "le moteur chaufe bcp leguille monte au rouge",
+        "attendu": [
+          "thermostat",
+          "radiateur",
+          "pompe-eau",
+          "ventilateur-radiateur",
+          "durite-refroidissement",
+          "vase-expansion"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "catalyseur",
+          "silencieux",
+          "sonde-lambda"
+        ]
+      },
+      {
+        "id": "aud29",
+        "text": "kayen dkhan k7al men l'echappement",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "silencieux",
+          "catalyseur",
+          "sonde-lambda"
+        ]
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-largus-moyen / classifieur seul | audit_ecriture_oran_controle": [
+      {
+        "id": "ctl04",
+        "text": "siyara t3ayi f la monté w ma tetla3ch",
+        "attendu": [
+          "kit-embrayage",
+          "turbocompresseur",
+          "filtre-carburant",
+          "injecteurs",
+          "filtre-air"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "papillon-motorise"
+        ]
+      },
+      {
+        "id": "ctl14",
+        "text": "دخان كحل من الشكمان",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "silencieux",
+          "catalyseur",
+          "sonde-lambda"
+        ]
+      }
+    ],
+    "A-largus-moyen / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "kit-embrayage",
+          "boite-vitesses",
+          "cable-embrayage"
+        ]
+      }
+    ],
+    "A-largus-moyen / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases006",
+        "text": "on entend un sifflement strident au démarrage qui part après quelques minutes",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-largus-moyen / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud02",
+        "text": "ma voitur demare pa le matin ca fait tac tac",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "catalyseur",
+          "silencieux",
+          "sonde-lambda"
+        ]
+      },
+      {
+        "id": "aud29",
+        "text": "kayen dkhan k7al men l'echappement",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "silencieux",
+          "catalyseur",
+          "sonde-lambda"
+        ]
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-largus-moyen / D (chaîne complète) | audit_ecriture_oran_controle": [
+      {
+        "id": "ctl04",
+        "text": "siyara t3ayi f la monté w ma tetla3ch",
+        "attendu": [
+          "kit-embrayage",
+          "turbocompresseur",
+          "filtre-carburant",
+          "injecteurs",
+          "filtre-air"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "papillon-motorise",
+          "kit-distribution"
+        ]
+      },
+      {
+        "id": "ctl14",
+        "text": "دخان كحل من الشكمان",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "silencieux",
+          "catalyseur",
+          "sonde-lambda"
+        ]
+      }
+    ]
+  }
+}
