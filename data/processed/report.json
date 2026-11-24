@@ -58,5 +58,15 @@
     "kinds": {
       "fault_type": 32
     }
+  },
+  "largus_forum": {
+    "records": 99727,
+    "with_category": 72898,
+    "with_family": 76602,
+    "with_fault": 866,
+    "translated_fr": 99727,
+    "kinds": {
+      "qa": 99727
+    }
   }
 }

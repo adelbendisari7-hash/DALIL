@@ -57,3 +57,12 @@ def test_tirage_stratifie_et_mesure(tmp_path):
 
 def test_intervalle_wilson():
     assert R.wilson(10, 10)[0] > 0.65 and R.wilson(0, 10)[1] < 0.35
+
+
+def test_separateur_unicode_dans_un_texte(tmp_path):
+    """Un message de forum peut contenir U+2028 : str.splitlines() couperait la ligne JSON (vu sur L'Argus, 24/11/2026)."""
+    src = tmp_path / "largus_forum.jsonl"
+    rows = [{"id": "largus_forum:1", "lang": "fr", "text": "bruit\u2028au freinage", "categories": ["plaquettes-avant"],
+             "family": "freinage", "label_quality": "solution"}]
+    src.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n", encoding="utf-8")
+    assert [r["id"] for r in R.labelled(src)] == ["largus_forum:1"]

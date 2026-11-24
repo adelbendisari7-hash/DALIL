@@ -36,7 +36,9 @@ def french_examples() -> list[tuple[str, str, str]]:
     texts, faults = load_examples(ROOT / "data" / "seed" / "diagnosis_examples_fr.jsonl")
     out += [(f"seed:{i}", t, f) for i, (t, f) in enumerate(zip(texts, faults))]
     for path in sorted((ROOT / "data" / "processed" / "train").glob("*.jsonl")):
-        for line in path.read_text(encoding="utf-8").splitlines():
+        for line in path.read_text(encoding="utf-8").split(chr(10)):
+            if not line.strip():
+                continue
             r = json.loads(line)
             text = r["text"] if r["lang"] == "fr" else r.get("text_fr")
             if text and r.get("fault"):

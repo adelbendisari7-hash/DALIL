@@ -48,7 +48,9 @@ def corpus_examples(target: str, include_synthetic: bool = True) -> tuple[list[s
     texts, labels, stats = [], [], {}
     for path in sorted(TRAIN_DIR.glob("*.jsonl")):
         n = 0
-        for line in path.read_text(encoding="utf-8").splitlines():
+        for line in path.read_text(encoding="utf-8").split(chr(10)):
+            if not line.strip():
+                continue
             r = json.loads(line)
             text = r.get("text_fr") if r["lang"] != "fr" else r["text"]
             if not text or (r.get("synthetic") and not include_synthetic):
@@ -92,12 +94,12 @@ def evaluate(texts, labels, target: str, extra: tuple[list, list], C: float = 20
 
 def train_on_set(set_dir: Path, out: Path | None) -> Path:
     """Variante A sur le jeu commun (cible = pièce), chaque exemple pondéré par la confiance de son étiquette."""
-    rows = [json.loads(line) for line in (set_dir / "train.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    rows = [json.loads(line) for line in (set_dir / "train.jsonl").read_text(encoding="utf-8").split(chr(10)) if line.strip()]
     stats = json.loads((set_dir / "stats.json").read_text(encoding="utf-8"))
     texts = [r["text"][:1000] for r in rows]
     pipe = build_pipeline(large=True)
     pipe.fit(texts, [r["label"] for r in rows], clf__sample_weight=np.array([r["weight"] for r in rows]))
-    val = [json.loads(line) for line in (set_dir / "val.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    val = [json.loads(line) for line in (set_dir / "val.jsonl").read_text(encoding="utf-8").split(chr(10)) if line.strip()]
     res: dict = {"target": "part", "set": stats.get("quality"), "train": len(rows), "val": len(val)}
     if val:
         proba = pipe.predict_proba([r["text"][:1000] for r in val])

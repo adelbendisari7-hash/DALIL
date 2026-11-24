@@ -52,7 +52,7 @@ def part_names() -> dict[str, str]:
 
 def labelled(path: Path) -> list[dict]:
     rows = []
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for line in path.read_text(encoding="utf-8").split(chr(10)):
         if line.strip():
             r = json.loads(line)
             if r.get("categories") or r.get("family"):

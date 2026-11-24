@@ -67,7 +67,7 @@ def test_texts() -> set[str]:
         if p.suffix == ".json":
             rows = json.loads(p.read_text(encoding="utf-8")).get("cases", [])
         else:
-            rows = [json.loads(line) for line in p.read_text(encoding="utf-8").splitlines() if line.strip()]
+            rows = [json.loads(line) for line in p.read_text(encoding="utf-8").split(chr(10)) if line.strip()]
         out.update(norm(r.get("text", "")) for r in rows if r.get("text"))
     out.discard("")
     return out
@@ -101,7 +101,7 @@ def build(quality: str = "fort", max_per_label: int = 0, sources: set[str] | Non
         if sources and path.stem not in sources:
             continue
         kept = 0
-        for line in path.read_text(encoding="utf-8").splitlines():
+        for line in path.read_text(encoding="utf-8").split(chr(10)):
             if not line.strip():
                 continue
             r = json.loads(line)

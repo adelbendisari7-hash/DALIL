@@ -25,7 +25,7 @@ log = logging.getLogger("dalil.classifier")
 def load_examples(path: Path | None = None) -> tuple[list[str], list[str]]:
     path = path or Path(get_settings().data_dir) / "seed" / "diagnosis_examples_fr.jsonl"
     texts, labels = [], []
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for line in path.read_text(encoding="utf-8").split(chr(10)):
         if line.strip():
             row = json.loads(line)
             texts.append(row["text"])

@@ -47,7 +47,7 @@ def load_cases(path: Path) -> list[dict]:
         return [{"id": f"{path.stem}{i:03d}", "text": c["text"], "variant": c.get("variant"), "dtc": c.get("dtc", []),
                  "expect": c.get("expect_parts", []), "expect_status": c.get("expect_status")} for i, c in enumerate(cases, 1)]
     out = []
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for line in path.read_text(encoding="utf-8").split(chr(10)):
         if line.strip():
             c = json.loads(line)
             out.append({"id": c["id"], "text": c.get("text", ""), "variant": c.get("variant"), "dtc": c.get("dtc", []),
