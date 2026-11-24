@@ -65,6 +65,14 @@ echo [5/5] Lancement de l'API et du site...
 set "DALIL_ADMIN_PHONES=%ADMIN_PHONE%"
 rem Recherche par vecteurs + reclassement (retombe sur les mots-cles si les modeles de ml\artifacts sont absents)
 set "DALIL_RETRIEVAL_MODE=hybrid"
+rem Classifieur a deux niveaux (24/11/2026) : les familles de pieces apprises sur L'Argus reclassent les pannes du
+rem modele de reference (audit 82 -> 87 %, controle 88 -> 94 %, rien de perdu ailleurs). Fichier local, hors git :
+rem python ml\train_family_reranker.py --alphas 0.25. Absent : modele de reference seul.
+if exist "ml\artifacts\famille_rerank_a0.25.joblib" (
+  set "DALIL_CLASSIFIER_PATH=%~dp0ml\artifacts\famille_rerank_a0.25.joblib"
+  set "DALIL_MODEL_VERSION=tfidf-lr+familles-largus-a0.25"
+  echo      Classifieur a deux niveaux ^(familles apprises sur L'Argus^)
+)
 if not "%USE_LLM%"=="1" (
   echo      Diagnostic sans modele de langage ^(rapide ; USE_LLM=1 en haut de ce fichier pour l'activer^)
 ) else if exist "tools\llama.cpp\llama-server.exe" if exist "%LLM_GGUF%" (

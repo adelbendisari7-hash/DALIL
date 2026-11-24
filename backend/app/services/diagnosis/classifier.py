@@ -130,11 +130,45 @@ class OnnxEncoderClassifier:
         return {label: float(x) for label, x in zip(self.labels, p)}
 
 
+class FamilyRerankedClassifier:
+    """Classifieur à deux niveaux (ml/train_family_reranker.py) : le classifieur de base propose ses pannes ou pièces,
+    un classifieur de familles de pièces (entraîné notamment sur L'Argus, dont seule la famille est fiable) les
+    reclasse : score = p(étiquette) x p(famille de l'étiquette) ** alpha, puis normalisation.
+    alpha = 0 rend exactement le classifieur de base. Une étiquette sans famille connue reçoit un facteur neutre.
+    """
+
+    def __init__(self, base, family_pipeline: Pipeline, alpha: float, label_family: dict[str, str],
+                 version: str | None = None):
+        self.base, self.family_pipeline, self.alpha = base, family_pipeline, float(alpha)
+        self.label_family = label_family
+        self.target, self.labels = base.target, base.labels
+        self.version = version or f"{base.version}+familles-a{alpha:g}"
+        self.families: list[str] = list(family_pipeline.classes_)
+
+    def family_proba(self, text: str) -> dict[str, float]:
+        probs = self.family_pipeline.predict_proba([text])[0]
+        return {f: float(p) for f, p in zip(self.families, probs)}
+
+    def predict_proba(self, text: str) -> dict[str, float]:
+        p = self.base.predict_proba(text)
+        if not self.alpha:
+            return p
+        q = self.family_proba(text)
+        neutral = 1.0 / max(len(q), 1)
+        scores = {label: v * (q.get(self.label_family.get(label, ""), neutral) + 1e-6) ** self.alpha for label, v in p.items()}
+        total = sum(scores.values()) or 1.0
+        return {label: v / total for label, v in scores.items()}
+
+
 def load_classifier(path: Path):
-    """Charge un classifieur : fichier .joblib (pipeline seul, ou dict avec target/version) ou dossier ONNX."""
+    """Charge un classifieur : fichier .joblib (pipeline seul, dict avec target/version, ou classifieur à deux
+    niveaux « family_rerank ») ou dossier ONNX."""
     if path.is_dir():
         return OnnxEncoderClassifier(path)
     obj = joblib.load(path)
+    if isinstance(obj, dict) and obj.get("kind") == "family_rerank":
+        base = FaultClassifier(obj["base"]["pipeline"], obj["base"].get("target", "fault"), obj["base"].get("version"))
+        return FamilyRerankedClassifier(base, obj["family_pipeline"], obj["alpha"], obj["label_family"], obj.get("version"))
     if isinstance(obj, dict):
         return FaultClassifier(obj["pipeline"], obj.get("target", "fault"), obj.get("version"))
     return FaultClassifier(obj)

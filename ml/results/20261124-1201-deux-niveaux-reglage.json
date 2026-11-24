@@ -1,0 +1,638 @@
+{
+  "rows": [
+    {
+      "date": "20261124-1201",
+      "variante": "A-actuel / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.9,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 981.3,
+      "ms_p95": 325.9
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "A-actuel / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 282.8,
+      "ms_p95": 346.6
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "A-actuel / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.822,
+      "top3": 0.867,
+      "abstention": 0.089,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 274.6,
+      "ms_p95": 335.0
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a0.25-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.9,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 270.9,
+      "ms_p95": 306.3
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a0.25-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 274.9,
+      "ms_p95": 308.8
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a0.25-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.844,
+      "top3": 0.911,
+      "abstention": 0.067,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 267.6,
+      "ms_p95": 310.4
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a0.5 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a0.5-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.94,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 268.0,
+      "ms_p95": 318.9
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a0.5 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a0.5-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 256.9,
+      "ms_p95": 288.1
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a0.5 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a0.5-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.8,
+      "top3": 0.911,
+      "abstention": 0.067,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 248.0,
+      "ms_p95": 269.9
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a1 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a1-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.92,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 0.8,
+      "ms_moyen": 103.5,
+      "ms_p95": 257.6
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a1 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a1-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.882,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 83.5,
+      "ms_p95": 103.0
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a1 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a1-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.8,
+      "top3": 0.911,
+      "abstention": 0.044,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 80.5,
+      "ms_p95": 90.8
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a2 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a2-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.9,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 0.8,
+      "ms_moyen": 85.4,
+      "ms_p95": 102.6
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a2 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a2-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.824,
+      "top3": 0.941,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 81.8,
+      "ms_p95": 101.3
+    },
+    {
+      "date": "20261124-1201",
+      "variante": "2niv-a2 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a2-20261124",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.756,
+      "top3": 0.844,
+      "abstention": 0.044,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 79.6,
+      "ms_p95": 98.1
+    }
+  ],
+  "erreurs": {
+    "A-actuel / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "A-actuel / D (chaîne complète) | demo_cases": [],
+    "A-actuel / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud21",
+        "text": "el frein ysoni",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": [
+          "amortisseurs",
+          "papillon-motorise",
+          "rotules-direction"
+        ]
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "2niv-a0.25 / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "2niv-a0.25 / D (chaîne complète) | demo_cases": [],
+    "2niv-a0.25 / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "2niv-a0.5 / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "2niv-a0.5 / D (chaîne complète) | demo_cases": [],
+    "2niv-a0.5 / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "2niv-a1 / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "boite-vitesses",
+          "kit-embrayage",
+          "cable-embrayage"
+        ]
+      }
+    ],
+    "2niv-a1 / D (chaîne complète) | demo_cases": [],
+    "2niv-a1 / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud13",
+        "text": "fumee blanche et le liquide de refroidissement baisse",
+        "attendu": [
+          "joint-culasse"
+        ],
+        "obtenu": [
+          "pompe-eau",
+          "radiateur",
+          "kit-distribution"
+        ]
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "2niv-a2 / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev055",
+        "text": "comment changer le mot de passe de mon compte",
+        "attendu": "je ne sais pas",
+        "obtenu": [
+          "boite-vitesses",
+          "cable-embrayage",
+          "kit-embrayage"
+        ]
+      }
+    ],
+    "2niv-a2 / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases016",
+        "text": "elle s'arrête quand elle est bien chaude puis repart une fois froide",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "thermostat",
+          "ventilateur-radiateur",
+          "radiateur"
+        ]
+      }
+    ],
+    "2niv-a2 / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud06",
+        "text": "bruit clak clak quand je tourne le volan a fond",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "pompe-direction",
+          "rotules-direction",
+          "batterie"
+        ]
+      },
+      {
+        "id": "aud13",
+        "text": "fumee blanche et le liquide de refroidissement baisse",
+        "attendu": [
+          "joint-culasse"
+        ],
+        "obtenu": [
+          "pompe-eau",
+          "radiateur",
+          "kit-distribution"
+        ]
+      },
+      {
+        "id": "aud22",
+        "text": "tomobil ma tdemarich",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "bougies-prechauffage",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "aud29",
+        "text": "kayen dkhan k7al men l'echappement",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "silencieux",
+          "catalyseur",
+          "joint-culasse"
+        ]
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ]
+  }
+}

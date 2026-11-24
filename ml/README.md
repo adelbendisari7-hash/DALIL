@@ -184,3 +184,28 @@ Restent mal traités : « fumée noire et ça consomme », « ça s'éteint tout
   réponses limitées à 300 jetons), 50 s par réponse et 0 JSON valide sur 36. Sur le même adaptateur rechargé en mode
   `eval()`, avec cache et 512 jetons : 30 s par réponse sur T4 en 4 bits, 79/79 JSON valides. Les deux changements
   ont été faits ensemble ; on ne sait pas lequel des deux explique le 0/36.
+
+## L'Argus et le classifieur à deux niveaux (24/11/2026)
+
+**Relecture de 200 étiquettes** de L'Argus, par Claude, sans voir le niveau de confiance (`ml/relecture_etiquettes.py`,
+`results/20261124-0900-relecture-largus_forum.md`). La pièce exacte n'est juste que dans 28 % des cas ; la famille l'est
+dans 75 à 89 % des cas quand elle concorde avec la catégorie du forum.
+
+**Première tentative, rejetée.** Les étiquettes de famille ont été ajoutées au classifieur de pièces (21 643 exemples).
+Le modèle a reculé : démo 94 -> 77 %, refus du hors-sujet 100 -> 80 % (`results/20261124-0823-largus-famille.md`).
+
+**Deux niveaux, retenu.** Un modèle de familles est entraîné sur L'Argus et sur l'amorçage (`ml/train_family_reranker.py`,
+93 % sur la validation de L'Argus). Il reclasse les pannes du modèle en service : score = p(panne) x p(famille) ^ alpha.
+Alpha a été réglé sur dev, démo et audit, puis vérifié sur le contrôle :
+
+| Chaîne complète, top-1 | Mots-clés : en service | Mots-clés : alpha 0,25 | Hybride : en service | Hybride : alpha 0,25 |
+| --- | ---: | ---: | ---: | ---: |
+| Dev | 90 % | 90 % | 92 % | 92 % |
+| Démo | 94 % | 94 % | 94 % | 94 % |
+| Audit d'Oran | 82 % | 84 % | 82 % | 87 % |
+| Contrôle (jamais vu) | 88 % | 94 % | 88 % | 94 % |
+| Hors-sujet refusé | 100 % | 100 % | 100 % | 100 % |
+
+Alpha 0,5 gagne sur dev (94 %) mais perd sur l'audit ; alpha 1 et 2 perdent sur la démo et le hors-sujet. Gains modestes
+(1 à 2 cas par jeu) mais tous dans le même sens. Le fichier (`ml/artifacts/famille_rerank_a0.25.joblib`, 31 Mo) reste
+hors git, parce que son vocabulaire est tiré des textes de L'Argus ; `DEMARRER-DALIL.bat` l'utilise s'il est présent.

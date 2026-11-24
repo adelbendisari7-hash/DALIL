@@ -45,3 +45,5 @@ frontend/next-env.d.ts
 
 # Fiches de relecture (textes de forums, même anonymisés) : jamais dans git
 data/relecture/
+# Classifieur à deux niveaux : vocabulaire tiré des textes de L'Argus (données sous accord), jamais dans git
+ml/artifacts/famille_rerank_*.joblib
