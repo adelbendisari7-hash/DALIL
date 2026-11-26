@@ -1,0 +1,195 @@
+{
+  "rows": [
+    {
+      "date": "20261126-1352",
+      "variante": "en-service / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-20261118+familles-largus-fort-a0.25-20261126",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "largus_controle",
+      "n": 43,
+      "n_hors_sujet": 0,
+      "top1": 0.372,
+      "top3": 0.581,
+      "abstention": 0.14,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 2181.7,
+      "ms_p95": 512.5
+    }
+  ],
+  "erreurs": {
+    "en-service / D (chaîne complète) | largus_controle": [
+      {
+        "id": "ctl001",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "demarreur",
+          "batterie",
+          "bougies-prechauffage"
+        ]
+      },
+      {
+        "id": "ctl008",
+        "attendu": [
+          "triangles"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "amortisseurs",
+          "etrier-frein"
+        ]
+      },
+      {
+        "id": "ctl009",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "ctl012",
+        "attendu": [
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl013",
+        "attendu": [
+          "thermostat"
+        ],
+        "obtenu": [
+          "ventilateur-radiateur",
+          "radiateur",
+          "compresseur-clim"
+        ]
+      },
+      {
+        "id": "ctl015",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "ctl018",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "cable-embrayage",
+          "kit-embrayage"
+        ]
+      },
+      {
+        "id": "ctl019",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "sonde-lambda",
+          "capteur-vilebrequin"
+        ]
+      },
+      {
+        "id": "ctl020",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "pompe-carburant",
+          "kit-distribution"
+        ]
+      },
+      {
+        "id": "ctl021",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "ctl022",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "alternateur",
+          "batterie"
+        ]
+      },
+      {
+        "id": "ctl025",
+        "attendu": [
+          "filtre-carburant"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bougies-allumage",
+          "filtre-huile"
+        ]
+      },
+      {
+        "id": "ctl029",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl031",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": [
+          "boite-vitesses",
+          "kit-embrayage",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "ctl035",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl036",
+        "attendu": [
+          "bobine-allumage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl038",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl039",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": "unknown"
+      }
+    ]
+  }
+}

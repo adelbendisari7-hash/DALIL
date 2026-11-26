@@ -230,3 +230,18 @@ Lecture :
 - Les vrais textes sont plus longs : 8,8 s par diagnostic en hybride, proche de la limite de 10 s.
 - **Tenir compte du véhicule** (fréquence des familles de pannes par modèle, tirée de L'Argus, lissée) a été simulé hors
   ligne avant d'être développé : au mieux deux cas de plus sur 104 en top-1, rien en top-3. Piste abandonnée.
+
+### Fiches de pannes supplémentaires : essai non retenu (26/11/2026)
+
+12 des 45 erreurs sur les vrais cas venaient de pièces qui ne sont la pièce principale d'aucune panne type. Dix fiches ont
+été écrites, avec 10 exemples chacune, puis mesurées sur un **jeu de contrôle** de 43 vrais cas tiré avant toute correction :
+
+| Chaîne complète, top-1 / top-3 | Avant | Avec les 10 fiches |
+| --- | --- | --- |
+| Jeu L'Argus étudié (104) | 36 / 57 % | 35 / 61 % |
+| **Contrôle L'Argus (43)** | 37 / 58 % | 37 / 54 % |
+| Audit d'Oran / contrôle d'Oran | 87 / 91 %, 94 / 100 % | 82 / 89 %, 88 / 100 % |
+
+Le gain n'existe que sur le jeu qui a servi à écrire les fiches : c'est un sur-ajustement, que seul le jeu de contrôle
+permettait de voir. Les fiches restent en brouillon (`data/seed/brouillons/`) ; il leur faudra de vrais exemples.
+

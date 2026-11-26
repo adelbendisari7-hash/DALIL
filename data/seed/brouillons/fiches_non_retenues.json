@@ -1,0 +1,252 @@
+{
+ "_note": "BROUILLON non chargé (26/11/2026). 10 fiches pour des pièces qui ne sont la pièce principale d aucune panne. Mesurées avec 10 exemples écrits chacune : recul sur le contrôle L Argus (top-3 58 -> 54 %) et sur les jeux d Oran. À reprendre avec de vrais exemples et une relecture par un mécanicien.",
+ "faults": [
+  {
+   "slug": "sonde-temperature-hs",
+   "name_fr": "Sonde de température moteur défectueuse",
+   "system": "refroidissement",
+   "severity": "moyenne",
+   "do_not_drive": false,
+   "description": "La sonde donne une mauvaise température au calculateur et au tableau de bord : jauge bloquée ou folle, ventilateur qui ne se déclenche pas ou tourne sans arrêt, démarrage difficile à froid, ralenti instable moteur froid, préchauffage qui ne s'allume pas correctement.",
+   "parts": {
+    "sonde-temperature": 1.0,
+    "ventilateur-radiateur": 0.3,
+    "thermostat": 0.2
+   }
+  },
+  {
+   "slug": "silentblocs-uses",
+   "name_fr": "Silentblocs de suspension usés",
+   "system": "suspension",
+   "severity": "moyenne",
+   "do_not_drive": false,
+   "description": "Les caoutchoucs qui tiennent les bras de suspension sont fendus : claquements sourds sur les bosses et au freinage, flou dans la direction, voiture qui se déplace ou glisse en virage, pneus usés de travers.",
+   "parts": {
+    "silentblocs": 1.0,
+    "triangles": 0.5,
+    "biellette-stabilisatrice": 0.3
+   }
+  },
+  {
+   "slug": "maitre-cylindre-hs",
+   "name_fr": "Maître-cylindre de frein défaillant",
+   "system": "freinage",
+   "severity": "haute",
+   "do_not_drive": true,
+   "description": "Fuite interne du maître-cylindre : la pédale de frein s'enfonce lentement jusqu'au plancher sans fuite visible aux roues, freinage qui faiblit, il faut pomper sur la pédale, niveau de liquide qui baisse.",
+   "parts": {
+    "maitre-cylindre": 1.0,
+    "liquide-frein": 0.3
+   }
+  },
+  {
+   "slug": "durite-refroidissement-hs",
+   "name_fr": "Durite de refroidissement fendue ou bouchée",
+   "system": "refroidissement",
+   "severity": "moyenne",
+   "do_not_drive": false,
+   "description": "Une durite ou un collier laisse fuir le liquide, ou une durite est bouchée : traces de liquide sous la voiture, niveau qui baisse, moteur qui chauffe, durite gonflée ou dure, odeur de liquide chaud.",
+   "parts": {
+    "durite-refroidissement": 1.0,
+    "vase-expansion": 0.3,
+    "radiateur": 0.2
+   }
+  },
+  {
+   "slug": "galet-tendeur-use",
+   "name_fr": "Galet tendeur ou enrouleur usé",
+   "system": "distribution",
+   "severity": "moyenne",
+   "do_not_drive": false,
+   "description": "Le roulement du galet est fatigué : sifflement ou bruit de roulement aigu à l'avant du moteur qui suit le régime, bruit plus fort à froid, courroie qui frotte, se décale ou se détend.",
+   "parts": {
+    "galet-tendeur": 1.0,
+    "courroie-accessoires": 0.5,
+    "kit-distribution": 0.3
+   }
+  },
+  {
+   "slug": "filtre-carburant-colmate",
+   "name_fr": "Filtre à carburant colmaté ou prise d'air",
+   "system": "alimentation",
+   "severity": "moyenne",
+   "do_not_drive": false,
+   "description": "Le carburant passe mal : perte de puissance en montée, à-coups, moteur qui cale ou démarre mal, circuit gazole qui se désamorce, bulles dans le tuyau après un changement de filtre, eau dans le gazole.",
+   "parts": {
+    "filtre-carburant": 1.0,
+    "pompe-carburant": 0.3
+   }
+  },
+  {
+   "slug": "capteur-pression-turbo-hs",
+   "name_fr": "Capteur de pression de suralimentation défectueux",
+   "system": "gestion-moteur",
+   "severity": "moyenne",
+   "do_not_drive": false,
+   "description": "Le capteur de pression d'admission donne une fausse mesure : perte de puissance soudaine, voiture bridée en mode dégradé, voyant moteur, turbo qui ne pousse plus, code défaut de surpression ou de sous-pression.",
+   "parts": {
+    "capteur-pression-admission": 1.0,
+    "turbocompresseur": 0.3,
+    "vanne-egr": 0.2
+   }
+  },
+  {
+   "slug": "volant-moteur-use",
+   "name_fr": "Volant moteur bimasse usé",
+   "system": "transmission",
+   "severity": "moyenne",
+   "do_not_drive": false,
+   "description": "Le volant moteur a du jeu : claquements ou cognements au ralenti qui cessent en appuyant sur l'embrayage, vibrations au démarrage et à l'arrêt du moteur, à-coups à bas régime.",
+   "parts": {
+    "volant-moteur": 1.0,
+    "kit-embrayage": 0.5
+   }
+  },
+  {
+   "slug": "coupelles-amortisseur-hs",
+   "name_fr": "Coupelles d'amortisseur usées",
+   "system": "suspension",
+   "severity": "moyenne",
+   "do_not_drive": false,
+   "description": "Le roulement de la coupelle en haut de l'amortisseur est usé : craquement ou claquement en braquant à l'arrêt, roue qui semble se décaler en tournant, bruit sec sur les dos d'âne.",
+   "parts": {
+    "coupelles": 1.0,
+    "amortisseurs": 0.4
+   }
+  },
+  {
+   "slug": "triangle-suspension-use",
+   "name_fr": "Triangle ou rotule de suspension usé",
+   "system": "train-roulant",
+   "severity": "haute",
+   "do_not_drive": true,
+   "description": "Jeu dans la rotule ou le bras inférieur de suspension : claquements dans le train avant, roue qui bouge, voiture qui tire ou flotte, refus au contrôle technique pour jeu de rotule de suspension.",
+   "parts": {
+    "triangles": 1.0,
+    "silentblocs": 0.4
+   }
+  }
+ ],
+ "exemples": {
+  "sonde-temperature-hs": [
+   "l'aiguille de température reste tout en bas même après une heure de route",
+   "le ventilateur du radiateur ne se met jamais en marche et pourtant le moteur chauffe",
+   "le ventilo tourne en permanence même moteur froid",
+   "la jauge de température monte d'un coup dans le rouge puis redescend sans raison",
+   "ma voiture démarre mal le matin et le ralenti est instable tant qu'elle est froide",
+   "voyant de température qui clignote alors que le niveau de liquide est bon",
+   "le préchauffage ne s'allume pas toujours et elle démarre difficilement à froid",
+   "la température affichée est fausse, elle indique 120 alors que le moteur est froid",
+   "moteur qui consomme beaucoup et fume noir seulement à froid",
+   "ventilateur qui ne démarre plus depuis que j'ai changé le joint de culasse"
+  ],
+  "silentblocs-uses": [
+   "claquement sourd à l'avant quand je passe sur les bosses",
+   "la voiture flotte et semble glisser dans les virages",
+   "bruit de cloc à l'avant quand je freine fort",
+   "mes pneus avant s'usent sur le bord intérieur",
+   "le contrôle technique signale des silent blocs fendus",
+   "la direction est floue, la voiture bouge toute seule sur autoroute",
+   "ça cogne en dessous quand je démarre et quand je freine",
+   "grincement de caoutchouc sur les dos d'âne",
+   "le train arrière bouge, bruit à l'arrière sur les routes abîmées",
+   "vibration dans le volant et bruit sourd en roulant sur les pavés"
+  ],
+  "maitre-cylindre-hs": [
+   "la pédale de frein descend lentement jusqu'au plancher quand je reste appuyé au feu rouge",
+   "je dois pomper sur la pédale pour freiner, aucune fuite aux roues",
+   "le niveau de liquide de frein baisse mais je ne vois aucune fuite",
+   "pédale de frein molle qui s'enfonce de plus en plus",
+   "après avoir purgé les freins la pédale reste spongieuse",
+   "la voiture freine de moins en moins bien et la pédale va au fond",
+   "pédale qui part au plancher d'un coup puis revient",
+   "le frein a lâché, la pédale s'enfonce sans résistance",
+   "liquide de frein qui coule derrière le servofrein",
+   "j'ai changé les plaquettes et les flexibles mais la pédale s'enfonce toujours"
+  ],
+  "durite-refroidissement-hs": [
+   "fuite de liquide de refroidissement au niveau d'une durite",
+   "je perds du liquide vert sous la voiture côté moteur",
+   "la durite du haut du radiateur est fendue et ça fuit",
+   "le moteur chauffe et une durite est toute dure et gonflée",
+   "odeur de liquide chaud et fumée blanche sous le capot",
+   "le collier de la durite suinte, il y a des traces blanches",
+   "le chauffage ne chauffe plus et une durite est bouchée",
+   "je dois rajouter de l'eau tous les deux jours, la durite est mouillée",
+   "la durite a éclaté sur l'autoroute et ça a fumé",
+   "fuite goutte à goutte sur une durite après la pompe à eau"
+  ],
+  "galet-tendeur-use": [
+   "sifflement aigu à l'avant du moteur qui augmente quand j'accélère",
+   "bruit de roulement côté courroie au ralenti",
+   "ça siffle au démarrage à froid puis ça se calme",
+   "la courroie se décale et frotte sur le côté",
+   "bruit de grelot à l'avant du moteur, on m'a parlé du galet",
+   "le galet tendeur fait du bruit quand on le tourne à la main",
+   "ronronnement qui suit le régime moteur côté distribution",
+   "couinement de courroie même après l'avoir changée",
+   "la courroie d'accessoires se détend toute seule",
+   "bruit métallique qui vient des poulies quand le moteur tourne"
+  ],
+  "filtre-carburant-colmate": [
+   "perte de puissance en montée, elle n'avance plus",
+   "depuis que j'ai changé le filtre à gasoil elle démarre puis cale",
+   "je dois pomper avec la poire pour qu'elle démarre",
+   "il y a des bulles d'air dans le tuyau transparent du gazole",
+   "moteur qui broute et qui cale quand le réservoir est presque vide",
+   "à-coups à l'accélération et moteur qui s'étouffe",
+   "on a trouvé de l'eau dans le filtre à gazole",
+   "elle démarre bien puis s'arrête au bout de quelques secondes",
+   "désamorçage du circuit gazole, il faut purger tous les matins",
+   "le moteur manque de puissance et fume un peu noir, le filtre n'a jamais été changé"
+  ],
+  "capteur-pression-turbo-hs": [
+   "voiture bridée d'un coup, elle ne dépasse plus 3000 tours avec le voyant moteur",
+   "perte de puissance soudaine et passage en mode dégradé",
+   "le turbo ne pousse plus mais il ne siffle pas, la valise indique un défaut de pression",
+   "code défaut de surpression turbo",
+   "plus de reprise, si je coupe et je redémarre ça revient pendant un moment",
+   "défaut capteur de pression d'admission à la valise",
+   "voyant moteur orange et plus de puissance en montée",
+   "la voiture n'accélère plus au-dessus de 2500 tours",
+   "j'ai changé la vanne egr mais toujours bridée",
+   "manque de pêche par intermittence, le turbo coupe"
+  ],
+  "volant-moteur-use": [
+   "claquement au ralenti qui disparaît quand j'appuie sur l'embrayage",
+   "grosses vibrations quand je coupe le moteur",
+   "à-coups à bas régime, on m'a parlé du volant bimasse",
+   "cognement métallique au démarrage du moteur",
+   "bruit de ferraille sous la voiture au ralenti moteur chaud",
+   "ça tremble fort quand je démarre en première",
+   "la voiture broute au démarrage malgré un embrayage neuf",
+   "bruit de casserole à l'arrêt moteur au point mort",
+   "claquements en décélération à bas régime",
+   "vibrations dans la pédale d'embrayage"
+  ],
+  "coupelles-amortisseur-hs": [
+   "craquement en haut de la roue quand je tourne le volant à l'arrêt",
+   "claquement à l'avant quand je braque pour me garer",
+   "la roue semble sauter quand je tourne à fond",
+   "bruit sec en haut de l'amortisseur sur les dos d'âne",
+   "grincement en tournant le volant voiture à l'arrêt",
+   "ça cogne en haut de la suspension avant droite",
+   "bruit de ressort qui tourne quand je braque",
+   "craquement côté passager en manœuvre",
+   "toc toc en haut de la tour d'amortisseur",
+   "volant qui accroche puis lâche en braquant"
+  ],
+  "triangle-suspension-use": [
+   "jeu dans la rotule de suspension au contrôle technique",
+   "claquement dans le train avant sur les nids de poule",
+   "la roue avant bouge quand on la secoue",
+   "la voiture tire d'un côté et claque en freinant",
+   "bras de suspension à changer, il y a du jeu",
+   "bruit sourd à l'avant et la voiture flotte",
+   "contre-visite pour rotule de triangle",
+   "ça cogne à l'avant gauche en tournant et en freinant",
+   "le pneu s'use d'un côté et la direction n'est pas droite",
+   "bruit de claquement dans la roue quand je passe un trottoir"
+  ]
+ }
+}
