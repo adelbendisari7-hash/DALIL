@@ -54,6 +54,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 | Date | Décision | Raison |
 | --- | --- | --- |
+| 27/11/2026 | **Techniconnexion (30 421 discussions collectées par l'utilisateur) : pas d'usage pour l'entraînement sans accord écrit des administrateurs** | Ni licence ni CGU sur le site ; son `robots.txt` déclare `Content-Signal: ai-train=no, search=yes, ai-input=no` et bloque les robots d'IA (vérifié le 27/11/2026). Données laissées dans `WebScraping/`, rien copié dans DALIL. Analyse faite : riche (modèle connu à 93 %, l'auteur revient dans 72 % des discussions) mais `solution_text` est une formule de clôture dans 34 % des sujets résolus, un tiers BMW, données personnelles à masquer |
 | 26/11/2026 | **CamemBERT reporté jusqu'à l'arrivée des données d'un nouveau forum** | Décision de l'utilisateur, sur recommandation : un seul entraînement et un seul envoi sur Kaggle ; le forum sera mesuré seul avant d'entrer dans le jeu commun |
 | 26/11/2026 | **Priorité : un DALIL efficace en français d'abord** ; darija et arabe ensuite | Décision de l'utilisateur. Les améliorations se mesurent sur les jeux en français (contrôle L'Argus en premier) |
 | 26/11/2026 | **194 vrais exemples L'Argus vérifiés ajoutés au modèle de base** (en service, fichier local) | Contrôle L'Argus jamais vu, hybride : top-1 40 -> 49 %, top-3 56 -> 63 %, abstention 9 -> 7 % ; rien ne recule ailleurs. Cas semblables dans la recherche : neutres, non retenus. **Fin du travail sur L'Argus** |
