@@ -130,7 +130,12 @@ def main() -> None:
                            "mode": mode, "llm": llm, "jeu": test.stem,
                            **{k: v for k, v in res.items() if k != "erreurs"}}
                     rows.append(row)
-                    details[f"{label} | {test.stem}"] = res["erreurs"]
+                    errs = res["erreurs"]
+                    if "test_prive" in test.parts:
+                        # Jeu tiré de données sous accord (L'Argus) : les fichiers de résultats peuvent partir dans git,
+                        # ils ne gardent donc que l'identifiant du cas, jamais son texte.
+                        errs = [{k: v for k, v in e.items() if k != "text"} for e in errs]
+                    details[f"{label} | {test.stem}"] = errs
                     print(f"{label:38} {test.stem:22} top1 {res['top1']:.2f}  top3 {res['top3']:.2f}  "
                           f"abst. {res['abstention']:.2f}  hors sujet {res['hors_sujet_refuse']}  {res['ms_moyen']} ms")
 
@@ -146,7 +151,8 @@ def main() -> None:
     md += ["", "## Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)", ""]
     for key, errs in details.items():
         md.append(f"### {key} ({len(errs)})")
-        md += [f"- `{e['id']}` {e['text'][:90]!r} : attendu {e['attendu']}, obtenu {e['obtenu']}" for e in errs] or ["- aucune"]
+        md += [f"- `{e['id']}` {e['text'][:90]!r} : attendu {e['attendu']}, obtenu {e['obtenu']}" if "text" in e
+               else f"- `{e['id']}` (texte privé) : attendu {e['attendu']}, obtenu {e['obtenu']}" for e in errs] or ["- aucune"]
         md.append("")
     base = RESULTS / f"{stamp}{('-' + args.tag) if args.tag else ''}"
     base.with_suffix(".md").write_text("\n".join(md), encoding="utf-8")

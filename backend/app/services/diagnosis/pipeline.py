@@ -59,7 +59,12 @@ SYMPTOM = re.compile(_WB + r"(bruit|grince|grincement|siffle|sifflement|claque|c
                      r"tremble|chauffe|surchauffe|fuit|fuite|fume|fumee|odeur|sent|cale|demarre|patine|voyant|allume|"
                      r"eteint|panne|marche plus|tire|dur|molle|use|casse|baisse|perte|consomme|rates?|a-coups|broute|"
                      r"craque|saute|ne passe|ne rentre|ne charge|ne refroidit|ne chauffe|decharge|crisse|couine|"
-                     r"ronfle|gronde|toussote|hoquette)" + _WE)
+                     r"ronfle|gronde|toussote|hoquette)" + _WE
+                     # racines (jeu de test L'Argus, 26/11/2026 : « refus de démarrage », « manque de puissance »)
+                     + r"|" + _WB + r"(demarr\w*|accelera\w*|puissance|surconsom\w*|fum\w+|freine\w*|bloqu\w*)" + _WE)
+# La règle « hors sujet » vise les messages courts (« combien coûte le gasoil », « bonjour ça va ») : une description
+# longue est presque toujours une panne, et les vrais messages commencent par « Bonjour » ou racontent un achat.
+NON_FAULT_MAX_WORDS = 30
 
 
 @lru_cache
@@ -76,6 +81,8 @@ def _part_words() -> frozenset[str]:
 
 def non_fault_question(text: str) -> bool:
     t = normalize(text)
+    if len(t.split()) > NON_FAULT_MAX_WORDS:
+        return False
     return bool(NON_FAULT_INTENT.search(t)) and not SYMPTOM.search(t) and not (set(t.split()) & _part_words())
 
 
