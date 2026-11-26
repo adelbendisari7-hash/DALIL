@@ -47,3 +47,7 @@ frontend/next-env.d.ts
 data/relecture/
 # Classifieur à deux niveaux : vocabulaire tiré des textes de L'Argus (données sous accord), jamais dans git
 ml/artifacts/famille_rerank_*.joblib
+# Jeux de test tirés de données sous accord (L'Argus) : jamais dans git
+data/test_prive/
+# Résultats sur le jeu de test L'Argus : contiennent les textes des erreurs (données sous accord)
+ml/results/*largus-test*

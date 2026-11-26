@@ -40,7 +40,9 @@ sys.path.insert(0, str(ROOT / "backend"))
 
 TRAIN_DIR = ROOT / "data" / "processed" / "train"
 OUT_DIR = ROOT / "data" / "processed" / "train_set"
-TEST_FILES = [*sorted((ROOT / "data" / "test").glob("*.jsonl")), ROOT / "data" / "seed" / "demo_cases.json"]
+# Jeux de test : ceux du dépôt, et ceux tirés de données sous accord (data/test_prive/, hors git : jeu L'Argus)
+TEST_FILES = [*sorted((ROOT / "data" / "test").glob("*.jsonl")), *sorted((ROOT / "data" / "test_prive").glob("*.jsonl")),
+              ROOT / "data" / "seed" / "demo_cases.json"]
 
 # Poids d'un exemple selon la provenance de son étiquette. 1 = aussi sûr qu'un exemple écrit à la main.
 QUALITY_WEIGHT = {

@@ -8,6 +8,15 @@
 | `audit_ecriture_oran.jsonl` | 48 cas écrits comme à Oran : français fautif ou SMS (20), darija en lettres latines (20), arabe (5), hors sujet (3) | **Synthétique**, rédigé le 18/11/2026. A servi à écrire le lexique de darija (`backend/app/services/diagnosis/darija.py`) : mesure de réglage, pas un résultat |
 | `audit_ecriture_oran_controle.jsonl` | 20 cas du même genre, écrits **avant** le lexique et jamais utilisés pour l'écrire | **Synthétique**. Contrôle : dit si le gain tient sur des phrases nouvelles. Même auteur que le lexique : biais possible, seul le jeu d'Oran tranchera |
 
+## Jeu de test L'Argus (privé, hors git)
+
+`data/test_prive/largus_test.jsonl` : **104 vrais cas** du forum L'Argus, écrits par des conducteurs (pas par l'équipe),
+où l'auteur confirme la cause et où cette cause est une pièce de la taxonomie DALIL. Choisis et vérifiés un par un par
+Claude le 26/11/2026, parmi 500 discussions tirées au hasard (environ 1 sur 4 retenue). Hors git : données sous accord.
+Ses textes sont exclus de tout entraînement (`ml/build_training_set.py`, `TEST_FILES`). Il ne sert qu'à mesurer, jamais à
+régler. Limites : français de France, parc ancien, pas de darija ; vérifié par une IA, pas par un mécanicien.
+Les résultats détaillés (`ml/results/*largus-test*`) contiennent les textes des erreurs : ils sont hors git eux aussi.
+
 ## Constituer le jeu de test d'Oran (section 5, couche 3)
 
 1. Remplir `modele_annotation_oran.csv` avec les mécaniciens partenaires : un cas par ligne, **le symptôme

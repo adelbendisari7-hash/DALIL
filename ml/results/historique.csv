@@ -216,3 +216,11 @@ date,variante,modele,cible,mode,llm,jeu,n,n_hors_sujet,top1,top3,abstention,hors
 20261124-1205,2niv-a0.25 / D (chaîne complète),tfidf-lr-fault-20261118+familles-largus-fort-a0.25-20261124,fault,full,none,demo_cases,17,3,0.941,1.0,0.0,1.0,7.2,9.5
 20261124-1205,2niv-a0.25 / D (chaîne complète),tfidf-lr-fault-20261118+familles-largus-fort-a0.25-20261124,fault,full,none,audit_ecriture_oran,45,3,0.867,0.911,0.067,1.0,5.8,6.6
 20261124-1205,2niv-a0.25 / D (chaîne complète),tfidf-lr-fault-20261118+familles-largus-fort-a0.25-20261124,fault,full,none,audit_ecriture_oran_controle,16,4,0.938,1.0,0.0,1.0,5.9,7.2
+20261126-1250,A-actuel / classifieur seul,tfidf-lr-fault-20261118,fault,classifier,none,largus_test,104,0,0.26,0.423,0.346,,1089.4,522.8
+20261126-1250,A-actuel / D (chaîne complète),tfidf-lr-fault-20261118,fault,full,none,largus_test,104,0,0.337,0.481,0.24,,437.0,554.7
+20261126-1250,2niv-a0.25 / classifieur seul,tfidf-lr-fault-20261118+familles-largus-fort-a0.25-20261126,fault,classifier,none,largus_test,104,0,0.346,0.548,0.115,,492.7,595.4
+20261126-1250,2niv-a0.25 / D (chaîne complète),tfidf-lr-fault-20261118+familles-largus-fort-a0.25-20261126,fault,full,none,largus_test,104,0,0.356,0.548,0.087,,507.1,604.7
+20261126-1250,2niv-a0.5 / classifieur seul,tfidf-lr-fault-20261118+familles-largus-fort-a0.5-20261126,fault,classifier,none,largus_test,104,0,0.365,0.558,0.067,,430.4,576.8
+20261126-1250,2niv-a0.5 / D (chaîne complète),tfidf-lr-fault-20261118+familles-largus-fort-a0.5-20261126,fault,full,none,largus_test,104,0,0.346,0.567,0.067,,407.7,548.8
+20261126-1256,A-actuel / D (chaîne complète),tfidf-lr-fault-20261118,fault,full,none,largus_test,104,0,0.279,0.471,0.269,,8832.4,9779.4
+20261126-1256,2niv-a0.25 / D (chaîne complète),tfidf-lr-fault-20261118+familles-largus-fort-a0.25-20261126,fault,full,none,largus_test,104,0,0.337,0.567,0.087,,45.7,67.4

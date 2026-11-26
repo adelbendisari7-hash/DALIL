@@ -209,3 +209,24 @@ Alpha a été réglé sur dev, démo et audit, puis vérifié sur le contrôle :
 Alpha 0,5 gagne sur dev (94 %) mais perd sur l'audit ; alpha 1 et 2 perdent sur la démo et le hors-sujet. Gains modestes
 (1 à 2 cas par jeu) mais tous dans le même sens. Le fichier (`ml/artifacts/famille_rerank_a0.25.joblib`, 31 Mo) reste
 hors git, parce que son vocabulaire est tiré des textes de L'Argus ; `DEMARRER-DALIL.bat` l'utilise s'il est présent.
+
+## Sur de vrais textes de conducteurs : le jeu de test L'Argus (26/11/2026)
+
+104 cas réels, à cause confirmée, jamais utilisés pour entraîner ni régler (`data/test/README.md`) :
+
+| Chaîne complète | Modèle de référence seul | Deux niveaux, alpha 0,25 (en service) |
+| --- | ---: | ---: |
+| Mots-clés : top-1 / top-3 | 34 / 48 % | 36 / 55 % |
+| Hybride : top-1 / top-3 | 28 / 47 % | **34 / 57 %** |
+| « Je ne sais pas » à tort (hybride) | 27 % | **9 %** |
+| Temps moyen (hybride, sans cache) | 8,8 s | (même chaîne) |
+
+Lecture :
+- **Sur de vrais textes, DALIL est bien moins bon que sur les jeux de l'équipe** (environ 55 % contre 90 % et plus pour la
+  bonne pièce dans les 3 premières). C'est le biais que l'on soupçonnait : les jeux de l'équipe ont le même auteur que les
+  exemples d'entraînement. Le jeu d'Oran reste la mesure de référence pour le mémoire.
+- Le classifieur à deux niveaux confirme son gain sur ces textes indépendants (+10 points de top-3 en hybride, trois fois
+  moins d'abstentions à tort).
+- Les vrais textes sont plus longs : 8,8 s par diagnostic en hybride, proche de la limite de 10 s.
+- **Tenir compte du véhicule** (fréquence des familles de pannes par modèle, tirée de L'Argus, lissée) a été simulé hors
+  ligne avant d'être développé : au mieux deux cas de plus sur 104 en top-1, rien en top-3. Piste abandonnée.
