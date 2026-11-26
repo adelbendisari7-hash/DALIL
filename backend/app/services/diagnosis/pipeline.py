@@ -79,6 +79,14 @@ def _part_words() -> frozenset[str]:
     return frozenset(words - {"moteur", "avant", "arriere", "voiture", "gasoil", "essence", "carburant", "diesel"})
 
 
+def shorten_query(text: str, max_chars: int) -> str:
+    """Début du texte, coupé à la fin d'un mot (0 = texte entier)."""
+    if not max_chars or len(text) <= max_chars:
+        return text
+    cut = text[:max_chars]
+    return cut[:cut.rfind(" ")] if " " in cut else cut
+
+
 def non_fault_question(text: str) -> bool:
     t = normalize(text)
     if len(t.split()) > NON_FAULT_MAX_WORDS:
@@ -234,8 +242,10 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full", use_llm:
     with MODELS_LOCK:
         # --- Recherche
         search_index = get_index()
+        # Texte lu par la recherche : son début seulement si retrieval_query_chars le demande (temps de réponse)
+        rtext = shorten_query(text, get_settings().retrieval_query_chars)
         # En mode classifieur seul, la recherche hybride (vecteurs et reclassement) serait du temps perdu.
-        hits = search_index.search(db, text, k=8) if text and not (mode == "classifier" and search_index.name == "hybrid") else []
+        hits = search_index.search(db, rtext, k=8) if text and not (mode == "classifier" and search_index.name == "hybrid") else []
         retrieved_ids = [h.chunk_id for h in hits]
         # Appui de la recherche pour chaque panne : somme des similarités des passages étiquetés avec elle.
         # La part de cet appui dans tout ce qui a été retrouvé (couverture) dit si les passages trouvés
@@ -253,7 +263,7 @@ def run_diagnosis(db: Session, inp: DiagnosisInput, mode: str = "full", use_llm:
         domain_hits = domain_index.search(db, text, k=1) if text else []
         max_sim = max((h.score for h in domain_hits), default=0.0)
         # Avec la recherche hybride, un second garde-fou : ressemblance des vecteurs avec les fiches de référence.
-        dense_domain = dense_index.domain_similarity(db, text, DOMAIN_SOURCES) if search_index.name == "hybrid" else None
+        dense_domain = dense_index.domain_similarity(db, rtext, DOMAIN_SOURCES) if search_index.name == "hybrid" else None
 
         # --- Classifieur
         clf: dict[str, float] = {}

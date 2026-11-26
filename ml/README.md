@@ -278,3 +278,22 @@ sont ce qui a servi ; les étiquettes de pièce brutes, le véhicule, les fiches
 n'ont rien apporté ou ont fait reculer le modèle. Sur le contrôle jamais vu, la bonne pièce en tête passe de 37 % (avant
 toute utilisation de L'Argus dans le modèle, mots-clés) à 49 % (hybride).
 
+## Temps de réponse sur les textes longs (26/11/2026)
+
+Profil d'un diagnostic hybride sur les 6 vrais textes les plus longs (840 à 900 caractères) : vecteur de la question
+1,3 à 4,6 s, reclassement 2,7 à 6,1 s, garde-fou et classifieur négligeables ; jusqu'à 10,5 s au total.
+
+| Réglage (jeu L'Argus de réglage, hybride) | top-1 / top-3 | moyen | 95e centile |
+| --- | --- | ---: | ---: |
+| Actuel (texte entier, 10 passages) | 40 / 60 % | 5,8 s | 8,2 s |
+| Recherche sur les 400 premiers caractères | 40 / 58 % | 4,5 s | 5,8 s |
+| 400 caractères + 6 passages reclassés | 38 / 58 % | 3,8 s | 4,1 s |
+| 600 caractères | 39 / 59 % | 6,7 s | 6,7 s |
+| 400 caractères + modèle des vecteurs en int8 | 14 / 20 % | 4,4 s | 5,7 s |
+
+- **Le modèle des vecteurs en int8 est à proscrire** : ses vecteurs ne correspondent plus à ceux de la base (calculés en
+  float16 sur Kaggle), le garde-fou prend tout pour du hors-sujet (abstention 46 à 84 %).
+- Raccourcir le texte fait gagner sur les cas lents mais coûte 1 à 2 cas sur 104 ; les temps varient d'une mesure à
+  l'autre sur ce portable. **Réglage inchangé** (`retrieval_query_chars = 0`), sous la limite des 10 s en moyenne et au
+  95e centile. Pour un ordinateur plus lent : `DALIL_RETRIEVAL_QUERY_CHARS=400` (`backend/app/config.py`).
+

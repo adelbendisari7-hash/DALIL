@@ -52,6 +52,10 @@ class Settings(BaseSettings):
     rerank_pool: int = 10
     rerank_max_len: int = 256
     rerank_int8: bool = True
+    # Textes longs (vrais messages de 800 à 900 caractères : jusqu'à 10,5 s, 26/11/2026). La recherche ne lit que le
+    # début du texte (le symptôme y est presque toujours) ; le classifieur lit tout. 0 = texte entier.
+    retrieval_query_chars: int = 0
+    embed_int8: bool = False  # modèle des vecteurs de la requête en int8, comme le reclassement
 
     diagnosis_rate_per_minute: int = 20
     otp_rate_per_minute: int = 5

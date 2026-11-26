@@ -32,6 +32,8 @@ class Embedder:
         self.torch = torch
         self.tok = AutoTokenizer.from_pretrained(str(folder), padding_side="left")
         self.model = AutoModel.from_pretrained(str(folder), dtype=torch.float32).eval()
+        if get_settings().embed_int8:  # couches linéaires en int8, comme le reclassement
+            self.model = torch.quantization.quantize_dynamic(self.model, {torch.nn.Linear}, dtype=torch.qint8)
 
     def encode(self, texts: list[str], max_len: int = 384, batch: int = 16) -> np.ndarray:
         torch = self.torch

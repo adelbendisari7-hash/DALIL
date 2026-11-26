@@ -1,0 +1,1409 @@
+{
+  "rows": [
+    {
+      "date": "20261126-1604",
+      "variante": "q400-int8 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261126+familles-largus-fort-a0.25-20261126",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.52,
+      "top3": 0.54,
+      "abstention": 0.46,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 5977.7,
+      "ms_p95": 5411.7
+    },
+    {
+      "date": "20261126-1604",
+      "variante": "q400-int8 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261126+familles-largus-fort-a0.25-20261126",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.294,
+      "top3": 0.353,
+      "abstention": 0.647,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 4616.0,
+      "ms_p95": 5748.6
+    },
+    {
+      "date": "20261126-1604",
+      "variante": "q400-int8 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261126+familles-largus-fort-a0.25-20261126",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.156,
+      "top3": 0.156,
+      "abstention": 0.844,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 4338.2,
+      "ms_p95": 5410.2
+    },
+    {
+      "date": "20261126-1604",
+      "variante": "q400-int8 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261126+familles-largus-fort-a0.25-20261126",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "largus_test",
+      "n": 104,
+      "n_hors_sujet": 0,
+      "top1": 0.144,
+      "top3": 0.202,
+      "abstention": 0.644,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 4393.5,
+      "ms_p95": 5676.6
+    }
+  ],
+  "erreurs": {
+    "q400-int8 / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev001",
+        "text": "quand j'appuie sur la pédale de frein j'entends un frottement métallique à l'avant",
+        "attendu": [
+          "plaquettes-avant",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev003",
+        "text": "ma pédale de frein devient spongieuse et il faut l'enfoncer presque jusqu'en bas",
+        "attendu": [
+          "flexible-frein",
+          "liquide-frein",
+          "maitre-cylindre"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev005",
+        "text": "le matin il faut plusieurs essais pour démarrer, le démarreur tourne au ralenti",
+        "attendu": [
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev011",
+        "text": "il y a un sifflement aigu sous le capot quand je tourne le volant à l'arrêt",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur",
+          "pompe-direction"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev014",
+        "text": "sur l'autoroute la température grimpe vite alors que le ventilateur tourne",
+        "attendu": [
+          "thermostat",
+          "pompe-eau",
+          "radiateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev016",
+        "text": "en ville dans les embouteillages ça chauffe, le ventilateur ne se déclenche jamais",
+        "attendu": [
+          "ventilateur-radiateur",
+          "sonde-temperature"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev017",
+        "text": "fumée blanche continue à l'échappement et le bocal de liquide se vide sans fuite visible",
+        "attendu": [
+          "joint-culasse"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev018",
+        "text": "la voiture se balance longtemps après un ralentisseur et elle penche dans les virages",
+        "attendu": [
+          "amortisseurs",
+          "coupelles",
+          "ressorts"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev021",
+        "text": "quand je braque complètement en accélérant ça claque côté roue avant gauche",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev022",
+        "text": "toc toc à l'avant quand je passe sur les pavés doucement",
+        "attendu": [
+          "biellette-stabilisatrice",
+          "silentblocs",
+          "amortisseurs",
+          "rotules-direction"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev028",
+        "text": "fumée noire au démarrage sur mon diesel et passage en mode dégradé",
+        "attendu": [
+          "vanne-egr",
+          "debitmetre",
+          "injecteurs",
+          "turbocompresseur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev029",
+        "text": "le moteur cliquette fort au ralenti et sent le gasoil",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev033",
+        "text": "je dois faire la vidange, elle a 12 000 km de retard",
+        "attendu": [
+          "filtre-huile",
+          "huile-moteur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev034",
+        "text": "le moteur est gras sur le dessus et ça sent l'huile brûlée",
+        "attendu": [
+          "joint-cache-culbuteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev036",
+        "text": "le bruit d'échappement est devenu très fort, comme un tracteur",
+        "attendu": [
+          "silencieux"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev038",
+        "text": "grosses vibrations dans la caisse au ralenti et choc quand je passe la marche arrière",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev039",
+        "text": "le volant est devenu lourd et il gémit quand je manoeuvre",
+        "attendu": [
+          "pompe-direction",
+          "cremaillere"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev040",
+        "text": "la voiture a des trous à l'accélération et cale parfois au feu",
+        "attendu": [
+          "debitmetre",
+          "papillon-motorise",
+          "bougies-allumage",
+          "filtre-air"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev041",
+        "text": "grincement aigu à l'arrière à chaque arrêt",
+        "attendu": [
+          "plaquettes-arriere",
+          "plaquettes-avant",
+          "machoires-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev042",
+        "text": "les phares baissent d'intensité la nuit et la batterie est neuve",
+        "attendu": [
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev043",
+        "text": "ça patine et ça sent le brûlé quand je démarre en côte",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "dev044",
+        "text": "il y a une flaque d'huile noire sous le moteur chaque matin",
+        "attendu": [
+          "joint-cache-culbuteurs",
+          "huile-moteur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "q400-int8 / D (chaîne complète) | demo_cases": [
+      {
+        "id": "demo_cases001",
+        "text": "quand j'appuie sur le frein ça crisse comme du métal contre du métal",
+        "attendu": [
+          "plaquettes-avant",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases002",
+        "text": "au feu rouge l'aiguille de température grimpe, sur la route ça va",
+        "attendu": [
+          "ventilateur-radiateur",
+          "sonde-temperature"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases003",
+        "text": "ce matin tac tac tac en démarrant et le moteur ne voulait pas tourner",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases005",
+        "text": "la pédale de l'embrayage colle en haut et le moteur s'emballe en montée",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases006",
+        "text": "on entend un sifflement strident au démarrage qui part après quelques minutes",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases007",
+        "text": "la batterie ne tient plus la charge en roulant et le voyant de batterie est allumé",
+        "attendu": [
+          "alternateur",
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases008",
+        "text": "mon diesel a du mal à partir les matins d'hiver, il fume blanc",
+        "attendu": [
+          "bougies-prechauffage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases009",
+        "text": "en braquant complètement pour me garer j'entends clac clac",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases012",
+        "text": "la climatisation envoie de l'air chaud",
+        "attendu": [
+          "compresseur-clim",
+          "condenseur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases013",
+        "text": "le volant est dur comme de la pierre quand je manoeuvre",
+        "attendu": [
+          "pompe-direction",
+          "cremaillere"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "demo_cases017",
+        "text": "pas d'air qui sort des aérateurs et ça sent le moisi",
+        "attendu": [
+          "filtre-habitacle"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "q400-int8 / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud01",
+        "text": "sa grinse kan je frein",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud02",
+        "text": "ma voitur demare pa le matin ca fait tac tac",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud03",
+        "text": "le moteur chaufe bcp leguille monte au rouge",
+        "attendu": [
+          "thermostat",
+          "radiateur",
+          "pompe-eau",
+          "ventilateur-radiateur",
+          "durite-refroidissement",
+          "vase-expansion"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud04",
+        "text": "la direction tir a gauche quand je roule",
+        "attendu": [
+          "rotules-direction",
+          "biellettes-direction",
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud05",
+        "text": "voyant batrie alumé en roulant",
+        "attendu": [
+          "alternateur",
+          "batterie",
+          "courroie-accessoires"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud06",
+        "text": "bruit clak clak quand je tourne le volan a fond",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud08",
+        "text": "lembrayage patine en montee",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud10",
+        "text": "la clim souffle chaud",
+        "attendu": [
+          "compresseur-clim",
+          "condenseur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud11",
+        "text": "voyant moteur orange et perte de puissance",
+        "attendu": [
+          "vanne-egr",
+          "turbocompresseur",
+          "debitmetre",
+          "sonde-lambda",
+          "capteur-pression-admission",
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud13",
+        "text": "fumee blanche et le liquide de refroidissement baisse",
+        "attendu": [
+          "joint-culasse"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud14",
+        "text": "bruit de roulement qui augmente avec la vitesse",
+        "attendu": [
+          "roulements-roue"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud15",
+        "text": "la voiture tape sur les dos dane",
+        "attendu": [
+          "amortisseurs",
+          "silentblocs",
+          "biellette-stabilisatrice",
+          "coupelles"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud16",
+        "text": "pedale de frein molle",
+        "attendu": [
+          "liquide-frein",
+          "maitre-cylindre",
+          "flexible-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud17",
+        "text": "phare avant grillé",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud18",
+        "text": "sifflement au demarrage a froid",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud19",
+        "text": "ca cale au ralenti au feu rouge",
+        "attendu": [
+          "papillon-motorise",
+          "vanne-egr",
+          "capteur-vilebrequin",
+          "debitmetre",
+          "bougies-allumage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud20",
+        "text": "le diesel demare mal a froid",
+        "attendu": [
+          "bougies-prechauffage",
+          "injecteurs",
+          "filtre-carburant",
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud21",
+        "text": "el frein ysoni",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud22",
+        "text": "tomobil ma tdemarich",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud24",
+        "text": "kayen bruit f la roue avant",
+        "attendu": [
+          "roulements-roue",
+          "cardans",
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud25",
+        "text": "la batrie tfargh kol sbah",
+        "attendu": [
+          "batterie",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud26",
+        "text": "el clim ma tberredch",
+        "attendu": [
+          "compresseur-clim",
+          "condenseur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud27",
+        "text": "ki nfreini tsoni",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud28",
+        "text": "el voyant ta3 moteur cha3el",
+        "attendu": [
+          "sonde-lambda",
+          "vanne-egr",
+          "debitmetre",
+          "capteur-pression-admission",
+          "bobine-allumage",
+          "catalyseur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud29",
+        "text": "kayen dkhan k7al men l'echappement",
+        "attendu": [
+          "injecteurs",
+          "turbocompresseur",
+          "filtre-air",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud33",
+        "text": "el phare ma ycha3elch",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud35",
+        "text": "el courroie tsaffar ki nchaal",
+        "attendu": [
+          "courroie-accessoires",
+          "galet-tendeur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud37",
+        "text": "el frein ma yechedch mlih",
+        "attendu": [
+          "plaquettes-avant",
+          "disques-frein",
+          "liquide-frein",
+          "maitre-cylindre"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud40",
+        "text": "el amortisseur rah fini, tomobil tdegdeg",
+        "attendu": [
+          "amortisseurs",
+          "coupelles",
+          "silentblocs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud41",
+        "text": "الفرامل تصفر كي نفريني",
+        "attendu": [
+          "plaquettes-avant",
+          "plaquettes-arriere",
+          "disques-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud43",
+        "text": "الموتور يسخن بزاف",
+        "attendu": [
+          "thermostat",
+          "radiateur",
+          "pompe-eau",
+          "ventilateur-radiateur",
+          "durite-refroidissement",
+          "vase-expansion"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud44",
+        "text": "البطارية تفرغ كل صباح",
+        "attendu": [
+          "batterie",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud45",
+        "text": "كاين صوت في الروضة القدامية",
+        "attendu": [
+          "roulements-roue",
+          "cardans",
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "q400-int8 / D (chaîne complète) | largus_test": [
+      {
+        "id": "lar001",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar003",
+        "attendu": [
+          "pompe-direction"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar004",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "boite-vitesses",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "lar005",
+        "attendu": [
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar006",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "injecteurs",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar007",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar008",
+        "attendu": [
+          "durite-refroidissement"
+        ],
+        "obtenu": [
+          "thermostat",
+          "pompe-eau"
+        ]
+      },
+      {
+        "id": "lar009",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar010",
+        "attendu": [
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar012",
+        "attendu": [
+          "filtre-carburant"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "injecteurs",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar014",
+        "attendu": [
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar015",
+        "attendu": [
+          "galet-tendeur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar017",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar019",
+        "attendu": [
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar020",
+        "attendu": [
+          "etrier-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar021",
+        "attendu": [
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar022",
+        "attendu": [
+          "filtre-air"
+        ],
+        "obtenu": [
+          "boite-vitesses",
+          "turbocompresseur",
+          "kit-embrayage"
+        ]
+      },
+      {
+        "id": "lar023",
+        "attendu": [
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar025",
+        "attendu": [
+          "roulements-roue"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar028",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar029",
+        "attendu": [
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar030",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar031",
+        "attendu": [
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar032",
+        "attendu": [
+          "bobine-allumage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar033",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar034",
+        "attendu": [
+          "demarreur"
+        ],
+        "obtenu": [
+          "batterie",
+          "kit-embrayage",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "lar036",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar037",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar038",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar039",
+        "attendu": [
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar040",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar041",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar042",
+        "attendu": [
+          "coupelles"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar043",
+        "attendu": [
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar045",
+        "attendu": [
+          "joint-culasse"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar046",
+        "attendu": [
+          "huile-moteur"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "batterie",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "lar047",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar048",
+        "attendu": [
+          "bobine-allumage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar049",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar050",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "lar051",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar052",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar053",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "joint-culasse",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar055",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "ventilateur-radiateur",
+          "thermostat",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar056",
+        "attendu": [
+          "bobine-allumage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar057",
+        "attendu": [
+          "capteur-pression-admission"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "vanne-egr",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar058",
+        "attendu": [
+          "bobine-allumage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar059",
+        "attendu": [
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar060",
+        "attendu": [
+          "silentblocs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar061",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar062",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar063",
+        "attendu": [
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar064",
+        "attendu": [
+          "etrier-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar065",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar066",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar067",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar069",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar070",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "lar071",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar072",
+        "attendu": [
+          "ampoules"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar073",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar074",
+        "attendu": [
+          "cable-embrayage",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar075",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar077",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar078",
+        "attendu": [
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar079",
+        "attendu": [
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar080",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar081",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar084",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar085",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar087",
+        "attendu": [
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar088",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar089",
+        "attendu": [
+          "maitre-cylindre"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar090",
+        "attendu": [
+          "batterie"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar091",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar092",
+        "attendu": [
+          "cable-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar094",
+        "attendu": [
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar095",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar096",
+        "attendu": [
+          "silentblocs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar097",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs",
+          "sonde-lambda"
+        ]
+      },
+      {
+        "id": "lar100",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar102",
+        "attendu": [
+          "flexible-frein"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar104",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": "unknown"
+      }
+    ]
+  }
+}

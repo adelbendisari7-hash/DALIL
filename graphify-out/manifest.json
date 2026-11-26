@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "backend/app/config.py": {
-    "mtime": 1794933761.953806,
-    "seen": 1794934270.8126845,
-    "ast_hash": "46970d1234b56f4a66006b52abad3b27",
+    "mtime": 1795707816.387166,
+    "seen": 1795712838.8517852,
+    "ast_hash": "0ba8909a5a7dd29ef0a80fb664bed5dc",
     "semantic_hash": ""
   },
   "backend/app/db.py": {
@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/pipeline.py": {
-    "mtime": 1795700776.339949,
-    "seen": 1795707211.8201063,
-    "ast_hash": "f4fdbe1b124826d656a129e2aee9664b",
+    "mtime": 1795707827.8526218,
+    "seen": 1795712838.8517852,
+    "ast_hash": "7b41d1ed9a96f092b29d7890033ae10c",
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/retrieval.py": {
@@ -612,9 +612,9 @@
     "semantic_hash": ""
   },
   "ml/README.md": {
-    "mtime": 1795707196.019667,
-    "seen": 1795707211.8201063,
-    "ast_hash": "e8bded2f327f4b67323bfec1d1b3ae3e",
+    "mtime": 1795712821.451472,
+    "seen": 1795712838.8617098,
+    "ast_hash": "a0d76157cd472f95e88ed1271c9d35d0",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.pdf": {
@@ -828,9 +828,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/embeddings.py": {
-    "mtime": 1794929441.6869924,
-    "seen": 1794931051.2328465,
-    "ast_hash": "2027b767cf334a08a93e4d49d8456263",
+    "mtime": 1795707816.5851943,
+    "seen": 1795712838.8517852,
+    "ast_hash": "26c9f1bda740077c4810984ed3952470",
     "semantic_hash": ""
   },
   "backend/tests/test_llm_chaine.py": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795707196.0216749,
-    "seen": 1795707211.8201063,
-    "ast_hash": "33897071ea29277c419ddebcd47c9666",
+    "mtime": 1795712821.454011,
+    "seen": 1795712838.8617098,
+    "ast_hash": "47f0d93768199224db9957fda19789c3",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -1527,6 +1527,72 @@
     "mtime": 1795707167.8888385,
     "seen": 1795707211.8201063,
     "ast_hash": "6c38e8a12486e952bc43e22cf38f0fc2",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_vitesse.py": {
+    "mtime": 1795707840.8905878,
+    "seen": 1795712838.8517852,
+    "ast_hash": "e13d3529cdddb2ede2bcc010f94ba1ce",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1544-vitesse-actuel.json": {
+    "mtime": 1795709031.0473359,
+    "seen": 1795712838.8617098,
+    "ast_hash": "edea27259b1ad8f8f15c86bfc0b542d9",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1604-vitesse-400-int8.json": {
+    "mtime": 1795710130.567168,
+    "seen": 1795712838.8617098,
+    "ast_hash": "12f85f229d0dc604497b5e7e7c8b4daa",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1622-vitesse-400.json": {
+    "mtime": 1795711087.392652,
+    "seen": 1795712838.8617098,
+    "ast_hash": "c7dd6f536113ac80ff15a43ce083c85d",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1638-vitesse-400-p6.json": {
+    "mtime": 1795711910.409916,
+    "seen": 1795712838.8617098,
+    "ast_hash": "2f8d41a45eaaef67a6475f93d130906e",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1652-vitesse-600.json": {
+    "mtime": 1795712641.4603295,
+    "seen": 1795712838.8617098,
+    "ast_hash": "c14416f084c8f29151f410d0ecc68c9b",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1544-vitesse-actuel.md": {
+    "mtime": 1795709031.0452232,
+    "seen": 1795712838.8617098,
+    "ast_hash": "afbf288ad41a3a62a9cc0e563e27167e",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1604-vitesse-400-int8.md": {
+    "mtime": 1795710130.560037,
+    "seen": 1795712838.8617098,
+    "ast_hash": "dff663f812c6a08f3865e25d666cd4fe",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1622-vitesse-400.md": {
+    "mtime": 1795711087.3910377,
+    "seen": 1795712838.8617098,
+    "ast_hash": "76f757e81d7a60ec578f9fce32544ac6",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1638-vitesse-400-p6.md": {
+    "mtime": 1795711910.409916,
+    "seen": 1795712838.8617098,
+    "ast_hash": "974b7aa4f5d49b1d073c14fcfa799b4b",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1652-vitesse-600.md": {
+    "mtime": 1795712641.4582758,
+    "seen": 1795712838.8617098,
+    "ast_hash": "1014df961b2cc5b9b8a60651632981ae",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {
