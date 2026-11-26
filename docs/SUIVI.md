@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 26/11/2026, temps de réponse étudié (réglage inchangé).
+> Dernière mise à jour : 26/11/2026, CamemBERT reporté en attendant les données d'un nouveau forum.
 
 ## 1. Où on en est
 
@@ -43,7 +43,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-0. **CamemBERT sur Kaggle (prochaine étape technique, accord de l'utilisateur)** : bloquée en attendant (a) un nouveau jeton Kaggle actif dans `C:\Users\Adel\.kaggle\kaggle.json` et (b) l'accord de l'utilisateur pour envoyer les données L'Argus anonymisées dans un jeu Kaggle privé. Ensuite : entraîner le carnet `02_encodeur_camembert` (généré par `ml/kaggle/make_notebooks.py`) sur les familles L'Argus + les 194 vrais exemples + l'amorçage, puis comparer au modèle en service sur le contrôle L'Argus (43) et le contrôle d'Oran ; ne mettre en service que si meilleur sans recul ailleurs. Vitesse déjà étudiée (réglage inchangé, 26/11).
+0. **CamemBERT sur Kaggle (prochaine étape technique)** : **reporté jusqu'à l'arrivée des données d'un nouveau forum** (annoncées le 26/11/2026 au soir), pour un seul entraînement et un seul envoi. D'abord : intégrer ce forum (skill `ajouter-source-donnees` : accord noté, fiche, anonymisation, taxonomie) et le mesurer seul. Le jeton Kaggle `C:\Users\Adel\.kaggle\access_token` du 14/11 fonctionne encore (vérifié le 26/11). Reste l'accord de l'utilisateur pour envoyer L'Argus et le nouveau forum, anonymisés, dans un jeu Kaggle privé. Ensuite : entraîner le carnet `02_encodeur_camembert` (généré par `ml/kaggle/make_notebooks.py`) sur les familles L'Argus + les 194 vrais exemples + l'amorçage, puis comparer au modèle en service sur le contrôle L'Argus (43) et le contrôle d'Oran ; ne mettre en service que si meilleur sans recul ailleurs. Vitesse déjà étudiée (réglage inchangé, 26/11).
 1. **L'Argus** : classifieur à deux niveaux en service (relancer `DEMARRER-DALIL.bat`). Reste possible : faire contrôler une vingtaine d'étiquettes de la relecture par un mécanicien ; L'Argus comme « cas semblables » dans la recherche, après mesure. Le chiffre du mémoire viendra du jeu de test d'Oran.
 2. **Étape 11, essais à Oran (équipe, sur le terrain)** : suivre `docs/essais-oran.md` : fiches des mécaniciens (jeu de test, objectif 200 cas), inscription chronométrée de 5 à 10 magasins, parcours de 10 à 20 automobilistes, questionnaire ; puis rédiger `docs/compte-rendu-essais.md`.
 3. **Visiter les magasins** (équipe) : liste `data/terrain/liste_visite_osm.xlsx`, 62 lieux importés en brouillons (23 pièces, 6 pneus, 33 garages ; Oran 23, Bir El Djir 10, Aïn El Beïda 6…). Remplir les colonnes jaunes, réimporter (Admin > Import CSV), puis vérifier chaque fiche (Admin > Magasins) : seules les fiches vérifiées sont recommandées. Commencer par les 23 magasins de pièces ; compter aussi les magasins absents de la carte (couverture d'OSM, mémoire section 4).
@@ -54,6 +54,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 | Date | Décision | Raison |
 | --- | --- | --- |
+| 26/11/2026 | **CamemBERT reporté jusqu'à l'arrivée des données d'un nouveau forum** | Décision de l'utilisateur, sur recommandation : un seul entraînement et un seul envoi sur Kaggle ; le forum sera mesuré seul avant d'entrer dans le jeu commun |
 | 26/11/2026 | **Priorité : un DALIL efficace en français d'abord** ; darija et arabe ensuite | Décision de l'utilisateur. Les améliorations se mesurent sur les jeux en français (contrôle L'Argus en premier) |
 | 26/11/2026 | **194 vrais exemples L'Argus vérifiés ajoutés au modèle de base** (en service, fichier local) | Contrôle L'Argus jamais vu, hybride : top-1 40 -> 49 %, top-3 56 -> 63 %, abstention 9 -> 7 % ; rien ne recule ailleurs. Cas semblables dans la recherche : neutres, non retenus. **Fin du travail sur L'Argus** |
 | 26/11/2026 | **10 nouvelles fiches de pannes non retenues** (brouillon gardé : `data/seed/brouillons/fiches_non_retenues.json`) | Avec 10 exemples écrits par fiche, gain sur le jeu étudié seulement (top-3 57 -> 61 %) mais recul sur le jeu de contrôle jamais vu (58 -> 54 %) et sur les jeux d'Oran (audit 87 -> 82 %, contrôle 94 -> 88 % en top-1) : dix pannes de plus diluent le classifieur. À reprendre avec de vrais exemples par panne |
