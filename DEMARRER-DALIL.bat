@@ -70,7 +70,7 @@ rem modele de reference (audit 82 -> 87 %, controle 88 -> 94 %, rien de perdu ai
 rem python ml\train_family_reranker.py --alphas 0.25. Absent : modele de reference seul.
 if exist "ml\artifacts\famille_rerank_a0.25.joblib" (
   set "DALIL_CLASSIFIER_PATH=%~dp0ml\artifacts\famille_rerank_a0.25.joblib"
-  set "DALIL_MODEL_VERSION=tfidf-lr+familles-largus-a0.25"
+  set "DALIL_MODEL_VERSION=tfidf-lr-reels+familles-largus-a0.25"
   echo      Classifieur a deux niveaux ^(familles apprises sur L'Argus^)
 )
 if not "%USE_LLM%"=="1" (

@@ -126,6 +126,8 @@ def main() -> None:
     ap.add_argument("--out", default=None, help="fichier de sortie (défaut : ml/artifacts/baseline_tfidf_lr[_part].joblib)")
     ap.add_argument("--set", nargs="?", const=str(ROOT / "data" / "processed" / "train_set"), default=None,
                     help="entraîner sur le jeu commun (dossier de ml/build_training_set.py)")
+    ap.add_argument("--exemples-reels", default=None,
+                    help="JSONL {text, fault} d'exemples réels vérifiés à ajouter (ex. data/processed/largus_causes_verifiees.jsonl)")
     args = ap.parse_args()
     if args.set:
         train_on_set(Path(args.set), Path(args.out) if args.out else None)
@@ -135,6 +137,11 @@ def main() -> None:
     seed_labels = relabel(seed_faults, args.target)
     extra: tuple[list, list] = ([], [])
     corpus_stats: dict = {}
+    if args.exemples_reels:  # vrais textes de conducteurs, cause confirmée et vérifiée (L'Argus, 26/11/2026)
+        reels = [json.loads(l) for l in Path(args.exemples_reels).read_text(encoding="utf-8").split(chr(10)) if l.strip()]
+        extra = ([r["text"][:1000] for r in reels], relabel([r["fault"] for r in reels], args.target))
+        corpus_stats = {"exemples_reels": len(reels)}
+        print(f"exemples réels vérifiés : {len(reels)}")
     if args.corpus:
         ct, cl, corpus_stats = corpus_examples(args.target, include_synthetic=not args.no_synthetic)
         extra = (ct, cl)
@@ -155,7 +162,8 @@ def main() -> None:
     ft, fl = fiche_examples()
     pipe = build_pipeline(large=args.corpus)
     pipe.fit(seed_texts + ft + extra[0], seed_labels + relabel(fl, args.target) + extra[1])
-    version = f"tfidf-lr-{args.target}{'-corpus' if args.corpus else ''}-{datetime.now(timezone.utc):%Y%m%d}"
+    version = (f"tfidf-lr-{args.target}{'-corpus' if args.corpus else ''}{'-reels' if args.exemples_reels else ''}"
+               f"-{datetime.now(timezone.utc):%Y%m%d}")
     suffix = "" if args.target == "fault" and not args.corpus else f"_{args.target}{'_corpus' if args.corpus else ''}"
     out = Path(args.out) if args.out else ARTIFACTS / f"baseline_tfidf_lr{suffix}.joblib"
     out.parent.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,805 @@
+{
+"_note": "Causes confirmées de L Argus vérifiées une à une par Claude le 26/11/2026 (179 justes sur 250 extraites, 72 %). Identifiants de discussion et pièces seulement, aucun texte. Reconstruire les exemples : python ml/extraire_causes_largus.py --verifiees",
+"causes": [
+{
+"id": "largus_forum:101508",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:106673",
+"part": "bougies-prechauffage",
+"fault": "prechauffage-hs"
+},
+{
+"id": "largus_forum:108720",
+"part": "papillon-motorise",
+"fault": "ralenti-instable"
+},
+{
+"id": "largus_forum:108765",
+"part": "papillon-motorise",
+"fault": "ralenti-instable"
+},
+{
+"id": "largus_forum:111003",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "largus_forum:111068",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:113674",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "largus_forum:115396",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:117151",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:119344",
+"part": "roulements-roue",
+"fault": "roulement-use"
+},
+{
+"id": "largus_forum:120289",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:121171",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "largus_forum:122437",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:127121",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "largus_forum:129908",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:129927",
+"part": "courroie-accessoires",
+"fault": "courroie-accessoires-usee"
+},
+{
+"id": "largus_forum:133710",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:136253",
+"part": "turbocompresseur",
+"fault": "turbo-hs"
+},
+{
+"id": "largus_forum:138892",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:145778",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:14913",
+"part": "sonde-lambda",
+"fault": "sonde-lambda-hs"
+},
+{
+"id": "largus_forum:152250",
+"part": "cardans",
+"fault": "cardan-hs"
+},
+{
+"id": "largus_forum:15489",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:156079",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:158210",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "largus_forum:15822",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:170659",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:171505",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "largus_forum:174267",
+"part": "filtre-air",
+"fault": "filtre-air-colmate"
+},
+{
+"id": "largus_forum:17999",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:182368",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:183950",
+"part": "cardans",
+"fault": "cardan-hs"
+},
+{
+"id": "largus_forum:184457",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:186310",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:186573",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "largus_forum:189024",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "largus_forum:190183",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "largus_forum:191066",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:192951",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:194279",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:196279",
+"part": "turbocompresseur",
+"fault": "turbo-hs"
+},
+{
+"id": "largus_forum:198125",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "largus_forum:198151",
+"part": "sonde-lambda",
+"fault": "sonde-lambda-hs"
+},
+{
+"id": "largus_forum:202023",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:20228",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:202281",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "largus_forum:202956",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:20766",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "largus_forum:21007",
+"part": "bougies-prechauffage",
+"fault": "prechauffage-hs"
+},
+{
+"id": "largus_forum:210544",
+"part": "roulements-roue",
+"fault": "roulement-use"
+},
+{
+"id": "largus_forum:221856",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:222264",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "largus_forum:225142",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:226890",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:227475",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "largus_forum:227829",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:228395",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:229709",
+"part": "pompe-eau",
+"fault": "pompe-eau-hs"
+},
+{
+"id": "largus_forum:229960",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:230031",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:230286",
+"part": "etrier-frein",
+"fault": "etrier-grippe"
+},
+{
+"id": "largus_forum:232812",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:235974",
+"part": "kit-embrayage",
+"fault": "embrayage-use"
+},
+{
+"id": "largus_forum:238065",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "largus_forum:238073",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:240968",
+"part": "vanne-egr",
+"fault": "egr-encrassee"
+},
+{
+"id": "largus_forum:241187",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:241914",
+"part": "courroie-accessoires",
+"fault": "courroie-accessoires-usee"
+},
+{
+"id": "largus_forum:242593",
+"part": "kit-embrayage",
+"fault": "embrayage-use"
+},
+{
+"id": "largus_forum:244123",
+"part": "courroie-accessoires",
+"fault": "courroie-accessoires-usee"
+},
+{
+"id": "largus_forum:244618",
+"part": "vanne-egr",
+"fault": "egr-encrassee"
+},
+{
+"id": "largus_forum:245388",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:248377",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:248475",
+"part": "roulements-roue",
+"fault": "roulement-use"
+},
+{
+"id": "largus_forum:249857",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:249967",
+"part": "catalyseur",
+"fault": "catalyseur-hs"
+},
+{
+"id": "largus_forum:250165",
+"part": "compresseur-clim",
+"fault": "clim-ne-refroidit-plus"
+},
+{
+"id": "largus_forum:250225",
+"part": "disques-frein",
+"fault": "disques-voiles"
+},
+{
+"id": "largus_forum:250752",
+"part": "bougies-prechauffage",
+"fault": "prechauffage-hs"
+},
+{
+"id": "largus_forum:252318",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:253812",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:256383",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:257386",
+"part": "catalyseur",
+"fault": "catalyseur-hs"
+},
+{
+"id": "largus_forum:260129",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:262542",
+"part": "cardans",
+"fault": "cardan-hs"
+},
+{
+"id": "largus_forum:263896",
+"part": "plaquettes-avant",
+"fault": "plaquettes-usees"
+},
+{
+"id": "largus_forum:266801",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:267196",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:267347",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:267971",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:268153",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:270653",
+"part": "vanne-egr",
+"fault": "egr-encrassee"
+},
+{
+"id": "largus_forum:270726",
+"part": "support-moteur",
+"fault": "supports-moteur-uses"
+},
+{
+"id": "largus_forum:275142",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "largus_forum:275273",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:27936",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:282423",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:285854",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "largus_forum:287610",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:2877",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:289954",
+"part": "radiateur",
+"fault": "fuite-refroidissement"
+},
+{
+"id": "largus_forum:290873",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:290994",
+"part": "cable-embrayage",
+"fault": "commande-embrayage-hs"
+},
+{
+"id": "largus_forum:291550",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:29176",
+"part": "bougies-prechauffage",
+"fault": "prechauffage-hs"
+},
+{
+"id": "largus_forum:292143",
+"part": "filtre-huile",
+"fault": "vidange-a-faire"
+},
+{
+"id": "largus_forum:29245",
+"part": "radiateur",
+"fault": "fuite-refroidissement"
+},
+{
+"id": "largus_forum:294097",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:294544",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "largus_forum:294604",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "largus_forum:29725",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "largus_forum:299886",
+"part": "filtre-air",
+"fault": "filtre-air-colmate"
+},
+{
+"id": "largus_forum:302230",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:306066",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "largus_forum:306379",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:307200",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:307237",
+"part": "debitmetre",
+"fault": "debitmetre-hs"
+},
+{
+"id": "largus_forum:308639",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "largus_forum:337830",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "largus_forum:338754",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "largus_forum:340343",
+"part": "courroie-accessoires",
+"fault": "courroie-accessoires-usee"
+},
+{
+"id": "largus_forum:340627",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:340758",
+"part": "courroie-accessoires",
+"fault": "courroie-accessoires-usee"
+},
+{
+"id": "largus_forum:341420",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:346749",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "largus_forum:350077",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "largus_forum:350811",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "largus_forum:35222",
+"part": "disques-frein",
+"fault": "disques-voiles"
+},
+{
+"id": "largus_forum:353639",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:35546",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:355635",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:357983",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:366658",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "largus_forum:377387",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:39018",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:43285",
+"part": "cardans",
+"fault": "cardan-hs"
+},
+{
+"id": "largus_forum:44523",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:45749",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "largus_forum:49087",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:513989",
+"part": "vanne-egr",
+"fault": "egr-encrassee"
+},
+{
+"id": "largus_forum:53401",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "largus_forum:54604",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "largus_forum:55549",
+"part": "boite-vitesses",
+"fault": "boite-vitesses-hs"
+},
+{
+"id": "largus_forum:56358",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:589",
+"part": "plaquettes-avant",
+"fault": "plaquettes-usees"
+},
+{
+"id": "largus_forum:59408",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:60949",
+"part": "bougies-prechauffage",
+"fault": "prechauffage-hs"
+},
+{
+"id": "largus_forum:66686",
+"part": "vanne-egr",
+"fault": "egr-encrassee"
+},
+{
+"id": "largus_forum:66726",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:6838",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "largus_forum:68670",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "largus_forum:70922",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:74368",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:75001",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:75621",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:76825",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "largus_forum:87025",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:91721",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:9641",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:97936",
+"part": "cable-embrayage",
+"fault": "commande-embrayage-hs"
+}
+]
+}
