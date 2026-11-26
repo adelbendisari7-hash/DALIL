@@ -1,5 +1,5 @@
 {
-"_note": "Causes confirmées de L Argus vérifiées une à une par Claude le 26/11/2026 (179 justes sur 250 extraites, 72 %). Identifiants de discussion et pièces seulement, aucun texte. Reconstruire les exemples : python ml/extraire_causes_largus.py --verifiees",
+"_note": "Causes confirmées de L Argus vérifiées une à une par Claude le 26/11/2026 : 179 justes sur 250 (« c'était… »), puis 35 sur 50 (« j'ai changé X et tout marche »). Identifiants et pièces seulement, aucun texte. Reconstruire les exemples : python ml/extraire_causes_largus.py --verifiees",
 "causes": [
 {
 "id": "largus_forum:101508",
@@ -800,6 +800,176 @@
 "id": "largus_forum:97936",
 "part": "cable-embrayage",
 "fault": "commande-embrayage-hs"
+},
+{
+"id": "largus_forum:127007",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "largus_forum:132737",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:134742",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:136489",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:14613",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "largus_forum:158172",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "largus_forum:16352",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:187701",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "largus_forum:204057",
+"part": "kit-distribution",
+"fault": "distribution-a-faire"
+},
+{
+"id": "largus_forum:210673",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:212055",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "largus_forum:216717",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:237691",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "largus_forum:238667",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:240827",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:240882",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:240901",
+"part": "courroie-accessoires",
+"fault": "courroie-accessoires-usee"
+},
+{
+"id": "largus_forum:243524",
+"part": "filtre-air",
+"fault": "filtre-air-colmate"
+},
+{
+"id": "largus_forum:247000",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:258913",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:284668",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "largus_forum:295994",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:297138",
+"part": "amortisseurs",
+"fault": "amortisseurs-uses"
+},
+{
+"id": "largus_forum:307575",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:308507",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "largus_forum:335360",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:352061",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "largus_forum:368815",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "largus_forum:376070",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "largus_forum:46505",
+"part": "kit-embrayage",
+"fault": "embrayage-use"
+},
+{
+"id": "largus_forum:59476",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "largus_forum:79455",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "largus_forum:84971",
+"part": "bougies-prechauffage",
+"fault": "prechauffage-hs"
+},
+{
+"id": "largus_forum:93803",
+"part": "thermostat",
+"fault": "thermostat-bloque"
 }
 ]
 }

@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/pipeline.py": {
-    "mtime": 1795035219.8231199,
-    "seen": 1795035864.402251,
-    "ast_hash": "12f72da210aac86939c0a57b54a7cf82",
+    "mtime": 1795700776.339949,
+    "seen": 1795707211.8201063,
+    "ast_hash": "f4fdbe1b124826d656a129e2aee9664b",
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/retrieval.py": {
@@ -318,9 +318,9 @@
     "semantic_hash": ""
   },
   "data/seed/faults.json": {
-    "mtime": 1795025736.8660326,
-    "seen": 1795027518.9094217,
-    "ast_hash": "4f76e8be3a613b33145d48ede9a49b2f",
+    "mtime": 1795701725.969874,
+    "seen": 1795707211.8201063,
+    "ast_hash": "ee91fcce1e1cb4f52f2125c1304a0326",
     "semantic_hash": ""
   },
   "data/seed/geo_oran.json": {
@@ -504,15 +504,15 @@
     "semantic_hash": ""
   },
   "ml/artifacts/baseline_tfidf_lr.metrics.json": {
-    "mtime": 1795025861.3032146,
-    "seen": 1795027518.9094217,
+    "mtime": 1795701743.949024,
+    "seen": 1795707211.8201063,
     "ast_hash": "35148fc6c18ecc9edcf182841855e782",
     "semantic_hash": ""
   },
   "ml/train_baseline.py": {
-    "mtime": 1795506651.1691058,
-    "seen": 1795506775.0617769,
-    "ast_hash": "27dac74c1eb2bf2c483d91689b6d60a7",
+    "mtime": 1795702154.50346,
+    "seen": 1795707211.8201063,
+    "ast_hash": "60e7c759e5c1d1bc497ca12a71e361c3",
     "semantic_hash": ""
   },
   ".claude/skills/ajouter-source-donnees/SKILL.md": {
@@ -522,9 +522,9 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1795698847.618716,
-    "seen": 1795698885.8333814,
-    "ast_hash": "c8d831716a417b1dfc453e988e383afb",
+    "mtime": 1795707196.0206764,
+    "seen": 1795707211.8201063,
+    "ast_hash": "8ac0ec4b15ccc0c813101ddb2f56fae9",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.md": {
@@ -612,9 +612,9 @@
     "semantic_hash": ""
   },
   "ml/README.md": {
-    "mtime": 1795698847.618716,
-    "seen": 1795698885.8333814,
-    "ast_hash": "dd0dd78c75375e45b0dffefaa47f719c",
+    "mtime": 1795707196.019667,
+    "seen": 1795707211.8201063,
+    "ast_hash": "e8bded2f327f4b67323bfec1d1b3ae3e",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.pdf": {
@@ -648,9 +648,9 @@
     "semantic_hash": ""
   },
   "ml/evaluate.py": {
-    "mtime": 1795506642.084055,
-    "seen": 1795506775.0617769,
-    "ast_hash": "438af8f63f54861b35894b11eec5095f",
+    "mtime": 1795700988.0057197,
+    "seen": 1795707211.8201063,
+    "ast_hash": "2cce4676e61c82c45ce8b1bc858f5ac7",
     "semantic_hash": ""
   },
   "ml/kaggle/make_notebooks.py": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795698847.6249814,
-    "seen": 1795698885.8333814,
-    "ast_hash": "901013223139502dbafd8a9b479392aa",
+    "mtime": 1795707196.0216749,
+    "seen": 1795707211.8201063,
+    "ast_hash": "33897071ea29277c419ddebcd47c9666",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -1413,6 +1413,120 @@
     "mtime": 1795522539.1710584,
     "seen": 1795522712.5140045,
     "ast_hash": "fcdccfa0fecb1852a1fe77a10426543e",
+    "semantic_hash": ""
+  },
+  "data/largus/causes_verifiees.json": {
+    "mtime": 1795703152.8230674,
+    "seen": 1795707211.8201063,
+    "ast_hash": "a83524ba42e6e5518f36149025249ff8",
+    "semantic_hash": ""
+  },
+  "data/seed/brouillons/fiches_non_retenues.json": {
+    "mtime": 1795701744.2157981,
+    "seen": 1795707211.8201063,
+    "ast_hash": "514e5fe3c5bc6c2ccc70883ff2356f3a",
+    "semantic_hash": ""
+  },
+  "ml/extraire_causes_largus.py": {
+    "mtime": 1795703131.5653913,
+    "seen": 1795707211.8201063,
+    "ast_hash": "eb8f29b85ac49339b4a788367291042d",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1346-regle-hors-sujet.json": {
+    "mtime": 1795701001.1492388,
+    "seen": 1795707211.8201063,
+    "ast_hash": "a11ae31ad83f523fc661104595c11f8f",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1352-controle-depart.json": {
+    "mtime": 1795701265.3514228,
+    "seen": 1795707211.8201063,
+    "ast_hash": "9e8fda5dac039c1304ccc837a44e8979",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1359-nouvelles-fiches.json": {
+    "mtime": 1795701687.304508,
+    "seen": 1795707211.8201063,
+    "ast_hash": "da7a3eb423f0d972c4ac168f85ba06fa",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1410-exemples-reels.json": {
+    "mtime": 1795702308.8344996,
+    "seen": 1795707211.8201063,
+    "ast_hash": "9c95b80f1c3ba803cb7af3d5bf0967db",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1412-exemples-reels-et-cas.json": {
+    "mtime": 1795702411.0233445,
+    "seen": 1795707211.8201063,
+    "ast_hash": "d294a1c85be55b2644feaee544bb9620",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1412-exemples-reels-hybride.json": {
+    "mtime": 1795703053.1331859,
+    "seen": 1795707211.8201063,
+    "ast_hash": "bf07d57e3313bdc5101dc2685d95a598",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1427-exemples-reels-194-hybride.json": {
+    "mtime": 1795705050.5982347,
+    "seen": 1795707211.8201063,
+    "ast_hash": "3814765561d541ceb21270f0b18ffbea",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1531-reglage-alpha-reels.json": {
+    "mtime": 1795707167.8908436,
+    "seen": 1795707211.8201063,
+    "ast_hash": "ad48c532685df00decba7eecd1161749",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1346-regle-hors-sujet.md": {
+    "mtime": 1795701001.1572747,
+    "seen": 1795707211.8201063,
+    "ast_hash": "2c19fed7e1c0d1b8163185f0e6992b88",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1352-controle-depart.md": {
+    "mtime": 1795701265.348715,
+    "seen": 1795707211.8201063,
+    "ast_hash": "1051c651227c926b49ec2d250741274a",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1359-nouvelles-fiches.md": {
+    "mtime": 1795701687.304508,
+    "seen": 1795707211.8201063,
+    "ast_hash": "2484687d5c7fb1417fbbd3c6acfc3316",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1410-exemples-reels.md": {
+    "mtime": 1795702308.8344996,
+    "seen": 1795707211.8201063,
+    "ast_hash": "a810508515318723cbb72fbd6a66317b",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1412-exemples-reels-et-cas.md": {
+    "mtime": 1795702411.0205493,
+    "seen": 1795707211.8201063,
+    "ast_hash": "60c9ae7ab521f51b36fe79479064159e",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1412-exemples-reels-hybride.md": {
+    "mtime": 1795703053.1331859,
+    "seen": 1795707211.8201063,
+    "ast_hash": "f3a4b11fabb285f40201d55108931ba7",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1427-exemples-reels-194-hybride.md": {
+    "mtime": 1795705050.5944867,
+    "seen": 1795707211.8201063,
+    "ast_hash": "cdaf8f66dc0c6d25da6d375b040ddfd2",
+    "semantic_hash": ""
+  },
+  "ml/results/20261126-1531-reglage-alpha-reels.md": {
+    "mtime": 1795707167.8888385,
+    "seen": 1795707211.8201063,
+    "ast_hash": "6c38e8a12486e952bc43e22cf38f0fc2",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {

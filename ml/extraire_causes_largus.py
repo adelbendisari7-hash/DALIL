@@ -35,6 +35,12 @@ CUE = re.compile(
     r"|il s'agissait (bien |en fait )?d[eu'e]"
     r"|verdict ?:? ?)", re.IGNORECASE)
 WINDOW = 7
+# Seconde forme (26/11/2026) : « j'ai changé la pompe et tout marche » ; la réussite doit être dite dans la même phrase
+CHANGE = re.compile(r"(j'?\s?ai|on a|le garage a|il a|le m[ée]cano a|nous avons)\s+(donc |finalement |enfin |juste |simplement )*"
+                    r"(chang\w*|remplac\w*|mis (un|une|des) (neuve?s?|nouveaux?|nouvelles?))\s+", re.IGNORECASE)
+REUSSITE = re.compile(r"(tout )?(marche|fonctionne|refonctionne|remarche|roule)\b|plus (de |aucun )(probl|souci|bruit|panne)|"
+                      r"r[ée]solu|nickel|impec|d[ée]marre (au quart|nickel|bien|maintenant|du premier)|rentr[ée] dans l'ordre",
+                      re.IGNORECASE)
 # Formulations absentes de la taxonomie (vérifiées le 26/11/2026)
 EXTRA = [
     (r"sonde (de )?(temp\w*|d'?eau|liquide)|thermo ?contact|sonde moteur", "sonde-temperature"),
@@ -86,6 +92,24 @@ def cause(solution: str) -> tuple[str | None, str]:
             continue
         if HYPOTHESE.search(before) or INCERTAIN.search(" ".join(sentence.split()[:WINDOW + 3])) or FAUX_AMIS.search(window):
             continue
+        for pat, slug in EXTRA:
+            if pat.search(window):
+                return slug, (m.group(0) + window)
+        cats = categories_fr(window)
+        if cats:
+            return cats[0], (m.group(0) + window)
+    return None, ""
+
+
+def cause_changement(solution: str) -> tuple[str | None, str]:
+    """« j'ai changé la X … et tout marche » : pièce juste après le verbe, réussite dans la même phrase."""
+    for sent in re.split(r"[.!?\n]", solution or ""):
+        m = CHANGE.search(sent)
+        if not m or not REUSSITE.search(sent[m.end():]) or HYPOTHESE.search(sent[:m.start()][-40:]):
+            continue
+        window = " ".join(sent[m.end():].split()[:5])
+        if FAUX_AMIS.search(window) or re.search(r"\b(et|puis|ainsi que|,)\b.*\b(et|puis)\b", window):
+            continue  # plusieurs pièces changées d'un coup : on ne sait pas laquelle était en cause
         for pat, slug in EXTRA:
             if pat.search(window):
                 return slug, (m.group(0) + window)

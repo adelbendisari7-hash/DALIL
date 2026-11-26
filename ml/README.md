@@ -245,3 +245,36 @@ Lecture :
 Le gain n'existe que sur le jeu qui a servi à écrire les fiches : c'est un sur-ajustement, que seul le jeu de contrôle
 permettait de voir. Les fiches restent en brouillon (`data/seed/brouillons/`) ; il leur faudra de vrais exemples.
 
+## Vrais exemples vérifiés tirés de L'Argus (26/11/2026, en service)
+
+Les étiquettes de pièce déduites de tout un message ne sont justes que dans 28 % des cas. On ne garde donc que les
+**causes affirmées** par l'auteur (`ml/extraire_causes_largus.py`) :
+- « c'était bien la bobine », « panne résolue en changeant le démarreur » ;
+- « j'ai changé la pompe et tout marche », avec la réussite dite dans la même phrase.
+
+Les hypothèses (« si c'était… », « peut-être ») et les pièces homonymes (durite du turbo, sonde d'air…) sont écartées.
+Les règles seules plafonnent à 60-65 % de justes (trois échantillons de 60 relus) ; chaque cause extraite a donc été
+**vérifiée une à une** par Claude : 179 justes sur 250, puis 35 sur 50. Sont gardées les 194 dont la pièce est la pièce
+principale d'une panne type. Les identifiants vérifiés, sans texte, sont dans `data/largus/causes_verifiees.json` ;
+`python ml/extraire_causes_largus.py --verifiees` reconstruit les exemples, puis
+`python ml/train_baseline.py --exemples-reels data/processed/largus_causes_verifiees.jsonl --out <base>.joblib` et
+`python ml/train_family_reranker.py --base <base>.joblib --alphas 0.25`.
+
+| Chaîne complète hybride, top-1 / top-3 | Avant (deux niveaux) | + 160 exemples | + 194 exemples (en service) |
+| --- | --- | --- | --- |
+| Dev | 92 / 98 % | 96 / 98 % | 96 / 98 % |
+| Démo | 94 / 100 % | 94 / 100 % | 94 / 100 % |
+| Audit d'Oran | 87 / 91 % | 89 / 91 % | 89 / 91 % |
+| Contrôle d'Oran | 94 / 100 % | 94 / 100 % | 94 / 100 % |
+| L'Argus, jeu étudié | 35 / 59 % | 40 / 60 % | 40 / 60 % |
+| **L'Argus, contrôle jamais vu** | 40 / 56 % (abst. 9 %) | 47 / 58 % (12 %) | **49 / 63 % (7 %)** |
+
+Alpha du second niveau revérifié sur les jeux de réglage avec ce nouveau modèle de base (0,15 / 0,25 / 0,5) : 0,25 reste
+le meilleur. Les mêmes 160 cas versés comme « cas semblables » dans la recherche ont été essayés : neutres (contrôle
+top-1 42 -> 40 %, abstention 16 -> 9 %), non retenus. Le fichier du modèle reste local, hors git.
+
+**Bilan de L'Argus** : le classifieur à deux niveaux (familles), ces 194 vrais exemples et les deux jeux de test réalistes
+sont ce qui a servi ; les étiquettes de pièce brutes, le véhicule, les fiches sans vrais exemples et les cas semblables
+n'ont rien apporté ou ont fait reculer le modèle. Sur le contrôle jamais vu, la bonne pièce en tête passe de 37 % (avant
+toute utilisation de L'Argus dans le modèle, mots-clés) à 49 % (hybride).
+

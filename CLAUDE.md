@@ -26,6 +26,7 @@ Cahier des charges complet : `docs/cahier-des-charges.md` (le relire pour toute 
 - Jeu d'entraînement commun (variantes A et B) : `python ml/build_training_set.py` puis `python ml/train_baseline.py --set` ; relecture d'étiquettes : `python ml/relecture_etiquettes.py tirer --source largus_forum` puis `mesurer <fichier.xlsx>`.
 - Classifieur à deux niveaux (familles apprises sur L'Argus, fichier local hors git) : `python ml/train_family_reranker.py --alphas 0.25` ; le lanceur l'utilise s'il existe (`DALIL_CLASSIFIER_PATH`).
 - Jeu de test L'Argus (104 vrais cas, privé, hors git) : `python ml/evaluate.py ... --test data/test_prive/largus_test.jsonl` ; ses résultats détaillés restent hors git.
+- Vrais exemples L'Argus vérifiés (identifiants sans texte dans `data/largus/causes_verifiees.json`) : `python ml/extraire_causes_largus.py --verifiees` puis `train_baseline.py --exemples-reels data/processed/largus_causes_verifiees.jsonl --out <base>` et `train_family_reranker.py --base <base> --alphas 0.25` (voir `ml/README.md`).
 - Jeu de test d'Oran : `python ml/oran_csv_to_jsonl.py fiches.csv [--check]` (protocole des essais : `docs/essais-oran.md`).
 - Étape 7 sur Kaggle : `ml/kaggle/README.md` ; carnets générés par `python ml/kaggle/make_notebooks.py` (modifier ce script, pas les .ipynb) ; jeu d'affinage du modèle de langage : `python ml/build_llm_dataset.py`.
 - Frontend : `cd frontend && npm run dev` ; e2e : `cd frontend && npx playwright test` (téléphone simulé ; trouve seul `backend/.venv`).
