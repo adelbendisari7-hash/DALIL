@@ -53,6 +53,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 | Date | Décision | Raison |
 | --- | --- | --- |
+| 26/11/2026 | **Priorité : un DALIL efficace en français d'abord** ; darija et arabe ensuite | Décision de l'utilisateur. Les améliorations se mesurent sur les jeux en français (contrôle L'Argus en premier) |
 | 26/11/2026 | **194 vrais exemples L'Argus vérifiés ajoutés au modèle de base** (en service, fichier local) | Contrôle L'Argus jamais vu, hybride : top-1 40 -> 49 %, top-3 56 -> 63 %, abstention 9 -> 7 % ; rien ne recule ailleurs. Cas semblables dans la recherche : neutres, non retenus. **Fin du travail sur L'Argus** |
 | 26/11/2026 | **10 nouvelles fiches de pannes non retenues** (brouillon gardé : `data/seed/brouillons/fiches_non_retenues.json`) | Avec 10 exemples écrits par fiche, gain sur le jeu étudié seulement (top-3 57 -> 61 %) mais recul sur le jeu de contrôle jamais vu (58 -> 54 %) et sur les jeux d'Oran (audit 87 -> 82 %, contrôle 94 -> 88 % en top-1) : dix pannes de plus diluent le classifieur. À reprendre avec de vrais exemples par panne |
 | 26/11/2026 | **Pas de prise en compte du véhicule** (fréquence des pannes par modèle) | Simulée hors ligne sur les 104 vrais cas : au mieux +2 cas en top-1, rien en top-3 ; et les modèles les plus vendus en Algérie sont absents de L'Argus |
