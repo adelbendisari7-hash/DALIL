@@ -25,7 +25,25 @@ def cat_id(db, slug):
 # --- Étape 3 : référentiels -----------------------------------------------
 
 def test_health(client):
-    assert client.get("/health").json() == {"status": "ok"}
+    assert client.get("/health").json()["status"] == "ok"
+    assert client.get("/api/v1/health").json()["status"] == "ok"
+
+
+def test_health_dit_quand_les_modeles_sont_prets(monkeypatch):
+    """Le site affiche « DALIL se prépare » tant que `ready` est faux ; il devient vrai après le préchargement,
+    même raté (sinon le site attendrait pour rien)."""
+    from fastapi.testclient import TestClient
+
+    from app import main
+
+    main.READY.clear()
+    monkeypatch.setattr(main, "get_settings", lambda: type("S", (), {"warmup": True})())
+    monkeypatch.setattr(main.threading, "Thread", lambda target, **k: type("T", (), {"start": lambda self: None})())
+    with TestClient(main.app) as c:   # démarrage de l'application, préchargement pas encore fait
+        assert c.get("/health").json() == {"status": "ok", "ready": False}
+        monkeypatch.setattr("app.db.SessionLocal", lambda: (_ for _ in ()).throw(RuntimeError("base absente")))
+        main.warmup()
+        assert c.get("/health").json()["ready"] is True
 
 
 def test_vehicle_selection(client):

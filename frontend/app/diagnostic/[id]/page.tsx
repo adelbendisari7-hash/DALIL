@@ -79,12 +79,92 @@ function ShareButton({ r }: { r: Result }) {
   );
 }
 
+type Family = { id: number; name: string; children: { id: number; name: string }[] };
+
+/** « Ce diagnostic était-il juste ? ». Oui : la première pièce proposée est confirmée. Non : quelle pièce était en
+ * cause ? Chaque réponse devient un vrai exemple candidat pour l'entraînement (python -m app.export_retours). */
+function DiagnosisFeedback({ r }: { r: Result }) {
+  const [step, setStep] = useState<"ask" | "which" | "done">("ask");
+  const [families, setFamilies] = useState<Family[] | null>(null);
+  const [other, setOther] = useState(false);
+  const [picked, setPicked] = useState<number | null>(null);
+  const [comment, setComment] = useState("");
+  const [busy, setBusy] = useState(false);
+  // Pièces déjà proposées par DALIL, sauf la première (jugée fausse) : un toucher suffit dans la plupart des cas.
+  const quick = [...r.causes.slice(1).map((c) => c.part), ...r.causes.flatMap((c) => c.other_parts)]
+    .filter((p, i, all) => p.category_id !== r.causes[0]?.part.category_id && all.findIndex((q) => q.category_id === p.category_id) === i)
+    .slice(0, 5);
+
+  async function send(json: Record<string, unknown>) {
+    setBusy(true);
+    await api("/feedback", { method: "POST", json: { session_id: r.session_id, ...json } }).catch(() => undefined);
+    setBusy(false);
+    setStep("done");
+  }
+  function chooseOther() {
+    setOther(true);
+    if (!families) api<Family[]>("/parts/categories").then(setFamilies).catch(() => setFamilies([]));
+  }
+
+  if (step === "done") return <div className="feedback"><span className="ok" role="status">{t("result.feedback.thanks")}</span></div>;
+  return (
+    <div className="feedback">
+      <p>{t("result.feedback.q")}</p>
+      {step === "ask" ? (
+        <div className="actions" style={{ marginTop: 0 }}>
+          <button className="btn btn-ghost" disabled={busy}
+            onClick={() => send({ diagnosis_correct: true, category_id: r.causes[0]?.part.category_id ?? null })}>
+            {t("result.feedback.yes")}
+          </button>
+          <button className="btn btn-ghost" onClick={() => setStep("which")}>{t("result.feedback.no")}</button>
+        </div>
+      ) : (
+        <div className="questions">
+          <p className="help" style={{ marginTop: 0 }}>{t("result.feedback.which")}</p>
+          <div className="chips">
+            {quick.map((p) => (
+              <button key={p.category_id} type="button" className="chip" aria-pressed={picked === p.category_id}
+                onClick={() => { setPicked(p.category_id); setOther(false); }}>{p.name}</button>
+            ))}
+            <button type="button" className="chip" aria-pressed={other} onClick={chooseOther}>{t("result.feedback.other")}</button>
+          </div>
+          {other && (
+            <>
+              <label htmlFor="fb-part">{t("result.feedback.choose")}</label>
+              <select id="fb-part" value={picked ?? ""} onChange={(e) => setPicked(e.target.value ? Number(e.target.value) : null)}>
+                <option value="">—</option>
+                {(families ?? []).map((f) => (
+                  <optgroup key={f.id} label={f.name}>
+                    {f.children.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+                  </optgroup>
+                ))}
+              </select>
+            </>
+          )}
+          <label htmlFor="fb-comment">{t("result.feedback.comment")}</label>
+          <input id="fb-comment" maxLength={300} value={comment} placeholder={t("result.feedback.comment.placeholder")}
+            onChange={(e) => setComment(e.target.value)} />
+          <div className="actions">
+            <button className="btn" disabled={busy || picked === null}
+              onClick={() => send({ diagnosis_correct: false, category_id: picked, comment: comment.trim() || null })}>
+              {t("result.feedback.send")}
+            </button>
+            <button className="btn btn-ghost" disabled={busy}
+              onClick={() => send({ diagnosis_correct: false, comment: comment.trim() || null })}>
+              {t("result.feedback.unknown")}
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function DiagnosticResult() {
   const { id } = useParams<{ id: string }>();
   const [r, setR] = useState<Result | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-  const [feedback, setFeedback] = useState(false);
 
   useEffect(() => {
     api<Result>(`/diagnosis/${id}`).then(setR)
@@ -111,11 +191,6 @@ export default function DiagnosticResult() {
       setError(e instanceof ApiError && e.message ? e.message : t("common.error"));
     }
     setBusy(false);
-  }
-
-  async function rate(ok: boolean) {
-    await api("/feedback", { method: "POST", json: { session_id: r?.session_id, diagnosis_correct: ok } }).catch(() => undefined);
-    setFeedback(true);
   }
 
   if (error) return <p className="err" role="alert">{error}</p>;
@@ -204,19 +279,7 @@ export default function DiagnosticResult() {
             ))}
           </ol>
           <ShareButton r={r} />
-          <div className="feedback">
-            <p>{t("result.feedback.q")}</p>
-            <div className="actions" style={{ marginTop: 0 }}>
-            {feedback ? (
-              <span className="ok">{t("result.feedback.thanks")}</span>
-            ) : (
-              <>
-                <button className="btn btn-ghost" onClick={() => rate(true)}>{t("result.feedback.yes")}</button>
-                <button className="btn btn-ghost" onClick={() => rate(false)}>{t("result.feedback.no")}</button>
-              </>
-            )}
-            </div>
-          </div>
+          <DiagnosisFeedback r={r} />
         </section>
       )}
 

@@ -94,8 +94,9 @@ a { color: var(--blue); }
   display: inline-flex;
   align-items: center;
 }
-/* Boutons de zoom de la carte : 30 px par défaut, trop petits pour un doigt */
-.leaflet-touch .leaflet-bar a { width: 44px; height: 44px; line-height: 44px; font-size: 22px; }
+/* Boutons de zoom de la carte : 30 px par défaut, trop petits pour un doigt. Sélecteur plus précis que celui de
+   Leaflet : en production, sa feuille de style arrive après la nôtre (vérification du 27/11/2026). */
+.leaflet-container.leaflet-touch .leaflet-bar a { width: 44px; height: 44px; line-height: 44px; font-size: 22px; }
 .nav { display: flex; gap: 0 1rem; flex-wrap: wrap; font-size: var(--step--1); }
 .nav a, .nav button {
   color: #dbe6f1;

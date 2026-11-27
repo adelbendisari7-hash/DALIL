@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 27/11/2026 (matin), Techniconnexion intégré, CamemBERT entraîné et mesuré : V2 mise en service (deux forums) ; site amélioré.
+> Dernière mise à jour : 27/11/2026 (midi), V2 en service ; site : démarrage plus rapide, retours « quelle pièce était en cause », version de production.
 
 ## 1. Où on en est
 
@@ -44,6 +44,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 ## 3. Prochaines actions, dans l'ordre
 
 0. **V2 en service depuis le 27/11/2026** : à remesurer contre l'ancien modèle (`ml/artifacts/famille_rerank_a0.25_avant-v2-20261126.joblib`) dès que le jeu de test d'Oran existe ; garder le meilleur. Pour revenir en arrière : recopier ce fichier sur `famille_rerank_a0.25.joblib` et remettre `DALIL_MODEL_VERSION=tfidf-lr-reels+familles-largus-a0.25` dans `DEMARRER-DALIL.bat`.
+0 ter. **Pendant les essais d'Oran, récolter les retours** : chaque « Non, c'était telle pièce » ou « Oui » devient un vrai exemple candidat (`cd backend && python -m app.export_retours`). Les relire un à un comme ceux des forums, puis les ajouter à l'entraînement (`train_baseline.py --exemples-reels`) ; jamais les cas du jeu de test d'Oran.
 0 bis. **Accords écrits à archiver** : Techniconnexion (robots.txt `ai-train=no`, usage par l'IA déclaré autorisé par l'utilisateur le 27/11) et L'Argus, tous deux couvrant le jeu Kaggle privé `dalil-camembert` envoyé le 27/11/2026. Sans écrit, supprimer ce jeu sur Kaggle.
 1. **L'Argus** : classifieur à deux niveaux en service (relancer `DEMARRER-DALIL.bat`). Reste possible : faire contrôler une vingtaine d'étiquettes de la relecture par un mécanicien ; L'Argus comme « cas semblables » dans la recherche, après mesure. Le chiffre du mémoire viendra du jeu de test d'Oran.
 2. **Étape 11, essais à Oran (équipe, sur le terrain)** : suivre `docs/essais-oran.md` : fiches des mécaniciens (jeu de test, objectif 200 cas), inscription chronométrée de 5 à 10 magasins, parcours de 10 à 20 automobilistes, questionnaire ; puis rédiger `docs/compte-rendu-essais.md`.
@@ -78,8 +79,8 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 4. Pour reprendre le travail
 
-- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (158 tests).
-- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (20 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
+- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (163 tests).
+- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (22 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
 - **Ouvrir le site sur un téléphone** : `DEMARRER-DALIL.bat` affiche l'adresse Wi-Fi du PC (fiche : `docs/test-telephone.md`).
 - **Tests du pipeline de données** : `cd backend && .venv/Scripts/python -m pytest -q ../data/pipeline/tests`.
 - **Servir le modèle affiné** :
@@ -142,3 +143,4 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 26/11/2026 | **Temps de réponse sur les textes longs** : le reclassement et le vecteur de la question font tout le temps (jusqu'à 10,5 s). Essais sur le jeu de réglage : recherche limitée à 400 ou 600 caractères (plus rapide sur les cas lents, mais 1 à 2 cas perdus sur 104), 6 passages au lieu de 10 (idem), modèle des vecteurs en int8 (à proscrire : abstention 46 à 84 %). Réglage inchangé (5,8 s en moyenne, 8,2 s au 95e centile) ; option `retrieval_query_chars` disponible pour un ordinateur plus lent. 157 tests backend |
 | 27/11/2026 (nuit) | **Techniconnexion intégré** (`data/pipeline/sources/techniconnexion.py`, fiche, 53 tests pipeline) : nettoyage maximal (citations, formules, pseudonymes, sujets hors panne et procédures), étiquettes à double accord (rubrique + pièce nommée, 73-82 % justes à la relecture), 19 006 exemples, 153 vrais exemples vérifiés + contrôle de 39 cas. **CamemBERT entraîné sur Kaggle** (jeu privé `dalil-camembert`, données nettoyées seulement) : familles (validation 91,7 %) et pièces ; prise en charge des modèles ONNX dans le classifieur à deux niveaux (`ml/assembler_deux_niveaux.py`). 11 variantes mesurées sur 7 jeux : aucune ne passe la règle de mise en service (voir décision). 158 tests backend |
 | 27/11/2026 (matin) | **Site** : exemples de descriptions à toucher et conseil d'écriture sur l'accueil, message d'attente après 3 s d'analyse, bouton « Envoyer à mon mécanicien » (partage du téléphone, sinon copie ou WhatsApp, sans donnée personnelle) ; test e2e ajouté |
+| 27/11/2026 (midi) | **Site, trois améliorations** (demandées par l'utilisateur). (1) **Démarrage** : index des mots-clés gardé sur disque (`data/processed/index_cache/`, reconnu par une empreinte du contenu de la base et du code de normalisation, 3 versions gardées), trois modèles chargés en parallèle ; API prête 53 s après le double-clic au lieu de 124 s (premier diagnostic : 91 s d'attente auparavant). `/health` dit `ready` ; l'accueil affiche « DALIL se prépare » tant que ce n'est pas le cas. (2) **Retours** : « Oui » confirme la première pièce ; « Non » demande la pièce réellement en cause (pièces proposées en un toucher, liste complète, « je ne sais pas encore ») et ce que le mécanicien a trouvé ; `python -m app.export_retours` en fait des vrais exemples candidats (numéros et e-mails masqués). (3) **Version de production** servie par le lanceur (construite seulement si le code a changé ; `SITE_DEV=1` pour le mode développement) : en 3G, accueil en 2,8 s et 212 Ko au lieu de 17 s et 2,1 Mo ; boutons de zoom de la carte remis à 44 px (la feuille de Leaflet passait après la nôtre en production). Vérification « comme un téléphone » : 3 parcours sur 3, aucun constat. 163 tests backend, 22 e2e |

@@ -223,5 +223,13 @@
   "home.slow": "Encore quelques secondes : DALIL compare votre description à des milliers de pannes connues.",
   "result.share": "Envoyer à mon mécanicien",
   "result.share.copied": "Résumé copié : collez-le dans un message.",
-  "result.share.text": "Diagnostic DALIL ({vehicle}) : {cause}, pièce à vérifier : {part} (confiance {confidence} %)."
+  "result.share.text": "Diagnostic DALIL ({vehicle}) : {cause}, pièce à vérifier : {part} (confiance {confidence} %).",
+  "home.warming": "DALIL se prépare (moins d'une minute après le démarrage). Vous pouvez déjà écrire : le diagnostic partira dès qu'il sera prêt.",
+  "result.feedback.which": "Quelle pièce était en cause ? Votre réponse apprend à DALIL à mieux reconnaître cette panne.",
+  "result.feedback.other": "Une autre pièce…",
+  "result.feedback.choose": "Choisir dans la liste",
+  "result.feedback.unknown": "Je ne sais pas encore",
+  "result.feedback.comment": "Ce que le mécanicien a trouvé (facultatif)",
+  "result.feedback.comment.placeholder": "Exemple : c'était le capteur, pas la batterie",
+  "result.feedback.send": "Envoyer"
 }

@@ -170,6 +170,10 @@ def contact_event(body: ContactEventIn, db: Session = Depends(get_db)):
 def feedback(body: FeedbackIn, request: Request, db: Session = Depends(get_db)):
     if body.shop_id and not db.get(Shop, body.shop_id):
         raise HTTPException(404, "Magasin inconnu")
+    if body.category_id and not db.get(PartCategory, body.category_id):
+        raise HTTPException(404, "Pièce inconnue")
+    if body.session_id and not db.get(DiagnosisSession, body.session_id):
+        raise HTTPException(404, "Diagnostic inconnu")
     fb = Feedback(**body.model_dump(), client_hash=client_hash(request))
     db.add(fb)
     if body.part_found and body.shop_id:

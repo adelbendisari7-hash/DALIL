@@ -98,3 +98,31 @@ test("exemple touché : la description se remplit et le résultat peut être env
   await expect(page.getByRole("heading", { name: "Causes probables" })).toBeVisible({ timeout: 60_000 });
   await expect(page.getByRole("button", { name: "Envoyer à mon mécanicien" })).toBeVisible();
 });
+
+test("API qui charge encore ses modèles : l'accueil dit que DALIL se prépare", async ({ page }) => {
+  await page.route("**/api/v1/health", (route) => route.fulfill({ json: { status: "ok", ready: false } }));
+  await page.goto("/");
+  await expect(page.getByText("DALIL se prépare")).toBeVisible();
+  await page.unroute("**/api/v1/health");
+  await expect(page.getByText("DALIL se prépare")).toHaveCount(0, { timeout: 10_000 }); // l'API répond « prête »
+});
+
+test("diagnostic faux : l'utilisateur dit quelle pièce était en cause", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Décrivez le problème").fill("la voiture ne démarre pas le matin, le démarreur tourne lentement");
+  await page.getByRole("button", { name: "Trouver la panne" }).click();
+  await expect(page.getByRole("heading", { name: "Causes probables" })).toBeVisible({ timeout: 60_000 });
+  await page.getByRole("button", { name: "Non", exact: true }).click();
+  const send = page.getByRole("button", { name: "Envoyer", exact: true });
+  await expect(send).toBeDisabled(); // pas de pièce choisie
+  await page.getByRole("button", { name: "Une autre pièce…" }).click();
+  await expect(page.getByLabel("Choisir dans la liste").locator("option")).not.toHaveCount(1); // liste chargée
+  await page.getByLabel("Choisir dans la liste").selectOption({ label: "Batterie" });
+  await page.getByLabel("Ce que le mécanicien a trouvé (facultatif)").fill("batterie changée");
+  const posted = page.waitForRequest((r) => r.url().endsWith("/api/v1/feedback") && r.method() === "POST");
+  await send.click();
+  const body = (await posted).postDataJSON();
+  expect(body).toMatchObject({ diagnosis_correct: false, comment: "batterie changée" });
+  expect(typeof body.category_id).toBe("number");
+  await expect(page.getByText("Merci, votre réponse améliore DALIL.")).toBeVisible();
+});

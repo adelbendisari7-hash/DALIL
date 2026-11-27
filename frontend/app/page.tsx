@@ -15,7 +15,24 @@ export default function Home() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [slow, setSlow] = useState(false);
+  const [warming, setWarming] = useState(false);
   const onVoice = useCallback((s: string) => setText(s), []);
+
+  // Juste après le démarrage, l'API charge ses modèles (~30 s) : on le dit plutôt que de laisser croire à une panne.
+  useEffect(() => {
+    let stop = false;
+    let timer: ReturnType<typeof setTimeout>;
+    const check = () =>
+      api<{ ready?: boolean }>("/health")
+        .then((h) => {
+          if (stop) return;
+          setWarming(h.ready === false);
+          if (h.ready === false) timer = setTimeout(check, 3000);
+        })
+        .catch(() => undefined);
+    check();
+    return () => { stop = true; clearTimeout(timer); };
+  }, []);
 
   // Un diagnostic prend 3 à 8 s sur le portable : au-delà de 3 s, on dit à l'utilisateur que ça avance.
   useEffect(() => {
@@ -46,6 +63,7 @@ export default function Home() {
     <form className="hero" onSubmit={submit} noValidate>
       <h1>{t("home.title")}</h1>
       <p className="lead">{t("home.lead")}</p>
+      {warming && <p className="notice" role="status">{t("home.warming")}</p>}
 
       <VehiclePicker onChange={setVehicle} />
 

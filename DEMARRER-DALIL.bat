@@ -13,6 +13,9 @@ rem  Modele de langage affine : DESACTIVE par defaut (decision du 17/11/2026). S
 rem  par diagnostic (exigence : moins de 10 s) et ne gagne pas en precision (demo 88 -> 77 %, voir ml/README.md).
 rem  Pour les mesures du memoire, mettre USE_LLM=1 (serveur llama.cpp, ~5 Go de memoire en q8_0).
 set "USE_LLM=0"
+rem  Site en version de production (construite au premier lancement et apres chaque modification, plus legere sur
+rem  un telephone). SITE_DEV=1 : mode developpement, rechargement a chaud pendant qu'on modifie le site.
+set "SITE_DEV=0"
 set "LLM_GGUF=ml\artifacts\dalil-qwen3-4b-instruct-2507-q8_0.gguf"
 
 echo.
@@ -86,7 +89,11 @@ if not "%USE_LLM%"=="1" (
   echo      Modele de langage affine absent : diagnostic sans modele de langage
 )
 start "DALIL - API (codes SMS affiches ici)" /D "%~dp0backend" cmd /k .venv\Scripts\python -m uvicorn app.main:app --port 8000
-start "DALIL - Site" /D "%~dp0frontend" cmd /k npm run dev
+if "%SITE_DEV%"=="1" (
+  start "DALIL - Site" /D "%~dp0frontend" cmd /k npm run dev
+) else (
+  start "DALIL - Site" /D "%~dp0frontend" cmd /k "node scripts\build-si-besoin.mjs && npm run start"
+)
 
 echo.
 echo  Attente du demarrage du site...
@@ -94,7 +101,8 @@ set /a tries=0
 :wait
 set /a tries+=1
 curl -s -o nul http://localhost:3000 && goto ready
-if %tries% geq 90 goto ready
+rem jusqu'a ~6 min : la premiere construction du site prend 1 a 3 minutes
+if %tries% geq 180 goto ready
 ping -n 3 127.0.0.1 >nul
 goto wait
 

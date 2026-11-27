@@ -7,6 +7,7 @@ Deux modes (réglage `retrieval_mode`) :
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import threading
@@ -64,8 +65,44 @@ class KeywordIndex:
         if not self.rows:
             self.vectorizer, self.matrix = None, None
             return
+        texts = [r.text for r in self.rows]
+        cache = self._cache_path(texts)
+        if cache is not None and cache.exists():
+            try:
+                import joblib
+                self.vectorizer, self.matrix = joblib.load(cache)
+                return
+            except Exception as e:  # fichier abîmé ou d'une autre version de scikit-learn : on recalcule
+                log.warning("Cache de l'index illisible (%s), recalcul", e)
         self.vectorizer = TfidfVectorizer(preprocessor=normalize, analyzer="char_wb", ngram_range=(3, 5), sublinear_tf=True)
-        self.matrix = self.vectorizer.fit_transform([r.text for r in self.rows])
+        self.matrix = self.vectorizer.fit_transform(texts)
+        if cache is not None:
+            try:
+                import joblib
+                cache.parent.mkdir(parents=True, exist_ok=True)
+                tmp = cache.with_suffix(".tmp")
+                joblib.dump((self.vectorizer, self.matrix), tmp)
+                tmp.replace(cache)
+                # Ménage : garder les 3 plus récents de cette sorte (plusieurs bases peuvent partager le dossier :
+                # celle de DALIL et celle des tests e2e ; n'en garder qu'un ferait recalculer l'autre à chaque fois).
+                same = sorted(cache.parent.glob(f"{cache.name.split('-')[0]}-*.joblib"), key=lambda f: -f.stat().st_mtime)
+                for old in same[3:]:
+                    old.unlink(missing_ok=True)
+            except OSError as e:
+                log.warning("Cache de l'index non écrit (%s)", e)
+
+    def _cache_path(self, texts: list[str]) -> Path | None:
+        """Fichier de cache propre à ce contenu exact (identifiants et textes) et à cet index."""
+        folder = get_settings().index_cache_dir
+        if not folder:
+            return None
+        import sklearn
+        h = hashlib.sha256(f"{sorted(self.only_sources or [])}|{sklearn.__version__}".encode())
+        h.update((Path(__file__).parent / "normalize.py").read_bytes())  # le prétraitement fait partie de l'index
+        for r, t in zip(self.rows, texts):
+            h.update(f"{r.id}\x1f{t}\x1e".encode())
+        kind = "domaine" if self.only_sources else "complet"
+        return Path(folder) / f"{kind}-{h.hexdigest()[:20]}.joblib"
 
     def search(self, db: Session, query: str, k: int = 5, sources: set[str] | None = None) -> list[Hit]:
         """Passages les plus proches ; `sources` restreint la recherche à certaines sources."""

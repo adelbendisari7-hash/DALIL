@@ -63,6 +63,9 @@ class Settings(BaseSettings):
     # Charge les modèles de diagnostic au démarrage (en arrière-plan) : le premier diagnostic ne paie pas
     # ~1 min de chargement de la recherche hybride.
     warmup: bool = True
+    # Index des mots-clés (TF-IDF sur ~9 600 passages : 60 à 120 s à recalculer sur le portable) gardé sur disque,
+    # reconnu par une empreinte du contenu de la base. Vide = pas de cache.
+    index_cache_dir: str = str(REPO_ROOT / "data" / "processed" / "index_cache")
     cors_origins: str = "http://localhost:3000"
 
     data_dir: str = str(REPO_ROOT / "data")

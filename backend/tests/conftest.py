@@ -13,6 +13,8 @@ os.environ["DALIL_LLM_PROVIDER"] = "none"
 # La recherche réécrit ses fichiers de vecteurs quand des fiches en manquent : jamais ceux de ml/artifacts.
 os.environ["DALIL_VECTORS_PATH"] = str(_tmp.parent / "vecteurs")
 os.environ["DALIL_WARMUP"] = "false"
+# Cache de l'index des mots-clés : dans le dossier temporaire des tests, jamais dans data/processed.
+os.environ["DALIL_INDEX_CACHE_DIR"] = str(_tmp.parent / "index_cache")
 
 import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402

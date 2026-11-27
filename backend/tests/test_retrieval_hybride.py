@@ -160,3 +160,44 @@ def test_vecteurs_des_fiches_manquants_recalcules(db, hybrid, tmp_path):
     saved = json.loads((tmp_path / "chunk_ids.json").read_text(encoding="utf-8"))
     assert fiches <= set(saved) and 10**9 not in saved
     assert retrieval.dense_index.ensure_reference(db) == 0  # rien à refaire ensuite
+
+
+def test_index_mots_cles_garde_sur_disque(db, tmp_path, monkeypatch):
+    """L'index TF-IDF (60 à 120 s à recalculer sur le portable) est relu depuis le disque au démarrage suivant,
+    à résultats identiques ; un autre contenu de la base donne un autre fichier."""
+    monkeypatch.setenv("DALIL_INDEX_CACHE_DIR", str(tmp_path / "cache"))
+    get_settings.cache_clear()
+    try:
+        first = retrieval.KeywordIndex()
+        hits = first.search(db, "bruit métallique au freinage")
+        files = list((tmp_path / "cache").glob("complet-*.joblib"))
+        assert len(files) == 1 and hits
+        second = retrieval.KeywordIndex()   # nouveau processus : relit le fichier au lieu de recalculer
+        monkeypatch.setattr(retrieval, "TfidfVectorizer", lambda *a, **k: (_ for _ in ()).throw(AssertionError("recalcul")))
+        again = second.search(db, "bruit métallique au freinage")
+        assert [(h.chunk_id, round(h.score, 6)) for h in again] == [(h.chunk_id, round(h.score, 6)) for h in hits]
+        assert second._cache_path([r.text + " modifié" for r in second.rows]) != files[0]
+    finally:
+        get_settings.cache_clear()
+
+
+def test_cache_de_l_index_partage_entre_deux_bases(db, tmp_path, monkeypatch):
+    """Deux bases (DALIL et tests e2e) qui partagent le dossier du cache ne s'effacent pas l'une l'autre :
+    le ménage garde les 3 index les plus récents de chaque sorte."""
+    import os
+    import time
+
+    folder = tmp_path / "cache"
+    folder.mkdir()
+    for i in range(4):   # index d'autres bases, du plus ancien au plus récent
+        f = folder / f"complet-autre{i}.joblib"
+        f.write_bytes(b"x")
+        os.utime(f, (time.time() - 100 + i,) * 2)
+    monkeypatch.setenv("DALIL_INDEX_CACHE_DIR", str(folder))
+    get_settings.cache_clear()
+    try:
+        retrieval.KeywordIndex().search(db, "bruit au freinage")
+        left = {f.name for f in folder.glob("complet-*.joblib")}
+        assert len(left) == 3 and {"complet-autre3.joblib", "complet-autre2.joblib"} <= left
+    finally:
+        get_settings.cache_clear()

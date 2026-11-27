@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "backend/app/config.py": {
-    "mtime": 1795707816.387166,
-    "seen": 1795712838.8517852,
-    "ast_hash": "0ba8909a5a7dd29ef0a80fb664bed5dc",
+    "mtime": 1795776290.0026474,
+    "seen": 1795777926.6340358,
+    "ast_hash": "c138b8a246f4d4efb998256878c8d11e",
     "semantic_hash": ""
   },
   "backend/app/db.py": {
@@ -36,9 +36,9 @@
     "semantic_hash": ""
   },
   "backend/app/main.py": {
-    "mtime": 1794928822.0219784,
-    "seen": 1794931051.2328465,
-    "ast_hash": "6f121bc67c25ca6b70e61572d4cfa037",
+    "mtime": 1795777352.6550436,
+    "seen": 1795777926.6340358,
+    "ast_hash": "585986fcc0271d4ac21dac76e40f0cff",
     "semantic_hash": ""
   },
   "backend/app/models.py": {
@@ -72,9 +72,9 @@
     "semantic_hash": ""
   },
   "backend/app/routers/shops.py": {
-    "mtime": 1794933761.9558225,
-    "seen": 1794934270.8126845,
-    "ast_hash": "6b15ed700e5b5fa1a57875812158f0d5",
+    "mtime": 1795776645.305822,
+    "seen": 1795777926.6340358,
+    "ast_hash": "bbb52f9eb8ff8416756c497a42966c30",
     "semantic_hash": ""
   },
   "backend/app/schemas.py": {
@@ -138,9 +138,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/retrieval.py": {
-    "mtime": 1794930074.6024952,
-    "seen": 1794931051.2328465,
-    "ast_hash": "f6d0f3aec8278455d9e70917ace045fd",
+    "mtime": 1795777093.5159245,
+    "seen": 1795777926.6340358,
+    "ast_hash": "5d6d5061d5e65bc0cf262ed63bc0bd9e",
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/safety.py": {
@@ -168,15 +168,15 @@
     "semantic_hash": ""
   },
   "backend/tests/conftest.py": {
-    "mtime": 1794930168.2828548,
-    "seen": 1794931051.2328465,
-    "ast_hash": "ea36614f691ddb3134ee46094d0049fd",
+    "mtime": 1795776322.9987497,
+    "seen": 1795777926.6340358,
+    "ast_hash": "bd6cce3eb8f5bcd9772cb523d7ba7c8d",
     "semantic_hash": ""
   },
   "backend/tests/test_api.py": {
-    "mtime": 1794618767.0989954,
-    "seen": 1794659040.1764622,
-    "ast_hash": "92e3e473ee1f273606a74271b664db31",
+    "mtime": 1795776574.7043872,
+    "seen": 1795777926.6340358,
+    "ast_hash": "415bd71ef582ba22115c4ac9110aac5a",
     "semantic_hash": ""
   },
   "backend/tests/test_demo_cases.py": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "frontend/app/diagnostic/[id]/page.tsx": {
-    "mtime": 1795751195.8114333,
-    "seen": 1795752692.6992602,
-    "ast_hash": "62d690d482399970305a5d5d6c30e093",
+    "mtime": 1795776711.7577624,
+    "seen": 1795777926.6340358,
+    "ast_hash": "e2fcd308df9eeb8b49598c57d88748e7",
     "semantic_hash": ""
   },
   "frontend/app/espace-magasin/page.tsx": {
@@ -396,9 +396,9 @@
     "semantic_hash": ""
   },
   "frontend/app/page.tsx": {
-    "mtime": 1795751186.2130852,
-    "seen": 1795752692.6992602,
-    "ast_hash": "65b37af41df5e84a14671bb71f73a561",
+    "mtime": 1795776574.7843654,
+    "seen": 1795777926.6340358,
+    "ast_hash": "a12884e1ef5a5f5de1942e40c67e8404",
     "semantic_hash": ""
   },
   "frontend/app/pieces/page.tsx": {
@@ -468,9 +468,9 @@
     "semantic_hash": ""
   },
   "frontend/messages/fr.json": {
-    "mtime": 1795751177.8736982,
-    "seen": 1795752692.6992602,
-    "ast_hash": "8ba3e31e1fffa904c97126cfa5ac1282",
+    "mtime": 1795776711.707385,
+    "seen": 1795777926.6340358,
+    "ast_hash": "6661cf2183eceed07b72dd4a64921578",
     "semantic_hash": ""
   },
   "frontend/next.config.mjs": {
@@ -522,9 +522,9 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1795752671.4769287,
-    "seen": 1795752692.6992602,
-    "ast_hash": "e2606513cf3748592cdcc8c594703177",
+    "mtime": 1795777907.3975186,
+    "seen": 1795777926.6340358,
+    "ast_hash": "515fa8b04d3615d30739d736c5fa3733",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.md": {
@@ -612,9 +612,9 @@
     "semantic_hash": ""
   },
   "ml/README.md": {
-    "mtime": 1795752576.4039888,
-    "seen": 1795752692.6992602,
-    "ast_hash": "4d69684e306522605b1ffa0ec6de6c9e",
+    "mtime": 1795775169.972912,
+    "seen": 1795777926.6340358,
+    "ast_hash": "2c46d295a3ad62cb25eb917d050a52b2",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.pdf": {
@@ -840,9 +840,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_retrieval_hybride.py": {
-    "mtime": 1794930152.7297552,
-    "seen": 1794931051.2328465,
-    "ast_hash": "e59f5925e9e86b610dccf6cef739e3f4",
+    "mtime": 1795777102.4001586,
+    "seen": 1795777926.6340358,
+    "ast_hash": "38796d519d1ad08b8fd073d724a1456f",
     "semantic_hash": ""
   },
   "ml/eval_with_llm.sh": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795752663.9636805,
-    "seen": 1795752692.6992602,
-    "ast_hash": "95e7ae72167cbd16078e9891aa6485ca",
+    "mtime": 1795777907.4009216,
+    "seen": 1795777926.6340358,
+    "ast_hash": "59a5ecd17bf56b66804697a2fddb2614",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -936,9 +936,9 @@
     "semantic_hash": ""
   },
   "docs/test-telephone.md": {
-    "mtime": 1795049499.9517128,
-    "seen": 1795049514.7529655,
-    "ast_hash": "7b83decd658f1f2c15eababeeb7fe4d2",
+    "mtime": 1795777913.8509977,
+    "seen": 1795777926.6340358,
+    "ast_hash": "ef4dddcc307cb7da2e0c2151d6d92df6",
     "semantic_hash": ""
   },
   "ml/results/20261117-1533-hybride-int8-10x256.md": {
@@ -978,9 +978,9 @@
     "semantic_hash": ""
   },
   "frontend/e2e/qualite.spec.ts": {
-    "mtime": 1795751240.561177,
-    "seen": 1795752692.6992602,
-    "ast_hash": "baadc9aff73d7454b93ab3f3739087b2",
+    "mtime": 1795776728.5123155,
+    "seen": 1795777926.6340358,
+    "ast_hash": "c303707dd297111a72c838c69733e341",
     "semantic_hash": ""
   },
   "ml/results/20261117-1627-mot-seul-hybride.json": {
@@ -1689,6 +1689,24 @@
     "mtime": 1795752563.7678652,
     "seen": 1795752692.6992602,
     "ast_hash": "3890f834bb85d2ecd481da578c7825e6",
+    "semantic_hash": ""
+  },
+  "backend/app/export_retours.py": {
+    "mtime": 1795776685.9852338,
+    "seen": 1795777926.6340358,
+    "ast_hash": "da34e904ee5f82f79c8a4d594dd1a3b9",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_export_retours.py": {
+    "mtime": 1795776686.0254369,
+    "seen": 1795777926.6340358,
+    "ast_hash": "53b285ec1f07cc702b73e1cf3da1b539",
+    "semantic_hash": ""
+  },
+  "frontend/scripts/build-si-besoin.mjs": {
+    "mtime": 1795776755.9789374,
+    "seen": 1795777926.6340358,
+    "ast_hash": "2f4272791dd836edab12b43b97ce9b5e",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {
