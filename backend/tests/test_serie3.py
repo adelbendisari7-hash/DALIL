@@ -253,3 +253,69 @@ def test_import_de_la_colonne_specialites(db):
     g = db.scalar(select(Shop).where(Shop.name == "Garage Importé"))
     assert g.specialties == ["diesel-injection", "electricite"] and g.shop_type == "garage"
     assert len(rep.errors) == 1 and "spécialité inconnue" in rep.errors[0]["error"]
+
+
+# --- 6. Carnet transmis à la revente ---------------------------------------------------------------------------------
+
+def test_transfert_du_carnet_avec_accord_du_vendeur(client, db):
+    from datetime import date, timedelta
+    hv = login(client, "0698000060")      # vendeur
+    from app.models import VehicleVariant
+    vid = db.scalar(select(VehicleVariant).order_by(VehicleVariant.id)).id
+    car = client.post(f"{API}/me/vehicles", headers=hv, json={"plate": "60001-115-31", "variant_id": vid, "mileage_km": 120000,
+                                                             "nickname": "La grise", "vin": "VF1ABC12345678901"}).json()
+    cid = car["id"]
+    client.post(f"{API}/me/vehicles/{cid}/maintenance", headers=hv,
+                json={"items": ["vidange"], "km": 119000, "price": 6500, "place": "Garage du quartier", "note": "Huile 5W40"})
+    client.post(f"{API}/me/vehicles/{cid}/papers", headers=hv, json={"kind": "controle", "valid_until": (date.today() + timedelta(days=200)).isoformat()})
+    client.post(f"{API}/me/vehicles/{cid}/papers", headers=hv, json={"kind": "assurance", "valid_until": (date.today() + timedelta(days=100)).isoformat()})
+    diag = client.post(f"{API}/diagnosis", headers=hv, json={"text": "ça grince quand je freine", "user_vehicle_id": cid}).json()
+
+    t = client.post(f"{API}/me/vehicles/{cid}/transfer", headers=hv, json={}).json()
+    code = t["code"]
+    assert len(code) == 9 and code[4] == "-" and t["include_prices"] is False
+    assert "code" not in client.get(f"{API}/me/vehicles/{cid}/transfer", headers=hv).json()   # code montré une seule fois
+
+    hb = login(client, "0698000061")      # acheteur
+    bad = client.post(f"{API}/me/vehicle-transfers/preview", headers=hb, json={"code": code, "plate": "60002-115-31"})
+    assert bad.status_code == 404                                           # code juste, mauvais matricule
+    assert client.post(f"{API}/me/vehicle-transfers/preview", headers=hb, json={"code": "AAAA-BBBB", "plate": "60001-115-31"}).status_code == 404
+    pv = client.post(f"{API}/me/vehicle-transfers/preview", headers=hb, json={"code": code.lower(), "plate": "60001 115 31"}).json()
+    assert pv["visits"] == 1 and pv["controles"] == 1 and pv["include_prices"] is False and "Garage" not in str(pv)
+    got = client.post(f"{API}/me/vehicle-transfers/accept", headers=hb, json={"code": code, "plate": "60001-115-31"}).json()
+    assert got["id"] == cid and got["nickname"] is None and got["vin"] == "VF1ABC12345678901" and got["mileage_km"] == 120000
+
+    # L'acheteur a le carnet (sans prix ni remarque) et le contrôle technique ; pas l'assurance du vendeur
+    v = client.get(f"{API}/me/vehicles/{cid}/maintenance/history", headers=hb).json()["visits"][0]
+    assert v["operations"][0]["item"] == "vidange" and v["km"] == 119000 and v["place"] == "Garage du quartier"
+    assert v["price"] is None and v["note"] is None
+    p = client.get(f"{API}/me/vehicles/{cid}/papers", headers=hb).json()["current"]
+    assert p["controle"] is not None and p["assurance"] is None
+    # Le vendeur n'a plus la voiture ; son diagnostic reste à lui, détaché de la voiture
+    assert all(c["id"] != cid for c in client.get(f"{API}/me/vehicles", headers=hv).json())
+    hist = client.get(f"{API}/me/diagnoses", headers=hv).json()
+    assert any(h["session_id"] == diag["session_id"] for h in hist)
+    assert client.get(f"{API}/me/diagnoses", headers=hb).json() == []
+    # Code déjà utilisé : refusé
+    assert client.post(f"{API}/me/vehicle-transfers/accept", headers=hb, json={"code": code, "plate": "60001-115-31"}).status_code == 404
+
+
+def test_transfert_avec_les_prix_et_annulation(client, db):
+    from app.models import VehicleVariant
+    hv = login(client, "0698000062")
+    vid = db.scalar(select(VehicleVariant).order_by(VehicleVariant.id)).id
+    cid = client.post(f"{API}/me/vehicles", headers=hv, json={"plate": "60003-115-31", "variant_id": vid}).json()["id"]
+    client.post(f"{API}/me/vehicles/{cid}/maintenance", headers=hv, json={"items": ["vidange"], "price": 5000, "note": "ok"})
+    first = client.post(f"{API}/me/vehicles/{cid}/transfer", headers=hv, json={}).json()["code"]
+    second = client.post(f"{API}/me/vehicles/{cid}/transfer", headers=hv, json={"include_prices": True}).json()["code"]
+    hb = login(client, "0698000063")
+    body = {"code": first, "plate": "60003-115-31"}
+    assert client.post(f"{API}/me/vehicle-transfers/preview", headers=hb, json=body).status_code == 404   # remplacé
+    assert client.delete(f"{API}/me/vehicles/{cid}/transfer", headers=hv).status_code == 204
+    assert client.post(f"{API}/me/vehicle-transfers/preview", headers=hb, json={**body, "code": second}).status_code == 404   # annulé
+    third = client.post(f"{API}/me/vehicles/{cid}/transfer", headers=hv, json={"include_prices": True}).json()["code"]
+    assert client.post(f"{API}/me/vehicle-transfers/accept", headers=hv, json={**body, "code": third}).status_code == 409   # à soi-même
+    client.post(f"{API}/me/vehicle-transfers/accept", headers=hb, json={**body, "code": third})
+    v = client.get(f"{API}/me/vehicles/{cid}/maintenance/history", headers=hb).json()["visits"][0]
+    assert v["price"] == 5000 and v["note"] == "ok"
+    assert client.post(f"{API}/me/vehicle-transfers/preview", headers=hb, json={**body, "plate": "pas un matricule"}).status_code == 422

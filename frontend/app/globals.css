@@ -916,3 +916,11 @@ footer.disclaimer { max-width: 760px; margin: 0 auto; padding: 0 16px 2rem; colo
 .chip-static { cursor: default; }
 .garage .chips { margin: 0.4rem 0; }
 .garage-link { margin-top: 1rem; }
+
+/* --- Carnet transmis à la revente --- */
+.transfer-list { margin: 0.25rem 0 0.75rem; padding-left: 1.1rem; font-size: var(--step--1); color: var(--steel); }
+.transfer-list li { margin: 0.25rem 0; }
+.transfer-code-box { display: flex; flex-direction: column; gap: 0.25rem; padding: 0.9rem; border-radius: var(--radius-m);
+  background: var(--surface); border: 1px dashed var(--line-strong); }
+.transfer-code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 1.9rem; letter-spacing: 0.12em; }
+.transfer-preview { display: flex; flex-direction: column; gap: 0.2rem; }

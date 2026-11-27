@@ -6,6 +6,7 @@ import Maintenance from "@/components/Maintenance";
 import Papers from "@/components/Papers";
 import PriceWatches from "@/components/PriceWatches";
 import Recalls from "@/components/Recalls";
+import { TakeOver, TransferPanel } from "@/components/Transfer";
 import VehiclePicker from "@/components/VehiclePicker";
 import { api, ApiError, lastDiagnosis, session, type User, type UserCar, type Vehicle } from "@/lib/api";
 import { t } from "@/lib/i18n";
@@ -237,6 +238,7 @@ function CarForm({ car, onDone, onCancel }: { car: UserCar | null; onDone: () =>
       {error && <p className="err" role="alert">{error}</p>}
       {taken && !reported && (
         <div>
+          <p className="help">{t("transfer.takenHint")}</p>
           <label htmlFor="report-msg">{t("account.cars.taken.message")}</label>
           <input id="report-msg" maxLength={500} value={reportMsg} onChange={(e) => setReportMsg(e.target.value)} />
           <div className="actions"><button type="button" className="btn btn-ghost" disabled={busy} onClick={report}>{t("account.cars.taken.report")}</button></div>
@@ -260,6 +262,8 @@ function Cars({ cars, reload, openUpkeep, openPapers, openRecalls }: { cars: Use
   const [papers, setPapers] = useState<number | null>(openPapers ?? null);
   // Voiture dont le panneau « Rappels » est ouvert (?rappels=<id>)
   const [recallsOpen, setRecallsOpen] = useState<number | null>(openRecalls ?? null);
+  // Voiture dont le panneau « Vendre » (carnet transmis à l'acheteur) est ouvert
+  const [selling, setSelling] = useState<number | null>(null);
   const [error, setError] = useState("");
 
   async function remove(c: UserCar) {
@@ -303,10 +307,12 @@ function Cars({ cars, reload, openUpkeep, openPapers, openRecalls }: { cars: Use
                 </button>
               )}
               <button className="btn btn-ghost" onClick={() => setEditing(c)}>{t("account.cars.edit")}</button>
+              <button className="btn btn-ghost" aria-expanded={selling === c.id} onClick={() => setSelling(selling === c.id ? null : c.id)}>{t("transfer.button")}</button>
               <button className="btn btn-ghost" onClick={() => remove(c)}>{t("account.cars.remove")}</button>
             </span>
             {papers === c.id && <Papers car={c} onChange={reload} />}
             {recallsOpen === c.id && <Recalls car={c} />}
+            {selling === c.id && <TransferPanel car={c} />}
             {upkeep === c.id && <Maintenance car={c} onChange={reload} />}
           </li>
         ))}
@@ -318,6 +324,8 @@ function Cars({ cars, reload, openUpkeep, openPapers, openRecalls }: { cars: Use
       ) : (
         <div className="actions"><button className="btn" onClick={() => setEditing("new")}>{t("account.cars.add")}</button></div>
       )}
+      {/* Une voiture achetée d'occasion : son carnet se reprend avec le code du vendeur (même sans autre voiture) */}
+      <div className="actions"><TakeOver onDone={() => { setEditing(null); reload(); }} /></div>
     </>
   );
 }

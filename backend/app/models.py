@@ -105,6 +105,22 @@ class UserVehicle(Base):
     variant: Mapped[VehicleVariant | None] = relationship()
 
 
+class VehicleTransfer(Base):
+    """Carnet transmis à la revente (migration 0018) : code créé par le vendeur (seule son empreinte est gardée),
+    valable 7 jours, accepté par l'acheteur avec le matricule. Voir services/vehicle_transfer.py."""
+    __tablename__ = "vehicle_transfers"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_vehicle_id: Mapped[int] = mapped_column(ForeignKey("user_vehicles.id", ondelete="CASCADE"), index=True)
+    from_user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
+    code_hash: Mapped[str] = mapped_column(String(64), index=True)
+    include_prices: Mapped[bool] = mapped_column(Boolean, default=False)
+    status: Mapped[str] = mapped_column(String(20), default="pending")   # pending|accepted|cancelled|expired
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    accepted_by: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
+    accepted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
 class MaintenanceVisit(Base):
     """Passage au garage noté dans le carnet d'entretien (migration 0013) : date, kilométrage à ce moment-là, prix
     payé, garage ou magasin, remarque. Il regroupe une ou plusieurs opérations (`MaintenanceRecord`)."""

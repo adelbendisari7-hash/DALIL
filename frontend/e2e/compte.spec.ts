@@ -319,3 +319,37 @@ if not c.execute("select 1 from knowledge_chunks where source = 'rappelconso'").
   await expect(page.getByRole("heading", { name: "Qu'est-ce qui ne va pas", exact: false })).toBeVisible();
   await expect(page.locator(".recall-banner")).toHaveCount(0);   // regardé : plus signalé
 });
+
+test("revente : le vendeur donne un code, l'acheteur reprend la voiture et son carnet, sans les prix", async ({ page }) => {
+  const p = plate();
+  await inscrire(page, phone(), "Omar", "Vendeur", "/compte");
+  await ajouterVoiture(page, p);
+  await page.getByRole("button", { name: "Entretien" }).click();
+  const carnet = page.locator(".carnet");
+  await carnet.getByRole("button", { name: "Noter un passage au garage" }).click();
+  await carnet.getByRole("button", { name: "Vidange et filtre à huile" }).click();
+  await carnet.getByLabel("Prix payé (DA)").fill("6500");
+  await carnet.getByRole("button", { name: "Enregistrer dans le carnet" }).click();
+  await expect(carnet.locator(".visit").first()).toContainText(/6.500 DA/);
+
+  await page.getByRole("button", { name: "Vendre" }).click();
+  await page.getByRole("button", { name: "Créer un code pour l'acheteur" }).click();
+  const code = (await page.locator(".transfer-code").innerText()).trim();
+  expect(code).toMatch(/^[A-Z2-9]{4}-[A-Z2-9]{4}$/);
+
+  await page.getByRole("button", { name: "Déconnexion" }).click();
+  await page.evaluate(() => localStorage.clear());
+  await inscrire(page, phone(), "Nabil", "Acheteur", "/compte");
+  await page.getByRole("button", { name: "Reprendre le carnet d'une voiture achetée" }).click();
+  await page.getByLabel("Code du vendeur").fill(code);
+  await page.getByLabel("Matricule de la voiture achetée").fill(p);
+  await page.getByRole("button", { name: "Vérifier" }).click();
+  await expect(page.locator(".transfer-preview")).toContainText("1 passages au garage");
+  await expect(page.locator(".transfer-preview")).toContainText("Sans les prix payés");
+  await page.getByRole("button", { name: "Reprendre la voiture et son carnet" }).click();
+  await expect(page.locator(".plate", { hasText: p })).toBeVisible();
+  await page.getByRole("button", { name: "Entretien" }).click();
+  const v = page.locator(".carnet .visit").first();
+  await expect(v).toContainText("Vidange et filtre à huile");
+  await expect(v).not.toContainText("DA");   // prix gardés par le vendeur
+});

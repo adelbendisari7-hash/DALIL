@@ -17,9 +17,9 @@ from ..db import get_db
 from ..models import (ContactEvent, DiagnosisSession, MaintenanceRecord, MaintenanceVisit, PartRequest, PlateReport,
                       PartCategory, PriceWatch, RequestResponse, Shop, User, UserVehicle, VehicleDocument,
                       VehicleVariant)
-from ..schemas import PlateReportIn, VehicleIn, VehiclePatch, format_plate
-from ..security import client_hash, current_user, feedback_limiter
-from ..services import maintenance, price_history, price_watch, recalls, vehicle_papers
+from ..schemas import PlateReportIn, VehicleIn, VehiclePatch, format_plate, normalize_plate
+from ..security import client_hash, current_user, feedback_limiter, login_limiter
+from ..services import maintenance, price_history, price_watch, recalls, vehicle_papers, vehicle_transfer
 from ..services.recommendation import RECOMMENDABLE_STATUSES
 
 router = APIRouter(prefix="/me")
@@ -301,6 +301,74 @@ def maintenance_undo(vehicle_id: int, record_id: int, user: User = Depends(curre
     if visit is not None and not db.scalars(select(MaintenanceRecord).where(MaintenanceRecord.visit_id == visit.id)).first():
         db.delete(visit)
     db.commit()
+
+
+# --- Carnet transmis à la revente ----------------------------------------------
+
+class TransferIn(BaseModel):
+    include_prices: bool = False   # prix et remarques du carnet : seulement si le vendeur le veut
+
+
+class TransferAcceptIn(BaseModel):
+    code: str = Field(..., min_length=8, max_length=12)
+    plate: str = Field(..., max_length=24)
+
+
+def _plate(raw: str) -> str:
+    try:
+        return normalize_plate(raw)
+    except ValueError as e:
+        raise HTTPException(422, str(e)) from None
+
+
+def _transfer_out(t, code: str | None = None) -> dict:
+    return {"id": t.id, "status": t.status, "include_prices": t.include_prices,
+            "expires_at": vehicle_transfer._aware(t.expires_at).isoformat(), **({"code": code} if code else {})}
+
+
+@router.get("/vehicles/{vehicle_id}/transfer")
+def transfer_status(vehicle_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Transfert en attente pour cette voiture (sans le code, qui n'est montré qu'à sa création)."""
+    car = _own(db, user, vehicle_id)
+    t = vehicle_transfer.pending(db, car)
+    db.commit()
+    return _transfer_out(t) if t else None
+
+
+@router.post("/vehicles/{vehicle_id}/transfer", status_code=201)
+def transfer_create(vehicle_id: int, body: TransferIn, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Le vendeur crée un code pour transmettre la voiture et son carnet ; un nouveau code annule l'ancien."""
+    car = _own(db, user, vehicle_id)
+    t, code = vehicle_transfer.create(db, car, user, body.include_prices)
+    db.commit()
+    return _transfer_out(t, code)
+
+
+@router.delete("/vehicles/{vehicle_id}/transfer", status_code=204)
+def transfer_cancel(vehicle_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    car = _own(db, user, vehicle_id)
+    t = vehicle_transfer.pending(db, car)
+    if t is not None:
+        t.status = "cancelled"
+    db.commit()
+
+
+@router.post("/vehicle-transfers/preview", dependencies=[Depends(login_limiter)])
+def transfer_preview(body: TransferAcceptIn, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Avant d'accepter : la voiture et ce que contient le carnet, sans rien de personnel sur le vendeur."""
+    t, car = vehicle_transfer.find(db, body.code, _plate(body.plate))
+    return vehicle_transfer.preview(db, t, car)
+
+
+@router.post("/vehicle-transfers/accept", dependencies=[Depends(login_limiter)])
+def transfer_accept(body: TransferAcceptIn, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """L'acheteur reprend la voiture et son carnet (code du vendeur + matricule)."""
+    t, car = vehicle_transfer.find(db, body.code, _plate(body.plate))
+    if len(list(db.scalars(select(UserVehicle.id).where(UserVehicle.user_id == user.id)))) >= MAX_VEHICLES:
+        raise HTTPException(409, f"{MAX_VEHICLES} voitures au plus par compte")
+    vehicle_transfer.accept(db, t, car, user)
+    db.commit()
+    return vehicle_out(car, db)
 
 
 # --- Rappels des constructeurs -------------------------------------------------
