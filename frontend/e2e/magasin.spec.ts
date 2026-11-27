@@ -173,3 +173,52 @@ test("catalogue rapide : un produit en moins de 30 s avec sa photo, prix et stoc
   await expect(row.getByText(/4.800 DA/)).toBeVisible();
   await expect(row.getByText("Prix confirmé aujourd'hui")).toBeVisible();
 });
+
+test("équipe : le gérant ajoute un vendeur, qui ne voit que ses accès, répond à une demande ; le journal l'affiche", async ({ page, request }) => {
+  const stamp = String(Date.now()).slice(-6);
+  const reg = async (phone: string, first: string) => (await (await request.post("/api/v1/auth/register", {
+    data: { first_name: first, last_name: "Test", phone, password: "equipe-e2e", consent: true } })).json()).token as string;
+  const gerant = await reg(`0553${stamp}`, "Gérant");
+  const vendeur = await reg(`0554${stamp}`, "Vendeur");
+  const auth = (tk: string) => ({ Authorization: `Bearer ${tk}` });
+  await request.patch("/api/v1/auth/me", { headers: auth(gerant), data: { role: "shop_owner" } });
+  const cats = await (await request.get("/api/v1/parts/categories")).json();
+  const freinage = cats.find((f: { slug: string }) => f.slug === "freinage");
+  const shop = await (await request.post("/api/v1/shops", { headers: auth(gerant),
+    data: { name: "[TEST] Équipe Gambetta", lat: 35.70, lng: -0.63, category_ids: [freinage.id], brand_ids: [] } })).json();
+  const admin = await apiToken(request, ADMIN_PHONE);
+  await request.post(`/api/v1/admin/shops/${shop.id}/verify`, { headers: auth(admin),
+    data: { phone_ok: true, address_ok: true, activity_ok: true } });
+  const plaquettes = freinage.children.find((c: { slug: string }) => c.slug === "plaquettes-avant");
+  await request.post("/api/v1/part-requests", { data: { category_id: plaquettes.id } });   // demande d'un client
+
+  // Le gérant ajoute le vendeur par son numéro (modèle « Vendeur »)
+  await asUser(page, request, gerant);
+  await page.goto("/espace-magasin");
+  await page.getByRole("tab", { name: "Équipe" }).click();
+  await page.getByLabel("Numéro de l'employé").fill(`0554${stamp}`);
+  await page.getByRole("button", { name: "Ajouter à l'équipe" }).click();
+  await expect(page.getByText("Employé ajouté à l'équipe.")).toBeVisible();
+  const member = page.locator(".member", { hasText: "Vendeur Test" });
+  await expect(member.getByRole("checkbox", { name: "Répondre aux demandes" })).toBeChecked();
+  await expect(member.getByRole("checkbox", { name: "Modifier la fiche du magasin" })).not.toBeChecked();
+
+  // Le vendeur : demandes et catalogue, ni fiche ni équipe ; il répond à la demande
+  await asUser(page, request, vendeur);
+  page.once("dialog", (d) => d.accept("4200"));   // prix demandé à la réponse « Disponible »
+  await page.goto("/espace-magasin");
+  await expect(page.getByText("Vous faites partie de l'équipe")).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Équipe" })).toHaveCount(0);
+  await expect(page.getByRole("tab", { name: "Ma fiche" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Fermé exceptionnellement" })).toHaveCount(0);
+  await page.getByRole("button", { name: "Disponible" }).first().click();
+  await expect(page.getByText("Répondu").first()).toBeVisible();
+  await page.getByRole("tab", { name: /Catalogue/ }).click();
+  await expect(page.getByRole("heading", { name: "Ajouter un produit" })).toHaveCount(0);   // pas l'accès « produits »
+
+  // Le journal du gérant
+  await asUser(page, request, gerant);
+  await page.goto("/espace-magasin");
+  await page.getByRole("tab", { name: "Équipe" }).click();
+  await expect(page.locator(".activity li", { hasText: "Vendeur Test a répondu à une demande" })).toContainText("4200 DA");
+});

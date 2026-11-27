@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import ShopForm, { cleanShop, type ShopFormValue } from "@/components/ShopForm";
 import ShopCatalog from "@/components/ShopCatalog";
+import ShopTeam from "@/components/ShopTeam";
 import ShopWizard from "@/components/ShopWizard";
 import { photoForm, shrinkPhoto } from "@/lib/photo";
 import type { Opening } from "@/components/HoursPicker";
@@ -10,7 +11,8 @@ import { api, ApiError, session, type User } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
 type Shop = Omit<ShopFormValue, "opening"> & {
-  id: number; status: string; verified: boolean; photo_url: string | null; verified_at: string | null; reject_reason: string | null;
+  id: number; status: string; verified: boolean; photo_url: string | null;
+  my_role: "manager" | "employee"; my_permissions: string[]; verified_at: string | null; reject_reason: string | null;
   opening: Opening | null; closed_until: string | null; closed_note: string | null;
   open_status: { open: boolean; label: string } | null;
   brands: { brand_id: number; confirmed_at: string | null }[]; categories: { category_id: number; confirmed_at: string | null }[];
@@ -95,7 +97,7 @@ export default function ShopSpace() {
 
 /** En-tête de la gestion du magasin : statut (vérification, refus et motif, badge), fermeture exceptionnelle,
  * reconfirmation des informations, affiche à imprimer. */
-function ShopStatus({ shop, onChange }: { shop: Shop; onChange: () => void }) {
+function ShopStatus({ shop, onChange, canEdit }: { shop: Shop; onChange: () => void; canEdit: boolean }) {
   const [closing, setClosing] = useState(false);
   const [until, setUntil] = useState("");
   const [why, setWhy] = useState("");
@@ -123,7 +125,7 @@ function ShopStatus({ shop, onChange }: { shop: Shop; onChange: () => void }) {
         {shop.verified && shop.verified_at && t("shop.verifiedOn", { date: new Date(shop.verified_at).toLocaleDateString("fr-FR") })}
       </p>
       {shop.open_status && <p className={`open-pill ${shop.open_status.open ? "is-open" : ""}`}>{shop.open_status.label}</p>}
-      {stale && (
+      {stale && canEdit && (
         <div className="notice">
           {t("shop.reconfirm.text")}{" "}
           <button type="button" className="btn btn-ghost" onClick={async () => { await api(`/shops/${shop.id}/reconfirm`, { method: "POST" }).catch(() => undefined); onChange(); }}>
@@ -131,14 +133,14 @@ function ShopStatus({ shop, onChange }: { shop: Shop; onChange: () => void }) {
           </button>
         </div>
       )}
-      <div className="actions">
+      {canEdit && <div className="actions">
         {shop.closed_until ? (
           <button type="button" className="btn btn-ghost" onClick={() => patch({ closed_until: null })}>{t("shop.closed.reopen")}</button>
         ) : (
           <button type="button" className="btn btn-ghost" onClick={() => setClosing(!closing)}>{t("shop.closed.button")}</button>
         )}
         {shop.verified && <Link className="btn btn-ghost" href={`/espace-magasin/affiche?magasin=${shop.id}`}>{t("shop.poster.button")}</Link>}
-      </div>
+      </div>}
       {closing && (
         <div className="car-form">
           <div className="row">
@@ -162,7 +164,14 @@ function ShopStatus({ shop, onChange }: { shop: Shop; onChange: () => void }) {
 }
 
 function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
-  const [tab, setTab] = useState<"inbox" | "catalog" | "profile">("inbox");
+  type Tab = "inbox" | "catalog" | "profile" | "team";
+  const can = (p: string) => shop.my_permissions.includes(p);
+  const manager = shop.my_role === "manager";
+  const tabs = ([
+    can("requests") && "inbox", (can("products") || can("prices") || can("products_delete")) && "catalog",
+    can("profile") && "profile", manager && "team",
+  ].filter(Boolean)) as Tab[];
+  const [tab, setTab] = useState<Tab>(tabs[0] ?? "inbox");
   const [count, setCount] = useState<number | null>(null);
   const [inbox, setInbox] = useState<Inbox[]>([]);
   const [msg, setMsg] = useState("");
@@ -205,12 +214,14 @@ function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
   const waiting = inbox.filter((r) => r.available === null).length;
   return (
     <div>
-      <ShopStatus shop={shop} onChange={onChange} />
+      <ShopStatus shop={shop} onChange={onChange} canEdit={can("profile")} />
+      {!manager && <p className="help">{t("team.youAreEmployee")}</p>}
       <div className="tabs" role="tablist">
-        {(["inbox", "catalog", "profile"] as const).map((k) => (
+        {tabs.map((k) => (
           <button key={k} role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>
             {k === "inbox" ? `${t("shop.inbox")}${waiting ? ` (${waiting})` : ""}`
-              : k === "catalog" ? `${t("shop.products")}${count != null ? ` (${count})` : ""}` : t("shop.profile")}
+              : k === "catalog" ? `${t("shop.products")}${count != null ? ` (${count})` : ""}`
+              : k === "team" ? t("team.tab") : t("shop.profile")}
           </button>
         ))}
       </div>
@@ -234,7 +245,8 @@ function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
         </div>
       ) : <p className="help">{t("shop.inbox.empty")}</p>)}
 
-      {tab === "catalog" && <ShopCatalog shopId={shop.id} onCount={setCount} />}
+      {tab === "catalog" && <ShopCatalog shopId={shop.id} onCount={setCount} perms={shop.my_permissions} />}
+      {tab === "team" && manager && <ShopTeam shopId={shop.id} onTransferred={onChange} />}
 
       {tab === "profile" && (
         <>

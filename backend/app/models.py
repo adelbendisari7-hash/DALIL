@@ -252,6 +252,31 @@ class ShopClaim(Base):
     resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
+class ShopMember(Base):
+    """Employé d'un magasin (plan côté magasin, phase 3). Le gérant est `shops.owner_user_id` ; lui seul ajoute,
+    règle les accès (`permissions`), suspend ou retire un employé. L'équipe DALIL n'a aucun écran pour cela."""
+    __tablename__ = "shop_members"
+    __table_args__ = (UniqueConstraint("shop_id", "user_id", name="uq_shop_members"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    shop_id: Mapped[int] = mapped_column(ForeignKey("shops.id", ondelete="CASCADE"), index=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    permissions: Mapped[list] = mapped_column(JSON, default=list)
+    status: Mapped[str] = mapped_column(String(20), default="active")   # active|suspended
+    added_by: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class ShopActivity(Base):
+    """Journal du magasin, lu par le gérant : qui a répondu à une demande, modifié un prix, ajouté un produit..."""
+    __tablename__ = "shop_activity"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    shop_id: Mapped[int] = mapped_column(ForeignKey("shops.id", ondelete="CASCADE"), index=True)
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
+    action: Mapped[str] = mapped_column(String(40))
+    target: Mapped[str | None] = mapped_column(String(200))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
+
+
 class ShopBrand(Base):
     __tablename__ = "shop_brands"
     shop_id: Mapped[int] = mapped_column(ForeignKey("shops.id", ondelete="CASCADE"), primary_key=True)

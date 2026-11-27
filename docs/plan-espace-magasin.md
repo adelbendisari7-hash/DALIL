@@ -88,7 +88,7 @@ métadonnées du JPEG par une routine courte, testée.
 **Critère de fin** : test chronométré « un produit en moins de 30 s » ; import de 500 lignes testé ; photo testée sur
 téléphone simulé, sans position GPS dans le fichier stocké.
 
-## Phase 3 — L'équipe du magasin (le gérant décide de tout)
+## Phase 3 — L'équipe du magasin (le gérant décide de tout) (faite le 27/11/2026)
 
 - **Le gérant ajoute autant d'employés qu'il veut** : l'employé crée son compte DALIL, le gérant tape son numéro.
 - **Accès à la carte** : pour chaque employé, le gérant coche ce qu'il peut faire :

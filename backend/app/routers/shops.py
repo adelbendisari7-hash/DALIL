@@ -40,6 +40,7 @@ from ..schemas import (
 from ..security import client_hash, current_user, current_user_optional, feedback_limiter, normalize_phone, require_role
 from ..services.imports import import_products, product_template, read_table
 from ..services import shop_onboarding as onboarding
+from ..services import shop_team as team
 from ..services.media import InvalidImage, storage
 from ..services.recommendation import RECOMMENDABLE_STATUSES, category_lineage, recommend
 
@@ -85,13 +86,16 @@ def _set_links(db: Session, shop: Shop, brand_ids: list[int] | None, category_id
             c.confirmed_at = now
 
 
-def _owned_shop(db: Session, shop_id: int, user: User) -> Shop:
-    shop = db.get(Shop, shop_id)
-    if not shop:
-        raise HTTPException(404, "Magasin inconnu")
-    if user.role != "admin" and shop.owner_user_id != user.id:
-        raise HTTPException(403, "Ce magasin ne vous appartient pas")
-    return shop
+def _owned_shop(db: Session, shop_id: int, user: User, perm: str = "profile") -> Shop:
+    """Magasin si l'utilisateur en est le gérant, ou un employé qui a l'accès `perm` (services/shop_team.py)."""
+    return team.shop_for(db, shop_id, user, perm)
+
+
+def _can_see(db: Session, shop: Shop, user: User | None) -> bool:
+    """Fiche non validée : visible de son équipe et de l'administrateur seulement."""
+    if shop.status in RECOMMENDABLE_STATUSES:
+        return True
+    return bool(user and (user.role == "admin" or team.membership(db, shop, user)[0]))
 
 
 # --- Public ---------------------------------------------------------------
@@ -119,7 +123,7 @@ def shops_map(db: Session = Depends(get_db)):
 
 @router.get("/shops/mine")
 def shops_mine(user: User = Depends(current_user), db: Session = Depends(get_db)):
-    return [shop_out(s) for s in db.scalars(select(Shop).where(Shop.owner_user_id == user.id))]
+    return [{**shop_out(s), "my_role": role, "my_permissions": perms} for s, role, perms in team.my_shops(db, user)]
 
 
 @router.get("/shops/claimable")
@@ -143,7 +147,7 @@ def shop_detail(shop_id: int, db: Session = Depends(get_db), user: User | None =
     shop = db.get(Shop, shop_id)
     if not shop:
         raise HTTPException(404, "Magasin inconnu")
-    if shop.status not in RECOMMENDABLE_STATUSES and not (user and (user.role == "admin" or user.id == shop.owner_user_id)):
+    if not _can_see(db, shop, user):
         raise HTTPException(404, "Magasin inconnu")
     return shop_out(shop)
 
@@ -160,8 +164,7 @@ def shop_products(shop_id: int, db: Session = Depends(get_db), user: User | None
     """Catalogue public d'un magasin visible (même règle que la fiche) ; le gérant et l'administrateur voient
     aussi celui d'une fiche en attente de validation."""
     shop = db.get(Shop, shop_id)
-    if not shop or (shop.status not in RECOMMENDABLE_STATUSES
-                    and not (user and (user.role == "admin" or user.id == shop.owner_user_id))):
+    if not shop or not _can_see(db, shop, user):
         raise HTTPException(404, "Magasin inconnu")
     rows = db.scalars(select(Product).where(Product.shop_id == shop_id).order_by(Product.updated_at.desc()))
     return [
@@ -250,7 +253,7 @@ def shop_create(body: ShopIn, db: Session = Depends(get_db), user: User = Depend
 
 @router.patch("/shops/{shop_id}")
 def shop_patch(shop_id: int, body: ShopPatch, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    shop = _owned_shop(db, shop_id, user)
+    shop = _owned_shop(db, shop_id, user, "profile")
     data = body.model_dump(exclude_unset=True, exclude={"brand_ids", "category_ids"})
     for k in ("phone", "whatsapp"):
         if data.get(k):
@@ -268,6 +271,7 @@ def shop_patch(shop_id: int, body: ShopPatch, db: Session = Depends(get_db), use
     for k, v in data.items():
         setattr(shop, k, v)
     _set_links(db, shop, body.brand_ids, body.category_ids, "declared")
+    team.log(db, shop.id, user, "profile.update")
     _commit_shop(db)
     return shop_out(shop)
 
@@ -275,7 +279,7 @@ def shop_patch(shop_id: int, body: ShopPatch, db: Session = Depends(get_db), use
 @router.post("/shops/{shop_id}/reconfirm")
 def shop_reconfirm(shop_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
     """« Mes informations sont à jour » : marques et familles reconfirmées (fraîcheur, six mois)."""
-    shop = _owned_shop(db, shop_id, user)
+    shop = _owned_shop(db, shop_id, user, "profile")
     now = datetime.now(timezone.utc)
     for link in [*shop.brands, *shop.categories]:
         link.confirmed_at = now
@@ -337,18 +341,19 @@ def _product_payload(db: Session, body: ProductIn) -> None:
 
 @router.post("/shops/{shop_id}/products", status_code=201)
 def product_create(shop_id: int, body: ProductIn, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    shop = _owned_shop(db, shop_id, user)
+    shop = _owned_shop(db, shop_id, user, "products")
     _product_payload(db, body)
     p = Product(shop_id=shop.id, **body.model_dump(exclude={"variant_ids"}), price_confirmed_at=datetime.now(timezone.utc))
     p.fitments = [ProductFitment(variant_id=v) for v in set(body.variant_ids)]
     db.add(p)
+    team.log(db, shop.id, user, "product.create", p.title)
     db.commit()
     return {"id": p.id}
 
 
 @router.put("/shops/{shop_id}/products/{product_id}")
 def product_update(shop_id: int, product_id: int, body: ProductIn, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    _owned_shop(db, shop_id, user)
+    _owned_shop(db, shop_id, user, "products")
     p = db.get(Product, product_id)
     if not p or p.shop_id != shop_id:
         raise HTTPException(404, "Produit inconnu")
@@ -357,6 +362,7 @@ def product_update(shop_id: int, product_id: int, body: ProductIn, db: Session =
         setattr(p, k, v)
     p.fitments = [ProductFitment(variant_id=v) for v in set(body.variant_ids)]
     p.price_confirmed_at = datetime.now(timezone.utc)
+    team.log(db, shop_id, user, "product.update", p.title)
     db.commit()
     return {"id": p.id}
 
@@ -372,12 +378,14 @@ def _own_product(db: Session, shop_id: int, product_id: int) -> Product:
 def product_patch(shop_id: int, product_id: int, body: ProductPatch, db: Session = Depends(get_db),
                   user: User = Depends(current_user)):
     """En un toucher depuis la liste : prix, en stock / rupture, ou confirmation du prix actuel."""
-    _owned_shop(db, shop_id, user)
+    _owned_shop(db, shop_id, user, "prices")
     p = _own_product(db, shop_id, product_id)
     data = body.model_dump(exclude_unset=True, exclude={"confirm"})
     for k, v in data.items():
         setattr(p, k, v)
     p.price_confirmed_at = datetime.now(timezone.utc)
+    what = ", ".join(f"{k} = {v}" for k, v in data.items()) or "prix confirmé"
+    team.log(db, shop_id, user, "product.quick", f"{p.title} : {what}")
     db.commit()
     return {"id": p.id, "price": p.price, "in_stock": p.in_stock, "price_confirmed_at": p.price_confirmed_at.isoformat()}
 
@@ -392,7 +400,7 @@ async def _read_photo(file: UploadFile) -> bytes:
 @router.post("/shops/{shop_id}/products/{product_id}/photo")
 async def product_photo(shop_id: int, product_id: int, file: UploadFile = File(...), db: Session = Depends(get_db),
                         user: User = Depends(current_user)):
-    _owned_shop(db, shop_id, user)
+    _owned_shop(db, shop_id, user, "products")
     p = _own_product(db, shop_id, product_id)
     try:
         url = storage().save("produits", await _read_photo(file))
@@ -406,7 +414,7 @@ async def product_photo(shop_id: int, product_id: int, file: UploadFile = File(.
 
 @router.delete("/shops/{shop_id}/products/{product_id}/photo", status_code=204)
 def product_photo_delete(shop_id: int, product_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    _owned_shop(db, shop_id, user)
+    _owned_shop(db, shop_id, user, "products")
     p = _own_product(db, shop_id, product_id)
     storage().delete(p.photo_url)
     p.photo_url = None
@@ -416,7 +424,7 @@ def product_photo_delete(shop_id: int, product_id: int, db: Session = Depends(ge
 @router.post("/shops/{shop_id}/photo")
 async def shop_photo(shop_id: int, file: UploadFile = File(...), db: Session = Depends(get_db), user: User = Depends(current_user)):
     """Photo de la devanture (idée C) : le client reconnaît la boutique dans la rue."""
-    shop = _owned_shop(db, shop_id, user)
+    shop = _owned_shop(db, shop_id, user, "profile")
     try:
         url = storage().save("devantures", await _read_photo(file))
     except InvalidImage as e:
@@ -429,7 +437,7 @@ async def shop_photo(shop_id: int, file: UploadFile = File(...), db: Session = D
 
 @router.delete("/shops/{shop_id}/photo", status_code=204)
 def shop_photo_delete(shop_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    shop = _owned_shop(db, shop_id, user)
+    shop = _owned_shop(db, shop_id, user, "profile")
     storage().delete(shop.photo_url)
     shop.photo_url = None
     db.commit()
@@ -446,9 +454,10 @@ def media(kind: str, name: str):
 
 @router.delete("/shops/{shop_id}/products/{product_id}", status_code=204)
 def product_delete(shop_id: int, product_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    _owned_shop(db, shop_id, user)
+    _owned_shop(db, shop_id, user, "products_delete")
     p = _own_product(db, shop_id, product_id)
     storage().delete(p.photo_url)
+    team.log(db, shop_id, user, "product.delete", p.title)
     db.delete(p)
     db.commit()
 
@@ -458,7 +467,7 @@ async def product_import(shop_id: int, file: UploadFile = File(...), dry_run: bo
                          user: User = Depends(current_user)):
     """Import Excel ou CSV. `dry_run=true` : aperçu (produits ajoutés, mis à jour, erreurs ligne par ligne) sans rien
     enregistrer ; le magasin confirme ensuite."""
-    shop = _owned_shop(db, shop_id, user)
+    shop = _owned_shop(db, shop_id, user, "products")
     content = await file.read()
     if len(content) > MAX_IMPORT_BYTES:
         raise HTTPException(413, "Fichier trop lourd (5 Mo maximum)")
@@ -467,6 +476,7 @@ async def product_import(shop_id: int, file: UploadFile = File(...), dry_run: bo
     if dry_run:
         db.rollback()
     else:
+        team.log(db, shop.id, user, "product.import", f"{rep.created} ajoutés, {rep.updated} mis à jour")
         db.commit()
     return {"created": rep.created, "updated": rep.updated, "errors": rep.errors, "total": len(rows), "dry_run": dry_run}
 
@@ -495,8 +505,8 @@ def part_request_create(body: PartRequestIn, db: Session = Depends(get_db), user
 
 
 @router.get("/part-requests/inbox")
-def part_request_inbox(db: Session = Depends(get_db), user: User = Depends(require_role("shop_owner"))):
-    shop_ids = [s.id for s in db.scalars(select(Shop).where(Shop.owner_user_id == user.id))]
+def part_request_inbox(db: Session = Depends(get_db), user: User = Depends(current_user)):
+    shop_ids = [s.id for s, _, perms in team.my_shops(db, user) if "requests" in perms]
     rows = db.execute(
         select(RequestResponse, PartRequest).join(PartRequest, PartRequest.id == RequestResponse.request_id)
         .where(RequestResponse.shop_id.in_(shop_ids)).order_by(PartRequest.created_at.desc()).limit(100)
@@ -513,7 +523,7 @@ def part_request_inbox(db: Session = Depends(get_db), user: User = Depends(requi
 
 @router.post("/part-requests/{request_id}/responses")
 def part_request_respond(request_id: int, body: PartResponseIn, shop_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    _owned_shop(db, shop_id, user)
+    _owned_shop(db, shop_id, user, "requests")
     rr = db.get(RequestResponse, (request_id, shop_id))
     if not rr:
         raise HTTPException(404, "Demande inconnue pour ce magasin")
@@ -522,6 +532,10 @@ def part_request_respond(request_id: int, body: PartResponseIn, shop_id: int, db
     req.status = "answered"
     if body.available:
         _mark_observed(db, shop_id, req.category_id, req.variant_id)
+    cat = db.get(PartCategory, req.category_id)
+    team.log(db, shop_id, user, "request.answer",
+             f"{cat.name_fr if cat else ''} : {'disponible' if body.available else 'pas en stock'}"
+             f"{f', {body.price:g} DA' if body.available and body.price else ''}")
     db.commit()
     return {"ok": True}
 

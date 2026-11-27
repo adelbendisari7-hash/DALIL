@@ -36,15 +36,15 @@
     "semantic_hash": ""
   },
   "backend/app/main.py": {
-    "mtime": 1795778358.0941672,
-    "seen": 1795779648.4903197,
-    "ast_hash": "20240297789f2c68b77ea0248f9b5a2e",
+    "mtime": 1795791762.6778717,
+    "seen": 1795792560.6280637,
+    "ast_hash": "6e82a834ab260d98fb657bdd88258201",
     "semantic_hash": ""
   },
   "backend/app/models.py": {
-    "mtime": 1795784205.564195,
-    "seen": 1795791636.7354836,
-    "ast_hash": "3673153bcc13c26361c2544cd784d8b0",
+    "mtime": 1795791680.216358,
+    "seen": 1795792560.6280637,
+    "ast_hash": "28064b76796c2b70db050085a0c07cbb",
     "semantic_hash": ""
   },
   "backend/app/routers/__init__.py": {
@@ -60,9 +60,9 @@
     "semantic_hash": ""
   },
   "backend/app/routers/auth.py": {
-    "mtime": 1795779843.645245,
-    "seen": 1795780571.7931917,
-    "ast_hash": "02dcf7870a45e41e5e7cc6b4e2d1a37c",
+    "mtime": 1795791762.6802764,
+    "seen": 1795792560.6280637,
+    "ast_hash": "e674e968d30e1b3dd283f3659ddeb3a0",
     "semantic_hash": ""
   },
   "backend/app/routers/public.py": {
@@ -72,9 +72,9 @@
     "semantic_hash": ""
   },
   "backend/app/routers/shops.py": {
-    "mtime": 1795784205.564195,
-    "seen": 1795791636.7354836,
-    "ast_hash": "2a0a790b4eadeb3d1bfdb3b7b67e88cf",
+    "mtime": 1795791719.0883808,
+    "seen": 1795792560.6280637,
+    "ast_hash": "5e9d0b7c0bc764389d2bbf187a5c138b",
     "semantic_hash": ""
   },
   "backend/app/schemas.py": {
@@ -372,9 +372,9 @@
     "semantic_hash": ""
   },
   "frontend/app/espace-magasin/page.tsx": {
-    "mtime": 1795784495.214556,
-    "seen": 1795791636.7354836,
-    "ast_hash": "291741597def6341d7e9320a41abab70",
+    "mtime": 1795792001.149398,
+    "seen": 1795792560.6280637,
+    "ast_hash": "f3fd26b9100128c6a559262d98d85fc5",
     "semantic_hash": ""
   },
   "frontend/app/layout.tsx": {
@@ -468,9 +468,9 @@
     "semantic_hash": ""
   },
   "frontend/messages/fr.json": {
-    "mtime": 1795785844.3274784,
-    "seen": 1795791636.7354836,
-    "ast_hash": "de662bba5398f77f12536b3d2ab15cd2",
+    "mtime": 1795792026.366261,
+    "seen": 1795792560.6280637,
+    "ast_hash": "cf4b0ab84115e01fd8ab82da5db65bf8",
     "semantic_hash": ""
   },
   "frontend/next.config.mjs": {
@@ -522,9 +522,9 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1795791621.3986473,
-    "seen": 1795791636.7354836,
-    "ast_hash": "eb783776e025e2ec0956b4f34f9dd4b1",
+    "mtime": 1795792545.061319,
+    "seen": 1795792560.6280637,
+    "ast_hash": "942e55435f1bfee48ed8e6bb08c5853c",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.md": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795791621.4020958,
-    "seen": 1795791636.7354836,
-    "ast_hash": "3cdd75692b7d3b2e4c006a33ca739cc6",
+    "mtime": 1795792545.061319,
+    "seen": 1795792560.6280637,
+    "ast_hash": "ffd299ca5732ad24cbfaf205aa293624",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -966,9 +966,9 @@
     "semantic_hash": ""
   },
   "frontend/e2e/magasin.spec.ts": {
-    "mtime": 1795784627.252863,
-    "seen": 1795791636.7354836,
-    "ast_hash": "93b638e3d63ec993a5660267468646bb",
+    "mtime": 1795792042.4594357,
+    "seen": 1795792560.6280637,
+    "ast_hash": "6d2d87c033c6646aaa90235a958d75e6",
     "semantic_hash": ""
   },
   "frontend/app/not-found.tsx": {
@@ -1800,9 +1800,9 @@
     "semantic_hash": ""
   },
   "docs/plan-espace-magasin.md": {
-    "mtime": 1795791621.3976507,
-    "seen": 1795791636.7354836,
-    "ast_hash": "9c51c065d7fa04cb1cdaadea865839f8",
+    "mtime": 1795792545.061319,
+    "seen": 1795792560.6280637,
+    "ast_hash": "0bb4434474dcc944b2e58c97d097537b",
     "semantic_hash": ""
   },
   "backend/alembic/versions/0007_catalogue_rapide.py": {
@@ -1824,15 +1824,45 @@
     "semantic_hash": ""
   },
   "frontend/components/ShopCatalog.tsx": {
-    "mtime": 1795785762.6110754,
-    "seen": 1795791636.7354836,
-    "ast_hash": "2020e6fe28c9c26b35100bd068b19aec",
+    "mtime": 1795792001.149398,
+    "seen": 1795792560.6280637,
+    "ast_hash": "b3120e188b5fb8afabd3ce7d54c4fbfa",
     "semantic_hash": ""
   },
   "frontend/lib/photo.ts": {
     "mtime": 1795784306.6620347,
     "seen": 1795791636.7354836,
     "ast_hash": "79dcae93b244326a04d936b5cda76936",
+    "semantic_hash": ""
+  },
+  "backend/alembic/versions/0008_equipe_magasin.py": {
+    "mtime": 1795791680.2658849,
+    "seen": 1795792560.6280637,
+    "ast_hash": "51fdc8001947b6130e1a845d2eb987a8",
+    "semantic_hash": ""
+  },
+  "backend/app/routers/team.py": {
+    "mtime": 1795791762.6778717,
+    "seen": 1795792560.6280637,
+    "ast_hash": "49761d93655342affc840dc0df6d3816",
+    "semantic_hash": ""
+  },
+  "backend/app/services/shop_team.py": {
+    "mtime": 1795791693.8089414,
+    "seen": 1795792560.6280637,
+    "ast_hash": "232719f5800863ad8d903b669715741b",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_equipe_magasin.py": {
+    "mtime": 1795791930.6274028,
+    "seen": 1795792560.6280637,
+    "ast_hash": "ede579deed4776041fde27bb32e5003f",
+    "semantic_hash": ""
+  },
+  "frontend/components/ShopTeam.tsx": {
+    "mtime": 1795791974.1063368,
+    "seen": 1795792560.6280637,
+    "ast_hash": "285a7e401c9d60628cdd87cc4cb5a333",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {

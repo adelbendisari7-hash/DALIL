@@ -170,7 +170,9 @@ function QuickAdd({ shopId, families, products, onAdded }: {
 }
 
 /** Une ligne du catalogue : prix modifiable, stock en un toucher, confirmation du prix, photo. */
-function ProductRow({ shopId, p, catName, onChange }: { shopId: number; p: Product; catName: string; onChange: () => void }) {
+function ProductRow({ shopId, p, catName, onChange, can }: {
+  shopId: number; p: Product; catName: string; onChange: () => void; can: (perm: string) => boolean;
+}) {
   const [editing, setEditing] = useState(false);
   const [price, setPrice] = useState(p.price != null ? String(p.price) : "");
   const age = daysAgo(p.price_confirmed_at);
@@ -189,10 +191,12 @@ function ProductRow({ shopId, p, catName, onChange }: { shopId: number; p: Produ
   }
   return (
     <li className={`product-row${p.in_stock ? "" : " is-out"}`}>
-      <label className="thumb-slot" aria-label={t("shop.photo.add")}>
-        {p.photo_url ? <img src={p.photo_url} alt="" className="thumb" /> : <span className="thumb thumb-empty">+</span>}
-        <input type="file" accept="image/*" capture="environment" onChange={photo} hidden />
-      </label>
+      {can("products") ? (
+        <label className="thumb-slot" aria-label={t("shop.photo.add")}>
+          {p.photo_url ? <img src={p.photo_url} alt="" className="thumb" /> : <span className="thumb thumb-empty">+</span>}
+          <input type="file" accept="image/*" capture="environment" onChange={photo} hidden />
+        </label>
+      ) : p.photo_url ? <img src={p.photo_url} alt="" className="thumb" /> : <span className="thumb thumb-empty" aria-hidden />}
       <div className="product-main">
         <strong>{p.title}</strong>
         <span className="meta">{catName}{p.oem_ref ? ` · réf. ${p.oem_ref}` : ""} · {t(`shop.condition.${p.condition}`)}</span>
@@ -201,7 +205,9 @@ function ProductRow({ shopId, p, catName, onChange }: { shopId: number; p: Produ
         </span>
       </div>
       <div className="product-side">
-        {editing ? (
+        {!can("prices") ? (
+          <span className="price-tag">{p.price != null ? `${p.price.toLocaleString("fr-FR")} DA` : t("shop.price.none")}</span>
+        ) : editing ? (
           <span className="price-edit">
             <input aria-label={t("shop.product.price")} inputMode="numeric" value={price} autoFocus
               onChange={(e) => setPrice(e.target.value.replace(/\D/g, ""))} />
@@ -213,17 +219,17 @@ function ProductRow({ shopId, p, catName, onChange }: { shopId: number; p: Produ
           </button>
         )}
         <button type="button" className={`stock-toggle${p.in_stock ? " on" : ""}`} aria-pressed={p.in_stock}
-          onClick={() => patch({ in_stock: !p.in_stock })}>
+          disabled={!can("prices")} onClick={() => patch({ in_stock: !p.in_stock })}>
           {p.in_stock ? t("shop.stock.in") : t("shop.stock.out")}
         </button>
-        {age != null && age > OLD_PRICE_DAYS && (
+        {can("prices") && age != null && age > OLD_PRICE_DAYS && (
           <button type="button" className="chip" onClick={() => patch({ confirm: true })}>{t("shop.price.confirm")}</button>
         )}
-        <button type="button" className="chip" onClick={async () => {
+        {can("products_delete") && <button type="button" className="chip" onClick={async () => {
           if (!window.confirm(t("shop.product.delete.confirm"))) return;
           await api(`/shops/${shopId}/products/${p.id}`, { method: "DELETE" }).catch(() => undefined);
           onChange();
-        }}>{t("shop.product.delete")}</button>
+        }}>{t("shop.product.delete")}</button>}
       </div>
     </li>
   );
@@ -291,7 +297,10 @@ function ImportBox({ shopId, onDone }: { shopId: number; onDone: () => void }) {
   );
 }
 
-export default function ShopCatalog({ shopId, onCount }: { shopId: number; onCount?: (n: number) => void }) {
+export default function ShopCatalog({ shopId, onCount, perms = ["products", "prices", "products_delete"] }: {
+  shopId: number; onCount?: (n: number) => void; perms?: string[];
+}) {
+  const can = (p: string) => perms.includes(p);
   const [products, setProducts] = useState<Product[]>([]);
   const [families, setFamilies] = useState<Family[]>([]);
   const [q, setQ] = useState("");
@@ -315,7 +324,7 @@ export default function ShopCatalog({ shopId, onCount }: { shopId: number; onCou
 
   return (
     <>
-      <QuickAdd shopId={shopId} families={families} products={products} onAdded={load} />
+      {can("products") && <QuickAdd shopId={shopId} families={families} products={products} onAdded={load} />}
       <div className="card">
         <h2 className="card-title">{t("shop.catalog.title", { n: products.length })}</h2>
         {old > 0 && <p className="notice">{t("shop.price.reminder", { n: old })}</p>}
@@ -334,10 +343,10 @@ export default function ShopCatalog({ shopId, onCount }: { shopId: number; onCou
         </div>
         {products.length === 0 && <p className="help">{t("shop.catalog.empty")}</p>}
         <ul className="list product-list">
-          {shown.map((p) => <ProductRow key={p.id} shopId={shopId} p={p} catName={catName(p.category_id)} onChange={load} />)}
+          {shown.map((p) => <ProductRow key={p.id} shopId={shopId} p={p} catName={catName(p.category_id)} onChange={load} can={can} />)}
         </ul>
       </div>
-      <ImportBox shopId={shopId} onDone={load} />
+      {can("products") && <ImportBox shopId={shopId} onDone={load} />}
     </>
   );
 }
