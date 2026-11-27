@@ -12,6 +12,8 @@ export type User = {
 export type UserCar = {
   id: number; plate: string; variant_id: number | null; year: number | null; label: string | null; nickname: string | null;
   mileage_km: number | null; vin: string | null; display: string; maintenance_due?: number;
+  // Entretiens dépassés (« due ») ou proches (« soon ») : rappel sur l'accueil
+  maintenance_items?: { item: string; name: string; status: "due" | "soon"; km_left: number | null; days_left: number | null }[];
 };
 
 function read(key: string): string | null {
@@ -108,4 +110,27 @@ export const requestStore = {
     const all = [r, ...requestStore.list().filter((x) => x.id !== r.id)].slice(0, 30);
     write("dalil.requests", JSON.stringify(all));
   },
+};
+
+/** Dernier diagnostic et ses magasins, gardés sur l'appareil pour les relire sans réseau (au garage, quand la 3G
+ * coupe). Marche aussi en http (le service worker, lui, demande le https ou localhost). Rien n'est envoyé ailleurs. */
+export type LastDiagnosis = {
+  id: number; savedAt: string; result: unknown;
+  shops?: { categoryId: number; partName: string; savedAt: string; list: unknown[] };
+};
+export const lastDiagnosis = {
+  get: (): LastDiagnosis | null => {
+    try { return JSON.parse(read("dalil.last") || "null") as LastDiagnosis | null; } catch { return null; }
+  },
+  saveResult: (id: number, result: unknown) => {
+    const cur = lastDiagnosis.get();
+    const keep = cur && cur.id === id ? cur.shops : undefined;   // les magasins du même diagnostic restent
+    write("dalil.last", JSON.stringify({ id, savedAt: new Date().toISOString(), result, shops: keep }));
+  },
+  saveShops: (sessionId: number, categoryId: number, partName: string, list: unknown[]) => {
+    const cur = lastDiagnosis.get();
+    if (!cur || cur.id !== sessionId) return;
+    write("dalil.last", JSON.stringify({ ...cur, shops: { categoryId, partName, savedAt: new Date().toISOString(), list } }));
+  },
+  clear: () => write("dalil.last", null),
 };

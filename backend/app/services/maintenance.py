@@ -78,5 +78,11 @@ def schedule(db: Session, car: UserVehicle, today: date | None = None) -> list[d
     return sorted(out, key=lambda x: (order[x["status"]], x["km_left"] if x["km_left"] is not None else 1e9))
 
 
+def due_items(db: Session, car: UserVehicle) -> list[dict]:
+    """Entretiens dépassés ou proches (rappel sur l'accueil) : nom, état, kilomètres ou jours restants."""
+    return [{"item": x["item"], "name": x["name"], "status": x["status"], "km_left": x["km_left"], "days_left": x["days_left"]}
+            for x in schedule(db, car) if x["status"] in ("due", "soon")]
+
+
 def due_count(db: Session, car: UserVehicle) -> int:
-    return sum(1 for x in schedule(db, car) if x["status"] in ("due", "soon"))
+    return len(due_items(db, car))

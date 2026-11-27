@@ -32,8 +32,11 @@ def vehicle_label(v: UserVehicle) -> str:
 
 
 def vehicle_out(v: UserVehicle, db: Session | None = None) -> dict:
-    extra = {"maintenance_due": maintenance.due_count(db, v)} if db is not None else {}
-    return {**extra,"id": v.id, "plate": format_plate(v.plate), "variant_id": v.variant_id, "year": v.year, "label": v.label,
+    extra = {}
+    if db is not None:
+        due = maintenance.due_items(db, v)
+        extra = {"maintenance_due": len(due), "maintenance_items": due}
+    return {**extra, "id": v.id, "plate": format_plate(v.plate), "variant_id": v.variant_id, "year": v.year, "label": v.label,
             "nickname": v.nickname, "mileage_km": v.mileage_km, "vin": v.vin, "display": vehicle_label(v),
             "brand_id": v.variant.model.brand_id if v.variant else None,
             "model_id": v.variant.model_id if v.variant else None}

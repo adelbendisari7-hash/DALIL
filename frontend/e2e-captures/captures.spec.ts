@@ -1,5 +1,27 @@
 // Captures d'écran de l'interface (revue de design), format téléphone, clair et sombre. Pas un test du parcours.
+import { execFileSync } from "node:child_process";
+import { resolve } from "node:path";
 import { test, devices, type Page } from "@playwright/test";
+import { PY_PATH } from "../e2e/helpers";
+
+/** Base des tests seulement (recréée à chaque lancement) : prix plus anciens des produits de démonstration, pour que
+ * l'historique des prix ait plusieurs mois à montrer. */
+function backdatePrices() {
+  const script = `
+import sqlite3, sys
+from datetime import datetime, timedelta, timezone
+c = sqlite3.connect(sys.argv[1])
+now = datetime.now(timezone.utc)
+rows = c.execute("select product_id, shop_id, category_id, condition, price from price_points where price is not null").fetchall()
+if not c.execute("select 1 from price_points where recorded_at < ?", ((now - timedelta(days=60)).isoformat(),)).fetchone():
+    for pid, sid, cat, cond, price in rows:
+        for days, k in ((150, 0.86), (110, 0.9), (75, 0.93), (40, 0.97)):
+            c.execute("insert into price_points (product_id, shop_id, category_id, condition, price, recorded_at) values (?,?,?,?,?,?)",
+                      (pid, sid, cat, cond, round(price * k, -1), (now - timedelta(days=days)).isoformat()))
+    c.commit()
+`;
+  execFileSync(PY_PATH, ["-c", script, resolve(__dirname, "../../backend/e2e.db")]);
+}
 const OUT = process.env.CAPTURES || "test-results/captures";
 const BASE = process.env.CAP_URL || `http://localhost:${process.env.E2E_WEB_PORT || "3000"}`;
 const uniq = String(Date.now()).slice(-6);
@@ -31,6 +53,21 @@ for (const scheme of ["light", "dark"] as const) {
       await page.getByRole("link", { name: "Voir les magasins" }).first().click();
       await page.locator(".shop").first().waitFor({ timeout: 60_000 });
       await shot(page, "03-magasins", scheme);
+      backdatePrices();
+      await page.reload();
+      const prices = page.locator(".price-history");
+      await prices.waitFor();
+      await prices.locator("svg g").nth(5).click();   // un mois touché : son libellé s'affiche
+      await prices.screenshot({ path: `${OUT}/${scheme}-03a-prix.png` });
+      const first = page.locator(".shop").first();
+      await first.getByRole("link", { name: "WhatsApp" }).click();
+      await first.getByRole("button", { name: "Oui, trouvée" }).click();
+      await first.getByRole("heading").getByRole("link").click();
+      await page.locator(".reviews").waitFor();
+      await shot(page, "03b-fiche-avis", scheme);
+      await page.goto(`${BASE}/`);
+      await page.locator(".last-diagnosis").waitFor();
+      await page.locator(".hero").screenshot({ path: `${OUT}/${scheme}-01c-accueil-dernier.png`});
       await page.goto(`${BASE}/pieces`);
       await shot(page, "04-pieces", scheme);
       await page.goto(`${BASE}/connexion?inscription=1`);

@@ -124,3 +124,29 @@ test("entretien d'une voiture : échéance « à faire », noté « fait », lie
   await expect(vidange.getByText(/95.000 km/)).toBeVisible();
   await expect(page.getByText("le carnet d'entretien de votre voiture fait foi", { exact: false })).toBeVisible();
 });
+
+test("rappel d'entretien sur l'accueil : vidange dépassée, masquable, mène au panneau de la voiture", async ({ page }) => {
+  await inscrire(page, phone(), "Nadia", "Rappel", "/compte");
+  await ajouterVoiture(page, plate());   // 85 000 km
+  // Vidange notée à 70 000 km : dépassée de 5 000 km (intervalle indicatif de 10 000 km)
+  const token = await page.evaluate(() => localStorage.getItem("dalil.token"));
+  const headers = { Authorization: `Bearer ${token}` };
+  const cars = await (await page.request.get("/api/v1/me/vehicles", { headers })).json();
+  const id = cars[0].id;
+  expect((await page.request.post(`/api/v1/me/vehicles/${id}/maintenance`, { headers, data: { item: "vidange", km: 70000 } })).status()).toBe(201);
+
+  await page.goto("/");
+  const banner = page.locator(".upkeep-banner");
+  await expect(banner.getByRole("heading", { name: "Entretien à prévoir" })).toBeVisible();
+  await expect(banner).toContainText(/vidange et filtre à huile \(dépassé de 5.000 km\)/);
+  await banner.getByRole("link").first().click();
+  await expect(page).toHaveURL((u) => u.pathname === "/compte" && u.searchParams.get("entretien") === String(id));
+  await expect(page.locator(".maint", { hasText: "Vidange et filtre à huile" }).locator(".maint-pill")).toHaveText("À faire");
+
+  await page.goto("/");
+  await page.locator(".upkeep-banner").getByRole("button", { name: "Plus tard" }).click();
+  await expect(page.locator(".upkeep-banner")).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Qu'est-ce qui ne va pas", exact: false })).toBeVisible();
+  await expect(page.locator(".upkeep-banner")).toHaveCount(0);   // masqué pour la journée
+});

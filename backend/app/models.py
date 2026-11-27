@@ -346,6 +346,19 @@ class Product(Base):
     fitments: Mapped[list[ProductFitment]] = relationship(cascade="all, delete-orphan")
 
 
+class PricePoint(Base):
+    """Historique des prix (28/11/2026) : une ligne à chaque prix fixé ou changé dans un catalogue, et une ligne sans
+    prix quand le produit est retiré ou n'a plus de prix. Écrite automatiquement (services/price_history.py)."""
+    __tablename__ = "price_points"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    product_id: Mapped[int] = mapped_column(Integer, index=True)   # sans clé étrangère : la ligne survit au produit
+    shop_id: Mapped[int] = mapped_column(ForeignKey("shops.id", ondelete="CASCADE"), index=True)
+    category_id: Mapped[int] = mapped_column(ForeignKey("part_categories.id"), index=True)
+    condition: Mapped[str] = mapped_column(String(20), default="neuf")
+    price: Mapped[float | None] = mapped_column(Float)
+    recorded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
+
+
 class ProductFitment(Base):
     __tablename__ = "product_fitments"
     product_id: Mapped[int] = mapped_column(ForeignKey("products.id", ondelete="CASCADE"), primary_key=True)
@@ -455,6 +468,9 @@ class ContactEvent(Base):
     category_id: Mapped[int | None] = mapped_column(ForeignKey("part_categories.id"))
     variant_id: Mapped[int | None] = mapped_column(ForeignKey("vehicle_variants.id"))
     channel: Mapped[str] = mapped_column(String(20))  # call|whatsapp
+    # Empreinte du client (HMAC de l'adresse IP) : un « pièce trouvée » n'est un avis vérifié que si le même client a
+    # d'abord contacté le magasin (migration 0012 ; vide pour les contacts plus anciens).
+    client_hash: Mapped[str | None] = mapped_column(String(16), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 
@@ -483,3 +499,7 @@ class Feedback(Base):
     # et par jour dans le score (section 6.4), pour qu'un magasin ne puisse pas gonfler le sien.
     client_hash: Mapped[str | None] = mapped_column(String(16), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+# Historique des prix : écouteur de la session, enregistré dès que les modèles sont chargés (API, seed, scripts, tests)
+from .services import price_history as _price_history  # noqa: E402,F401

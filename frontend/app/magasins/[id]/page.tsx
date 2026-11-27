@@ -13,7 +13,50 @@ type Shop = {
   phone: string | null; whatsapp: string | null; hours: string | null; is_demo: boolean; parts_origin: string[];
   brands: { brand_id: number }[]; categories: { category_id: number }[];
   landmark: string | null; verified: boolean; open_status: { open: boolean; label: string } | null; photo_url: string | null; fast_reply?: boolean;
+  reviews?: Reviews;
 };
+type Reviews = { found: number; not_found: number; since: string | null;
+  recent: { part: string | null; vehicle: string | null; date: string }[] };
+
+// Jours du calendrier entre la date de l'avis (AAAA-MM-JJ) et aujourd'hui, sans effet d'heure ni de fuseau
+const ago = (day: string) => {
+  const [y, m, d] = day.split("-").map(Number);
+  const now = new Date();
+  const days = Math.round((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(y, m - 1, d)) / 86_400_000);
+  return days <= 0 ? t("reviews.today") : days === 1 ? t("reviews.yesterday") : t("reviews.daysAgo", { n: days });
+};
+
+/** Avis vérifiés : « pièce trouvée » de clients qui ont d'abord contacté le magasin depuis DALIL. Ni nom ni
+ * commentaire : la pièce, la voiture et la date. */
+function ShopReviews({ r }: { r: Reviews }) {
+  const total = r.found + r.not_found;
+  return (
+    <section className="card reviews" aria-labelledby="rv-title">
+      <h2 id="rv-title" className="card-title">{t("reviews.title")}</h2>
+      {total === 0 ? (
+        <p className="help" style={{ marginTop: 0 }}>{t("reviews.none")}</p>
+      ) : (
+        <>
+          <p className="reviews-score">
+            <strong>{r.found}</strong> {t(r.found === 1 ? "reviews.found1" : "reviews.foundN")}
+            {r.not_found > 0 && <span className="meta"> · {t(r.not_found === 1 ? "reviews.notFound1" : "reviews.notFoundN", { n: r.not_found })}</span>}
+          </p>
+          {r.recent.length > 0 && (
+            <ul className="list reviews-list">
+              {r.recent.map((x, i) => (
+                <li key={i}>
+                  <span>{x.part ?? t("reviews.part")}{x.vehicle ? ` · ${x.vehicle}` : ""}</span>
+                  <span className="meta">{ago(x.date)}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
+      )}
+      <p className="help">{t("reviews.how")}</p>
+    </section>
+  );
+}
 type Product = { id: number; title: string; oem_ref: string | null; price: number | null; condition: string; in_stock: boolean;
   photo_url: string | null };
 type Named = { id: number; name: string };
@@ -56,6 +99,7 @@ export default function ShopPage() {
       {shop.open_status && <p className={`open-pill ${shop.open_status.open ? "is-open" : ""}`}>{shop.open_status.label}</p>}
       {shop.hours && <p>{t("shops.hours")} : {shop.hours}</p>}
       <ShopContact shop={shop} ctx={{}} />
+      {shop.reviews && <ShopReviews r={shop.reviews} />}
 
       <h3 className="section">{t("shop.brands")}</h3>
       <div className="chips">{shop.brands.map((b) => <span key={b.brand_id} className="chip">{name(brands, b.brand_id)}</span>)}</div>

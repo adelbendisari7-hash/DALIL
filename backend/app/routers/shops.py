@@ -41,7 +41,7 @@ from ..schemas import (
 from ..security import client_hash, current_user, current_user_optional, feedback_limiter, normalize_phone, require_role
 from ..services.imports import import_products, product_template, read_table
 from ..services import shop_onboarding as onboarding
-from ..services import shop_stats
+from ..services import price_history, shop_reviews, shop_stats
 from ..services import shop_team as team
 from ..services.media import InvalidImage, storage
 from ..services.recommendation import RECOMMENDABLE_STATUSES, category_lineage, offers, recommend
@@ -134,6 +134,16 @@ def shops_map(db: Session = Depends(get_db)):
     return [shop_out(s, full=False) for s in rows]
 
 
+@router.get("/prices/{category_id}")
+def price_history_view(category_id: int, condition: str | None = Query(None, pattern="^(neuf|adaptable|occasion)$"),
+                       db: Session = Depends(get_db)):
+    """Historique des prix d'une pièce dans les catalogues des magasins visibles : plus bas, médiane, plus haut à la
+    fin de chacun des 6 derniers mois. Prix lus, jamais estimés ; `demo` : calculé sur des magasins fictifs."""
+    if not db.get(PartCategory, category_id):
+        raise HTTPException(404, "Pièce inconnue")
+    return price_history.summary(db, category_id, condition)
+
+
 @router.get("/shops/mine")
 def shops_mine(user: User = Depends(current_user), db: Session = Depends(get_db)):
     return [{**shop_out(s), "my_role": role, "my_permissions": perms} for s, role, perms in team.my_shops(db, user)]
@@ -166,7 +176,7 @@ def shop_detail(shop_id: int, request: Request, db: Session = Depends(get_db),
     if not (user and (user.role == "admin" or team.membership(db, shop, user)[0])):   # l'équipe ne compte pas ses visites
         shop_stats.record(db, [shop.id], "view", client_hash(request))
         db.commit()
-    return {**shop_out(shop), "fast_reply": shop_stats.fast_reply(db, shop.id)}
+    return {**shop_out(shop), "fast_reply": shop_stats.fast_reply(db, shop.id), "reviews": shop_reviews.reviews(db, shop.id)}
 
 
 @router.get("/shops/{shop_id}/stats")
@@ -200,10 +210,10 @@ def shop_products(shop_id: int, db: Session = Depends(get_db), user: User | None
 
 
 @router.post("/contact-events", status_code=201, dependencies=[Depends(feedback_limiter)])
-def contact_event(body: ContactEventIn, db: Session = Depends(get_db)):
+def contact_event(body: ContactEventIn, request: Request, db: Session = Depends(get_db)):
     if not db.get(Shop, body.shop_id):
         raise HTTPException(404, "Magasin inconnu")
-    ev = ContactEvent(**body.model_dump())
+    ev = ContactEvent(**body.model_dump(), client_hash=client_hash(request))
     db.add(ev)
     db.commit()
     return {"id": ev.id}

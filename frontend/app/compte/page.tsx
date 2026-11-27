@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import Maintenance from "@/components/Maintenance";
 import VehiclePicker from "@/components/VehiclePicker";
-import { api, ApiError, session, type User, type UserCar, type Vehicle } from "@/lib/api";
+import { api, ApiError, lastDiagnosis, session, type User, type UserCar, type Vehicle } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
 type Commune = { id: number; nom_fr: string };
@@ -248,9 +248,10 @@ function CarForm({ car, onDone, onCancel }: { car: UserCar | null; onDone: () =>
   );
 }
 
-function Cars({ cars, reload }: { cars: UserCar[]; reload: () => void }) {
+function Cars({ cars, reload, openUpkeep }: { cars: UserCar[]; reload: () => void; openUpkeep?: number | null }) {
   const [editing, setEditing] = useState<UserCar | "new" | null>(cars.length ? null : "new");
-  const [upkeep, setUpkeep] = useState<number | null>(null);   // voiture dont le panneau « Entretien » est ouvert
+  // Voiture dont le panneau « Entretien » est ouvert (?entretien=<id> : depuis le rappel de l'accueil)
+  const [upkeep, setUpkeep] = useState<number | null>(openUpkeep ?? null);
   const [error, setError] = useState("");
 
   async function remove(c: UserCar) {
@@ -268,7 +269,7 @@ function Cars({ cars, reload }: { cars: UserCar[]; reload: () => void }) {
       {cars.length === 0 && editing === null && <p className="help">{t("account.cars.empty")}</p>}
       <ul className="list">
         {cars.map((c) => (
-          <li key={c.id} className="car">
+          <li key={c.id} className="car" id={`voiture-${c.id}`}>
             <span>
               <strong>{c.nickname || c.display}</strong>
               {c.nickname && <><br /><span className="meta">{c.display}</span></>}
@@ -363,6 +364,7 @@ function Account() {
     try {
       await api("/auth/me", { method: "DELETE" });
       session.clear();
+      lastDiagnosis.clear();   // rien ne reste sur l'appareil
       setUser(null);
       setDone(true);
     } catch (e) {
@@ -386,7 +388,7 @@ function Account() {
   const carsCard = complete && (
     <div className="card">
       <h2 className="card-title">{t("account.cars")}</h2>
-      {cars ? <Cars cars={cars} reload={loadCars} /> : <p>{t("common.loading")}</p>}
+      {cars ? <Cars cars={cars} reload={loadCars} openUpkeep={params.get("entretien") ? Number(params.get("entretien")) : null} /> : <p>{t("common.loading")}</p>}
       {welcome && next && next !== "/compte" && (
         <div className="actions"><button className="btn btn-primary btn-block" onClick={() => router.push(next)}>{t("account.continue")}</button></div>
       )}

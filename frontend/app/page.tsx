@@ -5,8 +5,25 @@ import { useCallback, useEffect, useState } from "react";
 import VehiclePicker from "@/components/VehiclePicker";
 import VoiceInput from "@/components/VoiceInput";
 import WarningLights, { lightPhrase, type Light } from "@/components/WarningLights";
-import { api, ApiError, session, type UserCar, type Vehicle } from "@/lib/api";
+import { api, ApiError, lastDiagnosis, session, store, type LastDiagnosis, type UserCar, type Vehicle } from "@/lib/api";
 import { t } from "@/lib/i18n";
+
+type Due = NonNullable<UserCar["maintenance_items"]>[number];
+function upkeepWhen(x: Due): string {
+  if (x.status === "due") {
+    if (x.km_left != null && x.km_left <= 0) return t("upkeep.overKm", { km: Math.abs(x.km_left).toLocaleString("fr-FR") });
+    return t("upkeep.due");
+  }
+  if (x.km_left != null && x.km_left <= 1500) return t("upkeep.inKm", { km: x.km_left.toLocaleString("fr-FR") });
+  if (x.days_left != null) return t("upkeep.inDays", { n: x.days_left });
+  return t("upkeep.soon");
+}
+
+function lastSummary(l: LastDiagnosis): string {
+  const r = l.result as { vehicle?: string; causes?: { name: string }[] };
+  const cause = r.causes?.[0]?.name;
+  return [cause ?? t("offline.last.unknown"), r.vehicle].filter(Boolean).join(" · ");
+}
 
 export default function Home() {
   const router = useRouter();
@@ -20,6 +37,19 @@ export default function Home() {
       .then((cs) => { setCars(cs); if (cs.length) setCar(cs[0].id); })
       .catch(() => undefined);
   }, []);
+  // Dernier diagnostic gardé sur l'appareil (relisible sans réseau)
+  const [last, setLast] = useState<LastDiagnosis | null>(null);
+  // Rappel d'entretien masqué pour aujourd'hui
+  const [upkeepHidden, setUpkeepHidden] = useState(true);
+  useEffect(() => {
+    setLast(lastDiagnosis.get());
+    setUpkeepHidden(store.read("dalil.upkeep.hidden") === new Date().toDateString());
+  }, []);
+  function hideUpkeep() {
+    store.write("dalil.upkeep.hidden", new Date().toDateString());
+    setUpkeepHidden(true);
+  }
+  const upkeep = cars.filter((c) => c.maintenance_items?.length);
   const [text, setText] = useState("");
   const [lights, setLights] = useState<string[]>([]);
 
@@ -89,6 +119,38 @@ export default function Home() {
       <h1>{t("home.title")}</h1>
       <p className="lead">{t("home.lead")}</p>
       {warming && <p className="notice" role="status">{t("home.warming")}</p>}
+
+      {/* Rappel d'entretien : seulement ce qui est dépassé ou proche, masquable pour la journée */}
+      {!upkeepHidden && upkeep.length > 0 && (
+        <aside className="card upkeep-banner" aria-labelledby="upkeep-title">
+          <div className="upkeep-head">
+            <h2 id="upkeep-title" className="card-title">{t("upkeep.title")}</h2>
+            <button type="button" className="btn btn-ghost" onClick={hideUpkeep}>{t("upkeep.hide")}</button>
+          </div>
+          <ul className="upkeep-list">
+            {upkeep.map((c) => (
+              <li key={c.id}>
+                <Link href={`/compte?entretien=${c.id}#voiture-${c.id}`}>
+                  <strong>{c.nickname || c.display}</strong>
+                  <span className="meta">
+                    {c.maintenance_items!.slice(0, 3).map((x) => `${x.name.toLowerCase()} (${upkeepWhen(x)})`).join(", ")}
+                    {c.maintenance_items!.length > 3 ? ` +${c.maintenance_items!.length - 3}` : ""}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="help">{t("upkeep.note")}</p>
+        </aside>
+      )}
+
+      {last && (
+        <Link className="card last-diagnosis" href={`/diagnostic/${last.id}`}>
+          <span className="card-title">{t("offline.last")}</span>
+          <span>{lastSummary(last)}</span>
+          <span className="meta">{t("offline.last.help", { date: new Date(last.savedAt).toLocaleDateString("fr-FR") })}</span>
+        </Link>
+      )}
 
       {/* 1. Le problème : la tâche principale vient en premier */}
       <div className="card">

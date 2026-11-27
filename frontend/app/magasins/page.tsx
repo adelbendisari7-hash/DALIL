@@ -3,8 +3,9 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";
+import PriceHistory from "@/components/PriceHistory";
 import ShopContact from "@/components/ShopContact";
-import { api, requestStore, vehicleStore } from "@/lib/api";
+import { api, ApiError, lastDiagnosis, requestStore, vehicleStore } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
 const ShopMap = dynamic(() => import("@/components/ShopMap"), { ssr: false });
@@ -34,6 +35,7 @@ function Shops() {
   const [requestMsg, setRequestMsg] = useState("");
   const [requestSent, setRequestSent] = useState(false);
   const [sort, setSort] = useState<"score" | "price">("score");
+  const [offline, setOffline] = useState<string | null>(null);
 
   useEffect(() => {
     if (!variantParam) setVariantId(vehicleStore.get()?.variantId);
@@ -47,8 +49,23 @@ function Shops() {
       q.set("lat", String(me[0]));
       q.set("lng", String(me[1]));
     }
-    api<Rec[]>(`/shops/recommend?${q}`).then(setShops).catch(() => setError(t("common.error")));
-  }, [categoryId, variantId, me]);
+    api<Rec[]>(`/shops/recommend?${q}`)
+      .then((list) => {
+        setShops(list);
+        setOffline(null);
+        // Magasins du dernier diagnostic : gardés sur l'appareil, pour appeler même sans réseau
+        if (sessionId) lastDiagnosis.saveShops(sessionId, categoryId, partName, list);
+      })
+      .catch((e) => {
+        const saved = lastDiagnosis.get()?.shops;
+        if (e instanceof ApiError && e.status === 0 && saved && saved.categoryId === categoryId) {
+          setShops(saved.list as Rec[]);
+          setOffline(saved.savedAt);
+          return;
+        }
+        setError(e instanceof ApiError && e.status === 0 ? t("offline.none") : t("common.error"));
+      });
+  }, [categoryId, variantId, me, sessionId, partName]);
 
   function locate() {
     if (!navigator.geolocation) return setGeo("denied");
@@ -94,6 +111,11 @@ function Shops() {
       </div>
       <p className="help">{geo === "denied" ? t("shops.locate.denied") : t("shops.locate.help")}</p>
 
+      {offline && (
+        <p className="notice offline-note" role="status">
+          {t("offline.shops", { date: new Date(offline).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" }) })}
+        </p>
+      )}
       {error && <p className="err" role="alert">{error}</p>}
       {!shops && !error && <p>{t("common.loading")}</p>}
       {shops && shops.length === 0 && <p>{t("shops.empty")}</p>}
@@ -143,6 +165,8 @@ function Shops() {
           ))}
         </ol>
       )}
+
+      {!offline && <PriceHistory categoryId={categoryId} />}
 
       <div className="section">
         <button className="btn btn-ghost" onClick={broadcast}>{t("shops.request")}</button>

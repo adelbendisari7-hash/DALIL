@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { api, ApiError } from "@/lib/api";
+import { api, ApiError, lastDiagnosis } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
 type Part = { category_id: number; slug: string; name: string };
@@ -165,11 +165,27 @@ export default function DiagnosticResult() {
   const [r, setR] = useState<Result | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  // Sans réseau : le dernier diagnostic gardé sur l'appareil, avec sa date
+  const [offline, setOffline] = useState<string | null>(null);
 
   useEffect(() => {
-    api<Result>(`/diagnosis/${id}`).then(setR)
-      .catch((e) => setError(e instanceof ApiError && e.status === 404 ? t("diagnosis.notFound") : t("common.error")));
+    api<Result>(`/diagnosis/${id}`).then((res) => { setR(res); setOffline(null); })
+      .catch((e) => {
+        const saved = lastDiagnosis.get();
+        if (e instanceof ApiError && e.status === 0 && saved && saved.id === Number(id)) {
+          setR(saved.result as Result);
+          setOffline(saved.savedAt);
+          return;
+        }
+        setError(e instanceof ApiError && e.status === 404 ? t("diagnosis.notFound")
+          : e instanceof ApiError && e.status === 0 ? t("offline.none") : t("common.error"));
+      });
   }, [id]);
+
+  // Chaque résultat définitif est gardé sur l'appareil (consultable hors ligne)
+  useEffect(() => {
+    if (r && !offline && r.llm !== "pending") lastDiagnosis.saveResult(r.session_id, r);
+  }, [r, offline]);
 
   // Tant que le modèle de langage travaille (20 à 45 s sur le portable), on garde le résultat provisoire à l'écran
   // et on relit le résultat toutes les 2,5 s ; il remplace le provisoire dès que `llm` n'est plus « pending ».
@@ -198,6 +214,11 @@ export default function DiagnosticResult() {
 
   return (
     <article>
+      {offline && (
+        <p className="notice offline-note" role="status">
+          {t("offline.result", { date: new Date(offline).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" }) })}
+        </p>
+      )}
       <span className="vehicle-pill">{t("result.for")} {r.vehicle}</span>
       {r.understood && <p className="notice" role="status">{t("result.understood")} « {r.understood} »</p>}
       {r.llm === "pending" && <p className="notice" role="status">{t("result.refining")}</p>}
