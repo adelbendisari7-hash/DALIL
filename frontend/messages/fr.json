@@ -313,5 +313,15 @@
   "admin.reset.help": "Vérifiez d'abord que vous parlez au titulaire du numéro. Le mot de passe provisoire ne s'affiche qu'une fois : donnez-le au client et demandez-lui de le changer.",
   "admin.reset.phone": "Numéro du client",
   "admin.reset.button": "Donner un mot de passe provisoire",
-  "admin.reset.done": "Mot de passe provisoire de {name} : {password}"
+  "admin.reset.done": "Mot de passe provisoire de {name} : {password}",
+  "nav.parts.short": "Pièces",
+  "nav.shop.short": "Magasin",
+  "nav.admin.short": "Admin",
+  "nav.account.short": "Compte",
+  "home.step.problem": "Le problème",
+  "home.step.vehicle": "Votre véhicule",
+  "home.step.dtc": "Code défaut (facultatif)",
+  "result.best": "Le plus probable",
+  "result.others": "Autres causes possibles",
+  "account.role.mechanic": "Mécanicien"
 }

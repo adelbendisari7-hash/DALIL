@@ -188,7 +188,7 @@ function CarForm({ car, onDone, onCancel }: { car: UserCar | null; onDone: () =>
 
   const needModel = !car && !notListed && !model;
   return (
-    <form className="questions" onSubmit={save} noValidate>
+    <form className="car-form" onSubmit={save} noValidate>
       <h3>{car ? car.display : t("account.cars.add")}</h3>
       <label htmlFor="plate">{t("account.cars.plate")}</label>
       <input id="plate" inputMode="numeric" autoComplete="off" required maxLength={24} placeholder={t("account.cars.plate.placeholder")}
@@ -375,45 +375,59 @@ function Account() {
     );
   }
   const complete = Boolean(user.first_name && user.last_name);
+  const initials = ((user.first_name?.[0] ?? "") + (user.last_name?.[0] ?? "")).toUpperCase() || "?";
+  const carsCard = complete && (
+    <div className="card">
+      <h2 className="card-title">{t("account.cars")}</h2>
+      {cars ? <Cars cars={cars} reload={loadCars} /> : <p>{t("common.loading")}</p>}
+      {welcome && next && next !== "/compte" && (
+        <div className="actions"><button className="btn btn-primary btn-block" onClick={() => router.push(next)}>{t("account.continue")}</button></div>
+      )}
+    </div>
+  );
+  const profileCard = (
+    <div className="card">
+      <h2 className="card-title">{t("account.profile")}</h2>
+      <ProfileForm user={user} onSaved={setUser} />
+    </div>
+  );
   return (
     <section>
-      {welcome ? (
-        <>
-          <h1>{t("account.welcome.title")}</h1>
-          <p className="lead">{complete ? t("account.welcome.cars") : t("account.welcome.text")}</p>
-        </>
-      ) : (
-        <h1>{t("account.title")}</h1>
-      )}
+      <div className="account-head">
+        <span className="avatar" aria-hidden>{initials}</span>
+        <div>
+          <h1>{welcome ? t("account.welcome.title") : t("account.title")}</h1>
+          <span className="meta">{[user.name, t(`account.role.${user.role}`)].filter(Boolean).join(" · ")}</span>
+        </div>
+      </div>
+      {welcome && <p className="lead">{complete ? t("account.welcome.cars") : t("account.welcome.text")}</p>}
 
-      <h2 className="section">{t("account.profile")}</h2>
-      <ProfileForm user={user} onSaved={setUser} />
+      {/* Juste après l'inscription, l'étape suivante (la voiture) passe en premier */}
+      {welcome && complete ? <>{carsCard}{profileCard}</> : <>{profileCard}{carsCard}</>}
 
       {complete && (
-        <>
-          <h2 className="section">{t("account.cars")}</h2>
-          {cars ? <Cars cars={cars} reload={loadCars} /> : <p>{t("common.loading")}</p>}
-          {welcome && next && next !== "/compte" && (
-            <div className="actions"><button className="btn btn-primary" onClick={() => router.push(next)}>{t("account.continue")}</button></div>
-          )}
-
-          <h2 className="section">{t("account.history")}</h2>
+        <div className="card">
+          <h2 className="card-title">{t("account.history")}</h2>
           <History cars={cars ?? []} />
-        </>
+        </div>
       )}
 
-      <h2 className="section">{t("account.password")}</h2>
-      <PasswordForm user={user} onSaved={() => setUser({ ...user, has_password: true })} />
-
-      <p className="section"><span className="meta">{t("account.role")}</span><br /><strong>{t(`account.role.${user.role}`)}</strong></p>
-      <div className="actions">
-        <button className="btn btn-ghost" onClick={() => { session.clear(); setUser(null); }}>{t("nav.logout")}</button>
+      <div className="card">
+        <h2 className="card-title">{t("account.password")}</h2>
+        <PasswordForm user={user} onSaved={() => setUser({ ...user, has_password: true })} />
       </div>
-      <h2 className="section">{t("account.delete.title")}</h2>
-      <p className="help">{t("account.delete.text")}</p>
-      {error && <p className="err" role="alert">{error}</p>}
-      <div className="actions">
-        <button className="btn" onClick={remove}>{t("account.delete.button")}</button>
+
+      <div className="actions" style={{ marginBottom: "0.9rem" }}>
+        <button className="btn btn-ghost btn-block" onClick={() => { session.clear(); setUser(null); }}>{t("nav.logout")}</button>
+      </div>
+
+      <div className="card danger-zone">
+        <h2 className="card-title">{t("account.delete.title")}</h2>
+        <p className="help">{t("account.delete.text")}</p>
+        {error && <p className="err" role="alert">{error}</p>}
+        <div className="actions">
+          <button className="btn" onClick={remove}>{t("account.delete.button")}</button>
+        </div>
       </div>
     </section>
   );

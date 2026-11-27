@@ -1,17 +1,17 @@
 # Graph Report - DALIL  (2026-11-27)
 
 ## Corpus Check
-- 285 files · ~319,332 words
+- 287 files · ~320,455 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 31 file(s) not represented in the graph (top: .ipynb 9, (none) 6, .jsonl 4)
 
 ## Summary
-- 2231 nodes · 4809 edges · 156 communities (126 shown, 30 thin omitted)
+- 2235 nodes · 4815 edges · 153 communities (124 shown, 29 thin omitted)
 - Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 281 edges (avg confidence: 0.92)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `89659b6c`
+- Built from commit: `8cd8c684`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,11 +29,11 @@
 - recommendation.py
 - mot.py
 - largus.py
-- imports.py
+- admin.py
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - i18n.ts
 - steps
-- retrieval.py
+- get_settings
 - espace-magasin/page.tsx
 - compilerOptions
 - DALIL — cahier des charges de la plateforme de diagnostic auto et de localisation de pièces détachées (Oran)
@@ -54,17 +54,17 @@
 - sw.js
 - report.md
 - Étape 11 : essais à Oran (protocole et compte rendu)
-- anonymiser_ouedkniss.py
-- classifier.py
+- re
+- FaultClassifier
 - test_llm_chaine.py
-- Plan : référentiel complet des véhicules d'Algérie et nouveaux jeux de données pour le diagnostic
+- taxonomy_map.py
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - react
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - hybrid
-- pathlib
+- normalize
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
@@ -76,14 +76,14 @@
 - test_api.py
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
-- Étape 8 : chaîne de diagnostic, plan proposé (à valider avant de coder)
+- question_bank
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - public.py
 - eval_with_llm.sh
-- api.ts
+- test_mot_de_passe.py
 - run.py
-- build_llm_dataset.py
+- Étape 7 sur Kaggle : traduction et entraînement
 - export_retours.py
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Étape 9 : vérification sur un vrai téléphone
@@ -102,12 +102,12 @@
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - load_vectors.py
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
-- test_pipeline.py
+- common.py
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - evaluate.py
-- ConsoleSms
-- dependencies
+- load_classifier
+- test_deux_niveaux.py
 - Le marché automobile algérien : ce qu'il implique pour DALIL
 - json
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
@@ -118,7 +118,7 @@
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Embedding
 - to_french
-- re
+- extraire_causes_largus.py
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
@@ -128,7 +128,7 @@
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
-- t
+- admin/page.tsx
 - sources/__init__.py
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - 20261124-0900-relecture-largus_forum.md
@@ -138,22 +138,19 @@
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
-- conftest.py
+- test_concurrence.py
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
 - shorten_query
 - Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)
+- DALIL : suivi du projet
 - t
-- RateLimiter
-- test_espace_magasin.py
+- @playwright/test
 - sqlalchemy
-- config.py
-- login
+- VehicleVariant
 - compte.spec.ts
-- test_retours.py
-- Embedder
 
 ## God Nodes (most connected - your core abstractions)
 1. `get_settings()` - 66 edges
@@ -163,8 +160,8 @@
 5. `User` - 42 edges
 6. `Base` - 33 edges
 7. `Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)` - 33 edges
-8. `Shop` - 29 edges
-9. `Context` - 29 edges
+8. `Context` - 29 edges
+9. `Shop` - 29 edges
 10. `Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)` - 29 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -172,25 +169,25 @@
   CLAUDE.md → frontend/lib/i18n.ts
 - `Carte du code` --references--> `score_shop()`  [INFERRED]
   CLAUDE.md → backend/app/services/recommendation.py
-- `6. Journal` --references--> `FamilyRerankedClassifier`  [INFERRED]
-  docs/SUIVI.md → backend/app/services/diagnosis/classifier.py
-- `Décisions déjà prises par l'utilisateur (17/11/2026)` --references--> `glossary_misses()`  [INFERRED]
-  docs/plan-referentiel-et-donnees.md → data/pipeline/translate.py
 - `1. Où on en est` --references--> `score_shop()`  [INFERRED]
   docs/SUIVI.md → backend/app/services/recommendation.py
+- `6. Journal` --references--> `FamilyRerankedClassifier`  [INFERRED]
+  docs/SUIVI.md → backend/app/services/diagnosis/classifier.py
+- `1. Ce qui existe déjà (étapes 3 à 7)` --references--> `_CallBudget`  [INFERRED]
+  docs/plan-etape-8.md → backend/app/services/diagnosis/llm.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (156 total, 30 thin omitted)
+## Communities (153 total, 29 thin omitted)
 
 ### Community 0 - "llm.py"
 Cohesion: 0.13
 Nodes (9): AnthropicProvider, build_user_message(), _CallBudget, get_llm(), LLMProvider, OpenAICompatProvider, _parse_json(), rerank_with_llm() (+1 more)
 
 ### Community 2 - "account.py"
-Cohesion: 0.16
-Nodes (16): PlateReport, UserVehicle, _check(), _commit(), diagnoses(), _own(), plate_report(), resolve_report() (+8 more)
+Cohesion: 0.14
+Nodes (19): PlateReport, User, UserVehicle, _check(), _commit(), diagnoses(), _own(), plate_report() (+11 more)
 
 ### Community 3 - "kaggle_run.py"
 Cohesion: 0.28
@@ -205,60 +202,60 @@ Cohesion: 0.06
 Nodes (34): A-actuel / classifieur seul | audit_ecriture_oran (8), A-actuel / classifieur seul | audit_ecriture_oran_controle (0), A-actuel / classifieur seul | demo_cases (0), A-actuel / classifieur seul | dev_fr_synthetique (2), A-actuel / D (chaîne complète) | audit_ecriture_oran (6), A-actuel / D (chaîne complète) | audit_ecriture_oran_controle (0), A-actuel / D (chaîne complète) | demo_cases (0), A-actuel / D (chaîne complète) | dev_fr_synthetique (1) (+26 more)
 
 ### Community 6 - "package.json"
-Cohesion: 0.17
-Nodes (15): devDependencies, @playwright/test@^1.65.1, @types/leaflet@^1.9.22, @types/node@^26.6.6, @types/react@^19.3.0, @types/react-dom@^19.3.0, typescript@^5.9.3, name (+7 more)
+Cohesion: 0.14
+Nodes (17): react-dom@^19.3.1, devDependencies, @playwright/test@^1.65.1, @types/leaflet@^1.9.22, @types/node@^26.6.6, @types/react@^19.3.0, @types/react-dom@^19.3.0, typescript@^5.9.3 (+9 more)
 
 ### Community 7 - "DALIL — cahier des charges de la plateforme de diagnostic auto et de localisation de pièces détachées (Oran)"
 Cohesion: 0.07
 Nodes (27): Carte du code, Commandes, Conventions, DALIL — consignes pour Claude Code, 10. Exigences non fonctionnelles, 11. Plan de réalisation pour Claude Code, 12. Idées complémentaires, 13. Risques et questions ouvertes (+19 more)
 
 ### Community 8 - "relecture_etiquettes.py"
-Cohesion: 0.17
+Cohesion: 0.19
 Nodes (12): _rows(), test_intervalle_wilson(), test_separateur_unicode_dans_un_texte(), test_tirage_stratifie_et_mesure(), labelled(), main(), measure(), part_names() (+4 more)
 
 ### Community 9 - "t"
-Cohesion: 0.12
-Nodes (14): Family, Hit, PartsPage(), RefHit, Brand, Hit, Model, modelYears() (+6 more)
+Cohesion: 0.10
+Nodes (19): Home(), submit(), Family, Hit, PartsPage(), RefHit, Brand, Hit (+11 more)
 
 ### Community 10 - "helpers.ts"
-Cohesion: 0.23
-Nodes (7): ADMIN_PHONE, makeCatalog(), OTP, PY_PATH, VENV, WEB_ENV, @playwright/test
+Cohesion: 0.27
+Nodes (6): ADMIN_PHONE, makeCatalog(), OTP, PY_PATH, VENV, WEB_ENV
 
 ### Community 11 - "recommendation.py"
-Cohesion: 0.11
-Nodes (31): category_lineage(), freshness(), haversine_km(), proximity(), rank(), recommend(), reliability(), score_shop() (+23 more)
+Cohesion: 0.10
+Nodes (31): km(), main(), nearest_commune(), prepare(), read_osm(), run(), write_visit_list(), category_lineage() (+23 more)
 
 ### Community 12 - "mot.py"
-Cohesion: 0.22
-Nodes (10): download(), collect(), Context, aggregate(), _band(), collect(), _n(), _pct() (+2 more)
+Cohesion: 0.21
+Nodes (8): aggregate(), _band(), collect(), _n(), _pct(), rfr_categories(), fetch(), main()
 
 ### Community 13 - "largus.py"
-Cohesion: 0.12
-Nodes (20): author_solution(), category_family(), clean_category(), collect(), _connect(), label(), mask_names(), post_number() (+12 more)
-
-### Community 14 - "imports.py"
 Cohesion: 0.09
-Nodes (23): km(), main(), nearest_commune(), prepare(), read_osm(), run(), write_visit_list(), Commune (+15 more)
+Nodes (24): admin_headers(), client(), author_solution(), category_family(), clean_category(), collect(), _connect(), label() (+16 more)
+
+### Community 14 - "admin.py"
+Cohesion: 0.10
+Nodes (26): AdminAction, Shop, ShopBrand, ShopCategory, admin_actions(), admin_import(), admin_merge(), admin_plate_report_resolve() (+18 more)
 
 ### Community 15 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.09
 Nodes (22): A-amorcage / classifieur seul | demo_cases (0), A-amorcage / classifieur seul | dev_fr_synthetique (4), A-amorcage / D (chaîne complète) | demo_cases (0), A-amorcage / D (chaîne complète) | dev_fr_synthetique (3), A-corpus-panne / classifieur seul | demo_cases (1), A-corpus-panne / classifieur seul | dev_fr_synthetique (4), A-corpus-panne / D (chaîne complète) | demo_cases (1), A-corpus-panne / D (chaîne complète) | dev_fr_synthetique (3) (+14 more)
 
 ### Community 16 - "i18n.ts"
-Cohesion: 0.13
-Nodes (10): body, display, metadata, RootLayout(), viewport, NotFound(), TopBar(), catalogs (+2 more)
+Cohesion: 0.11
+Nodes (18): Login(), go(), submit(), LoginPage(), PasswordInput(), Saved, display, metadata (+10 more)
 
 ### Community 17 - "steps"
 Cohesion: 0.12
 Nodes (20): runs-on, steps, DALIL_DATABASE_URL, runs-on, steps, jobs, backend, frontend (+12 more)
 
-### Community 18 - "retrieval.py"
-Cohesion: 0.13
-Nodes (10): health(), start_warmup(), warmup(), get_embedder(), get_reranker(), _load(), _diagnose(), test_diagnostics_simultanes_pendant_la_reconstruction_des_index() (+2 more)
+### Community 18 - "get_settings"
+Cohesion: 0.10
+Nodes (14): get_settings(), Settings, health(), start_warmup(), warmup(), new_otp(), get_classifier(), get_embedder() (+6 more)
 
 ### Community 19 - "espace-magasin/page.tsx"
-Cohesion: 0.15
-Nodes (18): FieldForm(), submit(), Claimable, Family, Inbox, Product, Shop, ShopSpace() (+10 more)
+Cohesion: 0.12
+Nodes (31): FieldForm(), submit(), DiagnosisFeedback(), chooseOther(), send(), Claimable, errMsg(), Family (+23 more)
 
 ### Community 20 - "compilerOptions"
 Cohesion: 0.11
@@ -289,28 +286,28 @@ Cohesion: 0.11
 Nodes (18): A-actuel / classifieur seul | audit_ecriture_oran (8), A-actuel / classifieur seul | audit_ecriture_oran_controle (0), A-actuel / classifieur seul | demo_cases (0), A-actuel / classifieur seul | dev_fr_synthetique (2), A-actuel / D (chaîne complète) | audit_ecriture_oran (6), A-actuel / D (chaîne complète) | audit_ecriture_oran_controle (0), A-actuel / D (chaîne complète) | demo_cases (0), A-actuel / D (chaîne complète) | dev_fr_synthetique (1) (+10 more)
 
 ### Community 27 - "oran_csv_to_jsonl.py"
-Cohesion: 0.16
-Nodes (10): test_conversion_des_fiches(), test_lignes_invalides_refusees_avec_la_raison(), test_modele_fourni_ne_contient_que_l_exemple(), test_vehicule_inconnu_garde_sans_vehicule_et_signale(), convert(), _fuzzy(), main(), _slugs() (+2 more)
+Cohesion: 0.18
+Nodes (9): test_conversion_des_fiches(), test_lignes_invalides_refusees_avec_la_raison(), test_modele_fourni_ne_contient_que_l_exemple(), test_vehicule_inconnu_garde_sans_vehicule_et_signale(), convert(), _fuzzy(), _slugs(), walk() (+1 more)
 
 ### Community 28 - "diagnostic/[id]/page.tsx"
-Cohesion: 0.16
-Nodes (15): Cause, DiagnosisFeedback(), chooseOther(), send(), DiagnosticResult(), answer(), Family, Part (+7 more)
+Cohesion: 0.19
+Nodes (12): Cause, DiagnosticResult(), answer(), Family, Part, PartLabel(), Question, Ref (+4 more)
 
 ### Community 29 - "techniconnexion.py"
 Cohesion: 0.09
-Nodes (19): _plain(), author_solution(), collect(), domain(), is_diagnostic(), label(), mask_names(), own_text() (+11 more)
+Nodes (20): _plain(), author_solution(), collect(), domain(), is_diagnostic(), label(), mask_names(), own_text() (+12 more)
 
 ### Community 30 - "train_baseline.py"
-Cohesion: 0.21
-Nodes (7): fiche_examples(), corpus_examples(), evaluate(), fault_to_part(), main(), relabel(), train_on_set()
+Cohesion: 0.14
+Nodes (10): build_pipeline(), fiche_examples(), train_baseline(), test_chaine_avec_classifieur_de_pieces(), corpus_examples(), evaluate(), fault_to_part(), main() (+2 more)
 
 ### Community 31 - "build_training_set.py"
-Cohesion: 0.16
-Nodes (12): test_poids_seuil_doublons_et_fuite(), test_regle_largus_famille_et_poids_mesures(), test_regle_techniconnexion_double_accord(), test_validation_stable(), _write(), build(), is_symptom_text(), is_val() (+4 more)
+Cohesion: 0.12
+Nodes (21): main(), load_examples(), test_poids_seuil_doublons_et_fuite(), test_regle_largus_famille_et_poids_mesures(), test_regle_techniconnexion_double_accord(), test_validation_stable(), _write(), build() (+13 more)
 
 ### Community 32 - "Étape 7 sur Kaggle : traduction et entraînement"
-Cohesion: 0.09
-Nodes (21): CamemBERT sur les forums nettoyés (27/11/2026), Entraîner avec L'Argus (variante A contre CamemBERT), Faire tourner les modèles sur le portable, Mesurer (portable), Mettre un modèle en service, Ordre conseillé, Préparer le jeu de données Kaggle « dalil-pipeline », Étape 7 sur Kaggle : traduction et entraînement (+13 more)
+Cohesion: 0.15
+Nodes (13): Ce que le banc a déjà appris (matière pour le mémoire), Données d'entraînement, Fiches de pannes supplémentaires : essai non retenu (26/11/2026), L'Argus et le classifieur à deux niveaux (24/11/2026), Mesurer, Modèles (étape 7), Premiers résultats (14/11/2026, jeux synthétiques, sans modèle de langage), Qualité des réponses sur des textes écrits comme à Oran (18/11/2026) (+5 more)
 
 ### Community 33 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.18
@@ -324,29 +321,29 @@ Nodes (5): clean_name(), _dump(), main(), norm(), variants_for()
 Cohesion: 0.18
 Nodes (10): 1. Ce que les essais doivent mesurer, 2. Avant les essais, 3. Déroulé, 4. Fiches de relevé, 5. Questionnaire (1 à 5, de « pas du tout » à « tout à fait »), 6. Modèle de compte rendu, A. Mécaniciens : constituer le jeu de test (le plus important), B. Magasins (environ 15 min chacun, sur leur propre téléphone) (+2 more)
 
-### Community 39 - "anonymiser_ouedkniss.py"
-Cohesion: 0.27
-Nodes (4): test_numero_dans_le_modele_masque_date_et_nombres_intacts(), anonymize(), main(), scrub()
+### Community 39 - "re"
+Cohesion: 0.22
+Nodes (11): test_numero_dans_le_modele_masque_date_et_nombres_intacts(), anonymize(), main(), scrub(), brand_name(), engine_of(), fuel_of(), main() (+3 more)
 
-### Community 40 - "classifier.py"
-Cohesion: 0.08
-Nodes (19): build_pipeline(), FamilyRerankedClassifier, FaultClassifier, get_classifier(), load_classifier(), load_examples(), OnnxEncoderClassifier, train_baseline() (+11 more)
+### Community 40 - "FaultClassifier"
+Cohesion: 0.29
+Nodes (5): FamilyRerankedClassifier, FaultClassifier, test_alpha_nul_rend_le_classifieur_de_base(), test_la_famille_fait_remonter_la_bonne_panne_et_somme_un(), test_modele_de_familles_encodeur()
 
 ### Community 43 - "test_llm_chaine.py"
-Cohesion: 0.11
-Nodes (23): Fake, fake(), install(), _run(), test_cache_expire(), test_cache_une_question_identique_ne_coute_qu_un_appel(), test_cas_de_demonstration_en_mode_complet_avec_modele(), test_le_classifieur_seul_n_appelle_pas_le_modele() (+15 more)
+Cohesion: 0.17
+Nodes (15): Fake, fake(), install(), _run(), test_cache_expire(), test_cache_une_question_identique_ne_coute_qu_un_appel(), test_cas_de_demonstration_en_mode_complet_avec_modele(), test_le_classifieur_seul_n_appelle_pas_le_modele() (+7 more)
 
-### Community 44 - "Plan : référentiel complet des véhicules d'Algérie et nouveaux jeux de données pour le diagnostic"
-Cohesion: 0.15
-Nodes (12): 0. Objectifs et critères de fin, 1. Phase A : référentiel des véhicules, 2. Phase B : collecte des nouvelles données, 4. Phase D : documentation et clôture, 5. Ordre et volume estimé, 6. Sources consultées pour ce plan, A1. Modèles à ajouter, A2. Méthode (rejouable, sans rien inventer) (+4 more)
+### Community 44 - "taxonomy_map.py"
+Cohesion: 0.18
+Nodes (15): 4. Relier à la taxonomie, categories_en(), categories_fr(), family_fr(), fault_for(), _match(), _norm(), primary_part_to_fault() (+7 more)
 
 ### Community 45 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.22
 Nodes (8): A / classifieur seul | demo_cases (0), A / classifieur seul | dev_fr_synthetique (4), A / D (chaîne complète) | demo_cases (0), A / D (chaîne complète) | dev_fr_synthetique (3), C (recherche + LM) | demo_cases (4), C (recherche + LM) | dev_fr_synthetique (13), Erreurs (pièce attendue absente du top-3, ou hors sujet accepté), Résultats 20261114-1722 couverture
 
 ### Community 46 - "react"
-Cohesion: 0.11
-Nodes (22): Family, Named, Product, Shop, ShopMap, ShopPage(), Rec, ShopMap (+14 more)
+Cohesion: 0.09
+Nodes (27): Family, Named, Product, Shop, ShopMap, ShopPage(), Rec, ShopMap (+19 more)
 
 ### Community 47 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.15
@@ -361,12 +358,12 @@ Cohesion: 0.18
 Nodes (10): A-panne / classifieur seul | demo_cases (0), A-panne / classifieur seul | dev_fr_synthetique (4), A-piece / classifieur seul | demo_cases (0), A-piece / classifieur seul | dev_fr_synthetique (5), A-piece / D (chaîne complète) | demo_cases (0), A-piece / D (chaîne complète) | dev_fr_synthetique (3), C (recherche + LM) | demo_cases (1), C (recherche + LM) | dev_fr_synthetique (7) (+2 more)
 
 ### Community 50 - "hybrid"
-Cohesion: 0.08
-Nodes (15): get_settings(), Reranker, get_index(), FakeEmbedder, FakeReranker, hybrid(), test_garde_fou_vectoriel_absent_en_mode_mots_cles(), test_garde_fou_vectoriel_du_domaine() (+7 more)
+Cohesion: 0.10
+Nodes (14): get_index(), _diag(), FakeEmbedder, FakeReranker, hybrid(), test_garde_fou_vectoriel_absent_en_mode_mots_cles(), test_garde_fou_vectoriel_du_domaine(), encode_query() (+6 more)
 
-### Community 51 - "pathlib"
-Cohesion: 0.29
-Nodes (5): client(), get_json(), _fetch(), fetch(), main()
+### Community 51 - "normalize"
+Cohesion: 0.24
+Nodes (5): extract_dtc(), normalize(), non_fault_question(), _part_words(), text_is_dangerous()
 
 ### Community 52 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.29
@@ -401,8 +398,8 @@ Cohesion: 0.40
 Nodes (4): A / D (chaîne complète) | demo_cases (0), A / D (chaîne complète) | dev_fr_synthetique (3), Erreurs (pièce attendue absente du top-3, ou hors sujet accepté), Résultats 20261117-1627 mot-seul-mots-cles
 
 ### Community 60 - "test_api.py"
-Cohesion: 0.13
-Nodes (9): cat_id(), test_admin_saisie_terrain_apparait_sur_la_carte(), test_contact_et_retour_modifient_le_score(), test_demande_diffusee(), test_diagnostic_et_session(), test_parcours_magasin_inscription_validation_catalogue(), test_recommandation_raisons_et_ordre(), test_references_jamais_generees() (+1 more)
+Cohesion: 0.07
+Nodes (29): login(), cat_id(), test_admin_saisie_terrain_apparait_sur_la_carte(), test_contact_et_retour_modifient_le_score(), test_demande_diffusee(), test_diagnostic_et_session(), test_import_excel_500_lignes(), test_otp_mauvais_code_et_roles() (+21 more)
 
 ### Community 61 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.29
@@ -412,9 +409,9 @@ Nodes (6): A / D (chaîne complète) | demo_cases (0), A / D (chaîne complète)
 Cohesion: 0.29
 Nodes (6): A / D (chaîne complète) | demo_cases (0), A / D (chaîne complète) | dev_fr_synthetique (1), C (recherche + LM) | demo_cases (2), C (recherche + LM) | dev_fr_synthetique (11), Erreurs (pièce attendue absente du top-3, ou hors sujet accepté), Résultats 20261116-0000 hybride-garde-vecteurs
 
-### Community 63 - "Étape 8 : chaîne de diagnostic, plan proposé (à valider avant de coder)"
-Cohesion: 0.33
-Nodes (5): 2. Ce qui manque, par ordre de priorité, 3. Hors périmètre de l'étape 8, 4. Tests ajoutés, 5. Décisions demandées à l'équipe, Étape 8 : chaîne de diagnostic, plan proposé (à valider avant de coder)
+### Community 63 - "question_bank"
+Cohesion: 0.18
+Nodes (9): _pick_questions(), question_bank(), _references(), 1. Ce qui existe déjà (étapes 3 à 7), 2. Ce qui manque, par ordre de priorité, 3. Hors périmètre de l'étape 8, 4. Tests ajoutés, 5. Décisions demandées à l'équipe (+1 more)
 
 ### Community 64 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.40
@@ -425,24 +422,24 @@ Cohesion: 0.40
 Nodes (4): A / D (chaîne complète) | demo_cases (1), A / D (chaîne complète) | dev_fr_synthetique (2), Erreurs (pièce attendue absente du top-3, ou hors sujet accepté), Résultats 20261116-0054 lora-q8-hybride
 
 ### Community 66 - "public.py"
-Cohesion: 0.14
-Nodes (21): DiagnosisSession, VehicleVariant, brands(), categories(), communes(), _defer(), diagnosis(), diagnosis_answers() (+13 more)
+Cohesion: 0.12
+Nodes (21): DiagnosisSession, brands(), categories(), communes(), _defer(), diagnosis(), diagnosis_answers(), diagnosis_get() (+13 more)
 
-### Community 68 - "api.ts"
-Cohesion: 0.13
-Nodes (17): Metrics, PlateReport, Shop, Tab, Login(), go(), submit(), LoginPage() (+9 more)
+### Community 68 - "test_mot_de_passe.py"
+Cohesion: 0.40
+Nodes (8): _h(), _register(), test_changer_son_mot_de_passe_et_reinitialisation_par_l_administrateur(), test_compte_supprime_libere_le_numero(), test_inscription_puis_connexion(), test_inscription_refusee(), test_matricule_unique_dans_la_base_et_entre_ses_propres_voitures(), test_numero_unique_quel_que_soit_son_ecriture()
 
 ### Community 69 - "run.py"
-Cohesion: 0.08
-Nodes (34): read_jsonl(), sha1(), write_jsonl(), chunk_rows(), dump(), export_training(), LicenseError, load_source() (+26 more)
+Cohesion: 0.09
+Nodes (27): read_jsonl(), sha1(), write_jsonl(), chunk_rows(), dump(), export_training(), LicenseError, load_source() (+19 more)
 
-### Community 70 - "build_llm_dataset.py"
-Cohesion: 0.32
-Nodes (3): build(), explanation(), french_examples()
+### Community 70 - "Étape 7 sur Kaggle : traduction et entraînement"
+Cohesion: 0.20
+Nodes (8): CamemBERT sur les forums nettoyés (27/11/2026), Entraîner avec L'Argus (variante A contre CamemBERT), Faire tourner les modèles sur le portable, Mesurer (portable), Mettre un modèle en service, Ordre conseillé, Préparer le jeu de données Kaggle « dalil-pipeline », Étape 7 sur Kaggle : traduction et entraînement
 
 ### Community 73 - "export_retours.py"
-Cohesion: 0.19
-Nodes (8): export(), main(), principal_faults(), scrub(), test_health_dit_quand_les_modeles_sont_prets(), _cat(), _diag(), test_retours_deviennent_des_exemples()
+Cohesion: 0.24
+Nodes (6): export(), principal_faults(), scrub(), _cat(), _diag(), test_retours_deviennent_des_exemples()
 
 ### Community 74 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.13
@@ -461,8 +458,8 @@ Cohesion: 0.40
 Nodes (4): A / D (chaîne complète) | demo_cases (0), A / D (chaîne complète) | dev_fr_synthetique (2), Erreurs (pièce attendue absente du top-3, ou hors sujet accepté), Résultats 20261117-1542 hybride-int8-10x256-vecteurs-repares
 
 ### Community 78 - "security.py"
-Cohesion: 0.11
-Nodes (23): OtpCode, User, admin_reset_password(), change_password(), login(), me(), me_delete(), me_patch() (+15 more)
+Cohesion: 0.10
+Nodes (23): get_db(), OtpCode, change_password(), login(), me(), me_patch(), otp_request(), otp_verify() (+15 more)
 
 ### Community 79 - "fiche-telephone.spec.ts"
 Cohesion: 0.13
@@ -473,20 +470,20 @@ Cohesion: 0.33
 Nodes (6): scripts, build, dev, start, test:e2e, typecheck
 
 ### Community 84 - "run_diagnosis"
-Cohesion: 0.10
-Nodes (24): extract_dtc(), normalize(), DiagnosisInput, informative_words(), non_fault_question(), _normalized(), _part_view(), _part_words() (+16 more)
+Cohesion: 0.23
+Nodes (12): DiagnosisInput, informative_words(), _normalized(), run_diagnosis(), test_arabe_incompris_message_clair(), test_demo_case(), test_mot_seul_avec_code_obd_reste_un_diagnostic(), test_mot_seul_pas_de_resultat_sur() (+4 more)
 
 ### Community 85 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.06
 Nodes (30): Erreurs (pièce attendue absente du top-3, ou hors sujet accepté), Résultats 20261127-0132 forums-v4, V4-a0.15 / D (chaîne complète) | audit_ecriture_oran (5), V4-a0.15 / D (chaîne complète) | audit_ecriture_oran_controle (1), V4-a0.15 / D (chaîne complète) | demo_cases (0), V4-a0.15 / D (chaîne complète) | dev_fr_synthetique (1), V4-a0.15 / D (chaîne complète) | largus_controle (16), V4-a0.15 / D (chaîne complète) | largus_test (38) (+22 more)
 
 ### Community 86 - "KeywordIndex"
-Cohesion: 0.10
-Nodes (7): DenseIndex, Hit, HybridIndex, KeywordIndex, test_cache_de_l_index_partage_entre_deux_bases(), test_index_mots_cles_garde_sur_disque(), 3. Phase C : apprentissage
+Cohesion: 0.05
+Nodes (20): Embedder, DenseIndex, Hit, HybridIndex, KeywordIndex, test_cache_de_l_index_partage_entre_deux_bases(), test_index_mots_cles_garde_sur_disque(), 0. Objectifs et critères de fin (+12 more)
 
 ### Community 87 - "seed.py"
-Cohesion: 0.09
-Nodes (45): Base, AdminAction, Brand, ContactEvent, DtcCode, DtcPart, Fault, FaultPart (+37 more)
+Cohesion: 0.10
+Nodes (33): Base, Commune, ContactEvent, DtcCode, DtcPart, Fault, FaultPart, Feedback (+25 more)
 
 ### Community 88 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.29
@@ -500,9 +497,9 @@ Nodes (5): check_ids(), check_queries(), fill_db(), install(), main()
 Cohesion: 0.08
 Nodes (23): en-service / D (chaîne complète) | audit_ecriture_oran (4), en-service / D (chaîne complète) | audit_ecriture_oran_controle (0), en-service / D (chaîne complète) | demo_cases (0), en-service / D (chaîne complète) | dev_fr_synthetique (1), en-service / D (chaîne complète) | largus_controle (16), en-service / D (chaîne complète) | largus_test (42), en-service / D (chaîne complète) | techniconnexion_controle (16), Erreurs (pièce attendue absente du top-3, ou hors sujet accepté) (+15 more)
 
-### Community 91 - "test_pipeline.py"
-Cohesion: 0.12
-Nodes (27): 3. Écrire le module de collecte, 4. Relier à la taxonomie, Record, collectors(), collect_complaints(), collect_recalls(), _vehicle(), collect() (+19 more)
+### Community 91 - "common.py"
+Cohesion: 0.11
+Nodes (26): 3. Écrire le module de collecte, client(), download(), get_json(), Record, cmd_collect(), cmd_load(), cmd_report() (+18 more)
 
 ### Community 92 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.08
@@ -516,21 +513,17 @@ Nodes (10): 2niv-a0.25 / D (chaîne complète) | audit_ecriture_oran (4), 2niv-a
 Cohesion: 0.27
 Nodes (5): test_banc_evaluation(), load_cases(), main(), ranked_parts(), run()
 
-### Community 95 - "ConsoleSms"
-Cohesion: 0.40
-Nodes (3): ConsoleSms, get_sms_sender(), SmsSender
-
-### Community 96 - "dependencies"
-Cohesion: 0.33
-Nodes (6): dependencies, leaflet@^1.9.4, next@^15.5.29, react@^19.3.1, react-dom@^19.3.1, react-dom
+### Community 95 - "load_classifier"
+Cohesion: 0.25
+Nodes (4): load_classifier(), OnnxEncoderClassifier, test_chargement_du_fichier(), test_chargement_avec_cible()
 
 ### Community 97 - "Le marché automobile algérien : ce qu'il implique pour DALIL"
 Cohesion: 0.25
 Nodes (7): 1. Le parc : vieux, français, et de plus en plus diesel à la revente, 2. Oran, 3. Ce qui se vend aujourd'hui (2023-2026), 4. Écarts avec le référentiel actuel de DALIL (`data/seed/vehicles.json`), 5. Recommandations pour le site, Le marché automobile algérien : ce qu'il implique pour DALIL, Sources
 
 ### Community 98 - "json"
-Cohesion: 0.23
-Nodes (10): main(), is_val(), main(), reels(), write(), family_rows(), fault_to_part(), label_families() (+2 more)
+Cohesion: 0.26
+Nodes (4): main(), family_rows(), label_families(), main()
 
 ### Community 99 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.29
@@ -560,9 +553,9 @@ Nodes (6): A / D (chaîne complète) | audit_ecriture_oran (6), A / D (chaîne c
 Cohesion: 0.17
 Nodes (13): _ar_word(), _french_like_hits(), _norm_ar(), _replace_phrases(), to_french(), strip_accents(), test_diagnostic_en_darija(), test_francais_inchange() (+5 more)
 
-### Community 107 - "re"
-Cohesion: 0.21
-Nodes (11): brand_name(), engine_of(), fuel_of(), main(), model_key(), pct(), _plain(), cause() (+3 more)
+### Community 107 - "extraire_causes_largus.py"
+Cohesion: 0.16
+Nodes (7): build(), explanation(), french_examples(), cause(), cause_changement(), cause_etat(), main()
 
 ### Community 108 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.50
@@ -600,12 +593,12 @@ Nodes (14): en-service / D (chaîne complète) | audit_ecriture_oran (4), en-ser
 Cohesion: 0.13
 Nodes (14): a0.15 / D (chaîne complète) | audit_ecriture_oran (4), a0.15 / D (chaîne complète) | demo_cases (0), a0.15 / D (chaîne complète) | dev_fr_synthetique (1), a0.15 / D (chaîne complète) | largus_test (43), a0.25 / D (chaîne complète) | audit_ecriture_oran (4), a0.25 / D (chaîne complète) | demo_cases (0), a0.25 / D (chaîne complète) | dev_fr_synthetique (1), a0.25 / D (chaîne complète) | largus_test (41) (+6 more)
 
-### Community 117 - "t"
+### Community 117 - "admin/page.tsx"
 Cohesion: 0.20
-Nodes (17): Admin(), act(), resetPassword(), resolvePlate(), upload(), pct(), errMsg(), ShopAdmin() (+9 more)
+Nodes (10): Admin(), act(), resetPassword(), resolvePlate(), upload(), Metrics, pct(), PlateReport (+2 more)
 
 ### Community 119 - "sources/__init__.py"
-Cohesion: 0.18
+Cohesion: 0.29
 Nodes (6): 1. Vérifier avant d'écrire du code, 2. Déclarer la source, 5. Tester, charger, mesurer, Ajouter une source de données à DALIL, Ce qu'il ne faut pas faire, SourceSpec
 
 ### Community 120 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
@@ -636,9 +629,9 @@ Nodes (8): en-service / D (chaîne complète) | audit_ecriture_oran (4), en-serv
 Cohesion: 0.25
 Nodes (7): 2niv-regle / D (chaîne complète) | audit_ecriture_oran (4), 2niv-regle / D (chaîne complète) | audit_ecriture_oran_controle (0), 2niv-regle / D (chaîne complète) | demo_cases (0), 2niv-regle / D (chaîne complète) | dev_fr_synthetique (1), 2niv-regle / D (chaîne complète) | largus_test (45), Erreurs (pièce attendue absente du top-3, ou hors sujet accepté), Résultats 20261126-1346 regle-hors-sujet
 
-### Community 129 - "conftest.py"
-Cohesion: 0.31
-Nodes (6): admin_headers(), client(), db(), _db(), base(), folder()
+### Community 129 - "test_concurrence.py"
+Cohesion: 0.25
+Nodes (5): db(), _db(), _diagnose(), test_diagnostics_simultanes_pendant_la_reconstruction_des_index(), test_prechargement_sans_erreur()
 
 ### Community 130 - "Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)"
 Cohesion: 0.50
@@ -664,47 +657,43 @@ Nodes (3): shorten_query(), test_coupe_a_la_fin_d_un_mot(), test_texte_court_inc
 Cohesion: 0.50
 Nodes (3): Erreurs (pièce attendue absente du top-3, ou hors sujet accepté), q600 / D (chaîne complète) | largus_test (43), Résultats 20261126-1652 vitesse-600
 
+### Community 139 - "DALIL : suivi du projet"
+Cohesion: 0.22
+Nodes (8): 1. Où on en est, 2. Résultats à retenir (étape 7), 3. Prochaines actions, dans l'ordre, 4. Pour reprendre le travail, 5. Contraintes connues, 6. Journal, DALIL : suivi du projet, Décisions prises
+
 ### Community 140 - "t"
 Cohesion: 0.24
 Nodes (18): Account(), remove(), AccountPage(), CarForm(), report(), save(), Cars(), remove() (+10 more)
 
-### Community 142 - "test_espace_magasin.py"
-Cohesion: 0.24
-Nodes (6): new_otp(), _owner(), test_catalogue_d_une_fiche_non_validee_cache_au_public(), test_code_fixe_des_tests_seulement_avec_les_sms_de_console(), test_les_exemples_du_modele_s_importent_sans_erreur(), test_mode_console_annonce_sans_donner_le_code()
-
 ### Community 143 - "sqlalchemy"
-Cohesion: 0.10
-Nodes (8): upgrade(), upgrade(), upgrade(), upgrade(), upgrade(), get_db(), make_engine(), export()
+Cohesion: 0.09
+Nodes (7): upgrade(), upgrade(), upgrade(), upgrade(), upgrade(), make_engine(), export()
 
-### Community 145 - "login"
-Cohesion: 0.22
-Nodes (11): login(), test_import_excel_500_lignes(), test_otp_mauvais_code_et_roles(), test_revendication_de_fiche(), test_suppression_compte(), test_diagnostic_rattache_a_la_voiture_et_historique(), test_profil_obligatoire_et_facultatif(), test_signalement_puis_liberation_du_matricule() (+3 more)
+### Community 144 - "VehicleVariant"
+Cohesion: 0.14
+Nodes (9): Brand, Model, VehicleVariant, admin_metrics(), seed_vehicles(), _variant(), resolve_variants(), search_categories() (+1 more)
 
 ### Community 152 - "compte.spec.ts"
 Cohesion: 0.47
 Nodes (3): phone(), plate(), uniq()
 
-### Community 153 - "test_retours.py"
-Cohesion: 0.39
-Nodes (6): _client(), _recommend(), test_adresse_ip_jamais_conservee(), test_retour_repete_par_le_meme_client_compte_une_fois(), test_retours_de_clients_differents_s_additionnent(), test_retours_limites_en_debit()
-
 ## Knowledge Gaps
-- **30 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **29 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `score_shop()` connect `recommendation.py` to `DALIL — cahier des charges de la plateforme de diagnostic auto et de localisation de pièces détachées (Oran)`?**
-  _High betweenness centrality (0.144) - this node is a cross-community bridge._
+- **Why does `score_shop()` connect `recommendation.py` to `DALIL : suivi du projet`, `DALIL — cahier des charges de la plateforme de diagnostic auto et de localisation de pièces détachées (Oran)`?**
+  _High betweenness centrality (0.137) - this node is a cross-community bridge._
 - **Should `llm.py` be split into smaller, more focused modules?**
   _Cohesion score 0.13438735177865613 - nodes in this community are weakly interconnected._
 - **Why does `Carte du code` connect `DALIL — cahier des charges de la plateforme de diagnostic auto et de localisation de pièces détachées (Oran)` to `recommendation.py`?**
-  _High betweenness centrality (0.138) - this node is a cross-community bridge._
+  _High betweenness centrality (0.136) - this node is a cross-community bridge._
+- **Should `account.py` be split into smaller, more focused modules?**
+  _Cohesion score 0.1408199643493761 - nodes in this community are weakly interconnected._
 - **Should `environment` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._
 - **Should `Erreurs (pièce attendue absente du top-3, ou hors sujet accepté)` be split into smaller, more focused modules?**
   _Cohesion score 0.05714285714285714 - nodes in this community are weakly interconnected._
-- **Should `DALIL — cahier des charges de la plateforme de diagnostic auto et de localisation de pièces détachées (Oran)` be split into smaller, more focused modules?**
-  _Cohesion score 0.06666666666666667 - nodes in this community are weakly interconnected._
-- **Should `t` be split into smaller, more focused modules?**
-  _Cohesion score 0.12105263157894737 - nodes in this community are weakly interconnected._
+- **Should `package.json` be split into smaller, more focused modules?**
+  _Cohesion score 0.1437908496732026 - nodes in this community are weakly interconnected._

@@ -198,8 +198,8 @@ export default function DiagnosticResult() {
 
   return (
     <article>
-      <p className="meta">{t("result.for")} {r.vehicle}</p>
-      {r.understood && <p className="help" role="status">{t("result.understood")} « {r.understood} »</p>}
+      <span className="vehicle-pill">{t("result.for")} {r.vehicle}</span>
+      {r.understood && <p className="notice" role="status">{t("result.understood")} « {r.understood} »</p>}
       {r.llm === "pending" && <p className="notice" role="status">{t("result.refining")}</p>}
       {r.safety.do_not_drive && <div className="danger" role="alert">{r.safety.message}</div>}
 
@@ -253,11 +253,15 @@ export default function DiagnosticResult() {
           <ol className="causes">
             {r.causes.map((c, i) => (
               <li className="cause" key={c.fault}>
+                {i === 0 && r.causes.length > 1 && <span className="cause-badge">{t("result.best")}</span>}
                 <div className="cause-head">
                   <h3>{c.name}</h3>
-                  <span className="cause-rank">{t(`result.urgency.${c.severity}`)}</span>
+                  <span className="cause-rank" data-sev={c.severity}>{t(`result.urgency.${c.severity}`)}</span>
                 </div>
-                <div className="meter" aria-hidden><span style={{ width: `${Math.round(c.confidence * 100)}%` }} /></div>
+                {/* jauge animée par transform (compositeur) : la largeur est l'échelle horizontale */}
+                <div className="meter" aria-hidden>
+                  <span style={{ transform: `scaleX(${Math.max(0.02, c.confidence)})` }} />
+                </div>
                 <span className="meta">{t("result.confidence")} {Math.round(c.confidence * 100)} %</span>
                 <p>{c.explanation || c.description}</p>
                 {i === 0 ? (
@@ -278,13 +282,15 @@ export default function DiagnosticResult() {
               </li>
             ))}
           </ol>
-          <ShareButton r={r} />
-          <DiagnosisFeedback r={r} />
+          <div className="card">
+            <DiagnosisFeedback r={r} />
+            <ShareButton r={r} />
+          </div>
         </section>
       )}
 
       <div className="notice">{r.disclaimer}</div>
-      <Link href="/">{t("result.newSearch")}</Link>
+      <p className="result-foot"><Link className="btn btn-ghost" href="/">{t("result.newSearch")}</Link></p>
     </article>
   );
 }

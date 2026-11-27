@@ -61,14 +61,14 @@ function Login() {
 
   const switchTo = (m: "login" | "register") => { setMode(m); setError(""); };
   return (
-    <section style={{ maxWidth: "26rem" }}>
+    <section className="auth">
       <h1>{mode === "login" ? t("login.title") : t("login.tab.register")}</h1>
       <div className="tabs" role="tablist">
         <button role="tab" type="button" aria-selected={mode === "login"} onClick={() => switchTo("login")}>{t("login.tab.login")}</button>
         <button role="tab" type="button" aria-selected={mode === "register"} onClick={() => switchTo("register")}>{t("login.tab.register")}</button>
       </div>
-      <p className="help">{mode === "login" ? t("login.lead") : t("login.register.lead")}</p>
-      <form onSubmit={submit} noValidate>
+      <form className="card" onSubmit={submit} noValidate>
+        <p className="help" style={{ marginTop: 0 }}>{mode === "login" ? t("login.lead") : t("login.register.lead")}</p>
         {mode === "register" && (
           <div className="row">
             <div>

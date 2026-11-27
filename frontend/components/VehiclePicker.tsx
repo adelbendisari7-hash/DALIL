@@ -19,7 +19,8 @@ function modelYears(vs: Variant[]): number[] {
 }
 
 /** Sélection du véhicule (F1) : marque, modèle, année, motorisation. Mémorisé sur l'appareil, sauf
- * `remember={false}` (fiche d'une voiture du compte client : le choix appartient à la fiche, pas à l'appareil). */
+ * `remember={false}` (fiche d'une voiture du compte client : le choix appartient à la fiche, pas à l'appareil ; la
+ * fiche a sa propre case « pas dans la liste », d'où ni conseil ni demande de véhicule absent ici). */
 export default function VehiclePicker({ onChange, remember = true }: { onChange: (v: Vehicle | null) => void; remember?: boolean }) {
   const [saved, setSaved] = useState<Vehicle | null>(null);
   const [editing, setEditing] = useState(false);
@@ -52,14 +53,17 @@ export default function VehiclePicker({ onChange, remember = true }: { onChange:
     setModels([]);
     setModel(null);
     if (!brand) return;
+    let stale = false;   // marque changée entre-temps : la réponse ne la concerne plus
     api<Model[]>(`/vehicles/models?brand_id=${brand.id}`)
       .then((ms) => {
+        if (stale) return;
         setModels(ms);
         const wanted = ms.find((m) => m.id === pendingModel.current);
         pendingModel.current = null;
         if (wanted) setModel(wanted);
       })
       .catch(() => undefined);
+    return () => { stale = true; };
   }, [brand]);
 
   useEffect(() => {
@@ -100,19 +104,27 @@ export default function VehiclePicker({ onChange, remember = true }: { onChange:
   useEffect(() => {
     setModelVariants([]);
     setYear("");
-    if (model) api<Variant[]>(`/vehicles/variants?model_id=${model.id}`).then(setModelVariants).catch(() => undefined);
+    if (!model) return;
+    let stale = false;
+    api<Variant[]>(`/vehicles/variants?model_id=${model.id}`).then((vs) => { if (!stale) setModelVariants(vs); }).catch(() => undefined);
+    return () => { stale = true; };
   }, [model]);
 
   useEffect(() => {
     setVariants([]);
     if (!model) return;
+    // Réponse périmée ignorée : en 3G, la liste « toutes années » pouvait arriver après celle de l'année choisie et
+    // réafficher des motorisations hors de l'année, ou faire disparaître la liste sous le doigt (27/11/2026).
+    let stale = false;
     const q = year ? `&year=${year}` : "";
     api<Variant[]>(`/vehicles/variants?model_id=${model.id}${q}`)
       .then((vs) => {
+        if (stale) return;
         setVariants(vs);
         if (vs.length === 1 && year) choose(vs[0]);
       })
       .catch(() => undefined);
+    return () => { stale = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [model, year]);
 
@@ -147,8 +159,8 @@ export default function VehiclePicker({ onChange, remember = true }: { onChange:
   }
 
   return (
-    <fieldset style={{ border: 0, padding: 0, margin: "1.25rem 0 0" }}>
-      <legend style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "var(--step-1)" }}>
+    <fieldset style={{ border: 0, padding: 0, margin: 0 }}>
+      <legend className="card-title">
         {t("vehicle.title")}
       </legend>
       <label htmlFor="v-search">{t("vehicle.search")}</label>
@@ -209,14 +221,14 @@ export default function VehiclePicker({ onChange, remember = true }: { onChange:
           </select>
         </div>
       </div>
-      <p className="help">{t("vehicle.none")}</p>
-      {!missingOpen ? (
+      {remember && <p className="help">{t("vehicle.none")}</p>}
+      {!remember ? null : !missingOpen ? (
         <button type="button" className="btn btn-ghost" onClick={() => setMissingOpen(true)}>{t("vehicle.missing.open")}</button>
       ) : missingSent ? (
         <p className="ok" role="status">{t("vehicle.missing.thanks")}</p>
       ) : (
-        <div className="questions">
-          <p className="help">{t("vehicle.missing.help")}</p>
+        <div className="car-form">
+          <p className="help" style={{ marginTop: 0 }}>{t("vehicle.missing.help")}</p>
           <div className="row">
             <div><label htmlFor="m-brand">{t("vehicle.brand")}</label>
               <input id="m-brand" value={missing.brand} maxLength={60} onChange={(e) => setMissing({ ...missing, brand: e.target.value })} /></div>

@@ -76,69 +76,78 @@ export default function Home() {
       <p className="lead">{t("home.lead")}</p>
       {warming && <p className="notice" role="status">{t("home.warming")}</p>}
 
-      {cars.length > 0 && (
-        <fieldset style={{ border: 0, padding: 0, margin: "1.25rem 0 0" }}>
-          <legend style={{ fontWeight: 600 }}>{t("home.car")}</legend>
-          <div className="chips">
-            {cars.map((c) => (
-              <button key={c.id} type="button" className="chip" aria-pressed={car === c.id} onClick={() => setCar(c.id)}>
-                {c.nickname || c.display}
-              </button>
-            ))}
-            <button type="button" className="chip" aria-pressed={car === "other"} onClick={() => setCar("other")}>
-              {t("home.car.other")}
-            </button>
+      {/* 1. Le problème : la tâche principale vient en premier */}
+      <div className="card">
+        <label htmlFor="symptom" className="card-title">{t("home.label")}</label>
+        <textarea
+          id="symptom"
+          name="symptom"
+          placeholder={t("home.placeholder")}
+          value={text}
+          maxLength={2000}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <p className="help">{t("home.tip")}</p>
+        {!text.trim() && (
+          <div className="examples">
+            <span className="help">{t("home.examples")}</span>
+            <div className="chips">
+              {[1, 2, 3].map((n) => (
+                <button key={n} type="button" className="chip" onClick={() => setText(t(`home.example.${n}`))}>
+                  {t(`home.example.${n}`)}
+                </button>
+              ))}
+            </div>
           </div>
-        </fieldset>
-      )}
-      {car === "other" && <VehiclePicker onChange={setVehicle} />}
+        )}
+        <VoiceInput onText={onVoice} />
+      </div>
 
-      <label htmlFor="symptom">{t("home.label")}</label>
-      <textarea
-        id="symptom"
-        name="symptom"
-        placeholder={t("home.placeholder")}
-        value={text}
-        maxLength={2000}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <p className="help">{t("home.tip")}</p>
-      {!text.trim() && (
-        <div className="examples">
-          <span className="help">{t("home.examples")}</span>
-          <div className="chips">
-            {[1, 2, 3].map((n) => (
-              <button key={n} type="button" className="chip" onClick={() => setText(t(`home.example.${n}`))}>
-                {t(`home.example.${n}`)}
+      {/* 2. Le véhicule : une voiture du compte en un toucher, sinon le sélecteur */}
+      <div className="card">
+        {cars.length > 0 && (
+          <fieldset style={{ border: 0, padding: 0, margin: 0 }}>
+            <legend className="card-title">{t("home.car")}</legend>
+            <div className="chips">
+              {cars.map((c) => (
+                <button key={c.id} type="button" className="chip" aria-pressed={car === c.id} onClick={() => setCar(c.id)}>
+                  {c.nickname || c.display}
+                </button>
+              ))}
+              <button type="button" className="chip" aria-pressed={car === "other"} onClick={() => setCar("other")}>
+                {t("home.car.other")}
               </button>
-            ))}
-          </div>
-        </div>
-      )}
-      <VoiceInput onText={onVoice} />
+            </div>
+          </fieldset>
+        )}
+        {car === "other" && <div style={cars.length ? { marginTop: "1rem" } : undefined}><VehiclePicker onChange={setVehicle} /></div>}
+      </div>
 
-      <label htmlFor="dtc">{t("home.dtc")}</label>
-      <input
-        id="dtc"
-        name="dtc"
-        placeholder={t("home.dtc.placeholder")}
-        autoCapitalize="characters"
-        value={dtc}
-        onChange={(e) => setDtc(e.target.value.toUpperCase())}
-        style={{ maxWidth: "14rem" }}
-      />
-      <p className="help">{t("home.dtc.help")}</p>
+      {/* 3. Le code défaut, pour qui en a un */}
+      <div className="card">
+        <label htmlFor="dtc" className="card-title">{t("home.dtc")}</label>
+        <input
+          id="dtc"
+          name="dtc"
+          placeholder={t("home.dtc.placeholder")}
+          autoCapitalize="characters"
+          value={dtc}
+          onChange={(e) => setDtc(e.target.value.toUpperCase())}
+          style={{ maxWidth: "14rem" }}
+        />
+        <p className="help">{t("home.dtc.help")}</p>
+      </div>
 
       {error && <p className="err" role="alert">{error}</p>}
-      <div className="actions">
-        <button className="btn btn-primary btn-block" disabled={busy}>
+      <div className="submit-zone">
+        <button className={`btn btn-primary btn-block${busy ? " is-busy" : ""}`} disabled={busy}>
           {busy ? t("home.submitting") : t("home.submit")}
         </button>
+        {busy && slow && <p className="help" role="status" style={{ textAlign: "center" }}>{t("home.slow")}</p>}
       </div>
-      {busy && slow && <p className="help" role="status">{t("home.slow")}</p>}
 
       <div className="aside-link">
-        <p style={{ marginBottom: "0.25rem" }}>{t("home.mechanic")}</p>
+        <p>{t("home.mechanic")}</p>
         <Link href="/pieces">{t("home.mechanic.link")}</Link>
       </div>
     </form>
