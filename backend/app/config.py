@@ -59,6 +59,7 @@ class Settings(BaseSettings):
 
     diagnosis_rate_per_minute: int = 20
     otp_rate_per_minute: int = 5
+    login_rate_per_minute: int = 10   # connexions et inscriptions par adresse IP
     feedback_rate_per_minute: int = 30  # retours et contacts, par adresse IP
     # Charge les modèles de diagnostic au démarrage (en arrière-plan) : le premier diagnostic ne paie pas
     # ~1 min de chargement de la recherche hybride.

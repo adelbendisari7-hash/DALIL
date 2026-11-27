@@ -92,6 +92,51 @@ function ProfileForm({ user, onSaved }: { user: User; onSaved: (u: User) => void
   );
 }
 
+/** Changer son mot de passe (ou en choisir un : compte créé avant les mots de passe, ou mot de passe provisoire). */
+function PasswordForm({ user, onSaved }: { user: User; onSaved: () => void }) {
+  const [current, setCurrent] = useState("");
+  const [next, setNext] = useState("");
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [busy, setBusy] = useState(false);
+  const has = user.has_password !== false;
+
+  async function save(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setMsg(null);
+    try {
+      await api("/auth/me/password", { method: "POST", json: { current, new: next } });
+      setMsg({ ok: true, text: t("account.password.changed") });
+      setCurrent("");
+      setNext("");
+      onSaved();
+    } catch (err) {
+      setMsg({ ok: false, text: errText(err) });
+    }
+    setBusy(false);
+  }
+
+  return (
+    <form onSubmit={save} noValidate>
+      {!has && <p className="notice">{t("account.password.none")}</p>}
+      {has && (
+        <>
+          <label htmlFor="pw-current">{t("account.password.current")}</label>
+          <input id="pw-current" type="password" autoComplete="current-password" maxLength={128} value={current} onChange={(e) => setCurrent(e.target.value)} />
+        </>
+      )}
+      <label htmlFor="pw-new">{t("account.password.new")}</label>
+      <input id="pw-new" type="password" autoComplete="new-password" maxLength={128} value={next} onChange={(e) => setNext(e.target.value)} />
+      {msg && <p className={msg.ok ? "ok" : "err"} role={msg.ok ? "status" : "alert"}>{msg.text}</p>}
+      <div className="actions">
+        <button className="btn btn-ghost" disabled={busy || next.length < 8 || (has && !current)}>
+          {has ? t("account.password.change") : t("account.password.set")}
+        </button>
+      </div>
+    </form>
+  );
+}
+
 /** Ajout ou modification d'une voiture. Matricule déjà pris : message et signalement à l'équipe. */
 function CarForm({ car, onDone, onCancel }: { car: UserCar | null; onDone: () => void; onCancel: () => void }) {
   const [plate, setPlate] = useState(car?.plate ?? "");
@@ -332,10 +377,10 @@ function Account() {
   const complete = Boolean(user.first_name && user.last_name);
   return (
     <section>
-      {welcome && !complete ? (
+      {welcome ? (
         <>
           <h1>{t("account.welcome.title")}</h1>
-          <p className="lead">{t("account.welcome.text")}</p>
+          <p className="lead">{complete ? t("account.welcome.cars") : t("account.welcome.text")}</p>
         </>
       ) : (
         <h1>{t("account.title")}</h1>
@@ -356,6 +401,9 @@ function Account() {
           <History cars={cars ?? []} />
         </>
       )}
+
+      <h2 className="section">{t("account.password")}</h2>
+      <PasswordForm user={user} onSaved={() => setUser({ ...user, has_password: true })} />
 
       <p className="section"><span className="meta">{t("account.role")}</span><br /><strong>{t(`account.role.${user.role}`)}</strong></p>
       <div className="actions">

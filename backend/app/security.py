@@ -1,4 +1,4 @@
-"""Connexion par code SMS à usage unique, jetons JWT, contrôle des rôles, limitation de débit."""
+"""Connexion par mot de passe (ou par code SMS, gardé pour plus tard), jetons JWT, contrôle des rôles, limitation de débit."""
 from __future__ import annotations
 
 import hashlib
@@ -33,6 +33,35 @@ def normalize_phone(raw: str) -> str:
     if not PHONE_RE.match(p):
         raise HTTPException(422, "Numéro de mobile algérien invalide (ex. 0550 12 34 56)")
     return "+213" + p[-9:]
+
+
+# Mots de passe : scrypt de la bibliothèque standard (pas de dépendance), sel aléatoire par mot de passe.
+SCRYPT_N, SCRYPT_R, SCRYPT_P = 2**14, 8, 1
+MIN_PASSWORD = 8
+
+
+def hash_password(password: str) -> str:
+    salt = secrets.token_bytes(16)
+    h = hashlib.scrypt(password.encode(), salt=salt, n=SCRYPT_N, r=SCRYPT_R, p=SCRYPT_P, dklen=32)
+    return f"scrypt${SCRYPT_N}${SCRYPT_R}${SCRYPT_P}${salt.hex()}${h.hex()}"
+
+
+def verify_password(password: str, stored: str | None) -> bool:
+    if not stored:
+        hashlib.scrypt(b"x", salt=b"0" * 16, n=SCRYPT_N, r=SCRYPT_R, p=SCRYPT_P, dklen=32)  # même durée : rien ne fuit
+        return False
+    try:
+        _, n, r, p, salt, h = stored.split("$")
+        got = hashlib.scrypt(password.encode(), salt=bytes.fromhex(salt), n=int(n), r=int(r), p=int(p), dklen=32)
+    except ValueError:
+        return False
+    return hmac.compare_digest(got.hex(), h)
+
+
+def temporary_password() -> str:
+    """Mot de passe provisoire donné par l'administrateur (mot de passe oublié) : 10 caractères lisibles."""
+    alphabet = "abcdefghjkmnpqrstuvwxyz23456789"
+    return "".join(secrets.choice(alphabet) for _ in range(10))
 
 
 def hash_code(phone: str, code: str) -> str:
@@ -142,3 +171,4 @@ def client_hash(request: Request) -> str:
     ip = request.client.host if request.client else "anon"
     return hmac.new(get_settings().jwt_secret.encode(), f"client:{ip}".encode(), hashlib.sha256).hexdigest()[:16]
 otp_limiter = RateLimiter(get_settings().otp_rate_per_minute)
+login_limiter = RateLimiter(get_settings().login_rate_per_minute)   # essais de mot de passe, par adresse IP

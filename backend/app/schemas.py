@@ -177,6 +177,58 @@ class MePatch(BaseModel):
         return v
 
 
+def check_password(v: str) -> str:
+    if len(v) < 8:
+        raise ValueError("Mot de passe trop court : 8 caractères au moins")
+    if v.strip() != v or not v.strip():
+        raise ValueError("Mot de passe : pas d'espace au début ni à la fin")
+    return v
+
+
+class RegisterIn(BaseModel):
+    """Inscription : prénom, nom, téléphone, mot de passe obligatoires ; e-mail facultatif ; consentement exigé."""
+    first_name: str = Field(..., max_length=60)
+    last_name: str = Field(..., max_length=60)
+    phone: str = Field(..., max_length=24)
+    password: str = Field(..., max_length=128)
+    email: str | None = Field(None, max_length=160)
+    consent: bool = Field(False, validate_default=True)   # validé même absent : pas de compte sans consentement
+
+    @field_validator("password")
+    @classmethod
+    def _password(cls, v):
+        return check_password(v)
+
+    _names = field_validator("first_name", "last_name")(MePatch._names.__func__)
+    _email = field_validator("email")(MePatch._email.__func__)
+
+    @field_validator("consent")
+    @classmethod
+    def _consent(cls, v):
+        if not v:
+            raise ValueError("Acceptez la conservation de vos informations pour créer un compte")
+        return v
+
+
+class LoginIn(BaseModel):
+    phone: str = Field(..., max_length=24)
+    password: str = Field(..., max_length=128)
+
+
+class PasswordChange(BaseModel):
+    current: str = Field(..., max_length=128)
+    new: str = Field(..., max_length=128)
+
+    @field_validator("new")
+    @classmethod
+    def _password(cls, v):
+        return check_password(v)
+
+
+class PasswordResetIn(BaseModel):
+    phone: str = Field(..., max_length=24)
+
+
 VIN_RE = re.compile(r"^[A-HJ-NPR-Z0-9]{17}$")   # 17 caractères, sans I, O ni Q (norme ISO 3779)
 
 

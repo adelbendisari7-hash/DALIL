@@ -41,6 +41,6 @@ Cahier des charges complet : `docs/cahier-des-charges.md` (le relire pour toute 
 ## Carte du code
 - `backend/app/services/recommendation.py` : score des magasins (section 6.4), fonction pure `score_shop` testée par 10 scénarios.
 - `backend/app/services/diagnosis/pipeline.py` : chaîne de diagnostic (normalisation, recherche, classifieur, modèle de langage, sûreté, questions de précision, niveaux de référence).
-- `backend/app/routers/` : `public` (véhicules, pièces, OBD, diagnostic), `shops` (recommandation, espace magasin, contacts, retours, demandes), `auth` (OTP, profil du compte client), `account` (voitures du client au matricule unique, signalements, historique), `admin`.
+- `backend/app/routers/` : `public` (véhicules, pièces, OBD, diagnostic), `shops` (recommandation, espace magasin, contacts, retours, demandes), `auth` (inscription et connexion par mot de passe, profil du compte client ; code SMS gardé pour plus tard), `account` (voitures du client au matricule unique, signalements, historique), `admin`.
 - `data/seed/` : référentiels JSON ; `data/scripts/` : OSM Overpass, OBDex.
 - `data/pipeline/` : `sources/` (un module par source + registre des licences), `taxonomy_map.py` (texte -> famille de pièce), `translate.py`, `load.py` (base de connaissances + `data/processed/train/`), `run.py`. Fiches des sources : `data/sources/<id>.md`.

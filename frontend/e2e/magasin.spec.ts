@@ -12,15 +12,16 @@ async function apiToken(request: APIRequestContext, phone: string): Promise<stri
 }
 
 test("un magasin test s'inscrit et publie 20 produits par import Excel", async ({ page, request }, info) => {
-  // 1. Connexion par SMS (code fixe des tests), depuis l'espace magasin
+  // 1. Inscription par mot de passe, depuis l'espace magasin (les SMS sont payants)
   await page.goto("/espace-magasin");
   await page.getByRole("link", { name: "Connexion" }).last().click();
-  await page.getByLabel("Numéro de mobile").fill("0555123456");
-  await page.getByRole("button", { name: "Recevoir le code" }).click();
-  await expect(page.getByRole("note")).toContainText("DALIL - API");   // prototype : où lire le code
-  await page.getByLabel("Code reçu par SMS").fill(OTP);
+  await page.getByRole("tab", { name: "Créer un compte" }).click();
+  await page.getByLabel("Prénom").fill("Rachid");
+  await page.getByLabel("Nom", { exact: true }).fill("Test");
+  await page.getByLabel("Numéro de mobile").fill(`0555${String(Date.now()).slice(-6)}`);
+  await page.getByLabel("Mot de passe (8 caractères au moins)").fill("magasin-e2e");
   await page.getByRole("checkbox").check();
-  await page.getByRole("button", { name: "Me connecter" }).click();
+  await page.getByRole("button", { name: "Créer mon compte" }).click();
   await expect(page).toHaveURL(/espace-magasin/);
 
   // 2. Inscription du magasin (nom, position prise au magasin, marques, familles)

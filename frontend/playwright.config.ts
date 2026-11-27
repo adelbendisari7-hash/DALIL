@@ -23,7 +23,7 @@ export default defineConfig({
       command: `${PY} -c "import pathlib; pathlib.Path('e2e.db').unlink(missing_ok=True)" && ${PY} -m alembic upgrade head && ${PY} -m app.seed && ${PY} -m uvicorn app.main:app --port ${API_PORT}`,
       cwd: "../backend",
       url: `http://localhost:${API_PORT}/health`,
-      env: { DALIL_DATABASE_URL: E2E_DB, DALIL_ADMIN_PHONES: "0550000099", DALIL_OTP_RATE_PER_MINUTE: "100",
+      env: { DALIL_DATABASE_URL: E2E_DB, DALIL_ADMIN_PHONES: "0550000099", DALIL_OTP_RATE_PER_MINUTE: "100", DALIL_LOGIN_RATE_PER_MINUTE: "200",
              DALIL_OTP_TEST_CODE: OTP, DALIL_SMS_PROVIDER: "console" },
       reuseExistingServer: false,
       timeout: 120_000,

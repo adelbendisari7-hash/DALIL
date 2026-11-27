@@ -28,8 +28,8 @@ from ..models import (
     User,
     UserVehicle,
 )
-from ..schemas import ShopIn, format_plate, shop_out
-from ..security import log_admin, normalize_phone, require_admin
+from ..schemas import PasswordResetIn, ShopIn, format_plate, shop_out
+from ..security import hash_password, log_admin, normalize_phone, require_admin, temporary_password
 from ..services.catalog import resolve_category, resolve_variants
 from ..services.imports import import_shops, read_table
 from ..services.recommendation import STALE_DAYS
@@ -250,3 +250,18 @@ def admin_plate_report_resolve(report_id: int, action: str, db: Session = Depend
     log_admin(db, admin, f"plate.{action}", str(report_id))
     db.commit()
     return out
+
+
+@router.post("/users/reset-password")
+def admin_reset_password(body: PasswordResetIn, db: Session = Depends(get_db), admin: User = Depends(require_admin)):
+    """Mot de passe oublié (pas de SMS) : mot de passe provisoire, montré une seule fois à l'administrateur, qui le
+    donne au client après avoir vérifié qu'il parle bien au titulaire du numéro. Le client le change ensuite."""
+    phone = normalize_phone(body.phone)
+    user = db.scalar(select(User).where(User.phone == phone))
+    if not user:
+        raise HTTPException(404, "Aucun compte avec ce numéro")
+    temp = temporary_password()
+    user.password_hash = hash_password(temp)
+    log_admin(db, admin, "user.reset_password", str(user.id))
+    db.commit()
+    return {"phone": phone, "name": user.name, "temporary_password": temp}

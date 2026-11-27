@@ -163,6 +163,10 @@ test("automobiliste : accueil, véhicule, diagnostic, magasins, carte, contact, 
   // Carte : déplacement au doigt
   await page.getByRole("button", { name: "Carte" }).tap();
   await expect(page.locator(".leaflet-marker-icon").first()).toBeVisible({ timeout: 60_000 });
+  // Attendre la fin de l'animation d'ouverture (cadrage sur les magasins) : Leaflet ignore un glissement pendant
+  // celle-ci ; le doigt posé dans la même milliseconde que les repères faisait échouer ce contrôle (27/11/2026).
+  await page.waitForFunction(() => !document.querySelector(".leaflet-zoom-anim, .leaflet-pan-anim"));
+  await page.waitForTimeout(1500);
   const pane = page.locator(".leaflet-map-pane");
   const before = await pane.getAttribute("style");
   await swipe(page, ".leaflet-container", 120, -60);
@@ -226,32 +230,28 @@ test("mécanicien et magasin : chercher une pièce, se connecter", async ({ page
 
   await page.goto("/connexion?next=/espace-magasin");
   await ergonomie(page, "connexion");
-  await page.getByLabel("Numéro de mobile").fill("0550000000");
-  await page.getByRole("button", { name: "Recevoir le code" }).tap();
-  await expect.soft(page.getByRole("note"), "connexion : message « mode démonstration »").toContainText("DALIL - API");
+  // Inscription par mot de passe (les SMS sont payants depuis le 27/11/2026) : numéro unique à chaque passage
+  await page.getByRole("tab", { name: "Créer un compte" }).tap();
+  await page.getByLabel("Prénom").fill("Essai");
+  await page.getByLabel("Nom", { exact: true }).fill("Téléphone");
+  await page.getByLabel("Numéro de mobile").fill(`0555${String(Date.now()).slice(-6)}`);
+  await page.getByLabel("Mot de passe (8 caractères au moins)").fill("telephone-essai");
+  await page.getByRole("checkbox").check();
   await shot(page, "09-connexion");
-  const log = process.env.TEL_API_LOG;
-  if (log && existsSync(log)) {
-    await page.waitForTimeout(1000);
-    const codes = [...readFileSync(log, "utf-8").matchAll(/\+213550000000 : DALIL : votre code est (\d{6})/g)];
-    if (codes.length) {
-      await page.getByLabel("Code reçu par SMS").fill(codes[codes.length - 1][1]);
-      await page.getByRole("checkbox").check();
-      await page.getByRole("button", { name: "Me connecter" }).tap();
-      t0 = Date.now();
-      await expect.soft(page, "connexion réussie, retour à l'espace magasin")
-        .toHaveURL((u) => u.pathname.startsWith("/espace-magasin"), { timeout: 60_000 });
-      mesures.connexion_s = (Date.now() - t0) / 1000;
-      if (new URL(page.url()).pathname.startsWith("/connexion")) {
-        const err = await page.locator(".err").textContent().catch(() => null);
-        constats.push(`connexion : toujours sur la page de connexion après 60 s${err ? " (" + err + ")" : ""}`);
-      }
-      const dacia = page.getByRole("button", { name: "Dacia", exact: true });
-      await expect.soft(dacia, "espace magasin : marques proposées").toBeVisible({ timeout: 60_000 });
-      await expect.soft(page.getByRole("button", { name: "Freinage", exact: true }), "espace magasin : familles proposées").toBeVisible();
-      mesures.espace_magasin_listes_s = (Date.now() - t0) / 1000;
-      await shot(page, "10-espace-magasin");
-      await ergonomie(page, "espace magasin");
-    } else constats.push("connexion : code introuvable dans le journal de l'API");
+  await page.getByRole("button", { name: "Créer mon compte" }).tap();
+  t0 = Date.now();
+  await expect.soft(page, "connexion réussie, retour à l'espace magasin")
+    .toHaveURL((u) => u.pathname.startsWith("/espace-magasin"), { timeout: 60_000 });
+  mesures.connexion_s = (Date.now() - t0) / 1000;
+  if (new URL(page.url()).pathname.startsWith("/connexion")) {
+    const err = await page.locator(".err").textContent().catch(() => null);
+    constats.push(`connexion : toujours sur la page de connexion après 60 s${err ? " (" + err + ")" : ""}`);
   }
+  const dacia = page.getByRole("button", { name: "Dacia", exact: true });
+  await expect.soft(dacia, "espace magasin : marques proposées").toBeVisible({ timeout: 60_000 });
+  await expect.soft(page.getByRole("button", { name: "Freinage", exact: true }), "espace magasin : familles proposées").toBeVisible();
+  mesures.espace_magasin_listes_s = (Date.now() - t0) / 1000;
+  await shot(page, "10-espace-magasin");
+  await ergonomie(page, "espace magasin");
+
 });

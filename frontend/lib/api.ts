@@ -5,7 +5,7 @@ export type User = {
   id: number; phone: string; role: string; name: string | null; consent: boolean;
   // Compte client : prénom, nom obligatoires (`complete`) ; le reste facultatif
   first_name?: string | null; last_name?: string | null; email?: string | null; commune_id?: number | null;
-  birth_date?: string | null; lang?: string; complete?: boolean;
+  birth_date?: string | null; lang?: string; complete?: boolean; has_password?: boolean;
 };
 
 /** Voiture du compte client (GET /me/vehicles). */

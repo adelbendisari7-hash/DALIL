@@ -31,6 +31,8 @@ export default function Admin() {
   const [stale, setStale] = useState<Shop[]>([]);
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const [plates, setPlates] = useState<PlateReport[]>([]);
+  const [resetPhone, setResetPhone] = useState("");
+  const [resetMsg, setResetMsg] = useState("");
   const [msg, setMsg] = useState("");
   const [source, setSource] = useState("terrain");
 
@@ -45,6 +47,16 @@ export default function Admin() {
     if (tab === "metrics") setMetrics(await api<Metrics>("/admin/metrics").catch(() => null));
     if (tab === "plates") setPlates(await api<PlateReport[]>("/admin/plate-reports").catch(() => []));
   }, [tab]);
+
+  async function resetPassword(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      const r = await api<{ name: string | null; temporary_password: string }>("/admin/users/reset-password", { method: "POST", json: { phone: resetPhone } });
+      setResetMsg(t("admin.reset.done", { name: r.name ?? resetPhone, password: r.temporary_password }));
+    } catch (err) {
+      setResetMsg(err instanceof ApiError && err.message ? err.message : t("common.error"));
+    }
+  }
 
   async function resolvePlate(id: number, action: "release" | "reject") {
     await api(`/admin/plate-reports/${id}/${action}`, { method: "POST" }).catch(() => undefined);
@@ -150,6 +162,17 @@ export default function Admin() {
 
       {tab === "plates" && (
         <>
+          <h2>{t("admin.reset")}</h2>
+          <p className="help">{t("admin.reset.help")}</p>
+          <form onSubmit={resetPassword} className="actions" style={{ alignItems: "flex-end" }}>
+            <div style={{ flex: "1 1 12rem" }}>
+              <label htmlFor="reset-phone">{t("admin.reset.phone")}</label>
+              <input id="reset-phone" type="tel" value={resetPhone} onChange={(e) => setResetPhone(e.target.value)} />
+            </div>
+            <button className="btn" disabled={!resetPhone.trim()}>{t("admin.reset.button")}</button>
+          </form>
+          {resetMsg && <p className="notice" role="status">{resetMsg}</p>}
+          <h2 className="section">{t("admin.plates")}</h2>
           {plates.length === 0 && <p className="help">{t("admin.plates.empty")}</p>}
           <ul className="list">
             {plates.map((p) => (

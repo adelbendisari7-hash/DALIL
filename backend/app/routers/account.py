@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from ..db import get_db
@@ -42,6 +43,19 @@ def _own(db: Session, user: User, vehicle_id: int) -> UserVehicle:
     return v
 
 
+PLATE_TAKEN = {"code": "plate_taken", "message": "Ce matricule est déjà enregistré sur un autre compte. S'il s'agit de "
+                                                 "votre voiture, signalez-le : l'équipe DALIL vérifiera."}
+
+
+def _commit(db: Session) -> None:
+    """Deux enregistrements simultanés du même matricule : la contrainte unique de la base tranche."""
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(409, detail=PLATE_TAKEN) from None
+
+
 def _check(db: Session, data: dict, current: UserVehicle | None = None) -> None:
     if data.get("variant_id") is not None and not db.get(VehicleVariant, data["variant_id"]):
         raise HTTPException(422, "Véhicule inconnu dans le référentiel")
@@ -49,9 +63,7 @@ def _check(db: Session, data: dict, current: UserVehicle | None = None) -> None:
     if plate:
         other = db.scalar(select(UserVehicle).where(UserVehicle.plate == plate))
         if other and other is not current:
-            raise HTTPException(409, detail={"code": "plate_taken", "message":
-                                             "Ce matricule est déjà enregistré sur un autre compte. S'il s'agit de "
-                                             "votre voiture, signalez-le : l'équipe DALIL vérifiera."})
+            raise HTTPException(409, detail=PLATE_TAKEN)
 
 
 @router.get("/vehicles")
@@ -71,7 +83,7 @@ def vehicle_add(body: VehicleIn, user: User = Depends(current_user), db: Session
     _check(db, data)
     v = UserVehicle(user_id=user.id, **data)
     db.add(v)
-    db.commit()
+    _commit(db)
     db.refresh(v)
     return vehicle_out(v)
 
@@ -87,7 +99,7 @@ def vehicle_edit(vehicle_id: int, body: VehiclePatch, user: User = Depends(curre
         setattr(v, k, val)
     if not v.variant_id and not v.label:
         raise HTTPException(422, "Choisissez le modèle de la voiture, ou saisissez sa marque et son modèle")
-    db.commit()
+    _commit(db)
     db.refresh(v)
     return vehicle_out(v)
 

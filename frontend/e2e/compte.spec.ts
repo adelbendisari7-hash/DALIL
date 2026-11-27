@@ -1,23 +1,26 @@
 import { expect, test, type Page } from "@playwright/test";
-import { OTP } from "./helpers";
 
 // Numéros et matricules uniques à chaque exécution : les tests se rejouent sur la même base sans se gêner
 const uniq = () => String(Date.now() % 1_000_000 + Math.floor(Math.random() * 1000)).padStart(6, "0").slice(-6);
 const phone = () => `0555${uniq()}`;
 const plate = () => `${uniq()}-1${String(10 + Math.floor(Math.random() * 15))}-31`;
 
+/** Inscription par mot de passe (les SMS sont payants) : prénom, nom, numéro, mot de passe, consentement. */
+async function inscrire(page: Page, tel: string, prenom: string, nom: string, next = "/") {
+  await page.goto(`/connexion?inscription=1&next=${next}`);
+  await page.getByLabel("Prénom").fill(prenom);
+  await page.getByLabel("Nom", { exact: true }).fill(nom);
+  await page.getByLabel("Numéro de mobile").fill(tel);
+  await page.getByLabel("Mot de passe (8 caractères au moins)").fill("motdepasse-e2e");
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Créer mon compte" }).click();
+  await expect(page.getByRole("heading", { name: "Bienvenue sur DALIL" })).toBeVisible();
+}
+
 /** Suppression du compte sur demande (loi 18-07, section 10) : promise à la connexion, faisable depuis le site. */
 test("un utilisateur supprime son compte depuis « Mon compte »", async ({ page }) => {
-  await page.goto("/connexion?next=/compte");
   const tel = phone();
-  await page.getByLabel("Numéro de mobile").fill(tel);
-  await page.getByRole("button", { name: "Recevoir le code" }).click();
-  await page.getByLabel("Code reçu par SMS").fill(OTP);
-  await page.getByRole("checkbox").check();
-  await page.getByRole("button", { name: "Me connecter" }).click();
-
-  // Nouveau compte : la page demande d'abord le prénom et le nom
-  await expect(page.getByRole("heading", { name: "Créez votre compte" })).toBeVisible();
+  await inscrire(page, tel, "Samir", "Toumi", "/compte");
   await expect(page.getByText(`+213${tel.slice(1)}`)).toBeVisible();
   await expect(page.getByRole("link", { name: "Mon compte", exact: true })).toBeVisible(); // menu : connecté
 
@@ -28,23 +31,29 @@ test("un utilisateur supprime son compte depuis « Mon compte »", async ({ page
   expect(await page.evaluate(() => localStorage.getItem("dalil.token"))).toBeNull();
 });
 
-
-async function connecter(page: Page, phone: string, next = "/") {
-  await page.goto(`/connexion?next=${next}`);
-  await page.getByLabel("Numéro de mobile").fill(phone);
-  await page.getByRole("button", { name: "Recevoir le code" }).click();
-  await page.getByLabel("Code reçu par SMS").fill(OTP);
-  await page.getByRole("checkbox").check();
+test("connexion par mot de passe : bon mot de passe accepté, mauvais refusé, numéro déjà pris refusé", async ({ page }) => {
+  const tel = phone();
+  await inscrire(page, tel, "Lina", "Saadi");
+  await page.getByRole("button", { name: "Déconnexion" }).click();
+  await page.goto("/connexion?next=/compte");
+  await page.getByLabel("Numéro de mobile").fill(tel);
+  await page.getByLabel("Mot de passe", { exact: true }).fill("mauvais-mdp");
   await page.getByRole("button", { name: "Me connecter" }).click();
-}
-
-async function creerCompte(page: Page, prenom: string, nom: string) {
-  await expect(page.getByRole("heading", { name: "Créez votre compte" })).toBeVisible();
-  await page.getByLabel("Prénom").fill(prenom);
-  await page.getByLabel("Nom", { exact: true }).fill(nom);
-  await page.getByRole("button", { name: "Enregistrer", exact: true }).click();
-  await expect(page.getByText("Informations enregistrées.")).toBeVisible();
-}
+  await expect(page.getByRole("alert").filter({ hasText: "Numéro ou mot de passe incorrect" })).toBeVisible();
+  await page.getByLabel("Mot de passe", { exact: true }).fill("motdepasse-e2e");
+  await page.getByRole("button", { name: "Me connecter" }).click();
+  await expect(page.getByRole("heading", { name: "Mon compte", exact: true })).toBeVisible();
+  // Le même numéro, écrit autrement, ne peut pas créer un second compte
+  await page.evaluate(() => localStorage.clear());
+  await page.goto("/connexion?inscription=1");
+  await page.getByLabel("Prénom").fill("Autre");
+  await page.getByLabel("Nom", { exact: true }).fill("Personne");
+  await page.getByLabel("Numéro de mobile").fill(`+213 ${tel.slice(1)}`);
+  await page.getByLabel("Mot de passe (8 caractères au moins)").fill("autre-mdp-123");
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Créer mon compte" }).click();
+  await expect(page.getByRole("alert").filter({ hasText: "déjà un compte" })).toBeVisible();
+});
 
 async function ajouterVoiture(page: Page, matricule: string) {
   await page.getByLabel("Matricule").fill(matricule);
@@ -64,8 +73,7 @@ async function ajouterVoiture(page: Page, matricule: string) {
 }
 
 test("compte client : créé après la connexion, une voiture ajoutée, diagnostic rangé dans l'historique", async ({ page }) => {
-  await connecter(page, phone());
-  await creerCompte(page, "Amina", "Benali");
+  await inscrire(page, phone(), "Amina", "Benali");
   const p = plate();
   await ajouterVoiture(page, p.replaceAll("-", " "));
   await expect(page.locator(".plate", { hasText: p })).toBeVisible();
@@ -85,15 +93,13 @@ test("compte client : créé après la connexion, une voiture ajoutée, diagnost
 
 test("matricule déjà enregistré par un autre client : refusé, puis signalé", async ({ page }) => {
   const p = plate();
-  await connecter(page, phone(), "/compte");
-  await creerCompte(page, "Karim", "Haddad");
+  await inscrire(page, phone(), "Karim", "Haddad", "/compte");
   await ajouterVoiture(page, p);
   await expect(page.locator(".plate", { hasText: p })).toBeVisible();
   await page.getByRole("button", { name: "Déconnexion" }).click();
   await page.evaluate(() => localStorage.clear());
 
-  await connecter(page, phone(), "/compte");
-  await creerCompte(page, "Yacine", "Mansouri");
+  await inscrire(page, phone(), "Yacine", "Mansouri", "/compte");
   await ajouterVoiture(page, p.replaceAll("-", " "));
   await expect(page.getByRole("alert").filter({ hasText: "déjà enregistré" })).toBeVisible();
   await expect(page.getByText("Karim")).toHaveCount(0);   // rien n'est dévoilé du propriétaire

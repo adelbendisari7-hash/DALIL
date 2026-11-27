@@ -73,6 +73,8 @@ class User(Base):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     phone: Mapped[str] = mapped_column(String(20), unique=True, index=True)
+    # Connexion par mot de passe (27/11/2026, SMS payants) : scrypt salé, jamais le mot de passe lui-même
+    password_hash: Mapped[str | None] = mapped_column(String(200))
     role: Mapped[str] = mapped_column(String(20), default="driver")  # driver|mechanic|shop_owner|admin
     name: Mapped[str | None] = mapped_column(String(120))   # « Prénom Nom », gardé pour l'affichage et les magasins
     # Compte client (27/11/2026) : prénom, nom et téléphone obligatoires pour un compte complet ; le reste facultatif

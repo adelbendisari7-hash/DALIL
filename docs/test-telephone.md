@@ -55,7 +55,7 @@ Une fois le site mis en ligne en https (étape 12), ce réglage ne sera plus né
 - [ ] « Chercher une pièce » : taper « amortisseur », puis voir les magasins.
 
 **Magasin**
-- [ ] Connexion par numéro de téléphone : le code s'affiche dans la fenêtre « DALIL - API » du PC.
+- [ ] Création d'un compte (prénom, nom, numéro, mot de passe), puis déconnexion et reconnexion avec le mot de passe. (Les SMS sont payants : plus de code depuis le 27/11/2026.)
 
 ## Résultat
 

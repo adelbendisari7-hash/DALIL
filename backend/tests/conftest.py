@@ -7,6 +7,7 @@ os.environ["DALIL_DATABASE_URL"] = f"sqlite:///{_tmp.as_posix()}"
 os.environ["DALIL_ADMIN_PHONES"] = "0550000099"
 os.environ["DALIL_DIAGNOSIS_RATE_PER_MINUTE"] = "1000"
 os.environ["DALIL_OTP_RATE_PER_MINUTE"] = "1000"
+os.environ["DALIL_LOGIN_RATE_PER_MINUTE"] = "1000"
 # Les tests tournent sur une base à eux : ni les vecteurs ni les modèles de ml/artifacts ne leur correspondent.
 os.environ["DALIL_RETRIEVAL_MODE"] = "keyword"
 os.environ["DALIL_LLM_PROVIDER"] = "none"
