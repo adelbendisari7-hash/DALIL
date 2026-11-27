@@ -290,3 +290,32 @@ c.commit()
   await expect(page.getByRole("heading", { name: "Qu'est-ce qui ne va pas", exact: false })).toBeVisible();
   await expect(page.locator(".price-banner")).toHaveCount(0);
 });
+
+test("rappel possible pour la voiture : signalé sur l'accueil, lu dans le compte, fiche officielle", async ({ page }) => {
+  // Un rappel publié pour la Clio IV (ajouté à la base des tests, sur le modèle des fiches RappelConso)
+  execFileSync(PY_PATH, ["-c", `
+import sqlite3, sys, json
+c = sqlite3.connect(sys.argv[1])
+if not c.execute("select 1 from knowledge_chunks where source = 'rappelconso'").fetchone():
+    meta = {"url": "https://rappel.conso.gouv.fr/fiche-rappel/99999/test", "date": "2025-03-01",
+            "vehicle": {"make": "Renault", "model": "captur, clio iv voiture de tourisme."}}
+    c.execute("insert into knowledge_chunks (source, lang, text, metadata, license) values (?,?,?,?,?)",
+              ("rappelconso", "fr", "Rappel renault captur, clio iv voiture de tourisme. : l'ancrage de la ceinture arrière peut se détacher. Risque : blessures.",
+               json.dumps(meta), "Licence Ouverte v2.0"))
+    c.commit()
+`, resolve(__dirname, "../../backend/e2e.db")]);
+  await inscrire(page, phone(), "Leila", "Rappel", "/compte");
+  await ajouterVoiture(page, plate());   // Renault Clio 4
+  await page.goto("/");
+  const banner = page.locator(".recall-banner");
+  await expect(banner).toContainText("1 rappels publiés pour ce modèle");
+  await banner.getByRole("link").first().click();
+  const panel = page.locator(".recalls");
+  await expect(panel).toContainText("ceinture arrière peut se détacher");
+  await expect(panel).toContainText("Même génération");
+  await expect(panel).toContainText("pas forcément concernée");
+  await expect(panel.getByRole("link", { name: "Voir la fiche officielle" })).toHaveAttribute("href", /rappel\.conso\.gouv\.fr/);
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "Qu'est-ce qui ne va pas", exact: false })).toBeVisible();
+  await expect(page.locator(".recall-banner")).toHaveCount(0);   // regardé : plus signalé
+});

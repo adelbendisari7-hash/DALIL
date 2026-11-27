@@ -897,3 +897,8 @@ footer.disclaimer { max-width: 760px; margin: 0 auto; padding: 0 16px 2rem; colo
 .price-banner { border-left-color: var(--green); }
 .price-follow { margin-top: 0.75rem; }
 .watch.has-alert strong a { color: var(--green); }
+
+/* --- Rappels des constructeurs --- */
+.recall-banner { border-left-color: var(--blue); }
+.recall-count { background: var(--blue); }
+.recall-link { align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; font-weight: 600; }

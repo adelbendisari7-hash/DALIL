@@ -17,6 +17,7 @@ export type UserCar = {
   // Contrôle technique et assurance en cours ; ceux qui finissent dans 30 jours au plus, ou expirés
   papers?: { controle: Paper | null; assurance: Paper | null };
   papers_alerts?: Paper[];
+  recalls_count?: number;   // rappels publiés en France pour ce modèle (RappelConso)
 };
 
 /** Papier d'une voiture (contrôle technique, assurance) : valable jusqu'au, état et jours restants. */

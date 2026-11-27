@@ -118,3 +118,52 @@ def test_prix_suivi_refus_et_suivi_d_un_autre(client, db):
     assert client.delete(f"{API}/me/price-watches/{w['id']}", headers=h2).status_code == 404
     assert client.post(f"{API}/me/price-watches/{w['id']}/seen", headers=h2).status_code == 404
     assert client.get(f"{API}/me/price-watches").status_code == 401
+
+
+# --- 3. Rappels des constructeurs ------------------------------------------------------------------------------------
+
+def _recall(db, make, models, motif, date="2025-01-10"):
+    from app.models import KnowledgeChunk
+    c = KnowledgeChunk(source="rappelconso", lang="fr", license="Licence Ouverte v2.0",
+                       text=f"Rappel {make.lower()} {models} : {motif} Risque : blessures.",
+                       meta={"url": "https://rappel.conso.gouv.fr/fiche-rappel/1/x", "date": date,
+                             "vehicle": {"make": make, "model": models}})
+    db.add(c)
+    db.commit()
+    return c
+
+
+def test_correspondance_des_rappels():
+    from app.services.recalls import brand_key, split_model, _generation_after
+    assert split_model("Clio 4") == ("clio", 4) and split_model("208") == ("208", None)
+    assert split_model("Logan MCV") == ("logan mcv", None) and split_model("Clio V") == ("clio", 5)
+    assert _generation_after("captur, clio iv, kangoo ii", "clio") == {4}
+    assert _generation_after("208 v2, 2008 v2", "208") == {2}
+    assert brand_key("Vw") == brand_key("Volkswagen") and brand_key("Citroën") == brand_key("Citroen")
+
+
+def test_rappels_d_une_voiture(client, db):
+    from app.models import Brand, Model, VehicleVariant
+    from app.services import recalls
+    variant = db.scalar(select(VehicleVariant).join(Model).join(Brand)
+                        .where(Brand.name == "Renault", Model.name == "Clio 4"))
+    assert variant is not None
+    _recall(db, "Renault", "captur, clio iv voiture de tourisme.", "le frein peut lâcher.", "2025-03-01")
+    _recall(db, "Renault", "clio v voiture de tourisme.", "autre génération.")
+    _recall(db, "Renault", "clio voiture de tourisme. niv : vf1rjb00012345", "sans génération.", "2024-02-01")
+    _recall(db, "Renault Trucks", "clio", "camion, écarté.")
+    _recall(db, "Peugeot", "clio", "autre marque.")
+    recalls._index.cache_clear()
+    h = login(client, "0698000020")
+    cid = client.post(f"{API}/me/vehicles", headers=h, json={"plate": "50001-115-31", "variant_id": variant.id}).json()["id"]
+    r = client.get(f"{API}/me/vehicles/{cid}/recalls", headers=h).json()
+    assert [x["motif"] for x in r["recalls"]] == ["le frein peut lâcher.", "sans génération."]   # plus récent d'abord
+    assert r["recalls"][0]["match"] == "generation" and r["recalls"][1]["match"] == "model"
+    assert r["recalls"][0]["url"].startswith("https://rappel.conso.gouv.fr/") and "RappelConso" in r["source"]
+    car = next(c for c in client.get(f"{API}/me/vehicles", headers=h).json() if c["id"] == cid)
+    assert car["recalls_count"] == 2
+    # Voiture saisie à la main (« Renault Clio 4 ») : même résultat ; voiture d'un autre : 404
+    cid2 = client.post(f"{API}/me/vehicles", headers=h, json={"plate": "50002-115-31", "label": "Renault Clio 4"}).json()["id"]
+    assert len(client.get(f"{API}/me/vehicles/{cid2}/recalls", headers=h).json()["recalls"]) == 2
+    h2 = login(client, "0698000021")
+    assert client.get(f"{API}/me/vehicles/{cid}/recalls", headers=h2).status_code == 404

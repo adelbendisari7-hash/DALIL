@@ -705,5 +705,21 @@
   "watch.following": "Prix suivi : DALIL vous préviendra s'il baisse.",
   "watch.login": "Connectez-vous pour suivre le prix de cette pièce",
   "watch.banner": "Prix en baisse",
-  "watch.banner.help": "Touchez une pièce pour voir les magasins. « Vu » dans Mon compte retire l'alerte."
+  "watch.banner.help": "Touchez une pièce pour voir les magasins. « Vu » dans Mon compte retire l'alerte.",
+  "recalls.button": "Rappels",
+  "recalls.count": "{n} rappels possibles pour ce modèle",
+  "recalls.warning": "Rappels publiés en France par les constructeurs pour ce modèle. Votre voiture n'est pas forcément concernée (année, série, numéro de châssis) : vérifiez sur la fiche officielle ou chez le concessionnaire, avec votre numéro de châssis.",
+  "recalls.none": "Aucun rappel trouvé pour ce modèle.",
+  "recalls.noDate": "Date inconnue",
+  "recalls.match.generation": "Même génération",
+  "recalls.match.model": "Génération à vérifier",
+  "recalls.models": "Modèles cités : {models}",
+  "recalls.risk": "Risque : {risk}",
+  "recalls.official": "Voir la fiche officielle",
+  "recalls.vin": "Votre numéro de châssis : {vin}. Donnez-le au concessionnaire pour savoir si votre voiture est concernée.",
+  "recalls.noVin": "Ajoutez le numéro de châssis de la voiture (Modifier) : c'est lui qui dit si elle est concernée.",
+  "recalls.source": "Source : {source}.",
+  "recalls.banner": "Rappels possibles",
+  "recalls.bannerLine": "{n} rappels publiés pour ce modèle, à vérifier",
+  "recalls.bannerHelp": "Touchez la voiture pour les lire. Le message disparaît une fois les rappels regardés."
 }

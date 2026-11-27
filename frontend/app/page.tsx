@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import VehiclePicker from "@/components/VehiclePicker";
 import { paperWhen } from "@/components/Papers";
 import { shopsLink, watchLine, type Watch } from "@/components/PriceWatches";
+import { recallsSeen } from "@/components/Recalls";
 import VoiceInput from "@/components/VoiceInput";
 import WarningLights, { lightPhrase, type Light } from "@/components/WarningLights";
 import { api, ApiError, lastDiagnosis, session, store, type LastDiagnosis, type UserCar, type Vehicle } from "@/lib/api";
@@ -52,6 +53,10 @@ export default function Home() {
     setUpkeepHidden(true);
   }
   const upkeep = cars.filter((c) => c.maintenance_items?.length);
+  // Rappels possibles pas encore regardés (le panneau « Rappels » de la voiture les marque comme vus)
+  const [seenRecalls, setSeenRecalls] = useState<Record<string, number>>({});
+  useEffect(() => { setSeenRecalls(recallsSeen.get()); }, []);
+  const recallCars = cars.filter((c) => (c.recalls_count ?? 0) > (seenRecalls[c.id] ?? 0));
   // Pièces suivies dont le prix a baissé, ou qu'un magasin propose enfin
   const [watchAlerts, setWatchAlerts] = useState<Watch[]>([]);
   useEffect(() => {
@@ -156,6 +161,23 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </aside>
+      )}
+
+      {recallCars.length > 0 && (
+        <aside className="card upkeep-banner recall-banner" aria-labelledby="recall-title">
+          <h2 id="recall-title" className="card-title">{t("recalls.banner")}</h2>
+          <ul className="upkeep-list">
+            {recallCars.map((c) => (
+              <li key={c.id}>
+                <Link href={`/compte?rappels=${c.id}#voiture-${c.id}`}>
+                  <strong>{c.nickname || c.display}</strong>
+                  <span className="meta">{t("recalls.bannerLine", { n: c.recalls_count ?? 0 })}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="help">{t("recalls.bannerHelp")}</p>
         </aside>
       )}
 

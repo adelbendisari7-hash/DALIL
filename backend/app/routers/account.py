@@ -19,7 +19,7 @@ from ..models import (ContactEvent, DiagnosisSession, MaintenanceRecord, Mainten
                       VehicleVariant)
 from ..schemas import PlateReportIn, VehicleIn, VehiclePatch, format_plate
 from ..security import client_hash, current_user, feedback_limiter
-from ..services import maintenance, price_history, price_watch, vehicle_papers
+from ..services import maintenance, price_history, price_watch, recalls, vehicle_papers
 from ..services.recommendation import RECOMMENDABLE_STATUSES
 
 router = APIRouter(prefix="/me")
@@ -39,7 +39,8 @@ def vehicle_out(v: UserVehicle, db: Session | None = None) -> dict:
     if db is not None:
         due = maintenance.due_items(db, v)
         extra = {"maintenance_due": len(due), "maintenance_items": due,
-                 "papers": vehicle_papers.current(db, v), "papers_alerts": vehicle_papers.alerts(db, v)}
+                 "papers": vehicle_papers.current(db, v), "papers_alerts": vehicle_papers.alerts(db, v),
+                 "recalls_count": len(recalls.for_car(db, v))}
     return {**extra, "id": v.id, "plate": format_plate(v.plate), "variant_id": v.variant_id, "year": v.year, "label": v.label,
             "nickname": v.nickname, "mileage_km": v.mileage_km, "vin": v.vin, "display": vehicle_label(v),
             "brand_id": v.variant.model.brand_id if v.variant else None,
@@ -300,6 +301,17 @@ def maintenance_undo(vehicle_id: int, record_id: int, user: User = Depends(curre
     if visit is not None and not db.scalars(select(MaintenanceRecord).where(MaintenanceRecord.visit_id == visit.id)).first():
         db.delete(visit)
     db.commit()
+
+
+# --- Rappels des constructeurs -------------------------------------------------
+
+@router.get("/vehicles/{vehicle_id}/recalls")
+def vehicle_recalls(vehicle_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Rappels publiés en France (RappelConso) pour le modèle de la voiture : « rappel possible », à vérifier avec le
+    numéro de châssis sur la fiche officielle ou chez le concessionnaire."""
+    car = _own(db, user, vehicle_id)
+    return {"recalls": recalls.for_car(db, car), "vin": car.vin,
+            "source": "RappelConso (DGCCRF), Licence Ouverte v2.0"}
 
 
 # --- Magasins contactés (pour le carnet) -------------------------------------

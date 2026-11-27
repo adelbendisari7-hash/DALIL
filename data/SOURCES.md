@@ -25,7 +25,7 @@ avec sa licence. `knowledge_chunks.license` est obligatoire en base.
 | NHTSA, plaintes (`nhtsa_complaints`) | `pipeline/sources/nhtsa.py` | Domaine public (US) | Collectée, à traduire | [Fiche](sources/nhtsa_complaints.md). Anglais, marché US ; 6 modèles proches du parc algérien |
 | NHTSA, rappels (`nhtsa_recalls`) | `pipeline/sources/nhtsa.py` | Domaine public (US) | Collectée, à traduire | [Fiche](sources/nhtsa_recalls.md) |
 | DVSA MOT, Royaume-Uni (`mot_uk`) | `pipeline/sources/mot.py` | Open Government Licence v3.0 | Collectée, en base | [Fiche](sources/mot_uk.md). Données codées : taux d'échec par modèle et famille de pièces |
-| RappelConso (`rappelconso`) | `pipeline/sources/rappelconso.py` | Licence Ouverte v2.0 (Etalab) | Collectée, en base | [Fiche](sources/rappelconso.md). Rappels de sécurité en français |
+| RappelConso (`rappelconso`) | `pipeline/sources/rappelconso.py` | Licence Ouverte v2.0 (Etalab) | Collectée, en base | [Fiche](sources/rappelconso.md). Rappels de sécurité en français ; depuis le 28/11/2026, aussi montrés au client pour le modèle de ses voitures (« rappel possible », source citée, lien vers la fiche officielle) |
 | Stack Exchange Mechanics (`stackexchange_mechanics`) | `pipeline/sources/stackexchange.py` | CC BY-SA 4.0 | Collectée, à traduire | [Fiche](sources/stackexchange_mechanics.md). Export du 31/12/2024, antérieur à juin 2025 |
 | CVFFAD, Chine (`cvffad`) | `pipeline/sources/cvffad.py` | CC BY 4.0 | Collectée, à traduire | [Fiche](sources/cvffad.md). **Synthétique** (textes générés, flottes de camions anonymisées) : ne couvre pas les marques chinoises du parc algérien |
 
