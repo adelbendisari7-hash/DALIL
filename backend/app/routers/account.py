@@ -5,19 +5,21 @@ Ni le propriétaire d'un matricule déjà pris ni sa voiture ne sont jamais mont
 """
 from __future__ import annotations
 
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from ..db import get_db
-from ..models import DiagnosisSession, MaintenanceRecord, MaintenanceVisit, PlateReport, User, UserVehicle, VehicleVariant
+from ..models import (ContactEvent, DiagnosisSession, MaintenanceRecord, MaintenanceVisit, PartRequest, PlateReport,
+                      RequestResponse, Shop, User, UserVehicle, VehicleDocument, VehicleVariant)
 from ..schemas import PlateReportIn, VehicleIn, VehiclePatch, format_plate
-from ..security import current_user, feedback_limiter
-from ..services import maintenance
+from ..security import client_hash, current_user, feedback_limiter
+from ..services import maintenance, vehicle_papers
+from ..services.recommendation import RECOMMENDABLE_STATUSES
 
 router = APIRouter(prefix="/me")
 MAX_VEHICLES = 20
@@ -35,7 +37,8 @@ def vehicle_out(v: UserVehicle, db: Session | None = None) -> dict:
     extra = {}
     if db is not None:
         due = maintenance.due_items(db, v)
-        extra = {"maintenance_due": len(due), "maintenance_items": due}
+        extra = {"maintenance_due": len(due), "maintenance_items": due,
+                 "papers": vehicle_papers.current(db, v), "papers_alerts": vehicle_papers.alerts(db, v)}
     return {**extra, "id": v.id, "plate": format_plate(v.plate), "variant_id": v.variant_id, "year": v.year, "label": v.label,
             "nickname": v.nickname, "mileage_km": v.mileage_km, "vin": v.vin, "display": vehicle_label(v),
             "brand_id": v.variant.model.brand_id if v.variant else None,
@@ -179,6 +182,7 @@ class MaintenanceIn(BaseModel):
     price: float | None = Field(None, ge=0, le=10_000_000)
     place: str | None = Field(None, max_length=120)
     note: str | None = Field(None, max_length=300)
+    shop_id: int | None = None   # magasin DALIL (parmi ceux que le client a contactés)
 
 
 OTHER = "autre"
@@ -203,18 +207,25 @@ def _visit_values(body: MaintenanceIn) -> tuple[list[str], str | None, date]:
     return items, other, done_on
 
 
-def _fill_visit(visit: MaintenanceVisit, car: UserVehicle, body: MaintenanceIn) -> None:
+def _fill_visit(db: Session, visit: MaintenanceVisit, car: UserVehicle, body: MaintenanceIn) -> None:
     items, other, done_on = _visit_values(body)
-    visit.done_on, visit.km, visit.price = done_on, body.km, body.price
-    visit.place, visit.note = _clean(body.place), _clean(body.note)
+    shop = None
+    if body.shop_id is not None:
+        shop = db.get(Shop, body.shop_id)
+        if not shop or shop.status not in RECOMMENDABLE_STATUSES:
+            raise HTTPException(422, "Magasin inconnu")
+    visit.done_on, visit.km, visit.price, visit.shop_id = done_on, body.km, body.price, shop.id if shop else None
+    visit.place, visit.note = _clean(body.place) or (shop.name if shop else None), _clean(body.note)
     visit.records = [MaintenanceRecord(user_vehicle_id=car.id, item=i, km=body.km, done_on=done_on) for i in items] +         ([MaintenanceRecord(user_vehicle_id=car.id, item=OTHER, label=other, km=body.km, done_on=done_on)] if other else [])
     if body.km is not None and (car.mileage_km is None or body.km > car.mileage_km):
         car.mileage_km = body.km   # un kilométrage plus grand met la voiture à jour
 
 
-def visit_out(v: MaintenanceVisit) -> dict:
+def visit_out(v: MaintenanceVisit, db: Session | None = None) -> dict:
     names = {it["slug"]: it["name"] for it in maintenance.items()}
+    shop = db.get(Shop, v.shop_id) if db is not None and v.shop_id else None
     return {"id": v.id, "done_on": v.done_on.isoformat(), "km": v.km, "price": v.price, "place": v.place, "note": v.note,
+            "shop": {"id": shop.id, "name": shop.name} if shop else None,
             "operations": [{"id": r.id, "item": r.item, "name": r.label if r.item == OTHER else names.get(r.item, r.item)}
                            for r in v.records]}
 
@@ -233,7 +244,7 @@ def maintenance_history(vehicle_id: int, user: User = Depends(current_user), db:
     visits = list(db.scalars(select(MaintenanceVisit).where(MaintenanceVisit.user_vehicle_id == car.id)
                              .order_by(MaintenanceVisit.done_on.desc(), MaintenanceVisit.id.desc())))
     year_ago = maintenance.add_months(date.today(), -12)
-    return {"visits": [visit_out(v) for v in visits],
+    return {"visits": [visit_out(v, db) for v in visits],
             "total": sum(v.price or 0 for v in visits),
             "total_12_months": sum(v.price or 0 for v in visits if v.done_on > year_ago),
             "priced": sum(1 for v in visits if v.price is not None)}
@@ -244,7 +255,7 @@ def maintenance_done(vehicle_id: int, body: MaintenanceIn, user: User = Depends(
     """Noter un passage au garage (aujourd'hui par défaut) avec ses opérations, son prix et son kilométrage."""
     car = _own(db, user, vehicle_id)
     visit = MaintenanceVisit(user_vehicle_id=car.id, done_on=date.today())
-    _fill_visit(visit, car, body)
+    _fill_visit(db, visit, car, body)
     db.add(visit)
     db.commit()
     return {"id": visit.records[0].id, "visit_id": visit.id}
@@ -263,9 +274,9 @@ def maintenance_visit_update(vehicle_id: int, visit_id: int, body: MaintenanceIn
     """Corriger un passage : date, kilométrage, prix, garage, remarque, opérations."""
     car = _own(db, user, vehicle_id)
     visit = _own_visit(db, car, visit_id)
-    _fill_visit(visit, car, body)
+    _fill_visit(db, visit, car, body)
     db.commit()
-    return visit_out(visit)
+    return visit_out(visit, db)
 
 
 @router.delete("/vehicles/{vehicle_id}/maintenance/visits/{visit_id}", status_code=204)
@@ -288,3 +299,101 @@ def maintenance_undo(vehicle_id: int, record_id: int, user: User = Depends(curre
     if visit is not None and not db.scalars(select(MaintenanceRecord).where(MaintenanceRecord.visit_id == visit.id)).first():
         db.delete(visit)
     db.commit()
+
+
+# --- Magasins contactés (pour le carnet) -------------------------------------
+
+def _naive(d: datetime) -> datetime:
+    return d.replace(tzinfo=None) if d.tzinfo else d
+
+
+@router.get("/contacted-shops")
+def contacted_shops(request: Request, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Magasins DALIL que le client a contactés : appels et WhatsApp depuis cet appareil (empreinte, 6 mois) et
+    magasins qui ont répondu « disponible » à ses demandes. Pour relier un passage du carnet à un magasin."""
+    since = datetime.now(timezone.utc) - timedelta(days=180)
+    last: dict[int, datetime] = {}
+    rows = list(db.execute(select(ContactEvent.shop_id, ContactEvent.created_at)
+                           .where(ContactEvent.client_hash == client_hash(request), ContactEvent.created_at >= since)))
+    rows += [r for r in db.execute(select(RequestResponse.shop_id, RequestResponse.responded_at)
+                                   .join(PartRequest, PartRequest.id == RequestResponse.request_id)
+                                   .where(PartRequest.user_id == user.id, RequestResponse.available.is_(True)))
+             if r[1] is not None]
+    for sid, at in rows:
+        last[sid] = max(last.get(sid, _naive(at)), _naive(at))
+    shops = list(db.scalars(select(Shop).where(Shop.id.in_(last), Shop.status.in_(RECOMMENDABLE_STATUSES))))
+    shops.sort(key=lambda s: last[s.id], reverse=True)
+    return [{"id": s.id, "name": s.name, "commune": s.commune.nom_fr if s.commune else None, "is_demo": s.is_demo}
+            for s in shops[:20]]
+
+
+# --- Papiers : contrôle technique et assurance -------------------------------
+
+class PaperIn(BaseModel):
+    kind: str = Field(..., pattern="^(controle|assurance)$")
+    done_on: date | None = None
+    valid_until: date
+    provider: str | None = Field(None, max_length=120)
+    price: float | None = Field(None, ge=0, le=10_000_000)
+    note: str | None = Field(None, max_length=300)
+
+
+def _fill_paper(doc: VehicleDocument, body: PaperIn) -> None:
+    today = date.today()
+    if body.done_on and body.done_on > today:
+        raise HTTPException(422, "La date où il a été fait ne peut pas être dans le futur")
+    if body.done_on and body.valid_until <= body.done_on:
+        raise HTTPException(422, "La date de fin doit venir après la date où il a été fait")
+    if body.valid_until > maintenance.add_months(today, 120):
+        raise HTTPException(422, "Date de fin trop lointaine : vérifiez-la sur le document")
+    doc.kind, doc.done_on, doc.valid_until = body.kind, body.done_on, body.valid_until
+    doc.provider, doc.price, doc.note = _clean(body.provider), body.price, _clean(body.note)
+
+
+def _own_paper(db: Session, car: UserVehicle, doc_id: int) -> VehicleDocument:
+    d = db.get(VehicleDocument, doc_id)
+    if not d or d.user_vehicle_id != car.id:
+        raise HTTPException(404, "Document inconnu")
+    return d
+
+
+@router.get("/vehicles/{vehicle_id}/papers")
+def papers(vehicle_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Contrôle technique et assurance en cours (état, jours restants) et historique des renouvellements."""
+    car = _own(db, user, vehicle_id)
+    return {"current": vehicle_papers.current(db, car),
+            "history": [vehicle_papers.doc_out(d) for d in vehicle_papers.history(db, car)]}
+
+
+@router.post("/vehicles/{vehicle_id}/papers", status_code=201)
+def paper_add(vehicle_id: int, body: PaperIn, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    car = _own(db, user, vehicle_id)
+    doc = VehicleDocument(user_vehicle_id=car.id)
+    _fill_paper(doc, body)
+    db.add(doc)
+    db.commit()
+    return vehicle_papers.doc_out(doc)
+
+
+@router.put("/vehicles/{vehicle_id}/papers/{doc_id}")
+def paper_update(vehicle_id: int, doc_id: int, body: PaperIn, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    car = _own(db, user, vehicle_id)
+    doc = _own_paper(db, car, doc_id)
+    _fill_paper(doc, body)
+    db.commit()
+    return vehicle_papers.doc_out(doc)
+
+
+@router.delete("/vehicles/{vehicle_id}/papers/{doc_id}", status_code=204)
+def paper_delete(vehicle_id: int, doc_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    car = _own(db, user, vehicle_id)
+    db.delete(_own_paper(db, car, doc_id))
+    db.commit()
+
+
+@router.get("/alerts")
+def alerts(user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Repère de l'onglet Compte : papiers qui finissent dans 30 jours au plus ou expirés, entretiens à faire."""
+    cars = list(db.scalars(select(UserVehicle).where(UserVehicle.user_id == user.id)))
+    return {"papers": sum(len(vehicle_papers.alerts(db, c)) for c in cars),
+            "maintenance": sum(maintenance.due_count(db, c) for c in cars)}

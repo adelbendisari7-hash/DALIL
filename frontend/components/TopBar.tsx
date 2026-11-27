@@ -46,6 +46,7 @@ export default function TopBar() {
   const [online, setOnline] = useState(true);
   const [pending, setPending] = useState(0);
   const [unseen, setUnseen] = useState(0);
+  const [papers, setPapers] = useState(0);
 
   // Réponses de magasins pas encore lues (client connecté) : repère sur l'onglet Compte
   useEffect(() => {
@@ -57,6 +58,17 @@ export default function TopBar() {
     const id = setInterval(read, 60_000);
     window.addEventListener("dalil-requests-seen", read);
     return () => { stop = true; clearInterval(id); window.removeEventListener("dalil-requests-seen", read); };
+  }, [user, path]);
+
+  // Contrôle technique ou assurance qui finit dans 30 jours au plus, ou expiré : repère sur l'onglet Compte aussi
+  useEffect(() => {
+    if (!user) return setPapers(0);
+    let stop = false;
+    const read = () => api<{ papers: number }>("/me/alerts")
+      .then((r) => { if (!stop) setPapers(r.papers); }).catch(() => undefined);
+    read();
+    window.addEventListener("dalil-alerts", read);
+    return () => { stop = true; window.removeEventListener("dalil-alerts", read); };
   }, [user, path]);
 
   // Demandes de clients en attente de réponse (gérant ou employé qui y répond) : relu à chaque page et toutes les minutes
@@ -89,10 +101,10 @@ export default function TopBar() {
   }, []);
 
   // Le nom complet sert d'étiquette (lecteurs d'écran, tests) ; le libellé court s'affiche sous l'icône sur téléphone.
-  const link = (href: string, icon: string, long: string, short: string, count = 0) => {
+  const link = (href: string, icon: string, long: string, short: string, count = 0, said?: string) => {
     const current = path === href || (href !== "/" && path.startsWith(href)) || (href === "/" && path.startsWith("/diagnostic"));
     return (
-      <Link href={href} aria-label={count ? `${long} (${t(href === "/compte" ? "nav.unseen" : "nav.pending", { n: count })})` : long}
+      <Link href={href} aria-label={count ? `${long} (${said ?? t("nav.pending", { n: count })})` : long}
         aria-current={current ? "page" : undefined}>
         <span className="nav-icon">{ICONS[icon]}{count > 0 && <span className="nav-badge" aria-hidden>{count > 9 ? "9+" : count}</span>}</span>
         <span className="label-long">{long}</span>
@@ -114,7 +126,8 @@ export default function TopBar() {
           {link("/espace-magasin", "shop", t("nav.shop"), t("nav.shop.short"), pending)}
           {user?.role === "admin" && link("/admin", "admin", t("nav.admin"), t("nav.admin.short"))}
           {user
-            ? link("/compte", "account", t("nav.account"), t("nav.account.short"), unseen)
+            ? link("/compte", "account", t("nav.account"), t("nav.account.short"), unseen + papers,
+              [unseen && t("nav.unseen", { n: unseen }), papers && t("nav.papers", { n: papers })].filter(Boolean).join(", "))
             : link("/connexion", "account", t("nav.login"), t("nav.login"))}
         </nav>
       </div>

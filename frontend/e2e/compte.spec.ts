@@ -189,3 +189,66 @@ test("carnet d'entretien : un passage avec plusieurs opérations, prix, kilomét
   await carnet.locator(".visit").first().getByRole("button", { name: /Supprimer le passage/ }).click();
   await expect(carnet).toContainText("Rien de noté pour l'instant");
 });
+
+const isoIn = (days: number) => new Date(Date.now() + days * 86_400_000).toISOString().slice(0, 10);
+
+test("papiers : assurance qui finit dans 5 jours -> rappel urgent, agenda, renouvellement", async ({ page }) => {
+  await inscrire(page, phone(), "Sofiane", "Papiers", "/compte");
+  await ajouterVoiture(page, plate());
+  await page.getByRole("button", { name: "Papiers" }).click();
+  const assurance = page.locator(".paper", { hasText: "Assurance" });
+  await expect(assurance.locator(".paper-pill")).toHaveText("Non renseigné");
+  await assurance.getByRole("button", { name: "Renseigner : Assurance" }).click();
+  await assurance.getByLabel("Début de l'assurance").fill(isoIn(-360));
+  await assurance.getByLabel("Valable jusqu'au").fill(isoIn(5));
+  await assurance.getByLabel("Compagnie d'assurance (facultatif)").fill("Assureur test");
+  await assurance.getByRole("button", { name: "Enregistrer" }).click();
+  await expect(assurance.locator(".paper-pill")).toHaveText("Urgent");
+  await expect(assurance).toContainText("finit dans 5 jours");
+
+  // Le téléphone préviendra 7 jours avant et la veille, à 9 h
+  const [download] = await Promise.all([page.waitForEvent("download"), assurance.getByRole("button", { name: "Ajouter à mon agenda" }).click()]);
+  expect(download.suggestedFilename()).toMatch(/^dalil-assurance-.*\.ics$/);
+  const ics = await (await import("node:fs/promises")).readFile(await download.path(), "utf-8");
+  expect(ics).toContain("BEGIN:VEVENT");
+  expect(ics).toContain(`DTSTART;VALUE=DATE:${isoIn(5).replaceAll("-", "")}`);
+  expect(ics).toContain("TRIGGER:-PT159H");
+  expect(ics).toContain("TRIGGER:-PT15H");
+
+  // Accueil : rappel rouge, impossible à masquer ; onglet Compte : repère
+  await page.goto("/");
+  const banner = page.locator(".papers-banner");
+  await expect(banner).toContainText("Assurance");
+  await expect(banner).toContainText("finit dans 5 jours");
+  await expect(banner.getByRole("button", { name: "Plus tard" })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /Mon compte \(1 papiers à renouveler\)/ })).toBeVisible();
+
+  // Renouvelée pour un an : plus de rappel
+  await banner.getByRole("link").first().click();
+  const again = page.locator(".paper", { hasText: "Assurance" });
+  await again.getByRole("button", { name: "Noter le renouvellement : Assurance" }).click();
+  await again.getByRole("button", { name: "+ 1 an" }).click();
+  await again.getByRole("button", { name: "Enregistrer" }).click();
+  await expect(again.locator(".paper-pill")).toHaveText("Valable");
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "Qu'est-ce qui ne va pas", exact: false })).toBeVisible();
+  await expect(page.locator(".papers-banner")).toHaveCount(0);
+});
+
+test("carnet : passage relié à un magasin DALIL contacté, lien vers sa fiche", async ({ page }) => {
+  await inscrire(page, phone(), "Walid", "Magasin", "/compte");
+  await ajouterVoiture(page, plate());
+  const shops = await (await page.request.get("/api/v1/shops")).json();
+  const shop = shops[0];
+  expect((await page.request.post("/api/v1/contact-events", { data: { shop_id: shop.id, channel: "call" } })).status()).toBe(201);
+  await page.reload();
+  await page.getByRole("button", { name: "Entretien" }).click();
+  const carnet = page.locator(".carnet");
+  await carnet.getByRole("button", { name: "Noter un passage au garage" }).click();
+  await carnet.getByRole("button", { name: "Vidange et filtre à huile" }).click();
+  await carnet.locator(".chip", { hasText: shop.name }).click();   // pastille « nom · commune »
+  await expect(carnet.getByLabel("Garage ou magasin (facultatif)")).toHaveValue(shop.name);
+  await carnet.getByRole("button", { name: "Enregistrer dans le carnet" }).click();
+  await expect(carnet.locator(".visit").first().getByRole("link", { name: shop.name })).toHaveAttribute("href", `/magasins/${shop.id}`);
+  await expect(carnet.getByRole("button", { name: "Envoyer le carnet au mécanicien" })).toBeVisible();
+});

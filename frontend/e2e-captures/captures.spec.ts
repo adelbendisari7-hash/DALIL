@@ -94,6 +94,19 @@ for (const scheme of ["light", "dark"] as const) {
       await page.locator(".carnet").screenshot({ path: `${OUT}/${scheme}-06b-carnet.png` });
       await page.locator(".carnet").getByRole("button", { name: /Modifier le passage/ }).click();
       await page.locator(".carnet").screenshot({ path: `${OUT}/${scheme}-06c-carnet-modifier.png` });
+      // Papiers : assurance qui finit dans 5 jours, contrôle technique valable
+      const iso = (days: number) => new Date(Date.now() + days * 86_400_000).toISOString().slice(0, 10);
+      await page.request.post(`${BASE}/api/v1/me/vehicles/${car.id}/papers`, { headers, data: {
+        kind: "assurance", done_on: iso(-360), valid_until: iso(5), provider: "Assureur test" } });
+      await page.request.post(`${BASE}/api/v1/me/vehicles/${car.id}/papers`, { headers, data: {
+        kind: "controle", done_on: iso(-200), valid_until: iso(530), provider: "Centre de contrôle", price: 2500 } });
+      await page.goto(`${BASE}/compte`);
+      await page.getByRole("button", { name: "Papiers" }).click();
+      await page.locator(".papers").waitFor();
+      await page.locator(".papers").screenshot({ path: `${OUT}/${scheme}-06d-papiers.png` });
+      await page.goto(`${BASE}/`);
+      await page.locator(".papers-banner").waitFor();
+      await page.screenshot({ path: `${OUT}/${scheme}-06e-accueil-papiers.png` });
       await page.goto(`${BASE}/espace-magasin`);
       await shot(page, "07-espace-magasin", scheme);
     });

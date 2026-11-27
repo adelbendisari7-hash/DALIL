@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import Maintenance from "@/components/Maintenance";
+import Papers from "@/components/Papers";
 import VehiclePicker from "@/components/VehiclePicker";
 import { api, ApiError, lastDiagnosis, session, type User, type UserCar, type Vehicle } from "@/lib/api";
 import { t } from "@/lib/i18n";
@@ -248,10 +249,13 @@ function CarForm({ car, onDone, onCancel }: { car: UserCar | null; onDone: () =>
   );
 }
 
-function Cars({ cars, reload, openUpkeep }: { cars: UserCar[]; reload: () => void; openUpkeep?: number | null }) {
+function Cars({ cars, reload, openUpkeep, openPapers }: { cars: UserCar[]; reload: () => void; openUpkeep?: number | null;
+  openPapers?: number | null }) {
   const [editing, setEditing] = useState<UserCar | "new" | null>(cars.length ? null : "new");
   // Voiture dont le panneau « Entretien » est ouvert (?entretien=<id> : depuis le rappel de l'accueil)
   const [upkeep, setUpkeep] = useState<number | null>(openUpkeep ?? null);
+  // Voiture dont le panneau « Papiers » (contrôle technique, assurance) est ouvert (?papiers=<id>)
+  const [papers, setPapers] = useState<number | null>(openPapers ?? null);
   const [error, setError] = useState("");
 
   async function remove(c: UserCar) {
@@ -282,9 +286,16 @@ function Cars({ cars, reload, openUpkeep }: { cars: UserCar[]; reload: () => voi
                 {t("maint.button")}
                 {(c.maintenance_due ?? 0) > 0 && <span className="maint-count" aria-label={t("maint.dueCount", { n: c.maintenance_due ?? 0 })}>{c.maintenance_due}</span>}
               </button>
+              <button className="btn btn-ghost" aria-expanded={papers === c.id} onClick={() => setPapers(papers === c.id ? null : c.id)}>
+                {t("papers.button")}
+                {(c.papers_alerts?.length ?? 0) > 0 && (
+                  <span className="maint-count" aria-label={t("papers.alertCount", { n: c.papers_alerts!.length })}>{c.papers_alerts!.length}</span>
+                )}
+              </button>
               <button className="btn btn-ghost" onClick={() => setEditing(c)}>{t("account.cars.edit")}</button>
               <button className="btn btn-ghost" onClick={() => remove(c)}>{t("account.cars.remove")}</button>
             </span>
+            {papers === c.id && <Papers car={c} onChange={reload} />}
             {upkeep === c.id && <Maintenance car={c} onChange={reload} />}
           </li>
         ))}
@@ -388,7 +399,8 @@ function Account() {
   const carsCard = complete && (
     <div className="card">
       <h2 className="card-title">{t("account.cars")}</h2>
-      {cars ? <Cars cars={cars} reload={loadCars} openUpkeep={params.get("entretien") ? Number(params.get("entretien")) : null} /> : <p>{t("common.loading")}</p>}
+      {cars ? <Cars cars={cars} reload={loadCars} openUpkeep={params.get("entretien") ? Number(params.get("entretien")) : null}
+          openPapers={params.get("papiers") ? Number(params.get("papiers")) : null} /> : <p>{t("common.loading")}</p>}
       {welcome && next && next !== "/compte" && (
         <div className="actions"><button className="btn btn-primary btn-block" onClick={() => router.push(next)}>{t("account.continue")}</button></div>
       )}

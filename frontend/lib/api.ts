@@ -14,6 +14,15 @@ export type UserCar = {
   mileage_km: number | null; vin: string | null; display: string; maintenance_due?: number;
   // Entretiens dépassés (« due ») ou proches (« soon ») : rappel sur l'accueil
   maintenance_items?: { item: string; name: string; status: "due" | "soon"; km_left: number | null; days_left: number | null }[];
+  // Contrôle technique et assurance en cours ; ceux qui finissent dans 30 jours au plus, ou expirés
+  papers?: { controle: Paper | null; assurance: Paper | null };
+  papers_alerts?: Paper[];
+};
+
+/** Papier d'une voiture (contrôle technique, assurance) : valable jusqu'au, état et jours restants. */
+export type Paper = {
+  id: number; kind: "controle" | "assurance"; done_on: string | null; valid_until: string; provider: string | null;
+  price: number | null; note: string | null; status: "ok" | "soon" | "urgent" | "expired"; days_left: number;
 };
 
 function read(key: string): string | null {

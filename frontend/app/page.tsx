@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import VehiclePicker from "@/components/VehiclePicker";
+import { paperWhen } from "@/components/Papers";
 import VoiceInput from "@/components/VoiceInput";
 import WarningLights, { lightPhrase, type Light } from "@/components/WarningLights";
 import { api, ApiError, lastDiagnosis, session, store, type LastDiagnosis, type UserCar, type Vehicle } from "@/lib/api";
@@ -50,6 +51,17 @@ export default function Home() {
     setUpkeepHidden(true);
   }
   const upkeep = cars.filter((c) => c.maintenance_items?.length);
+  // Papiers qui finissent bientôt : « bientôt » se masque pour la journée, urgent (7 jours) ou expiré reste affiché
+  const [papersHidden, setPapersHidden] = useState(true);
+  useEffect(() => { setPapersHidden(store.read("dalil.papers.hidden") === new Date().toDateString()); }, []);
+  const paperAlerts = cars.flatMap((c) => (c.papers_alerts ?? []).map((p) => ({ car: c, p })))
+    .filter(({ p }) => !papersHidden || p.status !== "soon")
+    .sort((a, b) => a.p.days_left - b.p.days_left);
+  const papersUrgent = paperAlerts.some(({ p }) => p.status !== "soon");
+  function hidePapers() {
+    store.write("dalil.papers.hidden", new Date().toDateString());
+    setPapersHidden(true);
+  }
   const [text, setText] = useState("");
   const [lights, setLights] = useState<string[]>([]);
 
@@ -119,6 +131,26 @@ export default function Home() {
       <h1>{t("home.title")}</h1>
       <p className="lead">{t("home.lead")}</p>
       {warming && <p className="notice" role="status">{t("home.warming")}</p>}
+
+      {/* Contrôle technique et assurance : rappel dès 30 jours avant la fin */}
+      {paperAlerts.length > 0 && (
+        <aside className={`card upkeep-banner papers-banner${papersUrgent ? " is-urgent" : ""}`} aria-labelledby="papers-title">
+          <div className="upkeep-head">
+            <h2 id="papers-title" className="card-title">{t("papers.banner")}</h2>
+            {!papersUrgent && <button type="button" className="btn btn-ghost" onClick={hidePapers}>{t("upkeep.hide")}</button>}
+          </div>
+          <ul className="upkeep-list">
+            {paperAlerts.map(({ car: c, p }) => (
+              <li key={p.id}>
+                <Link href={`/compte?papiers=${c.id}#voiture-${c.id}`}>
+                  <strong>{t(`papers.${p.kind}`)} · {c.nickname || c.display}</strong>
+                  <span className={`meta${p.status !== "soon" ? " paper-urgent" : ""}`}>{paperWhen(p)}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
 
       {/* Rappel d'entretien : seulement ce qui est dépassé ou proche, masquable pour la journée */}
       {!upkeepHidden && upkeep.length > 0 && (

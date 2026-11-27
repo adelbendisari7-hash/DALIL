@@ -116,9 +116,27 @@ class MaintenanceVisit(Base):
     price: Mapped[float | None] = mapped_column(Float)      # total payé, en dinars
     place: Mapped[str | None] = mapped_column(String(120))  # garage, mécanicien ou magasin
     note: Mapped[str | None] = mapped_column(String(300))
+    # Magasin DALIL où la pièce a été achetée, choisi parmi ceux que le client a contactés (migration 0014)
+    shop_id: Mapped[int | None] = mapped_column(ForeignKey("shops.id", ondelete="SET NULL"))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     records: Mapped[list["MaintenanceRecord"]] = relationship(cascade="all, delete-orphan", back_populates="visit",
                                                              order_by="MaintenanceRecord.id")
+
+
+class VehicleDocument(Base):
+    """Papiers d'une voiture (migration 0014) : contrôle technique et assurance, chacun avec la date où il a été fait
+    et la date jusqu'à laquelle il est valable (lue par le client sur le procès-verbal ou l'attestation : DALIL ne
+    devine pas la durée). Chaque renouvellement est une nouvelle ligne : le plus récent fait foi."""
+    __tablename__ = "vehicle_documents"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_vehicle_id: Mapped[int] = mapped_column(ForeignKey("user_vehicles.id", ondelete="CASCADE"), index=True)
+    kind: Mapped[str] = mapped_column(String(20))            # controle|assurance
+    done_on: Mapped[date | None] = mapped_column(Date)
+    valid_until: Mapped[date] = mapped_column(Date)
+    provider: Mapped[str | None] = mapped_column(String(120))  # centre de contrôle, compagnie d'assurance
+    price: Mapped[float | None] = mapped_column(Float)
+    note: Mapped[str | None] = mapped_column(String(300))   # formule d'assurance, observations du contrôle...
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 
 class MaintenanceRecord(Base):
