@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, File, HTTPException, Query, Request, Response, UploadFile
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from ..db import get_db
@@ -19,6 +20,7 @@ from ..models import (
     RequestResponse,
     Shop,
     ShopBrand,
+    ShopClaim,
     ShopCategory,
     User,
     VehicleVariant,
@@ -35,6 +37,7 @@ from ..schemas import (
 )
 from ..security import client_hash, current_user, current_user_optional, feedback_limiter, normalize_phone, require_role
 from ..services.imports import import_products, product_template, read_table
+from ..services import shop_onboarding as onboarding
 from ..services.recommendation import RECOMMENDABLE_STATUSES, category_lineage, recommend
 
 router = APIRouter()
@@ -123,6 +126,15 @@ def shops_claimable(phone: str, db: Session = Depends(get_db)):
     return [shop_out(s, full=False) for s in db.scalars(select(Shop).where(Shop.phone == p, Shop.owner_user_id.is_(None)))]
 
 
+@router.get("/shops/nearby-claimable")
+def shops_nearby_claimable(lat: float | None = Query(None, ge=-90, le=90), lng: float | None = Query(None, ge=-180, le=180),
+                           phone: str | None = None, db: Session = Depends(get_db), user: User = Depends(current_user)):
+    """Avant de créer une fiche : celles de l'équipe à moins de 150 m ou au même numéro, à revendiquer."""
+    p = normalize_phone(phone) if phone else None
+    return [{**shop_out(s, full=False), "distance_m": round(d * 1000) if d is not None else None}
+            for s, d in onboarding.nearby_claimable(db, lat, lng, p)]
+
+
 @router.get("/shops/{shop_id}")
 def shop_detail(shop_id: int, db: Session = Depends(get_db), user: User | None = Depends(current_user_optional)):
     shop = db.get(Shop, shop_id)
@@ -188,17 +200,47 @@ def feedback(body: FeedbackIn, request: Request, db: Session = Depends(get_db)):
 
 # --- Espace magasin -------------------------------------------------------
 
+def _phone_free(db: Session, phone: str | None, shop: Shop | None = None) -> None:
+    """Le téléphone d'un magasin est unique. Pris par une fiche sans gérant : on propose de la revendiquer."""
+    if not phone:
+        return
+    other = db.scalar(select(Shop).where(Shop.phone == phone))
+    if other is not None and other is not shop:
+        if other.owner_user_id is None:
+            raise HTTPException(409, detail={"code": "shop_phone_claimable", "shop_id": other.id,
+                                             "message": "Une fiche existe déjà avec ce numéro : revendiquez-la plutôt "
+                                                        "que d'en créer une nouvelle."})
+        raise HTTPException(409, detail=PHONE_TAKEN)
+
+
+PHONE_TAKEN = {"code": "shop_phone_taken", "message": "Ce numéro est déjà celui d'un autre magasin inscrit sur DALIL."}
+
+
+def _commit_shop(db: Session) -> None:
+    try:
+        db.commit()
+    except IntegrityError:   # deux inscriptions simultanées du même numéro
+        db.rollback()
+        raise HTTPException(409, detail=PHONE_TAKEN) from None
+
+
 @router.post("/shops", status_code=201)
 def shop_create(body: ShopIn, db: Session = Depends(get_db), user: User = Depends(require_role("shop_owner"))):
-    """Inscription en libre-service : la fiche attend la validation de l'administrateur."""
+    """Inscription en libre-service : la fiche attend la vérification par appel de l'administrateur."""
     data = body.model_dump(exclude={"brand_ids", "category_ids", "surveyor", "survey"})
     data["phone"] = normalize_phone(body.phone) if body.phone else user.phone
     data["whatsapp"] = normalize_phone(body.whatsapp) if body.whatsapp else data["phone"]
+    _phone_free(db, data["phone"])
+    if data.get("opening"):
+        data["hours"] = onboarding.hours_text(data["opening"])
+    if not data.get("commune_id") and data.get("lat") is not None:   # commune déduite de la position
+        c = onboarding.nearest_commune(db, data["lat"], data["lng"])
+        data["commune_id"] = c.id if c else None
     shop = Shop(**data, status="draft", source="declared", owner_user_id=user.id)
     db.add(shop)
     db.flush()
     _set_links(db, shop, body.brand_ids, body.category_ids, "declared")
-    db.commit()
+    _commit_shop(db)
     return shop_out(shop)
 
 
@@ -209,30 +251,76 @@ def shop_patch(shop_id: int, body: ShopPatch, db: Session = Depends(get_db), use
     for k in ("phone", "whatsapp"):
         if data.get(k):
             data[k] = normalize_phone(data[k])
+    _phone_free(db, data.get("phone"), shop)
+    if data.get("opening"):
+        data["hours"] = onboarding.hours_text(data["opening"])
+    if "closed_until" in data and data["closed_until"] is None:
+        data["closed_note"] = None
+    if data.get("lat") is not None and "commune_id" not in data:
+        c = onboarding.nearest_commune(db, data["lat"], data.get("lng", shop.lng))
+        data["commune_id"] = c.id if c else shop.commune_id
+    if shop.status == "rejected":   # fiche corrigée après un refus : retour dans la file de vérification
+        shop.status, shop.reject_reason = "draft", None
     for k, v in data.items():
         setattr(shop, k, v)
     _set_links(db, shop, body.brand_ids, body.category_ids, "declared")
+    _commit_shop(db)
+    return shop_out(shop)
+
+
+@router.post("/shops/{shop_id}/reconfirm")
+def shop_reconfirm(shop_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
+    """« Mes informations sont à jour » : marques et familles reconfirmées (fraîcheur, six mois)."""
+    shop = _owned_shop(db, shop_id, user)
+    now = datetime.now(timezone.utc)
+    for link in [*shop.brands, *shop.categories]:
+        link.confirmed_at = now
+    shop.updated_at = now
     db.commit()
     return shop_out(shop)
 
 
 @router.post("/shops/{shop_id}/claim")
 def shop_claim(shop_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    """Revendication d'une fiche créée par l'équipe : le numéro de connexion doit être celui de la fiche."""
+    """Revendication d'une fiche créée par l'équipe. Numéro de connexion = numéro de la fiche : immédiate.
+    Sinon : demande en attente, que l'administrateur accepte après avoir appelé le magasin."""
     shop = db.get(Shop, shop_id)
     if not shop:
         raise HTTPException(404, "Magasin inconnu")
     if shop.owner_user_id:
         raise HTTPException(409, "Fiche déjà revendiquée")
+    if user.role == "driver":
+        user.role = "shop_owner"
     if shop.phone != user.phone:
-        raise HTTPException(403, "Le numéro de la fiche ne correspond pas à votre numéro ; contactez l'équipe DALIL")
+        pending = db.scalar(select(ShopClaim).where(ShopClaim.shop_id == shop.id, ShopClaim.user_id == user.id,
+                                                    ShopClaim.status == "pending"))
+        if pending is None:
+            db.add(ShopClaim(shop_id=shop.id, user_id=user.id))
+        db.commit()
+        return {**shop_out(shop, full=False), "claim": "pending"}
     shop.owner_user_id = user.id
     if shop.status == "verified":
         shop.status = "claimed"
-    if user.role == "driver":
-        user.role = "shop_owner"
     db.commit()
-    return shop_out(shop)
+    return {**shop_out(shop), "claim": "accepted"}
+
+
+@router.get("/shops/claims/mine")
+def my_claims(db: Session = Depends(get_db), user: User = Depends(current_user)):
+    out = []
+    for c in db.scalars(select(ShopClaim).where(ShopClaim.user_id == user.id).order_by(ShopClaim.id.desc())):
+        shop = db.get(Shop, c.shop_id)
+        out.append({"id": c.id, "status": c.status, "reason": c.reason, "shop": shop_out(shop, full=False) if shop else None})
+    return out
+
+
+@router.get("/geo/geocode")
+def geocode(q: str = Query(..., min_length=3, max_length=200), user: User = Depends(current_user)):
+    """Adresse tapée par un magasin -> lieux de la wilaya d'Oran (OpenStreetMap). Réservé aux comptes connectés."""
+    try:
+        return onboarding.geocoder.search(q)
+    except Exception:   # service indisponible : le magasin place l'épingle lui-même
+        return []
 
 
 def _product_payload(db: Session, body: ProductIn) -> None:

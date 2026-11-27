@@ -25,7 +25,7 @@ Il complète les fonctions F6, F11, F12 et F18 du cahier des charges et l'étape
 Rappels du cahier : inscription en moins de 3 minutes, un produit en moins de 30 secondes, aucune adresse e-mail
 exigée, ne jamais inventer de magasin, de prix ni de référence.
 
-## Phase 1 — Inscription guidée, adresse et vérification
+## Phase 1 — Inscription guidée, adresse et vérification (faite le 27/11/2026)
 
 **Parcours** (le gérant a un compte DALIL ordinaire : prénom, nom, numéro, mot de passe) :
 

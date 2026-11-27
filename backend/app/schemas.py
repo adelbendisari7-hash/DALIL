@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -58,6 +58,14 @@ class ShopIn(BaseModel):
     photo_url: str | None = None
     surveyor: str | None = None
     survey: dict | None = None  # questions d'étude de marché (section 14)
+    landmark: str | None = Field(None, max_length=200)
+    opening: dict | None = None   # horaires structurés, voir services/shop_onboarding.check_opening
+
+    @field_validator("opening")
+    @classmethod
+    def _opening(cls, v):
+        from .services.shop_onboarding import check_opening
+        return check_opening(v)
 
 
 class ShopPatch(BaseModel):
@@ -70,9 +78,38 @@ class ShopPatch(BaseModel):
     address: str | None = None
     hours: str | None = None
     parts_origin: list[str] | None = None
-    sale_mode: str | None = None
+    sale_mode: str | None = Field(None, pattern="^(gros|detail|les_deux)$")
     brand_ids: list[int] | None = None
     category_ids: list[int] | None = None
+    landmark: str | None = Field(None, max_length=200)
+    opening: dict | None = None
+    # « Fermé exceptionnellement » jusqu'à cette date (incluse) ; null efface la fermeture
+    closed_until: date | None = None
+    closed_note: str | None = Field(None, max_length=120)
+
+    @field_validator("opening")
+    @classmethod
+    def _opening(cls, v):
+        from .services.shop_onboarding import check_opening
+        return check_opening(v)
+
+    @field_validator("closed_until")
+    @classmethod
+    def _closed(cls, v):
+        if v is not None and not date.today() - timedelta(days=1) <= v <= date.today() + timedelta(days=90):
+            raise ValueError("Fermeture exceptionnelle : une date dans les 90 prochains jours")
+        return v
+
+
+class ShopRejectIn(BaseModel):
+    reason: str = Field(..., min_length=3, max_length=255)
+
+
+class ShopVerifyIn(BaseModel):
+    """Liste de contrôle de l'appel de vérification : les trois cases doivent être cochées."""
+    phone_ok: bool = False
+    address_ok: bool = False
+    activity_ok: bool = False
 
 
 class ProductIn(BaseModel):
@@ -312,7 +349,9 @@ def shop_out(shop: Shop, full: bool = True) -> dict:
         "id": shop.id, "name": shop.name, "lat": shop.lat, "lng": shop.lng, "address": shop.address,
         "commune": shop.commune.nom_fr if shop.commune else None, "commune_id": shop.commune_id,
         "phone": shop.phone, "whatsapp": shop.whatsapp, "hours": shop.hours, "shop_type": shop.shop_type,
-        "status": shop.status, "is_demo": shop.is_demo,
+        "status": shop.status, "is_demo": shop.is_demo, "landmark": shop.landmark,
+        "verified": shop.status in ("verified", "claimed") and shop.verified_at is not None,
+        "verified_at": _iso(shop.verified_at), "open_status": _open_status(shop),
     }
     if full:
         d.update({
@@ -321,9 +360,16 @@ def shop_out(shop: Shop, full: bool = True) -> dict:
             "verified_at": _iso(shop.verified_at), "visited_at": _iso(shop.visited_at), "updated_at": _iso(shop.updated_at),
             "brands": [{"brand_id": b.brand_id, "source": b.source, "confirmed_at": _iso(b.confirmed_at)} for b in shop.brands],
             "categories": [{"category_id": c.category_id, "source": c.source, "confirmed_at": _iso(c.confirmed_at)} for c in shop.categories],
-            "owner_user_id": shop.owner_user_id,
+            "owner_user_id": shop.owner_user_id, "opening": shop.opening,
+            "closed_until": shop.closed_until.isoformat() if shop.closed_until else None, "closed_note": shop.closed_note,
+            "reject_reason": shop.reject_reason if shop.status == "rejected" else None,
         })
     return d
+
+
+def _open_status(shop: Shop) -> dict | None:
+    from .services.shop_onboarding import open_status
+    return open_status(shop)
 
 
 def _iso(d: datetime | None) -> str | None:

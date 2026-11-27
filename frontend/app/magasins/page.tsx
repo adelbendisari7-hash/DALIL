@@ -13,6 +13,7 @@ type Rec = {
   id: number; name: string; lat: number | null; lng: number | null; commune: string | null;
   phone: string | null; whatsapp: string | null; hours: string | null; is_demo: boolean;
   score: number; reasons: string[]; stale: boolean; distance_km: number | null;
+  verified: boolean; landmark: string | null; open_status: { open: boolean; label: string } | null;
 };
 
 function Shops() {
@@ -99,7 +100,11 @@ function Shops() {
                 <Link href={`/magasins/${s.id}`}>{s.name}</Link>
                 {s.is_demo && <span className="tag-demo" title={t("shops.demo")}>démo</span>}
               </h3>
-              <span className="meta">{[s.commune, s.hours].filter(Boolean).join(", ")}</span>
+              <div className="shop-badges">
+                {s.verified && <span className="badge-verified">{t("shop.verified")}</span>}
+                {s.open_status && <span className={`open-pill ${s.open_status.open ? "is-open" : ""}`}>{s.open_status.label}</span>}
+              </div>
+              <span className="meta">{[s.commune, s.landmark, s.open_status ? null : s.hours].filter(Boolean).join(" · ")}</span>
               <ul className="reasons">
                 {s.reasons.map((r) => <li key={r} className={r === "fiche à reconfirmer" ? "warn" : undefined}>{r}</li>)}
               </ul>

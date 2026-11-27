@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import VerificationQueue from "@/components/VerificationQueue";
 import { api, ApiError, session } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
@@ -20,13 +21,13 @@ type PlateReport = {
   id: number; plate: string; message: string | null; created_at: string;
   reporter: { name: string | null; phone: string } | null; holder: { name: string | null; phone: string; since: string } | null;
 };
-type Tab = "pending" | "verified" | "metrics" | "import" | "plates";
+type Tab = "verify" | "pending" | "verified" | "metrics" | "import" | "plates";
 
 const pct = (x: number | null) => (x == null ? "–" : `${Math.round(x * 100)} %`);
 
 export default function Admin() {
   const [allowed, setAllowed] = useState<boolean | null>(null);
-  const [tab, setTab] = useState<Tab>("pending");
+  const [tab, setTab] = useState<Tab>("verify");
   const [shops, setShops] = useState<Shop[]>([]);
   const [stale, setStale] = useState<Shop[]>([]);
   const [metrics, setMetrics] = useState<Metrics | null>(null);
@@ -93,7 +94,7 @@ export default function Admin() {
       <h1>{t("admin.title")}</h1>
       <Link className="btn btn-primary" href="/admin/terrain">{t("admin.field")}</Link>
       <div className="tabs" role="tablist">
-        {(["pending", "verified", "metrics", "import", "plates"] as Tab[]).map((k) => (
+        {(["verify", "pending", "verified", "metrics", "import", "plates"] as Tab[]).map((k) => (
           <button key={k} role="tab" aria-selected={tab === k} onClick={() => { setTab(k); setMsg(""); }}>{t(`admin.tab.${k}`)}</button>
         ))}
       </div>
@@ -159,6 +160,8 @@ export default function Admin() {
           </ul>
         </>
       )}
+
+      {tab === "verify" && <VerificationQueue />}
 
       {tab === "plates" && (
         <>

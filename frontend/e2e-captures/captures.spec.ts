@@ -43,3 +43,37 @@ for (const scheme of ["light", "dark"] as const) {
     });
   });
 }
+
+test.describe("magasin", () => {
+  test.use({ geolocation: { latitude: 35.6987, longitude: -0.6349 }, permissions: ["geolocation"] });
+  test("écrans du magasin (clair)", async ({ page, request }) => {
+    test.setTimeout(240_000);
+    const scheme = "light";
+    const r = await request.post(`${BASE}/api/v1/auth/register`, { data: { first_name: "Rachid", last_name: "Kaci",
+      phone: `0558${uniq}`, password: "capture-123", consent: true } });
+    const { token, user } = await r.json();
+    await page.goto(`${BASE}/`);
+    await page.evaluate(([tk, u]) => { localStorage.setItem("dalil.token", tk); localStorage.setItem("dalil.user", u); },
+      [token, JSON.stringify(user)]);
+    await page.goto(`${BASE}/espace-magasin`);
+    await page.getByLabel("Nom du magasin").fill("Pièces Auto El Bahia");
+    await shot(page, "10-magasin-etape1", scheme);
+    await page.getByRole("button", { name: "Continuer" }).click();
+    await page.getByRole("button", { name: "Je suis au magasin : prendre ma position" }).click();
+    await page.locator(".pin").waitFor();
+    await page.getByLabel("Repère (facultatif)").fill("en face de la poste");
+    await shot(page, "11-magasin-etape2", scheme);
+    await page.getByRole("button", { name: "Continuer" }).click();
+    const notMine = page.getByRole("button", { name: "Non, c'est un autre magasin" });
+    await page.getByRole("button", { name: "Dacia", exact: true }).or(notMine).waitFor();
+    if (await notMine.isVisible()) await notMine.click();
+    await page.getByRole("button", { name: "+ Marques françaises" }).click();
+    await page.getByRole("button", { name: "Freinage", exact: true }).click();
+    await shot(page, "12-magasin-etape4", scheme);
+    await page.getByRole("button", { name: "Continuer" }).click();
+    await shot(page, "13-magasin-recap", scheme);
+    await page.getByRole("button", { name: "Inscrire mon magasin" }).click();
+    await page.getByText("En attente de vérification", { exact: false }).waitFor();
+    await shot(page, "14-magasin-statut", scheme);
+  });
+});

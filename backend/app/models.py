@@ -204,13 +204,20 @@ class Shop(Base):
     __tablename__ = "shops"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(160))
-    phone: Mapped[str | None] = mapped_column(String(20), index=True)
+    phone: Mapped[str | None] = mapped_column(String(20), index=True, unique=True)   # unique depuis le 27/11/2026
     whatsapp: Mapped[str | None] = mapped_column(String(20))
     commune_id: Mapped[int | None] = mapped_column(ForeignKey("communes.id"))
     lat: Mapped[float | None] = mapped_column(Float)
     lng: Mapped[float | None] = mapped_column(Float)
     address: Mapped[str | None] = mapped_column(String(255))
-    hours: Mapped[str | None] = mapped_column(String(255))
+    landmark: Mapped[str | None] = mapped_column(String(200))   # repère : « en face de la mosquée El Feth »
+    hours: Mapped[str | None] = mapped_column(String(255))     # texte affiché (tiré de `opening` s'il existe)
+    # Horaires structurés : {"days": [5, 6, 0, 1, 2, 3], "from": "08:00", "to": "18:00", "break": ["12:00", "13:30"]}
+    # (jours de la semaine de Python : lundi = 0 ... dimanche = 6), pour « ouvert maintenant »
+    opening: Mapped[dict | None] = mapped_column(JSON)
+    closed_until: Mapped[date | None] = mapped_column(Date)    # « fermé exceptionnellement » jusqu'à cette date incluse
+    closed_note: Mapped[str | None] = mapped_column(String(120))
+    reject_reason: Mapped[str | None] = mapped_column(String(255))
     shop_type: Mapped[str] = mapped_column(String(20), default="pieces")  # pieces|casse|pneus|garage
     parts_origin: Mapped[list] = mapped_column(JSON, default=list)  # origine|adaptable|occasion
     sale_mode: Mapped[str | None] = mapped_column(String(20))  # gros|detail|les_deux
@@ -230,6 +237,19 @@ class Shop(Base):
     brands: Mapped[list[ShopBrand]] = relationship(cascade="all, delete-orphan")
     categories: Mapped[list[ShopCategory]] = relationship(cascade="all, delete-orphan")
     commune: Mapped[Commune | None] = relationship()
+
+
+class ShopClaim(Base):
+    """Revendication d'une fiche créée par l'équipe par un compte dont le numéro n'est pas celui de la fiche :
+    l'administrateur appelle le magasin avant de l'accepter (sinon n'importe qui pourrait prendre une fiche)."""
+    __tablename__ = "shop_claims"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    shop_id: Mapped[int] = mapped_column(ForeignKey("shops.id", ondelete="CASCADE"), index=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    status: Mapped[str] = mapped_column(String(20), default="pending")   # pending|accepted|rejected
+    reason: Mapped[str | None] = mapped_column(String(255))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class ShopBrand(Base):

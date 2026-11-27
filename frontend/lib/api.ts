@@ -52,7 +52,7 @@ export const store = { read, write };
 
 export class ApiError extends Error {
   /** `code` : erreur métier nommée par l'API (exemple : « plate_taken », matricule déjà enregistré). */
-  constructor(public status: number, message: string, public code?: string) {
+  constructor(public status: number, message: string, public code?: string, public data?: Record<string, unknown>) {
     super(message);
   }
 }
@@ -79,7 +79,7 @@ export async function api<T = unknown>(path: string, init: RequestInit & { json?
     // Erreurs de validation (FastAPI/pydantic) : on garde le message en français, sans le préfixe technique « Value error, ».
     if (d && typeof d === "object" && !Array.isArray(d)) {
       const o = d as { code?: string; message?: string };
-      throw new ApiError(res.status, o.message ?? "", o.code);
+      throw new ApiError(res.status, o.message ?? "", o.code, d as Record<string, unknown>);
     }
     const msg = typeof d === "string" ? d : Array.isArray(d)
       ? d.map((x: { msg?: string }) => (x.msg ?? "").replace(/^Value error,\s*/i, "")).join(" ; ") : "";

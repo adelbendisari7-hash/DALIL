@@ -24,15 +24,17 @@ from ..models import (
     Product,
     Shop,
     ShopBrand,
+    ShopClaim,
     ShopCategory,
     User,
     UserVehicle,
 )
-from ..schemas import PasswordResetIn, ShopIn, format_plate, shop_out
+from ..schemas import PasswordResetIn, ShopIn, ShopRejectIn, ShopVerifyIn, format_plate, shop_out
 from ..security import hash_password, log_admin, normalize_phone, require_admin, temporary_password
 from ..services.catalog import resolve_category, resolve_variants
 from ..services.imports import import_shops, read_table
 from ..services.recommendation import STALE_DAYS
+from ..services.shop_onboarding import hours_text, nearest_commune, possible_duplicates
 
 router = APIRouter(prefix="/admin", dependencies=[Depends(require_admin)])
 
@@ -59,6 +61,11 @@ def admin_shop_create(body: ShopIn, db: Session = Depends(get_db), admin: User =
         data["whatsapp"] = data["phone"]
     if data.get("phone") and db.scalar(select(Shop).where(Shop.phone == data["phone"])):
         raise HTTPException(409, "Un magasin avec ce numéro existe déjà : utilisez la fusion")
+    if data.get("opening"):   # horaires structurés : texte affiché recalculé
+        data["hours"] = hours_text(data["opening"])
+    if not data.get("commune_id") and data.get("lat") is not None:
+        c = nearest_commune(db, data["lat"], data["lng"])
+        data["commune_id"] = c.id if c else None
     shop = Shop(**data, status="verified", source="terrain", visited_at=now, verified_at=now,
                 surveyor=body.surveyor or admin.name or admin.phone)
     db.add(shop)
@@ -74,26 +81,85 @@ def admin_shop_create(body: ShopIn, db: Session = Depends(get_db), admin: User =
 
 
 @router.post("/shops/{shop_id}/verify")
-def admin_verify(shop_id: int, db: Session = Depends(get_db), admin: User = Depends(require_admin)):
+def admin_verify(shop_id: int, body: ShopVerifyIn | None = None, db: Session = Depends(get_db),
+                 admin: User = Depends(require_admin)):
+    """Vérification par appel (décision du 27/11/2026 : un appel suffit). Depuis la file de vérification, la liste de
+    contrôle est envoyée : numéro joignable, adresse confirmée, activité réelle, les trois cochées."""
     shop = db.get(Shop, shop_id)
     if not shop:
         raise HTTPException(404, "Magasin inconnu")
+    if body is not None and not (body.phone_ok and body.address_ok and body.activity_ok):
+        raise HTTPException(422, "Cochez les trois points de l'appel de vérification avant de valider")
     shop.status = "claimed" if shop.owner_user_id else "verified"
     shop.verified_at = datetime.now(timezone.utc)
-    log_admin(db, admin, "shop.verify", str(shop_id))
+    shop.reject_reason = None
+    log_admin(db, admin, "shop.verify", str(shop_id), body.model_dump() if body else None)
     db.commit()
     return shop_out(shop)
 
 
 @router.post("/shops/{shop_id}/reject")
-def admin_reject(shop_id: int, db: Session = Depends(get_db), admin: User = Depends(require_admin)):
+def admin_reject(shop_id: int, body: ShopRejectIn | None = None, db: Session = Depends(get_db),
+                 admin: User = Depends(require_admin)):
+    """Refus avec un motif, montré au magasin dans son espace ; il peut corriger sa fiche, qui revient dans la file."""
     shop = db.get(Shop, shop_id)
     if not shop:
         raise HTTPException(404, "Magasin inconnu")
     shop.status = "rejected"
-    log_admin(db, admin, "shop.reject", str(shop_id))
+    shop.reject_reason = body.reason if body else None
+    log_admin(db, admin, "shop.reject", str(shop_id), {"reason": shop.reject_reason})
     db.commit()
     return shop_out(shop)
+
+
+@router.get("/verification")
+def admin_verification(db: Session = Depends(get_db)):
+    """File « Magasins à vérifier » : inscriptions en libre-service et revendications en attente, avec le numéro à
+    appeler, le gérant, et les fiches proches au nom semblable (doublons probables, à fusionner)."""
+    shops = []
+    for s in db.scalars(select(Shop).where(Shop.status == "draft", Shop.source == "declared").order_by(Shop.created_at)):
+        owner = db.get(User, s.owner_user_id) if s.owner_user_id else None
+        shops.append({**shop_out(s), "owner": {"name": owner.name, "phone": owner.phone} if owner else None,
+                      "duplicates": [shop_out(d, full=False) for d in possible_duplicates(db, s)]})
+    claims = []
+    for c in db.scalars(select(ShopClaim).where(ShopClaim.status == "pending").order_by(ShopClaim.created_at)):
+        shop, who = db.get(Shop, c.shop_id), db.get(User, c.user_id)
+        if shop and who:
+            claims.append({"id": c.id, "created_at": c.created_at, "shop": shop_out(shop, full=False),
+                           "user": {"name": who.name, "phone": who.phone}})
+    return {"shops": shops, "claims": claims}
+
+
+@router.post("/claims/{claim_id}/{action}")
+def admin_claim(claim_id: int, action: str, body: ShopRejectIn | None = None, db: Session = Depends(get_db),
+                admin: User = Depends(require_admin)):
+    """Revendication : acceptée après l'appel au magasin (le compte devient gérant), ou refusée avec un motif."""
+    if action not in ("accept", "reject"):
+        raise HTTPException(404, "Action inconnue")
+    claim = db.get(ShopClaim, claim_id)
+    if not claim or claim.status != "pending":
+        raise HTTPException(404, "Revendication inconnue ou déjà traitée")
+    shop = db.get(Shop, claim.shop_id)
+    if action == "accept":
+        if shop.owner_user_id:
+            raise HTTPException(409, "Fiche déjà revendiquée")
+        shop.owner_user_id = claim.user_id
+        if shop.status == "verified":
+            shop.status = "claimed"
+        claim.status = "accepted"
+        for other in db.scalars(select(ShopClaim).where(ShopClaim.shop_id == shop.id, ShopClaim.status == "pending",
+                                                        ShopClaim.id != claim.id)):
+            other.status, other.reason = "rejected", "Fiche attribuée à un autre compte après vérification"
+            other.resolved_at = datetime.now(timezone.utc)
+        user = db.get(User, claim.user_id)
+        if user and user.role == "driver":
+            user.role = "shop_owner"
+    else:
+        claim.status, claim.reason = "rejected", body.reason if body else None
+    claim.resolved_at = datetime.now(timezone.utc)
+    log_admin(db, admin, f"claim.{action}", str(claim_id))
+    db.commit()
+    return {"id": claim.id, "status": claim.status}
 
 
 @router.post("/shops/{shop_id}/merge")

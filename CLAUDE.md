@@ -40,6 +40,7 @@ Cahier des charges complet : `docs/cahier-des-charges.md` (le relire pour toute 
 - Tout : `docker compose up --build`.
 
 ## Carte du code
+- `backend/app/services/shop_onboarding.py` : inscription des magasins (horaires et « ouvert maintenant », recherche d'adresse Nominatim, fiches proches à revendiquer, doublons) ; plan du côté magasin : `docs/plan-espace-magasin.md`.
 - `backend/app/services/recommendation.py` : score des magasins (section 6.4), fonction pure `score_shop` testée par 10 scénarios.
 - `backend/app/services/diagnosis/pipeline.py` : chaîne de diagnostic (normalisation, recherche, classifieur, modèle de langage, sûreté, questions de précision, niveaux de référence).
 - `backend/app/routers/` : `public` (véhicules, pièces, OBD, diagnostic), `shops` (recommandation, espace magasin, contacts, retours, demandes), `auth` (inscription et connexion par mot de passe, profil du compte client ; code SMS gardé pour plus tard), `account` (voitures du client au matricule unique, signalements, historique), `admin`.

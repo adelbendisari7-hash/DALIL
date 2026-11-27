@@ -42,7 +42,11 @@ async function ergonomie(page: Page, ecran: string) {
     const small = [...document.querySelectorAll("a, button, select, input:not([type=hidden]), [role=option]")]
       .filter(visible)
       .filter((el) => !el.closest(".leaflet-control-attribution"))
-      .map((el) => ({ el, b: el.getBoundingClientRect() }))
+      // Case à cocher dans son libellé : le doigt peut toucher tout le libellé, c'est lui la cible
+      .map((el) => {
+        const lab = (el as HTMLInputElement).type === "checkbox" || (el as HTMLInputElement).type === "radio" ? el.closest("label") : null;
+        return { el, b: (lab ?? el).getBoundingClientRect() };
+      })
       .filter(({ el, b }) => {
         const inline = el.tagName === "A" && getComputedStyle(el).display === "inline";   // lien dans une phrase
         return !inline && (b.height < 40 || b.width < 40);
@@ -247,9 +251,11 @@ test("mécanicien et magasin : chercher une pièce, se connecter", async ({ page
     const err = await page.locator(".err").textContent().catch(() => null);
     constats.push(`connexion : toujours sur la page de connexion après 60 s${err ? " (" + err + ")" : ""}`);
   }
-  const dacia = page.getByRole("button", { name: "Dacia", exact: true });
-  await expect.soft(dacia, "espace magasin : marques proposées").toBeVisible({ timeout: 60_000 });
-  await expect.soft(page.getByRole("button", { name: "Freinage", exact: true }), "espace magasin : familles proposées").toBeVisible();
+  // Inscription du magasin en étapes : nom, puis carte avec l'épingle (tuiles chargées en 3G)
+  await expect.soft(page.getByText("Étape 1 sur 5"), "espace magasin : inscription en étapes").toBeVisible({ timeout: 60_000 });
+  await page.getByLabel("Nom du magasin").fill("Essai téléphone");
+  await page.getByRole("button", { name: "Continuer" }).tap();
+  await expect.soft(page.locator(".pin-map"), "espace magasin : carte de l'emplacement").toBeVisible({ timeout: 60_000 });
   mesures.espace_magasin_listes_s = (Date.now() - t0) / 1000;
   await shot(page, "10-espace-magasin");
   await ergonomie(page, "espace magasin");

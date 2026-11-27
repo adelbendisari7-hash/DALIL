@@ -70,6 +70,8 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:3000"
 
     data_dir: str = str(REPO_ROOT / "data")
+    # Recherche d'adresse des magasins (Nominatim, OpenStreetMap) ; vide = désactivée (tests, hors ligne)
+    geocoder_url: str = "https://nominatim.openstreetmap.org/search"
 
 
 @lru_cache

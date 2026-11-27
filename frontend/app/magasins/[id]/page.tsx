@@ -12,6 +12,7 @@ type Shop = {
   id: number; name: string; lat: number | null; lng: number | null; address: string | null; commune: string | null;
   phone: string | null; whatsapp: string | null; hours: string | null; is_demo: boolean; parts_origin: string[];
   brands: { brand_id: number }[]; categories: { category_id: number }[];
+  landmark: string | null; verified: boolean; open_status: { open: boolean; label: string } | null;
 };
 type Product = { id: number; title: string; oem_ref: string | null; price: number | null; condition: string; in_stock: boolean };
 type Named = { id: number; name: string };
@@ -43,8 +44,11 @@ export default function ShopPage() {
         {shop.name}
         {shop.is_demo && <span className="tag-demo">démo</span>}
       </h1>
+      {shop.verified && <p className="badge-verified">{t("shop.verified")}</p>}
       {shop.is_demo && <p className="notice">{t("shops.demo")}</p>}
       <p className="meta">{[shop.address, shop.commune].filter(Boolean).join(", ")}</p>
+      {shop.landmark && <p className="meta">{t("shop.landmark")} : {shop.landmark}</p>}
+      {shop.open_status && <p className={`open-pill ${shop.open_status.open ? "is-open" : ""}`}>{shop.open_status.label}</p>}
       {shop.hours && <p>{t("shops.hours")} : {shop.hours}</p>}
       <ShopContact shop={shop} ctx={{}} />
 
