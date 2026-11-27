@@ -17,7 +17,7 @@ from ..config import get_settings
 
 MAX_BYTES = 1_000_000
 MAX_SIDE = 4096
-KINDS = ("produits", "devantures")
+KINDS = ("produits", "devantures", "demandes")
 NAME_RE = re.compile(r"^[0-9a-f]{32}\.jpg$")
 # Marqueurs JPEG sans longueur (pas de segment derrière)
 _STANDALONE = {0x01, *range(0xD0, 0xD8)}

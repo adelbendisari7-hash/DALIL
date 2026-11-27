@@ -560,7 +560,7 @@ def part_request_inbox(db: Session = Depends(get_db), user: User = Depends(curre
     for rr, req in rows:
         cat = db.get(PartCategory, req.category_id)
         v = db.get(VehicleVariant, req.variant_id) if req.variant_id else None
-        out.append({"request_id": req.id, "shop_id": rr.shop_id, "part": cat.name_fr,
+        out.append({"request_id": req.id, "shop_id": rr.shop_id, "part": cat.name_fr, "photo_url": req.photo_url,
                     "vehicle": f"{v.model.brand.name} {v.model.name} {v.engine}" if v else None,
                     "available": rr.available, "price": rr.price, "created_at": req.created_at.isoformat()})
     return out
@@ -596,6 +596,7 @@ def request_out(db: Session, req: PartRequest) -> dict:
     seen = req.seen_at.replace(tzinfo=timezone.utc) if req.seen_at and not req.seen_at.tzinfo else req.seen_at
     return {"id": req.id, "status": req.status, "created_at": req.created_at.isoformat(),
             "category_id": req.category_id, "part": cat.name_fr if cat else None, "variant_id": req.variant_id,
+            "photo_url": req.photo_url,
             "vehicle": f"{v.model.brand.name} {v.model.name} {v.engine}" if v else None,
             "notified": len(rows), "answered": len(answers),
             "unseen": sum(1 for r in answers if seen is None or
@@ -617,6 +618,31 @@ def part_request_status(request_id: int, token: str | None = None, db: Session =
                         user: User | None = Depends(current_user_optional)):
     """Réponses à une demande : pour son auteur connecté, ou avec le jeton reçu à la création (sans compte)."""
     return request_out(db, _readable(db, request_id, token, user))
+
+
+@router.post("/part-requests/{request_id}/photo")
+async def part_request_photo(request_id: int, token: str | None = None, file: UploadFile = File(...),
+                             db: Session = Depends(get_db), user: User | None = Depends(current_user_optional)):
+    """Photo de la pièce usée ou de son étiquette, jointe à la demande : les magasins identifient mieux la référence.
+    Par l'auteur connecté, ou avec le jeton de la demande (sans compte)."""
+    req = _readable(db, request_id, token, user)
+    try:
+        url = storage().save("demandes", await _read_photo(file))
+    except InvalidImage as e:
+        raise HTTPException(422, str(e)) from None
+    storage().delete(req.photo_url)
+    req.photo_url = url
+    db.commit()
+    return {"photo_url": url}
+
+
+@router.delete("/part-requests/{request_id}/photo", status_code=204)
+def part_request_photo_delete(request_id: int, token: str | None = None, db: Session = Depends(get_db),
+                              user: User | None = Depends(current_user_optional)):
+    req = _readable(db, request_id, token, user)
+    storage().delete(req.photo_url)
+    req.photo_url = None
+    db.commit()
 
 
 @router.post("/part-requests/{request_id}/seen", status_code=204)

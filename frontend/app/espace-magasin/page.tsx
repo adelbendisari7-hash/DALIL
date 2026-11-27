@@ -18,7 +18,8 @@ type Shop = Omit<ShopFormValue, "opening"> & {
   open_status: { open: boolean; label: string } | null;
   brands: { brand_id: number; confirmed_at: string | null }[]; categories: { category_id: number; confirmed_at: string | null }[];
 };
-type Inbox = { request_id: number; shop_id: number; part: string; vehicle: string | null; available: boolean | null };
+type Inbox = { request_id: number; shop_id: number; part: string; vehicle: string | null; available: boolean | null;
+  photo_url?: string | null };
 type Claim = { id: number; status: string; reason: string | null; shop: { id: number; name: string; commune: string | null } | null };
 
 const errMsg = (e: unknown) => (e instanceof ApiError && e.message ? e.message : t("common.error"));
@@ -233,7 +234,14 @@ function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
           <ul className="list">
             {inbox.map((r) => (
               <li key={r.request_id}>
-                <span><strong>{r.part}</strong>{r.vehicle ? `, ${r.vehicle}` : ""}</span>
+                <span className="inbox-main">
+                  {r.photo_url && (
+                    <a href={r.photo_url} target="_blank" rel="noopener noreferrer" aria-label={t("shop.inbox.photo", { part: r.part })}>
+                      <img src={r.photo_url} alt="" className="thumb" loading="lazy" />
+                    </a>
+                  )}
+                  <span><strong>{r.part}</strong>{r.vehicle ? `, ${r.vehicle}` : ""}</span>
+                </span>
                 {r.available === null ? (
                   <span className="actions" style={{ marginTop: 0 }}>
                     <button className="btn" onClick={() => respond(r.request_id, true)}>{t("shop.inbox.available")}</button>

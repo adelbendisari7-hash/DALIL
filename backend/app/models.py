@@ -486,6 +486,8 @@ class PartRequest(Base):
     # Jeton secret pour suivre la demande sans compte (les identifiants se suivent : ils ne suffisent pas)
     token: Mapped[str | None] = mapped_column(String(32))
     seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))   # dernière lecture des réponses par le client
+    # Photo de la pièce usée ou de son étiquette, vue par les magasins (migration 0015 ; JPEG nettoyé, nom au hasard)
+    photo_url: Mapped[str | None] = mapped_column(String(255))
 
 
 class RequestResponse(Base):

@@ -11,7 +11,8 @@ from sqlalchemy.orm import Session
 
 from ..config import get_settings
 from ..db import get_db
-from ..models import Commune, DiagnosisSession, OtpCode, PlateReport, Shop, ShopMember, User, UserVehicle
+from ..models import Commune, DiagnosisSession, OtpCode, PartRequest, PlateReport, Shop, ShopMember, User, UserVehicle
+from ..services.media import storage
 from ..schemas import LoginIn, MePatch, OtpRequest, OtpVerify, PasswordChange, RegisterIn
 from ..security import (
     create_token,
@@ -170,6 +171,9 @@ def me_delete(user: User = Depends(current_user), db: Session = Depends(get_db))
         s.user_id, s.user_vehicle_id = None, None
     for v in db.scalars(select(UserVehicle).where(UserVehicle.user_id == user.id)):
         db.delete(v)
+    for r in db.scalars(select(PartRequest).where(PartRequest.user_id == user.id, PartRequest.photo_url.is_not(None))):
+        storage().delete(r.photo_url)   # photos jointes à ses demandes : effacées du disque
+        r.photo_url = None
     for m in db.scalars(select(ShopMember).where(ShopMember.user_id == user.id)):   # quitte toutes les équipes
         db.delete(m)
     for r in db.scalars(select(PlateReport).where(PlateReport.reporter_user_id == user.id)):

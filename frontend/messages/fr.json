@@ -679,5 +679,11 @@
   "carnet.shops": "Magasin DALIL contacté (facultatif)",
   "carnet.share": "Envoyer le carnet au mécanicien",
   "carnet.share.head": "Carnet d'entretien de ma {car} :",
-  "carnet.share.foot": "Envoyé depuis DALIL."
+  "carnet.share.foot": "Envoyé depuis DALIL.",
+  "requests.photo.help": "Vous pouvez joindre une photo de la pièce usée ou de son étiquette : les magasins trouvent plus vite la bonne référence. Photographiez la pièce seule, sans le matricule de la voiture.",
+  "requests.photo.add": "Ajouter une photo de la pièce",
+  "requests.photo.alt": "Photo de la pièce jointe à la demande",
+  "requests.photo.error": "Cette photo n'a pas pu être lue. Essayez-en une autre.",
+  "requests.photo.notSent": "La demande est partie, mais la photo n'a pas pu être envoyée.",
+  "shop.inbox.photo": "Voir la photo jointe : {part}"
 }

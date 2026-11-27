@@ -7,7 +7,7 @@ import { t } from "@/lib/i18n";
 
 type Answer = { shop: ContactShop & { commune: string | null; verified?: boolean }; available: boolean; price: number | null; responded_at: string };
 type Req = { id: number; created_at: string; part: string | null; vehicle: string | null; category_id: number; variant_id: number | null;
-  notified: number; answered: number; unseen: number; responses: Answer[] };
+  notified: number; answered: number; unseen: number; responses: Answer[]; photo_url?: string | null };
 
 /** « Mes demandes » : réponses des magasins (disponible, prix), du moins cher au plus cher, avec appel et WhatsApp.
  * Connecté : les demandes du compte ; sans compte : celles envoyées depuis ce téléphone (jeton secret). */
@@ -56,6 +56,11 @@ export default function MyRequests() {
               {[r.vehicle, new Date(r.created_at).toLocaleDateString("fr-FR")].filter(Boolean).join(" · ")}
               {" · "}{t("requests.progress", { notified: r.notified, answered: r.answered })}
             </p>
+            {r.photo_url && (
+              <a href={r.photo_url} target="_blank" rel="noopener noreferrer" className="request-photo">
+                <img src={r.photo_url} alt={t("requests.photo.alt")} className="thumb thumb-large" loading="lazy" />
+              </a>
+            )}
             {r.answered === 0 && <p className="help">{t("requests.waiting")}</p>}
             <ul className="shops">
               {r.responses.map((a) => (

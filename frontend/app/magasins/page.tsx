@@ -7,6 +7,7 @@ import PriceHistory from "@/components/PriceHistory";
 import ShopContact from "@/components/ShopContact";
 import { api, ApiError, lastDiagnosis, requestStore, vehicleStore } from "@/lib/api";
 import { t } from "@/lib/i18n";
+import { photoForm, shrinkPhoto } from "@/lib/photo";
 
 const ShopMap = dynamic(() => import("@/components/ShopMap"), { ssr: false });
 
@@ -36,6 +37,22 @@ function Shops() {
   const [requestSent, setRequestSent] = useState(false);
   const [sort, setSort] = useState<"score" | "price">("score");
   const [offline, setOffline] = useState<string | null>(null);
+  // Photo de la pièce usée ou de son étiquette, jointe à la demande (réduite sur le téléphone)
+  const [photo, setPhoto] = useState<{ blob: Blob; url: string } | null>(null);
+  const [photoErr, setPhotoErr] = useState("");
+  async function pickPhoto(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0];
+    e.target.value = "";
+    if (!f) return;
+    setPhotoErr("");
+    try {
+      const blob = await shrinkPhoto(f);
+      if (photo) URL.revokeObjectURL(photo.url);
+      setPhoto({ blob, url: URL.createObjectURL(blob) });
+    } catch {
+      setPhotoErr(t("requests.photo.error"));
+    }
+  }
 
   useEffect(() => {
     if (!variantParam) setVariantId(vehicleStore.get()?.variantId);
@@ -83,6 +100,10 @@ function Shops() {
         method: "POST", json: { category_id: categoryId, variant_id: variantId ?? null, session_id: sessionId ?? null },
       });
       requestStore.add({ id: r.id, token: r.token });   // suivi des réponses, même sans compte
+      if (photo) {
+        await api(`/part-requests/${r.id}/photo?token=${encodeURIComponent(r.token)}`, { method: "POST", body: photoForm(photo.blob) })
+          .catch(() => setPhotoErr(t("requests.photo.notSent")));
+      }
       setRequestSent(r.notified_shops > 0);
       setRequestMsg(r.notified_shops ? t("shops.request.sent", { n: r.notified_shops }) : t("shops.request.none"));
     } catch {
@@ -168,8 +189,18 @@ function Shops() {
 
       {!offline && <PriceHistory categoryId={categoryId} />}
 
-      <div className="section">
-        <button className="btn btn-ghost" onClick={broadcast}>{t("shops.request")}</button>
+      <div className="section card request-box">
+        <p className="help" style={{ marginTop: 0 }}>{t("requests.photo.help")}</p>
+        <div className="photo-row">
+          {photo && <img src={photo.url} alt={t("requests.photo.alt")} className="thumb thumb-large" />}
+          <label className="btn btn-ghost photo-button">
+            {photo ? t("shop.photo.change") : t("requests.photo.add")}
+            <input type="file" accept="image/*" capture="environment" onChange={pickPhoto} hidden />
+          </label>
+          {photo && <button type="button" className="chip" onClick={() => { URL.revokeObjectURL(photo.url); setPhoto(null); }}>{t("carnet.remove")}</button>}
+        </div>
+        {photoErr && <p className="err" role="alert">{photoErr}</p>}
+        <button className="btn btn-ghost" onClick={broadcast} disabled={requestSent}>{t("shops.request")}</button>
         {requestMsg && <p className="help" role="status">{requestMsg}</p>}
         {requestSent && <Link className="btn" href="/demandes">{t("requests.follow")}</Link>}
       </div>

@@ -886,3 +886,9 @@ footer.disclaimer { max-width: 760px; margin: 0 auto; padding: 0 16px 2rem; colo
 .paper-pill.is-none { background: var(--surface); color: var(--steel); }
 .papers-banner.is-urgent { border-left-color: var(--red); }
 .paper-urgent { color: var(--red); font-weight: 700; }
+
+/* --- Photo jointe à une demande --- */
+.thumb-large { width: 96px; height: 96px; }
+.inbox-main { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+.request-box .btn { margin-top: 0.75rem; }
+.request-photo { display: inline-block; margin: 0.25rem 0 0.5rem; }

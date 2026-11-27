@@ -42,3 +42,26 @@ test("demande aux magasins sans compte : suivie, puis réponse avec le prix", as
   await expect(answer.getByText(/4.300 DA/)).toBeVisible();
   await expect(answer.getByRole("link", { name: "Appeler" })).toBeVisible();
 });
+
+test("demande avec la photo de la pièce : visible dans « Mes demandes »", async ({ page }) => {
+  await page.goto("/pieces");
+  await page.getByLabel("Nom de la pièce").fill("plaquettes");
+  await page.getByRole("button", { name: "Voir les magasins" }).first().click();
+  await expect(page.locator(".shop").first()).toBeVisible();
+  // Une vraie image JPEG, dessinée par le navigateur
+  const b64 = await page.evaluate(() => {
+    const c = document.createElement("canvas");
+    c.width = 200; c.height = 120;
+    const g = c.getContext("2d")!;
+    g.fillStyle = "#c33"; g.fillRect(0, 0, 200, 120);
+    return c.toDataURL("image/jpeg").split(",")[1];
+  });
+  await page.locator(".request-box input[type=file]").setInputFiles({ name: "piece.jpg", mimeType: "image/jpeg", buffer: Buffer.from(b64, "base64") });
+  await expect(page.getByRole("img", { name: "Photo de la pièce jointe à la demande" })).toBeVisible();
+  await page.getByRole("button", { name: "Demander aux magasins" }).click();
+  await expect(page.locator(".request-box [role=status]")).toBeVisible();   // demande partie
+  await page.goto("/demandes");   // suivie depuis ce téléphone, même sans compte
+  const photo = page.locator(".request-photo img").first();
+  await expect(photo).toBeVisible();
+  await expect(photo).toHaveAttribute("src", /\/api\/v1\/media\/demandes\//);
+});
