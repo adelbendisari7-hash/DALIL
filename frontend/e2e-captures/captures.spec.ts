@@ -80,6 +80,20 @@ for (const scheme of ["light", "dark"] as const) {
       await page.getByRole("button", { name: "Créer mon compte" }).click();
       await page.getByRole("heading", { name: "Bienvenue sur DALIL" }).waitFor();
       await shot(page, "06-compte", scheme);
+      // Carnet d'entretien : une voiture et un passage au garage noté (base des tests seulement)
+      const token = await page.evaluate(() => localStorage.getItem("dalil.token"));
+      const headers = { Authorization: `Bearer ${token}` };
+      const car = await (await page.request.post(`${BASE}/api/v1/me/vehicles`, { headers, data: {
+        plate: `${uniq}-1${scheme === "light" ? "12" : "13"}-31`, label: "Renault Clio 4", year: 2016, mileage_km: 92000 } })).json();
+      await page.request.post(`${BASE}/api/v1/me/vehicles/${car.id}/maintenance`, { headers, data: {
+        items: ["vidange", "filtre-air"], other: "Pneus avant", km: 91500, price: 18500, place: "Garage du quartier, Hai Sabah",
+        note: "Huile 5W40" } });
+      await page.goto(`${BASE}/compte`);
+      await page.getByRole("button", { name: "Entretien" }).click();
+      await page.locator(".carnet .visit").first().waitFor();
+      await page.locator(".carnet").screenshot({ path: `${OUT}/${scheme}-06b-carnet.png` });
+      await page.locator(".carnet").getByRole("button", { name: /Modifier le passage/ }).click();
+      await page.locator(".carnet").screenshot({ path: `${OUT}/${scheme}-06c-carnet-modifier.png` });
       await page.goto(`${BASE}/espace-magasin`);
       await shot(page, "07-espace-magasin", scheme);
     });

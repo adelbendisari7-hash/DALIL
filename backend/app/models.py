@@ -105,15 +105,35 @@ class UserVehicle(Base):
     variant: Mapped[VehicleVariant | None] = relationship()
 
 
+class MaintenanceVisit(Base):
+    """Passage au garage noté dans le carnet d'entretien (migration 0013) : date, kilométrage à ce moment-là, prix
+    payé, garage ou magasin, remarque. Il regroupe une ou plusieurs opérations (`MaintenanceRecord`)."""
+    __tablename__ = "maintenance_visits"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_vehicle_id: Mapped[int] = mapped_column(ForeignKey("user_vehicles.id", ondelete="CASCADE"), index=True)
+    done_on: Mapped[date] = mapped_column(Date)
+    km: Mapped[int | None] = mapped_column(Integer)
+    price: Mapped[float | None] = mapped_column(Float)      # total payé, en dinars
+    place: Mapped[str | None] = mapped_column(String(120))  # garage, mécanicien ou magasin
+    note: Mapped[str | None] = mapped_column(String(300))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    records: Mapped[list["MaintenanceRecord"]] = relationship(cascade="all, delete-orphan", back_populates="visit",
+                                                             order_by="MaintenanceRecord.id")
+
+
 class MaintenanceRecord(Base):
-    """Entretien noté par le client pour une de ses voitures (« vidange faite à 85 000 km le 12/11/2026 »)."""
+    """Opération d'entretien notée par le client pour une de ses voitures (« vidange faite à 85 000 km le
+    12/11/2026 »). Date et kilométrage recopiés du passage, pour le calcul des échéances."""
     __tablename__ = "maintenance_records"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_vehicle_id: Mapped[int] = mapped_column(ForeignKey("user_vehicles.id", ondelete="CASCADE"), index=True)
-    item: Mapped[str] = mapped_column(String(40))          # slug de data/seed/maintenance.json
+    visit_id: Mapped[int | None] = mapped_column(ForeignKey("maintenance_visits.id", ondelete="CASCADE"), index=True)
+    item: Mapped[str] = mapped_column(String(40))          # slug de data/seed/maintenance.json, ou « autre »
+    label: Mapped[str | None] = mapped_column(String(80))  # « autre » : ce qui a été fait (pneus, amortisseurs...)
     km: Mapped[int | None] = mapped_column(Integer)
     done_on: Mapped[date] = mapped_column(Date)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    visit: Mapped[MaintenanceVisit | None] = relationship(back_populates="records")
 
 
 class PlateReport(Base):

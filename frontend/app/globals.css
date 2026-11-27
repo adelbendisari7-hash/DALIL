@@ -863,3 +863,18 @@ footer.disclaimer { max-width: 760px; margin: 0 auto; padding: 0 16px 2rem; colo
 .last-diagnosis { display: flex; flex-direction: column; gap: 0.15rem; color: inherit; text-decoration: none; }
 .last-diagnosis .card-title { margin-bottom: 0.1rem; }
 .offline-note { border-left: 4px solid var(--steel); }
+
+/* --- Carnet d'entretien --- */
+.label-like { display: block; font-weight: 600; font-size: 0.95rem; margin: 0 0 0.2rem; color: var(--ink); }
+.visit-form { margin-top: 0.75rem; }
+.carnet { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.carnet-total { margin: 0.6rem 0 0; }
+.carnet-total strong { font-family: var(--font-display), sans-serif; font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.carnet-list { list-style: none; margin: 0.5rem 0 0; padding: 0; }
+.visit { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.7rem 0; border-top: 1px solid var(--line); }
+.visit:first-child { border-top: 0; }
+.visit-price { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* les champs (date surtout) ne doivent pas élargir le formulaire au-delà de l'écran */
+.row > div { min-width: 0; }
+.visit-form { min-width: 0; max-width: 100%; box-sizing: border-box; }
+.visit-form input { width: 100%; min-width: 0; box-sizing: border-box; }

@@ -150,3 +150,42 @@ test("rappel d'entretien sur l'accueil : vidange dépassée, masquable, mène au
   await expect(page.getByRole("heading", { name: "Qu'est-ce qui ne va pas", exact: false })).toBeVisible();
   await expect(page.locator(".upkeep-banner")).toHaveCount(0);   // masqué pour la journée
 });
+
+test("carnet d'entretien : un passage avec plusieurs opérations, prix, kilométrage, garage ; corrigé puis supprimé", async ({ page }) => {
+  await inscrire(page, phone(), "Rachid", "Carnet", "/compte");
+  await ajouterVoiture(page, plate());   // 85 000 km
+  await page.getByRole("button", { name: "Entretien" }).click();
+  const carnet = page.locator(".carnet");
+  await expect(carnet).toContainText("Rien de noté pour l'instant");
+
+  await carnet.getByRole("button", { name: "Noter un passage au garage" }).click();
+  const form = carnet.locator(".visit-form");
+  await form.getByRole("button", { name: "Vidange et filtre à huile" }).click();
+  await form.getByRole("button", { name: "Filtre à air" }).click();
+  await form.getByLabel("Autre chose (facultatif)").fill("Pneus avant");
+  await form.getByLabel("Kilométrage", { exact: true }).fill("86200");
+  await form.getByLabel("Prix payé (DA)").fill("18500");
+  await form.getByLabel("Garage ou magasin (facultatif)").fill("Garage du quartier");
+  await form.getByRole("button", { name: "Enregistrer dans le carnet" }).click();
+
+  const visit = carnet.locator(".visit").first();
+  await expect(visit).toContainText(/86.200 km/);
+  await expect(visit).toContainText(/18.500 DA/);
+  await expect(visit).toContainText("Vidange et filtre à huile, Filtre à air, Pneus avant");
+  await expect(visit).toContainText("Garage du quartier");
+  await expect(carnet.locator(".carnet-total")).toContainText(/18.500 DA dépensés sur 12 mois/);
+  // Les échéances partent de ce passage, et le kilométrage de la voiture a suivi
+  const vidange = page.locator(".maint", { hasText: "Vidange et filtre à huile" });
+  await expect(vidange.locator(".maint-pill")).toHaveText("À jour");
+  await expect(vidange.getByText(/96.200 km/)).toBeVisible();
+  await expect(page.getByText(/86.200 km/).first()).toBeVisible();
+
+  await visit.getByRole("button", { name: /Modifier le passage/ }).click();
+  await carnet.getByLabel("Prix payé (DA)").fill("19000");
+  await carnet.getByRole("button", { name: "Enregistrer les corrections" }).click();
+  await expect(carnet.locator(".visit").first()).toContainText(/19.000 DA/);
+
+  page.once("dialog", (d) => d.accept());
+  await carnet.locator(".visit").first().getByRole("button", { name: /Supprimer le passage/ }).click();
+  await expect(carnet).toContainText("Rien de noté pour l'instant");
+});

@@ -80,3 +80,66 @@ def test_refus(client, db):
     assert client.post(f"{API}/me/vehicles/{cid}/maintenance", headers=h, json={"item": "vidange", "done_on": future}).status_code == 422
     assert client.get(f"{API}/me/vehicles/{cid}/maintenance", headers=other).status_code == 404
     assert client.post(f"{API}/me/vehicles/{cid}/maintenance", headers=other, json={"item": "vidange"}).status_code == 404
+
+
+def _history(client, h, cid):
+    return client.get(f"{API}/me/vehicles/{cid}/maintenance/history", headers=h).json()
+
+
+def test_carnet_un_passage_plusieurs_operations_prix_et_garage(client, db):
+    h, cid = _car(client, db, "0695000010", 60000, plate="20010-115-31")
+    r = client.post(f"{API}/me/vehicles/{cid}/maintenance", headers=h, json={
+        "items": ["vidange", "filtre-air"], "other": "  Pneus avant Michelin ", "km": 61200,
+        "done_on": (date.today() - timedelta(days=10)).isoformat(), "price": 18500, "place": "Garage Benali, Hai Sabah",
+        "note": "Huile 5W40"})
+    assert r.status_code == 201, r.text
+    hist = _history(client, h, cid)
+    v = hist["visits"][0]
+    assert (v["km"], v["price"], v["place"], v["note"]) == (61200, 18500, "Garage Benali, Hai Sabah", "Huile 5W40")
+    assert [o["name"] for o in v["operations"]] == ["Vidange et filtre à huile", "Filtre à air", "Pneus avant Michelin"]
+    assert hist["total"] == 18500 and hist["total_12_months"] == 18500 and hist["priced"] == 1
+    # Les échéances partent de ce passage ; le kilométrage de la voiture suit
+    plan = _plan(client, h, cid)
+    assert plan["vidange"]["last"]["km"] == 61200 and plan["filtre-air"]["next_km"] == 81200
+    assert client.get(f"{API}/me/vehicles", headers=h).json()[0]["mileage_km"] == 61200
+
+
+def test_carnet_corriger_puis_supprimer_un_passage(client, db):
+    h, cid = _car(client, db, "0695000011", 40000, plate="20011-115-31")
+    vid = client.post(f"{API}/me/vehicles/{cid}/maintenance", headers=h,
+                      json={"items": ["vidange"], "km": 40000, "price": 6000}).json()["visit_id"]
+    old = (date.today() - timedelta(days=400)).isoformat()
+    client.post(f"{API}/me/vehicles/{cid}/maintenance", headers=h, json={"other": "Batterie", "done_on": old, "price": 12000})
+    hist = _history(client, h, cid)
+    assert hist["total"] == 18000 and hist["total_12_months"] == 6000          # la batterie a plus d'un an
+    assert [v["operations"][0]["name"] for v in hist["visits"]] == ["Vidange et filtre à huile", "Batterie"]   # récent d'abord
+    # Correction : prix, garage, et une opération de plus
+    r = client.put(f"{API}/me/vehicles/{cid}/maintenance/visits/{vid}", headers=h,
+                   json={"items": ["vidange", "filtre-habitacle"], "km": 40100, "price": 7500, "place": "Mécanicien du quartier"})
+    assert r.status_code == 200 and r.json()["price"] == 7500 and len(r.json()["operations"]) == 2
+    assert _plan(client, h, cid)["filtre-habitacle"]["status"] == "ok"
+    assert client.delete(f"{API}/me/vehicles/{cid}/maintenance/visits/{vid}", headers=h).status_code == 204
+    assert _plan(client, h, cid)["vidange"]["last"] is None
+    assert len(_history(client, h, cid)["visits"]) == 1
+
+
+def test_carnet_refus_et_carnet_d_un_autre(client, db):
+    h, cid = _car(client, db, "0695000012", 40000, plate="20012-115-31")
+    post = lambda body: client.post(f"{API}/me/vehicles/{cid}/maintenance", headers=h, json=body)   # noqa: E731
+    assert post({"km": 40000}).status_code == 422                       # aucune opération
+    assert post({"other": "   "}).status_code == 422
+    assert post({"items": ["inconnu"]}).status_code == 422
+    assert post({"items": ["vidange"], "price": -5}).status_code == 422
+    assert post({"items": ["vidange"], "done_on": (date.today() + timedelta(days=1)).isoformat()}).status_code == 422
+    vid = post({"items": ["vidange"], "price": 5000}).json()["visit_id"]
+    h2, cid2 = _car(client, db, "0695000013", 1000, plate="20013-115-31")
+    assert client.get(f"{API}/me/vehicles/{cid}/maintenance/history", headers=h2).status_code == 404
+    assert client.put(f"{API}/me/vehicles/{cid2}/maintenance/visits/{vid}", headers=h2, json={"items": ["vidange"]}).status_code == 404
+    assert client.delete(f"{API}/me/vehicles/{cid2}/maintenance/visits/{vid}", headers=h2).status_code == 404
+
+
+def test_annuler_la_derniere_operation_retire_le_passage(client, db):
+    h, cid = _car(client, db, "0695000014", 40000, plate="20014-115-31")
+    rid = client.post(f"{API}/me/vehicles/{cid}/maintenance", headers=h, json={"item": "vidange", "price": 5000}).json()["id"]
+    assert client.delete(f"{API}/me/vehicles/{cid}/maintenance/{rid}", headers=h).status_code == 204
+    assert _history(client, h, cid)["visits"] == []

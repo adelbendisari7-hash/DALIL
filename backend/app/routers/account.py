@@ -14,7 +14,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from ..db import get_db
-from ..models import DiagnosisSession, MaintenanceRecord, PlateReport, User, UserVehicle, VehicleVariant
+from ..models import DiagnosisSession, MaintenanceRecord, MaintenanceVisit, PlateReport, User, UserVehicle, VehicleVariant
 from ..schemas import PlateReportIn, VehicleIn, VehiclePatch, format_plate
 from ..security import current_user, feedback_limiter
 from ..services import maintenance
@@ -169,9 +169,54 @@ def resolve_report(db: Session, report: PlateReport, action: str) -> dict:
 
 
 class MaintenanceIn(BaseModel):
-    item: str = Field(..., max_length=40)
+    """Passage au garage : une ou plusieurs opérations (`items`, ou `item` seul comme avant), opération libre
+    (`other` : « pneus avant », « amortisseurs »...), date, kilométrage, prix payé, garage, remarque."""
+    item: str | None = Field(None, max_length=40)
+    items: list[str] = Field(default_factory=list, max_length=20)
+    other: str | None = Field(None, max_length=80)
     km: int | None = Field(None, ge=0, le=2_000_000)
     done_on: date | None = None
+    price: float | None = Field(None, ge=0, le=10_000_000)
+    place: str | None = Field(None, max_length=120)
+    note: str | None = Field(None, max_length=300)
+
+
+OTHER = "autre"
+
+
+def _clean(v: str | None) -> str | None:
+    v = (v or "").strip()
+    return v or None
+
+
+def _visit_values(body: MaintenanceIn) -> tuple[list[str], str | None, date]:
+    known = {it["slug"] for it in maintenance.items()}
+    items = list(dict.fromkeys([*([body.item] if body.item else []), *body.items]))
+    if any(i not in known for i in items):
+        raise HTTPException(422, "Entretien inconnu")
+    other = _clean(body.other)
+    if not items and not other:
+        raise HTTPException(422, "Choisissez au moins une opération, ou écrivez ce qui a été fait")
+    done_on = body.done_on or date.today()
+    if done_on > date.today():
+        raise HTTPException(422, "La date ne peut pas être dans le futur")
+    return items, other, done_on
+
+
+def _fill_visit(visit: MaintenanceVisit, car: UserVehicle, body: MaintenanceIn) -> None:
+    items, other, done_on = _visit_values(body)
+    visit.done_on, visit.km, visit.price = done_on, body.km, body.price
+    visit.place, visit.note = _clean(body.place), _clean(body.note)
+    visit.records = [MaintenanceRecord(user_vehicle_id=car.id, item=i, km=body.km, done_on=done_on) for i in items] +         ([MaintenanceRecord(user_vehicle_id=car.id, item=OTHER, label=other, km=body.km, done_on=done_on)] if other else [])
+    if body.km is not None and (car.mileage_km is None or body.km > car.mileage_km):
+        car.mileage_km = body.km   # un kilométrage plus grand met la voiture à jour
+
+
+def visit_out(v: MaintenanceVisit) -> dict:
+    names = {it["slug"]: it["name"] for it in maintenance.items()}
+    return {"id": v.id, "done_on": v.done_on.isoformat(), "km": v.km, "price": v.price, "place": v.place, "note": v.note,
+            "operations": [{"id": r.id, "item": r.item, "name": r.label if r.item == OTHER else names.get(r.item, r.item)}
+                           for r in v.records]}
 
 
 @router.get("/vehicles/{vehicle_id}/maintenance")
@@ -181,28 +226,65 @@ def vehicle_maintenance(vehicle_id: int, user: User = Depends(current_user), db:
     return {"mileage_km": car.mileage_km, "items": maintenance.schedule(db, car)}
 
 
+@router.get("/vehicles/{vehicle_id}/maintenance/history")
+def maintenance_history(vehicle_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Carnet d'entretien : passages du plus récent au plus ancien, total payé, total des 12 derniers mois."""
+    car = _own(db, user, vehicle_id)
+    visits = list(db.scalars(select(MaintenanceVisit).where(MaintenanceVisit.user_vehicle_id == car.id)
+                             .order_by(MaintenanceVisit.done_on.desc(), MaintenanceVisit.id.desc())))
+    year_ago = maintenance.add_months(date.today(), -12)
+    return {"visits": [visit_out(v) for v in visits],
+            "total": sum(v.price or 0 for v in visits),
+            "total_12_months": sum(v.price or 0 for v in visits if v.done_on > year_ago),
+            "priced": sum(1 for v in visits if v.price is not None)}
+
+
 @router.post("/vehicles/{vehicle_id}/maintenance", status_code=201)
 def maintenance_done(vehicle_id: int, body: MaintenanceIn, user: User = Depends(current_user), db: Session = Depends(get_db)):
-    """« Fait » : l'entretien est noté (aujourd'hui par défaut) ; un kilométrage plus grand met à jour la voiture."""
+    """Noter un passage au garage (aujourd'hui par défaut) avec ses opérations, son prix et son kilométrage."""
     car = _own(db, user, vehicle_id)
-    if body.item not in {it["slug"] for it in maintenance.items()}:
-        raise HTTPException(422, "Entretien inconnu")
-    done_on = body.done_on or date.today()
-    if done_on > date.today():
-        raise HTTPException(422, "La date ne peut pas être dans le futur")
-    rec = MaintenanceRecord(user_vehicle_id=car.id, item=body.item, km=body.km, done_on=done_on)
-    db.add(rec)
-    if body.km is not None and (car.mileage_km is None or body.km > car.mileage_km):
-        car.mileage_km = body.km
+    visit = MaintenanceVisit(user_vehicle_id=car.id, done_on=date.today())
+    _fill_visit(visit, car, body)
+    db.add(visit)
     db.commit()
-    return {"id": rec.id}
+    return {"id": visit.records[0].id, "visit_id": visit.id}
+
+
+def _own_visit(db: Session, car: UserVehicle, visit_id: int) -> MaintenanceVisit:
+    v = db.get(MaintenanceVisit, visit_id)
+    if not v or v.user_vehicle_id != car.id:
+        raise HTTPException(404, "Entretien inconnu")
+    return v
+
+
+@router.put("/vehicles/{vehicle_id}/maintenance/visits/{visit_id}")
+def maintenance_visit_update(vehicle_id: int, visit_id: int, body: MaintenanceIn, user: User = Depends(current_user),
+                             db: Session = Depends(get_db)):
+    """Corriger un passage : date, kilométrage, prix, garage, remarque, opérations."""
+    car = _own(db, user, vehicle_id)
+    visit = _own_visit(db, car, visit_id)
+    _fill_visit(visit, car, body)
+    db.commit()
+    return visit_out(visit)
+
+
+@router.delete("/vehicles/{vehicle_id}/maintenance/visits/{visit_id}", status_code=204)
+def maintenance_visit_delete(vehicle_id: int, visit_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    car = _own(db, user, vehicle_id)
+    db.delete(_own_visit(db, car, visit_id))
+    db.commit()
 
 
 @router.delete("/vehicles/{vehicle_id}/maintenance/{record_id}", status_code=204)
 def maintenance_undo(vehicle_id: int, record_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """« Annuler » une opération ; le passage disparaît avec sa dernière opération."""
     car = _own(db, user, vehicle_id)
     rec = db.get(MaintenanceRecord, record_id)
     if not rec or rec.user_vehicle_id != car.id:
         raise HTTPException(404, "Entretien inconnu")
+    visit = rec.visit
     db.delete(rec)
+    db.flush()
+    if visit is not None and not db.scalars(select(MaintenanceRecord).where(MaintenanceRecord.visit_id == visit.id)).first():
+        db.delete(visit)
     db.commit()
