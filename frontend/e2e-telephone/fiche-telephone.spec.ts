@@ -261,3 +261,70 @@ test("mécanicien et magasin : chercher une pièce, se connecter", async ({ page
   await ergonomie(page, "espace magasin");
 
 });
+
+test("client connecté : papiers de la voiture, carnet d'entretien, rappels de l'accueil, fiche d'un magasin", async ({ page }) => {
+  await slowDown(page);
+  // Compte et voiture (le formulaire de la voiture est déjà vérifié ailleurs) : numéro et matricule uniques
+  const uniq = String(Date.now()).slice(-6);
+  await page.goto("/connexion?inscription=1&next=/compte");
+  await page.getByLabel("Prénom").fill("Essai");
+  await page.getByLabel("Nom", { exact: true }).fill("Carnet");
+  await page.getByLabel("Numéro de mobile").fill(`0556${uniq}`);
+  await page.getByLabel("Mot de passe (8 caractères au moins)").fill("telephone-essai");
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Créer mon compte" }).tap();
+  await expect(page.getByRole("heading", { name: "Bienvenue sur DALIL" })).toBeVisible({ timeout: 60_000 });
+  const token = await page.evaluate(() => localStorage.getItem("dalil.token"));
+  const headers = { Authorization: `Bearer ${token}` };
+  const car = await (await page.request.post("/api/v1/me/vehicles", { headers, data: {
+    plate: `${uniq}-116-31`, label: "Renault Clio 4", year: 2016, mileage_km: 92000 } })).json();
+
+  // Papiers : assurance qui finit dans 5 jours, saisie au doigt
+  await page.goto("/compte");
+  await page.getByRole("button", { name: "Papiers" }).tap();
+  const assurance = page.locator(".paper", { hasText: "Assurance" });
+  await assurance.getByRole("button", { name: "Renseigner : Assurance" }).tap();
+  const iso = (d: number) => new Date(Date.now() + d * 86_400_000).toISOString().slice(0, 10);
+  await assurance.getByLabel("Début de l'assurance").fill(iso(-360));
+  await assurance.getByLabel("Valable jusqu'au").fill(iso(5));
+  await ergonomie(page, "papiers (formulaire ouvert)");
+  await shot(page, "11-papiers-formulaire");
+  let t0 = Date.now();
+  await assurance.getByRole("button", { name: "Enregistrer" }).tap();
+  await expect.soft(assurance.locator(".paper-pill"), "papiers : assurance urgente").toHaveText("Urgent", { timeout: 30_000 });
+  mesures.papier_enregistre_s = (Date.now() - t0) / 1000;
+  await ergonomie(page, "papiers");
+
+  // Carnet : un passage au garage noté au doigt
+  await page.getByRole("button", { name: "Entretien" }).tap();
+  const carnet = page.locator(".carnet");
+  await carnet.getByRole("button", { name: "Noter un passage au garage" }).tap();
+  await carnet.getByRole("button", { name: "Vidange et filtre à huile" }).tap();
+  await carnet.getByLabel("Kilométrage", { exact: true }).fill("92500");
+  await carnet.getByLabel("Prix payé (DA)").fill("6500");
+  await ergonomie(page, "carnet (formulaire ouvert)");
+  await shot(page, "12-carnet-formulaire");
+  t0 = Date.now();
+  await carnet.getByRole("button", { name: "Enregistrer dans le carnet" }).tap();
+  await expect.soft(carnet.locator(".visit").first(), "carnet : passage enregistré").toContainText(/6.500 DA/, { timeout: 30_000 });
+  mesures.passage_enregistre_s = (Date.now() - t0) / 1000;
+  await ergonomie(page, "carnet");
+  await shot(page, "13-carnet");
+
+  // Accueil : rappel des papiers en rouge, repère de l'onglet Compte
+  t0 = Date.now();
+  await page.goto("/");
+  await expect.soft(page.locator(".papers-banner"), "accueil : rappel de l'assurance").toContainText("finit dans 5 jours", { timeout: 60_000 });
+  mesures.accueil_rappels_s = (Date.now() - t0) / 1000;
+  await expect.soft(page.getByRole("link", { name: /papiers à renouveler/ }), "onglet Compte : repère").toBeVisible();
+  await ergonomie(page, "accueil avec rappels");
+  await shot(page, "14-accueil-rappels");
+
+  // Fiche d'un magasin (avis vérifiés) et prix d'une pièce sous la liste des magasins
+  const shops = await (await page.request.get("/api/v1/shops")).json();
+  await page.goto(`/magasins/${shops[0].id}`);
+  await expect.soft(page.locator(".reviews"), "fiche : avis vérifiés").toBeVisible({ timeout: 60_000 });
+  await ergonomie(page, "fiche d'un magasin");
+  await shot(page, "15-fiche-magasin");
+  void car;
+});
