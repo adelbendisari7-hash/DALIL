@@ -66,3 +66,55 @@ def test_photo_effacee_avec_le_compte(client, db):
     assert client.get(url).status_code == 404
     db.expire_all()
     assert db.get(PartRequest, req["id"]).photo_url is None
+
+
+# --- 2. Alerte de baisse de prix ---------------------------------------------------------------------------------------
+
+def test_prix_suivi_baisse_puis_vu(client, db):
+    from app.models import Product
+    from .test_avis_prix import _free_category, _shop
+    h = login(client, "0698000010")
+    cat = _free_category(db)
+    shop = _shop(db, "Prix suivi A")
+    p = Product(shop_id=shop.id, category_id=cat.id, title="Pièce suivie", price=5000)
+    db.add(p)
+    db.commit()
+    w = client.post(f"{API}/me/price-watches", headers=h, json={"category_id": cat.id}).json()
+    assert w["reference_price"] == 5000 and w["alert"] is None and w["lowest"]["shop"]["name"] == "Prix suivi A"
+    assert client.post(f"{API}/me/price-watches", headers=h, json={"category_id": cat.id}).json()["id"] == w["id"]   # pas de doublon
+    p.price = 4000
+    db.commit()
+    w2 = client.get(f"{API}/me/price-watches", headers=h).json()[0]
+    assert w2["alert"] == "drop" and w2["drop_pct"] == 20 and w2["lowest"]["price"] == 4000
+    assert client.get(f"{API}/me/alerts", headers=h).json()["prices"] == 1
+    seen = client.post(f"{API}/me/price-watches/{w['id']}/seen", headers=h).json()
+    assert seen["reference_price"] == 4000 and seen["alert"] is None
+    assert client.get(f"{API}/me/alerts", headers=h).json()["prices"] == 0
+    p.price = 4500          # une hausse ne déclenche rien
+    db.commit()
+    assert client.get(f"{API}/me/price-watches", headers=h).json()[0]["alert"] is None
+    assert client.delete(f"{API}/me/price-watches/{w['id']}", headers=h).status_code == 204
+    assert client.get(f"{API}/me/price-watches", headers=h).json() == []
+
+
+def test_prix_suivi_piece_sans_prix_puis_disponible(client, db):
+    from app.models import Product
+    from .test_avis_prix import _free_category, _shop
+    h = login(client, "0698000011")
+    cat = _free_category(db)
+    w = client.post(f"{API}/me/price-watches", headers=h, json={"category_id": cat.id}).json()
+    assert w["reference_price"] is None and w["lowest"] is None and w["alert"] is None
+    shop = _shop(db, "Prix suivi B")
+    db.add(Product(shop_id=shop.id, category_id=cat.id, title="Enfin là", price=3000))
+    db.commit()
+    assert client.get(f"{API}/me/price-watches", headers=h).json()[0]["alert"] == "available"
+
+
+def test_prix_suivi_refus_et_suivi_d_un_autre(client, db):
+    h = login(client, "0698000012")
+    assert client.post(f"{API}/me/price-watches", headers=h, json={"category_id": 999999}).status_code == 404
+    w = client.post(f"{API}/me/price-watches", headers=h, json={"category_id": _cat(db).id}).json()
+    h2 = login(client, "0698000013")
+    assert client.delete(f"{API}/me/price-watches/{w['id']}", headers=h2).status_code == 404
+    assert client.post(f"{API}/me/price-watches/{w['id']}/seen", headers=h2).status_code == 404
+    assert client.get(f"{API}/me/price-watches").status_code == 401

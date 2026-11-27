@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";
+import PriceFollow from "@/components/PriceFollow";
 import PriceHistory from "@/components/PriceHistory";
 import ShopContact from "@/components/ShopContact";
 import { api, ApiError, lastDiagnosis, requestStore, vehicleStore } from "@/lib/api";
@@ -188,6 +189,7 @@ function Shops() {
       )}
 
       {!offline && <PriceHistory categoryId={categoryId} />}
+      {!offline && <PriceFollow categoryId={categoryId} variantId={variantId} />}
 
       <div className="section card request-box">
         <p className="help" style={{ marginTop: 0 }}>{t("requests.photo.help")}</p>

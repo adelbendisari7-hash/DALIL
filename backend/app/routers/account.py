@@ -15,10 +15,11 @@ from sqlalchemy.orm import Session
 
 from ..db import get_db
 from ..models import (ContactEvent, DiagnosisSession, MaintenanceRecord, MaintenanceVisit, PartRequest, PlateReport,
-                      RequestResponse, Shop, User, UserVehicle, VehicleDocument, VehicleVariant)
+                      PartCategory, PriceWatch, RequestResponse, Shop, User, UserVehicle, VehicleDocument,
+                      VehicleVariant)
 from ..schemas import PlateReportIn, VehicleIn, VehiclePatch, format_plate
 from ..security import client_hash, current_user, feedback_limiter
-from ..services import maintenance, vehicle_papers
+from ..services import maintenance, price_history, price_watch, vehicle_papers
 from ..services.recommendation import RECOMMENDABLE_STATUSES
 
 router = APIRouter(prefix="/me")
@@ -396,4 +397,64 @@ def alerts(user: User = Depends(current_user), db: Session = Depends(get_db)):
     """Repère de l'onglet Compte : papiers qui finissent dans 30 jours au plus ou expirés, entretiens à faire."""
     cars = list(db.scalars(select(UserVehicle).where(UserVehicle.user_id == user.id)))
     return {"papers": sum(len(vehicle_papers.alerts(db, c)) for c in cars),
-            "maintenance": sum(maintenance.due_count(db, c) for c in cars)}
+            "maintenance": sum(maintenance.due_count(db, c) for c in cars),
+            "prices": price_watch.alert_count(db, user)}
+
+
+# --- Prix suivis -------------------------------------------------------------
+
+class PriceWatchIn(BaseModel):
+    category_id: int
+    variant_id: int | None = None
+
+
+@router.get("/price-watches")
+def price_watches(user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Pièces suivies : prix de référence, prix le plus bas du moment et son magasin, alerte (baisse ou disponible)."""
+    return price_watch.watches(db, user)
+
+
+@router.post("/price-watches", status_code=201)
+def price_watch_add(body: PriceWatchIn, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Suivre le prix d'une pièce ; référence = prix le plus bas du jour. Suivre deux fois la même pièce ne crée rien."""
+    if not db.get(PartCategory, body.category_id):
+        raise HTTPException(404, "Pièce inconnue")
+    if body.variant_id is not None and not db.get(VehicleVariant, body.variant_id):
+        raise HTTPException(422, "Véhicule inconnu")
+    w = db.scalar(select(PriceWatch).where(PriceWatch.user_id == user.id, PriceWatch.category_id == body.category_id))
+    if w is None:
+        if len(list(db.scalars(select(PriceWatch.id).where(PriceWatch.user_id == user.id)))) >= price_watch.MAX_WATCHES:
+            raise HTTPException(409, f"{price_watch.MAX_WATCHES} pièces suivies au plus : retirez-en une")
+        low = price_history.lowest(db, body.category_id)
+        w = PriceWatch(user_id=user.id, category_id=body.category_id, variant_id=body.variant_id,
+                       reference_price=low["price"] if low else None)
+        db.add(w)
+        try:
+            db.commit()
+        except IntegrityError:   # deux touchers rapides
+            db.rollback()
+            w = db.scalar(select(PriceWatch).where(PriceWatch.user_id == user.id, PriceWatch.category_id == body.category_id))
+    return price_watch.watch_out(db, w)
+
+
+def _own_watch(db: Session, user: User, watch_id: int) -> PriceWatch:
+    w = db.get(PriceWatch, watch_id)
+    if not w or w.user_id != user.id:
+        raise HTTPException(404, "Suivi inconnu")
+    return w
+
+
+@router.post("/price-watches/{watch_id}/seen")
+def price_watch_seen(watch_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """« Vu » : le prix le plus bas du moment devient la référence ; l'alerte disparaît jusqu'à la prochaine baisse."""
+    w = _own_watch(db, user, watch_id)
+    low = price_history.lowest(db, w.category_id)
+    w.reference_price = low["price"] if low else w.reference_price
+    db.commit()
+    return price_watch.watch_out(db, w)
+
+
+@router.delete("/price-watches/{watch_id}", status_code=204)
+def price_watch_delete(watch_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    db.delete(_own_watch(db, user, watch_id))
+    db.commit()

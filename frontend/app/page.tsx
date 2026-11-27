@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import VehiclePicker from "@/components/VehiclePicker";
 import { paperWhen } from "@/components/Papers";
+import { shopsLink, watchLine, type Watch } from "@/components/PriceWatches";
 import VoiceInput from "@/components/VoiceInput";
 import WarningLights, { lightPhrase, type Light } from "@/components/WarningLights";
 import { api, ApiError, lastDiagnosis, session, store, type LastDiagnosis, type UserCar, type Vehicle } from "@/lib/api";
@@ -51,6 +52,12 @@ export default function Home() {
     setUpkeepHidden(true);
   }
   const upkeep = cars.filter((c) => c.maintenance_items?.length);
+  // Pièces suivies dont le prix a baissé, ou qu'un magasin propose enfin
+  const [watchAlerts, setWatchAlerts] = useState<Watch[]>([]);
+  useEffect(() => {
+    if (!session.token()) return;
+    api<Watch[]>("/me/price-watches").then((ws) => setWatchAlerts(ws.filter((w) => w.alert))).catch(() => undefined);
+  }, []);
   // Papiers qui finissent bientôt : « bientôt » se masque pour la journée, urgent (7 jours) ou expiré reste affiché
   const [papersHidden, setPapersHidden] = useState(true);
   useEffect(() => { setPapersHidden(store.read("dalil.papers.hidden") === new Date().toDateString()); }, []);
@@ -149,6 +156,23 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </aside>
+      )}
+
+      {watchAlerts.length > 0 && (
+        <aside className="card upkeep-banner price-banner" aria-labelledby="price-alert-title">
+          <h2 id="price-alert-title" className="card-title">{t("watch.banner")}</h2>
+          <ul className="upkeep-list">
+            {watchAlerts.map((w) => (
+              <li key={w.id}>
+                <Link href={shopsLink(w)}>
+                  <strong>{w.part}</strong>
+                  <span className="meta">{watchLine(w)}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="help">{t("watch.banner.help")}</p>
         </aside>
       )}
 

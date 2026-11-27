@@ -47,6 +47,7 @@ export default function TopBar() {
   const [pending, setPending] = useState(0);
   const [unseen, setUnseen] = useState(0);
   const [papers, setPapers] = useState(0);
+  const [prices, setPrices] = useState(0);
 
   // Réponses de magasins pas encore lues (client connecté) : repère sur l'onglet Compte
   useEffect(() => {
@@ -62,10 +63,10 @@ export default function TopBar() {
 
   // Contrôle technique ou assurance qui finit dans 30 jours au plus, ou expiré : repère sur l'onglet Compte aussi
   useEffect(() => {
-    if (!user) return setPapers(0);
+    if (!user) { setPrices(0); return setPapers(0); }
     let stop = false;
-    const read = () => api<{ papers: number }>("/me/alerts")
-      .then((r) => { if (!stop) setPapers(r.papers); }).catch(() => undefined);
+    const read = () => api<{ papers: number; prices?: number }>("/me/alerts")
+      .then((r) => { if (!stop) { setPapers(r.papers); setPrices(r.prices ?? 0); } }).catch(() => undefined);
     read();
     window.addEventListener("dalil-alerts", read);
     return () => { stop = true; window.removeEventListener("dalil-alerts", read); };
@@ -126,8 +127,9 @@ export default function TopBar() {
           {link("/espace-magasin", "shop", t("nav.shop"), t("nav.shop.short"), pending)}
           {user?.role === "admin" && link("/admin", "admin", t("nav.admin"), t("nav.admin.short"))}
           {user
-            ? link("/compte", "account", t("nav.account"), t("nav.account.short"), unseen + papers,
-              [unseen && t("nav.unseen", { n: unseen }), papers && t("nav.papers", { n: papers })].filter(Boolean).join(", "))
+            ? link("/compte", "account", t("nav.account"), t("nav.account.short"), unseen + papers + prices,
+              [unseen && t("nav.unseen", { n: unseen }), papers && t("nav.papers", { n: papers }),
+               prices && t("nav.prices", { n: prices })].filter(Boolean).join(", "))
             : link("/connexion", "account", t("nav.login"), t("nav.login"))}
         </nav>
       </div>

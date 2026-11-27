@@ -154,6 +154,19 @@ class MaintenanceRecord(Base):
     visit: Mapped[MaintenanceVisit | None] = relationship(back_populates="records")
 
 
+class PriceWatch(Base):
+    """Pièce dont le client suit le prix (migration 0016) : alerte quand le prix le plus bas des catalogues passe sous
+    le prix de référence (celui du jour du suivi, puis celui que le client a vu en dernier)."""
+    __tablename__ = "price_watches"
+    __table_args__ = (UniqueConstraint("user_id", "category_id", name="uq_price_watch_user_category"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    category_id: Mapped[int] = mapped_column(ForeignKey("part_categories.id"))
+    variant_id: Mapped[int | None] = mapped_column(ForeignKey("vehicle_variants.id"))
+    reference_price: Mapped[float | None] = mapped_column(Float)   # None : aucun prix au moment du suivi
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
 class PlateReport(Base):
     """Signalement « ce matricule est le mien mais il est déjà enregistré » ; traité par l'administrateur."""
     __tablename__ = "plate_reports"

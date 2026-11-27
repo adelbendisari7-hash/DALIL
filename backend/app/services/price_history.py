@@ -61,6 +61,41 @@ def _aware(d: datetime) -> datetime:
     return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
 
 
+def _points(db: Session, category_id: int) -> tuple[list[PricePoint], bool]:
+    """Points de prix de la pièce (et de ses sous-pièces) dans les magasins visibles : ceux des vrais magasins, ou à
+    défaut ceux des magasins fictifs (`demo` vrai)."""
+    _, descendants = category_lineage(db, category_id)
+    rows = db.execute(
+        select(PricePoint, Shop.is_demo).join(Shop, Shop.id == PricePoint.shop_id)
+        .where(PricePoint.category_id.in_(descendants), Shop.status.in_(RECOMMENDABLE_STATUSES))
+        .order_by(PricePoint.recorded_at, PricePoint.id)
+    ).all()
+    real = [p for p, demo in rows if not demo]
+    return (real or [p for p, _ in rows]), (not real and bool(rows))
+
+
+def _state(points: list[PricePoint], end: datetime, condition: str | None) -> dict[tuple[int, int], PricePoint]:
+    """Dernier prix connu de chaque produit à la date `end` (clé magasin + produit : SQLite peut redonner le numéro
+    d'un produit supprimé) ; un produit retiré ou sans prix sort du calcul."""
+    last: dict[tuple[int, int], PricePoint] = {}
+    for p in points:
+        if _aware(p.recorded_at) <= end:
+            last[(p.shop_id, p.product_id)] = p
+    return {k: p for k, p in last.items() if p.price is not None and (condition is None or p.condition == condition)}
+
+
+def lowest(db: Session, category_id: int, condition: str | None = None) -> dict | None:
+    """Prix le plus bas aujourd'hui pour la pièce, avec le magasin qui le propose ; None si aucun prix."""
+    points, demo = _points(db, category_id)
+    cur = _state(points, datetime.now(timezone.utc), condition)
+    if not cur:
+        return None
+    best = min(cur.values(), key=lambda p: (p.price, p.shop_id))
+    shop = db.get(Shop, best.shop_id)
+    return {"price": best.price, "shop": {"id": shop.id, "name": shop.name}, "condition": best.condition,
+            "shops": len({p.shop_id for p in cur.values()}), "demo": demo}
+
+
 def summary(db: Session, category_id: int, condition: str | None = None, months: int = 6,
             now: datetime | None = None) -> dict:
     """État des catalogues à la fin de chacun des `months` derniers mois (le mois en cours : aujourd'hui).
@@ -69,22 +104,10 @@ def summary(db: Session, category_id: int, condition: str | None = None, months:
     médiane, plus haut, nombre de magasins et de produits. `trend_pct` compare la médiane d'aujourd'hui à la plus
     ancienne médiane disponible de la période (au moins deux magasins de part et d'autre)."""
     now = _aware(now or datetime.now(timezone.utc))
-    _, descendants = category_lineage(db, category_id)
-    rows = db.execute(
-        select(PricePoint, Shop.is_demo).join(Shop, Shop.id == PricePoint.shop_id)
-        .where(PricePoint.category_id.in_(descendants), Shop.status.in_(RECOMMENDABLE_STATUSES))
-        .order_by(PricePoint.recorded_at, PricePoint.id)
-    ).all()
-    real = [p for p, demo in rows if not demo]
-    demo = not real and bool(rows)
-    points = real or [p for p, _ in rows]
+    points, demo = _points(db, category_id)
 
-    def state_at(end: datetime) -> dict[int, PricePoint]:
-        last: dict[int, PricePoint] = {}
-        for p in points:
-            if _aware(p.recorded_at) <= end:
-                last[p.product_id] = p
-        return {pid: p for pid, p in last.items() if p.price is not None and (condition is None or p.condition == condition)}
+    def state_at(end: datetime) -> dict[tuple[int, int], PricePoint]:
+        return _state(points, end, condition)
 
     series = []
     for label, end in _month_ends(now, months):

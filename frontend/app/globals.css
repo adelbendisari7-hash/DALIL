@@ -892,3 +892,8 @@ footer.disclaimer { max-width: 760px; margin: 0 auto; padding: 0 16px 2rem; colo
 .inbox-main { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
 .request-box .btn { margin-top: 0.75rem; }
 .request-photo { display: inline-block; margin: 0.25rem 0 0.5rem; }
+
+/* --- Prix suivis --- */
+.price-banner { border-left-color: var(--green); }
+.price-follow { margin-top: 0.75rem; }
+.watch.has-alert strong a { color: var(--green); }

@@ -1,4 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
+import { execFileSync } from "node:child_process";
+import { resolve } from "node:path";
+import { PY_PATH } from "./helpers";
 
 // Numéros et matricules uniques à chaque exécution : les tests se rejouent sur la même base sans se gêner
 const uniq = () => String(Date.now() % 1_000_000 + Math.floor(Math.random() * 1000)).padStart(6, "0").slice(-6);
@@ -251,4 +254,39 @@ test("carnet : passage relié à un magasin DALIL contacté, lien vers sa fiche"
   await carnet.getByRole("button", { name: "Enregistrer dans le carnet" }).click();
   await expect(carnet.locator(".visit").first().getByRole("link", { name: shop.name })).toHaveAttribute("href", `/magasins/${shop.id}`);
   await expect(carnet.getByRole("button", { name: "Envoyer le carnet au mécanicien" })).toBeVisible();
+});
+
+test("prix suivi : baisse signalée sur l'accueil et dans le compte, « Vu » retire l'alerte", async ({ page }) => {
+  await inscrire(page, phone(), "Hakim", "Prix", "/compte");
+  const fams = await (await page.request.get("/api/v1/parts/categories")).json();
+  const plaq = fams.flatMap((f: { children: { id: number; name: string }[] }) => f.children)
+    .find((c: { name: string }) => c.name === "Plaquettes de frein avant");
+  await page.goto(`/magasins?category=${plaq.id}&part=${encodeURIComponent(plaq.name)}`);
+  await page.getByRole("button", { name: "Suivre le prix de cette pièce" }).click();
+  await expect(page.getByText("Prix suivi : DALIL vous préviendra s'il baisse.")).toBeVisible();
+
+  // Un magasin baisse son prix de moitié (point de prix écrit dans la base des tests)
+  execFileSync(PY_PATH, ["-c", `
+import sqlite3, sys
+from datetime import datetime, timezone
+c = sqlite3.connect(sys.argv[1])
+cat = int(sys.argv[2])
+row = c.execute("select product_id, shop_id, category_id, condition, min(price) from price_points where category_id = ? and price is not null", (cat,)).fetchone()
+c.execute("insert into price_points (product_id, shop_id, category_id, condition, price, recorded_at) values (?,?,?,?,?,?)",
+          (row[0], row[1], row[2], row[3], round(row[4] / 2), datetime.now(timezone.utc).isoformat()))
+c.commit()
+`, resolve(__dirname, "../../backend/e2e.db"), String(plaq.id)]);
+
+  await page.goto("/");
+  const banner = page.locator(".price-banner");
+  await expect(banner).toContainText("Plaquettes de frein avant");
+  await expect(banner).toContainText("− 50 %");
+  await page.goto("/compte");
+  const watch = page.locator(".watch", { hasText: "Plaquettes de frein avant" });
+  await expect(watch).toContainText("En baisse");
+  await watch.getByRole("button", { name: "Vu" }).click();
+  await expect(watch).not.toContainText("En baisse");
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "Qu'est-ce qui ne va pas", exact: false })).toBeVisible();
+  await expect(page.locator(".price-banner")).toHaveCount(0);
 });

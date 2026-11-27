@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import Maintenance from "@/components/Maintenance";
 import Papers from "@/components/Papers";
+import PriceWatches from "@/components/PriceWatches";
 import VehiclePicker from "@/components/VehiclePicker";
 import { api, ApiError, lastDiagnosis, session, type User, type UserCar, type Vehicle } from "@/lib/api";
 import { t } from "@/lib/i18n";
@@ -431,6 +432,8 @@ function Account() {
         <p className="help" style={{ marginTop: 0 }}>{t("requests.accountHelp")}</p>
         <div className="actions"><Link className="btn btn-ghost" href="/demandes">{t("requests.open")}</Link></div>
       </div>
+
+      <PriceWatches />
 
       {complete && (
         <div className="card">
