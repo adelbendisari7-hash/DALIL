@@ -14,7 +14,10 @@ type Rec = {
   phone: string | null; whatsapp: string | null; hours: string | null; is_demo: boolean;
   score: number; reasons: string[]; stale: boolean; distance_km: number | null;
   verified: boolean; landmark: string | null; open_status: { open: boolean; label: string } | null; fast_reply?: boolean;
+  offer: Offer | null;
 };
+type Offer = { title: string; price: number; condition: string; oem_ref: string | null; compatible: boolean | null;
+  count: number; confirmed_days: number | null };
 
 function Shops() {
   const sp = useSearchParams();
@@ -30,6 +33,7 @@ function Shops() {
   const [error, setError] = useState("");
   const [requestMsg, setRequestMsg] = useState("");
   const [requestSent, setRequestSent] = useState(false);
+  const [sort, setSort] = useState<"score" | "price">("score");
 
   useEffect(() => {
     if (!variantParam) setVariantId(vehicleStore.get()?.variantId);
@@ -95,9 +99,17 @@ function Shops() {
       {shops && shops.length === 0 && <p>{t("shops.empty")}</p>}
 
       {shops && shops.length > 0 && view === "map" && <ShopMap shops={shops} me={me} />}
+      {shops && shops.some((x) => x.offer) && view === "list" && (
+        <div className="toggle sort-toggle" role="group" aria-label={t("shops.sort")}>
+          <button aria-pressed={sort === "score"} onClick={() => setSort("score")}>{t("shops.sort.score")}</button>
+          <button aria-pressed={sort === "price"} onClick={() => setSort("price")}>{t("shops.sort.price")}</button>
+        </div>
+      )}
       {shops && shops.length > 0 && view === "list" && (
         <ol className="shops">
-          {shops.map((s) => (
+          {(sort === "price"
+            ? [...shops].sort((a, b) => (a.offer?.price ?? Infinity) - (b.offer?.price ?? Infinity))
+            : shops).map((s) => (
             <li className="shop" key={s.id}>
               <h3>
                 <Link href={`/magasins/${s.id}`}>{s.name}</Link>
@@ -109,6 +121,20 @@ function Shops() {
                 {s.open_status && <span className={`open-pill ${s.open_status.open ? "is-open" : ""}`}>{s.open_status.label}</span>}
               </div>
               <span className="meta">{[s.commune, s.landmark, s.open_status ? null : s.hours].filter(Boolean).join(" · ")}</span>
+              {s.offer && (
+                <div className="offer">
+                  <strong className="offer-price">{s.offer.price.toLocaleString("fr-FR")} DA</strong>
+                  <span className="meta">
+                    {s.offer.title} · {t(`shop.condition.${s.offer.condition}`)}
+                    {s.offer.compatible === true && <> · <span className="ok">{t("shops.offer.fits")}</span></>}
+                    {s.offer.compatible === false && ` · ${t("shops.offer.check")}`}
+                    {s.offer.count > 1 && ` · ${t("shops.offer.more", { n: s.offer.count - 1 })}`}
+                  </span>
+                  {s.offer.confirmed_days != null && s.offer.confirmed_days > 30 && (
+                    <span className="meta">{t("shops.offer.age", { n: s.offer.confirmed_days })}</span>
+                  )}
+                </div>
+              )}
               <ul className="reasons">
                 {s.reasons.map((r) => <li key={r} className={r === "fiche à reconfirmer" ? "warn" : undefined}>{r}</li>)}
               </ul>

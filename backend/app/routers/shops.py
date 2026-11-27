@@ -44,7 +44,7 @@ from ..services import shop_onboarding as onboarding
 from ..services import shop_stats
 from ..services import shop_team as team
 from ..services.media import InvalidImage, storage
-from ..services.recommendation import RECOMMENDABLE_STATUSES, category_lineage, recommend
+from ..services.recommendation import RECOMMENDABLE_STATUSES, category_lineage, offers, recommend
 
 router = APIRouter()
 MAX_IMPORT_BYTES = 5 * 1024 * 1024
@@ -116,6 +116,10 @@ def shops_recommend(
         out.append({**shop_out(shop, full=False), "score": sc.score, "breakdown": sc.breakdown,
                     "reasons": sc.reasons + (["répond vite aux demandes"] if fast else []), "stale": sc.stale,
                     "distance_km": sc.distance_km, "fast_reply": fast})
+    # Comparer les prix : meilleure offre du catalogue de chaque magasin
+    best = offers(db, [x["id"] for x in out], category_id, variant_id)
+    for x in out:
+        x["offer"] = best.get(x["id"])
     # Statistiques des magasins (sans donnée personnelle) : apparitions, et pièce cherchée près de chez qui
     variant = db.get(VehicleVariant, variant_id) if variant_id else None
     shop_stats.record(db, [x["id"] for x in out], "impression", client_hash(request))

@@ -141,3 +141,14 @@ test("voyant touché : description remplie, conseil de sûreté immédiat pour l
   await expect(page.getByRole("heading", { name: "Causes probables" })).toBeVisible({ timeout: 60_000 });
   await expect(page.getByRole("alert").filter({ hasText: "Ne roulez pas" })).toBeVisible();
 });
+
+test("comparer les prix : chaque magasin affiche son prix au catalogue, tri par prix croissant", async ({ page }) => {
+  await page.goto("/pieces");
+  await page.getByLabel("Nom de la pièce").fill("plaquettes avant");
+  await page.getByRole("button", { name: "Voir les magasins" }).first().click();
+  await expect(page.locator(".offer").first()).toBeVisible({ timeout: 30_000 });
+  await page.getByRole("button", { name: "Prix", exact: true }).click();
+  const prices = (await page.locator(".offer-price").allTextContents()).map((p) => Number(p.replace(/\D/g, "")));
+  expect(prices.length).toBeGreaterThan(0);
+  expect(prices).toEqual([...prices].sort((a, b) => a - b));
+});

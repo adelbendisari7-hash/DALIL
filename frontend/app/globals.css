@@ -819,3 +819,8 @@ footer.disclaimer { max-width: 760px; margin: 0 auto; padding: 0 16px 2rem; colo
 .maint-pill.is-check { background: var(--blue-tint); color: var(--blue-deep); border-color: transparent; }
 .maint-pill.is-ok { background: var(--green-bg); color: var(--green); border-color: transparent; }
 .maint-count { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; padding: 0 6px; margin-left: 0.4rem; border-radius: 10px; background: var(--red); color: #fff; font-size: 0.72rem; font-weight: 800; }
+
+/* --- Comparer les prix --- */
+.sort-toggle { margin: 0.75rem 0 0; }
+.offer { display: flex; flex-direction: column; gap: 0.1rem; margin: 0.5rem 0 0.1rem; padding: 0.55rem 0.75rem; border-radius: var(--radius-m); background: var(--surface-2); border: 1px solid var(--line); }
+.offer-price { font-family: var(--font-display), sans-serif; font-size: 1.4rem; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; }

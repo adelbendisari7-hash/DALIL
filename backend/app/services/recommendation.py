@@ -243,3 +243,34 @@ def recommend(
     by_id = {s.id: s for s in shops}
     ranked = [r for r in rank(signals) if r.breakdown["brand"] or r.breakdown["category"] or r.breakdown["catalog"]]
     return [(by_id[r.shop_id], r) for r in ranked[:limit]]
+
+
+def offers(db: Session, shop_ids: list[int], category_id: int, variant_id: int | None = None) -> dict[int, dict]:
+    """Meilleure offre de chaque magasin pour comparer les prix : le produit en stock le moins cher **compatible**
+    avec le véhicule ; à défaut, le moins cher de la famille (compatibilité à vérifier avec le vendeur). Prix lus dans
+    le catalogue du magasin, jamais estimés."""
+    if not shop_ids:
+        return {}
+    _, descendants = category_lineage(db, category_id)
+    products = list(db.scalars(select(Product).where(Product.shop_id.in_(shop_ids), Product.category_id.in_(descendants),
+                                                     Product.in_stock.is_(True), Product.price.is_not(None))))
+    fit = set()
+    if variant_id and products:
+        fit = {pid for (pid,) in db.execute(select(ProductFitment.product_id).where(
+            ProductFitment.variant_id == variant_id, ProductFitment.product_id.in_([p.id for p in products])))}
+    now = datetime.now(timezone.utc)
+    out: dict[int, dict] = {}
+    for sid in shop_ids:
+        mine = [p for p in products if p.shop_id == sid]
+        compatible = [p for p in mine if p.id in fit]
+        pool, ok = (compatible, True) if compatible else (mine, False if variant_id else None)
+        if not pool:
+            continue
+        best = min(pool, key=lambda p: p.price)
+        confirmed = best.price_confirmed_at
+        if confirmed is not None and confirmed.tzinfo is None:
+            confirmed = confirmed.replace(tzinfo=timezone.utc)
+        out[sid] = {"product_id": best.id, "title": best.title, "price": best.price, "condition": best.condition,
+                    "oem_ref": best.oem_ref, "photo_url": best.photo_url, "compatible": ok, "count": len(pool),
+                    "confirmed_days": (now - confirmed).days if confirmed else None}
+    return out

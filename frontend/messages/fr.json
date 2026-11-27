@@ -560,5 +560,12 @@
   "maint.save": "Noter l'entretien",
   "maint.undo": "Annuler le dernier",
   "maint.shops": "Voir les magasins",
-  "maint.disclaimer": "Intervalles indicatifs, les plus courants pour une voiture de tourisme : le carnet d'entretien de votre voiture fait foi. En ville, par forte chaleur ou sur route poussiéreuse, ils sont souvent plus courts."
+  "maint.disclaimer": "Intervalles indicatifs, les plus courants pour une voiture de tourisme : le carnet d'entretien de votre voiture fait foi. En ville, par forte chaleur ou sur route poussiéreuse, ils sont souvent plus courts.",
+  "shops.sort": "Trier les magasins",
+  "shops.sort.score": "Pertinence",
+  "shops.sort.price": "Prix",
+  "shops.offer.fits": "compatible avec votre véhicule",
+  "shops.offer.check": "compatibilité à vérifier avec le vendeur",
+  "shops.offer.more": "{n} autres au catalogue",
+  "shops.offer.age": "Prix indiqué il y a {n} jours : confirmez-le en appelant."
 }
