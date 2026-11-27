@@ -89,6 +89,17 @@ if not "%USE_LLM%"=="1" (
   echo      Modele de langage affine absent : diagnostic sans modele de langage
 )
 start "DALIL - API (codes SMS affiches ici)" /D "%~dp0backend" cmd /k .venv\Scripts\python -m uvicorn app.main:app --port 8000
+rem Le site attend que l'API reponde (15 s environ) : sinon il affiche des erreurs ECONNREFUSED inoffensives mais
+rem inquietantes. Les modeles finissent de se charger ensuite ; l'accueil affiche alors "DALIL se prepare".
+echo      Attente de l'API...
+set /a apitries=0
+:waitapi
+set /a apitries+=1
+curl -s -o nul http://127.0.0.1:8000/health && goto apiup
+if %apitries% geq 60 goto apiup
+ping -n 2 127.0.0.1 >nul
+goto waitapi
+:apiup
 if "%SITE_DEV%"=="1" (
   start "DALIL - Site" /D "%~dp0frontend" cmd /k npm run dev
 ) else (
