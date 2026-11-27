@@ -40,7 +40,13 @@ function Login() {
         r = await api<{ token: string; user: User }>("/auth/me", { method: "PATCH", json: { consent: true } });
         session.save(r.token, r.user);
       }
-      router.push(next);
+      // Compte client pas encore complet (prénom, nom) : on le crée d'abord, puis retour là où il allait.
+      // Pas pour l'espace magasin ni l'administration, qui ont leur propre parcours.
+      if (r.user.role === "driver" && !r.user.complete && !/^\/(espace-magasin|admin)/.test(next)) {
+        router.push(`/compte?bienvenue=1&next=${encodeURIComponent(next)}`);
+      } else {
+        router.push(next);
+      }
     } catch (err) { fail(err); }
     setBusy(false);
   }

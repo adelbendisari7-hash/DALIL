@@ -4,12 +4,21 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import VehiclePicker from "@/components/VehiclePicker";
 import VoiceInput from "@/components/VoiceInput";
-import { api, ApiError, type Vehicle } from "@/lib/api";
+import { api, ApiError, session, type UserCar, type Vehicle } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
 export default function Home() {
   const router = useRouter();
   const [vehicle, setVehicle] = useState<Vehicle | null>(null);
+  // Client connecté avec des voitures : il choisit l'une d'elles (le diagnostic est rangé dans son historique)
+  const [cars, setCars] = useState<UserCar[]>([]);
+  const [car, setCar] = useState<number | "other">("other");
+  useEffect(() => {
+    if (!session.token()) return;
+    api<UserCar[]>("/me/vehicles")
+      .then((cs) => { setCars(cs); if (cs.length) setCar(cs[0].id); })
+      .catch(() => undefined);
+  }, []);
   const [text, setText] = useState("");
   const [dtc, setDtc] = useState("");
   const [busy, setBusy] = useState(false);
@@ -50,7 +59,9 @@ export default function Home() {
     try {
       const r = await api<{ session_id: number }>("/diagnosis", {
         method: "POST",
-        json: { text, dtc_codes: codes, variant_id: vehicle?.variantId ?? null, defer_llm: true },
+        json: car !== "other"
+          ? { text, dtc_codes: codes, user_vehicle_id: car, defer_llm: true }
+          : { text, dtc_codes: codes, variant_id: vehicle?.variantId ?? null, defer_llm: true },
       });
       router.push(`/diagnostic/${r.session_id}`);
     } catch (err) {
@@ -65,7 +76,22 @@ export default function Home() {
       <p className="lead">{t("home.lead")}</p>
       {warming && <p className="notice" role="status">{t("home.warming")}</p>}
 
-      <VehiclePicker onChange={setVehicle} />
+      {cars.length > 0 && (
+        <fieldset style={{ border: 0, padding: 0, margin: "1.25rem 0 0" }}>
+          <legend style={{ fontWeight: 600 }}>{t("home.car")}</legend>
+          <div className="chips">
+            {cars.map((c) => (
+              <button key={c.id} type="button" className="chip" aria-pressed={car === c.id} onClick={() => setCar(c.id)}>
+                {c.nickname || c.display}
+              </button>
+            ))}
+            <button type="button" className="chip" aria-pressed={car === "other"} onClick={() => setCar("other")}>
+              {t("home.car.other")}
+            </button>
+          </div>
+        </fieldset>
+      )}
+      {car === "other" && <VehiclePicker onChange={setVehicle} />}
 
       <label htmlFor="symptom">{t("home.label")}</label>
       <textarea

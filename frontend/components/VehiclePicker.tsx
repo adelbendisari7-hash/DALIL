@@ -18,8 +18,9 @@ function modelYears(vs: Variant[]): number[] {
   return Array.from(years).sort((a, b) => b - a);
 }
 
-/** Sélection du véhicule (F1) : marque, modèle, année, motorisation. Mémorisé sur l'appareil. */
-export default function VehiclePicker({ onChange }: { onChange: (v: Vehicle | null) => void }) {
+/** Sélection du véhicule (F1) : marque, modèle, année, motorisation. Mémorisé sur l'appareil, sauf
+ * `remember={false}` (fiche d'une voiture du compte client : le choix appartient à la fiche, pas à l'appareil). */
+export default function VehiclePicker({ onChange, remember = true }: { onChange: (v: Vehicle | null) => void; remember?: boolean }) {
   const [saved, setSaved] = useState<Vehicle | null>(null);
   const [editing, setEditing] = useState(false);
   const [brands, setBrands] = useState<Brand[]>([]);
@@ -39,10 +40,10 @@ export default function VehiclePicker({ onChange }: { onChange: (v: Vehicle | nu
   const [missingSent, setMissingSent] = useState(false);
 
   useEffect(() => {
-    const v = vehicleStore.get();
+    const v = remember ? vehicleStore.get() : null;
     setSaved(v);
     setEditing(!v);
-    onChange(v);
+    if (remember) onChange(v);
     api<Brand[]>("/vehicles/brands").then(setBrands).catch(() => undefined);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -122,8 +123,9 @@ export default function VehiclePicker({ onChange }: { onChange: (v: Vehicle | nu
       brand: brand.name,
       model: model.name,
       label: `${brand.name} ${model.name}${v.engine === OTHER_ENGINE ? "" : ` ${v.engine}`}${year ? ` ${year}` : ""}`,
+      year: year || null,
     };
-    vehicleStore.set(veh);
+    if (remember) vehicleStore.set(veh);
     setSaved(veh);
     setEditing(false);
     onChange(veh);

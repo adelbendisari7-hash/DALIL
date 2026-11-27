@@ -289,3 +289,18 @@ legend { padding: 0; }
 .feedback p { margin-bottom: 0.25rem; }
 .examples { margin-top: 0.6rem; }
 .examples .chip { text-align: start; }
+
+/* --- Compte client --- */
+/* Matricule : rappel de la plaque (fond blanc, bord sombre), chiffres à chasse fixe */
+.plate {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  padding: 0.05rem 0.45rem;
+  background: var(--surface);
+  margin-top: 0.25rem;
+}
+.car .actions .btn { min-height: 44px; padding: 0.4rem 0.8rem; }

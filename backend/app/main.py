@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import get_settings
-from .routers import admin, auth, public, shops
+from .routers import account, admin, auth, public, shops
 
 app = FastAPI(
     title="DALIL API",
@@ -22,7 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-for r in (public.router, shops.router, auth.router, admin.router):
+for r in (public.router, shops.router, auth.router, account.router, admin.router):
     app.include_router(r, prefix="/api/v1")
 
 

@@ -16,7 +16,11 @@ type Metrics = {
   top_diagnosed_vehicles: { vehicle: string; count: number }[];
   requested_missing_vehicles: { vehicle: string; count: number }[];
 };
-type Tab = "pending" | "verified" | "metrics" | "import";
+type PlateReport = {
+  id: number; plate: string; message: string | null; created_at: string;
+  reporter: { name: string | null; phone: string } | null; holder: { name: string | null; phone: string; since: string } | null;
+};
+type Tab = "pending" | "verified" | "metrics" | "import" | "plates";
 
 const pct = (x: number | null) => (x == null ? "–" : `${Math.round(x * 100)} %`);
 
@@ -26,6 +30,7 @@ export default function Admin() {
   const [shops, setShops] = useState<Shop[]>([]);
   const [stale, setStale] = useState<Shop[]>([]);
   const [metrics, setMetrics] = useState<Metrics | null>(null);
+  const [plates, setPlates] = useState<PlateReport[]>([]);
   const [msg, setMsg] = useState("");
   const [source, setSource] = useState("terrain");
 
@@ -38,7 +43,13 @@ export default function Admin() {
       if (tab === "verified") setStale(await api<Shop[]>("/admin/stale").catch(() => []));
     }
     if (tab === "metrics") setMetrics(await api<Metrics>("/admin/metrics").catch(() => null));
+    if (tab === "plates") setPlates(await api<PlateReport[]>("/admin/plate-reports").catch(() => []));
   }, [tab]);
+
+  async function resolvePlate(id: number, action: "release" | "reject") {
+    await api(`/admin/plate-reports/${id}/${action}`, { method: "POST" }).catch(() => undefined);
+    load();
+  }
 
   useEffect(() => { if (allowed) load(); }, [allowed, load]);
 
@@ -70,7 +81,7 @@ export default function Admin() {
       <h1>{t("admin.title")}</h1>
       <Link className="btn btn-primary" href="/admin/terrain">{t("admin.field")}</Link>
       <div className="tabs" role="tablist">
-        {(["pending", "verified", "metrics", "import"] as Tab[]).map((k) => (
+        {(["pending", "verified", "metrics", "import", "plates"] as Tab[]).map((k) => (
           <button key={k} role="tab" aria-selected={tab === k} onClick={() => { setTab(k); setMsg(""); }}>{t(`admin.tab.${k}`)}</button>
         ))}
       </div>
@@ -133,6 +144,31 @@ export default function Admin() {
           <p className="help">{t("admin.metrics.missingVehicles.help")}</p>
           <ul className="list">
             {metrics.requested_missing_vehicles.map((v) => <li key={v.vehicle}><span>{v.vehicle}</span><span>{v.count}</span></li>)}
+          </ul>
+        </>
+      )}
+
+      {tab === "plates" && (
+        <>
+          {plates.length === 0 && <p className="help">{t("admin.plates.empty")}</p>}
+          <ul className="list">
+            {plates.map((p) => (
+              <li key={p.id}>
+                <span>
+                  <span className="plate">{p.plate}</span>
+                  <br />
+                  <span className="meta">
+                    {t("admin.plates.holder")} : {p.holder ? `${p.holder.name ?? "?"} (${p.holder.phone})` : "—"} ·{" "}
+                    {t("admin.plates.reporter")} : {p.reporter ? `${p.reporter.name ?? "?"} (${p.reporter.phone})` : "—"}
+                  </span>
+                  {p.message && <><br />« {p.message} »</>}
+                </span>
+                <span className="actions" style={{ marginTop: 0 }}>
+                  <button className="btn" onClick={() => resolvePlate(p.id, "release")}>{t("admin.plates.release")}</button>
+                  <button className="btn btn-ghost" onClick={() => resolvePlate(p.id, "reject")}>{t("admin.plates.reject")}</button>
+                </span>
+              </li>
+            ))}
           </ul>
         </>
       )}

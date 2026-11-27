@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from datetime import datetime
+import re
+from datetime import date, datetime
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -12,6 +13,7 @@ DTC_PATTERN = r"^[PCBUpcbu][0-3][0-9A-Fa-f]{3}$"
 class DiagnosisRequest(BaseModel):
     text: str = Field("", max_length=2000)
     variant_id: int | None = None
+    user_vehicle_id: int | None = None   # voiture du compte client (remplace variant_id si elle en a un)
     dtc_codes: list[str] = Field(default_factory=list, max_length=10)
     mode: str = Field("full", pattern="^(full|classifier|retrieval)$")
     # True : répondre tout de suite avec le classifieur (`llm: "pending"`) ; le modèle de langage affine en
@@ -110,10 +112,136 @@ class OtpVerify(BaseModel):
     code: str = Field(min_length=6, max_length=6)
 
 
+EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$")
+NAME_RE = re.compile(r"^[^\d@<>{}\[\]\/|]{1,60}$")   # lettres de toutes langues, espaces, tirets, apostrophes
+
+
+def _clean_name(v: str | None) -> str | None:
+    if v is None:
+        return None
+    v = " ".join(v.split())
+    if not v:
+        raise ValueError("ne peut pas être vide")
+    if not NAME_RE.match(v):
+        raise ValueError("ne doit contenir que des lettres")
+    return v
+
+
 class MePatch(BaseModel):
     name: str | None = None
     role: str | None = Field(None, pattern="^(driver|mechanic|shop_owner)$")
     consent: bool | None = None
+    # Compte client : envoyer "" pour effacer un champ facultatif (e-mail, commune, date de naissance)
+    first_name: str | None = Field(None, max_length=60)
+    last_name: str | None = Field(None, max_length=60)
+    email: str | None = Field(None, max_length=160)
+    commune_id: int | None = None
+    birth_date: date | None = None
+    lang: str | None = Field(None, pattern="^(fr|ar)$")
+    clear: list[str] = Field(default_factory=list)   # champs facultatifs à effacer : email, commune_id, birth_date
+
+    @field_validator("first_name", "last_name")
+    @classmethod
+    def _names(cls, v):
+        try:
+            return _clean_name(v)
+        except ValueError as e:
+            raise ValueError(f"Prénom ou nom : {e}") from None
+
+    @field_validator("email")
+    @classmethod
+    def _email(cls, v):
+        if v is None or not v.strip():
+            return None
+        v = v.strip().lower()
+        if not EMAIL_RE.match(v):
+            raise ValueError("Adresse e-mail invalide")
+        return v
+
+    @field_validator("birth_date")
+    @classmethod
+    def _birth(cls, v):
+        if v is None:
+            return v
+        age = (date.today() - v).days / 365.25
+        if not 16 <= age <= 110:
+            raise ValueError("Date de naissance invalide (16 ans au moins)")
+        return v
+
+    @field_validator("clear")
+    @classmethod
+    def _clear(cls, v):
+        bad = set(v) - {"email", "commune_id", "birth_date"}
+        if bad:
+            raise ValueError(f"Champ impossible à effacer : {', '.join(sorted(bad))}")
+        return v
+
+
+VIN_RE = re.compile(r"^[A-HJ-NPR-Z0-9]{17}$")   # 17 caractères, sans I, O ni Q (norme ISO 3779)
+
+
+def normalize_plate(raw: str) -> str:
+    """Matricule algérien -> chiffres seuls : numéro d'ordre (3 à 6 chiffres), catégorie et année (3), wilaya (2).
+    « 12345 115 31 », « 12345-115-31 » et « 12345.115.31 » donnent tous « 1234511531 »."""
+    digits = re.sub(r"[\s\-./_]", "", raw or "")
+    if not digits.isdigit() or not 8 <= len(digits) <= 11:
+        raise ValueError("Matricule invalide : 8 à 11 chiffres, par exemple 12345-115-31")
+    if digits[-2:] == "00":
+        raise ValueError("Matricule invalide : les deux derniers chiffres sont le numéro de la wilaya")
+    return digits
+
+
+def format_plate(digits: str) -> str:
+    return f"{digits[:-5]}-{digits[-5:-2]}-{digits[-2:]}"
+
+
+class VehicleIn(BaseModel):
+    plate: str = Field(..., max_length=24)
+    variant_id: int | None = None
+    year: int | None = Field(None, ge=1950, le=2100)
+    label: str | None = Field(None, max_length=120)
+    nickname: str | None = Field(None, max_length=60)
+    mileage_km: int | None = Field(None, ge=0, le=2_000_000)
+    vin: str | None = Field(None, max_length=24)
+
+    @field_validator("plate")
+    @classmethod
+    def _plate(cls, v):
+        return normalize_plate(v)
+
+    @field_validator("vin")
+    @classmethod
+    def _vin(cls, v):
+        if v is None or not v.strip():
+            return None
+        v = re.sub(r"[\s\-]", "", v).upper()
+        if not VIN_RE.match(v):
+            raise ValueError("Numéro de châssis invalide : 17 caractères, sans I, O ni Q")
+        return v
+
+    @field_validator("label", "nickname")
+    @classmethod
+    def _strip(cls, v):
+        return " ".join(v.split()) or None if v is not None else None
+
+
+class VehiclePatch(VehicleIn):
+    plate: str | None = Field(None, max_length=24)   # tout est facultatif dans une modification
+
+    @field_validator("plate")
+    @classmethod
+    def _plate(cls, v):
+        return None if v is None else normalize_plate(v)
+
+
+class PlateReportIn(BaseModel):
+    plate: str = Field(..., max_length=24)
+    message: str | None = Field(None, max_length=500)
+
+    @field_validator("plate")
+    @classmethod
+    def _plate(cls, v):
+        return normalize_plate(v)
 
 
 class PartRequestIn(BaseModel):

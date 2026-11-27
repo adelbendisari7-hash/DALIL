@@ -8,8 +8,8 @@ from sqlalchemy.orm import Session
 from ..config import get_settings
 from ..db import SessionLocal, get_db
 from ..models import (
-    Brand, Commune, DiagnosisSession, DtcCode, DtcPart, Model, PartCategory, PartReference, Product, User, VehicleRequest,
-    VehicleVariant,
+    Brand, Commune, DiagnosisSession, DtcCode, DtcPart, Model, PartCategory, PartReference, Product, User, UserVehicle,
+    VehicleRequest, VehicleVariant,
 )
 from ..schemas import AnswersRequest, DiagnosisRequest, VehicleRequestIn
 from ..security import client_hash, current_user_optional, diagnosis_limiter, feedback_limiter
@@ -186,12 +186,22 @@ def diagnosis(body: DiagnosisRequest, background: BackgroundTasks, db: Session =
               user: User | None = Depends(current_user_optional)):
     if not body.text.strip() and not body.dtc_codes:
         raise HTTPException(422, "Décrivez le problème ou saisissez un code OBD-II")
-    if body.variant_id and not db.get(VehicleVariant, body.variant_id):
+    variant_id, uv = body.variant_id, None
+    if body.user_vehicle_id is not None:   # voiture du compte : son modèle remplace celui du sélecteur
+        uv = db.get(UserVehicle, body.user_vehicle_id)
+        if not user or not uv or uv.user_id != user.id:
+            raise HTTPException(404, "Voiture inconnue")
+        variant_id = uv.variant_id or variant_id
+    if variant_id and not db.get(VehicleVariant, variant_id):
         raise HTTPException(422, "Véhicule inconnu")
-    inp = DiagnosisInput(text=body.text, variant_id=body.variant_id, dtc_codes=body.dtc_codes)
+    inp = DiagnosisInput(text=body.text, variant_id=variant_id, dtc_codes=body.dtc_codes)
     defer = _defer(body.defer_llm, body.mode)
     result, chunks = run_diagnosis(db, inp, mode=body.mode, use_llm=not defer)
-    sess = DiagnosisSession(user_id=user.id if user else None, variant_id=body.variant_id, input_text=body.text,
+    if uv is not None and not uv.variant_id:   # voiture absente du référentiel : le nom saisi par le client
+        from .account import vehicle_label
+        result["vehicle"] = vehicle_label(uv)
+    sess = DiagnosisSession(user_id=user.id if user else None, variant_id=variant_id, input_text=body.text,
+                            user_vehicle_id=body.user_vehicle_id,
                             lang=result["lang"], dtc_codes=body.dtc_codes, answers={},
                             model_version=get_settings().model_version)
     saved = _save(db, sess, result, chunks)

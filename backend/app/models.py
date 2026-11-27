@@ -8,11 +8,12 @@ Choix de portabilité : le même code tourne sur PostgreSQL (cible) et SQLite (r
 """
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 from sqlalchemy import (
     JSON,
     Boolean,
+    Date,
     DateTime,
     Float,
     ForeignKey,
@@ -73,10 +74,45 @@ class User(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     phone: Mapped[str] = mapped_column(String(20), unique=True, index=True)
     role: Mapped[str] = mapped_column(String(20), default="driver")  # driver|mechanic|shop_owner|admin
-    name: Mapped[str | None] = mapped_column(String(120))
+    name: Mapped[str | None] = mapped_column(String(120))   # « Prénom Nom », gardé pour l'affichage et les magasins
+    # Compte client (27/11/2026) : prénom, nom et téléphone obligatoires pour un compte complet ; le reste facultatif
+    first_name: Mapped[str | None] = mapped_column(String(60))
+    last_name: Mapped[str | None] = mapped_column(String(60))
+    email: Mapped[str | None] = mapped_column(String(160))
+    commune_id: Mapped[int | None] = mapped_column(ForeignKey("communes.id"))
+    birth_date: Mapped[date | None] = mapped_column(Date)
     lang: Mapped[str] = mapped_column(String(5), default="fr")
     consent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class UserVehicle(Base):
+    """Voiture d'un client. Le matricule (normalisé : chiffres seuls) est unique dans toute la base : un matricule
+    déjà pris se signale (PlateReport) et l'administrateur le libère, par exemple après une revente."""
+    __tablename__ = "user_vehicles"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    plate: Mapped[str] = mapped_column(String(16), unique=True)
+    variant_id: Mapped[int | None] = mapped_column(ForeignKey("vehicle_variants.id"))
+    year: Mapped[int | None] = mapped_column(Integer)
+    label: Mapped[str | None] = mapped_column(String(120))   # voiture absente du référentiel : marque et modèle saisis
+    nickname: Mapped[str | None] = mapped_column(String(60))
+    mileage_km: Mapped[int | None] = mapped_column(Integer)
+    vin: Mapped[str | None] = mapped_column(String(17))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    variant: Mapped[VehicleVariant | None] = relationship()
+
+
+class PlateReport(Base):
+    """Signalement « ce matricule est le mien mais il est déjà enregistré » ; traité par l'administrateur."""
+    __tablename__ = "plate_reports"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    plate: Mapped[str] = mapped_column(String(16), index=True)
+    reporter_user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
+    message: Mapped[str | None] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(String(20), default="open")   # open|released|rejected
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class OtpCode(Base):
@@ -292,6 +328,8 @@ class DiagnosisSession(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"))
     variant_id: Mapped[int | None] = mapped_column(ForeignKey("vehicle_variants.id"))
+    # Voiture du compte client concernée (historique par voiture) ; vidé si la voiture est retirée du compte
+    user_vehicle_id: Mapped[int | None] = mapped_column(ForeignKey("user_vehicles.id", ondelete="SET NULL"))
     input_text: Mapped[str] = mapped_column(Text)
     lang: Mapped[str] = mapped_column(String(5), default="fr")
     dtc_codes: Mapped[list] = mapped_column(JSON, default=list)

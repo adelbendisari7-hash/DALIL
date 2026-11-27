@@ -20,13 +20,15 @@ from ..models import (
     PartCategory,
     PartReference,
     PartRequest,
+    PlateReport,
     Product,
     Shop,
     ShopBrand,
     ShopCategory,
     User,
+    UserVehicle,
 )
-from ..schemas import ShopIn, shop_out
+from ..schemas import ShopIn, format_plate, shop_out
 from ..security import log_admin, normalize_phone, require_admin
 from ..services.catalog import resolve_category, resolve_variants
 from ..services.imports import import_shops, read_table
@@ -217,3 +219,34 @@ def admin_actions(db: Session = Depends(get_db)):
     rows = db.scalars(select(AdminAction).order_by(AdminAction.id.desc()).limit(200))
     return [{"id": a.id, "user_id": a.user_id, "action": a.action, "target": a.target, "details": a.details,
              "created_at": a.created_at.isoformat()} for a in rows]
+
+
+@router.get("/plate-reports")
+def admin_plate_reports(status: str = "open", db: Session = Depends(get_db)):
+    """Signalements « ce matricule est le mien » : qui signale, qui détient le matricule, depuis quand."""
+    out = []
+    for r in db.scalars(select(PlateReport).where(PlateReport.status == status).order_by(PlateReport.id)):
+        holder = db.scalar(select(UserVehicle).where(UserVehicle.plate == r.plate))
+        reporter = db.get(User, r.reporter_user_id) if r.reporter_user_id else None
+        owner = db.get(User, holder.user_id) if holder else None
+        out.append({"id": r.id, "plate": format_plate(r.plate), "status": r.status, "message": r.message,
+                    "created_at": r.created_at,
+                    "reporter": {"name": reporter.name, "phone": reporter.phone} if reporter else None,
+                    "holder": {"name": owner.name, "phone": owner.phone, "since": holder.created_at} if owner else None})
+    return out
+
+
+@router.post("/plate-reports/{report_id}/{action}")
+def admin_plate_report_resolve(report_id: int, action: str, db: Session = Depends(get_db),
+                               admin: User = Depends(require_admin)):
+    from .account import resolve_report
+
+    if action not in ("release", "reject"):
+        raise HTTPException(404, "Action inconnue")
+    report = db.get(PlateReport, report_id)
+    if not report:
+        raise HTTPException(404, "Signalement inconnu")
+    out = resolve_report(db, report, action)
+    log_admin(db, admin, f"plate.{action}", str(report_id))
+    db.commit()
+    return out
