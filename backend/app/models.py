@@ -282,6 +282,8 @@ class Product(Base):
     in_stock: Mapped[bool] = mapped_column(Boolean, default=True)
     photo_url: Mapped[str | None] = mapped_column(String(255))
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+    # Dernière fois que le magasin a confirmé le prix et le stock (« prix confirmé il y a N jours »)
+    price_confirmed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=utcnow)
     fitments: Mapped[list[ProductFitment]] = relationship(cascade="all, delete-orphan")
 
 

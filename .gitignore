@@ -51,3 +51,7 @@ ml/artifacts/famille_rerank_*.joblib
 data/test_prive/
 # Résultats sur le jeu de test L'Argus : contiennent les textes des erreurs (données sous accord)
 ml/results/*largus-test*
+
+# Photos des produits et des devantures envoyées par les magasins (services/media.py) : jamais dans git
+data/uploads/
+backend/e2e-media/

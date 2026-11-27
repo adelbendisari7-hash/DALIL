@@ -51,6 +51,9 @@ test("un magasin test s'inscrit et publie 20 produits par import Excel", async (
   const file = info.outputPath("catalogue.xlsx");
   makeCatalog(file, 20);
   await page.getByLabel("Importer un fichier Excel").setInputFiles(file);
+  // Aperçu d'abord, rien n'est enregistré avant la confirmation
+  await expect(page.getByText("Aperçu : 20 produits à ajouter, 0 à mettre à jour, 0 lignes en erreur.")).toBeVisible();
+  await page.getByRole("button", { name: "Importer 20 produits" }).click();
   await expect(page.getByText("20 ajoutés, 0 mis à jour, 0 lignes en erreur.")).toBeVisible();
   await expect(page.getByRole("tab", { name: "Catalogue (20)" })).toBeVisible();
 
@@ -122,4 +125,51 @@ test("adresse tapée : suggestions de lieux à Oran, épingle posée puis vérif
   await page.getByRole("link", { name: "Affiche pour le comptoir" }).click();
   await expect(page.getByRole("heading", { name: "Trouvez-nous sur DALIL", exact: true })).toBeVisible();
   await expect(page.locator(".poster-qr svg")).toBeVisible();
+});
+
+
+test("catalogue rapide : un produit en moins de 30 s avec sa photo, prix et stock en un toucher", async ({ page, request }) => {
+  const phone = `0557${String(Date.now()).slice(-6)}`;
+  const r = await request.post("/api/v1/auth/register", { data: { first_name: "Karim", last_name: "Test", phone,
+    password: "magasin-e2e", consent: true } });
+  const token = (await r.json()).token;
+  await request.patch("/api/v1/auth/me", { headers: { Authorization: `Bearer ${token}` }, data: { role: "shop_owner" } });
+  await request.post("/api/v1/shops", { headers: { Authorization: `Bearer ${token}` },
+    data: { name: "[TEST] Pièces Rapides", lat: 35.70, lng: -0.63, category_ids: [], brand_ids: [] } });
+  await asUser(page, request, token);
+  await page.goto("/espace-magasin");
+  await page.getByRole("tab", { name: /Catalogue/ }).click();
+
+  // Photo prise par le téléphone (JPEG fabriqué par le navigateur, comme l'appareil photo)
+  const jpeg = await page.evaluate(() => {
+    const c = document.createElement("canvas");
+    c.width = 1600; c.height = 1200;
+    const g = c.getContext("2d")!;
+    g.fillStyle = "#c33"; g.fillRect(0, 0, 1600, 1200);
+    return c.toDataURL("image/jpeg", 0.9).split(",")[1];
+  });
+
+  const t0 = Date.now();
+  await page.getByRole("button", { name: "Plaquettes de frein avant", exact: true }).click();
+  await expect(page.getByLabel("Désignation")).toHaveValue("Plaquettes de frein avant");   // titre proposé
+  await page.getByLabel("Prix en DA").fill("4500");
+  await page.getByRole("button", { name: "Adaptable", exact: true }).click();
+  await page.locator(".card", { hasText: "Ajouter un produit" }).locator('input[type="file"]')
+    .setInputFiles({ name: "photo.jpg", mimeType: "image/jpeg", buffer: Buffer.from(jpeg, "base64") });
+  await expect(page.locator(".card", { hasText: "Ajouter un produit" }).locator("img.thumb")).toBeVisible();
+  await page.getByRole("button", { name: "Ajouter et continuer" }).click();
+  await expect(page.getByText("Produit ajouté.")).toBeVisible();
+  expect(Date.now() - t0).toBeLessThan(30_000);
+  // « Ajouter et continuer » garde la famille : le titre est de nouveau proposé
+  await expect(page.getByLabel("Désignation")).toHaveValue("Plaquettes de frein avant");
+
+  const row = page.locator(".product-row", { hasText: "Plaquettes de frein avant" });
+  await expect(row.locator("img.thumb")).toBeVisible();   // photo envoyée et servie
+  await row.getByRole("button", { name: "En stock" }).click();
+  await expect(row.getByRole("button", { name: "Rupture" })).toBeVisible();
+  await row.getByRole("button", { name: /Modifier le prix/ }).click();
+  await row.getByLabel("Prix en DA").fill("4800");
+  await row.getByRole("button", { name: "OK" }).click();
+  await expect(row.getByText(/4.800 DA/)).toBeVisible();
+  await expect(row.getByText("Prix confirmé aujourd'hui")).toBeVisible();
 });

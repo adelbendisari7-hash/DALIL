@@ -2,19 +2,19 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import ShopForm, { cleanShop, type ShopFormValue } from "@/components/ShopForm";
+import ShopCatalog from "@/components/ShopCatalog";
 import ShopWizard from "@/components/ShopWizard";
+import { photoForm, shrinkPhoto } from "@/lib/photo";
 import type { Opening } from "@/components/HoursPicker";
-import { API, api, ApiError, session, type User } from "@/lib/api";
+import { api, ApiError, session, type User } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
 type Shop = Omit<ShopFormValue, "opening"> & {
-  id: number; status: string; verified: boolean; verified_at: string | null; reject_reason: string | null;
+  id: number; status: string; verified: boolean; photo_url: string | null; verified_at: string | null; reject_reason: string | null;
   opening: Opening | null; closed_until: string | null; closed_note: string | null;
   open_status: { open: boolean; label: string } | null;
   brands: { brand_id: number; confirmed_at: string | null }[]; categories: { category_id: number; confirmed_at: string | null }[];
 };
-type Product = { id: number; title: string; oem_ref: string | null; price: number | null; condition: string; category_id: number };
-type Family = { id: number; name: string; children: { id: number; name: string }[] };
 type Inbox = { request_id: number; shop_id: number; part: string; vehicle: string | null; available: boolean | null };
 type Claim = { id: number; status: string; reason: string | null; shop: { id: number; name: string; commune: string | null } | null };
 
@@ -163,67 +163,24 @@ function ShopStatus({ shop, onChange }: { shop: Shop; onChange: () => void }) {
 
 function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
   const [tab, setTab] = useState<"inbox" | "catalog" | "profile">("inbox");
-  const [products, setProducts] = useState<Product[]>([]);
-  const [families, setFamilies] = useState<Family[]>([]);
+  const [count, setCount] = useState<number | null>(null);
   const [inbox, setInbox] = useState<Inbox[]>([]);
   const [msg, setMsg] = useState("");
-  const [form, setForm] = useState({ title: "", category_id: "", oem_ref: "", price: "", condition: "adaptable", fits: "" });
-  const [importMsg, setImportMsg] = useState("");
 
-  const reload = useCallback(() => {
-    api<Product[]>(`/shops/${shop.id}/products`).then(setProducts).catch(() => undefined);
+  const reloadInbox = useCallback(() => {
     api<Inbox[]>("/part-requests/inbox").then((r) => setInbox(r.filter((x) => x.shop_id === shop.id))).catch(() => undefined);
   }, [shop.id]);
-
   useEffect(() => {
-    reload();
-    api<Family[]>("/parts/categories").then(setFamilies).catch(() => undefined);
-  }, [reload]);
-
-  async function addProduct(e: React.FormEvent) {
-    e.preventDefault();
-    setMsg("");
-    try {
-      const variant_ids: number[] = [];
-      if (form.fits.trim()) {
-        // La compatibilité saisie en texte passe par l'import pour être résolue côté serveur.
-        const csv = `titre;famille;reference;etat;prix;compatibilite\n${[form.title, families.flatMap((f) => f.children).find((c) => c.id === +form.category_id)?.name ?? "", form.oem_ref, form.condition, form.price, form.fits].map((x) => x.replaceAll(";", ",")).join(";")}`;
-        const fd = new FormData();
-        fd.append("file", new Blob([csv], { type: "text/csv" }), "produit.csv");
-        const r = await api<{ errors: { error: string }[] }>(`/shops/${shop.id}/products/import`, { method: "POST", body: fd });
-        if (r.errors.length) throw new ApiError(422, r.errors[0].error);
-      } else {
-        await api(`/shops/${shop.id}/products`, {
-          method: "POST",
-          json: { title: form.title, category_id: +form.category_id, oem_ref: form.oem_ref || null, price: form.price ? +form.price : null, condition: form.condition, variant_ids },
-        });
-      }
-      setForm({ ...form, title: "", oem_ref: "", price: "" });
-      setMsg(t("shop.product.added"));
-      reload();
-    } catch (err) { setMsg(errMsg(err)); }
-  }
-
-  async function importFile(e: React.ChangeEvent<HTMLInputElement>) {
-    const f = e.target.files?.[0];
-    if (!f) return;
-    const fd = new FormData();
-    fd.append("file", f);
-    try {
-      const r = await api<{ created: number; updated: number; errors: { line: number; error: string }[] }>(`/shops/${shop.id}/products/import`, { method: "POST", body: fd });
-      setImportMsg(t("shop.import.result", { created: r.created, updated: r.updated, errors: r.errors.length }) +
-        (r.errors.length ? ` ${r.errors.slice(0, 3).map((x) => `ligne ${x.line} : ${x.error}`).join(" ; ")}` : ""));
-      reload();
-    } catch (err) { setImportMsg(errMsg(err)); }
-    e.target.value = "";
-  }
+    reloadInbox();
+    api<{ id: number }[]>(`/shops/${shop.id}/products`).then((p) => setCount(p.length)).catch(() => undefined);
+  }, [reloadInbox, shop.id]);
 
   async function respond(requestId: number, available: boolean) {
     const price = available ? window.prompt(t("shop.product.price")) : null;
     await api(`/part-requests/${requestId}/responses?shop_id=${shop.id}`, {
       method: "POST", json: { available, price: price ? Number(price) || null : null },
     }).catch(() => undefined);
-    reload();
+    reloadInbox();
   }
 
   async function saveProfile(v: ShopFormValue) {
@@ -234,100 +191,73 @@ function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
     } catch (err) { setMsg(errMsg(err)); }
   }
 
-  const catName = (id: number) => families.flatMap((f) => f.children).find((c) => c.id === id)?.name ?? "";
+  async function storefront(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0];
+    e.target.value = "";
+    if (!f) return;
+    try {
+      const b = await shrinkPhoto(f);
+      await api(`/shops/${shop.id}/photo`, { method: "POST", body: photoForm(b) });
+      onChange();
+    } catch (err) { setMsg(err instanceof ApiError ? errMsg(err) : t("shop.photo.unreadable")); }
+  }
 
+  const waiting = inbox.filter((r) => r.available === null).length;
   return (
     <div>
       <ShopStatus shop={shop} onChange={onChange} />
       <div className="tabs" role="tablist">
         {(["inbox", "catalog", "profile"] as const).map((k) => (
           <button key={k} role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>
-            {k === "inbox" ? t("shop.inbox") : k === "catalog" ? `${t("shop.products")} (${products.length})` : t("shop.profile")}
+            {k === "inbox" ? `${t("shop.inbox")}${waiting ? ` (${waiting})` : ""}`
+              : k === "catalog" ? `${t("shop.products")}${count != null ? ` (${count})` : ""}` : t("shop.profile")}
           </button>
         ))}
       </div>
       {msg && <p className="help" role="status">{msg}</p>}
 
       {tab === "inbox" && (inbox.length ? (
-        <ul className="list">
-          {inbox.map((r) => (
-            <li key={r.request_id}>
-              <span><strong>{r.part}</strong>{r.vehicle ? `, ${r.vehicle}` : ""}</span>
-              {r.available === null ? (
-                <span className="actions" style={{ marginTop: 0 }}>
-                  <button className="btn" onClick={() => respond(r.request_id, true)}>{t("shop.inbox.available")}</button>
-                  <button className="btn btn-ghost" onClick={() => respond(r.request_id, false)}>{t("shop.inbox.unavailable")}</button>
-                </span>
-              ) : <span className="meta">{t("shop.inbox.answered")}</span>}
-            </li>
-          ))}
-        </ul>
-      ) : <p>{t("shop.inbox.empty")}</p>)}
-
-      {tab === "catalog" && (
-        <>
-          <form onSubmit={addProduct}>
-            <label htmlFor="p-title">{t("shop.product.title")}</label>
-            <input id="p-title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required minLength={2} />
-            <div className="row">
-              <div>
-                <label htmlFor="p-cat">{t("shop.product.category")}</label>
-                <select id="p-cat" value={form.category_id} onChange={(e) => setForm({ ...form, category_id: e.target.value })} required>
-                  <option value="">{t("vehicle.choose")}</option>
-                  {families.map((f) => (
-                    <optgroup key={f.id} label={f.name}>
-                      {f.children.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-                    </optgroup>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="p-price">{t("shop.product.price")}</label>
-                <input id="p-price" inputMode="numeric" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value.replace(/[^\d]/g, "") })} />
-              </div>
-              <div>
-                <label htmlFor="p-ref">{t("shop.product.ref")}</label>
-                <input id="p-ref" value={form.oem_ref} onChange={(e) => setForm({ ...form, oem_ref: e.target.value })} />
-              </div>
-              <div>
-                <label htmlFor="p-cond">{t("shop.product.condition")}</label>
-                <select id="p-cond" value={form.condition} onChange={(e) => setForm({ ...form, condition: e.target.value })}>
-                  {["neuf", "origine", "adaptable", "occasion"].map((c) => <option key={c} value={c}>{t(`shop.condition.${c}`)}</option>)}
-                </select>
-              </div>
-            </div>
-            <label htmlFor="p-fits">{t("shop.product.fits")}</label>
-            <input id="p-fits" placeholder="Dacia Logan 1.5 dCi 2015; Renault Symbol 2016" value={form.fits} onChange={(e) => setForm({ ...form, fits: e.target.value })} />
-            <div className="actions"><button className="btn">{t("shop.product.add")}</button></div>
-          </form>
-
-          <h3 className="section">{t("shop.import.title")}</h3>
-          <p className="help">{t("shop.import.help")}</p>
-          <p><a className="btn btn-ghost" href={`${API}/catalog/template.xlsx`} download>{t("shop.import.template")}</a></p>
-          <input type="file" accept=".xlsx,.csv" onChange={importFile} aria-label={t("shop.import.title")} />
-          {importMsg && <p className="help" role="status">{importMsg}</p>}
-
-          <ul className="list section">
-            {products.map((p) => (
-              <li key={p.id}>
-                <span>{p.title} <span className="meta">{catName(p.category_id)}{p.oem_ref ? `, réf. ${p.oem_ref}` : ""}</span></span>
-                <span>
-                  {p.price ? `${p.price.toLocaleString("fr-DZ")} DA ` : ""}
-                  <button className="chip" onClick={async () => { await api(`/shops/${shop.id}/products/${p.id}`, { method: "DELETE" }); reload(); }}>{t("shop.product.delete")}</button>
-                </span>
+        <div className="card">
+          <ul className="list">
+            {inbox.map((r) => (
+              <li key={r.request_id}>
+                <span><strong>{r.part}</strong>{r.vehicle ? `, ${r.vehicle}` : ""}</span>
+                {r.available === null ? (
+                  <span className="actions" style={{ marginTop: 0 }}>
+                    <button className="btn" onClick={() => respond(r.request_id, true)}>{t("shop.inbox.available")}</button>
+                    <button className="btn btn-ghost" onClick={() => respond(r.request_id, false)}>{t("shop.inbox.unavailable")}</button>
+                  </span>
+                ) : <span className="meta">{t("shop.inbox.answered")}</span>}
               </li>
             ))}
           </ul>
-        </>
-      )}
+        </div>
+      ) : <p className="help">{t("shop.inbox.empty")}</p>)}
+
+      {tab === "catalog" && <ShopCatalog shopId={shop.id} onCount={setCount} />}
 
       {tab === "profile" && (
-        <ShopForm
-          showPhone
-          initial={{ ...shop, landmark: shop.landmark ?? "", brand_ids: shop.brands.map((b) => b.brand_id), category_ids: shop.categories.map((c) => c.category_id) }}
-          submitLabel={t("shop.save")}
-          onSubmit={saveProfile}
-        />
+        <>
+          <div className="card">
+            <h2 className="card-title">{t("shop.storefront.title")}</h2>
+            <p className="help" style={{ marginTop: 0 }}>{t("shop.storefront.help")}</p>
+            <div className="photo-row">
+              {shop.photo_url && <img src={shop.photo_url} alt={t("shop.storefront.title")} className="storefront" />}
+              <label className="btn btn-ghost photo-button">
+                {shop.photo_url ? t("shop.photo.change") : t("shop.storefront.add")}
+                <input type="file" accept="image/*" capture="environment" onChange={storefront} hidden />
+              </label>
+            </div>
+          </div>
+          <div className="card">
+            <ShopForm
+              showPhone
+              initial={{ ...shop, landmark: shop.landmark ?? "", brand_ids: shop.brands.map((b) => b.brand_id), category_ids: shop.categories.map((c) => c.category_id) }}
+              submitLabel={t("shop.save")}
+              onSubmit={saveProfile}
+            />
+          </div>
+        </>
       )}
     </div>
   );

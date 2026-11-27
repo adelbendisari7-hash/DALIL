@@ -4,6 +4,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, File, HTTPException, Query, Request, Response, UploadFile
+from fastapi.responses import FileResponse
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -31,6 +32,7 @@ from ..schemas import (
     PartRequestIn,
     PartResponseIn,
     ProductIn,
+    ProductPatch,
     ShopIn,
     ShopPatch,
     shop_out,
@@ -38,6 +40,7 @@ from ..schemas import (
 from ..security import client_hash, current_user, current_user_optional, feedback_limiter, normalize_phone, require_role
 from ..services.imports import import_products, product_template, read_table
 from ..services import shop_onboarding as onboarding
+from ..services.media import InvalidImage, storage
 from ..services.recommendation import RECOMMENDABLE_STATUSES, category_lineage, recommend
 
 router = APIRouter()
@@ -163,7 +166,8 @@ def shop_products(shop_id: int, db: Session = Depends(get_db), user: User | None
     rows = db.scalars(select(Product).where(Product.shop_id == shop_id).order_by(Product.updated_at.desc()))
     return [
         {"id": p.id, "title": p.title, "category_id": p.category_id, "oem_ref": p.oem_ref, "part_brand": p.part_brand,
-         "condition": p.condition, "price": p.price, "in_stock": p.in_stock, "variant_ids": [f.variant_id for f in p.fitments]}
+         "condition": p.condition, "price": p.price, "in_stock": p.in_stock, "variant_ids": [f.variant_id for f in p.fitments],
+         "photo_url": p.photo_url, "price_confirmed_at": p.price_confirmed_at.isoformat() if p.price_confirmed_at else None}
         for p in rows
     ]
 
@@ -335,7 +339,7 @@ def _product_payload(db: Session, body: ProductIn) -> None:
 def product_create(shop_id: int, body: ProductIn, db: Session = Depends(get_db), user: User = Depends(current_user)):
     shop = _owned_shop(db, shop_id, user)
     _product_payload(db, body)
-    p = Product(shop_id=shop.id, **body.model_dump(exclude={"variant_ids"}))
+    p = Product(shop_id=shop.id, **body.model_dump(exclude={"variant_ids"}), price_confirmed_at=datetime.now(timezone.utc))
     p.fitments = [ProductFitment(variant_id=v) for v in set(body.variant_ids)]
     db.add(p)
     db.commit()
@@ -352,30 +356,119 @@ def product_update(shop_id: int, product_id: int, body: ProductIn, db: Session =
     for k, v in body.model_dump(exclude={"variant_ids"}).items():
         setattr(p, k, v)
     p.fitments = [ProductFitment(variant_id=v) for v in set(body.variant_ids)]
+    p.price_confirmed_at = datetime.now(timezone.utc)
     db.commit()
     return {"id": p.id}
+
+
+def _own_product(db: Session, shop_id: int, product_id: int) -> Product:
+    p = db.get(Product, product_id)
+    if not p or p.shop_id != shop_id:
+        raise HTTPException(404, "Produit inconnu")
+    return p
+
+
+@router.patch("/shops/{shop_id}/products/{product_id}")
+def product_patch(shop_id: int, product_id: int, body: ProductPatch, db: Session = Depends(get_db),
+                  user: User = Depends(current_user)):
+    """En un toucher depuis la liste : prix, en stock / rupture, ou confirmation du prix actuel."""
+    _owned_shop(db, shop_id, user)
+    p = _own_product(db, shop_id, product_id)
+    data = body.model_dump(exclude_unset=True, exclude={"confirm"})
+    for k, v in data.items():
+        setattr(p, k, v)
+    p.price_confirmed_at = datetime.now(timezone.utc)
+    db.commit()
+    return {"id": p.id, "price": p.price, "in_stock": p.in_stock, "price_confirmed_at": p.price_confirmed_at.isoformat()}
+
+
+async def _read_photo(file: UploadFile) -> bytes:
+    data = await file.read(1_000_001)
+    if len(data) > 1_000_000:
+        raise HTTPException(413, "Photo trop lourde (1 Mo au plus)")
+    return data
+
+
+@router.post("/shops/{shop_id}/products/{product_id}/photo")
+async def product_photo(shop_id: int, product_id: int, file: UploadFile = File(...), db: Session = Depends(get_db),
+                        user: User = Depends(current_user)):
+    _owned_shop(db, shop_id, user)
+    p = _own_product(db, shop_id, product_id)
+    try:
+        url = storage().save("produits", await _read_photo(file))
+    except InvalidImage as e:
+        raise HTTPException(422, str(e)) from None
+    storage().delete(p.photo_url)   # l'ancienne photo ne reste pas sur le disque
+    p.photo_url = url
+    db.commit()
+    return {"photo_url": url}
+
+
+@router.delete("/shops/{shop_id}/products/{product_id}/photo", status_code=204)
+def product_photo_delete(shop_id: int, product_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
+    _owned_shop(db, shop_id, user)
+    p = _own_product(db, shop_id, product_id)
+    storage().delete(p.photo_url)
+    p.photo_url = None
+    db.commit()
+
+
+@router.post("/shops/{shop_id}/photo")
+async def shop_photo(shop_id: int, file: UploadFile = File(...), db: Session = Depends(get_db), user: User = Depends(current_user)):
+    """Photo de la devanture (idée C) : le client reconnaît la boutique dans la rue."""
+    shop = _owned_shop(db, shop_id, user)
+    try:
+        url = storage().save("devantures", await _read_photo(file))
+    except InvalidImage as e:
+        raise HTTPException(422, str(e)) from None
+    storage().delete(shop.photo_url)
+    shop.photo_url = url
+    db.commit()
+    return {"photo_url": url}
+
+
+@router.delete("/shops/{shop_id}/photo", status_code=204)
+def shop_photo_delete(shop_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
+    shop = _owned_shop(db, shop_id, user)
+    storage().delete(shop.photo_url)
+    shop.photo_url = None
+    db.commit()
+
+
+@router.get("/media/{kind}/{name}")
+def media(kind: str, name: str):
+    """Photo publique : nom tiré au hasard (introuvable sans le connaître), contenu figé (cache long)."""
+    path = storage().path(kind, name)
+    if path is None:
+        raise HTTPException(404, "Photo introuvable")
+    return FileResponse(path, media_type="image/jpeg", headers={"Cache-Control": "public, max-age=31536000, immutable"})
 
 
 @router.delete("/shops/{shop_id}/products/{product_id}", status_code=204)
 def product_delete(shop_id: int, product_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
     _owned_shop(db, shop_id, user)
-    p = db.get(Product, product_id)
-    if not p or p.shop_id != shop_id:
-        raise HTTPException(404, "Produit inconnu")
+    p = _own_product(db, shop_id, product_id)
+    storage().delete(p.photo_url)
     db.delete(p)
     db.commit()
 
 
 @router.post("/shops/{shop_id}/products/import")
-async def product_import(shop_id: int, file: UploadFile = File(...), db: Session = Depends(get_db), user: User = Depends(current_user)):
+async def product_import(shop_id: int, file: UploadFile = File(...), dry_run: bool = False, db: Session = Depends(get_db),
+                         user: User = Depends(current_user)):
+    """Import Excel ou CSV. `dry_run=true` : aperçu (produits ajoutés, mis à jour, erreurs ligne par ligne) sans rien
+    enregistrer ; le magasin confirme ensuite."""
     shop = _owned_shop(db, shop_id, user)
     content = await file.read()
     if len(content) > MAX_IMPORT_BYTES:
         raise HTTPException(413, "Fichier trop lourd (5 Mo maximum)")
     rows = read_table(content, file.filename or "import.csv")
     rep = import_products(db, shop, rows)
-    db.commit()
-    return {"created": rep.created, "updated": rep.updated, "errors": rep.errors, "total": len(rows)}
+    if dry_run:
+        db.rollback()
+    else:
+        db.commit()
+    return {"created": rep.created, "updated": rep.updated, "errors": rep.errors, "total": len(rows), "dry_run": dry_run}
 
 
 # --- Demandes diffusées (F16) ---------------------------------------------

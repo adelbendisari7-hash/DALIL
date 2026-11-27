@@ -72,6 +72,8 @@ class Settings(BaseSettings):
     data_dir: str = str(REPO_ROOT / "data")
     # Recherche d'adresse des magasins (Nominatim, OpenStreetMap) ; vide = désactivée (tests, hors ligne)
     geocoder_url: str = "https://nominatim.openstreetmap.org/search"
+    # Photos des produits et des devantures (services/media.py), hors git
+    media_dir: str = str(REPO_ROOT / "data" / "uploads")
 
 
 @lru_cache

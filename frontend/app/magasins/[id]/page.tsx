@@ -12,9 +12,10 @@ type Shop = {
   id: number; name: string; lat: number | null; lng: number | null; address: string | null; commune: string | null;
   phone: string | null; whatsapp: string | null; hours: string | null; is_demo: boolean; parts_origin: string[];
   brands: { brand_id: number }[]; categories: { category_id: number }[];
-  landmark: string | null; verified: boolean; open_status: { open: boolean; label: string } | null;
+  landmark: string | null; verified: boolean; open_status: { open: boolean; label: string } | null; photo_url: string | null;
 };
-type Product = { id: number; title: string; oem_ref: string | null; price: number | null; condition: string; in_stock: boolean };
+type Product = { id: number; title: string; oem_ref: string | null; price: number | null; condition: string; in_stock: boolean;
+  photo_url: string | null };
 type Named = { id: number; name: string };
 type Family = Named & { children: Named[] };
 
@@ -44,6 +45,7 @@ export default function ShopPage() {
         {shop.name}
         {shop.is_demo && <span className="tag-demo">démo</span>}
       </h1>
+      {shop.photo_url && <img src={shop.photo_url} alt={t("shop.storefront.title")} className="storefront storefront-hero" />}
       {shop.verified && <p className="badge-verified">{t("shop.verified")}</p>}
       {shop.is_demo && <p className="notice">{t("shops.demo")}</p>}
       <p className="meta">{[shop.address, shop.commune].filter(Boolean).join(", ")}</p>
@@ -62,9 +64,13 @@ export default function ShopPage() {
           <h3 className="section">{t("shop.products")}</h3>
           <ul className="list">
             {products.map((p) => (
-              <li key={p.id}>
-                <span>{p.title}{p.oem_ref ? ` (réf. ${p.oem_ref})` : ""}</span>
-                <span className="meta">{p.price ? `${p.price.toLocaleString("fr-DZ")} DA` : ""} {t(`shop.condition.${p.condition}`)}</span>
+              <li key={p.id} className={`product-row${p.in_stock ? "" : " is-out"}`}>
+                {p.photo_url ? <img src={p.photo_url} alt="" className="thumb" loading="lazy" /> : <span className="thumb thumb-empty" aria-hidden />}
+                <span className="product-main">
+                  <span>{p.title}{p.oem_ref ? ` (réf. ${p.oem_ref})` : ""}</span>
+                  <span className="meta">{t(`shop.condition.${p.condition}`)}{p.in_stock ? "" : ` · ${t("shop.stock.out")}`}</span>
+                </span>
+                <strong className="product-side">{p.price ? `${p.price.toLocaleString("fr-FR")} DA` : ""}</strong>
               </li>
             ))}
           </ul>

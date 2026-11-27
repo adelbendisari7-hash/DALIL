@@ -123,6 +123,13 @@ class ProductIn(BaseModel):
     variant_ids: list[int] = Field(default_factory=list)
 
 
+class ProductPatch(BaseModel):
+    """Modification rapide depuis la liste du catalogue : prix, stock, ou simple confirmation (« toujours ce prix »)."""
+    price: float | None = Field(None, ge=0, le=100_000_000)
+    in_stock: bool | None = None
+    confirm: bool = False
+
+
 class ContactEventIn(BaseModel):
     shop_id: int
     channel: str = Field(pattern="^(call|whatsapp)$")

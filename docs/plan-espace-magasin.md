@@ -60,7 +60,7 @@ fiches à moins de 30 m et au nom proche sont signalées à l'administrateur pou
 (chronométré) ; l'épingle se déplace au doigt ; la revendication évite le doublon ; l'administrateur valide ; le
 magasin apparaît à la bonne place sur la carte des clients, avec son badge.
 
-## Phase 2 — Catalogue plus rapide
+## Phase 2 — Catalogue plus rapide (faite le 27/11/2026)
 
 - **Ajout en moins de 30 s** : famille en pastilles (les plus utilisées du magasin en premier), titre proposé d'après
   la famille, compatibilité par le sélecteur de véhicule (plusieurs modèles), prix, état en pastilles, « en stock »

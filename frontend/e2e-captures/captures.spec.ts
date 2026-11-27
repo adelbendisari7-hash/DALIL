@@ -75,5 +75,14 @@ test.describe("magasin", () => {
     await page.getByRole("button", { name: "Inscrire mon magasin" }).click();
     await page.getByText("En attente de vérification", { exact: false }).waitFor();
     await shot(page, "14-magasin-statut", scheme);
+    await page.getByRole("tab", { name: /Catalogue/ }).click();
+    for (const [name, price] of [["Plaquettes de frein avant", "4500"], ["Filtre à huile", "900"]]) {
+      await page.getByRole("button", { name, exact: true }).click();
+      await page.getByLabel("Prix en DA").fill(price);
+      await page.getByRole("button", { name: "Ajouter le produit" }).click();
+      await page.getByText("Produit ajouté.").waitFor();
+    }
+    await page.locator(".product-row").nth(1).waitFor();
+    await shot(page, "15-magasin-catalogue", scheme);
   });
 });

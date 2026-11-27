@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "backend/app/config.py": {
-    "mtime": 1795782897.0597875,
-    "seen": 1795784114.6378932,
-    "ast_hash": "db65fbd785777627686e400f6f420f63",
+    "mtime": 1795784205.564195,
+    "seen": 1795791636.7354836,
+    "ast_hash": "c9073a73b0d3de17990f4474499229c7",
     "semantic_hash": ""
   },
   "backend/app/db.py": {
@@ -42,9 +42,9 @@
     "semantic_hash": ""
   },
   "backend/app/models.py": {
-    "mtime": 1795782842.528242,
-    "seen": 1795784114.6378932,
-    "ast_hash": "c4ae6d8402af64d752bfbf304fedac1d",
+    "mtime": 1795784205.564195,
+    "seen": 1795791636.7354836,
+    "ast_hash": "3673153bcc13c26361c2544cd784d8b0",
     "semantic_hash": ""
   },
   "backend/app/routers/__init__.py": {
@@ -72,15 +72,15 @@
     "semantic_hash": ""
   },
   "backend/app/routers/shops.py": {
-    "mtime": 1795782954.5160415,
-    "seen": 1795784114.6378932,
-    "ast_hash": "1bf4e4965b397d04c944c2c1eb7d24f3",
+    "mtime": 1795784205.564195,
+    "seen": 1795791636.7354836,
+    "ast_hash": "2a0a790b4eadeb3d1bfdb3b7b67e88cf",
     "semantic_hash": ""
   },
   "backend/app/schemas.py": {
-    "mtime": 1795782887.8747466,
-    "seen": 1795784114.6378932,
-    "ast_hash": "02da4c69c131e98a715105a9e498c962",
+    "mtime": 1795784205.564195,
+    "seen": 1795791636.7354836,
+    "ast_hash": "935f31621f3ffa28f8cec558fc3764a5",
     "semantic_hash": ""
   },
   "backend/app/security.py": {
@@ -150,9 +150,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/imports.py": {
-    "mtime": 1795045145.029451,
-    "seen": 1795045217.7630627,
-    "ast_hash": "6e09d4f8800f39c8e0a1768039117982",
+    "mtime": 1795784205.564195,
+    "seen": 1795791636.7354836,
+    "ast_hash": "cab6ea935f1344114958e33a4964ea61",
     "semantic_hash": ""
   },
   "backend/app/services/recommendation.py": {
@@ -168,9 +168,9 @@
     "semantic_hash": ""
   },
   "backend/tests/conftest.py": {
-    "mtime": 1795782897.0618165,
-    "seen": 1795784114.6378932,
-    "ast_hash": "8b9833b2ece91e83c75f0d07cc3d1f29",
+    "mtime": 1795784205.564195,
+    "seen": 1795791636.7354836,
+    "ast_hash": "844dbd778209dbca2b620df460ce2d91",
     "semantic_hash": ""
   },
   "backend/tests/test_api.py": {
@@ -372,9 +372,9 @@
     "semantic_hash": ""
   },
   "frontend/app/espace-magasin/page.tsx": {
-    "mtime": 1795783308.1548693,
-    "seen": 1795784114.6378932,
-    "ast_hash": "68e5f75ec8c2ca90be68dd33f948f7e5",
+    "mtime": 1795784495.214556,
+    "seen": 1795791636.7354836,
+    "ast_hash": "291741597def6341d7e9320a41abab70",
     "semantic_hash": ""
   },
   "frontend/app/layout.tsx": {
@@ -384,9 +384,9 @@
     "semantic_hash": ""
   },
   "frontend/app/magasins/[id]/page.tsx": {
-    "mtime": 1795783337.152083,
-    "seen": 1795784114.6378932,
-    "ast_hash": "b45521484655ea328266973a53ffa00c",
+    "mtime": 1795784508.2068791,
+    "seen": 1795791636.7354836,
+    "ast_hash": "c3ff5ac2b5fc36f81c52b74ac774f2be",
     "semantic_hash": ""
   },
   "frontend/app/magasins/page.tsx": {
@@ -468,9 +468,9 @@
     "semantic_hash": ""
   },
   "frontend/messages/fr.json": {
-    "mtime": 1795783460.6607397,
-    "seen": 1795784114.6378932,
-    "ast_hash": "95f3b8e33678966dbceea217692b39fc",
+    "mtime": 1795785844.3274784,
+    "seen": 1795791636.7354836,
+    "ast_hash": "de662bba5398f77f12536b3d2ab15cd2",
     "semantic_hash": ""
   },
   "frontend/next.config.mjs": {
@@ -486,9 +486,9 @@
     "semantic_hash": ""
   },
   "frontend/playwright.config.ts": {
-    "mtime": 1795783500.5801282,
-    "seen": 1795784114.6378932,
-    "ast_hash": "17610163fb773650d0defc3b75c684f0",
+    "mtime": 1795784564.8830686,
+    "seen": 1795791636.7354836,
+    "ast_hash": "6d743084c922ba2cc8e16bb3f8efd0fa",
     "semantic_hash": ""
   },
   "frontend/public/sw.js": {
@@ -522,9 +522,9 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1795784100.9233232,
-    "seen": 1795784114.6378932,
-    "ast_hash": "e9d755f48235e6cb0f22c162cb7f2b73",
+    "mtime": 1795791621.3986473,
+    "seen": 1795791636.7354836,
+    "ast_hash": "eb783776e025e2ec0956b4f34f9dd4b1",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.md": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795784100.9233232,
-    "seen": 1795784114.6378932,
-    "ast_hash": "c718bcd396b0585d43f5c90c241e26d4",
+    "mtime": 1795791621.4020958,
+    "seen": 1795791636.7354836,
+    "ast_hash": "3cdd75692b7d3b2e4c006a33ca739cc6",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -954,9 +954,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_espace_magasin.py": {
-    "mtime": 1795042636.5428133,
-    "seen": 1795042737.3401535,
-    "ast_hash": "50ad8e9b7515a4e10b2ca926e53cfc5b",
+    "mtime": 1795785268.9315128,
+    "seen": 1795791636.7354836,
+    "ast_hash": "0d48053d0faf14ccb97152a78d0faeaa",
     "semantic_hash": ""
   },
   "frontend/e2e/helpers.ts": {
@@ -966,9 +966,9 @@
     "semantic_hash": ""
   },
   "frontend/e2e/magasin.spec.ts": {
-    "mtime": 1795783554.7269962,
-    "seen": 1795784114.6378932,
-    "ast_hash": "610abfb4a9b710818f612641ec2503c4",
+    "mtime": 1795784627.252863,
+    "seen": 1795791636.7354836,
+    "ast_hash": "93b638e3d63ec993a5660267468646bb",
     "semantic_hash": ""
   },
   "frontend/app/not-found.tsx": {
@@ -1740,9 +1740,9 @@
     "semantic_hash": ""
   },
   "frontend/e2e-captures/captures.spec.ts": {
-    "mtime": 1795783703.765223,
-    "seen": 1795784114.6378932,
-    "ast_hash": "ef5e5f9cff95d1e462c67e5dd17966e4",
+    "mtime": 1795785464.383097,
+    "seen": 1795791636.7354836,
+    "ast_hash": "8382c2f3ee6c2cf9edcc63687e852607",
     "semantic_hash": ""
   },
   "frontend/playwright.captures.config.ts": {
@@ -1800,9 +1800,39 @@
     "semantic_hash": ""
   },
   "docs/plan-espace-magasin.md": {
-    "mtime": 1795784100.9233232,
-    "seen": 1795784114.6378932,
-    "ast_hash": "dc5273e4960ffcf9948bd1bed6d96f15",
+    "mtime": 1795791621.3976507,
+    "seen": 1795791636.7354836,
+    "ast_hash": "9c51c065d7fa04cb1cdaadea865839f8",
+    "semantic_hash": ""
+  },
+  "backend/alembic/versions/0007_catalogue_rapide.py": {
+    "mtime": 1795784204.9145164,
+    "seen": 1795791636.7354836,
+    "ast_hash": "3707298b0160b025a1b061f4367fd217",
+    "semantic_hash": ""
+  },
+  "backend/app/services/media.py": {
+    "mtime": 1795784162.392856,
+    "seen": 1795791636.7354836,
+    "ast_hash": "ccd541eab310cebe5a4588af68939a5a",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_catalogue_rapide.py": {
+    "mtime": 1795784246.719409,
+    "seen": 1795791636.7354836,
+    "ast_hash": "943bac2fcd03998311937c22cd817e26",
+    "semantic_hash": ""
+  },
+  "frontend/components/ShopCatalog.tsx": {
+    "mtime": 1795785762.6110754,
+    "seen": 1795791636.7354836,
+    "ast_hash": "2020e6fe28c9c26b35100bd068b19aec",
+    "semantic_hash": ""
+  },
+  "frontend/lib/photo.ts": {
+    "mtime": 1795784306.6620347,
+    "seen": 1795791636.7354836,
+    "ast_hash": "79dcae93b244326a04d936b5cda76936",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {

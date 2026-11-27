@@ -200,6 +200,7 @@ def import_products(db: Session, shop: Shop, rows: list[dict]) -> ImportReport:
         prod.part_brand = str(r.get("marque_piece") or "").strip() or None
         prod.condition = str(r.get("etat") or "neuf").strip().lower() or "neuf"
         prod.in_stock = str(r.get("en_stock") or "oui").strip().lower() not in ("non", "0", "false", "faux", "no")
+        prod.price_confirmed_at = datetime.now(timezone.utc)
         db.add(prod)
         db.flush()
         have = {f.variant_id for f in prod.fitments}

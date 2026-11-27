@@ -731,3 +731,37 @@ footer.disclaimer { max-width: 760px; margin: 0 auto; padding: 0 16px 2rem; colo
   main { padding: 0 !important; }
   .poster { box-shadow: none; margin: 0 auto; }
 }
+
+/* --- Catalogue rapide et photos -------------------------------------------------------------------------- */
+.photo-row { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.9rem; flex-wrap: wrap; }
+.photo-button { cursor: pointer; }
+.thumb { width: 56px; height: 56px; flex: none; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); }
+.thumb-empty { display: inline-flex; align-items: center; justify-content: center; color: var(--steel); font-size: 1.4rem; font-weight: 300; }
+.thumb-slot { cursor: pointer; display: inline-flex; min-width: 56px; min-height: 56px; }
+.storefront { width: 100%; max-width: 420px; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-l); border: 1px solid var(--line); }
+.storefront-hero { display: block; margin: 0.25rem 0 0.75rem; max-width: 100%; }
+.product-list li.product-row, .list li.product-row { display: flex; flex-wrap: nowrap; align-items: center; gap: 0.75rem; }
+.product-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem; }
+.product-main strong { overflow-wrap: anywhere; }
+.product-side { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; flex: none; }
+@media (max-width: 420px) {
+  .product-list li.product-row { flex-wrap: wrap; }
+  .product-list .product-side { flex-direction: row; flex-wrap: wrap; align-items: center; width: 100%; justify-content: flex-start; padding-left: calc(56px + 0.75rem); }
+}
+.product-row.is-out .product-main strong, .product-row.is-out > .product-main > span:first-child { color: var(--steel); }
+.price-tag {
+  font: inherit; font-weight: 700; font-variant-numeric: tabular-nums;
+  background: var(--surface-2); color: var(--ink); border: 1px dashed var(--line-strong); border-radius: 10px;
+  padding: 0.35rem 0.7rem; min-height: 40px; cursor: pointer;
+}
+.price-edit { display: inline-flex; gap: 0.35rem; }
+.price-edit input { width: 7rem; min-height: 40px; }
+.price-edit .btn { min-height: 40px; padding: 0.3rem 0.8rem; }
+.stock-toggle {
+  font: inherit; font-size: 0.8rem; font-weight: 700; border-radius: 999px; padding: 0.3rem 0.8rem; min-height: 40px; cursor: pointer;
+  border: 1.5px solid color-mix(in srgb, var(--red) 40%, transparent); background: var(--red-bg); color: var(--red);
+  transition: background var(--fast) var(--ease), color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.stock-toggle.on { border-color: transparent; background: var(--green-bg); color: var(--green); }
+.stock-toggle:active { transform: scale(0.96); }
+.import-errors { margin: 0.25rem 0 0; padding-left: 1.1rem; color: var(--red); font-size: var(--step--1); }

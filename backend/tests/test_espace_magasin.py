@@ -39,7 +39,7 @@ def test_les_exemples_du_modele_s_importent_sans_erreur(client):
     wb.save(buf)
     r = client.post(f"{API}/shops/{shop['id']}/products/import", headers=h,
                     files={"file": ("catalogue.xlsx", buf.getvalue(), "application/octet-stream")}).json()
-    assert r == {"created": 2, "updated": 0, "errors": [], "total": 2}
+    assert r == {"created": 2, "updated": 0, "errors": [], "total": 2, "dry_run": False}
 
 
 def test_catalogue_d_une_fiche_non_validee_cache_au_public(client, admin_headers):
