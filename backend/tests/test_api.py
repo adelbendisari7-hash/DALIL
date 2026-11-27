@@ -274,7 +274,7 @@ def test_demande_diffusee(client, admin_headers, db):
     assert inbox[0]["request_id"] == req["id"]
     r = client.post(f"{API}/part-requests/{req['id']}/responses", params={"shop_id": shop_id}, headers=h, json={"available": True, "price": 19000})
     assert r.status_code == 200
-    status = client.get(f"{API}/part-requests/{req['id']}").json()
+    status = client.get(f"{API}/part-requests/{req['id']}", params={"token": req["token"]}).json()
     assert status["responses"][0]["available"] is True
 
 

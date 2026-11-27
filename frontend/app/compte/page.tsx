@@ -405,6 +405,12 @@ function Account() {
       {/* Juste après l'inscription, l'étape suivante (la voiture) passe en premier */}
       {welcome && complete ? <>{carsCard}{profileCard}</> : <>{profileCard}{carsCard}</>}
 
+      <div className="card">
+        <h2 className="card-title">{t("requests.title")}</h2>
+        <p className="help" style={{ marginTop: 0 }}>{t("requests.accountHelp")}</p>
+        <div className="actions"><Link className="btn btn-ghost" href="/demandes">{t("requests.open")}</Link></div>
+      </div>
+
       {complete && (
         <div className="card">
           <h2 className="card-title">{t("account.history")}</h2>

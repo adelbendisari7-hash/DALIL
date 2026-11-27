@@ -45,6 +45,19 @@ export default function TopBar() {
   const [user, setUser] = useState<User | null>(null);
   const [online, setOnline] = useState(true);
   const [pending, setPending] = useState(0);
+  const [unseen, setUnseen] = useState(0);
+
+  // Réponses de magasins pas encore lues (client connecté) : repère sur l'onglet Compte
+  useEffect(() => {
+    if (!user) return setUnseen(0);
+    let stop = false;
+    const read = () => api<{ unseen: number }>("/me/part-requests/unseen")
+      .then((r) => { if (!stop) setUnseen(r.unseen); }).catch(() => undefined);
+    read();
+    const id = setInterval(read, 60_000);
+    window.addEventListener("dalil-requests-seen", read);
+    return () => { stop = true; clearInterval(id); window.removeEventListener("dalil-requests-seen", read); };
+  }, [user, path]);
 
   // Demandes de clients en attente de réponse (gérant ou employé qui y répond) : relu à chaque page et toutes les minutes
   useEffect(() => {
@@ -79,7 +92,7 @@ export default function TopBar() {
   const link = (href: string, icon: string, long: string, short: string, count = 0) => {
     const current = path === href || (href !== "/" && path.startsWith(href)) || (href === "/" && path.startsWith("/diagnostic"));
     return (
-      <Link href={href} aria-label={count ? `${long} (${t("nav.pending", { n: count })})` : long}
+      <Link href={href} aria-label={count ? `${long} (${t(href === "/compte" ? "nav.unseen" : "nav.pending", { n: count })})` : long}
         aria-current={current ? "page" : undefined}>
         <span className="nav-icon">{ICONS[icon]}{count > 0 && <span className="nav-badge" aria-hidden>{count > 9 ? "9+" : count}</span>}</span>
         <span className="label-long">{long}</span>
@@ -101,7 +114,7 @@ export default function TopBar() {
           {link("/espace-magasin", "shop", t("nav.shop"), t("nav.shop.short"), pending)}
           {user?.role === "admin" && link("/admin", "admin", t("nav.admin"), t("nav.admin.short"))}
           {user
-            ? link("/compte", "account", t("nav.account"), t("nav.account.short"))
+            ? link("/compte", "account", t("nav.account"), t("nav.account.short"), unseen)
             : link("/connexion", "account", t("nav.login"), t("nav.login"))}
         </nav>
       </div>

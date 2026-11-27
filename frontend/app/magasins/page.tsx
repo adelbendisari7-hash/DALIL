@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import ShopContact from "@/components/ShopContact";
-import { api, vehicleStore } from "@/lib/api";
+import { api, requestStore, vehicleStore } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
 const ShopMap = dynamic(() => import("@/components/ShopMap"), { ssr: false });
@@ -29,6 +29,7 @@ function Shops() {
   const [view, setView] = useState<"list" | "map">("list");
   const [error, setError] = useState("");
   const [requestMsg, setRequestMsg] = useState("");
+  const [requestSent, setRequestSent] = useState(false);
 
   useEffect(() => {
     if (!variantParam) setVariantId(vehicleStore.get()?.variantId);
@@ -57,9 +58,11 @@ function Shops() {
 
   async function broadcast() {
     try {
-      const r = await api<{ notified_shops: number }>("/part-requests", {
+      const r = await api<{ id: number; token: string; notified_shops: number }>("/part-requests", {
         method: "POST", json: { category_id: categoryId, variant_id: variantId ?? null, session_id: sessionId ?? null },
       });
+      requestStore.add({ id: r.id, token: r.token });   // suivi des réponses, même sans compte
+      setRequestSent(r.notified_shops > 0);
       setRequestMsg(r.notified_shops ? t("shops.request.sent", { n: r.notified_shops }) : t("shops.request.none"));
     } catch {
       setRequestMsg(t("common.error"));
@@ -118,6 +121,7 @@ function Shops() {
       <div className="section">
         <button className="btn btn-ghost" onClick={broadcast}>{t("shops.request")}</button>
         {requestMsg && <p className="help" role="status">{requestMsg}</p>}
+        {requestSent && <Link className="btn" href="/demandes">{t("requests.follow")}</Link>}
       </div>
     </section>
   );

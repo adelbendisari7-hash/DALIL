@@ -500,5 +500,17 @@
   "stats.demand.notSold": "Pas dans votre fiche",
   "stats.demand.tip": "{n} pièces recherchées près de chez vous ne sont pas dans votre fiche. Si vous les vendez, ajoutez leur famille : les clients vous trouveront.",
   "stats.demand.edit": "Compléter ma fiche",
-  "nav.pending": "{n} demandes en attente"
+  "nav.pending": "{n} demandes en attente",
+  "requests.title": "Mes demandes",
+  "requests.lead": "Les réponses des magasins à vos demandes de pièces : qui l'a, à quel prix.",
+  "requests.empty": "Aucune demande pour l'instant. Cherchez une pièce, puis touchez « Demander aux magasins ».",
+  "requests.progress": "{notified} magasins contactés, {answered} réponses",
+  "requests.waiting": "Les magasins n'ont pas encore répondu. Revenez dans un moment.",
+  "requests.available": "Disponible",
+  "requests.cheapest": "Le moins cher",
+  "requests.new": "{n} nouvelles",
+  "requests.follow": "Suivre ma demande",
+  "requests.accountHelp": "Les réponses des magasins à vos demandes de pièces, du moins cher au plus cher.",
+  "requests.open": "Voir mes demandes",
+  "nav.unseen": "{n} nouvelles réponses de magasins"
 }

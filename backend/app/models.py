@@ -421,6 +421,9 @@ class PartRequest(Base):
     category_id: Mapped[int] = mapped_column(ForeignKey("part_categories.id"))
     status: Mapped[str] = mapped_column(String(20), default="open")  # open|answered|closed
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    # Jeton secret pour suivre la demande sans compte (les identifiants se suivent : ils ne suffisent pas)
+    token: Mapped[str | None] = mapped_column(String(32))
+    seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))   # dernière lecture des réponses par le client
 
 
 class RequestResponse(Base):

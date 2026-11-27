@@ -1,6 +1,7 @@
 """Magasins : recommandation (F7), fiches, espace magasin (F11, F12), contacts (F8), retours (F9), demandes (F16)."""
 from __future__ import annotations
 
+import secrets
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, File, HTTPException, Query, Request, Response, UploadFile
@@ -506,7 +507,7 @@ async def product_import(shop_id: int, file: UploadFile = File(...), dry_run: bo
 def part_request_create(body: PartRequestIn, db: Session = Depends(get_db), user: User | None = Depends(current_user_optional)):
     if not db.get(PartCategory, body.category_id):
         raise HTTPException(404, "Famille de pièces inconnue")
-    req = PartRequest(**body.model_dump(), user_id=user.id if user else None)
+    req = PartRequest(**body.model_dump(), user_id=user.id if user else None, token=secrets.token_urlsafe(16))
     db.add(req)
     db.flush()
     ancestors, _ = category_lineage(db, body.category_id)
@@ -520,7 +521,7 @@ def part_request_create(body: PartRequestIn, db: Session = Depends(get_db), user
         db.add(RequestResponse(request_id=req.id, shop_id=shop.id))
         n += 1
     db.commit()
-    return {"id": req.id, "notified_shops": n}
+    return {"id": req.id, "token": req.token, "notified_shops": n}
 
 
 @router.get("/part-requests/pending-count")
@@ -570,13 +571,57 @@ def part_request_respond(request_id: int, body: PartResponseIn, shop_id: int, db
     return {"ok": True}
 
 
-@router.get("/part-requests/{request_id}")
-def part_request_status(request_id: int, db: Session = Depends(get_db)):
+def request_out(db: Session, req: PartRequest) -> dict:
+    """Une demande vue par le client : la pièce, le véhicule, les magasins contactés et leurs réponses (disponibles
+    d'abord, du moins cher au plus cher), avec de quoi les appeler."""
+    cat = db.get(PartCategory, req.category_id)
+    v = db.get(VehicleVariant, req.variant_id) if req.variant_id else None
+    rows = list(db.scalars(select(RequestResponse).where(RequestResponse.request_id == req.id)))
+    answers = [r for r in rows if r.responded_at]
+    answers.sort(key=lambda r: (not r.available, r.price if r.price is not None else 1e12))
+    seen = req.seen_at.replace(tzinfo=timezone.utc) if req.seen_at and not req.seen_at.tzinfo else req.seen_at
+    return {"id": req.id, "status": req.status, "created_at": req.created_at.isoformat(),
+            "category_id": req.category_id, "part": cat.name_fr if cat else None, "variant_id": req.variant_id,
+            "vehicle": f"{v.model.brand.name} {v.model.name} {v.engine}" if v else None,
+            "notified": len(rows), "answered": len(answers),
+            "unseen": sum(1 for r in answers if seen is None or
+                          (r.responded_at.replace(tzinfo=timezone.utc) if not r.responded_at.tzinfo else r.responded_at) > seen),
+            "responses": [{"shop": shop_out(db.get(Shop, r.shop_id), full=False), "available": r.available, "price": r.price,
+                           "responded_at": r.responded_at.isoformat()} for r in answers]}
+
+
+def _readable(db: Session, request_id: int, token: str | None, user: User | None) -> PartRequest:
     req = db.get(PartRequest, request_id)
-    if not req:
-        raise HTTPException(404, "Demande inconnue")
-    rows = db.scalars(select(RequestResponse).where(RequestResponse.request_id == request_id))
-    return {"id": req.id, "status": req.status, "responses": [
-        {"shop": shop_out(db.get(Shop, r.shop_id), full=False), "available": r.available, "price": r.price}
-        for r in rows if r.responded_at
-    ]}
+    owner = req is not None and user is not None and req.user_id == user.id
+    if not req or not (owner or (token and req.token and secrets.compare_digest(token, req.token))):
+        raise HTTPException(404, "Demande inconnue")   # même réponse sans le bon jeton : rien n'est dévoilé
+    return req
+
+
+@router.get("/part-requests/{request_id}")
+def part_request_status(request_id: int, token: str | None = None, db: Session = Depends(get_db),
+                        user: User | None = Depends(current_user_optional)):
+    """Réponses à une demande : pour son auteur connecté, ou avec le jeton reçu à la création (sans compte)."""
+    return request_out(db, _readable(db, request_id, token, user))
+
+
+@router.post("/part-requests/{request_id}/seen", status_code=204)
+def part_request_seen(request_id: int, token: str | None = None, db: Session = Depends(get_db),
+                      user: User | None = Depends(current_user_optional)):
+    req = _readable(db, request_id, token, user)
+    req.seen_at = datetime.now(timezone.utc)
+    db.commit()
+
+
+@router.get("/me/part-requests")
+def my_part_requests(db: Session = Depends(get_db), user: User = Depends(current_user)):
+    """« Mes demandes » : les 30 dernières demandes du client connecté, avec les réponses des magasins."""
+    rows = db.scalars(select(PartRequest).where(PartRequest.user_id == user.id).order_by(PartRequest.id.desc()).limit(30))
+    return [request_out(db, r) for r in rows]
+
+
+@router.get("/me/part-requests/unseen")
+def my_unseen(db: Session = Depends(get_db), user: User = Depends(current_user)):
+    """Réponses de magasins pas encore lues (repère sur l'onglet Compte)."""
+    rows = db.scalars(select(PartRequest).where(PartRequest.user_id == user.id).order_by(PartRequest.id.desc()).limit(30))
+    return {"unseen": sum(request_out(db, r)["unseen"] for r in rows)}

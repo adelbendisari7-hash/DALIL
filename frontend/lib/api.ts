@@ -97,3 +97,15 @@ export const vehicleStore = {
   },
   set: (v: Vehicle | null) => write("dalil.vehicle", v ? JSON.stringify(v) : null),
 };
+
+/** Demandes envoyées aux magasins depuis cet appareil (suivi sans compte : identifiant + jeton secret). */
+export type RequestRef = { id: number; token: string };
+export const requestStore = {
+  list: (): RequestRef[] => {
+    try { return JSON.parse(read("dalil.requests") || "[]") as RequestRef[]; } catch { return []; }
+  },
+  add: (r: RequestRef) => {
+    const all = [r, ...requestStore.list().filter((x) => x.id !== r.id)].slice(0, 30);
+    write("dalil.requests", JSON.stringify(all));
+  },
+};
