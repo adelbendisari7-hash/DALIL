@@ -43,8 +43,11 @@ function PartLabel({ cause, href }: { cause: Cause; href: string }) {
       ) : (
         <span className="ref-level">{t("result.ref.1")}</span>
       )}
-      <div style={{ marginTop: "0.6rem" }}>
+      <div className="actions" style={{ marginTop: "0.6rem" }}>
         <Link className="btn" href={href}>{t("result.findShops")}</Link>
+        <Link className="btn btn-ghost" href={`/garages?${new URLSearchParams({ category: String(cause.part.category_id), part: cause.part.name })}`}>
+          {t("result.findGarage")}
+        </Link>
       </div>
     </div>
   );

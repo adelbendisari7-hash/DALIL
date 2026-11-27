@@ -19,11 +19,11 @@ from .catalog import resolve_category, resolve_variants
 from .diagnosis.normalize import normalize
 
 SHOP_COLUMNS = ["name", "phone", "whatsapp", "commune", "lat", "lng", "address", "hours", "brands", "categories",
-                "parts_origin", "sale_mode", "shop_type", "surveyor", "source", "osm_id"]
+                "parts_origin", "sale_mode", "shop_type", "specialties", "surveyor", "source", "osm_id"]
 # En-têtes français acceptés (liste de visite remplie sur le terrain, data/terrain/) -> colonne d'import.
 SHOP_ALIASES = {"nom": "name", "telephone": "phone", "id_osm": "osm_id", "type": "shop_type", "adresse": "address",
                 "horaires": "hours", "marques": "brands", "familles": "categories", "origine_des_pieces": "parts_origin",
-                "mode_de_vente": "sale_mode", "enqueteur": "surveyor"}
+                "mode_de_vente": "sale_mode", "enqueteur": "surveyor", "specialites": "specialties"}
 PRODUCT_COLUMNS = ["titre", "famille", "reference", "marque_piece", "etat", "prix", "en_stock", "compatibilite"]
 
 
@@ -120,6 +120,8 @@ def import_shops(db: Session, rows: list[dict], default_source: str = "terrain")
                     raise ValueError(f"famille de pièces inconnue : {c}")
                 cat_ids.append(cat.id)
             lat, lng = _float(r.get("lat")), _float(r.get("lng"))
+            from .garages import parse_specialties
+            specialties = parse_specialties(str(r.get("specialties") or ""))
         except (ValueError, KeyError, HTTPException) as e:
             rep.errors.append({"line": line, "error": getattr(e, "detail", None) or str(e)})
             continue
@@ -153,6 +155,8 @@ def import_shops(db: Session, rows: list[dict], default_source: str = "terrain")
                 setattr(shop, k, v)
         if r.get("parts_origin"):
             shop.parts_origin = sorted(set(shop.parts_origin or []) | set(_split(r["parts_origin"])))
+        if specialties:
+            shop.specialties = sorted(set(shop.specialties or []) | set(specialties))
         if shop.source == "terrain":
             shop.visited_at = now
         db.flush()

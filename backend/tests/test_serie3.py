@@ -197,3 +197,59 @@ def test_recapitulatif_de_la_semaine(client, db):
     assert {"impressions", "views", "calls", "requests"} <= set(w["current"])
     h2 = login(client, "0698000040")
     assert client.get(f"{API}/shops/{sid}/weekly", headers=h2).status_code in (403, 404)
+
+
+# --- 5. Mécaniciens et garages ---------------------------------------------------------------------------------------
+
+def _garage(db, name, specialties, lat=35.70, lng=-0.63, status="verified"):
+    g = Shop(name=name, shop_type="garage", specialties=specialties, status=status, source="terrain", lat=lat, lng=lng,
+             verified_at=datetime.now(timezone.utc) if status == "verified" else None)
+    db.add(g)
+    db.commit()
+    return g
+
+
+def test_garages_classes_par_specialite_et_proximite(client, db):
+    from app.services.garages import family_of, match
+    plaq = _cat(db)
+    assert family_of(db, plaq.id) == "freinage"
+    assert match(["freinage-suspension"], "freinage")[0] == 1.0 and match(["mecanique-generale"], "freinage")[0] == 0.5
+    frein = _garage(db, "Garage Frein Test", ["freinage-suspension"], lat=35.71, lng=-0.62)
+    general = _garage(db, "Garage Général Test", ["mecanique-generale"], lat=35.70, lng=-0.63)
+    elec = _garage(db, "Garage Élec Test", ["electricite"], lat=35.70, lng=-0.63)
+    draft = _garage(db, "Garage Brouillon Test", ["freinage-suspension"], status="draft")
+    r = client.get(f"{API}/garages/recommend", params={"category_id": plaq.id, "lat": 35.70, "lng": -0.63}).json()
+    names = [g["name"] for g in r]
+    assert names.index("Garage Frein Test") < names.index("Garage Général Test") < names.index("Garage Élec Test")
+    assert "Garage Brouillon Test" not in names and all(g["shop_type"] == "garage" for g in r)
+    top = next(g for g in r if g["id"] == frein.id)
+    assert top["specialties"] == ["Freinage et suspension"] and "spécialité : freinage et suspension" in top["reasons"]
+    assert top["distance_km"] is not None
+    assert client.get(f"{API}/garages/recommend", params={"category_id": 999999}).status_code == 404
+    assert len(client.get(f"{API}/garages/specialties").json()) == 10
+    _ = (general, elec, draft)
+
+
+def test_garage_s_inscrit_avec_ses_specialites(client, db):
+    h = login(client, "0698000050")
+    client.patch(f"{API}/auth/me", headers=h, json={"role": "shop_owner"})
+    bad = client.post(f"{API}/shops", headers=h, json={"name": "Garage X", "shop_type": "garage", "specialties": ["magie"]})
+    assert bad.status_code == 422
+    r = client.post(f"{API}/shops", headers=h, json={"name": "Garage Inscrit", "shop_type": "garage", "lat": 35.7, "lng": -0.63,
+                                                    "specialties": ["diesel-injection", "electricite", "electricite"]})
+    assert r.status_code == 201 and r.json()["shop_type"] == "garage"
+    assert r.json()["specialties"] == ["diesel-injection", "electricite"]
+    sid = r.json()["id"]
+    p = client.patch(f"{API}/shops/{sid}", headers=h, json={"specialties": ["climatisation"], "shop_type": None})
+    assert p.status_code == 200 and p.json()["specialties"] == ["climatisation"] and p.json()["shop_type"] == "garage"
+
+
+def test_import_de_la_colonne_specialites(db):
+    from app.services.imports import import_shops
+    rows = [{"nom": "Garage Importé", "type": "garage", "specialites": "Diesel et injection ; electricite", "lat": "35.7", "lng": "-0.63"},
+            {"nom": "Garage Faux", "type": "garage", "specialites": "voyance"}]
+    rep = import_shops(db, rows, default_source="terrain")
+    db.commit()
+    g = db.scalar(select(Shop).where(Shop.name == "Garage Importé"))
+    assert g.specialties == ["diesel-injection", "electricite"] and g.shop_type == "garage"
+    assert len(rep.errors) == 1 and "spécialité inconnue" in rep.errors[0]["error"]

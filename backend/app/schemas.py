@@ -60,12 +60,19 @@ class ShopIn(BaseModel):
     survey: dict | None = None  # questions d'étude de marché (section 14)
     landmark: str | None = Field(None, max_length=200)
     opening: dict | None = None   # horaires structurés, voir services/shop_onboarding.check_opening
+    specialties: list[str] = Field(default_factory=list, max_length=12)   # garage
 
     @field_validator("opening")
     @classmethod
     def _opening(cls, v):
         from .services.shop_onboarding import check_opening
         return check_opening(v)
+
+    @field_validator("specialties")
+    @classmethod
+    def _specialties(cls, v):
+        from .services.garages import check_specialties
+        return check_specialties(v)
 
 
 class ShopPatch(BaseModel):
@@ -86,6 +93,14 @@ class ShopPatch(BaseModel):
     # « Fermé exceptionnellement » jusqu'à cette date (incluse) ; null efface la fermeture
     closed_until: date | None = None
     closed_note: str | None = Field(None, max_length=120)
+    shop_type: str | None = Field(None, pattern="^(pieces|casse|pneus|garage)$")
+    specialties: list[str] | None = Field(None, max_length=12)
+
+    @field_validator("specialties")
+    @classmethod
+    def _specialties(cls, v):
+        from .services.garages import check_specialties
+        return None if v is None else check_specialties(v)
 
     @field_validator("opening")
     @classmethod
@@ -359,6 +374,7 @@ def shop_out(shop: Shop, full: bool = True) -> dict:
         "status": shop.status, "is_demo": shop.is_demo, "landmark": shop.landmark,
         "verified": shop.status in ("verified", "claimed") and shop.verified_at is not None,
         "verified_at": _iso(shop.verified_at), "open_status": _open_status(shop),
+        "specialties": shop.specialties or [],
     }
     if full:
         d.update({

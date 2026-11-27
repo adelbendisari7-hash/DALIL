@@ -190,6 +190,12 @@ function Shops() {
 
       {!offline && <PriceHistory categoryId={categoryId} />}
       {!offline && <PriceFollow categoryId={categoryId} variantId={variantId} />}
+      {!offline && (
+        <p className="help garage-link">
+          {t("garages.needOne")}{" "}
+          <Link href={`/garages?${new URLSearchParams({ category: String(categoryId), part: partName })}`}>{t("garages.find")}</Link>
+        </p>
+      )}
 
       <div className="section card request-box">
         <p className="help" style={{ marginTop: 0 }}>{t("requests.photo.help")}</p>

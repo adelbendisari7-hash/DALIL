@@ -3,7 +3,8 @@ import { useState } from "react";
 import { api, vehicleStore } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
-export type ContactShop = { id: number; name: string; phone: string | null; whatsapp: string | null; is_demo: boolean };
+export type ContactShop = { id: number; name: string; phone: string | null; whatsapp: string | null; is_demo: boolean;
+  shop_type?: string };
 type Ctx = { categoryId?: number; variantId?: number; sessionId?: number; partName?: string };
 
 /** Appel et WhatsApp avec message pré-rempli (F8), puis question « pièce trouvée ? » (F9). */
@@ -37,7 +38,9 @@ export default function ShopContact({ shop, ctx }: { shop: ContactShop; ctx: Ctx
   }
 
   const vehicle = vehicleStore.get()?.label || t("shops.whatsapp.noVehicle");
-  const msg = t("shops.whatsapp.msg", { part: (ctx.partName || "").toLowerCase(), vehicle });
+  const msg = shop.shop_type === "garage"
+    ? t(ctx.partName ? "garages.whatsapp.msg" : "garages.whatsapp.msgNoPart", { part: (ctx.partName || "").toLowerCase(), vehicle })
+    : t("shops.whatsapp.msg", { part: (ctx.partName || "").toLowerCase(), vehicle });
   const wa = shop.whatsapp ? `https://wa.me/${shop.whatsapp.replace("+", "")}?text=${encodeURIComponent(msg)}` : null;
   // Magasin fictif : aucun numéro dans le lien (un appui long sur le téléphone pourrait sinon le composer, et un
   // numéro de démonstration au format algérien peut appartenir à quelqu'un).

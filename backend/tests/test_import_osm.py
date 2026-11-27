@@ -31,7 +31,8 @@ Auto Test;;35.71;-0.62;0792999004;;pieces;osm;node/999100004
     assert first is not None and first.lat == 35.7291           # le second point n'écrase ni l'identifiant ni la position
     assert len(res["a_verifier"]) == 1 and "node/999100003" in res["a_verifier"][0]["note"]
     ws = load_workbook(tmp_path / "liste.xlsx")["À visiter"]
-    remarks = {ws.cell(row=r, column=7).value: ws.cell(row=r, column=16).value for r in range(2, ws.max_row + 1)}
+    col = [c.value for c in ws[1]].index("Remarques") + 1
+    remarks = {ws.cell(row=r, column=7).value: ws.cell(row=r, column=col).value for r in range(2, ws.max_row + 1)}
     assert remarks["node/999100003"].startswith("À vérifier : même téléphone")
 
 

@@ -14,6 +14,7 @@ type Shop = {
   brands: { brand_id: number }[]; categories: { category_id: number }[];
   landmark: string | null; verified: boolean; open_status: { open: boolean; label: string } | null; photo_url: string | null; fast_reply?: boolean;
   reviews?: Reviews;
+  shop_type?: string; specialties?: string[];
 };
 type Reviews = { found: number; not_found: number; since: string | null;
   recent: { part: string | null; vehicle: string | null; date: string }[] };
@@ -68,6 +69,7 @@ export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [brands, setBrands] = useState<Named[]>([]);
   const [cats, setCats] = useState<Named[]>([]);
+  const [specialties, setSpecialties] = useState<{ slug: string; name: string }[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -75,12 +77,14 @@ export default function ShopPage() {
       .catch((e) => setError(e instanceof ApiError && e.status === 404 ? t("shop.notFound") : t("common.error")));
     api<Product[]>(`/shops/${id}/products`).then(setProducts).catch(() => undefined);
     api<Named[]>("/vehicles/brands").then(setBrands).catch(() => undefined);
+    api<{ slug: string; name: string }[]>("/garages/specialties").then(setSpecialties).catch(() => undefined);
     api<Family[]>("/parts/categories").then((f) => setCats(f.flatMap((x) => [x, ...x.children]))).catch(() => undefined);
   }, [id]);
 
   if (error) return <p className="err">{error}</p>;
   if (!shop) return <p>{t("common.loading")}</p>;
   const name = (list: Named[], i: number) => list.find((x) => x.id === i)?.name;
+  const specialtyName = Object.fromEntries(specialties.map((s) => [s.slug, s.name]));
 
   return (
     <article>
@@ -101,7 +105,13 @@ export default function ShopPage() {
       <ShopContact shop={shop} ctx={{}} />
       {shop.reviews && <ShopReviews r={shop.reviews} />}
 
-      <h3 className="section">{t("shop.brands")}</h3>
+      {shop.shop_type === "garage" && (shop.specialties?.length ?? 0) > 0 && (
+        <>
+          <h3 className="section">{t("garage.specialties.public")}</h3>
+          <div className="chips">{shop.specialties!.map((s) => <span key={s} className="chip chip-static">{specialtyName[s] ?? s}</span>)}</div>
+        </>
+      )}
+      <h3 className="section">{t(shop.shop_type === "garage" ? "garage.brands.public" : "shop.brands")}</h3>
       <div className="chips">{shop.brands.map((b) => <span key={b.brand_id} className="chip">{name(brands, b.brand_id)}</span>)}</div>
       <h3 className="section">{t("shop.categories")}</h3>
       <div className="chips">{shop.categories.map((c) => <span key={c.category_id} className="chip">{name(cats, c.category_id)}</span>)}</div>

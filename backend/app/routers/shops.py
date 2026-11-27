@@ -41,7 +41,7 @@ from ..schemas import (
 from ..security import client_hash, current_user, current_user_optional, feedback_limiter, normalize_phone, require_role
 from ..services.imports import import_products, product_template, read_table
 from ..services import shop_onboarding as onboarding
-from ..services import price_history, shop_reviews, shop_stats
+from ..services import garages, price_history, shop_reviews, shop_stats
 from ..services import shop_team as team
 from ..services.media import InvalidImage, storage
 from ..services.recommendation import RECOMMENDABLE_STATUSES, category_lineage, offers, recommend
@@ -142,6 +142,22 @@ def price_history_view(category_id: int, condition: str | None = Query(None, pat
     if not db.get(PartCategory, category_id):
         raise HTTPException(404, "Pièce inconnue")
     return price_history.summary(db, category_id, condition)
+
+
+@router.get("/garages/specialties")
+def garage_specialties():
+    """Spécialités qu'un garage peut déclarer, avec les familles de pièces qu'elles couvrent."""
+    return [{"slug": k, "name": v["name"], "families": v["families"]} for k, v in garages.SPECIALTIES.items()]
+
+
+@router.get("/garages/recommend")
+def garages_recommend(category_id: int | None = None, lat: float | None = Query(None, ge=-90, le=90),
+                      lng: float | None = Query(None, ge=-180, le=180), db: Session = Depends(get_db)):
+    """Mécaniciens pour une pièce : spécialité qui couvre sa famille, proximité, ouvert maintenant. Garages vérifiés
+    ou revendiqués seulement ; chaque résultat dit pourquoi il est classé là."""
+    if category_id is not None and not db.get(PartCategory, category_id):
+        raise HTTPException(404, "Pièce inconnue")
+    return garages.recommend(db, category_id, lat, lng)
 
 
 @router.get("/shops/mine")
@@ -296,6 +312,8 @@ def shop_create(body: ShopIn, db: Session = Depends(get_db), user: User = Depend
 def shop_patch(shop_id: int, body: ShopPatch, db: Session = Depends(get_db), user: User = Depends(current_user)):
     shop = _owned_shop(db, shop_id, user, "profile")
     data = body.model_dump(exclude_unset=True, exclude={"brand_ids", "category_ids"})
+    if data.get("shop_type") is None:
+        data.pop("shop_type", None)   # le type d'établissement n'est jamais effacé
     for k in ("phone", "whatsapp"):
         if data.get(k):
             data[k] = normalize_phone(data[k])

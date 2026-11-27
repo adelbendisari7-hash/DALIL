@@ -11,11 +11,13 @@ export type ShopFormValue = {
   name: string; phone: string; whatsapp: string; commune_id: number | null; lat: number | null; lng: number | null;
   address: string; landmark: string; hours: string; opening: Opening | null; brand_ids: number[]; category_ids: number[];
   parts_origin: string[]; sale_mode: string | null; survey?: Record<string, string>;
+  shop_type: string; specialties: string[];   // garage : spécialités (mécaniciens proposés après un diagnostic)
 };
 
 export const emptyShop: ShopFormValue = {
   name: "", phone: "", whatsapp: "", commune_id: null, lat: null, lng: null, address: "", landmark: "", hours: "",
   opening: DEFAULT_OPENING, brand_ids: [], category_ids: [], parts_origin: [], sale_mode: null,
+  shop_type: "pieces", specialties: [],
 };
 
 // Raccourcis « ce que vous vendez » (noms du référentiel ; ceux qui n'existent pas sont ignorés)
@@ -29,6 +31,8 @@ export function normalizeShop(initial?: Partial<ShopFormValue>): ShopFormValue {
   const base = { ...emptyShop, ...initial } as ShopFormValue;
   for (const k of ["name", "phone", "whatsapp", "address", "hours", "landmark"] as const) base[k] = base[k] ?? "";
   base.parts_origin = base.parts_origin ?? [];
+  base.shop_type = base.shop_type ?? "pieces";
+  base.specialties = base.specialties ?? [];
   base.opening = initial && "opening" in initial ? (initial.opening ?? null) : DEFAULT_OPENING;
   return base;
 }
@@ -83,16 +87,37 @@ export function LocationFields({ v, set }: Section) {
 export function SellsFields({ v, set }: Section) {
   const [brands, setBrands] = useState<Named[]>([]);
   const [families, setFamilies] = useState<Named[]>([]);
+  const [specialties, setSpecialties] = useState<{ slug: string; name: string }[]>([]);
   useEffect(() => {
     api<Named[]>("/vehicles/brands").then(setBrands).catch(() => undefined);
     api<Named[]>("/parts/categories").then(setFamilies).catch(() => undefined);
+    api<{ slug: string; name: string }[]>("/garages/specialties").then(setSpecialties).catch(() => undefined);
   }, []);
   const french = brands.filter((b) => FRENCH_BRANDS.includes(b.name)).map((b) => b.id);
   const addAll = (ids: number[], current: number[]) => Array.from(new Set([...current, ...ids]));
+  const garage = v.shop_type === "garage";
 
   return (
     <>
-      <label>{t("shop.brands")}</label>
+      <label>{t("shop.type")}</label>
+      <div className="chips">
+        {["pieces", "garage", "pneus", "casse"].map((k) => (
+          <button type="button" key={k} className="chip" aria-pressed={v.shop_type === k} onClick={() => set("shop_type", k)}>{t(`shop.type.${k}`)}</button>
+        ))}
+      </div>
+      {garage && (
+        <>
+          <label>{t("garage.specialties")}</label>
+          <p className="help" style={{ marginTop: 0 }}>{t("garage.specialties.help")}</p>
+          <div className="chips">
+            {specialties.map((s) => (
+              <button type="button" key={s.slug} className="chip" aria-pressed={v.specialties.includes(s.slug)}
+                onClick={() => set("specialties", toggle(v.specialties, s.slug))}>{s.name}</button>
+            ))}
+          </div>
+        </>
+      )}
+      <label>{t(garage ? "garage.brands" : "shop.brands")}</label>
       <div className="chips shortcuts">
         <button type="button" className="chip chip-shortcut" onClick={() => set("brand_ids", addAll(french, v.brand_ids))}>+ {t("shop.brands.french")}</button>
         <button type="button" className="chip chip-shortcut" onClick={() => set("brand_ids", brands.map((b) => b.id))}>+ {t("shop.all")}</button>
@@ -103,6 +128,7 @@ export function SellsFields({ v, set }: Section) {
           <button type="button" key={b.id} className="chip" aria-pressed={v.brand_ids.includes(b.id)} onClick={() => set("brand_ids", toggle(v.brand_ids, b.id))}>{b.name}</button>
         ))}
       </div>
+      {!garage && (<>
       <label>{t("shop.categories")}</label>
       <div className="chips shortcuts">
         <button type="button" className="chip chip-shortcut" onClick={() => set("category_ids", families.map((f) => f.id))}>+ {t("shop.all")}</button>
@@ -125,6 +151,7 @@ export function SellsFields({ v, set }: Section) {
           <button type="button" key={o} className="chip" aria-pressed={v.sale_mode === o} onClick={() => set("sale_mode", o)}>{t(`field.saleMode.${o}`)}</button>
         ))}
       </div>
+      </>)}
     </>
   );
 }

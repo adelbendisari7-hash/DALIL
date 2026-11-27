@@ -281,6 +281,8 @@ class Shop(Base):
     closed_note: Mapped[str | None] = mapped_column(String(120))
     reject_reason: Mapped[str | None] = mapped_column(String(255))
     shop_type: Mapped[str] = mapped_column(String(20), default="pieces")  # pieces|casse|pneus|garage
+    # Garage : spécialités (services/garages.py, migration 0017), pour le proposer après un diagnostic
+    specialties: Mapped[list | None] = mapped_column(JSON)
     parts_origin: Mapped[list] = mapped_column(JSON, default=list)  # origine|adaptable|occasion
     sale_mode: Mapped[str | None] = mapped_column(String(20))  # gros|detail|les_deux
     photo_url: Mapped[str | None] = mapped_column(String(255))

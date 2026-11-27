@@ -43,10 +43,11 @@ ATTRIBUTION = "© les contributeurs d'OpenStreetMap (ODbL), extraction du 17/11/
 # Colonnes de la liste : (en-tête, largeur). Les en-têtes en gras sont relus par l'import du back-office.
 COLUMNS = [
     ("Commune", 16), ("Type", 9), ("Nom", 30), ("Adresse", 24), ("Téléphone", 14), ("Carte", 11), ("ID OSM", 18),
-    ("Visité le", 11), ("Existe", 10), ("Marques", 22), ("Familles", 22), ("Origine des pièces", 18),
+    ("Visité le", 11), ("Existe", 10), ("Marques", 22), ("Familles", 22), ("Spécialités", 22),
+    ("Origine des pièces", 18),
     ("Mode de vente", 13), ("Accepte DALIL", 13), ("Enquêteur", 12), ("Remarques", 30),
 ]
-TO_FILL = {"Visité le", "Existe", "Marques", "Familles", "Origine des pièces", "Mode de vente", "Accepte DALIL",
+TO_FILL = {"Visité le", "Existe", "Marques", "Familles", "Spécialités", "Origine des pièces", "Mode de vente", "Accepte DALIL",
            "Enquêteur", "Remarques"}
 
 
@@ -114,8 +115,8 @@ def write_visit_list(db: Session, rows: list[dict], path: Path, notes: list[dict
     ws.freeze_panes = "C2"
     ws.auto_filter.ref = ws.dimensions
     last = ws.max_row
-    for col, values in (("I", "oui,non,déménagé,fermé"), ("L", "origine,adaptable,occasion,origine;adaptable"),
-                        ("M", "detail,gros,les_deux"), ("N", "oui,non,à rappeler")):
+    for col, values in (("I", "oui,non,déménagé,fermé"), ("M", "origine,adaptable,occasion,origine;adaptable"),
+                        ("N", "detail,gros,les_deux"), ("O", "oui,non,à rappeler")):
         dv = DataValidation(type="list", formula1=f'"{values}"', allow_blank=True)
         dv.add(f"{col}2:{col}{last}")
         ws.add_data_validation(dv)
@@ -129,14 +130,17 @@ def write_visit_list(db: Session, rows: list[dict], path: Path, notes: list[dict
         "Existe : « non », « déménagé » ou « fermé » -> la fiche sera rejetée dans le back-office.",
         "Marques : marques de voitures servies, séparées par « ; » (ex. Renault; Peugeot; Dacia).",
         "Familles : familles de pièces vendues, séparées par « ; » (ex. freinage; filtration; batterie).",
+        "Spécialités (garages) : séparées par « ; », parmi : mécanique générale; freinage et suspension; moteur et "
+        "distribution; diesel et injection; électricité auto; diagnostic électronique (valise); embrayage et boîte de "
+        "vitesses; climatisation; échappement; pneus et géométrie.",
         "Téléphone : le numéro du magasin (jamais un numéro personnel sans l'accord du gérant).",
         "",
         "Au retour : Admin > Import CSV (enregistrer en .xlsx ou .csv). Les fiches sont complétées (fusion par ID OSM) "
         "et restent en brouillon ; les vérifier une à une (Admin > Magasins) pour qu'elles soient recommandées.",
         "La commune proposée est la plus proche du point OpenStreetMap : la corriger si besoin ; vide = à préciser "
         "(écrire le nom exact d'une commune d'Oran, sinon la ligne est refusée à l'import).",
-        "Commencer par les lignes « Pièces » : ce sont celles que DALIL recommande. Les garages servent aux essais "
-        "(mécaniciens pour le jeu de test d'Oran, docs/essais-oran.md).",
+        "Commencer par les lignes « Pièces ». Les garages vérifiés sont proposés aux automobilistes après un "
+        "diagnostic, selon leurs spécialités ; ils servent aussi aux essais (jeu de test d'Oran, docs/essais-oran.md).",
     ]:
         info.append([line])
     info.column_dimensions["A"].width = 120

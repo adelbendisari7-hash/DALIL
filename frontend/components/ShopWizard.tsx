@@ -27,7 +27,8 @@ export default function ShopWizard({ defaultPhone, onDone, becomeOwner }: {
   function canGo(): string {
     if (step === "identity" && v.name.trim().length < 2) return t("shop.wizard.needName");
     if (step === "location" && (v.lat == null || v.lng == null)) return t("shop.wizard.needPin");
-    if (step === "sells" && !v.category_ids.length) return t("shop.wizard.needFamily");
+    if (step === "sells" && v.shop_type === "garage" && !v.specialties.length) return t("garage.needSpecialty");
+    if (step === "sells" && v.shop_type !== "garage" && !v.category_ids.length) return t("shop.wizard.needFamily");
     return "";
   }
 
@@ -115,7 +116,8 @@ export default function ShopWizard({ defaultPhone, onDone, becomeOwner }: {
           <dt>{t("shops.address")}</dt><dd>{[v.address, v.landmark].filter(Boolean).join(" · ") || t("shop.wizard.pinOnly")}</dd>
           <dt>{t("shop.hours")}</dt><dd>{v.opening ? `${v.opening.days.length} ${t("shop.wizard.days")}, ${v.opening.from}-${v.opening.to}` : "—"}</dd>
           <dt>{t("shop.wizard.sells")}</dt>
-          <dd>{t("shop.wizard.sellsCount", { brands: v.brand_ids.length, families: v.category_ids.length })}</dd>
+          <dd>{v.shop_type === "garage" ? t("garage.recap", { n: v.specialties.length, brands: v.brand_ids.length })
+            : t("shop.wizard.sellsCount", { brands: v.brand_ids.length, families: v.category_ids.length })}</dd>
         </dl>
       )}
 

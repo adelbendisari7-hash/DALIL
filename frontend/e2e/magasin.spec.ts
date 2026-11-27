@@ -254,3 +254,48 @@ test("votre semaine : pièces cherchées près du magasin qu'il ne propose pas, 
   await page.reload();
   await expect(page.getByRole("button", { name: "Voir votre semaine" })).toBeVisible();   // replié pour la semaine
 });
+
+test("un garage s'inscrit avec ses spécialités, puis est proposé pour la pièce du diagnostic", async ({ page, request }) => {
+  const phone = `0559${String(Date.now()).slice(-6)}`;
+  const r = await request.post("/api/v1/auth/register", { data: { first_name: "Mourad", last_name: "Garage", phone,
+    password: "garage-e2e", consent: true } });
+  const token = (await r.json()).token;
+  await request.patch("/api/v1/auth/me", { headers: { Authorization: `Bearer ${token}` }, data: { role: "shop_owner" } });
+  await asUser(page, request, token);
+  await page.goto("/espace-magasin");
+  await page.getByLabel("Nom du magasin").fill("[TEST] Garage Frein Plus");
+  await page.getByRole("button", { name: "Continuer" }).click();
+  await page.getByRole("button", { name: "Je suis au magasin : prendre ma position" }).click();
+  await expect(page.locator(".pin")).toBeVisible();
+  await page.getByRole("button", { name: "Continuer" }).click();
+  const garageChip = page.getByRole("button", { name: "Garage, mécanicien" });
+  const notMine = page.getByRole("button", { name: "Non, c'est un autre magasin" });
+  await expect(garageChip.or(notMine)).toBeVisible();
+  if (await notMine.isVisible()) await notMine.click();
+  await garageChip.click();
+  await page.getByRole("button", { name: "Continuer" }).click();
+  await expect(page.getByText("Choisissez au moins une spécialité.")).toBeVisible();   // un garage dit ce qu'il répare
+  await page.getByRole("button", { name: "Freinage et suspension" }).click();
+  await page.getByRole("button", { name: "Continuer" }).click();
+  await expect(page.getByText("1 spécialités, 0 marques")).toBeVisible();
+  await page.getByRole("button", { name: "Inscrire mon magasin" }).click();
+  await expect(page.getByText("En attente de vérification", { exact: false })).toBeVisible();
+
+  // Vérifié par l'équipe (appel), puis proposé à un automobiliste depuis la liste des magasins
+  const mine = await (await request.get("/api/v1/shops/mine", { headers: { Authorization: `Bearer ${token}` } })).json();
+  const admin = await apiToken(request, ADMIN_PHONE);
+  await request.post(`/api/v1/admin/shops/${mine[0].id}/verify`, { headers: { Authorization: `Bearer ${admin}` },
+    data: { phone_ok: true, address_ok: true, activity_ok: true } });
+  await page.evaluate(() => localStorage.clear());
+  const fams = await (await request.get("/api/v1/parts/categories")).json();
+  const plaq = fams.flatMap((f: { children: { id: number; slug: string; name: string }[] }) => f.children)
+    .find((c: { slug: string }) => c.slug === "plaquettes-avant");
+  await page.goto(`/magasins?category=${plaq.id}&part=${encodeURIComponent(plaq.name)}`);
+  await page.getByRole("link", { name: "Voir les mécaniciens" }).click();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Mécaniciens pour");
+  const g = page.locator(".garage", { hasText: "[TEST] Garage Frein Plus" });
+  await expect(g).toContainText("spécialité : freinage et suspension");
+  await expect(g).toContainText("Freinage et suspension");
+  await g.getByRole("link", { name: "[TEST] Garage Frein Plus" }).click();
+  await expect(page.getByRole("heading", { name: "Spécialités" })).toBeVisible();
+});
