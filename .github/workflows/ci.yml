@@ -39,3 +39,23 @@ jobs:
       - name: Parcours de bout en bout (Playwright)
         working-directory: frontend
         run: npx playwright install --with-deps chromium && npx playwright test
+
+  images:
+    # Les images de production se construisent (API avec les modèles, site) et la composition de production est
+    # valide : sans ce contrôle, une erreur ne se verrait que le jour de la mise en ligne.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Image de l'API (avec torch CPU et transformers)
+        run: docker build --build-arg WITH_ML=1 -t dalil-api backend
+      - name: Les modèles s'importent dans l'image
+        run: docker run --rm dalil-api python -c "import torch, transformers; from transformers import AutoModel, AutoModelForSequenceClassification, AutoTokenizer; print(torch.__version__, transformers.__version__)"
+      - name: L'API refuse de démarrer en production avec les réglages de développement
+        run: |
+          if docker run --rm -e DALIL_ENV=production dalil-api python -c "import app.main"; then
+            echo "démarrage accepté à tort"; exit 1; fi
+      - name: Image du site
+        run: docker build -t dalil-web frontend
+      - name: Composition de production valide
+        working-directory: deploy
+        run: DALIL_DOMAIN=dalil.example.dz POSTGRES_PASSWORD=x DALIL_JWT_SECRET=y docker compose -f docker-compose.prod.yml config -q

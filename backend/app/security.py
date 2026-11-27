@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import ipaddress
 import hmac
 import logging
 import re
@@ -143,6 +144,28 @@ def log_admin(db: Session, user: User, action: str, target: str | None = None, d
     db.add(AdminAction(user_id=user.id, action=action, target=target, details=details))
 
 
+def client_ip(request: Request) -> str:
+    """Adresse du client. Derrière le frontal de production (Caddy, deploy/Caddyfile), toutes les requêtes arrivent
+    par le relais du site : l'adresse réelle est dans l'en-tête X-Real-IP, que le frontal écrase toujours. On ne le
+    croit que si la requête vient d'un relais de confiance (adresse locale ou réseau privé du serveur) ; venu
+    directement d'Internet, il est ignoré (sinon n'importe qui choisirait son adresse et contournerait les limites)."""
+    host = request.client.host if request.client else "anon"
+    header = get_settings().proxy_ip_header
+    if header and _trusted_proxy(host):
+        real = (request.headers.get(header) or "").strip()
+        if real and len(real) <= 64:
+            return real
+    return host
+
+
+def _trusted_proxy(host: str) -> bool:
+    try:
+        ip = ipaddress.ip_address(host)
+    except ValueError:
+        return False
+    return ip.is_loopback or ip.is_private
+
+
 class RateLimiter:
     """Limiteur simple à fenêtre glissante, en mémoire (suffisant pour un seul processus)."""
 
@@ -151,7 +174,7 @@ class RateLimiter:
         self.hits: dict[str, deque] = defaultdict(deque)
 
     def __call__(self, request: Request) -> None:
-        key = request.client.host if request.client else "anon"
+        key = client_ip(request)
         now = time.monotonic()
         q = self.hits[key]
         while q and now - q[0] > 60:
@@ -168,7 +191,7 @@ feedback_limiter = RateLimiter(get_settings().feedback_rate_per_minute)
 def client_hash(request: Request) -> str:
     """Empreinte courte et non réversible du client (HMAC de l'adresse IP avec la clé du serveur) : sert à compter
     les retours par client sans conserver d'adresse IP (collecte minimale, section 10)."""
-    ip = request.client.host if request.client else "anon"
+    ip = client_ip(request)
     return hmac.new(get_settings().jwt_secret.encode(), f"client:{ip}".encode(), hashlib.sha256).hexdigest()[:16]
 otp_limiter = RateLimiter(get_settings().otp_rate_per_minute)
 login_limiter = RateLimiter(get_settings().login_rate_per_minute)   # essais de mot de passe, par adresse IP

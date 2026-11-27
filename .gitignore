@@ -55,3 +55,6 @@ ml/results/*largus-test*
 # Photos des produits et des devantures envoyées par les magasins (services/media.py) : jamais dans git
 data/uploads/
 backend/e2e-media/
+
+# Sauvegardes de production (deploy/sauvegarde.sh)
+deploy/sauvegardes/

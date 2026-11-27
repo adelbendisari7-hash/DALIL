@@ -27,6 +27,11 @@ for r in (public.router, shops.router, team.router, auth.router, account.router,
 
 
 # Modèles de diagnostic chargés ? Le site affiche « DALIL se prépare » tant que ce n'est pas le cas.
+if get_settings().env == "production":   # pas de démarrage en production avec des réglages de développement
+    from .config import production_problems
+    if _problems := production_problems(get_settings()):
+        raise RuntimeError("Réglages de production incomplets : " + " ; ".join(_problems))
+
 READY = threading.Event()
 # Modèles réellement chargés au démarrage : une recherche hybride retombée sur les mots-clés se voit dans /health
 MODELS: dict[str, bool] = {}

@@ -364,3 +364,53 @@ def test_imports_resolus_avant_le_chargement_en_parallele(monkeypatch):
     assert order[0] == "preimport" and {"embedder", "reranker"} <= set(order)
     assert main.MODELS == {"embedder": True, "reranker": False}
     main.MODELS.clear()
+
+
+# --- Mise en ligne : adresse réelle du client derrière le frontal, réglages de production ------------------------------
+
+def test_adresse_du_client_derriere_le_frontal(client):
+    from fastapi.testclient import TestClient
+    from app.main import app
+    from app.security import client_hash, client_ip
+    relais = TestClient(app, client=("127.0.0.1", 50000))        # le relais du site, sur le serveur
+    direct = TestClient(app, client=("41.200.0.9", 50000))      # une adresse d'Internet
+    seen = {}
+
+    @app.get("/__ip_test")
+    def _ip(request: __import__("fastapi").Request):
+        return {"ip": client_ip(request), "hash": client_hash(request)}
+    try:
+        a = relais.get("/__ip_test", headers={"X-Real-IP": "41.100.1.1"}).json()
+        b = relais.get("/__ip_test", headers={"X-Real-IP": "41.100.1.2"}).json()
+        c = direct.get("/__ip_test", headers={"X-Real-IP": "41.100.1.1"}).json()   # en-tête forgé : ignoré
+        d = relais.get("/__ip_test").json()
+        seen.update(a=a, b=b, c=c, d=d)
+    finally:
+        app.router.routes = [r for r in app.router.routes if getattr(r, "path", "") != "/__ip_test"]
+    assert seen["a"]["ip"] == "41.100.1.1" and seen["a"]["hash"] != seen["b"]["hash"]   # deux clients distincts
+    assert seen["c"]["ip"] == "41.200.0.9" and seen["d"]["ip"] == "127.0.0.1"
+
+
+def test_limite_d_essais_par_vrai_client_derriere_le_relais():
+    from fastapi import HTTPException
+    from starlette.requests import Request
+    from app.security import RateLimiter
+
+    def req(real):
+        return Request({"type": "http", "client": ("10.0.0.5", 1), "headers": [(b"x-real-ip", real.encode())]})
+    lim = RateLimiter(2)
+    lim(req("41.1.1.1")); lim(req("41.1.1.1"))
+    lim(req("41.1.1.2"))                     # un autre client derrière le même relais n'est pas bloqué
+    try:
+        lim(req("41.1.1.1"))
+        raise AssertionError("troisième essai du même client accepté")
+    except HTTPException as e:
+        assert e.status_code == 429
+
+
+def test_reglages_de_production_refuses():
+    from app.config import DEV_SECRET, Settings, production_problems
+    bad = Settings(jwt_secret=DEV_SECRET, otp_test_code="424242", database_url="sqlite:///x.db")
+    assert len(production_problems(bad)) == 3
+    good = Settings(jwt_secret="x" * 48, otp_test_code="", database_url="postgresql+psycopg2://dalil:Long-Secret@db/dalil")
+    assert production_problems(good) == []

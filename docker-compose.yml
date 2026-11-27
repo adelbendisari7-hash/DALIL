@@ -1,4 +1,5 @@
-# docker compose up --build  ->  API sur http://localhost:8000/docs, site sur http://localhost:3000
+# Développement : docker compose up --build  ->  API sur http://localhost:8000/docs, site sur http://localhost:3000
+# Production : deploy/docker-compose.prod.yml (https, secrets, sauvegardes ; docs/plan-mise-en-ligne.md)
 services:
   db:
     # PostGIS + pgvector (extensions activées par la migration 0001)
@@ -26,9 +27,14 @@ services:
       DALIL_LLM_PROVIDER: ${DALIL_LLM_PROVIDER:-none}
       DALIL_LLM_API_KEY: ${DALIL_LLM_API_KEY:-}
       DALIL_LLM_BASE_URL: ${DALIL_LLM_BASE_URL:-}
+      # Photos et cache de l'index hors du dossier data (monté en lecture seule)
+      DALIL_MEDIA_DIR: /app/uploads
+      DALIL_INDEX_CACHE_DIR: /app/cache/index
     volumes:
       - ./data:/app/data:ro
       - ./ml/artifacts:/app/ml/artifacts:ro
+      - uploads:/app/uploads
+      - cache:/app/cache
     depends_on:
       db: { condition: service_healthy }
     ports: ["8000:8000"]
@@ -42,3 +48,5 @@ services:
 
 volumes:
   pgdata:
+  uploads:
+  cache:

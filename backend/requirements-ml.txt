@@ -1,0 +1,6 @@
+# Modèles de la recherche hybride (vecteurs Qwen3-Embedding, reclassement bge-reranker), sur processeur.
+# Installés dans l'image de production (backend/Dockerfile, WITH_ML=1) avec l'index CPU de PyTorch :
+#   pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-ml.txt
+# Versions du portable où les mesures ont été faites (28/11/2026) : torch 2.15.0+cpu, transformers 5.23.0.
+torch>=2.15,<3
+transformers>=5.23,<6

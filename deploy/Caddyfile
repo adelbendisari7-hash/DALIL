@@ -1,0 +1,25 @@
+# Frontal de production : https automatique (Let's Encrypt), en-têtes de sécurité, adresse réelle du client.
+{$DALIL_DOMAIN} {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		# Micro (dictée), position (magasins proches), appareil photo (pièces, devantures) : pour DALIL seulement
+		Permissions-Policy "camera=(self), microphone=(self), geolocation=(self), interest-cohort=()"
+		-Server
+	}
+
+	# Import Excel du catalogue : 5 Mo au plus côté API ; un peu de marge pour l'enveloppe de la requête
+	request_body {
+		max_size 6MB
+	}
+
+	reverse_proxy web:3000 {
+		# Écrase toujours la valeur envoyée par le client : l'API ne croit cet en-tête que venant du serveur
+		# (backend/app/security.py, client_ip), pour compter et limiter par vrai client
+		header_up X-Real-IP {remote_host}
+	}
+}

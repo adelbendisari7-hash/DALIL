@@ -1,0 +1,75 @@
+# DALIL en production (docs/plan-mise-en-ligne.md). Depuis ce dossier, avec un fichier .env rempli (modèle : env.exemple) :
+#   docker compose -f docker-compose.prod.yml --env-file .env up -d --build
+# Seul le frontal Caddy est ouvert sur Internet (80 et 443, certificat https automatique) ; la base et l'API restent
+# sur le réseau interne. L'API refuse de démarrer avec des réglages de développement (DALIL_ENV=production).
+services:
+  db:
+    build: ../db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: dalil
+      POSTGRES_USER: dalil
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?mot de passe de la base obligatoire}
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dalil -d dalil"]
+      interval: 10s
+      retries: 30
+
+  api:
+    build:
+      context: ../backend
+      args: { WITH_ML: "1" }
+    restart: unless-stopped
+    environment:
+      DALIL_ENV: production
+      DALIL_DATABASE_URL: postgresql+psycopg2://dalil:${POSTGRES_PASSWORD}@db:5432/dalil
+      DALIL_JWT_SECRET: ${DALIL_JWT_SECRET:?clé secrète obligatoire (64 caractères tirés au hasard)}
+      DALIL_ADMIN_PHONES: ${DALIL_ADMIN_PHONES:-}
+      DALIL_SEED_ARGS: --no-demo
+      DALIL_RETRIEVAL_MODE: hybrid
+      DALIL_CLASSIFIER_PATH: /app/ml/artifacts/famille_rerank_a0.25.joblib
+      DALIL_MODEL_VERSION: ${DALIL_MODEL_VERSION:-tfidf-lr-reels-forums+familles-largus-techniconnexion-a0.25}
+      DALIL_LLM_PROVIDER: none
+      DALIL_DATA_DIR: /app/data
+      DALIL_MEDIA_DIR: /app/uploads
+      DALIL_INDEX_CACHE_DIR: /app/cache/index
+      DALIL_CORS_ORIGINS: https://${DALIL_DOMAIN}
+    volumes:
+      - ../data:/app/data:ro
+      - ../ml/artifacts:/app/ml/artifacts:ro
+      - uploads:/app/uploads
+      - cache:/app/cache
+    depends_on:
+      db: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5)"]
+      interval: 30s
+      retries: 10
+      start_period: 120s
+
+  web:
+    build:
+      context: ../frontend
+      args: { NEXT_PUBLIC_API_URL: "", DALIL_API_INTERNAL: "http://api:8000" }
+    restart: unless-stopped
+    depends_on: [api]
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443", "443:443/udp"]
+    environment:
+      DALIL_DOMAIN: ${DALIL_DOMAIN:?nom de domaine obligatoire}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [web]
+
+volumes:
+  pgdata:
+  uploads:
+  cache:
+  caddy_data:
+  caddy_config:

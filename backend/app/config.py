@@ -68,12 +68,33 @@ class Settings(BaseSettings):
     # reconnu par une empreinte du contenu de la base. Vide = pas de cache.
     index_cache_dir: str = str(REPO_ROOT / "data" / "processed" / "index_cache")
     cors_origins: str = "http://localhost:3000"
+    # En-tête qui porte l'adresse réelle du client derrière le frontal (security.client_ip) ; vide = jamais lu
+    proxy_ip_header: str = "x-real-ip"
+    # "production" : refuse de démarrer avec les réglages de développement (clé par défaut, code SMS fixe...)
+    env: str = "development"
 
     data_dir: str = str(REPO_ROOT / "data")
     # Recherche d'adresse des magasins (Nominatim, OpenStreetMap) ; vide = désactivée (tests, hors ligne)
     geocoder_url: str = "https://nominatim.openstreetmap.org/search"
     # Photos des produits et des devantures (services/media.py), hors git
     media_dir: str = str(REPO_ROOT / "data" / "uploads")
+
+
+DEV_SECRET = "dev-only-secret-change-me-in-production-0123456789"
+
+
+def production_problems(s: "Settings") -> list[str]:
+    """Réglages de développement interdits en production (DALIL_ENV=production) : l'API refuse de démarrer."""
+    problems = []
+    if s.jwt_secret == DEV_SECRET or len(s.jwt_secret) < 32:
+        problems.append("DALIL_JWT_SECRET : clé par défaut ou trop courte (32 caractères au moins, tirés au hasard)")
+    if s.otp_test_code:
+        problems.append("DALIL_OTP_TEST_CODE : code de connexion fixe des tests, à vider")
+    if "dalil-dev" in s.database_url:
+        problems.append("DALIL_DATABASE_URL : mot de passe de base de développement")
+    if s.database_url.startswith("sqlite"):
+        problems.append("DALIL_DATABASE_URL : SQLite est réservé au portable et aux tests ; PostgreSQL en production")
+    return problems
 
 
 @lru_cache

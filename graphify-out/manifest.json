@@ -1,8 +1,8 @@
 {
   ".github/workflows/ci.yml": {
-    "mtime": 1794658980.9581034,
-    "seen": 1794659040.1764622,
-    "ast_hash": "f48df5ca4b5af43b2f84f287024da02c",
+    "mtime": 1795821025.7936451,
+    "seen": 1795821239.7303538,
+    "ast_hash": "f8d41e406e7156b908b3cf3a60959a86",
     "semantic_hash": ""
   },
   "backend/alembic/env.py": {
@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "backend/app/config.py": {
-    "mtime": 1795784205.564195,
-    "seen": 1795791636.7354836,
-    "ast_hash": "c9073a73b0d3de17990f4474499229c7",
+    "mtime": 1795820930.0619729,
+    "seen": 1795821239.7303538,
+    "ast_hash": "b56147125f6196a0ac972c6f0928eac5",
     "semantic_hash": ""
   },
   "backend/app/db.py": {
@@ -36,9 +36,9 @@
     "semantic_hash": ""
   },
   "backend/app/main.py": {
-    "mtime": 1795812777.1778429,
-    "seen": 1795814072.6863253,
-    "ast_hash": "f5a1a68b16fd54ec1a40185aa5de2f66",
+    "mtime": 1795820930.0619729,
+    "seen": 1795821239.7303538,
+    "ast_hash": "5010a2f531d9df0f3b40b953b6b6d799",
     "semantic_hash": ""
   },
   "backend/app/models.py": {
@@ -84,9 +84,9 @@
     "semantic_hash": ""
   },
   "backend/app/security.py": {
-    "mtime": 1795779782.5213416,
-    "seen": 1795780571.7931917,
-    "ast_hash": "2d19b9e4238b82b56ce20081076a44d3",
+    "mtime": 1795820911.1650925,
+    "seen": 1795821239.7303538,
+    "ast_hash": "1a345b98b9e0c44bc8f73e2aee9ad342",
     "semantic_hash": ""
   },
   "backend/app/seed.py": {
@@ -342,9 +342,9 @@
     "semantic_hash": ""
   },
   "docker-compose.yml": {
-    "mtime": 1794619673.2520854,
-    "seen": 1794659040.1764622,
-    "ast_hash": "33dd4318369c63527f5213954cf2533b",
+    "mtime": 1795820989.3922403,
+    "seen": 1795821239.7303538,
+    "ast_hash": "035c02fd4bbb3c70801c14adb67717b4",
     "semantic_hash": ""
   },
   "frontend/app/admin/page.tsx": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795814055.0324721,
-    "seen": 1795814072.6863253,
-    "ast_hash": "199090f0e1215ccc8bbeef782de1222f",
+    "mtime": 1795821223.7804735,
+    "seen": 1795821239.7303538,
+    "ast_hash": "b4c2183f9eff366ceea8b3d1be55654d",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -2088,9 +2088,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_serie3.py": {
-    "mtime": 1795812777.207162,
-    "seen": 1795814072.6863253,
-    "ast_hash": "a52f30426cadf6dfb079aa9939e4caba",
+    "mtime": 1795820944.85638,
+    "seen": 1795821239.7303538,
+    "ast_hash": "d16a8e94e522349e36b1e9efa87a3225",
     "semantic_hash": ""
   },
   "frontend/app/garages/page.tsx": {
@@ -2133,6 +2133,30 @@
     "mtime": 1795811056.5878446,
     "seen": 1795814072.6863253,
     "ast_hash": "e51c3c8f480a374724a72ca2fad73cd5",
+    "semantic_hash": ""
+  },
+  "deploy/docker-compose.prod.yml": {
+    "mtime": 1795821009.5422306,
+    "seen": 1795821239.7303538,
+    "ast_hash": "37c79074ae21db6e402df340ea940705",
+    "semantic_hash": ""
+  },
+  "deploy/sauvegarde.sh": {
+    "mtime": 1795821009.7075372,
+    "seen": 1795821239.7303538,
+    "ast_hash": "13260b50d6c9facb2fe9e9ebfbfdc785",
+    "semantic_hash": ""
+  },
+  "backend/requirements-ml.txt": {
+    "mtime": 1795820989.1953146,
+    "seen": 1795821239.7303538,
+    "ast_hash": "7743d44a892d124bc0ea09eb97acb3a5",
+    "semantic_hash": ""
+  },
+  "docs/plan-mise-en-ligne.md": {
+    "mtime": 1795821222.3900235,
+    "seen": 1795821239.7303538,
+    "ast_hash": "07371d8f55b921d1c2ca15b74c53f86f",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {
