@@ -347,3 +347,20 @@ def test_demo_soutenance_rejouable_puis_purgee(client, db):
     assert db.scalar(select(User).where(User.phone == demo_soutenance.PHONE)) is None
     assert db.scalar(select(Shop).where(Shop.name == demo_soutenance.GARAGE)) is None
     seed_run(db, demo=True)
+
+
+# --- Démarrage : imports de transformers résolus avant le chargement en parallèle (défaut du 28/11/2026) ---------------
+
+def test_imports_resolus_avant_le_chargement_en_parallele(monkeypatch):
+    import app.main as main
+    from app.config import get_settings
+    from app.services.diagnosis import embeddings
+    order: list[str] = []
+    monkeypatch.setattr(get_settings(), "retrieval_mode", "hybrid")
+    monkeypatch.setattr(embeddings, "preimport", lambda: order.append("preimport"))
+    monkeypatch.setattr(embeddings, "get_embedder", lambda: order.append("embedder") or object())
+    monkeypatch.setattr(embeddings, "get_reranker", lambda: order.append("reranker"))   # absent : signalé
+    main.warmup()
+    assert order[0] == "preimport" and {"embedder", "reranker"} <= set(order)
+    assert main.MODELS == {"embedder": True, "reranker": False}
+    main.MODELS.clear()

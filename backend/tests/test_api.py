@@ -40,7 +40,7 @@ def test_health_dit_quand_les_modeles_sont_prets(monkeypatch):
     monkeypatch.setattr(main, "get_settings", lambda: type("S", (), {"warmup": True})())
     monkeypatch.setattr(main.threading, "Thread", lambda target, **k: type("T", (), {"start": lambda self: None})())
     with TestClient(main.app) as c:   # démarrage de l'application, préchargement pas encore fait
-        assert c.get("/health").json() == {"status": "ok", "ready": False}
+        assert c.get("/health").json() == {"status": "ok", "ready": False, "models": {}}   # rien de chargé encore
         monkeypatch.setattr("app.db.SessionLocal", lambda: (_ for _ in ()).throw(RuntimeError("base absente")))
         main.warmup()
         assert c.get("/health").json()["ready"] is True

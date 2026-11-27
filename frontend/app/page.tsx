@@ -144,82 +144,88 @@ export default function Home() {
       <p className="lead">{t("home.lead")}</p>
       {warming && <p className="notice" role="status">{t("home.warming")}</p>}
 
-      {/* Contrôle technique et assurance : rappel dès 30 jours avant la fin */}
-      {paperAlerts.length > 0 && (
-        <aside className={`card upkeep-banner papers-banner${papersUrgent ? " is-urgent" : ""}`} aria-labelledby="papers-title">
-          <div className="upkeep-head">
-            <h2 id="papers-title" className="card-title">{t("papers.banner")}</h2>
-            {!papersUrgent && <button type="button" className="btn btn-ghost" onClick={hidePapers}>{t("upkeep.hide")}</button>}
-          </div>
-          <ul className="upkeep-list">
-            {paperAlerts.map(({ car: c, p }) => (
-              <li key={p.id}>
-                <Link href={`/compte?papiers=${c.id}#voiture-${c.id}`}>
-                  <strong>{t(`papers.${p.kind}`)} · {c.nickname || c.display}</strong>
-                  <span className={`meta${p.status !== "soon" ? " paper-urgent" : ""}`}>{paperWhen(p)}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </aside>
-      )}
+      {/* Ce qui attend le client pour ses voitures, en une seule carte compacte : la description de la panne,
+          tâche principale de l'accueil, reste près du haut de l'écran même avec plusieurs rappels */}
+      {(paperAlerts.length > 0 || recallCars.length > 0 || watchAlerts.length > 0 || (!upkeepHidden && upkeep.length > 0)) && (
+        <section className="card alerts" aria-labelledby="alerts-title">
+          <h2 id="alerts-title" className="card-title">{t("alerts.title")}</h2>
 
-      {recallCars.length > 0 && (
-        <aside className="card upkeep-banner recall-banner" aria-labelledby="recall-title">
-          <h2 id="recall-title" className="card-title">{t("recalls.banner")}</h2>
-          <ul className="upkeep-list">
-            {recallCars.map((c) => (
-              <li key={c.id}>
-                <Link href={`/compte?rappels=${c.id}#voiture-${c.id}`}>
-                  <strong>{c.nickname || c.display}</strong>
-                  <span className="meta">{t("recalls.bannerLine", { n: c.recalls_count ?? 0 })}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="help">{t("recalls.bannerHelp")}</p>
-        </aside>
-      )}
+          {/* Contrôle technique et assurance : rappel dès 30 jours avant la fin ; urgent ou expiré : impossible à masquer */}
+          {paperAlerts.length > 0 && (
+            <div className={`alert-group papers-banner${papersUrgent ? " is-urgent" : ""}`}>
+              <div className="upkeep-head">
+                <h3 className="alert-title">{t("papers.banner")}</h3>
+                {!papersUrgent && <button type="button" className="btn btn-ghost" onClick={hidePapers}>{t("upkeep.hide")}</button>}
+              </div>
+              <ul className="upkeep-list">
+                {paperAlerts.map(({ car: c, p }) => (
+                  <li key={p.id}>
+                    <Link href={`/compte?papiers=${c.id}#voiture-${c.id}`}>
+                      <strong>{t(`papers.${p.kind}`)} · {c.nickname || c.display}</strong>
+                      <span className={`meta${p.status !== "soon" ? " paper-urgent" : ""}`}>{paperWhen(p)}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-      {watchAlerts.length > 0 && (
-        <aside className="card upkeep-banner price-banner" aria-labelledby="price-alert-title">
-          <h2 id="price-alert-title" className="card-title">{t("watch.banner")}</h2>
-          <ul className="upkeep-list">
-            {watchAlerts.map((w) => (
-              <li key={w.id}>
-                <Link href={shopsLink(w)}>
-                  <strong>{w.part}</strong>
-                  <span className="meta">{watchLine(w)}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="help">{t("watch.banner.help")}</p>
-        </aside>
-      )}
+          {recallCars.length > 0 && (
+            <div className="alert-group recall-banner">
+              <h3 className="alert-title">{t("recalls.banner")}</h3>
+              <ul className="upkeep-list">
+                {recallCars.map((c) => (
+                  <li key={c.id}>
+                    <Link href={`/compte?rappels=${c.id}#voiture-${c.id}`}>
+                      <strong>{c.nickname || c.display}</strong>
+                      <span className="meta">{t("recalls.bannerLine", { n: c.recalls_count ?? 0 })}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-      {/* Rappel d'entretien : seulement ce qui est dépassé ou proche, masquable pour la journée */}
-      {!upkeepHidden && upkeep.length > 0 && (
-        <aside className="card upkeep-banner" aria-labelledby="upkeep-title">
-          <div className="upkeep-head">
-            <h2 id="upkeep-title" className="card-title">{t("upkeep.title")}</h2>
-            <button type="button" className="btn btn-ghost" onClick={hideUpkeep}>{t("upkeep.hide")}</button>
-          </div>
-          <ul className="upkeep-list">
-            {upkeep.map((c) => (
-              <li key={c.id}>
-                <Link href={`/compte?entretien=${c.id}#voiture-${c.id}`}>
-                  <strong>{c.nickname || c.display}</strong>
-                  <span className="meta">
-                    {c.maintenance_items!.slice(0, 3).map((x) => `${x.name.toLowerCase()} (${upkeepWhen(x)})`).join(", ")}
-                    {c.maintenance_items!.length > 3 ? ` +${c.maintenance_items!.length - 3}` : ""}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="help">{t("upkeep.note")}</p>
-        </aside>
+          {watchAlerts.length > 0 && (
+            <div className="alert-group price-banner">
+              <h3 className="alert-title">{t("watch.banner")}</h3>
+              <ul className="upkeep-list">
+                {watchAlerts.map((w) => (
+                  <li key={w.id}>
+                    <Link href={shopsLink(w)}>
+                      <strong>{w.part}</strong>
+                      <span className="meta">{watchLine(w)}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Entretien : seulement ce qui est dépassé ou proche, masquable pour la journée */}
+          {!upkeepHidden && upkeep.length > 0 && (
+            <div className="alert-group upkeep-banner">
+              <div className="upkeep-head">
+                <h3 className="alert-title">{t("upkeep.title")}</h3>
+                <button type="button" className="btn btn-ghost" onClick={hideUpkeep}>{t("upkeep.hide")}</button>
+              </div>
+              <ul className="upkeep-list">
+                {upkeep.map((c) => (
+                  <li key={c.id}>
+                    <Link href={`/compte?entretien=${c.id}#voiture-${c.id}`}>
+                      <strong>{c.nickname || c.display}</strong>
+                      <span className="meta">
+                        {c.maintenance_items!.slice(0, 3).map((x) => `${x.name.toLowerCase()} (${upkeepWhen(x)})`).join(", ")}
+                        {c.maintenance_items!.length > 3 ? ` +${c.maintenance_items!.length - 3}` : ""}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="help">{t("upkeep.note")}</p>
+            </div>
+          )}
+        </section>
       )}
 
       {last && (

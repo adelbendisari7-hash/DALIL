@@ -45,6 +45,10 @@ Cahier des charges complet : `docs/cahier-des-charges.md` (le relire pour toute 
 - `backend/app/services/media.py` : photos des produits et des devantures (JPEG seulement, métadonnées et position GPS retirées, `data/uploads/` hors git).
 - `backend/app/services/shop_stats.py` : statistiques du magasin (apparitions et vues une fois par client et par jour, contacts, demandes et délai, recherches à moins de 10 km), badge « Répond vite ».
 - `backend/app/services/maintenance.py` : entretien des voitures du client (référentiel indicatif `data/seed/maintenance.json`, le carnet du constructeur fait foi).
+- `backend/app/services/garages.py` : spécialités des garages et classement des mécaniciens après un diagnostic.
+- `backend/app/services/recalls.py` : rappels des constructeurs (RappelConso) pour le modèle d'une voiture du client.
+- `backend/app/services/price_history.py` et `price_watch.py` : historique des prix (écrit à chaque changement) et prix suivis.
+- `backend/app/services/vehicle_papers.py` et `vehicle_transfer.py` : contrôle technique et assurance ; carnet transmis à la revente.
 - `backend/app/services/recommendation.py` : score des magasins, et `offers` (meilleure offre de chaque magasin pour comparer les prix) (section 6.4), fonction pure `score_shop` testée par 10 scénarios.
 - `backend/app/services/diagnosis/pipeline.py` : chaîne de diagnostic (normalisation, recherche, classifieur, modèle de langage, sûreté, questions de précision, niveaux de référence).
 - `backend/app/routers/` : `public` (véhicules, pièces, OBD, diagnostic), `shops` (recommandation, espace magasin, contacts, retours, demandes), `auth` (inscription et connexion par mot de passe, profil du compte client ; code SMS gardé pour plus tard), `account` (voitures du client au matricule unique, signalements, historique), `team` (équipe d'un magasin : réservée au gérant, aucune route d'administration ; accès dans `services/shop_team.py`), `admin`.

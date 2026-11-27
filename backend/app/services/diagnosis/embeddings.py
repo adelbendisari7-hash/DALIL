@@ -74,6 +74,18 @@ class Reranker:
         return out
 
 
+def preimport() -> None:
+    """Résout les imports de torch et transformers dans le fil appelant, avant le chargement en parallèle des modèles.
+    Les imports paresseux de transformers ne sont pas sûrs entre fils : chargés en même temps, l'un d'eux pouvait
+    échouer (« cannot import name 'AutoModelForSequenceClassification' ») et le reclassement restait désactivé jusqu'au
+    redémarrage (vu le 28/11/2026)."""
+    try:
+        import torch  # noqa: F401
+        from transformers import AutoModel, AutoModelForSequenceClassification, AutoTokenizer  # noqa: F401
+    except Exception as e:  # torch ou transformers absents : chaque chargeur le dira
+        log.warning("Import de torch/transformers impossible (%s)", e)
+
+
 def _load(cls, folder: str):
     path = Path(folder)
     if not (path / "config.json").exists():

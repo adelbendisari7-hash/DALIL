@@ -28,12 +28,14 @@ for r in (public.router, shops.router, team.router, auth.router, account.router,
 
 # Modèles de diagnostic chargés ? Le site affiche « DALIL se prépare » tant que ce n'est pas le cas.
 READY = threading.Event()
+# Modèles réellement chargés au démarrage : une recherche hybride retombée sur les mots-clés se voit dans /health
+MODELS: dict[str, bool] = {}
 
 
 @app.get("/health")
 @app.get("/api/v1/health")   # même adresse que le reste de l'API, pour le relais du site
 def health():
-    return {"status": "ok", "ready": READY.is_set()}
+    return {"status": "ok", "ready": READY.is_set(), "models": MODELS}
 
 
 def warmup() -> None:
@@ -41,7 +43,7 @@ def warmup() -> None:
     diagnostics qui arrivent pendant ce temps attendent la fin du chargement (verrou) au lieu de le refaire."""
     from .db import SessionLocal
     from .services.diagnosis.classifier import get_classifier
-    from .services.diagnosis.embeddings import get_embedder, get_reranker
+    from .services.diagnosis.embeddings import get_embedder, get_reranker, preimport
     from .services.diagnosis.pipeline import DiagnosisInput, run_diagnosis
     from .services.diagnosis.retrieval import MODELS_LOCK
 
@@ -52,12 +54,17 @@ def warmup() -> None:
             # Les trois modèles se chargent en parallèle : 31-39 s -> 13-18 s sur le portable (27/11/2026).
             loaders = [get_classifier]
             if get_settings().retrieval_mode == "hybrid":
+                preimport()   # imports résolus ici, une fois : pas sûrs entre fils (voir preimport)
                 loaders += [get_embedder, get_reranker]
             threads = [threading.Thread(target=f, name=f"dalil-{f.__name__}") for f in loaders]
             for th in threads:
                 th.start()
             for th in threads:
                 th.join()
+            if get_settings().retrieval_mode == "hybrid":
+                MODELS.update(embedder=get_embedder() is not None, reranker=get_reranker() is not None)
+                if not all(MODELS.values()):
+                    log.warning("Recherche hybride incomplète (%s) : vérifier ml/artifacts et l'installation", MODELS)
             with SessionLocal() as db:   # index des mots-clés et vecteurs, avec un diagnostic factice
                 run_diagnosis(db, DiagnosisInput(text="bruit métallique au freinage"), use_llm=False)
         log.warning("Modèles de diagnostic prêts en %.0f s", time.time() - t0)

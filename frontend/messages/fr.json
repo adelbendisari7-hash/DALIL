@@ -786,5 +786,6 @@
   "transfer.previewPrices": "Le vendeur transmet aussi les prix payés.",
   "transfer.previewNoPrices": "Sans les prix payés (choix du vendeur).",
   "transfer.accept": "Reprendre la voiture et son carnet",
-  "transfer.takenHint": "Vous venez d'acheter cette voiture ? Demandez au vendeur un code de transfert (Mon compte > Vendre), puis « Reprendre le carnet d'une voiture achetée ». Sinon, signalez-le à l'équipe DALIL."
+  "transfer.takenHint": "Vous venez d'acheter cette voiture ? Demandez au vendeur un code de transfert (Mon compte > Vendre), puis « Reprendre le carnet d'une voiture achetée ». Sinon, signalez-le à l'équipe DALIL.",
+  "alerts.title": "À faire pour vos voitures"
 }

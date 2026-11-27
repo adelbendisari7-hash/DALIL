@@ -328,3 +328,42 @@ test("client connecté : papiers de la voiture, carnet d'entretien, rappels de l
   await shot(page, "15-fiche-magasin");
   void car;
 });
+
+test("démonstration de soutenance (compte [DÉMO] préparé par python -m app.demo_soutenance)", async ({ page }) => {
+  test.skip(!process.env.TEL_DEMO, "TEL_DEMO=1 : instance où le scénario de démonstration a été préparé");
+  await slowDown(page);
+  await page.goto("/connexion?next=/");
+  await page.getByLabel("Numéro de mobile").fill("0550000101");
+  await page.getByLabel("Mot de passe", { exact: true }).fill("demo-soutenance");
+  await page.getByRole("button", { name: "Me connecter" }).tap();
+  // Accueil : les rappels du jour
+  await expect.soft(page.locator(".papers-banner"), "démo : assurance urgente").toContainText("finit dans 5 jours", { timeout: 60_000 });
+  await expect.soft(page.locator(".price-banner"), "démo : prix en baisse").toContainText("Plaquettes");
+  await expect.soft(page.locator(".upkeep-banner").filter({ hasText: "Entretien" }), "démo : entretien").toContainText("vidange");
+  await ergonomie(page, "démo : accueil");
+  await shot(page, "20-demo-accueil");
+  // Voiture : entretien et carnet, papiers, rappels
+  await page.goto("/compte");
+  await page.getByRole("button", { name: "Entretien" }).tap();
+  await expect.soft(page.locator(".carnet .visit"), "démo : trois passages").toHaveCount(3, { timeout: 30_000 });
+  await ergonomie(page, "démo : carnet");
+  await page.getByRole("button", { name: "Papiers" }).tap();
+  await ergonomie(page, "démo : papiers");
+  const recalls = page.getByRole("button", { name: /Rappels/ });
+  if (await recalls.count()) {
+    await recalls.first().tap();
+    await expect.soft(page.locator(".recalls"), "démo : rappels").toContainText("pas forcément concernée");
+    await ergonomie(page, "démo : rappels");
+  }
+  await shot(page, "21-demo-compte");
+  // Mécaniciens pour les plaquettes, et la fiche d'un magasin avec son avis
+  await page.goto("/");
+  await page.locator(".price-banner a").first().tap();
+  await expect.soft(page.locator(".price-history"), "démo : historique des prix").toBeVisible({ timeout: 60_000 });
+  await ergonomie(page, "démo : magasins et prix");
+  await shot(page, "22-demo-magasins");
+  await page.getByRole("link", { name: "Voir les mécaniciens" }).tap();
+  await expect.soft(page.locator(".garage").first(), "démo : garage proposé").toContainText("[DÉMO] Garage", { timeout: 60_000 });
+  await ergonomie(page, "démo : mécaniciens");
+  await shot(page, "23-demo-mecaniciens");
+});
