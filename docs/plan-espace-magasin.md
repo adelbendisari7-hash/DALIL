@@ -1,6 +1,6 @@
 # Plan : côté magasin (inscription, adresse et carte, catalogue, équipe, statistiques)
 
-Rédigé le 27/11/2026, révisé le même jour avec les décisions de l'utilisateur. **Feu vert donné le 27/11/2026, avec les cinq idées A à E.**
+Rédigé le 27/11/2026, révisé le même jour avec les décisions de l'utilisateur. **Feu vert donné le 27/11/2026, avec les cinq idées A à E. Phases 1 à 4 faites le 27/11/2026 ; reste le terrain (équipe).**
 Il complète les fonctions F6, F11, F12 et F18 du cahier des charges et l'étape 11 (essais à Oran).
 
 **Prompt à lancer :**
@@ -106,7 +106,7 @@ téléphone simulé, sans position GPS dans le fichier stocké.
 retiré n'a plus accès ; un administrateur DALIL ne peut pas modifier une équipe) ; parcours e2e : le gérant ajoute un
 vendeur, le vendeur répond à une demande, le journal l'affiche.
 
-## Phase 4 — Statistiques du magasin
+## Phase 4 — Statistiques du magasin (faite le 27/11/2026)
 
 - **Événements enregistrés**, sans donnée personnelle (empreinte du client, comme pour « pièce trouvée ») :
   apparition dans un classement, fiche ouverte, appel, WhatsApp, demande reçue, réponse (et délai), « pièce trouvée ».

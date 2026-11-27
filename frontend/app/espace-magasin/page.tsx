@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import ShopForm, { cleanShop, type ShopFormValue } from "@/components/ShopForm";
 import ShopCatalog from "@/components/ShopCatalog";
+import ShopStats from "@/components/ShopStats";
 import ShopTeam from "@/components/ShopTeam";
 import ShopWizard from "@/components/ShopWizard";
 import { photoForm, shrinkPhoto } from "@/lib/photo";
@@ -164,12 +165,12 @@ function ShopStatus({ shop, onChange, canEdit }: { shop: Shop; onChange: () => v
 }
 
 function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
-  type Tab = "inbox" | "catalog" | "profile" | "team";
+  type Tab = "inbox" | "catalog" | "stats" | "profile" | "team";
   const can = (p: string) => shop.my_permissions.includes(p);
   const manager = shop.my_role === "manager";
   const tabs = ([
     can("requests") && "inbox", (can("products") || can("prices") || can("products_delete")) && "catalog",
-    can("profile") && "profile", manager && "team",
+    can("stats") && "stats", can("profile") && "profile", manager && "team",
   ].filter(Boolean)) as Tab[];
   const [tab, setTab] = useState<Tab>(tabs[0] ?? "inbox");
   const [count, setCount] = useState<number | null>(null);
@@ -221,7 +222,7 @@ function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
           <button key={k} role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>
             {k === "inbox" ? `${t("shop.inbox")}${waiting ? ` (${waiting})` : ""}`
               : k === "catalog" ? `${t("shop.products")}${count != null ? ` (${count})` : ""}`
-              : k === "team" ? t("team.tab") : t("shop.profile")}
+              : k === "team" ? t("team.tab") : k === "stats" ? t("stats.tab") : t("shop.profile")}
           </button>
         ))}
       </div>
@@ -247,6 +248,7 @@ function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
 
       {tab === "catalog" && <ShopCatalog shopId={shop.id} onCount={setCount} perms={shop.my_permissions} />}
       {tab === "team" && manager && <ShopTeam shopId={shop.id} onTransferred={onChange} />}
+      {tab === "stats" && <ShopStats shopId={shop.id} onEditProfile={can("profile") ? () => setTab("profile") : undefined} />}
 
       {tab === "profile" && (
         <>

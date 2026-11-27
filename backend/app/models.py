@@ -277,6 +277,29 @@ class ShopActivity(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
 
 
+class ShopEvent(Base):
+    """Statistiques du magasin (phase 4) : apparition dans un classement, fiche ouverte. Sans donnée personnelle :
+    l'empreinte du client (HMAC de l'adresse IP) sert seulement à compter une fois par client et par jour."""
+    __tablename__ = "shop_events"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    shop_id: Mapped[int] = mapped_column(ForeignKey("shops.id", ondelete="CASCADE"), index=True)
+    kind: Mapped[str] = mapped_column(String(20))   # impression|view
+    client_hash: Mapped[str | None] = mapped_column(String(16))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
+
+
+class SearchEvent(Base):
+    """Pièce cherchée par un client (« ce que cherchent les clients près de chez vous ») : famille, marque du
+    véhicule, position arrondie à 0,01 degré (environ 1 km) si le client l'a donnée. Rien d'autre."""
+    __tablename__ = "search_events"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    category_id: Mapped[int] = mapped_column(ForeignKey("part_categories.id"), index=True)
+    brand_id: Mapped[int | None] = mapped_column(ForeignKey("brands.id"))
+    lat: Mapped[float | None] = mapped_column(Float)
+    lng: Mapped[float | None] = mapped_column(Float)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
+
+
 class ShopBrand(Base):
     __tablename__ = "shop_brands"
     shop_id: Mapped[int] = mapped_column(ForeignKey("shops.id", ondelete="CASCADE"), primary_key=True)

@@ -40,6 +40,7 @@ from ..schemas import (
 from ..security import client_hash, current_user, current_user_optional, feedback_limiter, normalize_phone, require_role
 from ..services.imports import import_products, product_template, read_table
 from ..services import shop_onboarding as onboarding
+from ..services import shop_stats
 from ..services import shop_team as team
 from ..services.media import InvalidImage, storage
 from ..services.recommendation import RECOMMENDABLE_STATUSES, category_lineage, recommend
@@ -102,7 +103,7 @@ def _can_see(db: Session, shop: Shop, user: User | None) -> bool:
 
 @router.get("/shops/recommend")
 def shops_recommend(
-    category_id: int, variant_id: int | None = None,
+    request: Request, category_id: int, variant_id: int | None = None,
     lat: float | None = Query(None, ge=-90, le=90), lng: float | None = Query(None, ge=-180, le=180),
     limit: int = Query(20, le=50), db: Session = Depends(get_db),
 ):
@@ -110,8 +111,15 @@ def shops_recommend(
         raise HTTPException(404, "Famille de pièces inconnue")
     out = []
     for shop, sc in recommend(db, category_id, variant_id, lat, lng, limit):
+        fast = shop_stats.fast_reply(db, shop.id)
         out.append({**shop_out(shop, full=False), "score": sc.score, "breakdown": sc.breakdown,
-                    "reasons": sc.reasons, "stale": sc.stale, "distance_km": sc.distance_km})
+                    "reasons": sc.reasons + (["répond vite aux demandes"] if fast else []), "stale": sc.stale,
+                    "distance_km": sc.distance_km, "fast_reply": fast})
+    # Statistiques des magasins (sans donnée personnelle) : apparitions, et pièce cherchée près de chez qui
+    variant = db.get(VehicleVariant, variant_id) if variant_id else None
+    shop_stats.record(db, [x["id"] for x in out], "impression", client_hash(request))
+    shop_stats.record_search(db, category_id, variant.model.brand_id if variant else None, lat, lng)
+    db.commit()
     return out
 
 
@@ -143,13 +151,24 @@ def shops_nearby_claimable(lat: float | None = Query(None, ge=-90, le=90), lng: 
 
 
 @router.get("/shops/{shop_id}")
-def shop_detail(shop_id: int, db: Session = Depends(get_db), user: User | None = Depends(current_user_optional)):
+def shop_detail(shop_id: int, request: Request, db: Session = Depends(get_db),
+                user: User | None = Depends(current_user_optional)):
     shop = db.get(Shop, shop_id)
     if not shop:
         raise HTTPException(404, "Magasin inconnu")
     if not _can_see(db, shop, user):
         raise HTTPException(404, "Magasin inconnu")
-    return shop_out(shop)
+    if not (user and (user.role == "admin" or team.membership(db, shop, user)[0])):   # l'équipe ne compte pas ses visites
+        shop_stats.record(db, [shop.id], "view", client_hash(request))
+        db.commit()
+    return {**shop_out(shop), "fast_reply": shop_stats.fast_reply(db, shop.id)}
+
+
+@router.get("/shops/{shop_id}/stats")
+def shop_stats_view(shop_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
+    """Tableau de bord du magasin : 30 derniers jours comparés aux 30 précédents, et ce que cherchent les clients
+    près du magasin. Gérant, et employés à qui il a donné l'accès « statistiques »."""
+    return shop_stats.stats(db, _owned_shop(db, shop_id, user, "stats"))
 
 
 @router.get("/catalog/template.xlsx")
@@ -502,6 +521,17 @@ def part_request_create(body: PartRequestIn, db: Session = Depends(get_db), user
         n += 1
     db.commit()
     return {"id": req.id, "notified_shops": n}
+
+
+@router.get("/part-requests/pending-count")
+def part_request_pending(db: Session = Depends(get_db), user: User = Depends(current_user)):
+    """Nombre de demandes en attente de réponse, pour le compteur de l'onglet « Magasin »."""
+    shop_ids = [s.id for s, _, perms in team.my_shops(db, user) if "requests" in perms]
+    if not shop_ids:
+        return {"pending": 0}
+    n = len(list(db.scalars(select(RequestResponse.request_id).where(RequestResponse.shop_id.in_(shop_ids),
+                                                                     RequestResponse.available.is_(None)))))
+    return {"pending": n}
 
 
 @router.get("/part-requests/inbox")

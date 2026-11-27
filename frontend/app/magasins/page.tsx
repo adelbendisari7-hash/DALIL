@@ -13,7 +13,7 @@ type Rec = {
   id: number; name: string; lat: number | null; lng: number | null; commune: string | null;
   phone: string | null; whatsapp: string | null; hours: string | null; is_demo: boolean;
   score: number; reasons: string[]; stale: boolean; distance_km: number | null;
-  verified: boolean; landmark: string | null; open_status: { open: boolean; label: string } | null;
+  verified: boolean; landmark: string | null; open_status: { open: boolean; label: string } | null; fast_reply?: boolean;
 };
 
 function Shops() {
@@ -102,6 +102,7 @@ function Shops() {
               </h3>
               <div className="shop-badges">
                 {s.verified && <span className="badge-verified">{t("shop.verified")}</span>}
+                {s.fast_reply && <span className="badge-verified badge-fast">{t("stats.fast")}</span>}
                 {s.open_status && <span className={`open-pill ${s.open_status.open ? "is-open" : ""}`}>{s.open_status.label}</span>}
               </div>
               <span className="meta">{[s.commune, s.landmark, s.open_status ? null : s.hours].filter(Boolean).join(" · ")}</span>

@@ -195,6 +195,10 @@ test("équipe : le gérant ajoute un vendeur, qui ne voit que ses accès, répon
   // Le gérant ajoute le vendeur par son numéro (modèle « Vendeur »)
   await asUser(page, request, gerant);
   await page.goto("/espace-magasin");
+  // Compteur des demandes en attente sur l'onglet « Magasin », et onglet Statistiques
+  await expect(page.locator(".nav .nav-badge")).toHaveText("1");
+  await page.getByRole("tab", { name: "Statistiques" }).click();
+  await expect(page.locator(".stats div", { hasText: "demandes reçues" }).locator("strong")).toHaveText("1");
   await page.getByRole("tab", { name: "Équipe" }).click();
   await page.getByLabel("Numéro de l'employé").fill(`0554${stamp}`);
   await page.getByRole("button", { name: "Ajouter à l'équipe" }).click();

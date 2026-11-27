@@ -771,3 +771,13 @@ footer.disclaimer { max-width: 760px; margin: 0 auto; padding: 0 16px 2rem; colo
 @media (min-width: 560px) { .member .perms { grid-template-columns: 1fr 1fr; } }
 .member .perms .check { margin: 0.35rem 0; }
 .activity li { padding: 0.6rem 0; }
+
+/* --- Statistiques du magasin, compteur des demandes --- */
+.stats div { display: flex; flex-direction: column; gap: 0.1rem; }
+.delta { font-size: 0.75rem; font-weight: 700; color: var(--steel); }
+.delta.up { color: var(--green); }
+.delta.down { color: var(--red); }
+.badge-fast { color: var(--blue-deep); background: color-mix(in srgb, var(--yellow) 30%, transparent); }
+.badge-fast::before { content: "⚡"; }
+.nav-icon { position: relative; display: inline-flex; }
+.nav-badge { position: absolute; top: -6px; right: -10px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--red); color: #fff; font-size: 0.68rem; font-weight: 800; line-height: 18px; text-align: center; box-shadow: 0 0 0 2px var(--surface); }

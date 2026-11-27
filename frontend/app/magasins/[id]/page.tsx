@@ -12,7 +12,7 @@ type Shop = {
   id: number; name: string; lat: number | null; lng: number | null; address: string | null; commune: string | null;
   phone: string | null; whatsapp: string | null; hours: string | null; is_demo: boolean; parts_origin: string[];
   brands: { brand_id: number }[]; categories: { category_id: number }[];
-  landmark: string | null; verified: boolean; open_status: { open: boolean; label: string } | null; photo_url: string | null;
+  landmark: string | null; verified: boolean; open_status: { open: boolean; label: string } | null; photo_url: string | null; fast_reply?: boolean;
 };
 type Product = { id: number; title: string; oem_ref: string | null; price: number | null; condition: string; in_stock: boolean;
   photo_url: string | null };
@@ -46,7 +46,10 @@ export default function ShopPage() {
         {shop.is_demo && <span className="tag-demo">démo</span>}
       </h1>
       {shop.photo_url && <img src={shop.photo_url} alt={t("shop.storefront.title")} className="storefront storefront-hero" />}
-      {shop.verified && <p className="badge-verified">{t("shop.verified")}</p>}
+      <div className="shop-badges">
+        {shop.verified && <span className="badge-verified">{t("shop.verified")}</span>}
+        {shop.fast_reply && <span className="badge-verified badge-fast">{t("stats.fast")}</span>}
+      </div>
       {shop.is_demo && <p className="notice">{t("shops.demo")}</p>}
       <p className="meta">{[shop.address, shop.commune].filter(Boolean).join(", ")}</p>
       {shop.landmark && <p className="meta">{t("shop.landmark")} : {shop.landmark}</p>}
