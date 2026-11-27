@@ -20,6 +20,7 @@ Cahier des charges complet : `docs/cahier-des-charges.md` (le relire pour toute 
 ## Commandes
 - Backend : `cd backend && .venv/Scripts/python -m pytest -q` ; API : `uvicorn app.main:app --reload` (docs sur /docs).
 - Migrations : `alembic upgrade head` ; référentiels + démo : `python -m app.seed` ; purge démo : `python -m app.seed --purge-demo`.
+- Démonstration de soutenance (compte client fictif prêt, rejouable) : `cd backend && python -m app.demo_soutenance` ; déroulé : `docs/demo-soutenance.md` ; la purge démo le supprime aussi.
 - Magasins OpenStreetMap -> brouillons + liste de visite : `cd backend && python -m app.import_osm` (rejouable ; `--dry-run`). La liste remplie se réimporte dans Admin > Import CSV.
 - Modèle de référence : `python ml/train_baseline.py [--target part] [--corpus]` (exporte dans `ml/artifacts/`).
 - Évaluation des variantes : `python ml/evaluate.py --model NOM=chemin --modes classifier,retrieval,full [--test data/test/oran_test.jsonl]` (résultats dans `ml/results/`). Le jeu de test d'Oran ne sert jamais à entraîner ni à régler un seuil ; les réglages se font sur `data/test/dev_fr_synthetique.jsonl`.

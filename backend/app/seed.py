@@ -2,7 +2,7 @@
 
     python -m app.seed               # référentiels + démo
     python -m app.seed --no-demo     # référentiels seulement
-    python -m app.seed --purge-demo  # supprime les magasins fictifs
+    python -m app.seed --purge-demo  # supprime les magasins fictifs et le compte de démonstration de soutenance
 """
 from __future__ import annotations
 
@@ -198,6 +198,9 @@ def seed_demo(db: Session, cats: dict[str, int]) -> None:
 
 
 def purge_demo(db: Session) -> int:
+    from .demo_soutenance import purge as purge_soutenance
+    purge_soutenance(db)   # compte client de la démonstration de soutenance
+    db.flush()
     ids = [s.id for s in db.scalars(select(Shop).where(Shop.is_demo.is_(True)))]
     db.execute(delete(PartReference).where(PartReference.source == "demo"))
     for sid in ids:

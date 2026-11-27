@@ -319,3 +319,31 @@ def test_transfert_avec_les_prix_et_annulation(client, db):
     v = client.get(f"{API}/me/vehicles/{cid}/maintenance/history", headers=hb).json()["visits"][0]
     assert v["price"] == 5000 and v["note"] == "ok"
     assert client.post(f"{API}/me/vehicle-transfers/preview", headers=hb, json={**body, "plate": "pas un matricule"}).status_code == 422
+
+
+# --- 7. Scénario de démonstration de soutenance ----------------------------------------------------------------------
+
+def test_demo_soutenance_rejouable_puis_purgee(client, db):
+    from app import demo_soutenance
+    from app.models import UserVehicle
+    out = demo_soutenance.run(db)
+    out2 = demo_soutenance.run(db)                       # rejouable : rien en double
+    assert db.scalar(select(UserVehicle).where(UserVehicle.plate == demo_soutenance.PLATE)).id == out2["car_id"]
+    tok = client.post(f"{API}/auth/login", json={"phone": out["phone"], "password": out["password"]}).json()["token"]
+    h = {"Authorization": f"Bearer {tok}"}
+    alerts = client.get(f"{API}/me/alerts", headers=h).json()
+    assert alerts["papers"] == 1 and alerts["prices"] == 1 and alerts["maintenance"] >= 1
+    car = client.get(f"{API}/me/vehicles", headers=h).json()[0]
+    assert car["nickname"].startswith("[DÉMO]") and car["maintenance_items"]
+    hist = client.get(f"{API}/me/vehicles/{car['id']}/maintenance/history", headers=h).json()
+    assert len(hist["visits"]) == 3 and any(v["shop"] for v in hist["visits"])
+    assert client.get(f"{API}/me/part-requests", headers=h).json()[0]["answered"] == 1
+    assert client.get(f"{API}/shops/{out['shop_id']}").json()["reviews"]["found"] >= 1
+    assert any(g["id"] == out["garage_id"] for g in client.get(f"{API}/garages/recommend").json())
+    # Purge : le compte de démonstration disparaît avec les magasins fictifs ; on les remet pour les autres tests
+    from app.seed import purge_demo, run as seed_run
+    purge_demo(db)
+    db.commit()
+    assert db.scalar(select(User).where(User.phone == demo_soutenance.PHONE)) is None
+    assert db.scalar(select(Shop).where(Shop.name == demo_soutenance.GARAGE)) is None
+    seed_run(db, demo=True)
