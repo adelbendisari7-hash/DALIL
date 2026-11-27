@@ -186,6 +186,13 @@ def shop_stats_view(shop_id: int, db: Session = Depends(get_db), user: User = De
     return shop_stats.stats(db, _owned_shop(db, shop_id, user, "stats"))
 
 
+@router.get("/shops/{shop_id}/weekly")
+def shop_weekly_view(shop_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
+    """« Votre semaine » : 7 derniers jours, pièces cherchées près du magasin qu'il ne propose pas, demandes sans
+    réponse, prix à confirmer. Mêmes accès que les statistiques."""
+    return shop_stats.weekly(db, _owned_shop(db, shop_id, user, "stats"))
+
+
 @router.get("/catalog/template.xlsx")
 def catalog_template(db: Session = Depends(get_db)):
     """Modèle Excel du catalogue : feuille « Catalogue » à remplir, plus « Exemples » et « Familles » (aide)."""

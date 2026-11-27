@@ -226,3 +226,31 @@ test("équipe : le gérant ajoute un vendeur, qui ne voit que ses accès, répon
   await page.getByRole("tab", { name: "Équipe" }).click();
   await expect(page.locator(".activity li", { hasText: "Vendeur Test a répondu à une demande" })).toContainText("4200 DA");
 });
+
+test("votre semaine : pièces cherchées près du magasin qu'il ne propose pas, raccourci vers la fiche", async ({ page, request }) => {
+  const phone = `0558${String(Date.now()).slice(-6)}`;
+  const r = await request.post("/api/v1/auth/register", { data: { first_name: "Samia", last_name: "Semaine", phone,
+    password: "magasin-e2e", consent: true } });
+  const token = (await r.json()).token;
+  const headers = { Authorization: `Bearer ${token}` };
+  await request.patch("/api/v1/auth/me", { headers, data: { role: "shop_owner" } });
+  const fams = await (await request.get("/api/v1/parts/categories")).json();
+  const all = fams.flatMap((f: { id: number; name: string; children: { id: number; name: string }[] }) => [f, ...f.children]);
+  const freinage = all.find((c: { name: string }) => c.name === "Freinage");
+  const batterie = all.find((c: { name: string }) => /^Batterie/.test(c.name));
+  await request.post("/api/v1/shops", { headers, data: { name: "[TEST] Semaine", lat: 35.70, lng: -0.63,
+    category_ids: [freinage.id], brand_ids: [] } });
+  for (let i = 0; i < 3; i++) await request.get(`/api/v1/shops/recommend?category_id=${batterie.id}&lat=35.71&lng=-0.62`);
+
+  await asUser(page, request, token);
+  await page.goto("/espace-magasin");
+  const weekly = page.locator(".weekly");
+  await expect(weekly.getByRole("heading", { name: "Votre semaine" })).toBeVisible();
+  await expect(weekly).toContainText(/recherches de batterie.* près de chez vous : pas dans votre fiche/);
+  await weekly.getByRole("button", { name: "Compléter ma fiche" }).first().click();
+  await expect(page.getByRole("tab", { name: "Ma fiche" })).toHaveAttribute("aria-selected", "true");
+  await weekly.getByRole("button", { name: "Replier" }).click();
+  await expect(page.locator(".weekly")).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Voir votre semaine" })).toBeVisible();   // replié pour la semaine
+});

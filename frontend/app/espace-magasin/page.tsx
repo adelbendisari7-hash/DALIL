@@ -10,6 +10,7 @@ import { photoForm, shrinkPhoto } from "@/lib/photo";
 import type { Opening } from "@/components/HoursPicker";
 import { api, ApiError, session, type User } from "@/lib/api";
 import { t } from "@/lib/i18n";
+import ShopWeekly from "@/components/ShopWeekly";
 
 type Shop = Omit<ShopFormValue, "opening"> & {
   id: number; status: string; verified: boolean; photo_url: string | null;
@@ -218,6 +219,7 @@ function ShopAdmin({ shop, onChange }: { shop: Shop; onChange: () => void }) {
     <div>
       <ShopStatus shop={shop} onChange={onChange} canEdit={can("profile")} />
       {!manager && <p className="help">{t("team.youAreEmployee")}</p>}
+      {can("stats") && <ShopWeekly shopId={shop.id} go={(k) => { if (tabs.includes(k)) setTab(k); }} />}
       <div className="tabs" role="tablist">
         {tabs.map((k) => (
           <button key={k} role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>

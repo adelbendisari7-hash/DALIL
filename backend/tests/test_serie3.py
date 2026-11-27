@@ -167,3 +167,33 @@ def test_rappels_d_une_voiture(client, db):
     assert len(client.get(f"{API}/me/vehicles/{cid2}/recalls", headers=h).json()["recalls"]) == 2
     h2 = login(client, "0698000021")
     assert client.get(f"{API}/me/vehicles/{cid}/recalls", headers=h2).status_code == 404
+
+
+# --- 4. Récapitulatif de la semaine des magasins ----------------------------------------------------------------------
+
+def test_recapitulatif_de_la_semaine(client, db):
+    from datetime import timedelta
+    from app.models import Product
+    from .test_statistiques_magasin import _client, _shop
+    h, sid = _shop(client, db, 40, families=("freinage",))
+    plaq = _cat(db).id
+    batt = _cat(db, "batterie").id
+    near = _client("10.9.40.1")
+    for _ in range(4):
+        near.get(f"{API}/shops/recommend?category_id={batt}&lat=35.71&lng=-0.62")   # cherchée, pas vendue
+    near.get(f"{API}/shops/recommend?category_id={plaq}&lat=35.71&lng=-0.62")       # vendue (famille), pas au catalogue
+    old = datetime.now(timezone.utc) - timedelta(days=90)
+    db.add(Product(shop_id=sid, category_id=_cat(db, "disques-frein").id if _cat(db, "disques-frein") else plaq,
+                   title="Disques", price=7000, price_confirmed_at=old))
+    db.commit()
+    req = client.post(f"{API}/part-requests", json={"category_id": plaq}).json()   # demande reçue, sans réponse
+    w = client.get(f"{API}/shops/{sid}/weekly", headers=h).json()
+    assert w["week"].startswith(str(datetime.now(timezone.utc).isocalendar()[0]))
+    missing = {m["category_id"]: m for m in w["missing"]}
+    assert missing[batt]["sold"] is False and missing[batt]["searches"] >= 4
+    assert missing[plaq]["sold"] is True and missing[plaq]["in_catalog"] is False
+    assert w["stale_prices"] == 1 and w["products"] == 1
+    assert w["pending_requests"] >= 1 and req["notified_shops"] >= 1
+    assert {"impressions", "views", "calls", "requests"} <= set(w["current"])
+    h2 = login(client, "0698000040")
+    assert client.get(f"{API}/shops/{sid}/weekly", headers=h2).status_code in (403, 404)

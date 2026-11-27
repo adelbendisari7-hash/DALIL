@@ -108,3 +108,33 @@ def fast_reply(db: Session, shop_id: int, now: datetime | None = None) -> bool:
         return False
     delays = [(_aware(r.responded_at) - _aware(r.notified_at)).total_seconds() / 60 for r in answered]
     return median(delays) <= FAST_MINUTES
+
+
+PRICE_STALE_DAYS = 60   # même seuil que le rappel des prix du catalogue (idée E)
+
+
+def weekly(db: Session, shop: Shop, now: datetime | None = None) -> dict:
+    """Récapitulatif de la semaine (28/11/2026) : 7 derniers jours comparés aux 7 précédents, et ce qu'il y a à faire :
+    pièces cherchées près du magasin qu'il ne propose pas (ni dans sa fiche, ni dans son catalogue), demandes sans
+    réponse, prix à confirmer. Agrégé, sans aucune donnée de client."""
+    from ..models import Product, ProductFitment  # noqa: F401  (import local : évite un cycle au chargement)
+    now = now or datetime.now(timezone.utc)
+    start = now - timedelta(days=7)
+    cur = _period(db, shop, start, now + timedelta(seconds=1))
+    prev = _period(db, shop, start - timedelta(days=7), start)
+    products = list(db.scalars(select(Product).where(Product.shop_id == shop.id)))
+    product_cats = {p.category_id for p in products}
+    missing = []
+    for d in demand_near(db, shop, start, limit=12):
+        _, descendants = category_lineage(db, d["category_id"])   # la pièce cherchée ou une de ses sous-pièces
+        has_product = bool(descendants & product_cats)
+        if not d["sold"] or not has_product:
+            missing.append({**d, "in_catalog": has_product})
+    pending = len(list(db.scalars(select(RequestResponse.request_id).where(RequestResponse.shop_id == shop.id,
+                                                                            RequestResponse.responded_at.is_(None)))))
+    stale = sum(1 for p in products if p.price is not None and
+                (p.price_confirmed_at is None or (now - _aware(p.price_confirmed_at)).days > PRICE_STALE_DAYS))
+    year, week, _ = now.isocalendar()
+    return {"week": f"{year}-S{week:02d}", "from": start.date().isoformat(), "to": now.date().isoformat(),
+            "current": cur, "previous": prev, "missing": missing[:5], "pending_requests": pending,
+            "stale_prices": stale, "products": len(products), "fast_reply": fast_reply(db, shop.id, now)}

@@ -721,5 +721,22 @@
   "recalls.source": "Source : {source}.",
   "recalls.banner": "Rappels possibles",
   "recalls.bannerLine": "{n} rappels publiés pour ce modèle, à vérifier",
-  "recalls.bannerHelp": "Touchez la voiture pour les lire. Le message disparaît une fois les rappels regardés."
+  "recalls.bannerHelp": "Touchez la voiture pour les lire. Le message disparaît une fois les rappels regardés.",
+  "weekly.title": "Votre semaine",
+  "weekly.open": "Voir votre semaine",
+  "weekly.hide": "Replier",
+  "weekly.impressions": "apparitions",
+  "weekly.views": "fiches ouvertes",
+  "weekly.contacts": "appels et WhatsApp",
+  "weekly.requests": "demandes reçues",
+  "weekly.compare": "7 derniers jours ; entre parenthèses, l'écart avec la semaine d'avant.",
+  "weekly.notInCatalog": "{n} recherches de {part} près de chez vous : rien à votre catalogue.",
+  "weekly.notSold": "{n} recherches de {part} près de chez vous : pas dans votre fiche.",
+  "weekly.addProduct": "Ajouter un produit",
+  "weekly.addFamily": "Compléter ma fiche",
+  "weekly.pending": "{n} demandes de clients attendent votre réponse.",
+  "weekly.answer": "Répondre",
+  "weekly.stale": "{n} prix n'ont pas été confirmés depuis plus de 60 jours.",
+  "weekly.confirm": "Confirmer les prix",
+  "weekly.nothing": "Rien à faire cette semaine : votre fiche est à jour."
 }
