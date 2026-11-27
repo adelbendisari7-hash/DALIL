@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 27/11/2026 (soir), refonte de l'interface ; connexion par mot de passe ; compte client.
+> Dernière mise à jour : 27/11/2026 (soir), plan du côté magasin validé (`docs/plan-espace-magasin.md`), phase 1 en cours.
 
 ## 1. Où on en est
 
@@ -43,6 +43,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
+0. **Côté magasin : exécuter `docs/plan-espace-magasin.md`** (validé le 27/11/2026, idées A à E comprises), phases 1 à 4 dans l'ordre ; le terrain commence après la phase 2.
 0. **V2 en service depuis le 27/11/2026** : à remesurer contre l'ancien modèle (`ml/artifacts/famille_rerank_a0.25_avant-v2-20261126.joblib`) dès que le jeu de test d'Oran existe ; garder le meilleur. Pour revenir en arrière : recopier ce fichier sur `famille_rerank_a0.25.joblib` et remettre `DALIL_MODEL_VERSION=tfidf-lr-reels+familles-largus-a0.25` dans `DEMARRER-DALIL.bat`.
 0 ter. **Pendant les essais d'Oran, récolter les retours** : chaque « Non, c'était telle pièce » ou « Oui » devient un vrai exemple candidat (`cd backend && python -m app.export_retours`). Les relire un à un comme ceux des forums, puis les ajouter à l'entraînement (`train_baseline.py --exemples-reels`) ; jamais les cas du jeu de test d'Oran.
 0 bis. **Accords écrits à archiver** : Techniconnexion (robots.txt `ai-train=no`, usage par l'IA déclaré autorisé par l'utilisateur le 27/11) et L'Argus, tous deux couvrant le jeu Kaggle privé `dalil-camembert` envoyé le 27/11/2026. Sans écrit, supprimer ce jeu sur Kaggle.
@@ -56,6 +57,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 | Date | Décision | Raison |
 | --- | --- | --- |
+| 27/11/2026 | **Plan du côté magasin validé** (`docs/plan-espace-magasin.md`) : inscription guidée avec **adresse du magasin placée sur la carte** (épingle ajustable), vérification par **un appel** seulement ; catalogue plus rapide avec photos (décision laissée à Claude : réduites et sans position GPS, JPEG, disque du serveur) ; **gérant + employés sans limite, le gérant seul décide des accès**, l'équipe DALIL n'intervient pas ; statistiques ; idées A à E retenues (affiche QR, « ouvert maintenant », photo de devanture, badge « répond vite », rappel des prix). Reportés : notifications sur vrai téléphone, arabe, pièces justificatives | Décisions de l'utilisateur |
 | 27/11/2026 | **Connexion par mot de passe, pas de SMS pour l'instant** : inscription (prénom, nom, numéro, mot de passe de 8 caractères au moins, e-mail facultatif, consentement), connexion numéro + mot de passe ; mot de passe oublié -> mot de passe provisoire donné par l'administrateur (Admin > Comptes et matricules) après vérification de l'identité. Code SMS gardé dans le programme pour le jour où un fournisseur sera choisi | Décision de l'utilisateur : les SMS ne sont pas gratuits. Limite assumée : le numéro n'est plus vérifié (quelqu'un peut s'inscrire avec le numéro d'un autre s'il est libre). **Numéro et matricule uniques** vérifiés aux deux niveaux : index unique en base et normalisation avant recherche (« 0550 12 34 56 » = « +213550123456 » ; « 12345 115 31 » = « 12345-115-31 ») ; deux envois simultanés -> 409 clair |
 | 27/11/2026 | **Compte client** (demande de l'utilisateur) : prénom, nom, téléphone obligatoires ; e-mail, commune, langue, date de naissance facultatifs. Voitures du client : matricule **unique** (normalisé en chiffres seuls, 12345-115-31), modèle du référentiel ou marque et modèle saisis, année, kilométrage, numéro de châssis, surnom. Matricule déjà pris : refus sans rien dévoiler du propriétaire + signalement ; l'administrateur libère ou refuse (Admin > Matricules). Diagnostics rattachés au compte et à la voiture (historique) | Choix de l'utilisateur sur proposition. **Données personnelles** de plus (matricule, e-mail, date de naissance) : consentement à la connexion élargi, tout est effacé à la suppression du compte ; à inclure dans la déclaration à l'ANPDP avant toute mise en ligne (étape 12) |
 | 27/11/2026 | **V2 mise en service** (décision de l'utilisateur, sur recommandation) : vrais exemples des deux forums (334) + familles L'Argus et Techniconnexion, alpha 0,25 ; ancien modèle gardé à côté | Top-3 meilleur sur les deux contrôles jamais vus (L'Argus 63 -> 65 %, Techniconnexion 59 -> 67 %), top-1 Techniconnexion 33 -> 46 %, Oran et démo inchangés. Recul accepté : top-1 L'Argus 49 -> 42 % (3 cas sur 43), « je ne sais pas » 7 -> 12 % sur ce jeu. Exception à la règle habituelle, à confirmer sur le jeu de test d'Oran |
