@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import VehiclePicker from "@/components/VehiclePicker";
 import VoiceInput from "@/components/VoiceInput";
+import WarningLights, { lightPhrase, type Light } from "@/components/WarningLights";
 import { api, ApiError, session, type UserCar, type Vehicle } from "@/lib/api";
 import { t } from "@/lib/i18n";
 
@@ -20,6 +21,19 @@ export default function Home() {
       .catch(() => undefined);
   }, []);
   const [text, setText] = useState("");
+  const [lights, setLights] = useState<string[]>([]);
+
+  // Toucher un voyant ajoute (ou retire) sa description au texte : la chaîne de diagnostic habituelle s'en charge
+  function toggleLight(l: Light) {
+    const phrase = lightPhrase(l.id);
+    if (lights.includes(l.id)) {
+      setLights(lights.filter((x) => x !== l.id));
+      setText((cur) => cur.split(", ").filter((x) => x !== phrase).join(", "));
+    } else {
+      setLights([...lights, l.id]);
+      setText((cur) => (cur.trim() ? `${cur.trim()}, ${phrase}` : phrase));
+    }
+  }
   const [dtc, setDtc] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -101,6 +115,13 @@ export default function Home() {
           </div>
         )}
         <VoiceInput onText={onVoice} />
+      </div>
+
+      {/* Un voyant allumé : le toucher suffit, pour qui ne sait pas le décrire */}
+      <div className="card">
+        <h2 className="card-title">{t("lights.title")}</h2>
+        <p className="help" style={{ marginTop: 0 }}>{t("lights.help")}</p>
+        <WarningLights selected={lights} onToggle={toggleLight} />
       </div>
 
       {/* 2. Le véhicule : une voiture du compte en un toucher, sinon le sélecteur */}

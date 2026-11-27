@@ -126,3 +126,18 @@ test("diagnostic faux : l'utilisateur dit quelle pièce était en cause", async 
   expect(typeof body.category_id).toBe("number");
   await expect(page.getByText("Merci, votre réponse améliore DALIL.")).toBeVisible();
 });
+
+test("voyant touché : description remplie, conseil de sûreté immédiat pour l'huile, diagnostic « ne roulez pas »", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Pression d'huile" }).click();
+  await expect(page.getByRole("button", { name: "Pression d'huile" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByLabel("Décrivez le problème")).toHaveValue("le voyant de pression d'huile rouge s'est allumé");
+  await expect(page.getByRole("alert").filter({ hasText: "arrêtez-vous dès que possible" })).toBeVisible();
+  await page.getByRole("button", { name: "Batterie", exact: true }).click();
+  await expect(page.getByLabel("Décrivez le problème")).toHaveValue(/huile.*, le voyant batterie rouge/);
+  await page.getByRole("button", { name: "Batterie", exact: true }).click();   // retiré : la phrase disparaît
+  await expect(page.getByLabel("Décrivez le problème")).toHaveValue("le voyant de pression d'huile rouge s'est allumé");
+  await page.getByRole("button", { name: "Trouver la panne" }).click();
+  await expect(page.getByRole("heading", { name: "Causes probables" })).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByRole("alert").filter({ hasText: "Ne roulez pas" })).toBeVisible();
+});

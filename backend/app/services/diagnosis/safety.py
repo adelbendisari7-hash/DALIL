@@ -19,12 +19,15 @@ UNKNOWN = (
     "Décrivez le symptôme autrement (quand, où, quel bruit) ou consultez un mécanicien."
 )
 
-# Freinage, direction, odeur de carburant, surchauffe (textes normalisés, sans accents).
+# Freinage, direction, odeur de carburant, surchauffe, pression d'huile (textes normalisés, sans accents).
 DANGER_PATTERNS = [
     r"\bfrein", r"pedale (molle|s'enfonce|au plancher)", r"ne freine (plus|pas)",
     r"\bdirection\b.*(dure|bloque|lache)", r"volant (bloque|tres dur)",
     r"odeur (d'|de )?(essence|gasoil|carburant)", r"fuite (d'|de )?(essence|gasoil|carburant)",
     r"surchauffe", r"temperature (monte|dans le rouge)", r"aiguille.*rouge", r"fumee blanche epaisse",
+    # Voyant de pression d'huile (burette rouge) : rouler casse le moteur (ajout du 28/11/2026, grille des voyants).
+    # Pas le voyant d'entretien « vidange » (clé), qui n'est qu'un rappel.
+    r"pression (d'|de )?huile", r"voyant (d'|de l'|de )huile", r"burette",
 ]
 
 

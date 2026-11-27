@@ -19,6 +19,11 @@ for (const scheme of ["light", "dark"] as const) {
       test.setTimeout(240_000);
       await page.goto(`${BASE}/`);
       await shot(page, "01-accueil", scheme);
+      await page.getByRole("button", { name: "Pression d'huile" }).click();
+      await page.getByRole("button", { name: "Moteur", exact: true }).click();
+      await page.locator(".lights").screenshot({ path: `${OUT}/${scheme}-01b-voyants.png` });
+      await page.getByRole("button", { name: "Pression d'huile" }).click();
+      await page.getByRole("button", { name: "Moteur", exact: true }).click();
       await page.getByLabel("Décrivez le problème").fill("ça grince quand je freine et le volant vibre");
       await page.getByRole("button", { name: "Trouver la panne" }).click();
       await page.getByRole("heading", { name: "Causes probables" }).waitFor({ timeout: 120_000 });
