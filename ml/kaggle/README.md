@@ -44,6 +44,25 @@ Les deux variantes lisent le **même** jeu d'entraînement, `data/processed/trai
 Les données de L'Argus, même anonymisées, montent sur Kaggle dans le jeu de données **privé**. L'accord de L'Argus
 doit couvrir cet usage.
 
+## CamemBERT sur les forums nettoyés (27/11/2026)
+
+Deux carnets, sur le jeu privé **`dalil-camembert`** (L'Argus + Techniconnexion anonymisés, accords déclarés par
+l'utilisateur, écrits à archiver ; jamais `data/test_prive/`, le script le refuse) :
+
+1. `python ml/kaggle/build_camembert_sets.py` fabrique `data/processed/camembert/` :
+   - `pieces` : amorçage + vrais exemples vérifiés des deux forums (916 exemples, étiquette = pièce) ;
+   - `familles` : étiquettes « fort » des deux forums, questions de procédure retirées (`--diagnostic-seul`),
+     amorçage x5 et vrais exemples (17 602 exemples, étiquette = famille). Textes des jeux de test exclus.
+2. `python ml/kaggle/kaggle_run.py dataset-camembert` publie le jeu privé.
+3. `python ml/kaggle/kaggle_run.py push 02_camembert_familles` (3 époques, ~25 min) et
+   `push 02_camembert_pieces` (40 époques, ~20 min) ; `output <carnet>` puis dézipper dans
+   `ml/artifacts/camembert-base_familles/` et `ml/artifacts/camembert-base_pieces/` (ONNX, 443 Mo chacun).
+4. Assembler les deux niveaux : `python ml/assembler_deux_niveaux.py --base <base.joblib ou dossier ONNX de pièces>
+   --familles ml/artifacts/camembert-base_familles --alphas 0.15,0.25,0.5 --out-dir ml/artifacts/exp/camembert`.
+   Le `.joblib` garde le chemin du dossier ONNX relatif à lui-même : les déplacer ensemble.
+
+Résultats et décision : `ml/README.md`, section « Techniconnexion et CamemBERT ».
+
 ## Préparer le jeu de données Kaggle « dalil-pipeline »
 
 Sur le portable :

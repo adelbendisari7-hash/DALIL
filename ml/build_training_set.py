@@ -60,6 +60,12 @@ SOURCE_RULES = {
     "largus_forum": {"label": "family", "weights": {
         "component": 0.89, "reponses+component": 0.85, "question+component": 0.82,
         "solution+component": 0.78, "auteur+component": 0.75}},
+    # Techniconnexion, 27/11/2026 (120 étiquettes relues par Claude, sans voir le niveau) : famille juste dans 35 à
+    # 75 % des cas selon le niveau, mais dans 73 à 82 % quand elle s'accorde avec la section du forum ET avec une pièce
+    # nommée dans la question (« +accord »), contre 31 à 44 % sinon. Seuls ces cas sont gardés.
+    "techniconnexion": {"label": "family", "weights": {
+        "question+domaine": 0.75, "solution+domaine+accord": 0.73, "auteur+domaine+accord": 0.82,
+        "reponses+domaine+accord": 0.79}},
 }
 LEVELS = {"fort": 0.8, "moyen": 0.5, "tout": 0.0}
 MAX_CHARS = 2000  # le symptôme est au début ; chaque modèle tronque encore à sa façon
@@ -100,8 +106,22 @@ def is_val(rid: str) -> bool:
     return int(hashlib.sha1(rid.encode()).hexdigest(), 16) % 10 == 0
 
 
+def is_symptom_text(text: str) -> bool:
+    """Le texte d'un forum décrit-il une panne ? (même règle que Techniconnexion : ni tuto, ni procédure, ni achat)"""
+    sys.path.insert(0, str(ROOT / "data"))
+    from pipeline.sources.techniconnexion import is_diagnostic
+
+    title, _, body = (text or "").partition(". ")
+    return is_diagnostic(title, body, False)
+
+
+FORUMS = {"largus_forum", "techniconnexion"}
+
+
 def build(quality: str = "fort", max_per_label: int = 0, sources: set[str] | None = None,
-          train_dir: Path = TRAIN_DIR, seed_weight: float = 5.0) -> tuple[list[dict], list[dict], dict]:
+          train_dir: Path = TRAIN_DIR, seed_weight: float = 5.0,
+          diagnostic_only: bool = False) -> tuple[list[dict], list[dict], dict]:
+    """`diagnostic_only` : écarte des forums les questions de procédure ou d'achat (27/11/2026, à mesurer)."""
     floor = LEVELS[quality]
     banned = test_texts()
     stats: dict = {"quality": quality, "max_per_label": max_per_label, "seed_weight": seed_weight, "par_source": {}, "ecartes": Counter()}
@@ -133,6 +153,9 @@ def build(quality: str = "fort", max_per_label: int = 0, sources: set[str] | Non
                 continue
             if w < floor:
                 stats["ecartes"][f"confiance < {quality}"] += 1
+                continue
+            if diagnostic_only and r["source"] in FORUMS and not is_symptom_text(text):
+                stats["ecartes"]["forum : pas une panne décrite"] += 1
                 continue
             key = norm(text)
             if key in banned:
@@ -173,9 +196,10 @@ def main() -> None:
     ap.add_argument("--seed-weight", type=float, default=5.0,
                     help="poids des exemples d'amorçage et des fiches (écrits pour DALIL) face au corpus")
     ap.add_argument("--out", default=str(OUT_DIR))
+    ap.add_argument("--diagnostic-seul", action="store_true", help="écarter des forums les questions qui ne décrivent pas une panne")
     args = ap.parse_args()
     train, val, stats = build(args.quality, args.max_per_label, set(filter(None, args.sources.split(","))) or None,
-                              seed_weight=args.seed_weight)
+                              seed_weight=args.seed_weight, diagnostic_only=args.diagnostic_seul)
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     for name, rows in (("train", train), ("val", val)):

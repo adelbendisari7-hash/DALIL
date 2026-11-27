@@ -137,15 +137,20 @@ class FamilyRerankedClassifier:
     alpha = 0 rend exactement le classifieur de base. Une étiquette sans famille connue reçoit un facteur neutre.
     """
 
-    def __init__(self, base, family_pipeline: Pipeline, alpha: float, label_family: dict[str, str],
+    def __init__(self, base, family_pipeline, alpha: float, label_family: dict[str, str],
                  version: str | None = None):
+        """`family_pipeline` : pipeline scikit-learn (TF-IDF) ou encodeur ONNX de familles (OnnxEncoderClassifier,
+        CamemBERT entraîné par le carnet Kaggle 02_camembert_familles)."""
         self.base, self.family_pipeline, self.alpha = base, family_pipeline, float(alpha)
         self.label_family = label_family
         self.target, self.labels = base.target, base.labels
         self.version = version or f"{base.version}+familles-a{alpha:g}"
-        self.families: list[str] = list(family_pipeline.classes_)
+        classes = getattr(family_pipeline, "classes_", None)
+        self.families: list[str] = list(classes) if classes is not None else list(family_pipeline.labels)
 
     def family_proba(self, text: str) -> dict[str, float]:
+        if not hasattr(self.family_pipeline, "classes_"):   # encodeur ONNX : dictionnaire famille -> probabilité
+            return self.family_pipeline.predict_proba(text)
         probs = self.family_pipeline.predict_proba([text])[0]
         return {f: float(p) for f, p in zip(self.families, probs)}
 
@@ -167,8 +172,14 @@ def load_classifier(path: Path):
         return OnnxEncoderClassifier(path)
     obj = joblib.load(path)
     if isinstance(obj, dict) and obj.get("kind") == "family_rerank":
-        base = FaultClassifier(obj["base"]["pipeline"], obj["base"].get("target", "fault"), obj["base"].get("version"))
-        return FamilyRerankedClassifier(base, obj["family_pipeline"], obj["alpha"], obj["label_family"], obj.get("version"))
+        if obj.get("base_onnx"):   # premier niveau ONNX (CamemBERT-pièces), dossier relatif au fichier .joblib
+            base = OnnxEncoderClassifier((path.parent / obj["base_onnx"]).resolve())
+        else:
+            base = FaultClassifier(obj["base"]["pipeline"], obj["base"].get("target", "fault"), obj["base"].get("version"))
+        family = obj.get("family_pipeline")
+        if family is None:   # modèle de familles ONNX, dossier relatif au fichier .joblib
+            family = OnnxEncoderClassifier((path.parent / obj["family_onnx"]).resolve())
+        return FamilyRerankedClassifier(base, family, obj["alpha"], obj["label_family"], obj.get("version"))
     if isinstance(obj, dict):
         return FaultClassifier(obj["pipeline"], obj.get("target", "fault"), obj.get("version"))
     return FaultClassifier(obj)

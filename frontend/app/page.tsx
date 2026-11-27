@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import VehiclePicker from "@/components/VehiclePicker";
 import VoiceInput from "@/components/VoiceInput";
 import { api, ApiError, type Vehicle } from "@/lib/api";
@@ -14,7 +14,15 @@ export default function Home() {
   const [dtc, setDtc] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [slow, setSlow] = useState(false);
   const onVoice = useCallback((s: string) => setText(s), []);
+
+  // Un diagnostic prend 3 à 8 s sur le portable : au-delà de 3 s, on dit à l'utilisateur que ça avance.
+  useEffect(() => {
+    if (!busy) return setSlow(false);
+    const timer = setTimeout(() => setSlow(true), 3000);
+    return () => clearTimeout(timer);
+  }, [busy]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -50,6 +58,19 @@ export default function Home() {
         maxLength={2000}
         onChange={(e) => setText(e.target.value)}
       />
+      <p className="help">{t("home.tip")}</p>
+      {!text.trim() && (
+        <div className="examples">
+          <span className="help">{t("home.examples")}</span>
+          <div className="chips">
+            {[1, 2, 3].map((n) => (
+              <button key={n} type="button" className="chip" onClick={() => setText(t(`home.example.${n}`))}>
+                {t(`home.example.${n}`)}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <VoiceInput onText={onVoice} />
 
       <label htmlFor="dtc">{t("home.dtc")}</label>
@@ -70,6 +91,7 @@ export default function Home() {
           {busy ? t("home.submitting") : t("home.submit")}
         </button>
       </div>
+      {busy && slow && <p className="help" role="status">{t("home.slow")}</p>}
 
       <div className="aside-link">
         <p style={{ marginBottom: "0.25rem" }}>{t("home.mechanic")}</p>

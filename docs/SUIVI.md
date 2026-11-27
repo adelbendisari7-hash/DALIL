@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 26/11/2026, CamemBERT reporté en attendant les données d'un nouveau forum.
+> Dernière mise à jour : 27/11/2026 (matin), Techniconnexion intégré, CamemBERT entraîné et mesuré : rien mis en service ; site amélioré.
 
 ## 1. Où on en est
 
@@ -43,17 +43,20 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-0. **CamemBERT sur Kaggle (prochaine étape technique)** : **reporté jusqu'à l'arrivée des données d'un nouveau forum** (annoncées le 26/11/2026 au soir), pour un seul entraînement et un seul envoi. D'abord : intégrer ce forum (skill `ajouter-source-donnees` : accord noté, fiche, anonymisation, taxonomie) et le mesurer seul. Le jeton Kaggle `C:\Users\Adel\.kaggle\access_token` du 14/11 fonctionne encore (vérifié le 26/11). Reste l'accord de l'utilisateur pour envoyer L'Argus et le nouveau forum, anonymisés, dans un jeu Kaggle privé. Ensuite : entraîner le carnet `02_encodeur_camembert` (généré par `ml/kaggle/make_notebooks.py`) sur les familles L'Argus + les 194 vrais exemples + l'amorçage, puis comparer au modèle en service sur le contrôle L'Argus (43) et le contrôle d'Oran ; ne mettre en service que si meilleur sans recul ailleurs. Vitesse déjà étudiée (réglage inchangé, 26/11).
+0. **Décision de l'équipe (27/11/2026)** : mettre en service ou non la variante V2 (vrais exemples des deux forums + familles des deux forums, `ml/artifacts/exp/v2/`) : +13 points sur le contrôle Techniconnexion, mais 2 à 3 cas perdus sur 43 au contrôle L'Argus (49 -> 42 % en top-1) ; sur les 82 cas des deux contrôles, 36 contre 34 en top-1 et 54 contre 50 en top-3. La règle habituelle dit non ; détail dans `ml/README.md` (section « Techniconnexion et CamemBERT »). CamemBERT : mesuré, pas meilleur, non retenu.
+0 bis. **Accords écrits à archiver** : Techniconnexion (robots.txt `ai-train=no`, usage par l'IA déclaré autorisé par l'utilisateur le 27/11) et L'Argus, tous deux couvrant le jeu Kaggle privé `dalil-camembert` envoyé le 27/11/2026. Sans écrit, supprimer ce jeu sur Kaggle.
 1. **L'Argus** : classifieur à deux niveaux en service (relancer `DEMARRER-DALIL.bat`). Reste possible : faire contrôler une vingtaine d'étiquettes de la relecture par un mécanicien ; L'Argus comme « cas semblables » dans la recherche, après mesure. Le chiffre du mémoire viendra du jeu de test d'Oran.
 2. **Étape 11, essais à Oran (équipe, sur le terrain)** : suivre `docs/essais-oran.md` : fiches des mécaniciens (jeu de test, objectif 200 cas), inscription chronométrée de 5 à 10 magasins, parcours de 10 à 20 automobilistes, questionnaire ; puis rédiger `docs/compte-rendu-essais.md`.
 3. **Visiter les magasins** (équipe) : liste `data/terrain/liste_visite_osm.xlsx`, 62 lieux importés en brouillons (23 pièces, 6 pneus, 33 garages ; Oran 23, Bir El Djir 10, Aïn El Beïda 6…). Remplir les colonnes jaunes, réimporter (Admin > Import CSV), puis vérifier chaque fiche (Admin > Magasins) : seules les fiches vérifiées sont recommandées. Commencer par les 23 magasins de pièces ; compter aussi les magasins absents de la carte (couverture d'OSM, mémoire section 4).
-4. **Sécurité** : révoquer le jeton Kaggle utilisé pendant l'étape 7 (kaggle.com > Settings > API), ou en créer un nouveau.
+4. **Sécurité** : révoquer le jeton Kaggle (`C:\Users\Adel\.kaggle\access_token`, encore utilisé le 27/11/2026) sur kaggle.com > Settings > API, ou en créer un nouveau.
 5. **Étape 12 (mise en ligne)** : seulement sur décision de l'équipe (hébergement, https, sauvegardes, surveillance, guide des magasins, déclaration à l'ANPDP).
 
 ## Décisions prises
 
 | Date | Décision | Raison |
 | --- | --- | --- |
+| 27/11/2026 | **Rien mis en service après Techniconnexion et CamemBERT** ; modèle en service inchangé (`famille_rerank_a0.25.joblib`) | Toutes les variantes (TF-IDF V1 à V4, CamemBERT-familles, tout CamemBERT) gagnent sur le contrôle Techniconnexion (33 -> 41 à 46 % en top-1) mais reculent sur le contrôle L'Argus (49 -> 33 à 44 %) ; CamemBERT recule aussi sur l'audit et le contrôle d'Oran. Choix final de V2 laissé à l'équipe |
+| 27/11/2026 | **Techniconnexion utilisé sur déclaration de l'utilisateur** (accord oral des administrateurs par téléphone, usage par l'IA compris) ; entraînement sur données nettoyées seulement | Remplace la décision du matin même (blocage). Écrit à archiver. Jeu Kaggle privé ; aucun texte dans git ; contrôle de 39 cas jamais vu tiré avant toute mesure |
 | 27/11/2026 | **Techniconnexion (30 421 discussions collectées par l'utilisateur) : pas d'usage pour l'entraînement sans accord écrit des administrateurs** | Ni licence ni CGU sur le site ; son `robots.txt` déclare `Content-Signal: ai-train=no, search=yes, ai-input=no` et bloque les robots d'IA (vérifié le 27/11/2026). Données laissées dans `WebScraping/`, rien copié dans DALIL. Analyse faite : riche (modèle connu à 93 %, l'auteur revient dans 72 % des discussions) mais `solution_text` est une formule de clôture dans 34 % des sujets résolus, un tiers BMW, données personnelles à masquer |
 | 26/11/2026 | **CamemBERT reporté jusqu'à l'arrivée des données d'un nouveau forum** | Décision de l'utilisateur, sur recommandation : un seul entraînement et un seul envoi sur Kaggle ; le forum sera mesuré seul avant d'entrer dans le jeu commun |
 | 26/11/2026 | **Priorité : un DALIL efficace en français d'abord** ; darija et arabe ensuite | Décision de l'utilisateur. Les améliorations se mesurent sur les jeux en français (contrôle L'Argus en premier) |
@@ -74,8 +77,8 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 4. Pour reprendre le travail
 
-- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (149 tests).
-- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (18 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
+- **Tests du backend** : `cd backend && .venv/Scripts/python -m pytest -q` (158 tests).
+- **Tests du site sur téléphone simulé** : `cd frontend && npx playwright test` (20 tests ; si DALIL tourne déjà, `E2E_API_PORT=8100 E2E_WEB_PORT=3100 npx playwright test`).
 - **Ouvrir le site sur un téléphone** : `DEMARRER-DALIL.bat` affiche l'adresse Wi-Fi du PC (fiche : `docs/test-telephone.md`).
 - **Tests du pipeline de données** : `cd backend && .venv/Scripts/python -m pytest -q ../data/pipeline/tests`.
 - **Servir le modèle affiné** :
@@ -136,3 +139,5 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 | 26/11/2026 | **Jeu de contrôle L'Argus** : 43 vrais cas jamais lus avant l'étude des erreurs (`data/test_prive/largus_controle.jsonl`, hors git, exclu de l'entraînement). Modèle en service : top-1 37 %, top-3 58 %, abstention 14 % (mots-clés). Les 10 fiches écrites pour les pièces jamais principales ont été mesurées dessus puis retirées (voir décision) ; base locale, fichiers et modèles remis dans leur état précédent |
 | 26/11/2026 | **Vrais exemples L'Argus** : extraction des causes affirmées (`ml/extraire_causes_largus.py`), les règles plafonnant à 60-65 % de justes ; chaque cause vérifiée une à une par Claude (179/250 puis 35/50), 194 gardées. `train_baseline.py --exemples-reels`. Identifiants sans texte dans `data/largus/causes_verifiees.json`. Alpha revérifié (0,25). Lanceur : version `tfidf-lr-reels+familles-largus-a0.25`. Résultats : `ml/README.md` |
 | 26/11/2026 | **Temps de réponse sur les textes longs** : le reclassement et le vecteur de la question font tout le temps (jusqu'à 10,5 s). Essais sur le jeu de réglage : recherche limitée à 400 ou 600 caractères (plus rapide sur les cas lents, mais 1 à 2 cas perdus sur 104), 6 passages au lieu de 10 (idem), modèle des vecteurs en int8 (à proscrire : abstention 46 à 84 %). Réglage inchangé (5,8 s en moyenne, 8,2 s au 95e centile) ; option `retrieval_query_chars` disponible pour un ordinateur plus lent. 157 tests backend |
+| 27/11/2026 (nuit) | **Techniconnexion intégré** (`data/pipeline/sources/techniconnexion.py`, fiche, 53 tests pipeline) : nettoyage maximal (citations, formules, pseudonymes, sujets hors panne et procédures), étiquettes à double accord (rubrique + pièce nommée, 73-82 % justes à la relecture), 19 006 exemples, 153 vrais exemples vérifiés + contrôle de 39 cas. **CamemBERT entraîné sur Kaggle** (jeu privé `dalil-camembert`, données nettoyées seulement) : familles (validation 91,7 %) et pièces ; prise en charge des modèles ONNX dans le classifieur à deux niveaux (`ml/assembler_deux_niveaux.py`). 11 variantes mesurées sur 7 jeux : aucune ne passe la règle de mise en service (voir décision). 158 tests backend |
+| 27/11/2026 (matin) | **Site** : exemples de descriptions à toucher et conseil d'écriture sur l'accueil, message d'attente après 3 s d'analyse, bouton « Envoyer à mon mécanicien » (partage du téléphone, sinon copie ou WhatsApp, sans donnée personnelle) ; test e2e ajouté |

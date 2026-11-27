@@ -297,3 +297,42 @@ Profil d'un diagnostic hybride sur les 6 vrais textes les plus longs (840 à 900
   l'autre sur ce portable. **Réglage inchangé** (`retrieval_query_chars = 0`), sous la limite des 10 s en moyenne et au
   95e centile. Pour un ordinateur plus lent : `DALIL_RETRIEVAL_QUERY_CHARS=400` (`backend/app/config.py`).
 
+
+## Techniconnexion et CamemBERT (27/11/2026, rien mis en service)
+
+**Données** : forum Techniconnexion (30 421 discussions, accord des administrateurs déclaré par l'utilisateur, écrit à
+archiver ; fiche `data/sources/techniconnexion.md`). Nettoyage maximal du bruit : citations (`blockquote`) et formules
+du forum retirées, pseudonymes et coordonnées masqués, sujets qui ne sont pas des pannes (tutoriels, achats, listes)
+et questions de procédure écartés. Étiquette de famille gardée seulement si deux indices concordent : la rubrique du
+forum (« +domaine ») **et** une pièce nommée dans la question (« +accord ») ; sur 120 étiquettes relues, 73 à 82 % de
+justes avec l'accord, 31 à 44 % sans. 19 006 exemples exportés, 1 529 discussions reliées à une panne type. Vrais
+exemples vérifiés un à un : 153 de plus (192 causes relues, 39 mises de côté comme **contrôle Techniconnexion jamais
+vu**, `data/test_prive/techniconnexion_controle.jsonl`), en plus des 196 de L'Argus.
+
+**CamemBERT** (Kaggle, jeu privé `dalil-camembert`, données nettoyées seulement) : CamemBERT-familles (17 602 exemples
+des deux forums, validation 91,7 % contre ~90,5 % pour le TF-IDF, 0,02 à 0,09 s par texte) et CamemBERT-pièces
+(916 exemples, dev 83 %). Voir `ml/kaggle/README.md`.
+
+| Chaîne complète hybride, top-1 / top-3 | En service | V2 : + vrais ex. des 2 forums, familles des 2 forums | V4n : idem, 349 ex., familles sans procédures | CamemBERT-familles (a 0,25) |
+| --- | --- | --- | --- | --- |
+| Dev | 96 / 98 % | 96 / 98 % | 96 / 98 % | 96 / 98 % |
+| Démo | 94 / 100 % | 94 / 100 % | 94 / 100 % | 94 / 100 % |
+| Audit d'Oran | 89 / 91 % | 89 / 91 % | 89 / 91 % | **87** / 91 % |
+| Contrôle d'Oran | 94 / 100 % | 94 / 100 % | 94 / 100 % | **88** / 100 % |
+| L'Argus, jeu de réglage | 40 / 60 % | 43 / 64 % | 43 / 64 % | 43 / 61 % |
+| **L'Argus, contrôle jamais vu** (43) | **49** / 63 % | 42 / 65 % | 44 / 65 % | 44 / 70 % |
+| **Techniconnexion, contrôle jamais vu** (39) | 33 / 59 % | **46 / 67 %** | 44 / 67 % | 44 / 64 % |
+
+Alpha réglé sur les jeux de réglage seulement (0,15 / 0,25 / 0,5 : 0,25 reste le meilleur pour chaque variante).
+Résultats complets : `ml/results/20261127-*`.
+
+**Décision : rien n'est mis en service.** Toutes les variantes gagnent 11 à 13 points sur le contrôle Techniconnexion
+et 3 à 4 sur le jeu de réglage L'Argus, mais perdent 2 à 3 cas sur 43 sur le contrôle L'Argus, et CamemBERT-familles
+recule sur l'audit et le contrôle d'Oran. La règle (mieux sur les deux contrôles, sans recul ailleurs) n'est pas
+remplie. Sur les 82 cas des deux contrôles réunis, V2 fait mieux que le modèle en service (36 contre 34 en top-1, 54
+contre 50 en top-3) : c'est à l'équipe de trancher si ce gain global justifie le recul sur L'Argus. CamemBERT
+n'apporte rien de plus que le TF-IDF ici, pour 443 Mo et un temps de réponse plus long.
+
+Modèle **tout CamemBERT** (CamemBERT-pièces + CamemBERT-familles, alpha 0,25) : nettement moins bon (dev 84 / 94 %,
+démo 82 / 100 %, audit 84 / 91 %, contrôle d'Oran 94 / 94 %, contrôle L'Argus 33 / 56 %, contrôle Techniconnexion
+46 / 67 %) : 916 exemples par pièce ne suffisent pas à un encodeur, alors que le TF-IDF s'en contente.

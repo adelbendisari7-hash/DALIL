@@ -48,7 +48,8 @@ NB_ENCODER = [
     ("code", '!pip install -q -U "transformers>=4.48" accelerate onnx onnxruntime onnxscript'),
     ("code", '''MODEL_ID = "__MODEL__"   # à comparer : "jhu-clsp/mmBERT-base", "almanach/camembert-base", "almanach/camembertav2-base"
 CONFIG = "__CONFIG__"    # "set" (jeu commun pondéré), "fr" (textes traduits) ou "en+fr" (transfert depuis l'anglais)
-MAX_LEN, EPOCHS, LR, BATCH, SEED, MIN_PER_CLASS = 256, 3, 3e-5, 32, 13, 5
+MAX_LEN, EPOCHS, LR, BATCH, SEED, MIN_PER_CLASS = 256, __EPOCHS__, __LR__, 32, 13, 5
+SET_DIR, TARGET = "__SET__", "__TARGET__"   # jeu commun et cible (« part » ou « family »)
 NAME = f"{MODEL_ID.split('/')[-1]}_{CONFIG.replace('+', '-')}"
 OUT = f"/kaggle/working/{NAME}"
 os.makedirs(OUT, exist_ok=True)'''),
@@ -71,9 +72,9 @@ for p in ([] if CONFIG == "set" else sorted(glob.glob("data/processed/train/*.js
         if text:
             examples.append({"text": text[:2000], "label": label, "src": r["source"], "weight": 1.0})
 if CONFIG == "set":   # même découpage et mêmes poids que la variante A (train_baseline.py --set)
-    print(json.load(open("data/processed/train_set/stats.json", encoding="utf-8")))
-    train = [{**r, "src": r["source"]} for r in load_jsonl("data/processed/train_set/train.jsonl")]
-    val = [{**r, "src": r["source"]} for r in load_jsonl("data/processed/train_set/val.jsonl")]
+    print(json.load(open(f"{SET_DIR}/stats.json", encoding="utf-8")))
+    train = [{**r, "src": r["source"]} for r in load_jsonl(f"{SET_DIR}/train.jsonl")]
+    val = [{**r, "src": r["source"]} for r in load_jsonl(f"{SET_DIR}/val.jsonl")]
     counts = Counter(e["label"] for e in train)
     train = [e for e in train if counts[e["label"]] >= MIN_PER_CLASS]
     labels = sorted({e["label"] for e in train})
@@ -88,6 +89,10 @@ else:
     val, train = examples[:n_val], examples[n_val:]
 lid = {l: i for i, l in enumerate(labels)}
 dev = [d for d in load_jsonl("data/test/dev_fr_synthetique.jsonl") if d.get("text") and d.get("expect")]
+if TARGET == "family":   # attendus du jeu dev = pièces -> familles
+    _cats = json.load(open("data/seed/part_categories.json", encoding="utf-8"))["families"]
+    _p2f = {c["slug"]: f["slug"] for f in _cats for c in f.get("children", [])} | {f["slug"]: f["slug"] for f in _cats}
+    dev = [{**d, "expect": sorted({_p2f.get(x, x) for x in d["expect"]})} for d in dev]
 print(f"{len(train)} entraînement, {len(val)} validation, {len(dev)} dev FR, {len(labels)} classes")
 print(Counter(e["src"] for e in examples))'''),
     ("code", '''import torch
@@ -172,7 +177,7 @@ torch.onnx.export(Logits(export), (sample["input_ids"], sample["attention_mask"]
                   dynamic_axes={"input_ids": {0: "b", 1: "t"}, "attention_mask": {0: "b", 1: "t"}, "logits": {0: "b"}},
                   opset_version=17, dynamo=False)   # exportateur classique : axes dynamiques fiables
 tok.save_pretrained(onnx_dir)   # écrit tokenizer.json
-json.dump({"target": "part", "labels": labels, "version": f"{NAME}-{time.strftime('%Y%m%d')}", "max_length": MAX_LEN,
+json.dump({"target": TARGET, "labels": labels, "version": f"{NAME}-{time.strftime('%Y%m%d')}", "max_length": MAX_LEN,
            "history": history, "model_id": MODEL_ID, "config": CONFIG},
           open(f"{onnx_dir}/labels.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 
@@ -487,8 +492,24 @@ for name in ("qwen3-embedding-0.6b", "bge-reranker-v2-m3"):
 ]
 
 
-def encoder(config: str, model_id: str = "jhu-clsp/mmBERT-base") -> list[tuple[str, str]]:
-    return [(k, src.replace("__CONFIG__", config).replace("__MODEL__", model_id)) for k, src in NB_ENCODER]
+def encoder(config: str, model_id: str = "jhu-clsp/mmBERT-base", set_dir: str = "data/processed/train_set",
+            target: str = "part", epochs: int = 3, setup: str | None = None, lr: str = "3e-5") -> list[tuple[str, str]]:
+    cells = [(k, setup if (setup and src == SETUP) else src) for k, src in NB_ENCODER]
+    return [(k, src.replace("__CONFIG__", config).replace("__MODEL__", model_id).replace("__SET__", set_dir)
+             .replace("__TARGET__", target).replace("__EPOCHS__", str(epochs)).replace("__LR__", lr)) for k, src in cells]
+
+
+# Jeu Kaggle réduit « dalil-camembert » (data/seed, data/test, data/processed/camembert) : pas de backend/.
+SETUP_CAMEMBERT = '''import glob, json, os, random, shutil, time
+from collections import Counter
+# Jeu « dalil-camembert » : un seul dossier data/, que Kaggle peut aplatir à l'extraction. On cherche le dossier
+# qui contient seed/ et processed/, et on le recopie sous /kaggle/working/dalil/data.
+DATA_IN = next(root for root, dirs, _ in os.walk("/kaggle/input") if "seed" in dirs and "processed" in dirs)
+REPO = "/kaggle/working/dalil"
+if not os.path.exists(REPO):
+    shutil.copytree(DATA_IN, f"{REPO}/data")
+os.chdir(REPO)
+print(DATA_IN, sorted(os.listdir("data")))'''
 
 
 NOTEBOOKS = {
@@ -496,6 +517,12 @@ NOTEBOOKS = {
     "02_encodeur_fr": encoder("fr"),          # variante B sur textes traduits (après le carnet 01)
     "02_encodeur_enfr": encoder("en+fr"),     # variante B par transfert multilingue (sans traduction)
     "02_encodeur_camembert": encoder("set", "almanach/camembert-base"),  # variante B sur le jeu commun (L'Argus inclus)
+    # 27/11/2026 : deux niveaux, comme en service (ml/kaggle/build_camembert_sets.py)
+    "02_camembert_familles": encoder("set", "almanach/camembert-base", "data/processed/camembert/familles", "family", 3,
+                                     SETUP_CAMEMBERT),
+    # 916 exemples seulement : 10 époques à 3e-5 laissaient le modèle loin du but (dev 40 %, 27/11/2026)
+    "02_camembert_pieces": encoder("set", "almanach/camembert-base", "data/processed/camembert/pieces", "part", 40,
+                                   SETUP_CAMEMBERT, "6e-5"),
     "03_lora_llm": NB_LLM,
     "04_fusion_gguf": NB_FUSION,   # reprise après le 03 : évaluation, fusion, GGUF
     "05_vecteurs": NB_VECTEURS,    # étape 8 : vecteurs de recherche + modèle de reclassement

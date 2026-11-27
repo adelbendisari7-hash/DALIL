@@ -66,4 +66,14 @@ SOURCES: dict[str, SourceSpec] = {s.id: s for s in [
         "Forum auto L'Argus (largus.fr), messages des membres anonymisés ; lien vers chaque discussion", "fr", "largus",
         notes="Utilisable seulement avec l'accord de L'Argus, à archiver. Voir data/sources/largus_forum.md.",
     ),
+    SourceSpec(
+        "techniconnexion", "Forum Techniconnexion – résolution des problèmes techniques (collecte de l'équipe)",
+        "Accord des administrateurs de Techniconnexion (DALIL_TECHNICONNEXION_AUTORISATION)",
+        "https://www.techniconnexion.com/t582-la-charte-du-forum-a-lire-obligatoirement",
+        "Forum Techniconnexion (techniconnexion.com), messages des membres anonymisés ; lien vers chaque discussion",
+        "fr", "techniconnexion",
+        notes="Aucune licence ; robots.txt « ai-train=no ». Utilisable seulement avec l'accord des administrateurs "
+              "(déclaré par l'utilisateur le 27/11/2026, usage par l'IA compris ; écrit à obtenir). "
+              "Voir data/sources/techniconnexion.md.",
+    ),
 ]}

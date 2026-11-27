@@ -50,6 +50,35 @@ function PartLabel({ cause, href }: { cause: Cause; href: string }) {
   );
 }
 
+/** Résumé à envoyer au mécanicien : véhicule, première cause, pièce et lien du diagnostic. Aucune donnée personnelle. */
+function ShareButton({ r }: { r: Result }) {
+  const [copied, setCopied] = useState(false);
+  const c = r.causes[0];
+  if (!c) return null;
+  async function share() {
+    const text = t("result.share.text", {
+      vehicle: r.vehicle, cause: c.name, part: c.part.name, confidence: Math.round(c.confidence * 100),
+    });
+    const url = window.location.href;
+    if (navigator.share) {
+      await navigator.share({ title: "DALIL", text, url }).catch(() => undefined);
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      setCopied(true);
+    } catch {
+      window.open(`https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`, "_blank", "noopener");
+    }
+  }
+  return (
+    <div className="actions">
+      <button type="button" className="btn btn-ghost" onClick={share}>{t("result.share")}</button>
+      {copied && <span className="ok" role="status">{t("result.share.copied")}</span>}
+    </div>
+  );
+}
+
 export default function DiagnosticResult() {
   const { id } = useParams<{ id: string }>();
   const [r, setR] = useState<Result | null>(null);
@@ -174,6 +203,7 @@ export default function DiagnosticResult() {
               </li>
             ))}
           </ol>
+          <ShareButton r={r} />
           <div className="feedback">
             <p>{t("result.feedback.q")}</p>
             <div className="actions" style={{ marginTop: 0 }}>

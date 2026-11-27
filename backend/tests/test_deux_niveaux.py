@@ -40,3 +40,20 @@ def test_chargement_du_fichier(tmp_path):
     clf = load_classifier(path)
     assert isinstance(clf, FamilyRerankedClassifier) and clf.target == "fault" and clf.version == "v1+familles-a0.5"
     assert set(clf.predict_proba("frein")) == {"plaquettes-usees", "batterie-faible"}
+
+
+class _EncodeurFamilles:
+    """Imite OnnxEncoderClassifier (CamemBERT-familles) : labels + predict_proba(texte) -> dict."""
+    labels = ["freinage", "electricite"]
+
+    def predict_proba(self, text):
+        return {"freinage": 0.9, "electricite": 0.1} if "frein" in text else {"freinage": 0.1, "electricite": 0.9}
+
+
+def test_modele_de_familles_encodeur():
+    base = FaultClassifier(BASE, "fault", "v1")
+    two = FamilyRerankedClassifier(base, _EncodeurFamilles(), 1.0, LF)
+    assert two.families == ["freinage", "electricite"]
+    assert two.family_proba("ça grince au frein")["freinage"] == 0.9
+    p = two.predict_proba("ça grince au frein")
+    assert abs(sum(p.values()) - 1) < 1e-6

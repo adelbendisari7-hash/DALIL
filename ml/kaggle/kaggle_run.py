@@ -30,6 +30,12 @@ OUTPUTS = HERE / "_outputs"
 # de l'installation et ne répond plus (sans message) si le projet est déplacé.
 KAGGLE = [sys.executable, "-m", "kaggle"]
 DATASET_SLUG = "dalil-pipeline"
+CAMEMBERT_SLUG = "dalil-camembert"
+# Jeu réduit pour CamemBERT : jeux d'entraînement construits (ml/kaggle/build_camembert_sets.py), amorçage et jeux de
+# test publics. Ni data/test_prive/, ni les messages complets des forums.
+# Demande de l'utilisateur (27/11/2026, accord déclaré des deux forums) : aussi les données complètes anonymisées.
+CAMEMBERT_INCLUDE = ["data/seed", "data/test", "data/processed/camembert", "data/processed/train",
+                     "data/processed/largus_forum.jsonl", "data/processed/techniconnexion.jsonl"]
 ADAPTER_SLUG = "dalil-lora-adapter"
 ADAPTER_DIR = ROOT / "ml" / "artifacts" / "lora_adapter"
 NOTEBOOKS = {
@@ -37,6 +43,9 @@ NOTEBOOKS = {
     "02_encodeur_fr": {"slug": "dalil-02-encodeur-fr", "outputs": ["*_onnx.zip"]},
     "02_encodeur_enfr": {"slug": "dalil-02-encodeur-enfr", "outputs": ["*_onnx.zip"]},
     "02_encodeur_camembert": {"slug": "dalil-02-encodeur-camembert", "outputs": ["*_onnx.zip"]},
+    # 27/11/2026 : jeu réduit « dalil-camembert » (kaggle_run.py dataset-camembert)
+    "02_camembert_familles": {"slug": "dalil-02-camembert-familles", "outputs": ["*_onnx.zip"], "base": CAMEMBERT_SLUG},
+    "02_camembert_pieces": {"slug": "dalil-02-camembert-pieces", "outputs": ["*_onnx.zip"], "base": CAMEMBERT_SLUG},
     "03_lora_llm": {"slug": "dalil-03-lora-llm", "outputs": ["*.gguf", "*-evaluation.json"]},
     "04_fusion_gguf": {"slug": "dalil-04-fusion-gguf", "outputs": ["*.gguf", "*-evaluation.json"],
                        "datasets": [ADAPTER_SLUG]},
@@ -107,6 +116,34 @@ def cmd_dataset() -> None:
     print(kaggle("datasets", "status", f"{user}/{DATASET_SLUG}", check=False))
 
 
+def cmd_dataset_camembert() -> None:
+    user = username()
+    folder = STAGING.with_name("staging-camembert")
+    if folder.exists():
+        shutil.rmtree(folder, onexc=_force_remove)
+    for rel in CAMEMBERT_INCLUDE:
+        src = ROOT / rel
+        if src.is_file():
+            (folder / rel).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, folder / rel)
+        else:
+            shutil.copytree(src, folder / rel, ignore=IGNORE)
+    leaks = [p for p in folder.rglob("*") if "test_prive" in p.parts]   # jeux de test privés : jamais entraînés
+    if leaks:
+        raise SystemExit(f"fichiers à ne pas envoyer : {leaks}")
+    (folder / "dataset-metadata.json").write_text(json.dumps({
+        "title": CAMEMBERT_SLUG, "id": f"{user}/{CAMEMBERT_SLUG}", "licenses": [{"name": "other"}],
+        "subtitle": "Jeux d'entraînement CamemBERT de DALIL (privé, forums anonymisés)",
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    size = sum(p.stat().st_size for p in folder.rglob("*") if p.is_file()) / 1e6
+    print(f"préparé : {folder} ({size:.0f} Mo)")
+    if CAMEMBERT_SLUG in kaggle("datasets", "list", "--mine", "-s", CAMEMBERT_SLUG, check=False):
+        print(kaggle("datasets", "version", "-p", str(folder), "-m", "mise à jour depuis le portable", "-r", "zip"))
+    else:
+        print(kaggle("datasets", "create", "-p", str(folder), "-r", "zip"))  # privé par défaut
+    print(kaggle("datasets", "status", f"{user}/{CAMEMBERT_SLUG}", check=False))
+
+
 def cmd_adapter() -> None:
     """Envoie l'adaptateur LoRA entraîné par le carnet 03 (ml/artifacts/lora_adapter) comme jeu de données privé,
     pour que le carnet 04 fasse évaluation, fusion et GGUF sans réentraîner."""
@@ -138,7 +175,8 @@ def cmd_push(name: str) -> None:
         "id": f"{user}/{nb['slug']}", "title": nb["slug"], "code_file": f"{name}.ipynb",
         "language": "python", "kernel_type": "notebook", "is_private": True,
         "enable_gpu": True, "enable_internet": True,
-        "dataset_sources": [f"{user}/{d}" for d in [DATASET_SLUG, *nb.get("datasets", [])]], "competition_sources": [], "kernel_sources": [],
+        "dataset_sources": [f"{user}/{d}" for d in [nb.get("base", DATASET_SLUG), *nb.get("datasets", [])]],
+        "competition_sources": [], "kernel_sources": [],
     }, indent=2), encoding="utf-8")
     # Pas de type de GPU imposé : imposer la T4 a laissé un carnet plus d'une heure en file d'attente,
     # alors que Kaggle démarre aussitôt sur le premier GPU libre. KAGGLE_ACCELERATOR pour en forcer un.
@@ -171,6 +209,8 @@ def main() -> None:
         stage()
     elif cmd == "dataset":
         cmd_dataset()
+    elif cmd == "dataset-camembert":
+        cmd_dataset_camembert()
     elif cmd == "adapter":
         cmd_adapter()
     elif cmd in ("push", "status", "output"):

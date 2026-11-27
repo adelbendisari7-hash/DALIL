@@ -27,12 +27,13 @@ from pipeline.sources import SOURCES, Context  # noqa: E402
 
 
 def collectors() -> dict:
-    from pipeline.sources import cvffad, largus, mot, nhtsa, rappelconso, stackexchange
+    from pipeline.sources import cvffad, largus, mot, nhtsa, rappelconso, stackexchange, techniconnexion
 
     return {
         "nhtsa_complaints": nhtsa.collect_complaints, "nhtsa_recalls": nhtsa.collect_recalls,
         "rappelconso": rappelconso.collect, "mot_uk": mot.collect,
         "stackexchange_mechanics": stackexchange.collect, "cvffad": cvffad.collect, "largus_forum": largus.collect,
+        "techniconnexion": techniconnexion.collect,
     }
 
 
@@ -121,6 +122,7 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--mot-year", type=int, default=2023)
     ap.add_argument("--redo-uppercase", action="store_true", help="retraduire les textes écrits en capitales")
     ap.add_argument("--largus-db", help="base SQLite de la collecte L'Argus (source largus_forum)")
+    ap.add_argument("--techniconnexion-dir", help="dossier ml_ready/ de la collecte Techniconnexion")
     args = ap.parse_args(argv)
 
     ids = list(SOURCES) if args.sources == "all" else [s.strip() for s in args.sources.split(",")]
@@ -128,7 +130,8 @@ def main(argv: list[str] | None = None) -> None:
     if unknown:
         ap.error(f"source(s) inconnue(s) : {', '.join(unknown)}")
     log = lambda m: print(m, flush=True)  # noqa: E731
-    ctx = Context(limit=args.limit, refresh=args.refresh, options={"mot_year": args.mot_year, "largus_db": args.largus_db}, log=log)
+    ctx = Context(limit=args.limit, refresh=args.refresh, options={"mot_year": args.mot_year, "largus_db": args.largus_db,
+                                                                        "techniconnexion_dir": args.techniconnexion_dir}, log=log)
 
     if args.command in ("all", "collect"):
         cmd_collect(ids, ctx)

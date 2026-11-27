@@ -68,5 +68,15 @@
     "kinds": {
       "qa": 99720
     }
+  },
+  "techniconnexion": {
+    "records": 30407,
+    "with_category": 23446,
+    "with_family": 23446,
+    "with_fault": 1529,
+    "translated_fr": 30407,
+    "kinds": {
+      "qa": 30407
+    }
   }
 }

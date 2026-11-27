@@ -1,0 +1,1350 @@
+{
+"_note": "Causes confirmées de Techniconnexion vérifiées une à une par Claude le 27/11/2026 : 179 justes sur 309 candidats (formes « c'était… » et « j'ai changé X et tout marche », pièce principale d'une panne type). Identifiants et pièces seulement, aucun texte. Les cas « controle » forment le jeu de contrôle privé (jamais entraînés). Reconstruire : python ml/extraire_causes_largus.py --source techniconnexion --verifiees Seconde passe le 27/11/2026 (forme « la X était HS … tout marche ») : 13 justes sur 35.",
+"causes": [
+{
+"id": "techniconnexion:46294",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:45750",
+"part": "bougies-allumage",
+"fault": "bougies-usees",
+"controle": true
+},
+{
+"id": "techniconnexion:44545",
+"part": "papillon-motorise",
+"fault": "ralenti-instable",
+"controle": true
+},
+{
+"id": "techniconnexion:42680",
+"part": "kit-distribution",
+"fault": "distribution-a-faire"
+},
+{
+"id": "techniconnexion:32996",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:22790",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:21962",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:22063",
+"part": "debitmetre",
+"fault": "debitmetre-hs"
+},
+{
+"id": "techniconnexion:477",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:12212",
+"part": "ventilateur-radiateur",
+"fault": "ventilateur-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:10242",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:10001",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:8591",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:1249",
+"part": "injecteurs",
+"fault": "injecteurs-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:716",
+"part": "sonde-lambda",
+"fault": "sonde-lambda-hs"
+},
+{
+"id": "techniconnexion:348",
+"part": "turbocompresseur",
+"fault": "turbo-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:243",
+"part": "pompe-eau",
+"fault": "pompe-eau-hs"
+},
+{
+"id": "techniconnexion:19629",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "techniconnexion:18717",
+"part": "ventilateur-radiateur",
+"fault": "ventilateur-hs"
+},
+{
+"id": "techniconnexion:8870",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:5677",
+"part": "bougies-allumage",
+"fault": "bougies-usees",
+"controle": true
+},
+{
+"id": "techniconnexion:28098",
+"part": "roulements-roue",
+"fault": "roulement-use"
+},
+{
+"id": "techniconnexion:25859",
+"part": "cardans",
+"fault": "cardan-hs"
+},
+{
+"id": "techniconnexion:4131",
+"part": "ampoules",
+"fault": "ampoule-grillee",
+"controle": true
+},
+{
+"id": "techniconnexion:46798",
+"part": "turbocompresseur",
+"fault": "turbo-hs"
+},
+{
+"id": "techniconnexion:44715",
+"part": "filtre-huile",
+"fault": "vidange-a-faire"
+},
+{
+"id": "techniconnexion:46080",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:45617",
+"part": "debitmetre",
+"fault": "debitmetre-hs"
+},
+{
+"id": "techniconnexion:45263",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:38205",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:36273",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:34467",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "techniconnexion:32893",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:31113",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:30112",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:27321",
+"part": "radiateur",
+"fault": "fuite-refroidissement"
+},
+{
+"id": "techniconnexion:26575",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:25574",
+"part": "debitmetre",
+"fault": "debitmetre-hs"
+},
+{
+"id": "techniconnexion:24460",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "techniconnexion:24496",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:24100",
+"part": "support-moteur",
+"fault": "supports-moteur-uses",
+"controle": true
+},
+{
+"id": "techniconnexion:21416",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:21435",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:20035",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "techniconnexion:20336",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "techniconnexion:9798",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:18298",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:14378",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:16216",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:14347",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:14393",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "techniconnexion:12088",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:13662",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "techniconnexion:13813",
+"part": "debitmetre",
+"fault": "debitmetre-hs"
+},
+{
+"id": "techniconnexion:13179",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:10924",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "techniconnexion:4691",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "techniconnexion:862",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:41657",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:33897",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:35877",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:35486",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:35781",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:22356",
+"part": "ventilateur-radiateur",
+"fault": "ventilateur-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:24333",
+"part": "alternateur",
+"fault": "alternateur-defaillant",
+"controle": true
+},
+{
+"id": "techniconnexion:5643",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:18807",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:17573",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "techniconnexion:16181",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:2504",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:31731",
+"part": "disques-frein",
+"fault": "disques-voiles"
+},
+{
+"id": "techniconnexion:26621",
+"part": "injecteurs",
+"fault": "injecteurs-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:16019",
+"part": "kit-embrayage",
+"fault": "embrayage-use"
+},
+{
+"id": "techniconnexion:13621",
+"part": "disques-frein",
+"fault": "disques-voiles"
+},
+{
+"id": "techniconnexion:4894",
+"part": "kit-embrayage",
+"fault": "embrayage-use"
+},
+{
+"id": "techniconnexion:18730",
+"part": "pompe-eau",
+"fault": "pompe-eau-hs"
+},
+{
+"id": "techniconnexion:48908",
+"part": "radiateur",
+"fault": "fuite-refroidissement"
+},
+{
+"id": "techniconnexion:46862",
+"part": "catalyseur",
+"fault": "catalyseur-hs"
+},
+{
+"id": "techniconnexion:46367",
+"part": "pompe-eau",
+"fault": "pompe-eau-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:44115",
+"part": "injecteurs",
+"fault": "injecteurs-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:41463",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:41955",
+"part": "thermostat",
+"fault": "thermostat-bloque",
+"controle": true
+},
+{
+"id": "techniconnexion:39705",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:39264",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:37904",
+"part": "vanne-egr",
+"fault": "egr-encrassee"
+},
+{
+"id": "techniconnexion:37338",
+"part": "papillon-motorise",
+"fault": "ralenti-instable"
+},
+{
+"id": "techniconnexion:36657",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "techniconnexion:34946",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:33699",
+"part": "filtre-huile",
+"fault": "vidange-a-faire",
+"controle": true
+},
+{
+"id": "techniconnexion:29572",
+"part": "papillon-motorise",
+"fault": "ralenti-instable",
+"controle": true
+},
+{
+"id": "techniconnexion:27339",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:24652",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:23392",
+"part": "vanne-egr",
+"fault": "egr-encrassee"
+},
+{
+"id": "techniconnexion:18633",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:10700",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "techniconnexion:11924",
+"part": "sonde-lambda",
+"fault": "sonde-lambda-hs"
+},
+{
+"id": "techniconnexion:12063",
+"part": "bougies-prechauffage",
+"fault": "prechauffage-hs"
+},
+{
+"id": "techniconnexion:8690",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:7446",
+"part": "papillon-motorise",
+"fault": "ralenti-instable"
+},
+{
+"id": "techniconnexion:894",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "techniconnexion:22129",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:42701",
+"part": "demarreur",
+"fault": "demarreur-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:30937",
+"part": "vanne-egr",
+"fault": "egr-encrassee"
+},
+{
+"id": "techniconnexion:4845",
+"part": "ventilateur-radiateur",
+"fault": "ventilateur-hs"
+},
+{
+"id": "techniconnexion:23585",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:18525",
+"part": "ventilateur-radiateur",
+"fault": "ventilateur-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:1314",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:26266",
+"part": "biellette-stabilisatrice",
+"fault": "biellette-stab-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:21132",
+"part": "biellette-stabilisatrice",
+"fault": "biellette-stab-hs"
+},
+{
+"id": "techniconnexion:36353",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "techniconnexion:35592",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "techniconnexion:29543",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:28640",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "techniconnexion:22689",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "techniconnexion:10194",
+"part": "injecteurs",
+"fault": "injecteurs-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:4941",
+"part": "kit-embrayage",
+"fault": "embrayage-use"
+},
+{
+"id": "techniconnexion:8944",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:8457",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:4082",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:48506",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "techniconnexion:37783",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "techniconnexion:39795",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:34424",
+"part": "papillon-motorise",
+"fault": "ralenti-instable"
+},
+{
+"id": "techniconnexion:32313",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:25168",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:24500",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:21085",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:14616",
+"part": "courroie-accessoires",
+"fault": "courroie-accessoires-usee",
+"controle": true
+},
+{
+"id": "techniconnexion:13241",
+"part": "bougies-prechauffage",
+"fault": "prechauffage-hs"
+},
+{
+"id": "techniconnexion:12460",
+"part": "pompe-eau",
+"fault": "pompe-eau-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:10009",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "techniconnexion:771",
+"part": "sonde-lambda",
+"fault": "sonde-lambda-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:32482",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:17804",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:29433",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:22886",
+"part": "debitmetre",
+"fault": "debitmetre-hs"
+},
+{
+"id": "techniconnexion:38526",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:30761",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:25845",
+"part": "vanne-egr",
+"fault": "egr-encrassee"
+},
+{
+"id": "techniconnexion:14857",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:5782",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:4533",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:32184",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:10593",
+"part": "ampoules",
+"fault": "ampoule-grillee"
+},
+{
+"id": "techniconnexion:48673",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:46155",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "techniconnexion:44422",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:43470",
+"part": "bobine-allumage",
+"fault": "bobine-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:42725",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "techniconnexion:40765",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:38243",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:37997",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:36446",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:36495",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:25507",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:33153",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:32126",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:31299",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "techniconnexion:19192",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "techniconnexion:28789",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "techniconnexion:27153",
+"part": "joint-culasse",
+"fault": "joint-culasse-hs"
+},
+{
+"id": "techniconnexion:23490",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs"
+},
+{
+"id": "techniconnexion:18175",
+"part": "thermostat",
+"fault": "thermostat-bloque",
+"controle": true
+},
+{
+"id": "techniconnexion:19104",
+"part": "bobine-allumage",
+"fault": "bobine-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:16468",
+"part": "batterie",
+"fault": "batterie-faible",
+"controle": true
+},
+{
+"id": "techniconnexion:16295",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:13408",
+"part": "cardans",
+"fault": "cardan-hs"
+},
+{
+"id": "techniconnexion:2327",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:241",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:26418",
+"part": "batterie",
+"fault": "batterie-faible",
+"controle": true
+},
+{
+"id": "techniconnexion:26440",
+"part": "batterie",
+"fault": "batterie-faible"
+},
+{
+"id": "techniconnexion:25164",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:31342",
+"part": "cardans",
+"fault": "cardan-hs"
+},
+{
+"id": "techniconnexion:28159",
+"part": "rotules-direction",
+"fault": "jeu-direction"
+},
+{
+"id": "techniconnexion:20004",
+"part": "roulements-roue",
+"fault": "roulement-use"
+},
+{
+"id": "techniconnexion:46804",
+"part": "capteur-vilebrequin",
+"fault": "capteur-vilebrequin-hs",
+"controle": true
+},
+{
+"id": "techniconnexion:43594",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:28823",
+"part": "bougies-prechauffage",
+"fault": "prechauffage-hs"
+},
+{
+"id": "techniconnexion:24494",
+"part": "alternateur",
+"fault": "alternateur-defaillant"
+},
+{
+"id": "techniconnexion:36655",
+"part": "pompe-carburant",
+"fault": "pompe-carburant-hs"
+},
+{
+"id": "techniconnexion:17458",
+"part": "bobine-allumage",
+"fault": "bobine-hs"
+},
+{
+"id": "techniconnexion:20192",
+"part": "thermostat",
+"fault": "thermostat-bloque"
+},
+{
+"id": "techniconnexion:42224",
+"part": "compresseur-clim",
+"fault": "clim-ne-refroidit-plus"
+},
+{
+"id": "techniconnexion:35283",
+"part": "debitmetre",
+"fault": "debitmetre-hs"
+},
+{
+"id": "techniconnexion:7444",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "techniconnexion:40055",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:4407",
+"part": "injecteurs",
+"fault": "injecteurs-hs"
+},
+{
+"id": "techniconnexion:48208",
+"part": "demarreur",
+"fault": "demarreur-hs"
+},
+{
+"id": "techniconnexion:33306",
+"part": "vanne-egr",
+"fault": "egr-encrassee"
+},
+{
+"id": "techniconnexion:24789",
+"part": "bougies-allumage",
+"fault": "bougies-usees"
+},
+{
+"id": "techniconnexion:26941",
+"part": "catalyseur",
+"fault": "catalyseur-hs"
+},
+{
+"id": "techniconnexion:12601",
+"part": "roulements-roue",
+"fault": "roulement-use"
+}
+],
+"examines": [
+"techniconnexion:10001",
+"techniconnexion:10009",
+"techniconnexion:10169",
+"techniconnexion:10194",
+"techniconnexion:10242",
+"techniconnexion:10455",
+"techniconnexion:10509",
+"techniconnexion:10532",
+"techniconnexion:10593",
+"techniconnexion:10700",
+"techniconnexion:10924",
+"techniconnexion:11924",
+"techniconnexion:12063",
+"techniconnexion:12068",
+"techniconnexion:12088",
+"techniconnexion:12207",
+"techniconnexion:12212",
+"techniconnexion:12248",
+"techniconnexion:12460",
+"techniconnexion:1249",
+"techniconnexion:12601",
+"techniconnexion:13000",
+"techniconnexion:1314",
+"techniconnexion:13179",
+"techniconnexion:13241",
+"techniconnexion:13348",
+"techniconnexion:13376",
+"techniconnexion:13408",
+"techniconnexion:13425",
+"techniconnexion:13504",
+"techniconnexion:13618",
+"techniconnexion:13621",
+"techniconnexion:13662",
+"techniconnexion:13725",
+"techniconnexion:13813",
+"techniconnexion:13845",
+"techniconnexion:13867",
+"techniconnexion:13914",
+"techniconnexion:14029",
+"techniconnexion:14347",
+"techniconnexion:14378",
+"techniconnexion:14393",
+"techniconnexion:14549",
+"techniconnexion:14616",
+"techniconnexion:1470",
+"techniconnexion:14804",
+"techniconnexion:14833",
+"techniconnexion:14857",
+"techniconnexion:14873",
+"techniconnexion:1565",
+"techniconnexion:16019",
+"techniconnexion:16181",
+"techniconnexion:16216",
+"techniconnexion:16295",
+"techniconnexion:16468",
+"techniconnexion:16723",
+"techniconnexion:1680",
+"techniconnexion:17272",
+"techniconnexion:17458",
+"techniconnexion:17506",
+"techniconnexion:17573",
+"techniconnexion:17747",
+"techniconnexion:17804",
+"techniconnexion:17877",
+"techniconnexion:18090",
+"techniconnexion:18175",
+"techniconnexion:18177",
+"techniconnexion:18276",
+"techniconnexion:18298",
+"techniconnexion:18525",
+"techniconnexion:18633",
+"techniconnexion:18717",
+"techniconnexion:18730",
+"techniconnexion:18807",
+"techniconnexion:18957",
+"techniconnexion:18973",
+"techniconnexion:19008",
+"techniconnexion:19024",
+"techniconnexion:19104",
+"techniconnexion:19110",
+"techniconnexion:19192",
+"techniconnexion:19506",
+"techniconnexion:19629",
+"techniconnexion:19793",
+"techniconnexion:20004",
+"techniconnexion:20020",
+"techniconnexion:20035",
+"techniconnexion:20192",
+"techniconnexion:20207",
+"techniconnexion:20235",
+"techniconnexion:20266",
+"techniconnexion:20336",
+"techniconnexion:20555",
+"techniconnexion:20693",
+"techniconnexion:20722",
+"techniconnexion:20775",
+"techniconnexion:20874",
+"techniconnexion:21085",
+"techniconnexion:21132",
+"techniconnexion:21416",
+"techniconnexion:21435",
+"techniconnexion:21556",
+"techniconnexion:21638",
+"techniconnexion:21962",
+"techniconnexion:22063",
+"techniconnexion:22129",
+"techniconnexion:22356",
+"techniconnexion:22689",
+"techniconnexion:22790",
+"techniconnexion:22886",
+"techniconnexion:22968",
+"techniconnexion:23060",
+"techniconnexion:2327",
+"techniconnexion:23334",
+"techniconnexion:23392",
+"techniconnexion:23490",
+"techniconnexion:23585",
+"techniconnexion:23901",
+"techniconnexion:241",
+"techniconnexion:24100",
+"techniconnexion:243",
+"techniconnexion:24333",
+"techniconnexion:24460",
+"techniconnexion:24494",
+"techniconnexion:24496",
+"techniconnexion:24500",
+"techniconnexion:24544",
+"techniconnexion:24566",
+"techniconnexion:24600",
+"techniconnexion:24652",
+"techniconnexion:24789",
+"techniconnexion:25017",
+"techniconnexion:2504",
+"techniconnexion:25164",
+"techniconnexion:25168",
+"techniconnexion:25202",
+"techniconnexion:25246",
+"techniconnexion:25507",
+"techniconnexion:25574",
+"techniconnexion:2583",
+"techniconnexion:25845",
+"techniconnexion:25859",
+"techniconnexion:25923",
+"techniconnexion:25947",
+"techniconnexion:26266",
+"techniconnexion:26371",
+"techniconnexion:26418",
+"techniconnexion:26440",
+"techniconnexion:26575",
+"techniconnexion:26621",
+"techniconnexion:26941",
+"techniconnexion:27153",
+"techniconnexion:27321",
+"techniconnexion:27339",
+"techniconnexion:27466",
+"techniconnexion:28005",
+"techniconnexion:28075",
+"techniconnexion:28098",
+"techniconnexion:28159",
+"techniconnexion:28640",
+"techniconnexion:28789",
+"techniconnexion:28823",
+"techniconnexion:29063",
+"techniconnexion:29433",
+"techniconnexion:29543",
+"techniconnexion:29564",
+"techniconnexion:29572",
+"techniconnexion:29597",
+"techniconnexion:29726",
+"techniconnexion:2985",
+"techniconnexion:29874",
+"techniconnexion:30034",
+"techniconnexion:30112",
+"techniconnexion:30761",
+"techniconnexion:30791",
+"techniconnexion:30937",
+"techniconnexion:31113",
+"techniconnexion:31297",
+"techniconnexion:31299",
+"techniconnexion:31342",
+"techniconnexion:31439",
+"techniconnexion:31731",
+"techniconnexion:31816",
+"techniconnexion:32089",
+"techniconnexion:32126",
+"techniconnexion:32184",
+"techniconnexion:3228",
+"techniconnexion:32285",
+"techniconnexion:32313",
+"techniconnexion:32482",
+"techniconnexion:32612",
+"techniconnexion:32673",
+"techniconnexion:32711",
+"techniconnexion:32754",
+"techniconnexion:32893",
+"techniconnexion:32996",
+"techniconnexion:33153",
+"techniconnexion:33301",
+"techniconnexion:33306",
+"techniconnexion:33473",
+"techniconnexion:33559",
+"techniconnexion:33699",
+"techniconnexion:33897",
+"techniconnexion:34018",
+"techniconnexion:34091",
+"techniconnexion:34158",
+"techniconnexion:34195",
+"techniconnexion:34216",
+"techniconnexion:34424",
+"techniconnexion:34467",
+"techniconnexion:348",
+"techniconnexion:34946",
+"techniconnexion:34976",
+"techniconnexion:34980",
+"techniconnexion:35283",
+"techniconnexion:35437",
+"techniconnexion:35486",
+"techniconnexion:35592",
+"techniconnexion:35781",
+"techniconnexion:35877",
+"techniconnexion:36273",
+"techniconnexion:36353",
+"techniconnexion:36446",
+"techniconnexion:36495",
+"techniconnexion:36655",
+"techniconnexion:36657",
+"techniconnexion:36874",
+"techniconnexion:36914",
+"techniconnexion:36985",
+"techniconnexion:37146",
+"techniconnexion:37338",
+"techniconnexion:37352",
+"techniconnexion:3743",
+"techniconnexion:37726",
+"techniconnexion:37783",
+"techniconnexion:37904",
+"techniconnexion:37997",
+"techniconnexion:38205",
+"techniconnexion:38243",
+"techniconnexion:38526",
+"techniconnexion:39264",
+"techniconnexion:39662",
+"techniconnexion:39705",
+"techniconnexion:39795",
+"techniconnexion:39817",
+"techniconnexion:40055",
+"techniconnexion:40137",
+"techniconnexion:40290",
+"techniconnexion:40367",
+"techniconnexion:40403",
+"techniconnexion:40765",
+"techniconnexion:4082",
+"techniconnexion:40897",
+"techniconnexion:4107",
+"techniconnexion:41174",
+"techniconnexion:4131",
+"techniconnexion:41361",
+"techniconnexion:4145",
+"techniconnexion:41463",
+"techniconnexion:41657",
+"techniconnexion:41955",
+"techniconnexion:421",
+"techniconnexion:42224",
+"techniconnexion:42364",
+"techniconnexion:42488",
+"techniconnexion:42680",
+"techniconnexion:42701",
+"techniconnexion:42725",
+"techniconnexion:42728",
+"techniconnexion:43470",
+"techniconnexion:43594",
+"techniconnexion:4403",
+"techniconnexion:4407",
+"techniconnexion:44115",
+"techniconnexion:44344",
+"techniconnexion:44422",
+"techniconnexion:44545",
+"techniconnexion:44715",
+"techniconnexion:45208",
+"techniconnexion:45262",
+"techniconnexion:45263",
+"techniconnexion:4533",
+"techniconnexion:45445",
+"techniconnexion:45617",
+"techniconnexion:45750",
+"techniconnexion:46080",
+"techniconnexion:46155",
+"techniconnexion:46294",
+"techniconnexion:46367",
+"techniconnexion:46621",
+"techniconnexion:46731",
+"techniconnexion:46790",
+"techniconnexion:46798",
+"techniconnexion:46804",
+"techniconnexion:46833",
+"techniconnexion:46862",
+"techniconnexion:46873",
+"techniconnexion:4691",
+"techniconnexion:47262",
+"techniconnexion:47271",
+"techniconnexion:477",
+"techniconnexion:4795",
+"techniconnexion:48040",
+"techniconnexion:48208",
+"techniconnexion:48278",
+"techniconnexion:4845",
+"techniconnexion:48506",
+"techniconnexion:48514",
+"techniconnexion:48673",
+"techniconnexion:48787",
+"techniconnexion:48840",
+"techniconnexion:48859",
+"techniconnexion:48865",
+"techniconnexion:48908",
+"techniconnexion:4894",
+"techniconnexion:4941",
+"techniconnexion:5187",
+"techniconnexion:5256",
+"techniconnexion:5429",
+"techniconnexion:5537",
+"techniconnexion:5643",
+"techniconnexion:5677",
+"techniconnexion:5782",
+"techniconnexion:6098",
+"techniconnexion:6189",
+"techniconnexion:631",
+"techniconnexion:6619",
+"techniconnexion:6954",
+"techniconnexion:716",
+"techniconnexion:7444",
+"techniconnexion:7446",
+"techniconnexion:771",
+"techniconnexion:801",
+"techniconnexion:8457",
+"techniconnexion:8591",
+"techniconnexion:862",
+"techniconnexion:8634",
+"techniconnexion:8690",
+"techniconnexion:8870",
+"techniconnexion:894",
+"techniconnexion:8944",
+"techniconnexion:9452",
+"techniconnexion:9670",
+"techniconnexion:9798"
+]
+}

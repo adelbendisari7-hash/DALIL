@@ -87,3 +87,14 @@ test("véhicule absent de la liste : la saisie est envoyée", async ({ page }) =
   await page.getByRole("button", { name: "Envoyer" }).click();
   await expect(page.getByText("Merci, votre véhicule sera ajouté.")).toBeVisible();
 });
+
+test("exemple touché : la description se remplit et le résultat peut être envoyé au mécanicien", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]).catch(() => undefined);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Ça grince quand je freine" }).click();
+  await expect(page.getByLabel("Décrivez le problème")).toHaveValue("Ça grince quand je freine");
+  await expect(page.getByRole("button", { name: "Ça grince quand je freine" })).toHaveCount(0); // exemples masqués
+  await page.getByRole("button", { name: "Trouver la panne" }).click();
+  await expect(page.getByRole("heading", { name: "Causes probables" })).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByRole("button", { name: "Envoyer à mon mécanicien" })).toBeVisible();
+});

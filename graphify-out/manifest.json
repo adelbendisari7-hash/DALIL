@@ -114,9 +114,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/classifier.py": {
-    "mtime": 1795521555.951869,
-    "seen": 1795522712.5140045,
-    "ast_hash": "8fa5cc150caea33acb601658b1c5a46d",
+    "mtime": 1795743900.7810578,
+    "seen": 1795752692.6992602,
+    "ast_hash": "678f38a4e5d4adaedf37e485c393009a",
     "semantic_hash": ""
   },
   "backend/app/services/diagnosis/llm.py": {
@@ -210,15 +210,15 @@
     "semantic_hash": ""
   },
   "data/pipeline/run.py": {
-    "mtime": 1795036370.2202823,
-    "seen": 1795036540.4535232,
-    "ast_hash": "0a6b5677ef0f913143b6a5f1cba64565",
+    "mtime": 1795736768.8303373,
+    "seen": 1795752692.6992602,
+    "ast_hash": "82fb6aae35a991f195b09a0cae96a503",
     "semantic_hash": ""
   },
   "data/pipeline/sources/__init__.py": {
-    "mtime": 1795036433.4165792,
-    "seen": 1795036540.4535232,
-    "ast_hash": "7cb650713d204515a30b362fdebdc894",
+    "mtime": 1795742880.2874033,
+    "seen": 1795752692.6992602,
+    "ast_hash": "6d72746e714753c9a451eb64aea4e4f7",
     "semantic_hash": ""
   },
   "data/pipeline/sources/cvffad.py": {
@@ -282,9 +282,9 @@
     "semantic_hash": ""
   },
   "data/processed/report.json": {
-    "mtime": 1795508282.0740123,
-    "seen": 1795508779.3648093,
-    "ast_hash": "04bfb50e032514232b7f4c55d9b7a5ef",
+    "mtime": 1795751245.6713521,
+    "seen": 1795752692.6992602,
+    "ast_hash": "696fd4afbbf24725f927dc92cea0f5f9",
     "semantic_hash": ""
   },
   "data/scripts/import_obdex.py": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "frontend/app/diagnostic/[id]/page.tsx": {
-    "mtime": 1795026745.738583,
-    "seen": 1795027518.9094217,
-    "ast_hash": "4a2fd6959bf752ed9afa4cf1b5917818",
+    "mtime": 1795751195.8114333,
+    "seen": 1795752692.6992602,
+    "ast_hash": "62d690d482399970305a5d5d6c30e093",
     "semantic_hash": ""
   },
   "frontend/app/espace-magasin/page.tsx": {
@@ -396,9 +396,9 @@
     "semantic_hash": ""
   },
   "frontend/app/page.tsx": {
-    "mtime": 1794782624.7164016,
-    "seen": 1794795248.276057,
-    "ast_hash": "371fbfc066d77dbc4b954eb3f04eab5f",
+    "mtime": 1795751186.2130852,
+    "seen": 1795752692.6992602,
+    "ast_hash": "65b37af41df5e84a14671bb71f73a561",
     "semantic_hash": ""
   },
   "frontend/app/pieces/page.tsx": {
@@ -468,9 +468,9 @@
     "semantic_hash": ""
   },
   "frontend/messages/fr.json": {
-    "mtime": 1795048188.7483032,
-    "seen": 1795049514.7529655,
-    "ast_hash": "e8cc8f90c1875a3c67fe0e1374962b6b",
+    "mtime": 1795751177.8736982,
+    "seen": 1795752692.6992602,
+    "ast_hash": "8ba3e31e1fffa904c97126cfa5ac1282",
     "semantic_hash": ""
   },
   "frontend/next.config.mjs": {
@@ -522,9 +522,9 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1795707196.0206764,
-    "seen": 1795707211.8201063,
-    "ast_hash": "8ac0ec4b15ccc0c813101ddb2f56fae9",
+    "mtime": 1795752671.4769287,
+    "seen": 1795752692.6992602,
+    "ast_hash": "e2606513cf3748592cdcc8c594703177",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.md": {
@@ -546,9 +546,9 @@
     "semantic_hash": ""
   },
   "data/SOURCES.md": {
-    "mtime": 1795506228.825848,
-    "seen": 1795506775.0617769,
-    "ast_hash": "284d0f3656f90d4afefe7cdaebe0ca9d",
+    "mtime": 1795742880.2860806,
+    "seen": 1795752692.6992602,
+    "ast_hash": "b27081e8e10dc472b1e030ec4eb2c1c1",
     "semantic_hash": ""
   },
   "data/pipeline/requirements-translate.txt": {
@@ -564,9 +564,9 @@
     "semantic_hash": ""
   },
   "data/processed/report.md": {
-    "mtime": 1795508282.0740123,
-    "seen": 1795508779.3648093,
-    "ast_hash": "05217ffa6c018dfb6a6b0ed036ee791c",
+    "mtime": 1795751245.6707606,
+    "seen": 1795752692.6992602,
+    "ast_hash": "6780dd67d92995e7ffbf18f940258c1e",
     "semantic_hash": ""
   },
   "data/sources/cvffad.md": {
@@ -612,9 +612,9 @@
     "semantic_hash": ""
   },
   "ml/README.md": {
-    "mtime": 1795712821.451472,
-    "seen": 1795712838.8617098,
-    "ast_hash": "a0d76157cd472f95e88ed1271c9d35d0",
+    "mtime": 1795752576.4039888,
+    "seen": 1795752692.6992602,
+    "ast_hash": "4d69684e306522605b1ffa0ec6de6c9e",
     "semantic_hash": ""
   },
   "DALIL \u2014 cahier des charges de la plateforme de diagnostic auto et de localisatio.pdf": {
@@ -654,9 +654,9 @@
     "semantic_hash": ""
   },
   "ml/kaggle/make_notebooks.py": {
-    "mtime": 1795036993.56526,
-    "seen": 1795037398.2848127,
-    "ast_hash": "9457ec2ac2cab3e7a42976ffe719fe03",
+    "mtime": 1795743197.0092573,
+    "seen": 1795752692.6992602,
+    "ast_hash": "bcb4096d8c26b51ddf8c1f1dbb49417e",
     "semantic_hash": ""
   },
   "ml/results/20261114-1233-premier-banc.json": {
@@ -696,9 +696,9 @@
     "semantic_hash": ""
   },
   "ml/kaggle/README.md": {
-    "mtime": 1795037386.2865112,
-    "seen": 1795037398.2894669,
-    "ast_hash": "896e3a3ab3da637e2f5eee05698acfff",
+    "mtime": 1795751142.984592,
+    "seen": 1795752692.6992602,
+    "ast_hash": "52d72ed6af2d971e117694ce320d6ed8",
     "semantic_hash": ""
   },
   "ml/results/20261114-1233-premier-banc.md": {
@@ -744,9 +744,9 @@
     "semantic_hash": ""
   },
   "ml/kaggle/kaggle_run.py": {
-    "mtime": 1795037019.5663424,
-    "seen": 1795037398.2848127,
-    "ast_hash": "61f3dc525aaa493593e7b14863d8035c",
+    "mtime": 1795742618.8674715,
+    "seen": 1795752692.6992602,
+    "ast_hash": "a72b771b178f6723a4e854fe3d5e48b0",
     "semantic_hash": ""
   },
   "ml/results/20261114-1401-A-vs-B-enfr.json": {
@@ -888,9 +888,9 @@
     "semantic_hash": ""
   },
   "docs/SUIVI.md": {
-    "mtime": 1795712821.454011,
-    "seen": 1795712838.8617098,
-    "ast_hash": "47f0d93768199224db9957fda19789c3",
+    "mtime": 1795752663.9636805,
+    "seen": 1795752692.6992602,
+    "ast_hash": "95e7ae72167cbd16078e9891aa6485ca",
     "semantic_hash": ""
   },
   "ml/results/20261115-2244-lora-q8.md": {
@@ -978,9 +978,9 @@
     "semantic_hash": ""
   },
   "frontend/e2e/qualite.spec.ts": {
-    "mtime": 1795035569.7139597,
-    "seen": 1795035864.411999,
-    "ast_hash": "025ad8ed1178bd35b3c59d44f97c1540",
+    "mtime": 1795751240.561177,
+    "seen": 1795752692.6992602,
+    "ast_hash": "baadc9aff73d7454b93ab3f3739087b2",
     "semantic_hash": ""
   },
   "ml/results/20261117-1627-mot-seul-hybride.json": {
@@ -1260,15 +1260,15 @@
     "semantic_hash": ""
   },
   "data/pipeline/tests/test_jeu_entrainement.py": {
-    "mtime": 1795507891.3245656,
-    "seen": 1795508779.3648093,
-    "ast_hash": "456916c7455fdea69b5b66030dd565e3",
+    "mtime": 1795738977.0327058,
+    "seen": 1795752692.6992602,
+    "ast_hash": "7821d51ffa7e597e252deeb9022d8082",
     "semantic_hash": ""
   },
   "ml/build_training_set.py": {
-    "mtime": 1795697227.5687416,
-    "seen": 1795698885.8333814,
-    "ast_hash": "520e04e862d561f3d46062f7a097a1a1",
+    "mtime": 1795739028.8947735,
+    "seen": 1795752692.6992602,
+    "ast_hash": "86529bfa3de5c5e8d8ecac7004956d8d",
     "semantic_hash": ""
   },
   "ml/results/20261118-2122-point-zero-avant-largus.json": {
@@ -1368,9 +1368,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_deux_niveaux.py": {
-    "mtime": 1795521896.9305532,
-    "seen": 1795522712.5140045,
-    "ast_hash": "412a6680df4fa70964035d69aa6d5138",
+    "mtime": 1795742753.0677392,
+    "seen": 1795752692.6992602,
+    "ast_hash": "8242c1db71a142a9779d485fb5b18c24",
     "semantic_hash": ""
   },
   "ml/results/20261124-1201-deux-niveaux-reglage.json": {
@@ -1392,9 +1392,9 @@
     "semantic_hash": ""
   },
   "ml/train_family_reranker.py": {
-    "mtime": 1795521580.9713955,
-    "seen": 1795522712.5140045,
-    "ast_hash": "a14de4df13589d56f409a926a49f0ccc",
+    "mtime": 1795739028.8967872,
+    "seen": 1795752692.6992602,
+    "ast_hash": "c9abcc9bf875abf3e2630766e4af2703",
     "semantic_hash": ""
   },
   "ml/results/20261124-1201-deux-niveaux-reglage.md": {
@@ -1416,9 +1416,9 @@
     "semantic_hash": ""
   },
   "data/largus/causes_verifiees.json": {
-    "mtime": 1795703152.8230674,
-    "seen": 1795707211.8201063,
-    "ast_hash": "a83524ba42e6e5518f36149025249ff8",
+    "mtime": 1795741997.370598,
+    "seen": 1795752692.6992602,
+    "ast_hash": "ab4a279b8f597746bd4a5b053b33318f",
     "semantic_hash": ""
   },
   "data/seed/brouillons/fiches_non_retenues.json": {
@@ -1428,9 +1428,9 @@
     "semantic_hash": ""
   },
   "ml/extraire_causes_largus.py": {
-    "mtime": 1795703131.5653913,
-    "seen": 1795707211.8201063,
-    "ast_hash": "eb8f29b85ac49339b4a788367291042d",
+    "mtime": 1795741925.627402,
+    "seen": 1795752692.6992602,
+    "ast_hash": "fb248903b9f2d5c01fd2fee6097ee29c",
     "semantic_hash": ""
   },
   "ml/results/20261126-1346-regle-hors-sujet.json": {
@@ -1593,6 +1593,102 @@
     "mtime": 1795712641.4582758,
     "seen": 1795712838.8617098,
     "ast_hash": "1014df961b2cc5b9b8a60651632981ae",
+    "semantic_hash": ""
+  },
+  "data/pipeline/sources/techniconnexion.py": {
+    "mtime": 1795739028.2644742,
+    "seen": 1795752692.6992602,
+    "ast_hash": "9d5898cbaa5e94241f2efa87c44e4819",
+    "semantic_hash": ""
+  },
+  "data/pipeline/tests/test_techniconnexion.py": {
+    "mtime": 1795738986.9710763,
+    "seen": 1795752692.6992602,
+    "ast_hash": "92eb3e1c6cc898efd174e51069e1ae89",
+    "semantic_hash": ""
+  },
+  "data/techniconnexion/causes_verifiees.json": {
+    "mtime": 1795741997.3534362,
+    "seen": 1795752692.6992602,
+    "ast_hash": "c66c4e7eed2fb68a3f307104eac5d1a5",
+    "semantic_hash": ""
+  },
+  "ml/assembler_deux_niveaux.py": {
+    "mtime": 1795743900.7841833,
+    "seen": 1795752692.6992602,
+    "ast_hash": "7fea4672dc3d0bd3d4422c72492077a9",
+    "semantic_hash": ""
+  },
+  "ml/kaggle/build_camembert_sets.py": {
+    "mtime": 1795742618.8654583,
+    "seen": 1795752692.6992602,
+    "ast_hash": "579edf35a88b584431e44da01fda6c89",
+    "semantic_hash": ""
+  },
+  "ml/results/20261127-0022-forums-techniconnexion.json": {
+    "mtime": 1795741836.3696957,
+    "seen": 1795752692.6992602,
+    "ast_hash": "4dbecd737889fb010cdbcac07f5db03e",
+    "semantic_hash": ""
+  },
+  "ml/results/20261127-0111-forums-v3.json": {
+    "mtime": 1795743060.692669,
+    "seen": 1795752692.6992602,
+    "ast_hash": "593fd2fcadc15ffe9ecec06bcd31e9ac",
+    "semantic_hash": ""
+  },
+  "ml/results/20261127-0132-forums-v4.json": {
+    "mtime": 1795752054.936831,
+    "seen": 1795752692.6992602,
+    "ast_hash": "0e8bfe532d55bc0ff8bcf3d9d0145b22",
+    "semantic_hash": ""
+  },
+  "ml/results/20261127-0141-camembert-familles.json": {
+    "mtime": 1795750315.248019,
+    "seen": 1795752692.6992602,
+    "ast_hash": "a44826f83891f48ec3623ba80fe47512",
+    "semantic_hash": ""
+  },
+  "ml/results/20261127-0332-camembert-pieces.json": {
+    "mtime": 1795752563.769868,
+    "seen": 1795752692.6992602,
+    "ast_hash": "cd9a8f1c58153496062770bf0ff69cac",
+    "semantic_hash": ""
+  },
+  "data/sources/techniconnexion.md": {
+    "mtime": 1795742880.283878,
+    "seen": 1795752692.6992602,
+    "ast_hash": "5a6ca53dfcf6dbeed033b395f83f9409",
+    "semantic_hash": ""
+  },
+  "ml/results/20261127-0022-forums-techniconnexion.md": {
+    "mtime": 1795741836.3642426,
+    "seen": 1795752692.6992602,
+    "ast_hash": "ea2b0942762528e01dac5d264a4909f6",
+    "semantic_hash": ""
+  },
+  "ml/results/20261127-0111-forums-v3.md": {
+    "mtime": 1795743060.6906614,
+    "seen": 1795752692.6992602,
+    "ast_hash": "56c4816f3955243fdd6f9eb86571eda6",
+    "semantic_hash": ""
+  },
+  "ml/results/20261127-0132-forums-v4.md": {
+    "mtime": 1795752054.926813,
+    "seen": 1795752692.6992602,
+    "ast_hash": "653d5586da7716f3527a096bdecc3c65",
+    "semantic_hash": ""
+  },
+  "ml/results/20261127-0141-camembert-familles.md": {
+    "mtime": 1795750315.2440133,
+    "seen": 1795752692.6992602,
+    "ast_hash": "a1fdf148ec4f41f077922aff1c8b5e05",
+    "semantic_hash": ""
+  },
+  "ml/results/20261127-0332-camembert-pieces.md": {
+    "mtime": 1795752563.7678652,
+    "seen": 1795752692.6992602,
+    "ast_hash": "3890f834bb85d2ecd481da578c7825e6",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {

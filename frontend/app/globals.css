@@ -286,3 +286,5 @@ footer.disclaimer { max-width: 760px; margin: 0 auto; padding: 0 16px 2rem; colo
 legend { padding: 0; }
 .feedback { margin-top: 1.5rem; }
 .feedback p { margin-bottom: 0.25rem; }
+.examples { margin-top: 0.6rem; }
+.examples .chip { text-align: start; }

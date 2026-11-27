@@ -1,0 +1,3485 @@
+{
+  "rows": [
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.15 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.15-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.96,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 3285.3,
+      "ms_p95": 3485.1
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.15 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.15-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 2429.3,
+      "ms_p95": 2855.2
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.15 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.15-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.867,
+      "top3": 0.889,
+      "abstention": 0.089,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 2352.6,
+      "ms_p95": 2723.4
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.15 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.15-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.875,
+      "top3": 0.938,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 2319.6,
+      "ms_p95": 2880.6
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.15 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.15-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "largus_test",
+      "n": 104,
+      "n_hors_sujet": 0,
+      "top1": 0.433,
+      "top3": 0.635,
+      "abstention": 0.067,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 5866.1,
+      "ms_p95": 11001.7
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.15 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.15-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "largus_controle",
+      "n": 43,
+      "n_hors_sujet": 0,
+      "top1": 0.419,
+      "top3": 0.628,
+      "abstention": 0.14,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 9511.4,
+      "ms_p95": 11048.9
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.15 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.15-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "techniconnexion_controle",
+      "n": 39,
+      "n_hors_sujet": 0,
+      "top1": 0.41,
+      "top3": 0.615,
+      "abstention": 0.103,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 9469.8,
+      "ms_p95": 11428.5
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.96,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 7296.8,
+      "ms_p95": 9240.3
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 7022.9,
+      "ms_p95": 8428.9
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.889,
+      "top3": 0.911,
+      "abstention": 0.067,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 6692.1,
+      "ms_p95": 8067.1
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.938,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 6753.0,
+      "ms_p95": 8522.1
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "largus_test",
+      "n": 104,
+      "n_hors_sujet": 0,
+      "top1": 0.442,
+      "top3": 0.635,
+      "abstention": 0.029,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 8508.7,
+      "ms_p95": 11679.6
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "largus_controle",
+      "n": 43,
+      "n_hors_sujet": 0,
+      "top1": 0.442,
+      "top3": 0.651,
+      "abstention": 0.116,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 7099.2,
+      "ms_p95": 8108.3
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "techniconnexion_controle",
+      "n": 39,
+      "n_hors_sujet": 0,
+      "top1": 0.41,
+      "top3": 0.667,
+      "abstention": 0.051,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 8049.1,
+      "ms_p95": 9590.4
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.5 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.5-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.96,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 5347.1,
+      "ms_p95": 6532.1
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.5 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.5-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 5186.3,
+      "ms_p95": 6721.4
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.5 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.5-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.867,
+      "top3": 0.911,
+      "abstention": 0.067,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 5379.4,
+      "ms_p95": 6598.4
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.5 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.5-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.938,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 5143.9,
+      "ms_p95": 6728.3
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.5 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.5-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "largus_test",
+      "n": 104,
+      "n_hors_sujet": 0,
+      "top1": 0.442,
+      "top3": 0.625,
+      "abstention": 0.029,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 7091.6,
+      "ms_p95": 8653.6
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.5 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.5-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "largus_controle",
+      "n": 43,
+      "n_hors_sujet": 0,
+      "top1": 0.442,
+      "top3": 0.628,
+      "abstention": 0.023,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 7200.9,
+      "ms_p95": 8137.7
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4-a0.5 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.5-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "techniconnexion_controle",
+      "n": 39,
+      "n_hors_sujet": 0,
+      "top1": 0.41,
+      "top3": 0.667,
+      "abstention": 0.051,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 8114.3,
+      "ms_p95": 9877.8
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4n-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "dev_fr_synthetique",
+      "n": 50,
+      "n_hors_sujet": 5,
+      "top1": 0.96,
+      "top3": 0.98,
+      "abstention": 0.02,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 5568.8,
+      "ms_p95": 6861.8
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4n-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "demo_cases",
+      "n": 17,
+      "n_hors_sujet": 3,
+      "top1": 0.941,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 5344.2,
+      "ms_p95": 6746.8
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4n-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran",
+      "n": 45,
+      "n_hors_sujet": 3,
+      "top1": 0.889,
+      "top3": 0.911,
+      "abstention": 0.067,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 5369.6,
+      "ms_p95": 6758.3
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4n-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "audit_ecriture_oran_controle",
+      "n": 16,
+      "n_hors_sujet": 4,
+      "top1": 0.938,
+      "top3": 1.0,
+      "abstention": 0.0,
+      "hors_sujet_refuse": 1.0,
+      "ms_moyen": 5216.8,
+      "ms_p95": 6766.5
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4n-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "largus_test",
+      "n": 104,
+      "n_hors_sujet": 0,
+      "top1": 0.433,
+      "top3": 0.635,
+      "abstention": 0.048,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 9954.2,
+      "ms_p95": 15586.7
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4n-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "largus_controle",
+      "n": 43,
+      "n_hors_sujet": 0,
+      "top1": 0.442,
+      "top3": 0.651,
+      "abstention": 0.093,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 8330.6,
+      "ms_p95": 10082.7
+    },
+    {
+      "date": "20261127-0132",
+      "variante": "V4n-a0.25 / D (chaîne complète)",
+      "modele": "tfidf-lr-fault-reels-20261127+familles-largus+techniconnexion-fort-a0.25-20261127",
+      "cible": "fault",
+      "mode": "full",
+      "llm": "none",
+      "jeu": "techniconnexion_controle",
+      "n": 39,
+      "n_hors_sujet": 0,
+      "top1": 0.436,
+      "top3": 0.667,
+      "abstention": 0.051,
+      "hors_sujet_refuse": null,
+      "ms_moyen": 8908.7,
+      "ms_p95": 10744.3
+    }
+  ],
+  "erreurs": {
+    "V4-a0.15 / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4-a0.15 / D (chaîne complète) | demo_cases": [],
+    "V4-a0.15 / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud07",
+        "text": "fumé noir a lechapement et ca consome bcp",
+        "attendu": [
+          "injecteurs",
+          "filtre-air",
+          "turbocompresseur",
+          "debitmetre",
+          "vanne-egr"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4-a0.15 / D (chaîne complète) | audit_ecriture_oran_controle": [
+      {
+        "id": "ctl04",
+        "text": "siyara t3ayi f la monté w ma tetla3ch",
+        "attendu": [
+          "kit-embrayage",
+          "turbocompresseur",
+          "filtre-carburant",
+          "injecteurs",
+          "filtre-air"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "kit-distribution",
+          "bougies-allumage"
+        ]
+      }
+    ],
+    "V4-a0.15 / D (chaîne complète) | largus_test": [
+      {
+        "id": "lar001",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "batterie",
+          "pompe-direction",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar004",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar005",
+        "attendu": [
+          "demarreur"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "courroie-accessoires"
+        ]
+      },
+      {
+        "id": "lar006",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "injecteurs",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar008",
+        "attendu": [
+          "durite-refroidissement"
+        ],
+        "obtenu": [
+          "thermostat",
+          "ventilateur-radiateur",
+          "pompe-eau"
+        ]
+      },
+      {
+        "id": "lar010",
+        "attendu": [
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "bobine-allumage",
+          "bougies-prechauffage"
+        ]
+      },
+      {
+        "id": "lar012",
+        "attendu": [
+          "filtre-carburant"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "debitmetre",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar015",
+        "attendu": [
+          "galet-tendeur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar022",
+        "attendu": [
+          "filtre-air"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "boite-vitesses",
+          "kit-embrayage"
+        ]
+      },
+      {
+        "id": "lar036",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar038",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar042",
+        "attendu": [
+          "coupelles"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar046",
+        "attendu": [
+          "huile-moteur"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "batterie",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar047",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar049",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": [
+          "boite-vitesses",
+          "pompe-carburant",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "lar050",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar051",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "lar053",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar055",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "ventilateur-radiateur",
+          "thermostat",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar057",
+        "attendu": [
+          "capteur-pression-admission"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "vanne-egr",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar060",
+        "attendu": [
+          "silentblocs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar061",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar062",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "capteur-vilebrequin",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar065",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "pompe-carburant",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar066",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar069",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "batterie",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar070",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "lar073",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar075",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "batterie",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "lar080",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "demarreur",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar081",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "plaquettes-avant"
+        ]
+      },
+      {
+        "id": "lar088",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "pompe-direction",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar089",
+        "attendu": [
+          "maitre-cylindre"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar091",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar096",
+        "attendu": [
+          "silentblocs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar097",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "bobine-allumage",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "lar100",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "thermostat",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar104",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "pompe-carburant"
+        ]
+      }
+    ],
+    "V4-a0.15 / D (chaîne complète) | largus_controle": [
+      {
+        "id": "ctl001",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "ctl008",
+        "attendu": [
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl009",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "ctl012",
+        "attendu": [
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl015",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "bougies-prechauffage",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl018",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "cable-embrayage"
+        ]
+      },
+      {
+        "id": "ctl019",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "sonde-lambda",
+          "capteur-vilebrequin",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl020",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "bougies-prechauffage"
+        ]
+      },
+      {
+        "id": "ctl021",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl022",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "alternateur",
+          "batterie"
+        ]
+      },
+      {
+        "id": "ctl025",
+        "attendu": [
+          "filtre-carburant"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "bougies-prechauffage",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "ctl030",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "ctl031",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl037",
+        "attendu": [
+          "rotules-direction"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl038",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl039",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4-a0.15 / D (chaîne complète) | techniconnexion_controle": [
+      {
+        "id": "tecc002",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "batterie",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "tecc004",
+        "attendu": [
+          "ventilateur-radiateur"
+        ],
+        "obtenu": [
+          "joint-culasse",
+          "radiateur",
+          "thermostat"
+        ]
+      },
+      {
+        "id": "tecc007",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bobine-allumage",
+          "turbocompresseur"
+        ]
+      },
+      {
+        "id": "tecc009",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "kit-distribution",
+          "injecteurs",
+          "batterie"
+        ]
+      },
+      {
+        "id": "tecc011",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc013",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc014",
+        "attendu": [
+          "ventilateur-radiateur"
+        ],
+        "obtenu": [
+          "compresseur-clim"
+        ]
+      },
+      {
+        "id": "tecc021",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc023",
+        "attendu": [
+          "ventilateur-radiateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "tecc024",
+        "attendu": [
+          "biellette-stabilisatrice"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "tecc026",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "batterie",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "tecc027",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "alternateur",
+          "demarreur",
+          "catalyseur"
+        ]
+      },
+      {
+        "id": "tecc029",
+        "attendu": [
+          "sonde-lambda"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "tecc030",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "tecc036",
+        "attendu": [
+          "bobine-allumage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4-a0.25 / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4-a0.25 / D (chaîne complète) | demo_cases": [],
+    "V4-a0.25 / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4-a0.25 / D (chaîne complète) | audit_ecriture_oran_controle": [],
+    "V4-a0.25 / D (chaîne complète) | largus_test": [
+      {
+        "id": "lar001",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "batterie",
+          "pompe-direction",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar004",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "boite-vitesses",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "lar005",
+        "attendu": [
+          "demarreur"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "courroie-accessoires"
+        ]
+      },
+      {
+        "id": "lar006",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "injecteurs",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar008",
+        "attendu": [
+          "durite-refroidissement"
+        ],
+        "obtenu": [
+          "thermostat",
+          "ventilateur-radiateur",
+          "pompe-eau"
+        ]
+      },
+      {
+        "id": "lar010",
+        "attendu": [
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "bobine-allumage",
+          "pompe-carburant",
+          "bougies-prechauffage"
+        ]
+      },
+      {
+        "id": "lar012",
+        "attendu": [
+          "filtre-carburant"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "debitmetre",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar015",
+        "attendu": [
+          "galet-tendeur"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "boite-vitesses",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar022",
+        "attendu": [
+          "filtre-air"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "boite-vitesses",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "lar036",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar038",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar042",
+        "attendu": [
+          "coupelles"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar046",
+        "attendu": [
+          "huile-moteur"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bougies-allumage",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "lar047",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar049",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "boite-vitesses",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "lar050",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar051",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "lar053",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar055",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "ventilateur-radiateur",
+          "thermostat",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar057",
+        "attendu": [
+          "capteur-pression-admission"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "pompe-carburant",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "lar060",
+        "attendu": [
+          "silentblocs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar061",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar062",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "capteur-vilebrequin",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar065",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "pompe-carburant",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar066",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar069",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "batterie",
+          "pompe-carburant",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar070",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "lar073",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar075",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bobine-allumage",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar080",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "demarreur",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar081",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "plaquettes-avant"
+        ]
+      },
+      {
+        "id": "lar088",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "lar089",
+        "attendu": [
+          "maitre-cylindre"
+        ],
+        "obtenu": [
+          "flexible-frein",
+          "plaquettes-avant",
+          "disques-frein"
+        ]
+      },
+      {
+        "id": "lar091",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar096",
+        "attendu": [
+          "silentblocs"
+        ],
+        "obtenu": [
+          "amortisseurs",
+          "alternateur",
+          "ampoules"
+        ]
+      },
+      {
+        "id": "lar097",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "bobine-allumage",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar100",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "thermostat",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar104",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "pompe-carburant"
+        ]
+      }
+    ],
+    "V4-a0.25 / D (chaîne complète) | largus_controle": [
+      {
+        "id": "ctl001",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "ctl008",
+        "attendu": [
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl009",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "ctl012",
+        "attendu": [
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl015",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "bougies-prechauffage",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl018",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "cable-embrayage"
+        ]
+      },
+      {
+        "id": "ctl019",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "sonde-lambda",
+          "capteur-vilebrequin",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl020",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "bougies-prechauffage"
+        ]
+      },
+      {
+        "id": "ctl021",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl022",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "alternateur",
+          "batterie"
+        ]
+      },
+      {
+        "id": "ctl025",
+        "attendu": [
+          "filtre-carburant"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "bougies-prechauffage",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "ctl030",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "ctl031",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl038",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl039",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4-a0.25 / D (chaîne complète) | techniconnexion_controle": [
+      {
+        "id": "tecc002",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "batterie",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "tecc004",
+        "attendu": [
+          "ventilateur-radiateur"
+        ],
+        "obtenu": [
+          "joint-culasse",
+          "thermostat",
+          "radiateur"
+        ]
+      },
+      {
+        "id": "tecc007",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bobine-allumage",
+          "turbocompresseur"
+        ]
+      },
+      {
+        "id": "tecc009",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "kit-distribution",
+          "injecteurs",
+          "batterie"
+        ]
+      },
+      {
+        "id": "tecc011",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc013",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc014",
+        "attendu": [
+          "ventilateur-radiateur"
+        ],
+        "obtenu": [
+          "compresseur-clim"
+        ]
+      },
+      {
+        "id": "tecc021",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc024",
+        "attendu": [
+          "biellette-stabilisatrice"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "tecc026",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "tecc027",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "alternateur",
+          "demarreur",
+          "catalyseur"
+        ]
+      },
+      {
+        "id": "tecc029",
+        "attendu": [
+          "sonde-lambda"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "tecc030",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "pompe-carburant",
+          "alternateur"
+        ]
+      }
+    ],
+    "V4-a0.5 / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4-a0.5 / D (chaîne complète) | demo_cases": [],
+    "V4-a0.5 / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4-a0.5 / D (chaîne complète) | audit_ecriture_oran_controle": [],
+    "V4-a0.5 / D (chaîne complète) | largus_test": [
+      {
+        "id": "lar001",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "batterie",
+          "pompe-direction",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar004",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "boite-vitesses",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "lar005",
+        "attendu": [
+          "demarreur"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "courroie-accessoires"
+        ]
+      },
+      {
+        "id": "lar006",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "injecteurs",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar008",
+        "attendu": [
+          "durite-refroidissement"
+        ],
+        "obtenu": [
+          "thermostat",
+          "pompe-eau",
+          "ventilateur-radiateur"
+        ]
+      },
+      {
+        "id": "lar010",
+        "attendu": [
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "bobine-allumage",
+          "pompe-carburant",
+          "bougies-prechauffage"
+        ]
+      },
+      {
+        "id": "lar012",
+        "attendu": [
+          "filtre-carburant"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "debitmetre",
+          "capteur-vilebrequin"
+        ]
+      },
+      {
+        "id": "lar015",
+        "attendu": [
+          "galet-tendeur"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "pompe-carburant",
+          "boite-vitesses"
+        ]
+      },
+      {
+        "id": "lar022",
+        "attendu": [
+          "filtre-air"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar033",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "sonde-lambda",
+          "pompe-carburant",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "lar036",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar038",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar042",
+        "attendu": [
+          "coupelles"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar046",
+        "attendu": [
+          "huile-moteur"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bougies-allumage",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "lar047",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar049",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "boite-vitesses",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "lar050",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bobine-allumage",
+          "batterie",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar051",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "lar053",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar055",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "ventilateur-radiateur",
+          "thermostat",
+          "compresseur-clim"
+        ]
+      },
+      {
+        "id": "lar057",
+        "attendu": [
+          "capteur-pression-admission"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "pompe-carburant",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "lar060",
+        "attendu": [
+          "silentblocs"
+        ],
+        "obtenu": [
+          "amortisseurs",
+          "injecteurs",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar061",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar062",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "capteur-vilebrequin",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar065",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "pompe-carburant",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar066",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar069",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar070",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar073",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar075",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bobine-allumage",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "lar080",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "demarreur",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar081",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "lar088",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "pompe-direction",
+          "rotules-direction"
+        ]
+      },
+      {
+        "id": "lar089",
+        "attendu": [
+          "maitre-cylindre"
+        ],
+        "obtenu": [
+          "flexible-frein",
+          "plaquettes-avant",
+          "disques-frein"
+        ]
+      },
+      {
+        "id": "lar091",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar096",
+        "attendu": [
+          "silentblocs"
+        ],
+        "obtenu": [
+          "amortisseurs",
+          "alternateur",
+          "ampoules"
+        ]
+      },
+      {
+        "id": "lar097",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "lar100",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "thermostat",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "lar104",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "pompe-carburant"
+        ]
+      }
+    ],
+    "V4-a0.5 / D (chaîne complète) | largus_controle": [
+      {
+        "id": "ctl001",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "ctl008",
+        "attendu": [
+          "triangles"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-carburant",
+          "cardans"
+        ]
+      },
+      {
+        "id": "ctl009",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl012",
+        "attendu": [
+          "alternateur"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "ctl015",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "batterie",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl018",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "cable-embrayage"
+        ]
+      },
+      {
+        "id": "ctl019",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "sonde-lambda",
+          "capteur-vilebrequin"
+        ]
+      },
+      {
+        "id": "ctl020",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "bougies-prechauffage"
+        ]
+      },
+      {
+        "id": "ctl021",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl022",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "alternateur",
+          "batterie"
+        ]
+      },
+      {
+        "id": "ctl025",
+        "attendu": [
+          "filtre-carburant"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "bougies-prechauffage",
+          "filtre-huile"
+        ]
+      },
+      {
+        "id": "ctl030",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "ctl031",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": [
+          "boite-vitesses",
+          "bobine-allumage",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "ctl038",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl039",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "cable-embrayage",
+          "boite-vitesses"
+        ]
+      },
+      {
+        "id": "ctl042",
+        "attendu": [
+          "roulements-roue"
+        ],
+        "obtenu": [
+          "kit-distribution",
+          "boite-vitesses",
+          "courroie-accessoires"
+        ]
+      }
+    ],
+    "V4-a0.5 / D (chaîne complète) | techniconnexion_controle": [
+      {
+        "id": "tecc002",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "batterie",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "tecc004",
+        "attendu": [
+          "ventilateur-radiateur"
+        ],
+        "obtenu": [
+          "joint-culasse",
+          "thermostat",
+          "radiateur"
+        ]
+      },
+      {
+        "id": "tecc007",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bobine-allumage",
+          "turbocompresseur"
+        ]
+      },
+      {
+        "id": "tecc009",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "kit-distribution",
+          "injecteurs",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "tecc011",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc013",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc014",
+        "attendu": [
+          "ventilateur-radiateur"
+        ],
+        "obtenu": [
+          "compresseur-clim"
+        ]
+      },
+      {
+        "id": "tecc021",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "boite-vitesses"
+        ]
+      },
+      {
+        "id": "tecc024",
+        "attendu": [
+          "biellette-stabilisatrice"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "tecc026",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "tecc027",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "alternateur",
+          "demarreur",
+          "catalyseur"
+        ]
+      },
+      {
+        "id": "tecc029",
+        "attendu": [
+          "sonde-lambda"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "tecc030",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "pompe-carburant",
+          "alternateur"
+        ]
+      }
+    ],
+    "V4n-a0.25 / D (chaîne complète) | dev_fr_synthetique": [
+      {
+        "id": "dev025",
+        "text": "la troisième craque et refuse parfois de rentrer",
+        "attendu": [
+          "boite-vitesses",
+          "kit-embrayage"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4n-a0.25 / D (chaîne complète) | demo_cases": [],
+    "V4n-a0.25 / D (chaîne complète) | audit_ecriture_oran": [
+      {
+        "id": "aud31",
+        "text": "kayen ri7a ta3 l'essence",
+        "attendu": [
+          "injecteurs",
+          "pompe-carburant",
+          "filtre-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud32",
+        "text": "ki ndour el volant tsoni tak tak",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "aud36",
+        "text": "tomobil tetfa wahedha f la route",
+        "attendu": [
+          "capteur-vilebrequin",
+          "pompe-carburant",
+          "filtre-carburant",
+          "alternateur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "aud42",
+        "text": "الطوموبيل ما تديماريش في الصباح",
+        "attendu": [
+          "batterie",
+          "demarreur"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4n-a0.25 / D (chaîne complète) | audit_ecriture_oran_controle": [],
+    "V4n-a0.25 / D (chaîne complète) | largus_test": [
+      {
+        "id": "lar001",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "batterie",
+          "pompe-direction",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar004",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "boite-vitesses",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "lar005",
+        "attendu": [
+          "demarreur"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "courroie-accessoires"
+        ]
+      },
+      {
+        "id": "lar006",
+        "attendu": [
+          "catalyseur"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "injecteurs",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar008",
+        "attendu": [
+          "durite-refroidissement"
+        ],
+        "obtenu": [
+          "thermostat",
+          "ventilateur-radiateur",
+          "pompe-eau"
+        ]
+      },
+      {
+        "id": "lar010",
+        "attendu": [
+          "vanne-egr"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "bobine-allumage",
+          "bougies-prechauffage"
+        ]
+      },
+      {
+        "id": "lar012",
+        "attendu": [
+          "filtre-carburant"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "debitmetre",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar015",
+        "attendu": [
+          "galet-tendeur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar022",
+        "attendu": [
+          "filtre-air"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "boite-vitesses",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "lar036",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "alternateur"
+        ]
+      },
+      {
+        "id": "lar038",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar042",
+        "attendu": [
+          "coupelles"
+        ],
+        "obtenu": [
+          "rotules-direction",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar046",
+        "attendu": [
+          "huile-moteur"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bougies-allumage",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar047",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar049",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "boite-vitesses",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "lar050",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar051",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "injecteurs",
+          "filtre-air"
+        ]
+      },
+      {
+        "id": "lar053",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar055",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "ventilateur-radiateur",
+          "thermostat",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar057",
+        "attendu": [
+          "capteur-pression-admission"
+        ],
+        "obtenu": [
+          "turbocompresseur",
+          "pompe-carburant",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "lar060",
+        "attendu": [
+          "silentblocs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar061",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar062",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "capteur-vilebrequin",
+          "pompe-carburant"
+        ]
+      },
+      {
+        "id": "lar065",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "pompe-carburant",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar066",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar069",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "batterie",
+          "pompe-carburant",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar070",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "bougies-allumage"
+        ]
+      },
+      {
+        "id": "lar073",
+        "attendu": [
+          "sonde-temperature"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar075",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bobine-allumage",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar080",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "demarreur",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "lar081",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "plaquettes-avant"
+        ]
+      },
+      {
+        "id": "lar088",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "pompe-direction"
+        ]
+      },
+      {
+        "id": "lar089",
+        "attendu": [
+          "maitre-cylindre"
+        ],
+        "obtenu": [
+          "flexible-frein",
+          "plaquettes-avant",
+          "disques-frein"
+        ]
+      },
+      {
+        "id": "lar091",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar096",
+        "attendu": [
+          "silentblocs"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "lar097",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "pompe-carburant",
+          "bobine-allumage",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "lar100",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "thermostat",
+          "demarreur"
+        ]
+      },
+      {
+        "id": "lar104",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "bobine-allumage",
+          "pompe-carburant"
+        ]
+      }
+    ],
+    "V4n-a0.25 / D (chaîne complète) | largus_controle": [
+      {
+        "id": "ctl001",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "demarreur",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "ctl008",
+        "attendu": [
+          "triangles"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl009",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "ctl012",
+        "attendu": [
+          "alternateur"
+        ],
+        "obtenu": [
+          "batterie",
+          "bobine-allumage",
+          "injecteurs"
+        ]
+      },
+      {
+        "id": "ctl015",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "batterie",
+          "bougies-prechauffage",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl018",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "kit-embrayage",
+          "cable-embrayage"
+        ]
+      },
+      {
+        "id": "ctl019",
+        "attendu": [
+          "pompe-carburant"
+        ],
+        "obtenu": [
+          "sonde-lambda",
+          "capteur-vilebrequin",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl020",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "bougies-prechauffage"
+        ]
+      },
+      {
+        "id": "ctl021",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "ctl022",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "alternateur",
+          "batterie"
+        ]
+      },
+      {
+        "id": "ctl025",
+        "attendu": [
+          "filtre-carburant"
+        ],
+        "obtenu": [
+          "bougies-allumage",
+          "bougies-prechauffage",
+          "filtre-huile"
+        ]
+      },
+      {
+        "id": "ctl030",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "vanne-egr"
+        ]
+      },
+      {
+        "id": "ctl031",
+        "attendu": [
+          "turbocompresseur"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl038",
+        "attendu": [
+          "cardans"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "ctl039",
+        "attendu": [
+          "debitmetre"
+        ],
+        "obtenu": "unknown"
+      }
+    ],
+    "V4n-a0.25 / D (chaîne complète) | techniconnexion_controle": [
+      {
+        "id": "tecc002",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "vanne-egr",
+          "batterie",
+          "alternateur"
+        ]
+      },
+      {
+        "id": "tecc004",
+        "attendu": [
+          "ventilateur-radiateur"
+        ],
+        "obtenu": [
+          "joint-culasse",
+          "thermostat",
+          "radiateur"
+        ]
+      },
+      {
+        "id": "tecc007",
+        "attendu": [
+          "injecteurs"
+        ],
+        "obtenu": [
+          "bougies-prechauffage",
+          "bobine-allumage",
+          "turbocompresseur"
+        ]
+      },
+      {
+        "id": "tecc009",
+        "attendu": [
+          "bougies-allumage"
+        ],
+        "obtenu": [
+          "kit-distribution",
+          "injecteurs",
+          "batterie"
+        ]
+      },
+      {
+        "id": "tecc011",
+        "attendu": [
+          "support-moteur"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc013",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc014",
+        "attendu": [
+          "ventilateur-radiateur"
+        ],
+        "obtenu": [
+          "compresseur-clim"
+        ]
+      },
+      {
+        "id": "tecc021",
+        "attendu": [
+          "papillon-motorise"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "bobine-allumage"
+        ]
+      },
+      {
+        "id": "tecc024",
+        "attendu": [
+          "biellette-stabilisatrice"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "tecc026",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "injecteurs",
+          "pompe-carburant",
+          "batterie"
+        ]
+      },
+      {
+        "id": "tecc027",
+        "attendu": [
+          "courroie-accessoires"
+        ],
+        "obtenu": [
+          "alternateur",
+          "demarreur",
+          "catalyseur"
+        ]
+      },
+      {
+        "id": "tecc029",
+        "attendu": [
+          "sonde-lambda"
+        ],
+        "obtenu": "unknown"
+      },
+      {
+        "id": "tecc030",
+        "attendu": [
+          "capteur-vilebrequin"
+        ],
+        "obtenu": [
+          "batterie",
+          "alternateur",
+          "pompe-carburant"
+        ]
+      }
+    ]
+  }
+}

@@ -70,3 +70,21 @@ def test_regle_largus_famille_et_poids_mesures(tmp_path):
     assert stats["ecartes"]["niveau écarté par la relecture"] == 1
     fort, _, _ = B.build("fort", seed_weight=1.0, train_dir=tmp_path / "train")   # 0,75 < 0,8 : écarté en « fort »
     assert not any(r.get("id") == "largus_forum:3" for r in fort)
+
+
+def test_regle_techniconnexion_double_accord(tmp_path):
+    """Techniconnexion : seules les familles qui s'accordent avec la section ET avec la question sont gardées."""
+    rows = [
+        {"id": "techniconnexion:1", "text": "Bruit au freinage, les plaquettes sifflent", "category": "plaquettes-avant",
+         "family": "freinage", "label_quality": "auteur+domaine+accord"},
+        {"id": "techniconnexion:2", "text": "Le moteur cale au ralenti", "category": "vanne-egr",
+         "family": "gestion-moteur", "label_quality": "reponses+domaine"},       # sans accord avec la question
+        {"id": "techniconnexion:3", "text": "Fuite d'eau sous la pompe à eau", "category": "pompe-eau",
+         "family": "refroidissement", "label_quality": "solution+domaine+accord"},
+    ]
+    train, val, _ = B.build("moyen", seed_weight=1.0, train_dir=_write(tmp_path, rows, "techniconnexion"))
+    got = {r["id"]: r for r in train + val if r["source"] == "techniconnexion"}
+    assert set(got) == {"techniconnexion:1", "techniconnexion:3"}
+    assert got["techniconnexion:1"]["label"] == "freinage" and got["techniconnexion:1"]["weight"] == 0.82
+    fort, _, _ = B.build("fort", seed_weight=1.0, train_dir=tmp_path / "train")   # 0,73 < 0,8 : écarté en « fort »
+    assert not any(r.get("id") == "techniconnexion:3" for r in fort)
