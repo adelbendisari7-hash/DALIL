@@ -11,7 +11,7 @@ export type User = {
 /** Voiture du compte client (GET /me/vehicles). */
 export type UserCar = {
   id: number; plate: string; variant_id: number | null; year: number | null; label: string | null; nickname: string | null;
-  mileage_km: number | null; vin: string | null; display: string;
+  mileage_km: number | null; vin: string | null; display: string; maintenance_due?: number;
 };
 
 function read(key: string): string | null {

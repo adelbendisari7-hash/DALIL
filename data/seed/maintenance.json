@@ -1,0 +1,27 @@
+{
+  "_note": "Entretien courant d'une voiture (fonction « Entretien de mes voitures », 28/11/2026). Intervalles INDICATIFS, ceux que l'on rencontre le plus souvent pour une voiture de tourisme ; ils varient selon le constructeur, le moteur et l'usage (ville, chaleur, poussière : souvent plus court en Algérie). Le carnet d'entretien de la voiture fait foi : DALIL l'écrit à côté de chaque échéance. Rédigé par l'équipe, aucune donnée externe. `km` et `months` : premier des deux atteint ; `part` : famille de pièce du référentiel (lien vers les magasins) ; `fuel` : limité à ce carburant.",
+  "items": [
+    {"slug": "vidange", "name": "Vidange et filtre à huile", "km": 10000, "months": 12, "part": "filtre-huile",
+     "why": "Une huile usée protège mal le moteur."},
+    {"slug": "filtre-air", "name": "Filtre à air", "km": 20000, "months": 24, "part": "filtre-air",
+     "why": "Encrassé, il fait consommer plus et perdre de la puissance ; plus souvent sur route poussiéreuse."},
+    {"slug": "filtre-habitacle", "name": "Filtre d'habitacle (pollen)", "km": 15000, "months": 12, "part": "filtre-habitacle",
+     "why": "Air de la ventilation et climatisation efficace."},
+    {"slug": "filtre-carburant", "name": "Filtre à gasoil", "km": 30000, "months": 24, "part": "filtre-carburant", "fuel": "diesel",
+     "why": "Protège les injecteurs de l'eau et des impuretés du gasoil."},
+    {"slug": "bougies", "name": "Bougies d'allumage", "km": 30000, "months": 36, "part": "bougies-allumage", "fuel": "essence",
+     "why": "Usées, elles font tousser le moteur et consommer plus."},
+    {"slug": "plaquettes", "name": "Contrôle des plaquettes de frein", "km": 20000, "months": 12, "part": "plaquettes-avant",
+     "why": "À changer avant d'atteindre le métal (grincement, voyant d'usure)."},
+    {"slug": "liquide-frein", "name": "Liquide de frein", "km": 40000, "months": 24, "part": "liquide-frein",
+     "why": "Il prend l'humidité avec le temps et freine moins bien quand il chauffe."},
+    {"slug": "refroidissement", "name": "Liquide de refroidissement", "km": 60000, "months": 48, "part": "radiateur",
+     "why": "Protège contre la surchauffe, importante en été."},
+    {"slug": "distribution", "name": "Courroie (kit) de distribution", "km": 80000, "months": 60, "part": "kit-distribution",
+     "why": "Si elle casse, le moteur peut être détruit. L'intervalle varie beaucoup selon le moteur (60 000 à 160 000 km) : vérifiez le carnet."},
+    {"slug": "courroie-accessoires", "name": "Courroie d'accessoires", "km": 60000, "months": 60, "part": "courroie-accessoires",
+     "why": "Entraîne l'alternateur et la direction assistée ; à changer avec la distribution le plus souvent."},
+    {"slug": "batterie", "name": "Contrôle de la batterie", "km": 60000, "months": 48, "part": "batterie",
+     "why": "Une batterie dure en général 4 à 5 ans ; la chaleur l'use plus vite."}
+  ]
+}

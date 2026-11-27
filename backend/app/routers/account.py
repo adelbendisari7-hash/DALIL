@@ -5,17 +5,19 @@ Ni le propriétaire d'un matricule déjà pris ni sa voiture ne sont jamais mont
 """
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from ..db import get_db
-from ..models import DiagnosisSession, PlateReport, User, UserVehicle, VehicleVariant
+from ..models import DiagnosisSession, MaintenanceRecord, PlateReport, User, UserVehicle, VehicleVariant
 from ..schemas import PlateReportIn, VehicleIn, VehiclePatch, format_plate
 from ..security import current_user, feedback_limiter
+from ..services import maintenance
 
 router = APIRouter(prefix="/me")
 MAX_VEHICLES = 20
@@ -29,8 +31,9 @@ def vehicle_label(v: UserVehicle) -> str:
     return f"{v.label or 'Voiture'}{f' {v.year}' if v.year else ''}"
 
 
-def vehicle_out(v: UserVehicle) -> dict:
-    return {"id": v.id, "plate": format_plate(v.plate), "variant_id": v.variant_id, "year": v.year, "label": v.label,
+def vehicle_out(v: UserVehicle, db: Session | None = None) -> dict:
+    extra = {"maintenance_due": maintenance.due_count(db, v)} if db is not None else {}
+    return {**extra,"id": v.id, "plate": format_plate(v.plate), "variant_id": v.variant_id, "year": v.year, "label": v.label,
             "nickname": v.nickname, "mileage_km": v.mileage_km, "vin": v.vin, "display": vehicle_label(v),
             "brand_id": v.variant.model.brand_id if v.variant else None,
             "model_id": v.variant.model_id if v.variant else None}
@@ -69,7 +72,7 @@ def _check(db: Session, data: dict, current: UserVehicle | None = None) -> None:
 @router.get("/vehicles")
 def vehicles(user: User = Depends(current_user), db: Session = Depends(get_db)):
     rows = db.scalars(select(UserVehicle).where(UserVehicle.user_id == user.id).order_by(UserVehicle.id))
-    return [vehicle_out(v) for v in rows]
+    return [vehicle_out(v, db) for v in rows]
 
 
 @router.post("/vehicles", status_code=201)
@@ -159,3 +162,44 @@ def resolve_report(db: Session, report: PlateReport, action: str) -> dict:
         report.status = "rejected"
     report.resolved_at = datetime.now(timezone.utc)
     return {"id": report.id, "status": report.status}
+
+
+
+class MaintenanceIn(BaseModel):
+    item: str = Field(..., max_length=40)
+    km: int | None = Field(None, ge=0, le=2_000_000)
+    done_on: date | None = None
+
+
+@router.get("/vehicles/{vehicle_id}/maintenance")
+def vehicle_maintenance(vehicle_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """Prochains entretiens d'une voiture (intervalles indicatifs ; le carnet du constructeur fait foi)."""
+    car = _own(db, user, vehicle_id)
+    return {"mileage_km": car.mileage_km, "items": maintenance.schedule(db, car)}
+
+
+@router.post("/vehicles/{vehicle_id}/maintenance", status_code=201)
+def maintenance_done(vehicle_id: int, body: MaintenanceIn, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    """« Fait » : l'entretien est noté (aujourd'hui par défaut) ; un kilométrage plus grand met à jour la voiture."""
+    car = _own(db, user, vehicle_id)
+    if body.item not in {it["slug"] for it in maintenance.items()}:
+        raise HTTPException(422, "Entretien inconnu")
+    done_on = body.done_on or date.today()
+    if done_on > date.today():
+        raise HTTPException(422, "La date ne peut pas être dans le futur")
+    rec = MaintenanceRecord(user_vehicle_id=car.id, item=body.item, km=body.km, done_on=done_on)
+    db.add(rec)
+    if body.km is not None and (car.mileage_km is None or body.km > car.mileage_km):
+        car.mileage_km = body.km
+    db.commit()
+    return {"id": rec.id}
+
+
+@router.delete("/vehicles/{vehicle_id}/maintenance/{record_id}", status_code=204)
+def maintenance_undo(vehicle_id: int, record_id: int, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    car = _own(db, user, vehicle_id)
+    rec = db.get(MaintenanceRecord, record_id)
+    if not rec or rec.user_vehicle_id != car.id:
+        raise HTTPException(404, "Entretien inconnu")
+    db.delete(rec)
+    db.commit()

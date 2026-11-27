@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
+import Maintenance from "@/components/Maintenance";
 import VehiclePicker from "@/components/VehiclePicker";
 import { api, ApiError, session, type User, type UserCar, type Vehicle } from "@/lib/api";
 import { t } from "@/lib/i18n";
@@ -249,6 +250,7 @@ function CarForm({ car, onDone, onCancel }: { car: UserCar | null; onDone: () =>
 
 function Cars({ cars, reload }: { cars: UserCar[]; reload: () => void }) {
   const [editing, setEditing] = useState<UserCar | "new" | null>(cars.length ? null : "new");
+  const [upkeep, setUpkeep] = useState<number | null>(null);   // voiture dont le panneau « Entretien » est ouvert
   const [error, setError] = useState("");
 
   async function remove(c: UserCar) {
@@ -275,9 +277,14 @@ function Cars({ cars, reload }: { cars: UserCar[]; reload: () => void }) {
               {c.mileage_km != null && <span className="meta"> · {t("account.cars.km", { km: c.mileage_km.toLocaleString("fr-FR") })}</span>}
             </span>
             <span className="actions" style={{ marginTop: 0 }}>
+              <button className="btn btn-ghost" aria-expanded={upkeep === c.id} onClick={() => setUpkeep(upkeep === c.id ? null : c.id)}>
+                {t("maint.button")}
+                {(c.maintenance_due ?? 0) > 0 && <span className="maint-count" aria-label={t("maint.dueCount", { n: c.maintenance_due ?? 0 })}>{c.maintenance_due}</span>}
+              </button>
               <button className="btn btn-ghost" onClick={() => setEditing(c)}>{t("account.cars.edit")}</button>
               <button className="btn btn-ghost" onClick={() => remove(c)}>{t("account.cars.remove")}</button>
             </span>
+            {upkeep === c.id && <Maintenance car={c} onChange={reload} />}
           </li>
         ))}
       </ul>

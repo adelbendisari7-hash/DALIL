@@ -107,3 +107,20 @@ test("matricule déjà enregistré par un autre client : refusé, puis signalé"
   await page.getByRole("button", { name: "C'est ma voiture : signaler" }).click();
   await expect(page.getByText("Signalement envoyé.")).toBeVisible();
 });
+
+test("entretien d'une voiture : échéance « à faire », noté « fait », lien vers les magasins", async ({ page }) => {
+  await inscrire(page, phone(), "Farid", "Entretien", "/compte");
+  await ajouterVoiture(page, plate());
+  // Kilométrage du formulaire : 85 000 km, rien de noté : la distribution est « à vérifier »
+  await page.getByRole("button", { name: "Entretien" }).click();
+  const distribution = page.locator(".maint", { hasText: "Courroie (kit) de distribution" });
+  await expect(distribution.locator(".maint-pill")).toHaveText("À vérifier");
+  await expect(distribution.getByRole("link", { name: "Voir les magasins" })).toHaveAttribute("href", /category=\d+/);
+  // Vidange faite aujourd'hui à 85 000 km : à jour, prochaine à 95 000 km
+  const vidange = page.locator(".maint", { hasText: "Vidange et filtre à huile" });
+  await vidange.getByRole("button", { name: "Noter : Vidange et filtre à huile fait" }).click();
+  await vidange.getByRole("button", { name: "Noter l'entretien" }).click();
+  await expect(vidange.locator(".maint-pill")).toHaveText("À jour");
+  await expect(vidange.getByText(/95.000 km/)).toBeVisible();
+  await expect(page.getByText("le carnet d'entretien de votre voiture fait foi", { exact: false })).toBeVisible();
+});

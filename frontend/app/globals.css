@@ -809,3 +809,13 @@ footer.disclaimer { max-width: 760px; margin: 0 auto; padding: 0 16px 2rem; colo
 .light[aria-pressed="true"] .light-name { color: #fff; }
 @media (hover: hover) { .light:not([aria-pressed="true"]):hover { border-color: var(--line-strong); } }
 @media (prefers-contrast: more) { .light-red { color: #c0281f; } .light-orange { color: #b77a00; } }
+
+/* --- Entretien des voitures --- */
+.car { flex-wrap: wrap; }
+.maintenance { width: 100%; margin-top: 0.5rem; padding: 0.75rem; background: var(--surface-2); border-radius: var(--radius-m); border: 1px solid var(--line); }
+.maint-pill { font-size: 0.72rem; font-weight: 700; border-radius: 999px; padding: 0.12rem 0.55rem; white-space: nowrap; background: var(--surface); color: var(--steel); border: 1px solid var(--line); }
+.maint-pill.is-due { background: var(--red-bg); color: var(--red); border-color: transparent; }
+.maint-pill.is-soon { background: color-mix(in srgb, var(--yellow) 30%, transparent); color: var(--ink); border-color: transparent; }
+.maint-pill.is-check { background: var(--blue-tint); color: var(--blue-deep); border-color: transparent; }
+.maint-pill.is-ok { background: var(--green-bg); color: var(--green); border-color: transparent; }
+.maint-count { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; padding: 0 6px; margin-left: 0.4rem; border-radius: 10px; background: var(--red); color: #fff; font-size: 0.72rem; font-weight: 800; }

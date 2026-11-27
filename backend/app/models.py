@@ -105,6 +105,17 @@ class UserVehicle(Base):
     variant: Mapped[VehicleVariant | None] = relationship()
 
 
+class MaintenanceRecord(Base):
+    """Entretien noté par le client pour une de ses voitures (« vidange faite à 85 000 km le 12/11/2026 »)."""
+    __tablename__ = "maintenance_records"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_vehicle_id: Mapped[int] = mapped_column(ForeignKey("user_vehicles.id", ondelete="CASCADE"), index=True)
+    item: Mapped[str] = mapped_column(String(40))          # slug de data/seed/maintenance.json
+    km: Mapped[int | None] = mapped_column(Integer)
+    done_on: Mapped[date] = mapped_column(Date)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
 class PlateReport(Base):
     """Signalement « ce matricule est le mien mais il est déjà enregistré » ; traité par l'administrateur."""
     __tablename__ = "plate_reports"
