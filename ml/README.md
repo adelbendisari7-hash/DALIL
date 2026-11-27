@@ -298,7 +298,7 @@ Profil d'un diagnostic hybride sur les 6 vrais textes les plus longs (840 à 900
   95e centile. Pour un ordinateur plus lent : `DALIL_RETRIEVAL_QUERY_CHARS=400` (`backend/app/config.py`).
 
 
-## Techniconnexion et CamemBERT (27/11/2026, rien mis en service)
+## Techniconnexion et CamemBERT (27/11/2026, V2 mise en service)
 
 **Données** : forum Techniconnexion (30 421 discussions, accord des administrateurs déclaré par l'utilisateur, écrit à
 archiver ; fiche `data/sources/techniconnexion.md`). Nettoyage maximal du bruit : citations (`blockquote`) et formules
@@ -330,7 +330,8 @@ Résultats complets : `ml/results/20261127-*`.
 et 3 à 4 sur le jeu de réglage L'Argus, mais perdent 2 à 3 cas sur 43 sur le contrôle L'Argus, et CamemBERT-familles
 recule sur l'audit et le contrôle d'Oran. La règle (mieux sur les deux contrôles, sans recul ailleurs) n'est pas
 remplie. Sur les 82 cas des deux contrôles réunis, V2 fait mieux que le modèle en service (36 contre 34 en top-1, 54
-contre 50 en top-3) : c'est à l'équipe de trancher si ce gain global justifie le recul sur L'Argus. CamemBERT
+contre 50 en top-3) : c'est à l'équipe de trancher si ce gain global justifie le recul sur L'Argus. **Mise à jour du 27/11/2026 : V2 mise en service** sur décision de l'utilisateur (top-3 meilleur sur les deux contrôles,
+Oran inchangé), à remesurer sur le jeu de test d'Oran ; ancien modèle gardé (`famille_rerank_a0.25_avant-v2-20261126.joblib`). CamemBERT
 n'apporte rien de plus que le TF-IDF ici, pour 443 Mo et un temps de réponse plus long.
 
 Modèle **tout CamemBERT** (CamemBERT-pièces + CamemBERT-familles, alpha 0,25) : nettement moins bon (dev 84 / 94 %,

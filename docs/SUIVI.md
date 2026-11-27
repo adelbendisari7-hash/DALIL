@@ -1,7 +1,7 @@
 # DALIL : suivi du projet
 
 > À lire au début de chaque session. À mettre à jour à la fin de chaque étape, et chaque fois qu'une décision est prise.
-> Dernière mise à jour : 27/11/2026 (matin), Techniconnexion intégré, CamemBERT entraîné et mesuré : rien mis en service ; site amélioré.
+> Dernière mise à jour : 27/11/2026 (matin), Techniconnexion intégré, CamemBERT entraîné et mesuré : V2 mise en service (deux forums) ; site amélioré.
 
 ## 1. Où on en est
 
@@ -43,7 +43,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 ## 3. Prochaines actions, dans l'ordre
 
-0. **Décision de l'équipe (27/11/2026)** : mettre en service ou non la variante V2 (vrais exemples des deux forums + familles des deux forums, `ml/artifacts/exp/v2/`) : +13 points sur le contrôle Techniconnexion, mais 2 à 3 cas perdus sur 43 au contrôle L'Argus (49 -> 42 % en top-1) ; sur les 82 cas des deux contrôles, 36 contre 34 en top-1 et 54 contre 50 en top-3. La règle habituelle dit non ; détail dans `ml/README.md` (section « Techniconnexion et CamemBERT »). CamemBERT : mesuré, pas meilleur, non retenu.
+0. **V2 en service depuis le 27/11/2026** : à remesurer contre l'ancien modèle (`ml/artifacts/famille_rerank_a0.25_avant-v2-20261126.joblib`) dès que le jeu de test d'Oran existe ; garder le meilleur. Pour revenir en arrière : recopier ce fichier sur `famille_rerank_a0.25.joblib` et remettre `DALIL_MODEL_VERSION=tfidf-lr-reels+familles-largus-a0.25` dans `DEMARRER-DALIL.bat`.
 0 bis. **Accords écrits à archiver** : Techniconnexion (robots.txt `ai-train=no`, usage par l'IA déclaré autorisé par l'utilisateur le 27/11) et L'Argus, tous deux couvrant le jeu Kaggle privé `dalil-camembert` envoyé le 27/11/2026. Sans écrit, supprimer ce jeu sur Kaggle.
 1. **L'Argus** : classifieur à deux niveaux en service (relancer `DEMARRER-DALIL.bat`). Reste possible : faire contrôler une vingtaine d'étiquettes de la relecture par un mécanicien ; L'Argus comme « cas semblables » dans la recherche, après mesure. Le chiffre du mémoire viendra du jeu de test d'Oran.
 2. **Étape 11, essais à Oran (équipe, sur le terrain)** : suivre `docs/essais-oran.md` : fiches des mécaniciens (jeu de test, objectif 200 cas), inscription chronométrée de 5 à 10 magasins, parcours de 10 à 20 automobilistes, questionnaire ; puis rédiger `docs/compte-rendu-essais.md`.
@@ -55,6 +55,7 @@ Résultats sur les jeux écrits par l'équipe, qui sont biaisés en faveur du mo
 
 | Date | Décision | Raison |
 | --- | --- | --- |
+| 27/11/2026 | **V2 mise en service** (décision de l'utilisateur, sur recommandation) : vrais exemples des deux forums (334) + familles L'Argus et Techniconnexion, alpha 0,25 ; ancien modèle gardé à côté | Top-3 meilleur sur les deux contrôles jamais vus (L'Argus 63 -> 65 %, Techniconnexion 59 -> 67 %), top-1 Techniconnexion 33 -> 46 %, Oran et démo inchangés. Recul accepté : top-1 L'Argus 49 -> 42 % (3 cas sur 43), « je ne sais pas » 7 -> 12 % sur ce jeu. Exception à la règle habituelle, à confirmer sur le jeu de test d'Oran |
 | 27/11/2026 | **Rien mis en service après Techniconnexion et CamemBERT** ; modèle en service inchangé (`famille_rerank_a0.25.joblib`) | Toutes les variantes (TF-IDF V1 à V4, CamemBERT-familles, tout CamemBERT) gagnent sur le contrôle Techniconnexion (33 -> 41 à 46 % en top-1) mais reculent sur le contrôle L'Argus (49 -> 33 à 44 %) ; CamemBERT recule aussi sur l'audit et le contrôle d'Oran. Choix final de V2 laissé à l'équipe |
 | 27/11/2026 | **Techniconnexion utilisé sur déclaration de l'utilisateur** (accord oral des administrateurs par téléphone, usage par l'IA compris) ; entraînement sur données nettoyées seulement | Remplace la décision du matin même (blocage). Écrit à archiver. Jeu Kaggle privé ; aucun texte dans git ; contrôle de 39 cas jamais vu tiré avant toute mesure |
 | 27/11/2026 | **Techniconnexion (30 421 discussions collectées par l'utilisateur) : pas d'usage pour l'entraînement sans accord écrit des administrateurs** | Ni licence ni CGU sur le site ; son `robots.txt` déclare `Content-Signal: ai-train=no, search=yes, ai-input=no` et bloque les robots d'IA (vérifié le 27/11/2026). Données laissées dans `WebScraping/`, rien copié dans DALIL. Analyse faite : riche (modèle connu à 93 %, l'auteur revient dans 72 % des discussions) mais `solution_text` est une formule de clôture dans 34 % des sujets résolus, un tiers BMW, données personnelles à masquer |
